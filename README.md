@@ -32,3 +32,4 @@ FLUSH PRIVILEGES;
 
 ## References
 - https://codeburst.io/getting-started-with-react-router-5c978f70df91
+- https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04
