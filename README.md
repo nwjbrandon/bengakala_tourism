@@ -1,18 +1,13 @@
 ## Installation
 
-## Setting up of front end
+## Setting up of front end and backend
 ```
+npm install # install dependencies
+npm run postinstall
 cd front-end
-npm install # install dependencies
 npm start
-```
-
-## Setting up of back-end
-```
 cd back-end
-npm install # install dependencies
-npm run dev
-npm test # optional for unit testing
+npm run server
 ```
 
 ## Setting up of database on Ubuntu 18
