@@ -11,6 +11,10 @@ const faq = require('./faq')
 const payment = require('./payment')
 const welcome = require('./welcome')
 const app = express()
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use(cors({credentials: true, origin: true}))
 app.use('/about', about)
