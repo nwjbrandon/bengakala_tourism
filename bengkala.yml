@@ -1,0 +1,26 @@
+# /home/nwjbrandon/.config/tmuxinator/bengkala.yml
+
+name: bengkala
+root: ~/
+
+windows:
+  - front-end:
+      root: /home/nwjbrandon/bengakala_tourism/front-end
+      layout: main-vertical
+      panes:
+        - npm start
+  - back-end:
+      root: /home/nwjbrandon/bengakala_tourism/back-end
+      layout: main-vertical
+      panes:
+        - npm run server
+  - editor:
+      root: /home/nwjbrandon/bengakala_tourism
+      layout: main-vertical
+      panes:
+        - vim
+  - git:
+      root: /home/nwjbrandon/bengakala_tourism
+      layout: main-vertical
+      panes:
+        - ls
