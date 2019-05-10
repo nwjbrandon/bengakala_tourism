@@ -1,4 +1,3 @@
-const info = {'info': 'faq'};
+const info = { info: 'faq' };
 
 module.exports = info;
-
