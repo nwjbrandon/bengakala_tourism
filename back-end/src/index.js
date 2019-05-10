@@ -1,6 +1,5 @@
-/* eslint-disable */
-require('@babel/register')({
-  presets: ['@babel/preset-env'],
-});
+const app = require('./app');
 
-module.exports = require('./server.js');
+const port = 3001;
+
+app.listen(port, () => console.log(`App listening on port ${port}!`));

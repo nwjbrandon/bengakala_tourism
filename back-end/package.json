@@ -4,16 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "server": "babel-node ./src/server.js",
-    "server:prod": "node ./dist/server.js",
+    "server": "babel-node ./src/index.js",
+    "server:prod": "node ./dist/index.js",
     "start": "nodemon cross-env PORT=3001 node ./src/index.js",
     "dev": "NODE_ENV=development npm-run-all server",
     "clean": "rimraf dist",
     "lint": "eslint \"./src/**/*.js\"",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "build": "babel ./src --out-dir dist",
     "prod": "NODE_ENV=production npm-run-all clean build server:prod",
-    "watch": "nodemon"
+    "watch": "nodemon",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
