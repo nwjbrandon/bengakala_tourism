@@ -1,5 +1,8 @@
-const express = require('express')
-const app = require('./app')
-const port = 3001
+// Transpile all code following this line with babel and use '@babel/preset-env' (aka ES6) preset.
+require("@babel/register")({
+  presets: ["@babel/preset-env"]
+});
 
-app.listen(port, () => console.log(`App listening on port ${port}!`))
+// Import the rest of our application.
+module.exports = require('./server.js')
+

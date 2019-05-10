@@ -1,4 +1,4 @@
-const info = {'info': 'welcome'}
+const info = {'info': 'welcome'};
 
-module.exports = info
+module.exports = info;
 

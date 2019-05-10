@@ -1,3 +1,3 @@
-const info = {'info': 'contact'}
+const info = {'info': 'contact'};
 
-module.exports = info
+module.exports = info;
