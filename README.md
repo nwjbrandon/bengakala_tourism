@@ -10,6 +10,12 @@ cd back-end
 npm run server
 ```
 
+## Setting up of redis
+```
+sudo apt-get install redis-server
+sudo systemctl enable redis-server.service
+```
+
 ## Setting up of database on Ubuntu 18
 - Install and access MySQL
 ```
