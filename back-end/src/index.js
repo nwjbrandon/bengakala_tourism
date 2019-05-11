@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import r from 'rethinkdb';
 import api from './api';
 import config from './config.js'
+import rdb from './storage';
 
 const app = express();
 const expressSwagger = require('express-swagger-generator')(app);
@@ -22,6 +23,9 @@ if (process.env.NODE_ENV === 'development') {
   
   // configurations for swagger docs
   expressSwagger(config.swaggerOptions);
+
+  console.log(rdb.r1.getName());
+  console.log(rdb.r2.getName());
 
   startExpress(config.express.portNumber);
 } else {
