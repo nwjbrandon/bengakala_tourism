@@ -19,24 +19,6 @@ if (process.env.NODE_ENV === 'development') {
   // configurations for swagger docs
   expressSwagger(config.swaggerOptions);
 
-  // connect to rethink
-  /*
-  r.connect(config.rethinkdb, (err, conn) => {
-    if (err) {
-      console.log('Could not open a connection to initialize the database');
-      process.exit(1);
-    } else {
-      r.table('Attraction').run(conn).then((err, result) => {
-      }).error(err => {
-        console.log('Table Attraction not found');
-        r.db(config.rethinkdb.db).run(conn).finally(() => {
-          return r.tableCreate('Attraction').run(conn);
-        })
-      })
-
-    }
-  })
-  */
   startExpress(config.express.portNumber);
 } else {
   // production mode
@@ -45,4 +27,6 @@ if (process.env.NODE_ENV === 'development') {
   startExpress(config.express.portNumber);
 }
 
-const startExpress = (portNumber) => { app.listen(portNumber) };
+function startExpress(portNumber) { 
+  app.listen(portNumber);
+};

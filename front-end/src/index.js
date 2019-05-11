@@ -16,20 +16,18 @@ import './index.css';
 
 const routing = (
     <Router>
-      <div>
-        <Switch>
-          <Route exact path="/" component={App} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/accomodation" component={Accomodation} />
-          <Route exact path="/admin" component={Admin} />
-          <Route exact path="/attraction" component={Attraction} />
-          <Route exact path="/contact" component={Contact} />
-          <Route exact path="/faq" component={Faq} />
-          <Route exact path="/payment" component={Payment} />
-          <Route exact path="/welcome" component={Welcome} />
-          <Route component={Notfound} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route exact path="/" component={App} />
+        <Route exact path="/about" component={About} />
+        <Route exact path="/accomodation" component={Accomodation} />
+        <Route exact path="/admin" component={Admin} />
+        <Route exact path="/attraction" component={Attraction} />
+        <Route exact path="/contact" component={Contact} />
+        <Route exact path="/faq" component={Faq} />
+        <Route exact path="/payment" component={Payment} />
+        <Route exact path="/welcome" component={Welcome} />
+        <Route component={Notfound} />
+      </Switch>
     </Router>
 )
 
