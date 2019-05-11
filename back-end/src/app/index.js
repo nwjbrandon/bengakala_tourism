@@ -13,9 +13,13 @@ const payment = require('./payment');
 const welcome = require('./welcome');
 
 const app = express();
-const swaggerDocument = require('./swagger.json');
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+console.log(process.env.NODE_ENV);
+if (process.env.NODE_ENV === 'development') {
+  const swaggerDocument = require('./swagger.json');
+  app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+}
+
 
 app.use(cors({ credentials: true, origin: true }));
 app.use('/about', about);
