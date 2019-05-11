@@ -13,6 +13,10 @@ app.use(bodyParser.json());
 app.use(cors({ credentials: true, origin: true }));
 app.use('/api', api);
 
+const startExpress = (portNumber) => { 
+  app.listen(portNumber);
+};
+
 if (process.env.NODE_ENV === 'development') {
   // development mode
   
@@ -27,6 +31,3 @@ if (process.env.NODE_ENV === 'development') {
   startExpress(config.express.portNumber);
 }
 
-function startExpress(portNumber) { 
-  app.listen(portNumber);
-};

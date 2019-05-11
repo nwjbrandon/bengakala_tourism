@@ -1,4 +1,3 @@
-import r from 'rethinkdb';
 const express = require('express');
 const app = express();
 
@@ -13,7 +12,7 @@ const app = express();
  */
 const getFAQ = [
   async(req, res) => {
-    const info = { name: 'myfaq' };
+    const info = { data: 'myfaq' };
     res.send(info);
   },
 ];

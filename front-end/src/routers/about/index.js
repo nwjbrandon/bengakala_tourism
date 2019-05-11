@@ -5,13 +5,13 @@ class About extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page_name: '',
+      data: '',
     }
   } 
   componentDidMount() {
-    axios.get('http://localhost:3001/about/hello')
+    axios.get('http://localhost:3001/api/about')
       .then(res => {
-        this.setState({ page_name: res.data.info });
+        this.setState({ data: res.data });
       })
       .catch(res => {
         if (res instanceof Error) {
@@ -24,7 +24,7 @@ class About extends React.Component {
   render() {
     return (
       <div>
-      <h1>{ this.state.page_name }</h1>
+      <h1>{ this.state.data }</h1>
       </div>
     )
   }

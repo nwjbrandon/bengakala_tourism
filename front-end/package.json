@@ -19,7 +19,7 @@
     "redux-saga": "^1.0.2"
   },
   "scripts": {
-    "start": "cross-env PORT=3000 react-scripts start",
+    "start": "REACT_APP_NODE_ENV=development REACT_APP_PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
