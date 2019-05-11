@@ -2,22 +2,21 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import * as serviceWorker from './Serviceworker';
-import About from './About'
-import Accomodation from './Accomodation'
-import Admin from './Admin'
-import App from './App'
-import Attraction from './Attraction'
-import Contact from './Contact'
-import Faq from './Faq'
-import Notfound from './Notfound'
-import Payment from './Payment'
-import Welcome from './Welcome'
+import About from './routers/about'
+import Accomodation from './routers/accomodation'
+import Admin from './routers/admin'
+import Home from './routers/home'
+import Attraction from './routers/attraction'
+import Contact from './routers/contact'
+import Faq from './routers/faq'
+import Notfound from './routers/notfound'
+import Payment from './routers/payment'
 import './index.css';
 
 const routing = (
     <Router>
       <Switch>
-        <Route exact path="/" component={App} />
+        <Route exact path="/" component={Home} />
         <Route exact path="/about" component={About} />
         <Route exact path="/accomodation" component={Accomodation} />
         <Route exact path="/admin" component={Admin} />
@@ -25,7 +24,6 @@ const routing = (
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/faq" component={Faq} />
         <Route exact path="/payment" component={Payment} />
-        <Route exact path="/welcome" component={Welcome} />
         <Route component={Notfound} />
       </Switch>
     </Router>
