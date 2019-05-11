@@ -1,5 +1,5 @@
-import React from 'react'
-import axios from 'axios'
+import React from 'react';
+import API from '../../api';
 
 class About extends React.Component {
   constructor(props) {
@@ -9,17 +9,9 @@ class About extends React.Component {
     }
   } 
   componentDidMount() {
-    axios.get('http://localhost:3001/api/about')
-      .then(res => {
-        this.setState({ data: res.data });
-      })
-      .catch(res => {
-        if (res instanceof Error) {
-          console.log(res.message);
-        } else {
-          console.log(res.data);
-        }
-      });
+    API.get('/about').then(res => {
+      this.setState({ data: res });
+    })
   }
   render() {
     return (

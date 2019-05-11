@@ -10,14 +10,14 @@ const app = express();
  * @returns {object} 200 - An array of user info
  * @returns {Error}  default - Unexpected error
  */
-const getFAQ = [
+const getFaq = [
   async(req, res) => {
-    const info = { data: 'myfaq' };
+    const info = { data: 'myFaq' };
     res.send(info);
   },
 ];
 
 export default {
-  get: getFAQ,
+  get: getFaq,
 };
 

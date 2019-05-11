@@ -1,30 +1,22 @@
 import React from 'react'
-import axios from 'axios'
+import API from '../../api';
 
 class Admin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      page_name: '',
+      data: '',
     }
   } 
   componentDidMount() {
-    axios.get('http://localhost:3001/admin/hello')
-      .then(res => {
-        this.setState({ page_name: res.data.info });
-      })
-      .catch(res => {
-        if (res instanceof Error) {
-          console.log(res.message);
-        } else {
-          console.log(res.data);
-        }
-      });
+    API.get('/admin').then(res => {
+      this.setState({ data: res });
+    })
   }
   render() {
     return (
       <div>
-      <h1>{ this.state.page_name }</h1>
+      <h1>{ this.state.data }</h1>
       </div>
     )
   }
