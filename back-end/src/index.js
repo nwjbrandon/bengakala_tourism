@@ -1,16 +1,29 @@
 const express = require('express');
-const app = require('./app');
+const cors = require('cors');
+const app = express();
 const expressSwagger = require('express-swagger-generator')(app);
 
+// all the api links 
+const api = require('./api');
+
+// configurations for server
+const portNumber = process.env.PORT || 3001;
+const modeType = process.env.NODE_ENV || 'development';
+const domainName = modeType === 'development' ? 'localhost' : 'www.bengkalatourism.com';
+
+app.use(cors({ credentials: true, origin: true }));
+app.use('/api', api);
+
+// configurations for swagger docs
 let options = {
   swaggerDefinition: {
     info: {
-      description: 'This is a sample server',
-      title: 'Swagger',
+      description: 'Bengkala Tourism Website',
+      title: 'Swagger Docs',
       version: '1.0.0',
     },
-    host: 'localhost:3000',
-    basePath: '/v1',
+    host: `${ domainName }:${ portNumber }`,
+    basePath: '/api',
     produces: [
       "application/json",
       "application/xml"
@@ -26,7 +39,7 @@ let options = {
     }
   },
   basedir: __dirname, //app absolute path
-  files: ['./app/**/*.js'] //Path to the API handle folder
+  files: ['./api/**/*.js'] //Path to the API handle folder
 };
 expressSwagger(options)
-app.listen(3000);
+app.listen(portNumber);
