@@ -3,11 +3,10 @@
 ## Setting up of front end and backend
 ```
 npm install # install dependencies
-npm run postinstall
 cd front-end
-npm start
+npm run start
 cd back-end
-npm run server
+npm run watch
 ```
 
 ## Setting up of redis
