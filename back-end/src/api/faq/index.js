@@ -1,4 +1,3 @@
-import rethinkdbConnection from '../../storage';
 import r from 'rethinkdb';
 const express = require('express');
 const app = express();
