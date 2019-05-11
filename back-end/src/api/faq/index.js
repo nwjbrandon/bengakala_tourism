@@ -1,3 +1,5 @@
+import rethinkdbConnection from '../../storage';
+import r from 'rethinkdb';
 const express = require('express');
 const app = express();
 
@@ -10,17 +12,14 @@ const app = express();
  * @returns {object} 200 - An array of user info
  * @returns {Error}  default - Unexpected error
  */
-app.get('/testing', (req, res) => { // type 'localhost:3001/testing' in browser
-  const info = { name: 'myfaq' };
-  res.send(info);
-  /*
-   * example of database call (DO NOT DELETE!)
-   *
-  sql.query('select * from customers', function(err, rows, fields) {
-    console.log(rows)
-  })
-  */
-});
+const getFAQ = [
+  async(req, res) => {
+    const info = { name: 'myfaq' };
+    res.send(info);
+  },
+];
 
+export default {
+  get: getFAQ,
+};
 
-module.exports = app;

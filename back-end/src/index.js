@@ -1,16 +1,18 @@
-const express = require('express');
-const cors = require('cors');
+import express from 'express';
+import cors from 'cors';
+import bodyParser from 'body-parser';
+import api from './api';
+
 const app = express();
 const expressSwagger = require('express-swagger-generator')(app);
-
-// all the api links 
-const api = require('./api');
 
 // configurations for server
 const portNumber = process.env.PORT || 3001;
 const modeType = process.env.NODE_ENV || 'development';
 const domainName = modeType === 'development' ? 'localhost' : 'www.bengkalatourism.com';
 
+// all the api links 
+app.use(bodyParser.json());
 app.use(cors({ credentials: true, origin: true }));
 app.use('/api', api);
 
