@@ -49,6 +49,7 @@
     "@babel/register": "^7.4.4",
     "cross-env": "^5.2.0",
     "eslint": "^5.16.0",
+    "express-swagger-generator": "^1.1.14",
     "nodemon": "^1.19.0"
   }
 }
