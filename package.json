@@ -6,5 +6,8 @@
   },
   "scripts": {
     "postinstall": "lerna bootstrap"
+  },
+  "dependencies": {
+    "node-mysql-wrapper": "^2.9.3"
   }
 }
