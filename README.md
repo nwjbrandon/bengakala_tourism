@@ -1,3 +1,4 @@
+[![CircleCI](https://circleci.com/gh/nwjbrandon/bengkala_tourism.svg?style=svg)](https://circleci.com/gh/nwjbrandon/bengkala_tourism)
 ## Installation
 
 ## Setting up of front end and backend
