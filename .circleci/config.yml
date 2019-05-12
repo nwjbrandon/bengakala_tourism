@@ -1,6 +1,8 @@
 version: 1
 jobs:
   build:
+    docker:
+      - image: buildpack-deps:trusty
     steps:
       - run:
 
