@@ -13,7 +13,7 @@
     "build": "babel ./src --out-dir dist",
     "prod": "NODE_ENV=production npm-run-all clean build server:prod",
     "watch": "nodemon",
-    "test": "mocha --require @babel/register",
+    "test": "mocha",
     "coverageHtml": "nyc --reporter=html mocha",
     "coverageText": "nyc --reporter=html mocha"
   },
