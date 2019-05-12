@@ -1,6 +1,6 @@
-[![Build Status](https://circleci.com/gh/nwjbrandon/bengkala_tourism.svg?style=svg)](https://circleci.com/gh/nwjbrandon/bengkala_tourism)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/nwjbrandon/bengkala_tourism/pulls)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/nwjbrandon/bengkala_tourism/issues)
+[![CircleCI](https://circleci.com/gh/nwjbrandon/bengkala_tourism.svg?style=svg)](https://circleci.com/gh/nwjbrandon/bengkala_tourism)
 
 ## Installation
 
