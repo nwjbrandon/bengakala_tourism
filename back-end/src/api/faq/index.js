@@ -12,6 +12,7 @@ const app = express();
  */
 const getFaq = [
   async(req, res) => {
+    console.log('hi');
     const info = { data: 'myFaq' };
     res.send(info);
   },

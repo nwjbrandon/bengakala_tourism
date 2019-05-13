@@ -1,11 +1,12 @@
 import axios from 'axios';
 import config from '../config';
 
-const httpUrl = `http://${ config.react.domainName }:${ config.react.portNumber }/api`;
+const httpUrl = 'http://localhost:3001/api';
 // const httpsUrl = `http://${ config.react.domainName }:${ config.react.portNumber }/api`;
 
 const getRequest = (url, data) => {
   return new Promise((resolve, reject) => {
+    console.log("hi");
     axios.get(httpUrl + url, { params: data || {} })
     .then(response => {
       console.log(response.data.data);
