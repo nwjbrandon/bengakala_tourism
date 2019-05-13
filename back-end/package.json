@@ -23,7 +23,7 @@
     "@babel/plugin-proposal-class-properties": "^7.4.4",
     "@babel/preset-react": "^7.0.0",
     "babel-eslint": "^10.0.1",
-    "bcrypt": "^3.0.6",
+    "bcryptjs": "^2.4.3",
     "chai": "^4.2.0",
     "cors": "^2.8.5",
     "eslint-config-airbnb": "^17.1.0",
