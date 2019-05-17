@@ -1,10 +1,3 @@
-import RethinkdbStorage from './rethinkdb';
+import DataBase from './mysql';
 
-const rdb = new RethinkdbStorage("Brandon");
-const rdb2 = new RethinkdbStorage("Brandon2");
-
-module.exports = {
-  r1: rdb,
-  r2: rdb2,
-};
-
+export const db = new DataBase('dev');
