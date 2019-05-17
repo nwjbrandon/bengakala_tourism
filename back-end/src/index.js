@@ -12,9 +12,28 @@ import db from './storage';
 const RedisStore = connectRedis(session);
 
 
+
+
 const app = express();
 const redisClient = redis.createClient();
-const expressSwagger = expressSwaggerGenerator(app);
+//const expressSwagger = expressSwaggerGenerator(app);
+
+
+
+
+const swaggerUi = require('swagger-ui-express');
+const swaggerSpec = require('./configuration/swagger')
+
+
+// use swagger-Ui-express for your app documentation endpoint
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+
+
+
+
+
+
 
 // api links
 app.use(bodyParser.json());
@@ -42,7 +61,7 @@ if (process.env.NODE_ENV === 'development') {
   // development mode
 
   // configurations for swagger docs
-  expressSwagger(config.swaggerOptions);
+  //expressSwagger(config.swaggerOptions);
   db.testing().then(r => console.log(r));
   startExpress(config.express.portNumber);
 } else {
