@@ -6,7 +6,7 @@ const config = {
     database: 'bengkala',
   },
   express: {
-    portNumber: process.env.PORT || 3002,
+    portNumber: process.env.PORT || 3001,
     modeType: process.env.NODE_ENV || 'development',
     domainName: process.env.NODE_ENV === 'development' ? 'localhost' : 'www.bengkalatourism.com',
   },

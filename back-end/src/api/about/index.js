@@ -1,13 +1,13 @@
-const express = require('express');
+import express from 'express';
+
 const app = express();
 
 /**
  * This function comment is parsed by doctrine testing
- * @route GET /api
- * @group foo - Operations about user
- * @param {string} email.query.required - username or email - eg: user@domain
- * @param {string} password.query.required - user's password.
- * @returns {object} 200 - An array of user info
+ * @route GET /about
+ * @group About - Obtain info for the about page
+ * @param { string } jj
+ * @returns {object} 200 - Return a json object to display on the about page
  * @returns {Error}  default - Unexpected error
  */
 const getAbout = [
