@@ -121,3 +121,4 @@ sudo systemctl restart nginx
 - https://hackernoon.com/start-to-finish-deploying-a-react-app-on-digitalocean-bcfae9e6d01b
 - https://stackoverflow.com/questions/44278748/how-to-deploy-create-react-app-on-digital-ocean
 - https://itnext.io/front-end-development-with-javascript-using-reactjs-redux-sass-and-webpack-1a2fdd46daba
+- https://codeforgeek.com/using-redis-to-handle-session-in-node-js/
