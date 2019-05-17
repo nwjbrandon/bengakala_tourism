@@ -6,7 +6,7 @@ import redis from 'redis';
 import connectRedis from 'connect-redis';
 import api from './api';
 import config from './config';
-import db from './storage';
+//import db from './storage';
 
 const RedisStore = connectRedis(session);
 
@@ -45,7 +45,7 @@ const startExpress = (portNumber) => {
 };
 
 if (process.env.NODE_ENV === 'development') {
-  db.testing().then(r => console.log(r));
+  //db.testing().then(r => console.log(r));
   startExpress(config.express.portNumber);
 } else {
 }
