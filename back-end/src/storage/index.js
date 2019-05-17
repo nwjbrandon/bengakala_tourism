@@ -1,3 +1,3 @@
 import DataBase from './mysql';
 
-export const db = new DataBase('dev');
+export const db = new DataBase();

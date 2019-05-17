@@ -24,8 +24,7 @@ if (process.env.NODE_ENV === 'development') {
 
   // configurations for swagger docs
   expressSwagger(config.swaggerOptions);
-  //const x = new DataBase('hello');
-  db.hello();
+  db.testing().then(r => console.log(r));
   startExpress(config.express.portNumber);
 } else {
   // production mode

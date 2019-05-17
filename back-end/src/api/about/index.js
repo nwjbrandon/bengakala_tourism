@@ -20,4 +20,3 @@ const getAbout = [
 export default {
   get: getAbout,
 };
-
