@@ -14,6 +14,7 @@ const app = express();
 app.get('/about', getAbout.get);
 app.get('/accommodation', getAccomodation.get);
 app.get('/admin', getAdmin.get);
+app.get('/admin/login', getAdmin.login);
 app.get('/attraction', getAttraction.get);
 app.get('/contact', getContact.get);
 app.get('/dashboard', getDashboard.get);

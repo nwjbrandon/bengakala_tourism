@@ -46,6 +46,7 @@
     "mysql-wrap": "^0.5.3",
     "npm-run-all": "^4.1.5",
     "nyc": "^14.1.1",
+    "passport": "^0.4.0",
     "redis": "^2.8.0",
     "rethinkdb": "^2.3.3",
     "rimraf": "^2.6.3",
