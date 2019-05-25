@@ -123,3 +123,5 @@ sudo systemctl restart nginx
 - https://itnext.io/front-end-development-with-javascript-using-reactjs-redux-sass-and-webpack-1a2fdd46daba
 - https://codeforgeek.com/using-redis-to-handle-session-in-node-js/
 - https://medium.com/the-andela-way/how-to-set-up-an-express-api-using-webpack-and-typescript-69d18c8c4f52
+- https://stackoverflow.com/questions/11804202/how-do-i-setup-a-ssl-certificate-for-an-express-js-server
+- https://flaviocopes.com/express-https-self-signed-certificate/
