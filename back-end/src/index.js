@@ -7,6 +7,8 @@ import connectRedis from 'connect-redis';
 import swaggerUi from 'swagger-ui-express';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
+import https from 'https';
+import fs from 'fs';
 import api from './api';
 import config from './config';
 import swaggerSpec from './configuration/swagger';
@@ -44,6 +46,9 @@ app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api', api);
 
 const startExpress = (portNumber) => {
-  app.listen(portNumber);
+  https.createServer({
+    key: fs.readFileSync(__dirname + '/cert/server.key'),
+    cert: fs.readFileSync(__dirname + '/cert/server.cert'),
+  }, app).listen(portNumber);
 };
 startExpress(config.express.portNumber);

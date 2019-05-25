@@ -2,8 +2,8 @@ const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-  devtool: 'cheap-eval-source-map',
-  mode: 'development',
+  devtool: false,
+  mode: 'production',
   entry: './src/index.js',
   module: {
     rules: [
@@ -33,5 +33,11 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true,
     hot: true,
+    https: true
+  },
+  performance: {
+    hints: false,
+    maxEntrypointSize: 512000,
+    maxAssetSize: 512000
   }
 };
