@@ -1,12 +1,14 @@
 const getAdmin = [
   async (req, res) => {
-    const info = { data: 'myAdmin' };
+    console.log(req.session);
+  const info = { data: 'myAdmin' };
     res.send(info);
   },
 ];
 
 const loginAdmin = [
   async (req, res) => {
+    console.log(req.session);
     const info = { data: 'Admin' };
     res.send(info);
   },

@@ -22,11 +22,38 @@ app.get('/dashboard', getDashboard.get);
 app.get('/faq', getFAQ.get);
 app.get('/payment', getPayment.get);
 
-app.post('/login', passport.authenticate('local'), (req, res) => {
-  // Since we're doing a POST with javascript, we can't actually redirect that post into a GET request
-  // So we're sending the user back the route to the members page because the redirect will happen on the front end
-  // They won't get this or even be able to access this page if they aren't authed
-  res.json('hihi');
+app.post('/login/admin', passport.authenticate('local'), (req, res) => {
+
+  req.session.key = req.body.email;
+  console.log(req);
+  //console.log(req.session);
+  //console.log(res.session);
+
+  res.json({data:'hihi'});
+});
+function checkAuthentication(req,res,next){
+  console.log(req);
+  if(req.isAuthenticated()){
+    // req.isAuthenticated() will return true if user is logged in
+    next();
+  } else{
+    res.redirect('/logout');
+  }
+}
+// eslint-disable-next-line no-unused-vars
+app.get('/some_path', checkAuthentication, (req, res) => {
+  // do something only if user is authenticated
+  res.send('done well');
+});
+
+app.get('/logout',function(req,res){
+  req.session.destroy(function(err){
+    if(err){
+      console.log(err);
+    } else {
+      res.redirect('/');
+    }
+  });
 });
 
 
