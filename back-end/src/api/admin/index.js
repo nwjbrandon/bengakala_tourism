@@ -1,20 +1,41 @@
 const getAdmin = [
   async (req, res) => {
-    console.log(req.session);
-  const info = { data: 'myAdmin' };
+    const info = { data: 'myAdmin' };
     res.send(info);
   },
 ];
 
 const loginAdmin = [
   async (req, res) => {
-    console.log(req.session);
+    req.session.key = req.body.email;
     const info = { data: 'Admin' };
     res.send(info);
   },
-]
+];
+
+const getDashboard = [
+  async (req, res) => {
+    const info = { data: 'myDashboard' };
+    res.send(info);
+  },
+];
+
+const getLogout = [
+  async (req, res) => {
+    req.session.destroy((err) => {
+      if (err) {
+        console.log(err);
+      } else {
+        res.redirect('/');
+      }
+    });
+  }
+];
+
 
 export default {
   get: getAdmin,
   login: loginAdmin,
+  dashboard: getDashboard,
+  logout: getLogout,
 };

@@ -6,20 +6,15 @@ import redis from 'redis';
 import connectRedis from 'connect-redis';
 import swaggerUi from 'swagger-ui-express';
 import passport from 'passport';
+import cookieParser from 'cookie-parser';
 import api from './api';
 import config from './config';
-import db from './storage';
 import swaggerSpec from './configuration/swagger';
-
-const cookieParser = require('cookie-parser');
-
-const router = express.Router();
 
 const app = express();
 
 // implementation for linux developers
-console.log('Starting redis and db server');
-db.testing().then(r => console.log(r));
+console.log('Ensure redis and db server is setup for linux machines');
 const RedisStore = connectRedis(session);
 const redisClient = redis.createClient();
 redisClient.on('error', (err) => {
@@ -46,10 +41,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
-
 app.use('/api', api);
-
-
 
 const startExpress = (portNumber) => {
   app.listen(portNumber);

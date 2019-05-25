@@ -1,35 +1,35 @@
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+import passport from 'passport';
+import passportLocal from 'passport-local';
+import bcrypt from 'bcryptjs';
+import db from '../storage';
 
-var expectedUser = {
-  username: "jacob",
-  password: "password"
-}
+const LocalStrategy = passportLocal.Strategy;
 
-// Telling passport we want to use a Local Strategy. In other words,
-// we want login with a username/email and password
+// Telling passport to use a Local Strategy to login with a username/email and password
 passport.use(new LocalStrategy(
-  // Our user will sign in using an email, rather than a "username"
+  // user will sign in using an email rather than a "username"
   {
     usernameField: 'email'
   },
-  ((email, password, done) => {
-    if (email === expectedUser.username && password === expectedUser.password) {
-      return done(null, {email, password});
+  (async (email, password, done) => {
+    const res = await db.fetchData('administrators', { email });
+    if (res.length === 0) {
+      return done(null, false, { message: 'user does not exist' });
+    }
+    if (bcrypt.compareSync(password, res[0].password)) {
+      return done(null, { email, password });
     } else {
-      return done(null, false, { message: 'incorrect'})
+      return done(null, false, { message: 'incorrect password' });
     }
   })
 ));
 
-passport.serializeUser((email, done) => {
-  console.log(email);
-  done(null, email);
+passport.serializeUser((user, done) => {
+  done(null, user);
 });
 
-passport.deserializeUser((email, done) => {
-  console.log(email);
-  done(null, email);
+passport.deserializeUser((user, done) => {
+  done(null, user);
 });
 
 export default passport;
