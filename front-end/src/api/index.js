@@ -6,7 +6,6 @@ const httpUrl = 'http://localhost:3001/api';
 
 const getRequest = (url, data) => {
   return new Promise((resolve, reject) => {
-    console.log("hi");
     axios.get(httpUrl + url, { params: data || {} })
     .then(response => {
       console.log(response.data.data);

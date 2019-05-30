@@ -1,25 +1,130 @@
 import React from 'react'
 import API from '../../api';
+import PropTypes from 'prop-types';
+import Paper from '@material-ui/core/Paper';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import Typography from '@material-ui/core/Typography';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import { NavLink } from "react-router-dom";
+import Link from '@material-ui/core/Link';
 
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    height: 600,
+  },
+  button: {
+    margin: theme.spacing(1),
+  },
+});
 class Admin extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       data: '',
+      showPassword: false,
+      password: '',
+      username: '',
     }
+    this.submit = this.submit.bind(this);
   } 
   componentDidMount() {
     API.get('/admin').then(res => {
       this.setState({ data: res });
     })
   }
+
+  submit() {
+    console.log(this.state);
+  }
   render() {
+    const {classes} = this.props;
     return (
-      <div>
-      <h1>{ this.state.data }</h1>
-      </div>
+        <React.Fragment>
+          <Grid
+              container
+              spacing={10}
+              direction="column"
+              alignItems="center"
+              justify="center"
+              style={{ minHeight: '100vh' }}
+          >
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
+                  Bengkala Tourism
+                </Typography>
+                <Typography variant="h6" style={{ paddingTop: 40 }}>
+                  Username
+                </Typography>
+                <TextField
+                    id="outlined-full-width"
+                    placeholder="Username"
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    value={this.state.username}
+                    onChange={e => this.setState({username: e.target.value})}
+                />
+                <Typography variant="h6" style={{ paddingTop: 20 }}>
+                  Password
+                </Typography>
+                <TextField
+                    id="outlined-full-width"
+                    placeholder="Password"
+                    fullWidth
+                    margin="normal"
+                    variant="outlined"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    type={'password'}
+                    value={this.state.password}
+                    onChange={e => this.setState({password: e.target.value})}
+                />
+                <Grid container justify="flex-end">
+                  <Typography variant="body2">
+                    <NavLink to="/forgot-password">Forgot Password?</NavLink>
+                  </Typography>
+                </Grid>
+                <Grid container justify="center" style={{ paddingTop: 20 }}>
+                  <NavLink to="/">
+                    <Button
+                        variant="contained"
+                        className={classes.button}
+
+                    >
+                      Cancel
+                    </Button>
+                  </NavLink>
+                  <Button
+                      variant="contained"
+                      className={classes.button}
+                      onClick={this.submit}
+                  >
+                    Sign In
+                  </Button>
+
+                </Grid>
+              </Paper>
+            </Grid>
+          </Grid>
+        </React.Fragment>
+
     )
   }
 }
 
-export default Admin
+Admin.propTypes = {
+  classes: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles)(Admin);
