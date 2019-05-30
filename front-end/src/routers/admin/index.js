@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { NavLink } from "react-router-dom";
-import Link from '@material-ui/core/Link';
 
 const styles = theme => ({
   root: {
@@ -29,7 +28,7 @@ class Admin extends React.Component {
       data: '',
       showPassword: false,
       password: '',
-      username: '',
+      email: '',
     }
     this.submit = this.submit.bind(this);
   } 
@@ -41,6 +40,11 @@ class Admin extends React.Component {
 
   submit() {
     console.log(this.state);
+    const { email, password } = this.state;
+    const data = { email, password };
+    API.post('/admin/login', data).then(r => {
+      console.log(r);
+    });
   }
   render() {
     const {classes} = this.props;
@@ -71,8 +75,8 @@ class Admin extends React.Component {
                     InputLabelProps={{
                       shrink: true,
                     }}
-                    value={this.state.username}
-                    onChange={e => this.setState({username: e.target.value})}
+                    value={this.state.email}
+                    onChange={e => this.setState({email: e.target.value})}
                 />
                 <Typography variant="h6" style={{ paddingTop: 20 }}>
                   Password

@@ -7,6 +7,7 @@ const getAdmin = [
 
 const loginAdmin = [
   async (req, res) => {
+    console.log(req.body.email);
     req.session.key = req.body.email;
     const info = { data: 'Admin' };
     res.send(info);

@@ -34,7 +34,7 @@ const delRequest = (url, data) => {
 
 const putRequest = (url, data) => {
   return new Promise((resolve, reject) => {
-    axios.get(httpUrl + url, data)
+    axios.put(httpUrl + url, data)
     .then(response => {
       console.log(response.data.data);
       resolve(response.data.data);
@@ -48,13 +48,13 @@ const putRequest = (url, data) => {
 
 const postRequest = (url, data) => {
   return new Promise((resolve, reject) => {
-    axios.get(httpUrl + url, data)
+    axios.post(httpUrl + url, data)
     .then(response => {
       console.log(response.data.data);
       resolve(response.data.data);
     })
     .catch(error => {
-      console.log("GET", url, error);
+      console.log("POST", url, error);
       reject(error.response.data);
     })
   })
