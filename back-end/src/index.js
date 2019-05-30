@@ -7,8 +7,6 @@ import connectRedis from 'connect-redis';
 import swaggerUi from 'swagger-ui-express';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
-import https from 'https';
-import fs from 'fs';
 import api from './api';
 import config from './config';
 import swaggerSpec from './configuration/swagger';
@@ -23,8 +21,8 @@ redisClient.on('error', (err) => {
   console.log('Redis error:', err);
 });
 app.use(session({
-  secret: 'shhh',
-  name: 'redisPractice',
+  secret: 'password',
+  name: 'Bengkala Tourism',
   resave: false,
   saveUninitialized: true,
   store: new RedisStore({
@@ -42,13 +40,10 @@ app.use(cors({ credentials: true, origin: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api', api);
 
 const startExpress = (portNumber) => {
-  https.createServer({
-    key: fs.readFileSync(__dirname + '/cert/server.key'),
-    cert: fs.readFileSync(__dirname + '/cert/server.cert'),
-  }, app).listen(portNumber);
+  app.listen(portNumber);
 };
 startExpress(config.express.portNumber);
