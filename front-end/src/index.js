@@ -1,15 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
-import About from './routers/about'
-import Accomodation from './routers/accomodation'
-import Admin from './routers/admin'
-import Home from './routers/home'
-import Attraction from './routers/attraction'
-import Contact from './routers/contact'
-import Faq from './routers/faq'
-import Notfound from './routers/notfound'
-import Payment from './routers/payment'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import About from './routers/about';
+import Accomodation from './routers/accomodation';
+import Admin from './routers/admin';
+import Home from './routers/home';
+import Attraction from './routers/attraction';
+import Contact from './routers/contact';
+import Faq from './routers/faq';
+import Notfound from './routers/notfound';
+import Payment from './routers/payment';
+import Dashboard from './routers/admin/dashboard';
 
 const routing = (
     <Router>
@@ -22,6 +23,7 @@ const routing = (
         <Route exact path="/contact" component={Contact} />
         <Route exact path="/faq" component={Faq} />
         <Route exact path="/payment" component={Payment} />
+          <Route exact path="/dashboard" component={Dashboard} />
         <Route component={Notfound} />
       </Switch>
     </Router>

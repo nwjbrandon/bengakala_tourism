@@ -16,6 +16,7 @@ const loginAdmin = [
 
 const getDashboard = [
   async (req, res) => {
+    console.log(req);
     const info = { data: 'myDashboard' };
     res.send(info);
   },
