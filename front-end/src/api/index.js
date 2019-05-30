@@ -3,10 +3,10 @@ import config from '../config';
 
 const httpUrl = 'http://localhost:3001/api';
 // const httpsUrl = `http://${ config.react.domainName }:${ config.react.portNumber }/api`;
-
+axios.defaults.withCredentials = true;
 const getRequest = (url, data) => {
   return new Promise((resolve, reject) => {
-    axios.get(httpUrl + url, { params: data || {} })
+    axios.get(httpUrl + url, { params: data || {}, withCredentials: true })
     .then(response => {
       console.log(response.data.data);
       resolve(response.data.data);
@@ -46,7 +46,7 @@ const putRequest = (url, data) => {
 
 const postRequest = (url, data) => {
   return new Promise((resolve, reject) => {
-    axios.post(httpUrl + url, data)
+    axios.post(httpUrl + url, data, { withCredentials: true })
     .then(response => {
       resolve(response.data);
     })
