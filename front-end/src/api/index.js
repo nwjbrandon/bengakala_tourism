@@ -36,12 +36,10 @@ const putRequest = (url, data) => {
   return new Promise((resolve, reject) => {
     axios.put(httpUrl + url, data)
     .then(response => {
-      console.log(response.data.data);
-      resolve(response.data.data);
+      resolve(response);
     })
     .catch(error => {
-      console.log("GET", url, error);
-      reject(error.response.data);
+      reject(error.response);
     })
   })
 };
@@ -50,12 +48,10 @@ const postRequest = (url, data) => {
   return new Promise((resolve, reject) => {
     axios.post(httpUrl + url, data)
     .then(response => {
-      console.log(response.data.data);
-      resolve(response.data.data);
+      resolve(response.data);
     })
     .catch(error => {
-      console.log("POST", url, error);
-      reject(error.response.data);
+      reject(error.response);
     })
   })
 };

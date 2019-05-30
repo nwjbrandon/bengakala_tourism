@@ -29,6 +29,7 @@ class Admin extends React.Component {
       showPassword: false,
       password: '',
       email: '',
+      error: '',
     }
     this.submit = this.submit.bind(this);
   } 
@@ -42,9 +43,13 @@ class Admin extends React.Component {
     console.log(this.state);
     const { email, password } = this.state;
     const data = { email, password };
-    API.post('/admin/login', data).then(r => {
-      console.log(r);
-    });
+    API.post('/admin/login', data)
+        .then(() => {
+          this.props.history.push('/dashboard');
+        })
+        .catch(err =>{
+          this.setState({ error: err.statusText});
+        });
   }
   render() {
     const {classes} = this.props;
@@ -104,7 +109,6 @@ class Admin extends React.Component {
                     <Button
                         variant="contained"
                         className={classes.button}
-
                     >
                       Cancel
                     </Button>
@@ -116,7 +120,11 @@ class Admin extends React.Component {
                   >
                     Sign In
                   </Button>
-
+                </Grid>
+                <Grid container justify="center">
+                  <Typography variant="body2">
+                    { this.state.error }
+                  </Typography>
                 </Grid>
               </Paper>
             </Grid>
