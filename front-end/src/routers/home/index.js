@@ -24,6 +24,7 @@ class App extends React.Component {
   render() {
     return (
       <div>
+        <img src={require('../../storage/tree.jpg')} />
       <h1>{ this.state.page_name }</h1>
       </div>
     )
