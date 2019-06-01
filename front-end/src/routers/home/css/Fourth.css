@@ -1,0 +1,43 @@
+.Fourth {
+  background-color: rgb(38, 8, 86);
+  margin-top: 100px;
+  height:90vh;
+}
+.We {
+  margin:0;
+  font-size: 2rem;
+  color: darkorange;;
+  text-align: center;
+  padding-top: 9%;
+  padding-bottom: 0;
+
+}
+.Choose {
+  margin:0;
+  font-size: 5rem;
+  color: rgb(244, 212, 66);
+  text-align: center;
+  padding-top: 0;
+}
+
+.Seperator{
+    background-color: #fff;
+    display: block;
+    width: 100px;
+    height: 3px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+    margin-top: 25px;
+    vertical-align: baseline;
+    opacity: 0.5;
+}
+
+.Bottom {
+  margin:0;
+  font-size: 2rem;
+  color: #fff;
+  text-align: center;
+  padding-top: 0;
+  line-height: 1em;
+
+}

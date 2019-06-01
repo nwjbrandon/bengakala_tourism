@@ -1,0 +1,22 @@
+.HomepageImage {
+  margin: 0 auto;
+  text-align: center;
+  padding-top: 200px;
+  opacity: 0.7;
+}
+
+.HomepageImage h1 {
+  margin:0;
+  font-size: 4rem;
+  color: #fff;
+}
+
+.HomepageImage{
+  background-image: url(../Pictures/Homepageimg.jpg);
+  height: 70vh;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  max-width: 100%;
+}
