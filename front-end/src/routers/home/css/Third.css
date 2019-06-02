@@ -1,0 +1,32 @@
+.Topheader{
+  margin: 80px auto 30px auto;
+  text-align: center;
+  font-size: 2em;
+  color: black;
+  font-weight: 700;
+  color: #1e1e23;
+  line-height: 1.25em;
+  position:relative;
+}
+
+.ThirdImage{
+  background-image: url(../Pictures/Thirdimg.png);
+  margin-bottom: 0;
+  height: 20rem;
+  background-repeat: no-repeat;
+  margin-top: 0;
+  vertical-align: middle;
+  background-position: center;
+}
+
+.Bottomheader {
+  margin: 10px auto 80px auto;
+  text-align: center;
+  font-size: 2.5em;
+  color: black;
+  font-weight: 700;
+  color: red;
+  line-height: 1.25em;
+  position:relative;
+  vertical-align: middle;
+}

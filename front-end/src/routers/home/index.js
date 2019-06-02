@@ -1,33 +1,29 @@
-import React from 'react'
-import axios from 'axios'
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom';
+//import App from './App';
+import Navigation from './Components/Navigation.js';
+import Header from './Components/Header.js';
+import Second from './Components/Second.js';
+import Third from './Components/Third.js';
+import Fourth from './Components/Fourth.js';
+import Fifth from './Components/Fifth.js';
+import Six from './Components/Six.js';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      page_name: '',
-    }
-  } 
-  componentDidMount() {
-    axios.get('http://localhost:3001/')
-      .then(res => {
-        this.setState({ page_name: res.data.info });
-      })
-      .catch(res => {
-        if (res instanceof Error) {
-          console.log(res.message);
-        } else {
-          console.log(res.data);
-        }
-      });
-  }
+
+class App extends Component {
   render() {
-    return (
+    return(
       <div>
-        <img src={require('../../storage/tree.jpg')} />
-      <h1>{ this.state.page_name }</h1>
+        <Navigation Logo="Bengkala Village" />
+        <div><Header title="The Story of us ALL"/></div>
+          <div><Second /></div>
+          <div><Third /></div>
+          <div><Fourth /></div>
+          <div><Fifth /></div>
+          <div><Six /></div>
       </div>
-    )
+
+    );
   }
 }
 
