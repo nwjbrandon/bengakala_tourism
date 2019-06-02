@@ -3,6 +3,13 @@ import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import ExpansionPanel from '@material-ui/core/ExpansionPanel';
+import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
+import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import Grid from '@material-ui/core/Grid';
 
 import NavBar from '../../../../components/dashboard/navBar';
 
@@ -15,48 +22,125 @@ const styles = theme => ({
         flexGrow: 1,
         padding: theme.spacing(3),
     },
+    heading: {
+        fontSize: theme.typography.pxToRem(15),
+        fontWeight: theme.typography.fontWeightRegular,
+    },
+    button: {
+        margin: theme.spacing(1),
+    },
+    buttonsLocation: {
+        alignSelf: 'flex-end'
+    }
 });
 
 class DashboardFAQ extends Component {
     constructor(props) {
         super(props);
-        this.state = {}
+        this.state = {
+            title: 'FAQ',
+            edit: false,
+            question: 'Expansion Panel 1',
+            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.'
+        }
+        this.cancel = this.cancel.bind(this)
+        this.edit = this.edit.bind(this)
+        this.submit = this.submit.bind(this)
+        this.delete = this.delete.bind(this)
+    }
+
+    cancel() {
+        this.setState({edit: !this.state.edit })
+    }
+
+    edit() {
+        this.setState({edit: !this.state.edit })
+    }
+
+    submit() {
+    }
+
+    delete() {
     }
 
     render() {
         const { classes } = this.props
+        const { title, edit, text, question } = this.state
         return (
             <div className={classes.root}>
                 <CssBaseline />
-                <NavBar />
+                <NavBar title={title} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <Typography paragraph>
-                        Dashboard About
-                    </Typography>
-                    <Typography paragraph>
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
-                        ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
-                        facilisis leo vel. Risus at ultrices mi tempus imperdiet. Semper risus in hendrerit
-                        gravida rutrum quisque non tellus. Convallis convallis tellus id interdum velit laoreet id
-                        donec ultrices. Odio morbi quis commodo odio aenean sed adipiscing. Amet nisl suscipit
-                        adipiscing bibendum est ultricies integer quis. Cursus euismod quis viverra nibh cras.
-                        Metus vulputate eu scelerisque felis imperdiet proin fermentum leo. Mauris commodo quis
-                        imperdiet massa tincidunt. Cras tincidunt lobortis feugiat vivamus at augue. At augue eget
-                        arcu dictum varius duis at consectetur lorem. Velit sed ullamcorper morbi tincidunt. Lorem
-                        donec massa sapien faucibus et molestie ac.
-                    </Typography>
-                    <Typography paragraph>
-                        Consequat mauris nunc congue nisi vitae suscipit. Fringilla est ullamcorper eget nulla
-                        facilisi etiam dignissim diam. Pulvinar elementum integer enim neque volutpat ac
-                        tincidunt. Ornare suspendisse sed nisi lacus sed viverra tellus. Purus sit amet volutpat
-                        consequat mauris. Elementum eu facilisis sed odio morbi. Euismod lacinia at quis risus sed
-                        vulputate odio. Morbi tincidunt ornare massa eget egestas purus viverra accumsan in. In
-                        hendrerit gravida rutrum quisque non tellus orci ac. Pellentesque nec nam aliquam sem et
-                        tortor. Habitant morbi tristique senectus et. Adipiscing elit duis tristique sollicitudin
-                        nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
-                        accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
-                    </Typography>
+                    <ExpansionPanel>
+                        <ExpansionPanelSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                            <Typography className={classes.heading}>General FAQ</Typography>
+                            <Typography className={classes.heading}>Expansion Table 1</Typography>
+                        </ExpansionPanelSummary>
+                        <ExpansionPanelDetails>
+                            {edit ?
+                                <Grid container alignItems="flex-start" justify="flex-start" direction="row">
+                                    <TextField
+                                        multiline={true}
+                                        variant="outlined"
+                                        fullWidth
+                                        value={question}
+                                        placeholder="Ex. Where are we located?"
+                                        label="Question"
+                                        onChange={e => this.setState({question: e.target.value})}
+                                        className={classes.button}
+                                    />
+                                    <TextField
+                                        multiline={true}
+                                        variant="outlined"
+                                        fullWidth
+                                        value={question}
+                                        placeholder="Ex. General FAQ"
+                                        label="Type"
+                                        onChange={e => this.setState({question: e.target.value})}
+                                        className={classes.button}
+                                    />
+                                    <TextField
+                                        multiline={true}
+                                        variant="outlined"
+                                        fullWidth
+                                        value={text}
+                                        placeholder="We are located at Bengkala, Indonesia"
+                                        label="Answer"
+                                        onChange={e => this.setState({text: e.target.value})}
+                                        className={classes.button}
+                                    />
+                                </Grid>
+                                :
+                                <Typography>
+                                    { text }
+                                </Typography>
+                            }
+                        </ExpansionPanelDetails>
+                        { edit ?
+                            <Grid container alignItems="flex-start" justify="flex-end" direction="row">
+                                <Button variant="contained" color="secondary" onClick={this.cancel} className={classes.button}>
+                                    Cancel
+                                </Button>
+                                <Button variant="contained" onClick={this.submit} className={classes.button}>
+                                    Submit
+                                </Button>
+                            </Grid>
+                            :
+                            <Grid container alignItems="flex-start" justify="flex-end" direction="row">
+                                <Button variant="contained" onClick={this.edit} className={classes.button}>
+                                    Edit
+                                </Button>
+                                <Button variant="contained" color="secondary" onClick={this.delete} className={classes.button}>
+                                    Delete
+                                </Button>
+                            </Grid>
+                        }
+                    </ExpansionPanel>
                 </main>
             </div>
         );
