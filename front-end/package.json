@@ -34,6 +34,7 @@
     "redux-saga": "^1.0.2",
     "style-loader": "^0.23.1",
     "url-loader": "^1.1.2",
+    "uuid": "^3.3.2",
     "webpack-merge": "^4.2.1"
   }
 }

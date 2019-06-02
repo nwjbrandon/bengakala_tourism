@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import uuidv1 from 'uuid/v1';
 
 import NavBar from '../../../../components/dashboard/navBar';
 
@@ -67,6 +68,22 @@ class DashboardFAQ extends Component {
         this.watchQuestionEntry = this.watchQuestionEntry.bind(this)
         this.watchTextEntry = this.watchTextEntry.bind(this)
         this.watchTypeEntry = this.watchTypeEntry.bind(this)
+        this.newEntry = this.newEntry.bind(this)
+    }
+
+    newEntry() {
+        const id = uuidv1()
+        let newData = this.state.data
+        newData[id] = {
+            title: '',
+            type: '',
+            text: '',
+            edit: true,
+            copyTitle: '',
+            copyType: '',
+            copyText: '',
+        }
+        this.setState({ data: newData })
     }
 
     watchQuestionEntry(event) {
@@ -208,6 +225,14 @@ class DashboardFAQ extends Component {
                             }
                         </ExpansionPanel>
                     ))}
+                    <Grid container alignItems="flex-start" justify="flex-end" direction="row">
+                        <Button variant="contained" onClick={this.newEntry} className={classes.button}>
+                            New
+                        </Button>
+                        <Button variant="contained" color="secondary" className={classes.button}>
+                            Submit
+                        </Button>
+                    </Grid>
                 </main>
             </div>
         );
