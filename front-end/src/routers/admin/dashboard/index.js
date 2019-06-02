@@ -20,15 +20,18 @@ const styles = theme => ({
 class Dashboard extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+      title: 'Main'
+    }
   }
 
   render() {
     const { classes } = this.props
+    const { title } = this.state
     return (
         <div className={classes.root}>
           <CssBaseline />
-          <NavBar />
+          <NavBar title={title} />
           <main className={classes.content}>
             <div className={classes.toolbar} />
             <Typography paragraph>
