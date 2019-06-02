@@ -2,22 +2,18 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import AppBar from '@material-ui/core/AppBar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
-import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
-import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import { Link } from 'react-router-dom'
+
+import SideDrawer from '../../../components/dashboard/menuOptions';
+
+const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
@@ -52,37 +48,6 @@ const styles = theme => ({
     },
   },
 });
-
-const drawerWidth = 240;
-
-const menuOptions = [
-  {
-    title: 'Dashboard',
-    to: '/dashboard',
-    icon: <InboxIcon />
-  },
-  {
-    title: 'About',
-    to: '/dashboard/about',
-    icon: <InboxIcon />
-  },
-  {
-    title: 'Attraction',
-    to: '/dashboard/attraction',
-    icon: <InboxIcon />
-  },
-]
-
-const settingOptions = [
-  {
-    title: 'Settings',
-    to: '/dashboard/settings'
-  },
-  {
-    title: 'Logout',
-    to: '/admin'
-  }
-]
 
 class Dashboard extends Component {
   constructor(props) {
@@ -131,33 +96,7 @@ class Dashboard extends Component {
                     keepMounted: true, // Better open performance on mobile.
                   }}
               >
-                <div>
-                  <div className={classes.toolbar} />
-                  <div className={classes.drawerHeader}>
-                    <IconButton onClick={this.handleOpenDrawer}>
-                      <ChevronLeftIcon />
-                    </IconButton>
-                  </div>
-                  <Divider />
-                  <Divider />
-                  <List>
-                    {menuOptions.map((text, index) => (
-                        <ListItem button key={text.title} component={Link} to={text.to}>
-                          <ListItemIcon>{ text.icon }</ListItemIcon>
-                          <ListItemText primary={text.title} />
-                        </ListItem>
-                    ))}
-                  </List>
-                  <Divider />
-                  <List>
-                    {settingOptions.map((text, index) => (
-                        <ListItem button key={text.title} component={Link} to={text.to}>
-                          <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                          <ListItemText primary={text.title} />
-                        </ListItem>
-                    ))}
-                  </List>
-                </div>
+                <SideDrawer handleOpenDrawer={this.handleOpenDrawer} />
               </Drawer>
             </Hidden>
             <Hidden xsDown implementation="css">
@@ -168,27 +107,7 @@ class Dashboard extends Component {
                   variant="permanent"
                   open
               >
-                <div>
-                  <div className={classes.toolbar} />
-                  <Divider />
-                  <List>
-                    {menuOptions.map((text, index) => (
-                        <ListItem button key={text.title} component={Link} to={text.to}>
-                          <ListItemIcon>{ text.icon }</ListItemIcon>
-                          <ListItemText primary={text.title} />
-                        </ListItem>
-                    ))}
-                  </List>
-                  <Divider />
-                  <List>
-                    {settingOptions.map((text, index) => (
-                        <ListItem button key={text.title} component={Link} to={text.to}>
-                          <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                          <ListItemText primary={text.title} />
-                        </ListItem>
-                    ))}
-                  </List>
-                </div>
+                <SideDrawer handleOpenDrawer={this.handleOpenDrawer} />
               </Drawer>
             </Hidden>
           </nav>
