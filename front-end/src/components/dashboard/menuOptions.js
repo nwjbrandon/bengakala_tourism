@@ -11,17 +11,17 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { Link } from 'react-router-dom'
-import Dashboard from '@material-ui/icons/dashboard';
-import Loyalty from '@material-ui/icons/loyalty';
-import Home from '@material-ui/icons/home';
-import Faq from '@material-ui/icons/questionanswer';
-import Payment from '@material-ui/icons/payment';
-import Permphone from '@material-ui/icons/permphonemsg';
-import Settingsapp from '@material-ui/icons/settingsapplications';
-import Settings from '@material-ui/icons/settings';
-import Store from '@material-ui/icons/store';
-import Terrain from '@material-ui/icons/terrain';
-import Exittoapp from '@material-ui/icons/exittoapp';
+import Dashboard from '@material-ui/icons/Dashboard';
+import Loyalty from '@material-ui/icons/Loyalty';
+import Home from '@material-ui/icons/Home';
+import Faq from '@material-ui/icons/QuestionAnswer';
+import Payment from '@material-ui/icons/Payment';
+import Permphone from '@material-ui/icons/PermPhoneMsg';
+import Settingsapp from '@material-ui/icons/SettingsApplications';
+import Settings from '@material-ui/icons/Settings';
+import Store from '@material-ui/icons/Store';
+import Terrain from '@material-ui/icons/Terrain';
+import Exittoapp from '@material-ui/icons/ExitToApp';
 
 const menuOptions = [
     {
