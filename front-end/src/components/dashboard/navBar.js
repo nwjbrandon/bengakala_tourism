@@ -67,7 +67,7 @@ class NavBar extends Component {
     }
 
     render() {
-        const { classes } = this.props
+        const { classes, title } = this.props
         const { openDrawer } = this.state
         return (
             <React.Fragment>
@@ -82,7 +82,7 @@ class NavBar extends Component {
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap>
-                            Admin Dashboard
+                            Admin Dashboard - { title }
                         </Typography>
                     </Toolbar>
                 </AppBar>
