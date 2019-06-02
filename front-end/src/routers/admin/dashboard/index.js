@@ -15,12 +15,9 @@ import MailIcon from '@material-ui/icons/Mail';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles, useTheme, withStyles } from '@material-ui/core/styles';
-import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import { withStyles } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-
-const drawerWidth = 240;
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -56,16 +53,49 @@ const styles = theme => ({
   },
 });
 
+const drawerWidth = 240;
+
+const menuOptions = [
+  {
+    title: 'Dashboard',
+    to: '/dashboard',
+    icon: <InboxIcon />
+  },
+  {
+    title: 'About',
+    to: '/dashboard/about',
+    icon: <InboxIcon />
+  },
+  {
+    title: 'Attraction',
+    to: '/dashboard/attraction',
+    icon: <InboxIcon />
+  },
+]
+
+const settingOptions = [
+  {
+    title: 'Settings',
+    to: '/dashboard/settings'
+  },
+  {
+    title: 'Logout',
+    to: '/admin'
+  }
+]
+
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       openDrawer: false
     }
+    this.handleOpenDrawer = this.handleOpenDrawer.bind(this)
   }
 
   handleOpenDrawer() {
-    this.setState({ openDrawer: !this.state.openDrawer })
+    const { openDrawer } = this.state
+    this.setState({ openDrawer: !openDrawer })
   }
 
   render() {
@@ -80,7 +110,7 @@ class Dashboard extends Component {
                   color="inherit"
                   edge="start"
                   className={classes.menuButton}
-                  onClick={() => {this.handleOpenDrawer()}}
+                  onClick={this.handleOpenDrawer}
               >
                 <MenuIcon />
               </IconButton>
@@ -104,26 +134,26 @@ class Dashboard extends Component {
                 <div>
                   <div className={classes.toolbar} />
                   <div className={classes.drawerHeader}>
-                    <IconButton onClick={() => {this.handleOpenDrawer()}}>
+                    <IconButton onClick={this.handleOpenDrawer}>
                       <ChevronLeftIcon />
                     </IconButton>
                   </div>
                   <Divider />
                   <Divider />
                   <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                          <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                          <ListItemText primary={text} />
+                    {menuOptions.map((text, index) => (
+                        <ListItem button key={text.title} component={Link} to={text.to}>
+                          <ListItemIcon>{ text.icon }</ListItemIcon>
+                          <ListItemText primary={text.title} />
                         </ListItem>
                     ))}
                   </List>
                   <Divider />
                   <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
+                    {settingOptions.map((text, index) => (
+                        <ListItem button key={text.title} component={Link} to={text.to}>
                           <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                          <ListItemText primary={text} />
+                          <ListItemText primary={text.title} />
                         </ListItem>
                     ))}
                   </List>
@@ -142,19 +172,19 @@ class Dashboard extends Component {
                   <div className={classes.toolbar} />
                   <Divider />
                   <List>
-                    {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
-                        <ListItem button key={text}>
-                          <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                          <ListItemText primary={text} />
+                    {menuOptions.map((text, index) => (
+                        <ListItem button key={text.title} component={Link} to={text.to}>
+                          <ListItemIcon>{ text.icon }</ListItemIcon>
+                          <ListItemText primary={text.title} />
                         </ListItem>
                     ))}
                   </List>
                   <Divider />
                   <List>
-                    {['All mail', 'Trash', 'Spam'].map((text, index) => (
-                        <ListItem button key={text}>
+                    {settingOptions.map((text, index) => (
+                        <ListItem button key={text.title} component={Link} to={text.to}>
                           <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-                          <ListItemText primary={text} />
+                          <ListItemText primary={text.title} />
                         </ListItem>
                     ))}
                   </List>
