@@ -13,26 +13,6 @@ import Grid from '@material-ui/core/Grid';
 
 import NavBar from '../../../../components/dashboard/navBar';
 
-const tmp = [
-    {
-        title: 'Expansion Table 1',
-        type: 'General FAQ',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-        edit: false,
-        id: '1',
-        copy: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-    },
-    {
-        title: 'Expansion Table 2',
-        type: 'Security FAQ',
-        text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-        edit: true,
-        id: '2',
-        copy: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-    },
-]
-
-
 const styles = theme => ({
     root: {
         display: 'flex',
@@ -64,7 +44,6 @@ class DashboardFAQ extends Component {
                     type: 'General FAQ',
                     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
                     edit: false,
-                    id: '1',
                     copyTitle: 'Copy Expansion Table 1',
                     copyType: 'Copy General FAQ',
                     copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
@@ -74,43 +53,80 @@ class DashboardFAQ extends Component {
                     type: 'Security FAQ',
                     text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
                     edit: false,
-                    id: '2',
                     copyTitle: 'Copy Expansion Table 1',
                     copyType: 'Copy General FAQ',
                     copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
                 },
             },
             title: 'FAQ',
-            edit: false,
-            question: 'Expansion Panel 1',
-            text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.'
         }
-        this.cancel = this.cancel.bind(this)
-        this.edit = this.edit.bind(this)
-        this.submit = this.submit.bind(this)
-        this.delete = this.delete.bind(this)
+        this.cancelEntry = this.cancelEntry.bind(this)
+        this.editEntry = this.editEntry.bind(this)
+        this.updateEntry = this.updateEntry.bind(this)
+        this.deleteEntry = this.deleteEntry.bind(this)
+        this.watchQuestionEntry = this.watchQuestionEntry.bind(this)
+        this.watchTextEntry = this.watchTextEntry.bind(this)
+        this.watchTypeEntry = this.watchTypeEntry.bind(this)
     }
 
-    cancel() {
-        this.setState({edit: !this.state.edit })
-    }
-
-    edit(val) {
-        const itemID = val.currentTarget.value
-        const newData = this.state.data
-        newData[itemID].edit = false
+    watchQuestionEntry(event) {
+        let newData = this.state.data
+        const id = event.target.id
+        newData[id].copyTitle = event.target.value
         this.setState({ data: newData })
     }
 
-    submit() {
+    watchTypeEntry(event) {
+        let newData = this.state.data
+        const id = event.target.id
+        newData[id].copyType = event.target.value
+        this.setState({ data: newData })
     }
 
-    delete() {
+    watchTextEntry(event) {
+        let newData = this.state.data
+        const id = event.target.id
+        newData[id].copyText = event.target.value
+        this.setState({ data: newData })
+    }
+
+    cancelEntry(event) {
+        let newData = this.state.data
+        const id = event.currentTarget.value
+        newData[id].edit = false
+        newData[id].copyText = newData[id].text
+        newData[id].copyType = newData[id].type
+        newData[id].copyTitle = newData[id].title
+        this.setState({ data: newData })
+    }
+
+    editEntry(event, data) {
+        let newData = this.state.data
+        const id = event.currentTarget.value
+        newData[id].edit = true
+        this.setState({ data: newData })
+    }
+
+    updateEntry(event) {
+        let newData = this.state.data
+        const id = event.currentTarget.value
+        newData[id].edit = false
+        newData[id].text = newData[id].copyText
+        newData[id].title = newData[id].copyTitle
+        newData[id].type = newData[id].copyType
+        this.setState({ data: newData })
+    }
+
+    deleteEntry(event) {
+        let newData = this.state.data
+        const id = event.currentTarget.value
+        delete newData[id]
+        this.setState({ data: newData })
     }
 
     render() {
         const { classes } = this.props
-        const { title, edit, text, question, data } = this.state
+        const { title, data } = this.state
         return (
             <div className={classes.root}>
                 <CssBaseline />
@@ -139,6 +155,8 @@ class DashboardFAQ extends Component {
                                             placeholder="Ex. Where are we located?"
                                             label="Question"
                                             className={classes.button}
+                                            onChange={this.watchQuestionEntry}
+                                            id={item}
                                         />
                                         <TextField
                                             multiline={true}
@@ -148,6 +166,8 @@ class DashboardFAQ extends Component {
                                             placeholder="Ex. General FAQ"
                                             label="Type"
                                             className={classes.button}
+                                            onChange={this.watchTypeEntry}
+                                            id={item}
                                         />
                                         <TextField
                                             multiline={true}
@@ -157,105 +177,37 @@ class DashboardFAQ extends Component {
                                             placeholder="We are located at Bengkala, Indonesia"
                                             label="Answer"
                                             className={classes.button}
+                                            onChange={this.watchTextEntry}
+                                            id={item}
                                         />
                                     </Grid>
                                     :
                                     <Typography>
-                                        { data[item].type } - { data[item].title }
+                                        { data[item].text } { data[item].edit }
                                     </Typography>
                                 }
                             </ExpansionPanelDetails>
                             { data[item].edit ?
                                 <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                                    <Button variant="contained" color="secondary" onClick={this.cancel} className={classes.button}>
+                                    <Button variant="contained" color="secondary" value={item} onClick={this.cancelEntry} className={classes.button}>
                                         Cancel
                                     </Button>
-                                    <Button variant="contained" onClick={this.submit} className={classes.button}>
-                                        Submit
+                                    <Button variant="contained" onClick={this.updateEntry} value={item} className={classes.button}>
+                                        Update
                                     </Button>
                                 </Grid>
                                 :
                                 <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                                    <Button variant="contained" value={data[item].id} onClick={this.edit} className={classes.button}>
+                                    <Button variant="contained" value={item} onClick={this.editEntry} className={classes.button}>
                                         Edit
                                     </Button>
-                                    <Button variant="contained" color="secondary" onClick={this.delete} className={classes.button}>
+                                    <Button variant="contained" color="secondary" value={item} onClick={this.deleteEntry} className={classes.button}>
                                         Delete
                                     </Button>
                                 </Grid>
                             }
                         </ExpansionPanel>
-
                     ))}
-                    <ExpansionPanel>
-                        <ExpansionPanelSummary
-                            expandIcon={<ExpandMoreIcon />}
-                            aria-controls="panel1a-content"
-                            id="panel1a-header"
-                        >
-                            <Typography className={classes.heading}>General FAQ</Typography>
-                            <Typography className={classes.heading}>Expansion Table 1</Typography>
-                        </ExpansionPanelSummary>
-                        <ExpansionPanelDetails>
-                            {edit ?
-                                <Grid container alignItems="flex-start" justify="flex-start" direction="row">
-                                    <TextField
-                                        multiline={true}
-                                        variant="outlined"
-                                        fullWidth
-                                        value={question}
-                                        placeholder="Ex. Where are we located?"
-                                        label="Question"
-                                        onChange={e => this.setState({question: e.target.value})}
-                                        className={classes.button}
-                                    />
-                                    <TextField
-                                        multiline={true}
-                                        variant="outlined"
-                                        fullWidth
-                                        value={question}
-                                        placeholder="Ex. General FAQ"
-                                        label="Type"
-                                        onChange={e => this.setState({question: e.target.value})}
-                                        className={classes.button}
-                                    />
-                                    <TextField
-                                        multiline={true}
-                                        variant="outlined"
-                                        fullWidth
-                                        value={text}
-                                        placeholder="We are located at Bengkala, Indonesia"
-                                        label="Answer"
-                                        onChange={e => this.setState({text: e.target.value})}
-                                        className={classes.button}
-                                    />
-                                </Grid>
-                                :
-                                <Typography>
-                                    { text }
-                                </Typography>
-                            }
-                        </ExpansionPanelDetails>
-                        { edit ?
-                            <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                                <Button variant="contained" color="secondary" onClick={this.cancel} className={classes.button}>
-                                    Cancel
-                                </Button>
-                                <Button variant="contained" onClick={this.submit} className={classes.button}>
-                                    Submit
-                                </Button>
-                            </Grid>
-                            :
-                            <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                                <Button variant="contained" onClick={this.edit} className={classes.button}>
-                                    Edit
-                                </Button>
-                                <Button variant="contained" color="secondary" onClick={this.delete} className={classes.button}>
-                                    Delete
-                                </Button>
-                            </Grid>
-                        }
-                    </ExpansionPanel>
                 </main>
             </div>
         );
