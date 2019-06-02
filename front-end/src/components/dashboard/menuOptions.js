@@ -11,47 +11,58 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles } from '@material-ui/core/styles';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { Link } from 'react-router-dom'
+import Dashboard from '@material-ui/icons/dashboard';
+import Loyalty from '@material-ui/icons/loyalty';
+import Home from '@material-ui/icons/home';
+import Faq from '@material-ui/icons/questionanswer';
+import Payment from '@material-ui/icons/payment';
+import Permphone from '@material-ui/icons/permphonemsg';
+import Settingsapp from '@material-ui/icons/settingsapplications';
+import Settings from '@material-ui/icons/settings';
+import Store from '@material-ui/icons/store';
+import Terrain from '@material-ui/icons/terrain';
+import Exittoapp from '@material-ui/icons/exittoapp';
 
 const menuOptions = [
     {
         title: 'Dashboard',
         to: '/dashboard',
-        icon: <InboxIcon />
+        icon: <Dashboard />
     },
     {
         title: 'About',
         to: '/dashboard/about',
-        icon: <InboxIcon />
+        icon: <Loyalty />
     },
     {
         title: 'Accommodation',
         to: '/dashboard/accommodation',
-        icon: <InboxIcon />
+        icon: <Store />
     },
     {
-        title: 'Attraction',
+        title: 'Attractions',
         to: '/dashboard/attraction',
-        icon: <InboxIcon />
+        icon: <Terrain />
     },
     {
-        title: 'Contact',
+        title: 'Contact Us',
         to: '/dashboard/contact',
-        icon: <InboxIcon />
+        icon: <Permphone />
     },
     {
         title: 'FAQ',
         to: '/dashboard/faq',
-        icon: <InboxIcon />
+        icon: <Faq />
     },
     {
         title: 'Home',
         to: '/dashboard/home',
-        icon: <InboxIcon />
+        icon: <Home />
     },
     {
         title: 'Payment',
         to: '/dashboard/payment',
-        icon: <InboxIcon />
+        icon: <Payment />
     },
 ]
 
@@ -59,12 +70,12 @@ const settingOptions = [
     {
         title: 'Settings',
         to: '/dashboard/settings',
-        icon: <InboxIcon />
+        icon: <Settings />
     },
     {
         title: 'Logout',
         to: '/admin',
-        icon: <InboxIcon />
+        icon: <Exittoapp />
     }
 ]
 
