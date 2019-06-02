@@ -9,7 +9,7 @@ class Accomodation extends React.Component {
     }
   } 
   componentDidMount() {
-    API.get('/accomodation').then(res => {
+    API.get('/accommodation').then(res => {
       this.setState({ data: res });
     })
   }
