@@ -59,6 +59,26 @@ class DashboardFAQ extends Component {
                     copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
                 },
             },
+            origin: {
+                '1': {
+                    title: 'Expansion Table 1',
+                    type: 'General FAQ',
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    edit: false,
+                    copyTitle: 'Copy Expansion Table 1',
+                    copyType: 'Copy General FAQ',
+                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                },
+                '2': {
+                    title: 'Expansion Table 2',
+                    type: 'Security FAQ',
+                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    edit: false,
+                    copyTitle: 'Copy Expansion Table 1',
+                    copyType: 'Copy General FAQ',
+                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                },
+            },
             title: 'FAQ',
         }
         this.cancelEntry = this.cancelEntry.bind(this)
@@ -69,6 +89,11 @@ class DashboardFAQ extends Component {
         this.watchTextEntry = this.watchTextEntry.bind(this)
         this.watchTypeEntry = this.watchTypeEntry.bind(this)
         this.newEntry = this.newEntry.bind(this)
+        this.reset = this.reset.bind(this)
+    }
+
+    reset() {
+        this.setState({ data: this.state.origin })
     }
 
     newEntry() {
@@ -150,6 +175,11 @@ class DashboardFAQ extends Component {
                 <NavBar title={title} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
+                    <Grid container alignItems="flex-start" justify="flex-end" direction="row">
+                        <Button variant="contained" onClick={this.newEntry} className={classes.button}>
+                            New
+                        </Button>
+                    </Grid>
                     {Object.keys(data).map((item, index) => (
                         <ExpansionPanel key={index}>
                             <ExpansionPanelSummary
@@ -226,8 +256,8 @@ class DashboardFAQ extends Component {
                         </ExpansionPanel>
                     ))}
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                        <Button variant="contained" onClick={this.newEntry} className={classes.button}>
-                            New
+                        <Button variant="contained" onClick={this.reset} className={classes.button}>
+                            Reset
                         </Button>
                         <Button variant="contained" color="secondary" className={classes.button}>
                             Submit
