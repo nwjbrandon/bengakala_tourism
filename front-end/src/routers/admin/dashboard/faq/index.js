@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import uuidv1 from 'uuid/v1';
+import _ from 'lodash'
 
 import NavBar from '../../../../components/dashboard/navBar';
 
@@ -93,7 +94,8 @@ class DashboardFAQ extends Component {
     }
 
     reset() {
-        this.setState({ data: this.state.origin })
+        const newData = _.cloneDeep(this.state.origin)
+        this.setState({ data: newData })
     }
 
     newEntry() {

@@ -10,6 +10,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import _ from 'lodash'
 
 import NavBar from '../../../../components/dashboard/navBar';
 
@@ -41,36 +42,35 @@ class DashboardFAQ extends Component {
             data: {
                 '1': {
                     title: 'Address',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    text: 'Kent Ridge Road',
                     edit: false,
                     copyTitle: 'Address',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyText: 'Kent Ridge Road',
                 },
                 '2': {
-                    title: 'Expansion Table 2',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Contact',
+                    text: '123456789',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyTitle: 'Contact',
+                    copyText: '123456789',
                 },
             },
             origin: {
                 '1': {
                     title: 'Address',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    text: 'Kent Ridge Road',
                     edit: false,
                     copyTitle: 'Address',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyText: 'Kent Ridge Road',
                 },
                 '2': {
-                    title: 'Expansion Table 2',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Contact',
+                    text: '123456789',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyTitle: 'Contact',
+                    copyText: '123456789',
                 },
             },
-
             title: 'Contact',
         }
         this.cancelEntry = this.cancelEntry.bind(this)
@@ -84,7 +84,8 @@ class DashboardFAQ extends Component {
     }
 
     reset() {
-        this.setState({ data: this.state.origin })
+        const newData = _.cloneDeep(this.state.origin)
+        this.setState({ data: newData })
     }
 
     watchQuestionEntry(event) {

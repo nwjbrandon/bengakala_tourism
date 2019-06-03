@@ -10,6 +10,11 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 import uuidv1 from 'uuid/v1';
 
 import NavBar from '../../../../components/dashboard/navBar';
@@ -41,45 +46,32 @@ class DashboardFAQ extends Component {
         this.state = {
             currentUsers: {
                 '1': {
-                    title: 'Expansion Table 1',
-                    type: 'General FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Asuna Yuuki',
+                    type: 'Fighter',
+                    text: 'asuna@gmail.com - 123456789',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    root: true,
+                    copyTitle: 'Asuna Yuuki',
+                    copyType: 'Fighter',
+                    copyText: 'asuna@gmail.com - 123456789',
                 },
                 '2': {
-                    title: 'Expansion Table 2',
-                    type: 'Security FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Isla',
+                    type: 'Griftia',
+                    text: 'isla@gmail.com - 123456789',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    root: false,
+                    copyTitle: 'Isla',
+                    copyType: 'Griftia',
+                    copyText: 'isla@gmail.com - 123456789',
                 },
             },
-            newUsers: {
-                '1': {
-                    title: 'Expansion Table 1',
-                    type: 'General FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                    edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                },
-                '2': {
-                    title: 'Expansion Table 2',
-                    type: 'Security FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                    edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                },
-            },
+            newUsers: {},
             title: 'Settings',
+            open: false,
+            username: 'test@example.com',
+            password: '',
+            confirmedPassword: '',
         }
         this.cancelEntry = this.cancelEntry.bind(this)
         this.editEntry = this.editEntry.bind(this)
@@ -89,21 +81,45 @@ class DashboardFAQ extends Component {
         this.watchTextEntry = this.watchTextEntry.bind(this)
         this.watchTypeEntry = this.watchTypeEntry.bind(this)
         this.newEntry = this.newEntry.bind(this)
+        this.warningEntry = this.warningEntry.bind(this)
+        this.submitEntry = this.submitEntry.bind(this)
+        this.confirmWarning = this.confirmWarning.bind(this)
+        this.handleClose = this.handleClose.bind(this)
+    }
+
+    submitEntry() {
+    }
+
+    warningEntry() {
+        this.setState({ open: true })
+    }
+
+    handleClose() {
+        this.setState({
+            open: false,
+            newUsers: {},
+        })
+    }
+
+    confirmWarning() {
+        this.setState({ open: false })
+        this.submitEntry()
     }
 
     newEntry() {
         const id = uuidv1()
-        let newData = this.state.data
+        let newData = this.state.newUsers
         newData[id] = {
             title: '',
             type: '',
             text: '',
             edit: true,
+            root: false,
             copyTitle: '',
             copyType: '',
             copyText: '',
         }
-        this.setState({ data: newData })
+        this.setState({ newUsers: newData })
     }
 
     watchQuestionEntry(event) {
@@ -128,13 +144,10 @@ class DashboardFAQ extends Component {
     }
 
     cancelEntry(event) {
-        let newData = this.state.data
+        let newData = this.state.newUsers
         const id = event.currentTarget.value
-        newData[id].edit = false
-        newData[id].copyText = newData[id].text
-        newData[id].copyType = newData[id].type
-        newData[id].copyTitle = newData[id].title
-        this.setState({ data: newData })
+        delete newData[id]
+        this.setState({ newUsers: newData})
     }
 
     editEntry(event, data) {
@@ -155,21 +168,70 @@ class DashboardFAQ extends Component {
     }
 
     deleteEntry(event) {
-        let newData = this.state.data
+        let newData = this.state.currentUsers
         const id = event.currentTarget.value
         delete newData[id]
-        this.setState({ data: newData })
+        this.setState({ currentUsers: newData})
     }
 
     render() {
         const { classes } = this.props
-        const { title, currentUsers, newUsers } = this.state
+        const { title, currentUsers, newUsers, open, confirmedPassword, password, username } = this.state
         return (
             <div className={classes.root}>
                 <CssBaseline />
                 <NavBar title={title} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
+                    <TextField
+                        multiline={true}
+                        variant="outlined"
+                        fullWidth
+                        value={username}
+                        placeholder="Ex. Where are we located?"
+                        label="Question"
+                        className={classes.button}
+                        onChange={(event) => { this.setState({ username: event.target.value})}}
+                    />
+                    <TextField
+                        multiline={true}
+                        variant="outlined"
+                        fullWidth
+                        value={password}
+                        placeholder="Ex. Where are we located?"
+                        label="Question"
+                        className={classes.button}
+                        onChange={(event) => { this.setState({ password: event.target.value })}}
+                    />
+                    <TextField
+                        multiline={true}
+                        variant="outlined"
+                        fullWidth
+                        value={password}
+                        placeholder="Ex. Where are we located?"
+                        label="Question"
+                        className={classes.button}
+                        onChange={(event) => { this.setState({ password: event.target.value })}}
+                    />
+                    <TextField
+                        multiline={true}
+                        variant="outlined"
+                        fullWidth
+                        value={confirmedPassword}
+                        placeholder="Ex. Where are we located?"
+                        label="Question"
+                        className={classes.button}
+                        onChange={(event) => { this.setState({ confirmedPassword: event.target.value })}}
+                    />
+                    <Grid container alignItems="flex-start" justify="flex-end" direction="row">
+                        <Button variant="contained" color="secondary"  onClick={this.cancelEntry} className={classes.button}>
+                            Cancel
+                        </Button>
+                        <Button variant="contained" color="secondary" className={classes.button} onClick={this.submitEntry}>
+                            Submit
+                        </Button>
+                    </Grid>
+                    <br />
                     {Object.keys(currentUsers).map((item, index) => (
                         <ExpansionPanel key={index}>
                             <ExpansionPanelSummary
@@ -182,77 +244,23 @@ class DashboardFAQ extends Component {
                                 <Typography className={classes.heading}>{ currentUsers[item].title }</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
-                                {currentUsers[item].edit ?
-                                    <Grid container alignItems="flex-start" justify="flex-start" direction="row">
-                                        <TextField
-                                            multiline={true}
-                                            variant="outlined"
-                                            fullWidth
-                                            value={currentUsers[item].copyTitle}
-                                            placeholder="Ex. Where are we located?"
-                                            label="Question"
-                                            className={classes.button}
-                                            onChange={this.watchQuestionEntry}
-                                            id={item}
-                                        />
-                                        <TextField
-                                            multiline={true}
-                                            variant="outlined"
-                                            fullWidth
-                                            value={currentUsers[item].copyType}
-                                            placeholder="Ex. General FAQ"
-                                            label="Type"
-                                            className={classes.button}
-                                            onChange={this.watchTypeEntry}
-                                            id={item}
-                                        />
-                                        <TextField
-                                            multiline={true}
-                                            variant="outlined"
-                                            fullWidth
-                                            value={currentUsers[item].copyText}
-                                            placeholder="We are located at Bengkala, Indonesia"
-                                            label="Answer"
-                                            className={classes.button}
-                                            onChange={this.watchTextEntry}
-                                            id={item}
-                                        />
-                                    </Grid>
-                                    :
-                                    <Typography>
-                                        { currentUsers[item].text } { currentUsers[item].edit }
-                                    </Typography>
-                                }
+                                <Typography>
+                                    { currentUsers[item].text } { currentUsers[item].edit }
+                                </Typography>
                             </ExpansionPanelDetails>
-                            { currentUsers[item].edit ?
+                            { currentUsers[item].root ?
                                 <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                                    <Button variant="contained" color="secondary" value={item} onClick={this.cancelEntry} className={classes.button}>
-                                        Cancel
-                                    </Button>
-                                    <Button variant="contained" onClick={this.updateEntry} value={item} className={classes.button}>
-                                        Update
-                                    </Button>
                                 </Grid>
                                 :
                                 <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                                    <Button variant="contained" value={item} onClick={this.editEntry} className={classes.button}>
-                                        Edit
-                                    </Button>
-                                    <Button variant="contained" color="secondary" value={item} onClick={this.deleteEntry} className={classes.button}>
+                                    <Button variant="contained" color="secondary" value={item} onClick={this.warningEntry} className={classes.button}>
                                         Delete
                                     </Button>
                                 </Grid>
                             }
                         </ExpansionPanel>
                     ))}
-                    <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                        <Button variant="contained" onClick={this.newEntry} className={classes.button}>
-                            New
-                        </Button>
-                        <Button variant="contained" color="secondary" className={classes.button}>
-                            Submit
-                        </Button>
-                    </Grid>
+                    <br />
                     {Object.keys(newUsers).map((item, index) => (
                         <ExpansionPanel key={index}>
                             <ExpansionPanelSummary
@@ -260,84 +268,85 @@ class DashboardFAQ extends Component {
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                             >
-                                <Typography className={classes.heading}>{ currentUsers[item].type }</Typography>
+                                <Typography className={classes.heading}>Job Title</Typography>
                                 &nbsp;-&nbsp;
-                                <Typography className={classes.heading}>{ currentUsers[item].title }</Typography>
+                                <Typography className={classes.heading}>Name of Administrator</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
-                                {currentUsers[item].edit ?
-                                    <Grid container alignItems="flex-start" justify="flex-start" direction="row">
-                                        <TextField
-                                            multiline={true}
-                                            variant="outlined"
-                                            fullWidth
-                                            value={newUsers[item].copyTitle}
-                                            placeholder="Ex. Where are we located?"
-                                            label="Question"
-                                            className={classes.button}
-                                            onChange={this.watchQuestionEntry}
-                                            id={item}
-                                        />
-                                        <TextField
-                                            multiline={true}
-                                            variant="outlined"
-                                            fullWidth
-                                            value={newUsers[item].copyType}
-                                            placeholder="Ex. General FAQ"
-                                            label="Type"
-                                            className={classes.button}
-                                            onChange={this.watchTypeEntry}
-                                            id={item}
-                                        />
-                                        <TextField
-                                            multiline={true}
-                                            variant="outlined"
-                                            fullWidth
-                                            value={newUsers[item].copyText}
-                                            placeholder="We are located at Bengkala, Indonesia"
-                                            label="Answer"
-                                            className={classes.button}
-                                            onChange={this.watchTextEntry}
-                                            id={item}
-                                        />
-                                    </Grid>
-                                    :
-                                    <Typography>
-                                        { newUsers[item].text } { newUsers[item].edit }
-                                    </Typography>
-                                }
+                                <Grid container alignItems="flex-start" justify="flex-start" direction="row">
+                                    <TextField
+                                        multiline={true}
+                                        variant="outlined"
+                                        fullWidth
+                                        value={newUsers[item].copyTitle}
+                                        placeholder="Ex. Where are we located?"
+                                        label="Question"
+                                        className={classes.button}
+                                        onChange={this.watchQuestionEntry}
+                                        id={item}
+                                    />
+                                    <TextField
+                                        multiline={true}
+                                        variant="outlined"
+                                        fullWidth
+                                        value={newUsers[item].copyType}
+                                        placeholder="Ex. General FAQ"
+                                        label="Type"
+                                        className={classes.button}
+                                        onChange={this.watchTypeEntry}
+                                        id={item}
+                                    />
+                                    <TextField
+                                        multiline={true}
+                                        variant="outlined"
+                                        fullWidth
+                                        value={newUsers[item].copyText}
+                                        placeholder="We are located at Bengkala, Indonesia"
+                                        label="Answer"
+                                        className={classes.button}
+                                        onChange={this.watchTextEntry}
+                                        id={item}
+                                    />
+                                </Grid>
                             </ExpansionPanelDetails>
-                            { newUsers[item].edit ?
-                                <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                                    <Button variant="contained" color="secondary" value={item} onClick={this.cancelEntry} className={classes.button}>
-                                        Cancel
-                                    </Button>
-                                    <Button variant="contained" onClick={this.updateEntry} value={item} className={classes.button}>
-                                        Update
-                                    </Button>
-                                </Grid>
-                                :
-                                <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                                    <Button variant="contained" value={item} onClick={this.editEntry} className={classes.button}>
-                                        Edit
-                                    </Button>
-                                    <Button variant="contained" color="secondary" value={item} onClick={this.deleteEntry} className={classes.button}>
-                                        Delete
-                                    </Button>
-                                </Grid>
-                            }
+                            <div className={classes.toolbar} />
+                            <Grid container alignItems="flex-start" justify="flex-end" direction="row">
+                                <Button variant="contained" color="secondary" value={item} onClick={this.cancelEntry} className={classes.button}>
+                                    Cancel
+                                </Button>
+                                <Button variant="contained" color="secondary" className={classes.button} onClick={this.submitEntry}>
+                                    Submit
+                                </Button>
+                            </Grid>
                         </ExpansionPanel>
                     ))}
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">
                         <Button variant="contained" onClick={this.newEntry} className={classes.button}>
                             New
                         </Button>
-                        <Button variant="contained" color="secondary" className={classes.button}>
+                    </Grid>
+                </main>
+                <Dialog
+                    open={open}
+                    onClose={this.handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Delete Admin User"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Are you sure you want to delete this admin user?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={this.handleClose} color="primary">
+                            Cancel
+                        </Button>
+                        <Button onClick={this.confirmWarning} color="primary" autoFocus>
                             Submit
                         </Button>
-                    </Grid>
-
-                </main>
+                    </DialogActions>
+                </Dialog>
             </div>
         );
     }

@@ -79,7 +79,7 @@ class DashboardFAQ extends Component {
                     copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
                 },
             },
-            title: 'FAQ',
+            title: 'Payment',
         }
         this.cancelEntry = this.cancelEntry.bind(this)
         this.editEntry = this.editEntry.bind(this)

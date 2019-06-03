@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import uuidv1 from 'uuid/v1';
+import _ from 'lodash';
 
 import NavBar from '../../../../components/dashboard/navBar';
 
@@ -41,45 +42,45 @@ class DashboardFAQ extends Component {
         this.state = {
             data: {
                 '1': {
-                    title: 'Expansion Table 1',
-                    type: 'General FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Garden View Balcony',
+                    type: '2 Double Decker Beds + 4 complimentary breakfast',
+                    text: 'Cozy and rustic in design, our Standard Villa is the perfect getaway from the hustle and bustle of city life, enabling guests to recharge and relax',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyTitle: 'Garden View Balcony',
+                    copyType: '2 Double Decker Beds + 4 complimentary breakfast',
+                    copyText: 'Cozy and rustic in design, our Standard Villa is the perfect getaway from the hustle and bustle of city life, enabling guests to recharge and relax',
                 },
                 '2': {
-                    title: 'Expansion Table 2',
-                    type: 'Security FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Back Garden Balcony',
+                    type: 'Queen Size Bed + 2 Complimentary Breakfast',
+                    text: 'Reflects a cosy and modern decor allowing you to enjoy the much- needed break from hectic city life.',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyTitle: 'Back Garden Balcony',
+                    copyType: 'Queen Size Bed + 2 Complimentary Breakfast',
+                    copyText: 'Reflects a cosy and modern decor allowing you to enjoy the much- needed break from hectic city life.',
                 },
             },
             origin: {
                 '1': {
-                    title: 'Expansion Table 1',
-                    type: 'General FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Garden View Balcony',
+                    type: '2 Double Decker Beds + 4 complimentary breakfast',
+                    text: 'Cozy and rustic in design, our Standard Villa is the perfect getaway from the hustle and bustle of city life, enabling guests to recharge and relax',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyTitle: 'Garden View Balcony',
+                    copyType: '2 Double Decker Beds + 4 complimentary breakfast',
+                    copyText: 'Cozy and rustic in design, our Standard Villa is the perfect getaway from the hustle and bustle of city life, enabling guests to recharge and relax',
                 },
                 '2': {
-                    title: 'Expansion Table 2',
-                    type: 'Security FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Back Garden Balcony',
+                    type: 'Queen Size Bed + 2 Complimentary Breakfast',
+                    text: 'Reflects a cosy and modern decor allowing you to enjoy the much- needed break from hectic city life.',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyTitle: 'Back Garden Balcony',
+                    copyType: 'Queen Size Bed + 2 Complimentary Breakfast',
+                    copyText: 'Reflects a cosy and modern decor allowing you to enjoy the much- needed break from hectic city life.',
                 },
             },
-            title: 'FAQ',
+            title: 'Accommodation',
         }
         this.cancelEntry = this.cancelEntry.bind(this)
         this.editEntry = this.editEntry.bind(this)
@@ -93,7 +94,8 @@ class DashboardFAQ extends Component {
     }
 
     reset() {
-        this.setState({ data: this.state.origin })
+        const newData = _.cloneDeep(this.state.origin)
+        this.setState({ data: newData })
     }
 
     newEntry() {

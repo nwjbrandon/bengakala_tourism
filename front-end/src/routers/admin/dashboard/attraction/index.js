@@ -11,6 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import uuidv1 from 'uuid/v1';
+import _ from 'lodash'
 
 import NavBar from '../../../../components/dashboard/navBar';
 
@@ -41,45 +42,27 @@ class DashboardFAQ extends Component {
         this.state = {
             data: {
                 '1': {
-                    title: 'Expansion Table 1',
-                    type: 'General FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Water Theme Playground for Children',
+                    type: 'Fun',
+                    text: 'Coming Soon!',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                },
-                '2': {
-                    title: 'Expansion Table 2',
-                    type: 'Security FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                    edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyTitle: 'Water Theme Playground for Children',
+                    copyType: 'Fun',
+                    copyText: 'Coming Soon!',
                 },
             },
             origin: {
                 '1': {
-                    title: 'Expansion Table 1',
-                    type: 'General FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Water Theme Playground for Children',
+                    type: 'Fun',
+                    text: 'Coming Soon!',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                },
-                '2': {
-                    title: 'Expansion Table 2',
-                    type: 'Security FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                    edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyTitle: 'Water Theme Playground for Children',
+                    copyType: 'Fun',
+                    copyText: 'Coming Soon!',
                 },
             },
-            title: 'FAQ',
+            title: 'Attraction',
         }
         this.cancelEntry = this.cancelEntry.bind(this)
         this.editEntry = this.editEntry.bind(this)
@@ -93,7 +76,8 @@ class DashboardFAQ extends Component {
     }
 
     reset() {
-        this.setState({ data: this.state.origin })
+        const newData = _.cloneDeep(this.state.origin)
+        this.setState({ data: newData })
     }
 
     newEntry() {
