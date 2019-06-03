@@ -81,6 +81,8 @@ class DashboardFAQ extends Component {
                 },
             },
             title: 'Accommodation',
+            file: '',
+            imagePreviewUrl: '',
         }
         this.cancelEntry = this.cancelEntry.bind(this)
         this.editEntry = this.editEntry.bind(this)
@@ -91,6 +93,28 @@ class DashboardFAQ extends Component {
         this.watchTypeEntry = this.watchTypeEntry.bind(this)
         this.newEntry = this.newEntry.bind(this)
         this.reset = this.reset.bind(this)
+    }
+
+    _handleSubmit(e) {
+        e.preventDefault();
+        // TODO: do something with -> this.state.file
+        console.log('handle uploading-', this.state.file);
+    }
+
+    _handleImageChange(e) {
+        e.preventDefault();
+
+        let reader = new FileReader();
+        let file = e.target.files[0];
+
+        reader.onloadend = () => {
+            this.setState({
+                file: file,
+                imagePreviewUrl: reader.result
+            });
+        }
+
+        reader.readAsDataURL(file)
     }
 
     reset() {
@@ -171,12 +195,34 @@ class DashboardFAQ extends Component {
     render() {
         const { classes } = this.props
         const { title, data } = this.state
+        let {imagePreviewUrl} = this.state;
+        let $imagePreview = null;
+        if (imagePreviewUrl) {
+            $imagePreview = (<img src={imagePreviewUrl} />);
+        } else {
+            $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+        }
+
         return (
             <div className={classes.root}>
                 <CssBaseline />
                 <NavBar title={title} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
+                    {/* https://codepen.io/hartzis/pen/VvNGZP */}
+                    <div className="previewComponent">
+                        <form onSubmit={(e)=>this._handleSubmit(e)}>
+                            <input className="fileInput"
+                                   type="file"
+                                   onChange={(e)=>this._handleImageChange(e)} />
+                            <button className="submitButton"
+                                    type="submit"
+                                    onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
+                        </form>
+                        <div className="imgPreview">
+                            {$imagePreview}
+                        </div>
+                    </div>
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">
                         <Button variant="contained" onClick={this.newEntry} className={classes.button}>
                             New
