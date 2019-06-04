@@ -40,6 +40,7 @@ module.exports = {
     overlay: true,
     contentBase: './dist',
     historyApiFallback: true,
-    hot: true
+    hot: true,
+    https: true
   }
 };

@@ -32,7 +32,7 @@ const routing = (
         <Route exact path="/faq" component={Faq} />
         <Route exact path="/payment" component={Payment} />
         <Route exact path="/dashboard" component={Dashboard} />
-        <Route exact path="/dashboard-about" component={DashboardAbout} />
+        <Route exact path="/dashboard/about" component={DashboardAbout} />
         <Route exact path="/dashboard-accommodation" component={DashboardAccommodation} />
         <Route exact path="/dashboard-attraction" component={DashboardAttraction} />
         <Route exact path="/dashboard-contact" component={DashboardContact} />
