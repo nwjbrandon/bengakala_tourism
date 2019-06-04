@@ -1,5 +1,6 @@
 import React from 'react';
 import API from '../../api';
+import AccomodationsForm from './Components/Accomodations'
 
 class Accomodation extends React.Component {
   constructor(props) {
@@ -7,7 +8,7 @@ class Accomodation extends React.Component {
     this.state = {
       data: '',
     }
-  } 
+  }
   componentDidMount() {
     API.get('/accommodation').then(res => {
       this.setState({ data: res });
@@ -15,9 +16,7 @@ class Accomodation extends React.Component {
   }
   render() {
     return (
-      <div>
-      <h1>{ this.state.data }</h1>
-      </div>
+      <AccomodationsForm />
     )
   }
 }
