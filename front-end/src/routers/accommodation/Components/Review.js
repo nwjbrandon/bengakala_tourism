@@ -19,7 +19,7 @@ export default function Review() {
 
   return (
     <Typography variant="h6" gutterBottom className={classes.title}>
-      Review Your Trip
+      Confirm Your Trip
     </Typography>
   );
 }
