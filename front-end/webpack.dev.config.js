@@ -28,12 +28,15 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: __dirname + '/src/index.html',
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
   ],
   devServer: {
     port: 3000,
@@ -41,6 +44,9 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true,
     hot: true,
-    https: true
+    https: true,
+    proxy: {
+      '/api': 'http://localhost:3001/api'
+    }
   }
 };

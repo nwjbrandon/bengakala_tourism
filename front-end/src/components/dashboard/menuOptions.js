@@ -31,37 +31,37 @@ const menuOptions = [
     },
     {
         title: 'About',
-        to: '/dashboard-about',
+        to: '/dashboard/about',
         icon: <Loyalty />
     },
     {
         title: 'Accommodation',
-        to: '/dashboard-accommodation',
+        to: '/dashboard/accommodation',
         icon: <Store />
     },
     {
         title: 'Attractions',
-        to: '/dashboard-attraction',
+        to: '/dashboard/attraction',
         icon: <Terrain />
     },
     {
         title: 'Contact Us',
-        to: '/dashboard-contact',
+        to: '/dashboard/contact',
         icon: <Permphone />
     },
     {
         title: 'FAQ',
-        to: '/dashboard-faq',
+        to: '/dashboard/faq',
         icon: <Faq />
     },
     {
         title: 'Home',
-        to: '/dashboard-home',
+        to: '/dashboard/home',
         icon: <Home />
     },
     {
         title: 'Payment',
-        to: '/dashboard-payment',
+        to: '/dashboard/payment',
         icon: <Payment />
     },
 ]
@@ -69,7 +69,7 @@ const menuOptions = [
 const settingOptions = [
     {
         title: 'Settings',
-        to: '/dashboard-settings',
+        to: '/dashboard/settings',
         icon: <Settings />
     },
     {

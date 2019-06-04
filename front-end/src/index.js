@@ -33,18 +33,18 @@ const routing = (
         <Route exact path="/payment" component={Payment} />
         <Route exact path="/dashboard" component={Dashboard} />
         <Route exact path="/dashboard/about" component={DashboardAbout} />
-        <Route exact path="/dashboard-accommodation" component={DashboardAccommodation} />
-        <Route exact path="/dashboard-attraction" component={DashboardAttraction} />
-        <Route exact path="/dashboard-contact" component={DashboardContact} />
-        <Route exact path="/dashboard-faq" component={DashboardFAQ} />
-        <Route exact path="/dashboard-home" component={DashboardHome} />
-        <Route exact path="/dashboard-payment" component={DashboardPayment} />
-          <Route exact path="/dashboard-settings" component={DashboardSettings} />
+        <Route exact path="/dashboard/accommodation" component={DashboardAccommodation} />
+        <Route exact path="/dashboard/attraction" component={DashboardAttraction} />
+        <Route exact path="/dashboard/contact" component={DashboardContact} />
+        <Route exact path="/dashboard/faq" component={DashboardFAQ} />
+        <Route exact path="/dashboard/home" component={DashboardHome} />
+        <Route exact path="/dashboard/payment" component={DashboardPayment} />
+          <Route exact path="/dashboard/settings" component={DashboardSettings} />
         <Route component={Notfound} />
       </Switch>
     </Router>
 )
 
-ReactDOM.render(routing, document.getElementById('app'));
+ReactDOM.render(routing, document.getElementById('root'));
 
 module.hot.accept();
