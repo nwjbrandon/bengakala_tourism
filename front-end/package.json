@@ -33,6 +33,7 @@
     "moment": "^2.24.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
+    "react-google-charts": "^3.0.13",
     "react-router-dom": "^5.0.0",
     "redux": "^4.0.1",
     "redux-saga": "^1.0.2",

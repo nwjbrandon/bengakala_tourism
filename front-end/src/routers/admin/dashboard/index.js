@@ -3,8 +3,36 @@ import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
+import Chart from "react-google-charts";
 
 import NavBar from '../../../components/dashboard/navBar';
+
+const data = [
+  [
+    {
+      type: "date",
+      id: "Date"
+    },
+    {
+      type: "number",
+      id: "Won/Loss"
+    }
+  ],
+  [new Date(2012, 3, 13), 37032],
+  [new Date(2012, 3, 14), 38024],
+  [new Date(2012, 3, 15), 38024],
+  [new Date(2012, 3, 16), 38108],
+  [new Date(2012, 3, 17), 38229],
+  // Many rows omitted for brevity.
+  [new Date(2013, 9, 4), 38177],
+  [new Date(2013, 9, 5), 38705],
+  [new Date(2013, 9, 12), 38210],
+  [new Date(2013, 9, 13), 38029],
+  [new Date(2013, 9, 19), 38823],
+  [new Date(2013, 9, 23), 38345],
+  [new Date(2013, 9, 24), 38436],
+  [new Date(2013, 9, 30), 38447]
+];
 
 const styles = theme => ({
   root: {
@@ -34,6 +62,7 @@ class Dashboard extends Component {
           <NavBar title={title} />
           <main className={classes.content}>
             <div className={classes.toolbar} />
+            <Chart chartType="Calendar" width="100%" height="400px" data={data} />
             <Typography paragraph>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt
               ut labore et dolore magna aliqua. Rhoncus dolor purus non enim praesent elementum
