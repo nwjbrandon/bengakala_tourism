@@ -8,6 +8,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { NavLink } from "react-router-dom";
+import { Link } from 'react-router-dom'
 
 const styles = theme => ({
   root: {
@@ -15,12 +16,17 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    height: 600,
+    height: 500,
+    [theme.breakpoints.up(500 + theme.spacing.unit * 3 * 2)]: {
+      width: 500,
+      margin: 'auto',
+    },
   },
   button: {
     margin: theme.spacing(1),
   },
 });
+
 class Admin extends React.Component {
   constructor(props) {
     super(props);
@@ -32,11 +38,6 @@ class Admin extends React.Component {
       error: '',
     }
     this.submit = this.submit.bind(this);
-  } 
-  componentDidMount() {
-    API.get('/admin').then(res => {
-      this.setState({ data: res });
-    })
   }
 
   submit() {
@@ -48,9 +49,10 @@ class Admin extends React.Component {
           this.props.history.push('/dashboard');
         })
         .catch(err =>{
-          this.setState({ error: err.statusText});
+          this.setState({ error: err.data});
         });
   }
+
   render() {
     const {classes} = this.props;
     return (
@@ -105,14 +107,14 @@ class Admin extends React.Component {
                   </Typography>
                 </Grid>
                 <Grid container justify="center" style={{ paddingTop: 20 }}>
-                  <NavLink to="/">
-                    <Button
-                        variant="contained"
-                        className={classes.button}
-                    >
-                      Cancel
-                    </Button>
-                  </NavLink>
+                  <Button
+                      variant="contained"
+                      className={classes.button}
+                      component={Link}
+                      to="/"
+                  >
+                    Cancel
+                  </Button>
                   <Button
                       variant="contained"
                       className={classes.button}
@@ -122,7 +124,7 @@ class Admin extends React.Component {
                   </Button>
                 </Grid>
                 <Grid container justify="center">
-                  <Typography variant="body2">
+                  <Typography variant="body2" color="error">
                     { this.state.error }
                   </Typography>
                 </Grid>

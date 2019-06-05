@@ -16,9 +16,9 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import uuidv1 from 'uuid/v1';
-
 import NavBar from '../../../../components/dashboard/navBar';
-
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 const styles = theme => ({
     root: {
         display: 'flex',
@@ -85,6 +85,22 @@ class DashboardFAQ extends Component {
         this.submitEntry = this.submitEntry.bind(this)
         this.confirmWarning = this.confirmWarning.bind(this)
         this.handleClose = this.handleClose.bind(this)
+        this.addNotification = this.addNotification.bind(this);
+        this.notificationDOMRef = React.createRef();
+    }
+
+    addNotification() {
+        this.notificationDOMRef.current.addNotification({
+            title: "Awesomeness",
+            message: "Awesome Notifications!",
+            type: "success",
+            insert: "top",
+            container: "top-right",
+            animationIn: ["animated", "fadeIn"],
+            animationOut: ["animated", "fadeOut"],
+            dismiss: { duration: 2000 },
+            dismissable: { click: true }
+        });
     }
 
     submitEntry() {
@@ -183,6 +199,12 @@ class DashboardFAQ extends Component {
                 <NavBar title={title} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
+                    <div className="app-content">
+                        <ReactNotification ref={this.notificationDOMRef} />
+                        <button onClick={this.addNotification} className="btn btn-primary">
+                            Add Awesome Notification
+                        </button>
+                    </div>
                     <TextField
                         multiline={true}
                         variant="outlined"

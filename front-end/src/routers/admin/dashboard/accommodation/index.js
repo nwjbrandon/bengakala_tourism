@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import uuidv1 from 'uuid/v1';
 import _ from 'lodash';
+import Calendar from 'react-calendar';
 
 import NavBar from '../../../../components/dashboard/navBar';
 
@@ -83,6 +84,7 @@ class DashboardFAQ extends Component {
             title: 'Accommodation',
             file: '',
             imagePreviewUrl: '',
+            date: new Date()
         }
         this.cancelEntry = this.cancelEntry.bind(this)
         this.editEntry = this.editEntry.bind(this)
@@ -93,6 +95,11 @@ class DashboardFAQ extends Component {
         this.watchTypeEntry = this.watchTypeEntry.bind(this)
         this.newEntry = this.newEntry.bind(this)
         this.reset = this.reset.bind(this)
+        this.onChange = this.onChange.bind(this)
+    }
+
+    onChange(date) {
+        this.setState({ date })
     }
 
     _handleSubmit(e) {
@@ -209,6 +216,10 @@ class DashboardFAQ extends Component {
                 <NavBar title={title} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
+                    <Calendar
+                        onChange={this.onChange}
+                        value={this.state.date}
+                    />
                     {/* https://codepen.io/hartzis/pen/VvNGZP */}
                     <div className="previewComponent">
                         <form onSubmit={(e)=>this._handleSubmit(e)}>

@@ -28,18 +28,25 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: __dirname + '/src/index.html',
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin()
   ],
   devServer: {
     port: 3000,
     overlay: true,
     contentBase: './dist',
     historyApiFallback: true,
-    hot: true
+    hot: true,
+    https: true,
+    proxy: {
+      '/api': 'http://localhost:3001/api'
+    }
   }
 };
