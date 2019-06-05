@@ -14,6 +14,7 @@ const app = express();
 // endpoints not necessarily to protect
 app.get('/about', getAbout.get);
 app.get('/accommodation', getAccomodation.get);
+app.get('/accommodation/cost', getAccomodation.cost);
 app.get('/attraction', getAttraction.get);
 app.get('/contact', getContact.get);
 app.get('/faq', getFAQ.get);
