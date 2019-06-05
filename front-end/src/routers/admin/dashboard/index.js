@@ -4,8 +4,8 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Chart from "react-google-charts";
-
 import NavBar from '../../../components/dashboard/navBar';
+import {connect} from 'react-redux';
 
 const data = [
   [
@@ -53,6 +53,13 @@ class Dashboard extends Component {
     }
   }
 
+  componentWillMount() {
+    if (this.props.auth) {
+    } else {
+      this.props.history.push('/admin');
+    }
+  }
+
   render() {
     const { classes } = this.props
     const { title } = this.state
@@ -94,6 +101,14 @@ class Dashboard extends Component {
 
 Dashboard.propTypes = {
   classes: PropTypes.object.isRequired,
+  auth: PropTypes.bool.isRequired,
 };
 
-export default withStyles(styles)(Dashboard);
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+
+export default connect(mapStateToProps)(withStyles(styles)(Dashboard));
