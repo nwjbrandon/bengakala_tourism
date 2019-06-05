@@ -62,7 +62,7 @@ class Admin extends React.Component {
   }
 
   render() {
-    const {classes, auth} = this.props;
+    const { classes } = this.props;
     return (
         <React.Fragment>
           <Grid
@@ -82,7 +82,6 @@ class Admin extends React.Component {
                   Username
                 </Typography>
                 <TextField
-                    id="outlined-full-width"
                     placeholder="Username"
                     fullWidth
                     margin="normal"
@@ -97,7 +96,6 @@ class Admin extends React.Component {
                   Password
                 </Typography>
                 <TextField
-                    id="outlined-full-width"
                     placeholder="Password"
                     fullWidth
                     margin="normal"

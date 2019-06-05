@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
-import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
@@ -20,6 +19,10 @@ import Settings from '@material-ui/icons/Settings';
 import Store from '@material-ui/icons/Store';
 import Terrain from '@material-ui/icons/Terrain';
 import Exittoapp from '@material-ui/icons/ExitToApp';
+import {connect} from 'react-redux';
+import {signOut} from '../../actions/auth'
+import {withRouter} from 'react-router-dom';
+import API from '../../api/index'
 
 const menuOptions = [
     {
@@ -70,11 +73,6 @@ const settingOptions = [
         to: '/dashboard/settings',
         icon: <Settings />
     },
-    {
-        title: 'Logout',
-        to: '/admin',
-        icon: <Exittoapp />
-    }
 ]
 
 const drawerWidth = 240;
@@ -113,14 +111,22 @@ const styles = theme => ({
     },
 });
 
-class SideDrawer extends Component {
+class SideDrawer extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
             openDrawer: false
         }
         this.handleCloseDrawer = this.props.handleCloseDrawer.bind(this)
+        this.logout = this.logout.bind(this)
     }
+
+    logout() {
+        this.props.signOut();
+        this.props.history.push('/admin');
+        API.get('/admin/logout');
+    }
+
     render() {
         const { classes } = this.props
         return (
@@ -148,6 +154,10 @@ class SideDrawer extends Component {
                             <ListItemText primary={text.title}/>
                         </ListItem>
                     ))}
+                    <ListItem button key='Logout' onClick={this.logout}>
+                        <ListItemIcon><Exittoapp /></ListItemIcon>
+                        <ListItemText primary='Logout'/>
+                    </ListItem>
                 </List>
             </div>
         )
@@ -156,6 +166,20 @@ class SideDrawer extends Component {
 
 SideDrawer.propTypes = {
     classes: PropTypes.object.isRequired,
+    auth: PropTypes.bool.isRequired,
 };
 
-export default withStyles(styles)(SideDrawer);
+function mapStateToProps(state) {
+    return {
+        auth: state.auth
+    };
+}
+
+function matchDispatchToProps(dispatch){
+    return {
+        signOut: () => dispatch(signOut()),
+    }
+}
+
+
+export default connect(mapStateToProps, matchDispatchToProps)(withStyles(styles)(withRouter(SideDrawer)));

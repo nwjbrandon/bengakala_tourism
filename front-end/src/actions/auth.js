@@ -5,3 +5,11 @@ export const signIn = () => {
         payload: true
     }
 };
+
+export const signOut = () => {
+    console.log('You are logging out');
+    return {
+        type: 'USER_SIGN_OUT',
+        payload: false
+    }
+};

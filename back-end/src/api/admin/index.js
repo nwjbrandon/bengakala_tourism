@@ -28,7 +28,7 @@ const getLogout = [
       if (err) {
         console.log(err);
       } else {
-        res.redirect('/');
+        console.log('logging out');
       }
     });
   }
