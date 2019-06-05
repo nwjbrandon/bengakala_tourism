@@ -119,21 +119,18 @@ class SideDrawer extends Component {
         this.state = {
             openDrawer: false
         }
-        this.handleOpenDrawer = this.props.handleOpenDrawer.bind(this)
+        this.handleCloseDrawer = this.props.handleCloseDrawer.bind(this)
     }
     render() {
         const { classes } = this.props
         return (
             <div>
                 <div className={classes.toolbar}/>
-                <Hidden smUp implementation="css">
                     <div className={classes.drawerHeader}>
-                        <IconButton onClick={this.handleOpenDrawer}>
+                        <IconButton onClick={this.handleCloseDrawer}>
                             <ChevronLeftIcon/>
                         </IconButton>
                     </div>
-                </Hidden>
-                <Divider/>
                 <Divider/>
                 <List>
                     {menuOptions.map((text) => (

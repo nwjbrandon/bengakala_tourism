@@ -57,14 +57,18 @@ class NavBar extends Component {
         super(props);
         this.state = {
             openDrawer: false
-        }
-        this.handleOpenDrawer = this.handleOpenDrawer.bind(this)
-    }
+        };
+        this.handleOpenDrawer = this.handleOpenDrawer.bind(this);
+        this.handleCloseDrawer = this.handleCloseDrawer.bind(this);
+    };
 
     handleOpenDrawer() {
-        const { openDrawer } = this.state
-        this.setState({ openDrawer: !openDrawer })
-    }
+        this.setState({ openDrawer: true })
+    };
+
+    handleCloseDrawer() {
+        this.setState({ openDrawer: false })
+    };
 
     render() {
         const { classes, title } = this.props
@@ -98,7 +102,7 @@ class NavBar extends Component {
                                 keepMounted: true, // Better open performance on mobile.
                             }}
                         >
-                            <SideDrawer handleOpenDrawer={this.handleOpenDrawer} />
+                            <SideDrawer handleCloseDrawer={this.handleCloseDrawer} />
                         </Drawer>
                     </Hidden>
                     <Hidden xsDown implementation="css">
@@ -109,7 +113,7 @@ class NavBar extends Component {
                             variant="permanent"
                             open
                         >
-                            <SideDrawer handleOpenDrawer={this.handleOpenDrawer} />
+                            <SideDrawer handleCloseDrawer={this.handleCloseDrawer} />
                         </Drawer>
                     </Hidden>
                 </nav>
