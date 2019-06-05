@@ -11,6 +11,7 @@ import Review from './Review';
 import TripDetailsForm from './TripDetailsForm'
 import PersonalDetailsForm from './PersonalDetailsForm'
 import ConfirmationScreen from './ConfirmationScreen'
+import Slip from './Slip'
 
 
 
@@ -60,7 +61,7 @@ function getStepContent(step) {
     case 1:
       return <TripDetailsForm />;
     case 2:
-      return <Review />;
+      return <Slip />;
     default:
       throw new Error('Unknown step');
   }
