@@ -36,6 +36,7 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin()
   ],
   devServer: {
     port: 3000,
