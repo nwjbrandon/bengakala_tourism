@@ -23,37 +23,53 @@ import DashboardHome from './routers/admin/dashboard/home';
 import DashboardPayment from './routers/admin/dashboard/payment';
 import DashboardSettings from './routers/admin/dashboard/settings';
 import allReducers from './reducers';
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
+import { PersistGate } from 'redux-persist/integration/react'
+
+const persistConfig = {
+  key: 'root',
+  storage,
+}
+
+const persistedReducer = persistReducer(persistConfig, allReducers)
 
 // https://codesandbox.io/s/github/reduxjs/redux/tree/master/examples/todos?from-embed
+
 const store = createStore(
-    allReducers,
+    persistedReducer,
     composeWithDevTools(),
 );
 
+const persistor = persistStore(store);
+
+
 const routing = (
     <Provider store={store}>
-      <Router>
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/about" component={About} />
-          <Route exact path="/accommodation" component={Accommodation} />
-          <Route exact path="/admin" component={Admin} />
-          <Route exact path="/attraction" component={Attraction} />
-          <Route exact path="/contact" component={Contact} />
-          <Route exact path="/faq" component={Faq} />
-          <Route exact path="/payment" component={Payment} />
-          <Route exact path="/dashboard" component={Dashboard} />
-          <Route exact path="/dashboard/about" component={DashboardAbout} />
-          <Route exact path="/dashboard/accommodation" component={DashboardAccommodation} />
-          <Route exact path="/dashboard/attraction" component={DashboardAttraction} />
-          <Route exact path="/dashboard/contact" component={DashboardContact} />
-          <Route exact path="/dashboard/faq" component={DashboardFAQ} />
-          <Route exact path="/dashboard/home" component={DashboardHome} />
-          <Route exact path="/dashboard/payment" component={DashboardPayment} />
-          <Route exact path="/dashboard/settings" component={DashboardSettings} />
-          <Route component={Notfound} />
-        </Switch>
-      </Router>
+      <PersistGate persistor={persistor} loading={null}>
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <Route exact path="/about" component={About} />
+            <Route exact path="/accommodation" component={Accommodation} />
+            <Route exact path="/admin" component={Admin} />
+            <Route exact path="/attraction" component={Attraction} />
+            <Route exact path="/contact" component={Contact} />
+            <Route exact path="/faq" component={Faq} />
+            <Route exact path="/payment" component={Payment} />
+            <Route exact path="/dashboard" component={Dashboard} />
+            <Route exact path="/dashboard/about" component={DashboardAbout} />
+            <Route exact path="/dashboard/accommodation" component={DashboardAccommodation} />
+            <Route exact path="/dashboard/attraction" component={DashboardAttraction} />
+            <Route exact path="/dashboard/contact" component={DashboardContact} />
+            <Route exact path="/dashboard/faq" component={DashboardFAQ} />
+            <Route exact path="/dashboard/home" component={DashboardHome} />
+            <Route exact path="/dashboard/payment" component={DashboardPayment} />
+            <Route exact path="/dashboard/settings" component={DashboardSettings} />
+            <Route component={Notfound} />
+          </Switch>
+        </Router>
+      </PersistGate>
     </Provider>
 )
 
