@@ -9,6 +9,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom'
+import {connect} from 'react-redux';
+import {signIn} from '../../actions/auth'
 
 const styles = theme => ({
   root: {
@@ -17,7 +19,7 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing(2),
     height: 500,
-    [theme.breakpoints.up(500 + theme.spacing.unit * 3 * 2)]: {
+    [theme.breakpoints.up(500 + theme.spacing(6))]: {
       width: 500,
       margin: 'auto',
     },
@@ -40,12 +42,18 @@ class Admin extends React.Component {
     this.submit = this.submit.bind(this);
   }
 
+  componentWillMount() {
+    console.log(this.props.auth);
+    this.setState({error: this.props.auth});
+  }
+
   submit() {
     console.log(this.state);
     const { email, password } = this.state;
     const data = { email, password };
     API.post('/admin/login', data)
         .then(() => {
+          this.props.signIn();
           this.props.history.push('/dashboard');
         })
         .catch(err =>{
@@ -54,7 +62,7 @@ class Admin extends React.Component {
   }
 
   render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
     return (
         <React.Fragment>
           <Grid
@@ -74,7 +82,6 @@ class Admin extends React.Component {
                   Username
                 </Typography>
                 <TextField
-                    id="outlined-full-width"
                     placeholder="Username"
                     fullWidth
                     margin="normal"
@@ -89,7 +96,6 @@ class Admin extends React.Component {
                   Password
                 </Typography>
                 <TextField
-                    id="outlined-full-width"
                     placeholder="Password"
                     fullWidth
                     margin="normal"
@@ -139,6 +145,19 @@ class Admin extends React.Component {
 
 Admin.propTypes = {
   classes: PropTypes.object.isRequired,
+  auth: PropTypes.bool.isRequired,
 };
 
-export default withStyles(styles)(Admin);
+function mapStateToProps(state) {
+  return {
+    auth: state.auth
+  };
+}
+
+function matchDispatchToProps(dispatch){
+  return {
+    signIn: () => dispatch(signIn()),
+  }
+}
+
+export default connect(mapStateToProps, matchDispatchToProps)(withStyles(styles)(Admin));
