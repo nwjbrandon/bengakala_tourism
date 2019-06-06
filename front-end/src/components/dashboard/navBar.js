@@ -9,7 +9,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-import SideDrawer from './menuOptions';
+import SideDrawerBrowser from './sideNavBarBrowser';
+import SideDrawerMobile from './sideNavBarMobile';
 
 const drawerWidth = 240;
 
@@ -102,7 +103,7 @@ class NavBar extends Component {
                                 keepMounted: true, // Better open performance on mobile.
                             }}
                         >
-                            <SideDrawer handleCloseDrawer={this.handleCloseDrawer} />
+                            <SideDrawerMobile handleCloseDrawer={this.handleCloseDrawer} />
                         </Drawer>
                     </Hidden>
                     <Hidden xsDown implementation="css">
@@ -113,7 +114,7 @@ class NavBar extends Component {
                             variant="permanent"
                             open
                         >
-                            <SideDrawer handleCloseDrawer={this.handleCloseDrawer} />
+                            <SideDrawerBrowser handleCloseDrawer={this.handleCloseDrawer} />
                         </Drawer>
                     </Hidden>
                 </nav>
