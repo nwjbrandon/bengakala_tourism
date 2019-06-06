@@ -1,13 +1,22 @@
 import React from 'react';
 import API from '../../api';
-import AccomodationsForm from './Components/Accomodations'
-import bg from './images/balivillage.jpg'
+import AccomodationsForm from '../../components/accomodations/Accomodations'
+import Slideshow from '../../components/accomodations/Slideshow'
+import bg from '../../components/accomodations/images/balivillage.jpg'
 
 class Accomodation extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       data: '',
+      textArray : [
+        {title : "This is title 1 " , text: "This is a long description 1. It is long so that i can see whether it still looks good on the website."},
+        {title : "This is title 2", text: "This is description 2"},
+        {title :"This is title 3" , text: "This is description 3"},
+        {title : "This is title 4", text: "This is description 4"},
+        {title : "This is title 5" , text: "This is description 5"},
+        {title : "This is title 6" , text: "This is description 6"},
+      ]
     }
   }
   componentDidMount() {
@@ -17,12 +26,14 @@ class Accomodation extends React.Component {
   }
   render() {
 
+
+
     var divStyle = {
       padding: 50 ,
-      backgroundPosition: "center",
-      backgroundRepeat: "no-repeat",
+      backgroundPosition: "top",
+      backgroundRepeat: "initial",
       backgroundSize: "cover",
-      height:"150vh",
+      // height:"250vh",
       width:"100%",
       backgroundImage: `url(${bg})`,
       textAlign:"left"
@@ -31,6 +42,7 @@ class Accomodation extends React.Component {
     return (
       <div style = {divStyle}>
         <AccomodationsForm  />
+        <Slideshow textArr = {this.state.textArray} />
       </div>
     )
   }

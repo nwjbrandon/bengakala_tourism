@@ -39,6 +39,7 @@
     "react-notifications-component": "^1.1.1",
     "react-redux": "^7.0.3",
     "react-router-dom": "^5.0.0",
+    "react-slideshow-image": "^1.1.8",
     "react-toastify": "^5.2.1",
     "redux": "^4.0.1",
     "redux-devtools-extension": "^2.13.8",
