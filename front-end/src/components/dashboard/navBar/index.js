@@ -96,21 +96,15 @@ class NavBar extends Component {
                         <Drawer
                             variant="temporary"
                             open={openDrawer}
-                            classes={{
-                                paper: classes.drawerPaper,
-                            }}
-                            ModalProps={{
-                                keepMounted: true, // Better open performance on mobile.
-                            }}
+                            classes={{ paper: classes.drawerPaper }}
+                            ModalProps={{ keepMounted: true }}
                         >
                             <SideDrawerMobile handleCloseDrawer={this.handleCloseDrawer} />
                         </Drawer>
                     </Hidden>
                     <Hidden xsDown implementation="css">
                         <Drawer
-                            classes={{
-                                paper: classes.drawerPaper,
-                            }}
+                            classes={{ paper: classes.drawerPaper }}
                             variant="permanent"
                             open
                         >

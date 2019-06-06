@@ -20,9 +20,9 @@ import Store from '@material-ui/icons/Store';
 import Terrain from '@material-ui/icons/Terrain';
 import Exittoapp from '@material-ui/icons/ExitToApp';
 import {connect} from 'react-redux';
-import {signOut} from '../../actions/auth'
+import {signOut} from '../../../actions/auth'
 import {withRouter} from 'react-router-dom';
-import API from '../../api/index'
+import API from '../../../api'
 
 const sideNavBarBrowser = [
     {
