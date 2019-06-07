@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 import {Provider} from 'react-redux';
-import {createStore} from 'redux';
+import {createStore, applyMiddleware, compose} from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 import About from './routers/about';
 import Accommodation from './routers/accommodation';
@@ -26,21 +26,28 @@ import allReducers from './reducers';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import { PersistGate } from 'redux-persist/integration/react'
+import createSagaMiddleware from "redux-saga";
+import { watcherSaga } from "./saga/test";
+
 
 const persistConfig = {
   key: 'root',
   storage,
-}
+};
 
+const sagaMiddleware = createSagaMiddleware();
+const enhancers = composeWithDevTools(
+    applyMiddleware(sagaMiddleware)
+)
 const persistedReducer = persistReducer(persistConfig, allReducers)
 
 // https://codesandbox.io/s/github/reduxjs/redux/tree/master/examples/todos?from-embed
 
 const store = createStore(
     persistedReducer,
-    composeWithDevTools(),
+    enhancers
 );
-
+sagaMiddleware.run(watcherSaga);
 const persistor = persistStore(store);
 
 
