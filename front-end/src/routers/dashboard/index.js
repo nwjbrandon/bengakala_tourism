@@ -162,7 +162,7 @@ Dashboard.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth
+    auth: state.admin.auth
   };
 }
 

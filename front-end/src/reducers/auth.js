@@ -1,4 +1,4 @@
-const authUser = (state = false, action) => {
+const auth = (state = false, action) => {
     switch (action.type) {
         case 'USER_AUTH':
             return true;
@@ -9,4 +9,4 @@ const authUser = (state = false, action) => {
     }
 }
 
-export default authUser
+export default auth
