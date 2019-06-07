@@ -27,7 +27,7 @@ import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
 import { PersistGate } from 'redux-persist/integration/react'
 import createSagaMiddleware from "redux-saga";
-import { watcherSaga } from "./saga/test";
+import { watcherSaga } from "./sagas/test";
 
 
 const persistConfig = {
