@@ -44,7 +44,6 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true,
     hot: true,
-    https: true,
     proxy: {
       '/api': 'http://localhost:3001/api'
     }

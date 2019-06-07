@@ -48,17 +48,7 @@ class Admin extends React.Component {
   }
 
   submit() {
-    console.log(this.state);
-    const { email, password } = this.state;
-    const data = { email, password };
-    API.post('/admin/login', data)
-        .then(() => {
-          this.props.signIn();
-          this.props.history.push('/dashboard');
-        })
-        .catch(err =>{
-          this.setState({ error: err.data});
-        });
+    this.props.signIn();
   }
 
   render() {
@@ -156,7 +146,7 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch){
   return {
-    signIn: () => dispatch(signIn()),
+    signIn: () => dispatch({type: "API_CALL_REQUEST"}),
   }
 }
 

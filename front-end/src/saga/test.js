@@ -10,16 +10,18 @@ export function* watcherSaga() {
 function fetchDog() {
   return axios({
     method: "get",
-    url: "https://dog.ceo/api/breeds/image/random"
+    url: "http://localhost:3001/api/about"
   });
 }
 
 // worker saga: makes the api call when watcher saga sees the action
 function* workerSaga() {
   try {
+    console.log('hihi')
     const response = yield call(fetchDog);
-    const dog = response.data.message;
-
+    const dog = response.data;
+    console.log(dog);
+    console.log(555);
     // dispatch a success action to the store with the new dog
     yield put({ type: "API_CALL_SUCCESS", dog });
   
