@@ -58,7 +58,7 @@ class Admin extends React.Component {
         <React.Fragment>
           <Grid
               container
-              spacing={24}
+              spacing={10}
               direction="column"
               alignItems="center"
               justify="center"
