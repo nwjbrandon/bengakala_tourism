@@ -4,7 +4,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Chart from "react-google-charts";
-import NavBar from '../../../components/dashboard/navBar';
+import NavBar from '../../components/dashboard/navBar';
 import {connect} from 'react-redux';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';

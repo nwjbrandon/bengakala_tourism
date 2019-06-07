@@ -13,15 +13,15 @@ import Contact from './routers/contact';
 import Faq from './routers/faq';
 import Notfound from './routers/notfound';
 import Payment from './routers/payment';
-import Dashboard from './routers/admin/dashboard';
-import DashboardAbout from './routers/admin/dashboard/about';
-import DashboardAccommodation from './routers/admin/dashboard/accommodation';
-import DashboardAttraction from './routers/admin/dashboard/attraction';
-import DashboardContact from './routers/admin/dashboard/contact';
-import DashboardFAQ from './routers/admin/dashboard/faq';
-import DashboardHome from './routers/admin/dashboard/home';
-import DashboardPayment from './routers/admin/dashboard/payment';
-import DashboardSettings from './routers/admin/dashboard/settings';
+import Dashboard from './routers/dashboard';
+import DashboardAbout from './routers/dashboard/about';
+import DashboardAccommodation from './routers/dashboard/accommodation';
+import DashboardAttraction from './routers/dashboard/attraction';
+import DashboardContact from './routers/dashboard/contact';
+import DashboardFAQ from './routers/dashboard/faq';
+import DashboardHome from './routers/dashboard/home';
+import DashboardPayment from './routers/dashboard/payment';
+import DashboardSettings from './routers/dashboard/settings';
 import allReducers from './reducers';
 import { persistStore, persistReducer } from 'redux-persist'
 import storage from 'redux-persist/lib/storage' // defaults to localStorage for web
