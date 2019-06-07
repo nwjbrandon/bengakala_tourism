@@ -19,9 +19,10 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing(2),
     height: 500,
+    margin: 'auto',
+    width: 450,
     [theme.breakpoints.up(500 + theme.spacing(6))]: {
       width: 500,
-      margin: 'auto',
     },
   },
   button: {
@@ -57,7 +58,7 @@ class Admin extends React.Component {
         <React.Fragment>
           <Grid
               container
-              spacing={10}
+              spacing={24}
               direction="column"
               alignItems="center"
               justify="center"
