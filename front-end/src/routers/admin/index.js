@@ -19,9 +19,10 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing(2),
     height: 500,
+    margin: 'auto',
+    width: 450,
     [theme.breakpoints.up(500 + theme.spacing(6))]: {
       width: 500,
-      margin: 'auto',
     },
   },
   button: {
@@ -48,17 +49,7 @@ class Admin extends React.Component {
   }
 
   submit() {
-    console.log(this.state);
-    const { email, password } = this.state;
-    const data = { email, password };
-    API.post('/admin/login', data)
-        .then(() => {
-          this.props.signIn();
-          this.props.history.push('/dashboard');
-        })
-        .catch(err =>{
-          this.setState({ error: err.data});
-        });
+    this.props.signIn();
   }
 
   render() {
@@ -156,7 +147,7 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch){
   return {
-    signIn: () => dispatch(signIn()),
+    signIn: () => dispatch({type: "API_CALL_REQUEST"}),
   }
 }
 

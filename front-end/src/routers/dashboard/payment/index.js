@@ -12,7 +12,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import uuidv1 from 'uuid/v1';
 
-import NavBar from '../../../../components/dashboard/navBar';
+import NavBar from '../../../components/dashboard/navBar';
 
 const styles = theme => ({
     root: {

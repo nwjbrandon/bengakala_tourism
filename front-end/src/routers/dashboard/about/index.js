@@ -10,10 +10,9 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
-import uuidv1 from 'uuid/v1';
-import _ from 'lodash'
+import _ from 'lodash';
 
-import NavBar from '../../../../components/dashboard/navBar';
+import NavBar from '../../../components/dashboard/navBar';
 
 const styles = theme => ({
     root: {
@@ -42,45 +41,23 @@ class DashboardFAQ extends Component {
         this.state = {
             data: {
                 '1': {
-                    title: 'Expansion Table 1',
-                    type: 'General FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Getaway to a Kampong Living',
+                    text: 'Gallop Kranji Farm Resort is a countryside destination located in Kranji, the north-west region of Singapore. Our Resort provides a local farm stay experience with our 35 villas choosing from our Standard, Superior, Executive, Premier Villa and Family Suite, with activities for all ages starting with our in-house Fruit & Vegetable Farm Tours, Herbal Plantation Tour, Bee Farm Tour, Animal Interaction with Pony Rides, Birdnest Museum Tour, Bottle Koi Feeding, Bird Farm Tour, Prawn Fishing, and our Family friendly Beer Garden and Variety of Food Options with Indoor and Outdoor Play area for the kids.',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                },
-                '2': {
-                    title: 'Expansion Table 2',
-                    type: 'Security FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                    edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                },
+                    copyTitle: 'Getaway to a Kampong Living',
+                    copyText: 'Gallop Kranji Farm Resort is a countryside destination located in Kranji, the north-west region of Singapore. Our Resort provides a local farm stay experience with our 35 villas choosing from our Standard, Superior, Executive, Premier Villa and Family Suite, with activities for all ages starting with our in-house Fruit & Vegetable Farm Tours, Herbal Plantation Tour, Bee Farm Tour, Animal Interaction with Pony Rides, Birdnest Museum Tour, Bottle Koi Feeding, Bird Farm Tour, Prawn Fishing, and our Family friendly Beer Garden and Variety of Food Options with Indoor and Outdoor Play area for the kids.',
+                }
             },
             origin: {
                 '1': {
-                    title: 'Expansion Table 1',
-                    type: 'General FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Getaway to a Kampong Living',
+                    text: 'Gallop Kranji Farm Resort is a countryside destination located in Kranji, the north-west region of Singapore. Our Resort provides a local farm stay experience with our 35 villas choosing from our Standard, Superior, Executive, Premier Villa and Family Suite, with activities for all ages starting with our in-house Fruit & Vegetable Farm Tours, Herbal Plantation Tour, Bee Farm Tour, Animal Interaction with Pony Rides, Birdnest Museum Tour, Bottle Koi Feeding, Bird Farm Tour, Prawn Fishing, and our Family friendly Beer Garden and Variety of Food Options with Indoor and Outdoor Play area for the kids.',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                },
-                '2': {
-                    title: 'Expansion Table 2',
-                    type: 'Security FAQ',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                    edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyType: 'Copy General FAQ',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                },
+                    copyTitle: 'Getaway to a Kampong Living',
+                    copyText: 'Gallop Kranji Farm Resort is a countryside destination located in Kranji, the north-west region of Singapore. Our Resort provides a local farm stay experience with our 35 villas choosing from our Standard, Superior, Executive, Premier Villa and Family Suite, with activities for all ages starting with our in-house Fruit & Vegetable Farm Tours, Herbal Plantation Tour, Bee Farm Tour, Animal Interaction with Pony Rides, Birdnest Museum Tour, Bottle Koi Feeding, Bird Farm Tour, Prawn Fishing, and our Family friendly Beer Garden and Variety of Food Options with Indoor and Outdoor Play area for the kids.',
+                }
             },
-            title: 'FAQ',
+            title: 'About',
         }
         this.cancelEntry = this.cancelEntry.bind(this)
         this.editEntry = this.editEntry.bind(this)
@@ -89,28 +66,12 @@ class DashboardFAQ extends Component {
         this.watchQuestionEntry = this.watchQuestionEntry.bind(this)
         this.watchTextEntry = this.watchTextEntry.bind(this)
         this.watchTypeEntry = this.watchTypeEntry.bind(this)
-        this.newEntry = this.newEntry.bind(this)
         this.reset = this.reset.bind(this)
     }
 
     reset() {
-        const newData = _.cloneDeep(this.state.origin)
-        this.setState({ data: newData })
-    }
-
-    newEntry() {
-        const id = uuidv1()
-        let newData = this.state.data
-        newData[id] = {
-            title: '',
-            type: '',
-            text: '',
-            edit: true,
-            copyTitle: '',
-            copyType: '',
-            copyText: '',
-        }
-        this.setState({ data: newData })
+        const oldData = _.cloneDeep(this.state.origin)
+        this.setState({ data: oldData })
     }
 
     watchQuestionEntry(event) {
@@ -139,7 +100,6 @@ class DashboardFAQ extends Component {
         const id = event.currentTarget.value
         newData[id].edit = false
         newData[id].copyText = newData[id].text
-        newData[id].copyType = newData[id].type
         newData[id].copyTitle = newData[id].title
         this.setState({ data: newData })
     }
@@ -157,7 +117,6 @@ class DashboardFAQ extends Component {
         newData[id].edit = false
         newData[id].text = newData[id].copyText
         newData[id].title = newData[id].copyTitle
-        newData[id].type = newData[id].copyType
         this.setState({ data: newData })
     }
 
@@ -177,11 +136,6 @@ class DashboardFAQ extends Component {
                 <NavBar title={title} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                        <Button variant="contained" onClick={this.newEntry} className={classes.button}>
-                            New
-                        </Button>
-                    </Grid>
                     {Object.keys(data).map((item, index) => (
                         <ExpansionPanel key={index}>
                             <ExpansionPanelSummary
@@ -189,8 +143,6 @@ class DashboardFAQ extends Component {
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                             >
-                                <Typography className={classes.heading}>{ data[item].type }</Typography>
-                                &nbsp;-&nbsp;
                                 <Typography className={classes.heading}>{ data[item].title }</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
@@ -205,17 +157,6 @@ class DashboardFAQ extends Component {
                                             label="Question"
                                             className={classes.button}
                                             onChange={this.watchQuestionEntry}
-                                            id={item}
-                                        />
-                                        <TextField
-                                            multiline={true}
-                                            variant="outlined"
-                                            fullWidth
-                                            value={data[item].copyType}
-                                            placeholder="Ex. General FAQ"
-                                            label="Type"
-                                            className={classes.button}
-                                            onChange={this.watchTypeEntry}
                                             id={item}
                                         />
                                         <TextField
