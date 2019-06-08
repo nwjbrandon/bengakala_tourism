@@ -1,4 +1,4 @@
-import _ from 'lodash';
+import { insert } from '../const/utils';
 
 const initialState = {
     originalData: {
@@ -21,10 +21,7 @@ const initialState = {
     },
 };
 
-const insert = (dest, payload) => {
-    const payloadKey = _.keys(payload)[0];
-    dest[payloadKey] = payload[payloadKey];
-};
+
 
 const auth = (state = false, action) => {
     console.log(action);
@@ -34,12 +31,7 @@ const auth = (state = false, action) => {
         case 'DASHBOARD_ABOUT_RESET':
             return {};
         case 'DASHBOARD_ABOUT_INSERT':
-            console.log(_.keys(action.payload)[0]);
-            console.log(action.payload[_.keys(action.payload)[0]]);
-            //const payloadKey = _.keys(action.payload)[0];
-            //const payloadValue = action.payload[payloadKey];
             const { displayedData } = initialState;
-            //displayedData[payloadKey] = payloadValue;
             insert(displayedData, action.payload);
             return { ...initialState, displayedData };
         case 'DASHBOARD_ABOUT_UPDATE':
