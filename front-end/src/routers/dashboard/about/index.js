@@ -11,7 +11,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import _ from 'lodash';
-import { DASHBOARD_ABOUT_INSERT } from '../../../actions/dashboard-about';
+import { DASHBOARD_ABOUT_INSERT, DASHBOARD_ABOUT_RESET, DASHBOARD_ABOUT_UPDATE } from '../../../actions/dashboard-about';
 import {connect} from 'react-redux';
 import NavBar from '../../../components/dashboard/navBar';
 
@@ -72,13 +72,15 @@ class DashboardFAQ extends Component {
 
     reset() {
         console.log(555);
-        this.props.update({'6': {
-            title: '',
-            type: '',
-            text: '',
-            edit: true,
-            mode: '',
-        }});
+        this.props.update({
+            '1': {
+                title: 'Insert Copy Getaway to a Kampong Living',
+                type: '',
+                text: 'Insert Copy Gallop Kranji Farm Resort is a countryside destination located in Kranji, the north-west region of Singapore. Our Resort provides a local farm stay experience with our 35 villas choosing from our Standard, Superior, Executive, Premier Villa and Family Suite, with activities for all ages starting with our in-house Fruit & Vegetable Farm Tours, Herbal Plantation Tour, Bee Farm Tour, Animal Interaction with Pony Rides, Birdnest Museum Tour, Bottle Koi Feeding, Bird Farm Tour, Prawn Fishing, and our Family friendly Beer Garden and Variety of Food Options with Indoor and Outdoor Play area for the kids.',
+                edit: false,
+                mode: 'about',
+            }
+        });
         const oldData = _.cloneDeep(this.state.origin)
         this.setState({ data: oldData })
     }
@@ -231,7 +233,9 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch){
     return {
-        update: (payload) => dispatch(DASHBOARD_ABOUT_INSERT(payload)),
+        insert: (payload) => dispatch(DASHBOARD_ABOUT_INSERT(payload)),
+        update: (payload) => dispatch(DASHBOARD_ABOUT_UPDATE(payload)),
+        reset: () => dispatch(DASHBOARD_ABOUT_RESET()),
     }
 }
 

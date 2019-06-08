@@ -4,3 +4,16 @@ export const DASHBOARD_ABOUT_INSERT = (payload) => {
         payload
     }
 };
+
+export const DASHBOARD_ABOUT_RESET = () => {
+    return {
+        type: 'DASHBOARD_ABOUT_RESET',
+    }
+};
+
+export const DASHBOARD_ABOUT_UPDATE = (payload) => {
+    return {
+        type: 'DASHBOARD_ABOUT_UPDATE',
+        payload
+    }
+};

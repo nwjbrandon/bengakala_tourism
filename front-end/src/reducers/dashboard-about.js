@@ -1,4 +1,4 @@
-import { insert } from '../const/utils';
+import { insert, reset, update } from '../const/utils';
 
 const initialState = {
     originalData: {
@@ -21,26 +21,21 @@ const initialState = {
     },
 };
 
-
-
-const auth = (state = false, action) => {
-    console.log(action);
+const reducer = (state = false, action) => {
+    const { displayedData, originalData } = initialState;
     switch (action.type) {
-        case 'DASHBOARD_ABOUT_DELETE':
-            return {};
         case 'DASHBOARD_ABOUT_RESET':
-            return {};
+            const resetData = reset(originalData);
+            return { ...initialState, displayedData: resetData };
         case 'DASHBOARD_ABOUT_INSERT':
-            const { displayedData } = initialState;
             insert(displayedData, action.payload);
             return { ...initialState, displayedData };
         case 'DASHBOARD_ABOUT_UPDATE':
+            update(displayedData, action.payload);
             return { ...initialState };
-        case 'USER_SIGN_OUT':
-            return false;
         default:
             return { ...initialState }
     }
 };
 
-export default auth
+export default reducer;
