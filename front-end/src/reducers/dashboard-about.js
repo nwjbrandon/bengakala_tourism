@@ -1,3 +1,4 @@
+import { createAction, handleActions } from 'redux-actions';
 import { insert, reset, update } from '../const/utils';
 
 const initialState = {
@@ -21,21 +22,28 @@ const initialState = {
     },
 };
 
-const reducer = (state = false, action) => {
+export const dashboardAboutReducer = (state, action) => {
     const { displayedData, originalData } = initialState;
     switch (action.type) {
         case 'DASHBOARD_ABOUT_RESET':
             const resetData = reset(originalData);
-            return { ...initialState, displayedData: resetData };
+            return { ...state, ...initialState, displayedData: resetData };
         case 'DASHBOARD_ABOUT_INSERT':
             insert(displayedData, action.payload);
-            return { ...initialState, displayedData };
+            return { ...state, ...initialState, displayedData };
         case 'DASHBOARD_ABOUT_UPDATE':
             update(displayedData, action.payload);
-            return { ...initialState };
+            return { ...state, ...initialState };
         default:
-            return { ...initialState }
+            return { ...state, ...initialState }
     }
 };
 
-export default reducer;
+export const dashboardAboutReducerSaga = handleActions({
+    'DASHBOARD_ABOUT_ONMOUNT': (state, action) => ({
+        ...state,
+        ...initialState,
+        displayedData: {...action.payload}
+    })
+}, initialState);
+

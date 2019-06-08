@@ -52,6 +52,10 @@ class DashboardFAQ extends Component {
         this.reset = this.reset.bind(this)
     }
 
+    componentDidMount() {
+        this.props.onMount();
+    }
+
     reset() {
         console.log(555);
         this.props.update({

@@ -1,3 +1,5 @@
+import { createAction, handleActions } from 'redux-actions';
+
 export const DASHBOARD_ABOUT_INSERT = (payload) => {
     return {
         type: 'DASHBOARD_ABOUT_INSERT',
@@ -17,3 +19,13 @@ export const DASHBOARD_ABOUT_UPDATE = (payload) => {
         payload
     }
 };
+/*
+export const DASHBOARD_ABOUT_ONMOUNT = () => {
+    return {
+        type: 'DASHBOARD_ABOUT_ONMOUNT',
+    }
+};
+*/
+
+export const DASHBOARD_ABOUT_ONMOUNT_NAME = 'DASHBOARD_ABOUT_ONMOUNT';
+export const DASHBOARD_ABOUT_ONMOUNT = createAction(DASHBOARD_ABOUT_ONMOUNT_NAME);
