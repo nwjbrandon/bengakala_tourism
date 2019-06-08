@@ -1,6 +1,6 @@
 import React from 'react';
 import API from '../../api';
-import './css/test.css';
+//import './css/test.css';
 
 class Contact extends React.Component {
   constructor(props) {

@@ -136,12 +136,10 @@ class Admin extends React.Component {
 
 Admin.propTypes = {
   classes: PropTypes.object.isRequired,
-  auth: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth
   };
 }
 
