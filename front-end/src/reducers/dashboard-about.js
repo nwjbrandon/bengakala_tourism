@@ -31,19 +31,24 @@ export const dashboardAboutReducer = (state, action) => {
         case 'DASHBOARD_ABOUT_INSERT':
             insert(displayedData, action.payload);
             return { ...state, ...initialState, displayedData };
-        case 'DASHBOARD_ABOUT_UPDATE':
-            update(displayedData, action.payload);
-            return { ...state, ...initialState };
         default:
             return { ...state, ...initialState }
     }
 };
 
 export const dashboardAboutReducerSaga = handleActions({
-    'DASHBOARD_ABOUT_ONMOUNT': (state, action) => ({
+    'DASHBOARD_ABOUT_UPDATE': (state, action) => {
+        const { displayedData } = initialState;
+        update(displayedData, action.payload);
+        return { ...state, ...initialState };
+
+    },
+    'DASHBOARD_ABOUT_ONMOUNT': (state, action) => {
+        return {
         ...state,
         ...initialState,
-        displayedData: {...action.payload}
-    })
+            displayedData: {...action.payload}
+        }
+    }
 }, initialState);
 
