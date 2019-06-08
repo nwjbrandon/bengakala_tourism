@@ -25,7 +25,7 @@ import Payment from './routers/payment';
 // Protected Routes
 import Admin from './routers/admin';
 import Dashboard from './routers/dashboard';
-import DashboardAbout from './routers/dashboard/about';
+import DashboardAbout from './containers/dashboard-about';
 import DashboardAccommodation from './routers/dashboard/accommodation';
 import DashboardAttraction from './routers/dashboard/attraction';
 import DashboardContact from './routers/dashboard/contact';

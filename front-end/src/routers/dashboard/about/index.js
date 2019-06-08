@@ -40,24 +40,6 @@ class DashboardFAQ extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: {
-                '1': {
-                    title: 'Getaway to a Kampong Living',
-                    text: 'Gallop Kranji Farm Resort is a countryside destination located in Kranji, the north-west region of Singapore. Our Resort provides a local farm stay experience with our 35 villas choosing from our Standard, Superior, Executive, Premier Villa and Family Suite, with activities for all ages starting with our in-house Fruit & Vegetable Farm Tours, Herbal Plantation Tour, Bee Farm Tour, Animal Interaction with Pony Rides, Birdnest Museum Tour, Bottle Koi Feeding, Bird Farm Tour, Prawn Fishing, and our Family friendly Beer Garden and Variety of Food Options with Indoor and Outdoor Play area for the kids.',
-                    edit: false,
-                    copyTitle: 'Getaway to a Kampong Living',
-                    copyText: 'Gallop Kranji Farm Resort is a countryside destination located in Kranji, the north-west region of Singapore. Our Resort provides a local farm stay experience with our 35 villas choosing from our Standard, Superior, Executive, Premier Villa and Family Suite, with activities for all ages starting with our in-house Fruit & Vegetable Farm Tours, Herbal Plantation Tour, Bee Farm Tour, Animal Interaction with Pony Rides, Birdnest Museum Tour, Bottle Koi Feeding, Bird Farm Tour, Prawn Fishing, and our Family friendly Beer Garden and Variety of Food Options with Indoor and Outdoor Play area for the kids.',
-                }
-            },
-            origin: {
-                '1': {
-                    title: 'Getaway to a Kampong Living',
-                    text: 'Gallop Kranji Farm Resort is a countryside destination located in Kranji, the north-west region of Singapore. Our Resort provides a local farm stay experience with our 35 villas choosing from our Standard, Superior, Executive, Premier Villa and Family Suite, with activities for all ages starting with our in-house Fruit & Vegetable Farm Tours, Herbal Plantation Tour, Bee Farm Tour, Animal Interaction with Pony Rides, Birdnest Museum Tour, Bottle Koi Feeding, Bird Farm Tour, Prawn Fishing, and our Family friendly Beer Garden and Variety of Food Options with Indoor and Outdoor Play area for the kids.',
-                    edit: false,
-                    copyTitle: 'Getaway to a Kampong Living',
-                    copyText: 'Gallop Kranji Farm Resort is a countryside destination located in Kranji, the north-west region of Singapore. Our Resort provides a local farm stay experience with our 35 villas choosing from our Standard, Superior, Executive, Premier Villa and Family Suite, with activities for all ages starting with our in-house Fruit & Vegetable Farm Tours, Herbal Plantation Tour, Bee Farm Tour, Animal Interaction with Pony Rides, Birdnest Museum Tour, Bottle Koi Feeding, Bird Farm Tour, Prawn Fishing, and our Family friendly Beer Garden and Variety of Food Options with Indoor and Outdoor Play area for the kids.',
-                }
-            },
             title: 'About',
         }
         this.cancelEntry = this.cancelEntry.bind(this)
@@ -139,8 +121,8 @@ class DashboardFAQ extends Component {
     }
 
     render() {
-        const { classes } = this.props
-        const { title, data } = this.state
+        const { classes, data } = this.props
+        const { title } = this.state
         return (
             <div className={classes.root}>
                 <CssBaseline />
@@ -225,18 +207,9 @@ class DashboardFAQ extends Component {
 
 DashboardFAQ.propTypes = {
     classes: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired,
+    origin: PropTypes.object.isRequired,
 };
-function mapStateToProps(state) {
-    return {
-    };
-}
 
-function matchDispatchToProps(dispatch){
-    return {
-        insert: (payload) => dispatch(DASHBOARD_ABOUT_INSERT(payload)),
-        update: (payload) => dispatch(DASHBOARD_ABOUT_UPDATE(payload)),
-        reset: () => dispatch(DASHBOARD_ABOUT_RESET()),
-    }
-}
 
-export default connect(mapStateToProps, matchDispatchToProps)(withStyles(styles)(DashboardFAQ));
+export default withStyles(styles)(DashboardFAQ);
