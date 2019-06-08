@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   devtool: 'cheap-eval-source-map',
   mode: 'development',
-  entry: './src/index.js',
+  entry: ['@babel/polyfill', './src/index.js'],
   module: {
     rules: [
       {
