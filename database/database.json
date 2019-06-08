@@ -1,0 +1,10 @@
+{
+  "dev": {
+    "host": "localhost",
+    "user": "bengkala",
+    "password" : "bengkala",
+    "database": "bengkala",
+    "driver": "mysql",
+    "multipleStatements": true
+  }
+}
