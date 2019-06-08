@@ -166,12 +166,10 @@ class SideDrawer extends React.Component {
 
 SideDrawer.propTypes = {
     classes: PropTypes.object.isRequired,
-    auth: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
     return {
-        auth: state.auth
     };
 }
 

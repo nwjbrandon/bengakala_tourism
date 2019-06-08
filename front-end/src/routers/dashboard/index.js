@@ -12,6 +12,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
+import {DASHBOARD_ABOUT_INSERT} from "../../actions/dashboard-about";
 
 const styles = theme => ({
   root: {
@@ -74,13 +75,6 @@ class Dashboard extends Component {
         [new Date(2018, 9, 24), 10],
         [new Date(2019, 9, 30), 7]
       ]
-    }
-  }
-
-  componentWillMount() {
-    if (this.props.auth) {
-    } else {
-      this.props.history.push('/admin');
     }
   }
 
@@ -162,9 +156,14 @@ Dashboard.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    auth: state.admin.auth
   };
 }
 
+function matchDispatchToProps(dispatch){
+  return {
+    update: () => dispatch(DASHBOARD_ABOUT_INSERT),
+  }
+}
 
-export default connect(mapStateToProps)(withStyles(styles)(Dashboard));
+
+export default connect(mapStateToProps, matchDispatchToProps())(withStyles(styles)(Dashboard));

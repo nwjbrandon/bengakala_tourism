@@ -1,6 +1,6 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 import axios from "axios";
-
+import { DASHBOARD_ABOUT_INSERT } from "../actions/dashboard-about";
 // watcher sagas: watches for actions dispatched to the store, starts worker sagas
 export default function* watcherSaga() {
   yield takeLatest("API_CALL_REQUEST", workerSaga);
@@ -18,15 +18,16 @@ function fetchDog() {
 function* workerSaga() {
   try {
     console.log('hihi')
-    const response = yield call(fetchDog);
-    const dog = response.data;
-    console.log(dog);
+    //const response = yield call(fetchDog);
+    //const dog = response.data;
+    //console.log(dog);
     console.log(555);
     // dispatch a success action to the store with the new dog
-    yield put({ type: "API_CALL_SUCCESS", dog });
+    yield put(DASHBOARD_ABOUT_INSERT);
   
   } catch (error) {
     // dispatch a failure action to the store with the error
+    console.log(error)
     yield put({ type: "API_CALL_FAILURE", error });
   }
 }
