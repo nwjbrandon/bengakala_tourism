@@ -39,15 +39,10 @@ class Contact extends React.Component {
       address:'National University of Singapore, Kent Ridge',
       mycontact:'(+65) Brandon',
       name: '',
-      //email:'',
       contact:'',
       subject:'',
       message:'',
       mailSent: false,
-      //error: null,
-
-      showPassword: false,
-      password: '',
       email: '',
       error: '',
     }
@@ -97,8 +92,28 @@ class Contact extends React.Component {
         >
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Typography variant="h4" align="center" style={{ paddingTop: 30 }}>
+              <Typography variant="h4" align="center" style={{ paddingTop: 20 }}>
                 Contact Us!
+              </Typography>
+
+              <Typography variant="h6" align="left" style={{ paddingTop: 20 }}>
+                Address:
+              </Typography>
+
+              <Typography variant="h7" align="left" style={{ paddingTop: 0 }}>
+                {this.state.address}
+              </Typography>
+
+              <Typography variant="h6" align="left" style={{ paddingTop: 10 }}>
+                Call us:
+              </Typography>
+
+              <Typography variant="h7" align="left" style={{ paddingTop: 0 }}>
+                {this.state.mycontact}
+              </Typography>
+
+              <Typography variant="h6" style={{ paddingTop: 40 }}>
+                Your details:
               </Typography>
 
               <TextField
@@ -136,6 +151,7 @@ class Contact extends React.Component {
               <Typography variant="h6" style={{ paddingTop: 20 }}>
                 Your message:
               </Typography>
+
               <TextField
                   required
                   label="Subject"
