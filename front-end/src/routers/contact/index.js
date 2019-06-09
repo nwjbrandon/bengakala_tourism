@@ -14,7 +14,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import LocationIcon from '@material-ui/icons/Locationon';
-import PhoneIcon from '@material-ui/icons/Permphonemsg';
+import PhoneIcon from '@material-ui/icons/PermPhoneMsg';
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux';
