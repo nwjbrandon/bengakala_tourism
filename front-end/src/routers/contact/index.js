@@ -7,10 +7,19 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import Divider from '@material-ui/core/Divider';
+import List from '@material-ui/core/List';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
+import ListItemAvatar from '@material-ui/core/ListItemAvatar';
+import Avatar from '@material-ui/core/Avatar';
+import LocationIcon from '@material-ui/icons/Locationon';
+import PhoneIcon from '@material-ui/icons/Permphonemsg';
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux';
 import bg from './bgpic/Homepageimg.jpg'
+
 
 const styles = theme => ({
   root: {
@@ -92,27 +101,34 @@ class Contact extends React.Component {
         >
           <Grid item xs={12}>
             <Paper className={classes.paper}>
+
               <Typography variant="h4" align="center" style={{ paddingTop: 20 }}>
                 Contact Us!
               </Typography>
 
-              <Typography variant="h6" align="left" style={{ paddingTop: 20 }}>
-                Address:
-              </Typography>
+              <List className={classes.root}>
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <LocationIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary="Address" secondary={this.state.address} />
+                </ListItem>
+                <Divider variant="inset" component="li" />
+                <ListItem>
+                  <ListItemAvatar>
+                    <Avatar>
+                      <PhoneIcon />
+                    </Avatar>
+                  </ListItemAvatar>
+                  <ListItemText primary="Call Us" secondary={this.state.mycontact} />
+                </ListItem>
+                <Divider variant="inset" component="li" />
+              </List>
 
-              <Typography variant="h7" align="left" style={{ paddingTop: 0 }}>
-                {this.state.address}
-              </Typography>
 
-              <Typography variant="h6" align="left" style={{ paddingTop: 10 }}>
-                Call us:
-              </Typography>
-
-              <Typography variant="h7" align="left" style={{ paddingTop: 0 }}>
-                {this.state.mycontact}
-              </Typography>
-
-              <Typography variant="h6" style={{ paddingTop: 40 }}>
+              <Typography variant="h6" style={{ paddingTop: 30 }}>
                 Your details:
               </Typography>
 
@@ -147,8 +163,9 @@ class Contact extends React.Component {
                   value={this.state.contact}
                   onChange={e => this.setState({contact: e.target.value})}
               />
+              <Divider />
 
-              <Typography variant="h6" style={{ paddingTop: 20 }}>
+              <Typography variant="h6" style={{ paddingTop: 30 }}>
                 Your message:
               </Typography>
 
