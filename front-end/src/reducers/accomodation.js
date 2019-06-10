@@ -9,7 +9,7 @@ const initialState = {
     checkIn: new Date(),
     checkOut: new Date(),
     breakfast: false,
-    lunch :true ,
+    lunch :false ,
     dinner :false,
     numberMales: 0,
     numberFemales: 0,
