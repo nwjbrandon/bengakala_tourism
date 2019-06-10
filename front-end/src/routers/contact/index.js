@@ -29,7 +29,7 @@ const styles = theme => ({
     padding: theme.spacing(3),
     height: '100%',
     [theme.breakpoints.up(500 + theme.spacing(6))]: {
-    width: 535,
+    width: '37%',
     margin: 'auto',
     background: 'rgba(255, 255, 255, 0.9)',
     boxShadow: 'none',
@@ -98,7 +98,7 @@ class Contact extends React.Component {
             backgroundImage: `url(${bg})`,
             backgroundRepeat: "inital",
             backgroundSize: "cover",
-            width:"103%",
+            width:"110%",
             textAlign:"left",
             paddingTop: 40}}
         >
