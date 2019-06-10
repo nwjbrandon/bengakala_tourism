@@ -29,7 +29,7 @@ const styles = theme => ({
     padding: theme.spacing(2),
     height: '100%',
     [theme.breakpoints.up(500 + theme.spacing(6))]: {
-      width: 600,
+      width: 535,
       margin: 'auto',
       background: 'rgba(255, 255, 255, 0.9)',
       boxShadow: 'none',
