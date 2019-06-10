@@ -21,7 +21,7 @@ const Slideshow = (props) => {
     console.log(imgurl);
     i++;
     i = i%6;
-    return (<Eachslide title = {props.textArr[i].title} text = {props.textArr[i].text} img = {imgurl}/>);
+    return (<Eachslide key = {props.textArr[i].title} title = {props.textArr[i].title} text = {props.textArr[i].text} img = {imgurl}/>);
   });
 
     var divStyle = {
@@ -31,6 +31,12 @@ const Slideshow = (props) => {
         marginLeft : "auto",
         marginRight : "auto",
         marginTop: "150px",
+        paddingTop: "10px",
+        paddingRight: "50px",
+        paddingLeft: "50px",
+        paddingBottom: "30px",
+        background: "#21212170",
+        borderRadius: "40px"
           // paddingTop: "66%",
 
     };

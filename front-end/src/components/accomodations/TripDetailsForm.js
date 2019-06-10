@@ -8,17 +8,25 @@ import Datespicker from './DatesPicker'
 import Mealplan from './Mealplan'
 import NumberSelector from './NumberSelector'
 
+import Guests from './GuestsSelect.js'
+
+
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
   },
+  label:{
+    color: "white"
+  }
 }));
+
+
 export default function AddressForm() {
   const classes = useStyles();
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
+      <Typography className={classes.label}  variant="h6" gutterBottom>
         Enter Your Trip Details
       </Typography>
       <Grid container spacing={3}>
@@ -26,8 +34,7 @@ export default function AddressForm() {
 
         <Mealplan />
 
-        <NumberSelector division = {6} label = "Number of Males"/>
-        <NumberSelector division = {6} label = "Number of Females"/>
+        <Guests />
 
         <Grid item xs={12}>
           <Paper className={classes.root}>
