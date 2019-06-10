@@ -17,7 +17,7 @@ export default (props) => {
           top: 0,
           left: 0,
           width: "100%",
-          height: "100%"
+          height: "90%"
         }}
         src={'https://www.youtube.com/embed/' +props.youtubeId}
         frameBorder="0"
