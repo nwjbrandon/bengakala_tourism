@@ -11,10 +11,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import uuidv1 from 'uuid/v1';
-import _ from 'lodash';
-import Calendar from 'react-calendar';
+import _ from 'lodash'
 
-import NavBar from '../../../../components/dashboard/navBar';
+import NavBar from '../../../components/dashboard/navBar';
 
 const styles = theme => ({
     root: {
@@ -43,48 +42,27 @@ class DashboardFAQ extends Component {
         this.state = {
             data: {
                 '1': {
-                    title: 'Garden View Balcony',
-                    type: '2 Double Decker Beds + 4 complimentary breakfast',
-                    text: 'Cozy and rustic in design, our Standard Villa is the perfect getaway from the hustle and bustle of city life, enabling guests to recharge and relax',
+                    title: 'Water Theme Playground for Children',
+                    type: 'Fun',
+                    text: 'Coming Soon!',
                     edit: false,
-                    copyTitle: 'Garden View Balcony',
-                    copyType: '2 Double Decker Beds + 4 complimentary breakfast',
-                    copyText: 'Cozy and rustic in design, our Standard Villa is the perfect getaway from the hustle and bustle of city life, enabling guests to recharge and relax',
-                },
-                '2': {
-                    title: 'Back Garden Balcony',
-                    type: 'Queen Size Bed + 2 Complimentary Breakfast',
-                    text: 'Reflects a cosy and modern decor allowing you to enjoy the much- needed break from hectic city life.',
-                    edit: false,
-                    copyTitle: 'Back Garden Balcony',
-                    copyType: 'Queen Size Bed + 2 Complimentary Breakfast',
-                    copyText: 'Reflects a cosy and modern decor allowing you to enjoy the much- needed break from hectic city life.',
+                    copyTitle: 'Water Theme Playground for Children',
+                    copyType: 'Fun',
+                    copyText: 'Coming Soon!',
                 },
             },
             origin: {
                 '1': {
-                    title: 'Garden View Balcony',
-                    type: '2 Double Decker Beds + 4 complimentary breakfast',
-                    text: 'Cozy and rustic in design, our Standard Villa is the perfect getaway from the hustle and bustle of city life, enabling guests to recharge and relax',
+                    title: 'Water Theme Playground for Children',
+                    type: 'Fun',
+                    text: 'Coming Soon!',
                     edit: false,
-                    copyTitle: 'Garden View Balcony',
-                    copyType: '2 Double Decker Beds + 4 complimentary breakfast',
-                    copyText: 'Cozy and rustic in design, our Standard Villa is the perfect getaway from the hustle and bustle of city life, enabling guests to recharge and relax',
-                },
-                '2': {
-                    title: 'Back Garden Balcony',
-                    type: 'Queen Size Bed + 2 Complimentary Breakfast',
-                    text: 'Reflects a cosy and modern decor allowing you to enjoy the much- needed break from hectic city life.',
-                    edit: false,
-                    copyTitle: 'Back Garden Balcony',
-                    copyType: 'Queen Size Bed + 2 Complimentary Breakfast',
-                    copyText: 'Reflects a cosy and modern decor allowing you to enjoy the much- needed break from hectic city life.',
+                    copyTitle: 'Water Theme Playground for Children',
+                    copyType: 'Fun',
+                    copyText: 'Coming Soon!',
                 },
             },
-            title: 'Accommodation',
-            file: '',
-            imagePreviewUrl: '',
-            date: new Date()
+            title: 'Attraction',
         }
         this.cancelEntry = this.cancelEntry.bind(this)
         this.editEntry = this.editEntry.bind(this)
@@ -95,33 +73,6 @@ class DashboardFAQ extends Component {
         this.watchTypeEntry = this.watchTypeEntry.bind(this)
         this.newEntry = this.newEntry.bind(this)
         this.reset = this.reset.bind(this)
-        this.onChange = this.onChange.bind(this)
-    }
-
-    onChange(date) {
-        this.setState({ date })
-    }
-
-    _handleSubmit(e) {
-        e.preventDefault();
-        // TODO: do something with -> this.state.file
-        console.log('handle uploading-', this.state.file);
-    }
-
-    _handleImageChange(e) {
-        e.preventDefault();
-
-        let reader = new FileReader();
-        let file = e.target.files[0];
-
-        reader.onloadend = () => {
-            this.setState({
-                file: file,
-                imagePreviewUrl: reader.result
-            });
-        }
-
-        reader.readAsDataURL(file)
     }
 
     reset() {
@@ -202,38 +153,12 @@ class DashboardFAQ extends Component {
     render() {
         const { classes } = this.props
         const { title, data } = this.state
-        let {imagePreviewUrl} = this.state;
-        let $imagePreview = null;
-        if (imagePreviewUrl) {
-            $imagePreview = (<img src={imagePreviewUrl} />);
-        } else {
-            $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
-        }
-
         return (
             <div className={classes.root}>
                 <CssBaseline />
                 <NavBar title={title} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    <Calendar
-                        onChange={this.onChange}
-                        value={this.state.date}
-                    />
-                    {/* https://codepen.io/hartzis/pen/VvNGZP */}
-                    <div className="previewComponent">
-                        <form onSubmit={(e)=>this._handleSubmit(e)}>
-                            <input className="fileInput"
-                                   type="file"
-                                   onChange={(e)=>this._handleImageChange(e)} />
-                            <button className="submitButton"
-                                    type="submit"
-                                    onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
-                        </form>
-                        <div className="imgPreview">
-                            {$imagePreview}
-                        </div>
-                    </div>
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">
                         <Button variant="contained" onClick={this.newEntry} className={classes.button}>
                             New

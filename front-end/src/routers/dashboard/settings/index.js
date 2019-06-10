@@ -16,7 +16,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import uuidv1 from 'uuid/v1';
-import NavBar from '../../../../components/dashboard/navBar';
+import NavBar from '../../../components/dashboard/navBar';
 import ReactNotification from "react-notifications-component";
 import "react-notifications-component/dist/theme.css";
 const styles = theme => ({

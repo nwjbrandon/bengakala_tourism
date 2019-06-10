@@ -10,8 +10,11 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import uuidv1 from 'uuid/v1';
+import _ from 'lodash';
+import Calendar from 'react-calendar';
 
-import NavBar from '../../../../components/dashboard/navBar';
+import NavBar from '../../../components/dashboard/navBar';
 
 const styles = theme => ({
     root: {
@@ -40,38 +43,48 @@ class DashboardFAQ extends Component {
         this.state = {
             data: {
                 '1': {
-                    title: 'About Us',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Garden View Balcony',
+                    type: '2 Double Decker Beds + 4 complimentary breakfast',
+                    text: 'Cozy and rustic in design, our Standard Villa is the perfect getaway from the hustle and bustle of city life, enabling guests to recharge and relax',
                     edit: false,
-                    copyTitle: 'Address',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyTitle: 'Garden View Balcony',
+                    copyType: '2 Double Decker Beds + 4 complimentary breakfast',
+                    copyText: 'Cozy and rustic in design, our Standard Villa is the perfect getaway from the hustle and bustle of city life, enabling guests to recharge and relax',
                 },
                 '2': {
-                    title: 'Expansion Table 2',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Back Garden Balcony',
+                    type: 'Queen Size Bed + 2 Complimentary Breakfast',
+                    text: 'Reflects a cosy and modern decor allowing you to enjoy the much- needed break from hectic city life.',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyTitle: 'Back Garden Balcony',
+                    copyType: 'Queen Size Bed + 2 Complimentary Breakfast',
+                    copyText: 'Reflects a cosy and modern decor allowing you to enjoy the much- needed break from hectic city life.',
                 },
             },
             origin: {
                 '1': {
-                    title: 'Address',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Garden View Balcony',
+                    type: '2 Double Decker Beds + 4 complimentary breakfast',
+                    text: 'Cozy and rustic in design, our Standard Villa is the perfect getaway from the hustle and bustle of city life, enabling guests to recharge and relax',
                     edit: false,
-                    copyTitle: 'Address',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyTitle: 'Garden View Balcony',
+                    copyType: '2 Double Decker Beds + 4 complimentary breakfast',
+                    copyText: 'Cozy and rustic in design, our Standard Villa is the perfect getaway from the hustle and bustle of city life, enabling guests to recharge and relax',
                 },
                 '2': {
-                    title: 'Expansion Table 2',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    title: 'Back Garden Balcony',
+                    type: 'Queen Size Bed + 2 Complimentary Breakfast',
+                    text: 'Reflects a cosy and modern decor allowing you to enjoy the much- needed break from hectic city life.',
                     edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
+                    copyTitle: 'Back Garden Balcony',
+                    copyType: 'Queen Size Bed + 2 Complimentary Breakfast',
+                    copyText: 'Reflects a cosy and modern decor allowing you to enjoy the much- needed break from hectic city life.',
                 },
             },
-
-            title: 'Home',
+            title: 'Accommodation',
+            file: '',
+            imagePreviewUrl: '',
+            date: new Date()
         }
         this.cancelEntry = this.cancelEntry.bind(this)
         this.editEntry = this.editEntry.bind(this)
@@ -80,11 +93,55 @@ class DashboardFAQ extends Component {
         this.watchQuestionEntry = this.watchQuestionEntry.bind(this)
         this.watchTextEntry = this.watchTextEntry.bind(this)
         this.watchTypeEntry = this.watchTypeEntry.bind(this)
+        this.newEntry = this.newEntry.bind(this)
         this.reset = this.reset.bind(this)
+        this.onChange = this.onChange.bind(this)
+    }
+
+    onChange(date) {
+        this.setState({ date })
+    }
+
+    _handleSubmit(e) {
+        e.preventDefault();
+        // TODO: do something with -> this.state.file
+        console.log('handle uploading-', this.state.file);
+    }
+
+    _handleImageChange(e) {
+        e.preventDefault();
+
+        let reader = new FileReader();
+        let file = e.target.files[0];
+
+        reader.onloadend = () => {
+            this.setState({
+                file: file,
+                imagePreviewUrl: reader.result
+            });
+        }
+
+        reader.readAsDataURL(file)
     }
 
     reset() {
-        this.setState({ data: this.state.origin })
+        const newData = _.cloneDeep(this.state.origin)
+        this.setState({ data: newData })
+    }
+
+    newEntry() {
+        const id = uuidv1()
+        let newData = this.state.data
+        newData[id] = {
+            title: '',
+            type: '',
+            text: '',
+            edit: true,
+            copyTitle: '',
+            copyType: '',
+            copyText: '',
+        }
+        this.setState({ data: newData })
     }
 
     watchQuestionEntry(event) {
@@ -113,6 +170,7 @@ class DashboardFAQ extends Component {
         const id = event.currentTarget.value
         newData[id].edit = false
         newData[id].copyText = newData[id].text
+        newData[id].copyType = newData[id].type
         newData[id].copyTitle = newData[id].title
         this.setState({ data: newData })
     }
@@ -130,6 +188,7 @@ class DashboardFAQ extends Component {
         newData[id].edit = false
         newData[id].text = newData[id].copyText
         newData[id].title = newData[id].copyTitle
+        newData[id].type = newData[id].copyType
         this.setState({ data: newData })
     }
 
@@ -143,12 +202,43 @@ class DashboardFAQ extends Component {
     render() {
         const { classes } = this.props
         const { title, data } = this.state
+        let {imagePreviewUrl} = this.state;
+        let $imagePreview = null;
+        if (imagePreviewUrl) {
+            $imagePreview = (<img src={imagePreviewUrl} />);
+        } else {
+            $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+        }
+
         return (
             <div className={classes.root}>
                 <CssBaseline />
                 <NavBar title={title} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
+                    <Calendar
+                        onChange={this.onChange}
+                        value={this.state.date}
+                    />
+                    {/* https://codepen.io/hartzis/pen/VvNGZP */}
+                    <div className="previewComponent">
+                        <form onSubmit={(e)=>this._handleSubmit(e)}>
+                            <input className="fileInput"
+                                   type="file"
+                                   onChange={(e)=>this._handleImageChange(e)} />
+                            <button className="submitButton"
+                                    type="submit"
+                                    onClick={(e)=>this._handleSubmit(e)}>Upload Image</button>
+                        </form>
+                        <div className="imgPreview">
+                            {$imagePreview}
+                        </div>
+                    </div>
+                    <Grid container alignItems="flex-start" justify="flex-end" direction="row">
+                        <Button variant="contained" onClick={this.newEntry} className={classes.button}>
+                            New
+                        </Button>
+                    </Grid>
                     {Object.keys(data).map((item, index) => (
                         <ExpansionPanel key={index}>
                             <ExpansionPanelSummary
@@ -156,6 +246,8 @@ class DashboardFAQ extends Component {
                                 aria-controls="panel1a-content"
                                 id="panel1a-header"
                             >
+                                <Typography className={classes.heading}>{ data[item].type }</Typography>
+                                &nbsp;-&nbsp;
                                 <Typography className={classes.heading}>{ data[item].title }</Typography>
                             </ExpansionPanelSummary>
                             <ExpansionPanelDetails>
@@ -170,6 +262,17 @@ class DashboardFAQ extends Component {
                                             label="Question"
                                             className={classes.button}
                                             onChange={this.watchQuestionEntry}
+                                            id={item}
+                                        />
+                                        <TextField
+                                            multiline={true}
+                                            variant="outlined"
+                                            fullWidth
+                                            value={data[item].copyType}
+                                            placeholder="Ex. General FAQ"
+                                            label="Type"
+                                            className={classes.button}
+                                            onChange={this.watchTypeEntry}
                                             id={item}
                                         />
                                         <TextField

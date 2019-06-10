@@ -1,8 +1,14 @@
 import {combineReducers} from 'redux';
-import authUserReducer from './auth';
+import reduceReducers from 'reduce-reducers';
+import auth from './auth';
+import statements from './statements'
+import { dashboardAboutReducer } from './dashboard-about-onmount'
 
 const allReducers = combineReducers({
-    auth: authUserReducer,
+    admin: reduceReducers(statements, auth),
+    statements,
+    auth,
+    dashboardAbout: reduceReducers(dashboardAboutReducer),
 });
 
 export default allReducers

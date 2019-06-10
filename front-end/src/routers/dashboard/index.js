@@ -4,8 +4,15 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Chart from "react-google-charts";
-import NavBar from '../../../components/dashboard/navBar';
+import NavBar from '../../components/dashboard/navBar';
 import {connect} from 'react-redux';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
+import Paper from '@material-ui/core/Paper';
+import {DASHBOARD_ABOUT_INSERT} from "../../actions/dashboard-about";
 
 const styles = theme => ({
   root: {
@@ -16,7 +23,26 @@ const styles = theme => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
+  root1: {
+    width: '100%',
+    marginTop: theme.spacing(3),
+    overflowX: 'auto',
+  },
+  table: {
+    minWidth: 650,
+  },
 });
+function createData(name, calories, fat, carbs, protein) {
+  return { name, calories, fat, carbs, protein };
+}
+
+const rows = [
+  createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
+  createData('Ice cream sandwich', 237, 9.0, 37, 4.3),
+  createData('Eclair', 262, 16.0, 24, 6.0),
+  createData('Cupcake', 305, 3.7, 67, 4.3),
+  createData('Gingerbread', 356, 16.0, 49, 3.9),
+];
 
 class Dashboard extends Component {
   constructor(props) {
@@ -49,13 +75,6 @@ class Dashboard extends Component {
         [new Date(2018, 9, 24), 10],
         [new Date(2019, 9, 30), 7]
       ]
-    }
-  }
-
-  componentWillMount() {
-    if (this.props.auth) {
-    } else {
-      this.props.history.push('/admin');
     }
   }
 
@@ -98,6 +117,32 @@ class Dashboard extends Component {
               nibh sit. Ornare aenean euismod elementum nisi quis eleifend. Commodo viverra maecenas
               accumsan lacus vel facilisis. Nulla posuere sollicitudin aliquam ultrices sagittis orci a.
             </Typography>
+            <Paper className={classes.root1}>
+              <Table className={classes.table}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Dessert (100g serving)</TableCell>
+                    <TableCell align="right">Calories</TableCell>
+                    <TableCell align="right">Fat&nbsp;(g)</TableCell>
+                    <TableCell align="right">Carbs&nbsp;(g)</TableCell>
+                    <TableCell align="right">Protein&nbsp;(g)</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {rows.map(row => (
+                      <TableRow key={row.name}>
+                        <TableCell component="th" scope="row">
+                          {row.name}
+                        </TableCell>
+                        <TableCell align="right">{row.calories}</TableCell>
+                        <TableCell align="right">{row.fat}</TableCell>
+                        <TableCell align="right">{row.carbs}</TableCell>
+                        <TableCell align="right">{row.protein}</TableCell>
+                      </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Paper>
           </main>
         </div>
     );
@@ -111,9 +156,14 @@ Dashboard.propTypes = {
 
 function mapStateToProps(state) {
   return {
-    auth: state.auth
   };
 }
 
+function matchDispatchToProps(dispatch){
+  return {
+    update: () => dispatch(DASHBOARD_ABOUT_INSERT),
+  }
+}
 
-export default connect(mapStateToProps)(withStyles(styles)(Dashboard));
+
+export default connect(mapStateToProps, matchDispatchToProps())(withStyles(styles)(Dashboard));

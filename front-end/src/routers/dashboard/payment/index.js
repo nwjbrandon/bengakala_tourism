@@ -11,9 +11,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import uuidv1 from 'uuid/v1';
-import _ from 'lodash'
 
-import NavBar from '../../../../components/dashboard/navBar';
+import NavBar from '../../../components/dashboard/navBar';
 
 const styles = theme => ({
     root: {
@@ -80,7 +79,7 @@ class DashboardFAQ extends Component {
                     copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
                 },
             },
-            title: 'FAQ',
+            title: 'Payment',
         }
         this.cancelEntry = this.cancelEntry.bind(this)
         this.editEntry = this.editEntry.bind(this)
@@ -94,8 +93,7 @@ class DashboardFAQ extends Component {
     }
 
     reset() {
-        const newData = _.cloneDeep(this.state.origin)
-        this.setState({ data: newData })
+        this.setState({ data: this.state.origin })
     }
 
     newEntry() {

@@ -9,7 +9,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-import SideDrawer from './menuOptions';
+import SideDrawerBrowser from './sideNavBarBrowser';
+import SideDrawerMobile from './sideNavBarMobile';
 
 const drawerWidth = 240;
 
@@ -95,25 +96,19 @@ class NavBar extends Component {
                         <Drawer
                             variant="temporary"
                             open={openDrawer}
-                            classes={{
-                                paper: classes.drawerPaper,
-                            }}
-                            ModalProps={{
-                                keepMounted: true, // Better open performance on mobile.
-                            }}
+                            classes={{ paper: classes.drawerPaper }}
+                            ModalProps={{ keepMounted: true }}
                         >
-                            <SideDrawer handleCloseDrawer={this.handleCloseDrawer} />
+                            <SideDrawerMobile handleCloseDrawer={this.handleCloseDrawer} />
                         </Drawer>
                     </Hidden>
                     <Hidden xsDown implementation="css">
                         <Drawer
-                            classes={{
-                                paper: classes.drawerPaper,
-                            }}
+                            classes={{ paper: classes.drawerPaper }}
                             variant="permanent"
                             open
                         >
-                            <SideDrawer handleCloseDrawer={this.handleCloseDrawer} />
+                            <SideDrawerBrowser handleCloseDrawer={this.handleCloseDrawer} />
                         </Drawer>
                     </Hidden>
                 </nav>

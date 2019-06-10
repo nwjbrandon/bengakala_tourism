@@ -20,11 +20,11 @@ import Store from '@material-ui/icons/Store';
 import Terrain from '@material-ui/icons/Terrain';
 import Exittoapp from '@material-ui/icons/ExitToApp';
 import {connect} from 'react-redux';
-import {signOut} from '../../actions/auth'
+import {signOut} from '../../../actions/auth'
 import {withRouter} from 'react-router-dom';
-import API from '../../api/index'
+import API from '../../../api'
 
-const menuOptions = [
+const sideNavBarBrowser = [
     {
         title: 'Dashboard',
         to: '/dashboard',
@@ -133,13 +133,10 @@ class SideDrawer extends React.Component {
             <div>
                 <div className={classes.toolbar}/>
                     <div className={classes.drawerHeader}>
-                        <IconButton onClick={this.handleCloseDrawer}>
-                            <ChevronLeftIcon/>
-                        </IconButton>
                     </div>
                 <Divider/>
                 <List>
-                    {menuOptions.map((text) => (
+                    {sideNavBarBrowser.map((text) => (
                         <ListItem button key={text.title} component={Link} to={text.to}>
                             <ListItemIcon>{text.icon}</ListItemIcon>
                             <ListItemText primary={text.title}/>
@@ -166,12 +163,10 @@ class SideDrawer extends React.Component {
 
 SideDrawer.propTypes = {
     classes: PropTypes.object.isRequired,
-    auth: PropTypes.bool.isRequired,
 };
 
 function mapStateToProps(state) {
     return {
-        auth: state.auth
     };
 }
 

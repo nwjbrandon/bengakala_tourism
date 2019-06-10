@@ -8,11 +8,9 @@ const getRequest = (url, data) => {
   return new Promise((resolve, reject) => {
     axios.get(httpUrl + url, { params: data || {}, withCredentials: true })
     .then(response => {
-      console.log(response.data.data);
       resolve(response.data.data);
     })
     .catch(error => {
-      console.log("GET", url, error);
       reject(error.response.data);
     })
   })
@@ -22,11 +20,9 @@ const delRequest = (url, data) => {
   return new Promise((resolve, reject) => {
     axios.delete(httpUrl + url, data)
     .then(response => {
-      console.log(response.data.data);
       resolve(response.data.data);
     })
     .catch(error => {
-      console.log("GET", url, error);
       reject(error.response.data);
     })
   })

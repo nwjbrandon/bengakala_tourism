@@ -1,3 +1,5 @@
+import API from '../api';
+
 export const signIn = () => {
     console.log('You are logging in');
     return {
