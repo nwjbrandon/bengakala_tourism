@@ -1,36 +1,50 @@
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/nwjbrandon/bengkala_tourism/pulls)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/nwjbrandon/bengkala_tourism/issues)
 [![CircleCI](https://circleci.com/gh/nwjbrandon/bengkala_tourism.svg?style=svg)](https://circleci.com/gh/nwjbrandon/bengkala_tourism)
 
 ## Installation
 
-## Setting up of front end and backend
+## Install nodejs v10
+- Install nodejs
 ```
-npm install # install dependencies
-cd front-end
+sudo apt update
+curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
+sudo apt install nodejs
+```
+
+## Setting up of front end and backend
+- Setup front-end and back-end
+```
+npm install # install dependencies in front-end, back-end, and database
+cd front-end # from root of this repo
 npm run start
-cd back-end
-npm run watch
+cd back-end # from root of this repo
+npm run start
 ```
 
 ## Setting up of redis
+- Setup of MySQL on Ubuntu18
 ```
 sudo apt-get install redis-server
 sudo systemctl enable redis-server.service
 ```
 
-## Setting up of database on Ubuntu 18
-- Install and access MySQL
+## Setting up of database
+- Set up of MySQL on Ubuntu18
 ```
 sudo apt update
 sudo apt install mysql-server
 sudo systemctl status mysql # check whether mysql is active
-sudo mysql # enter mysql
 ```
-- Set user and password configurations
+- Refer to database directory and run the migration scripts
+
+## Set user and password configurations
+- Enter MySQL Cli
 ```
-CREATE USER 'newuser'@'localhost' IDENTIFIED BY 'password';
-GRANT ALL PRIVILEGES ON * . * TO 'newuser'@'localhost';
+sudo mysql # enter mysql cli
+```
+- Set username and password on MySQL
+```
+CREATE USER 'bengkala'@'localhost' IDENTIFIED BY 'bengkala';
+GRANT ALL PRIVILEGES ON * . * TO 'bengkala'@'localhost';
 FLUSH PRIVILEGES;
 ```
 
@@ -110,10 +124,6 @@ sudo nano /etc/nginx/sites-available/default
 sudo nginx -t # check for syntax errors
 sudo systemctl restart nginx
 ```
-
-
-
-## Setting up of Jenkins
 
 ## References
 - https://codeburst.io/getting-started-with-react-router-5c978f70df91

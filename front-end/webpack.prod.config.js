@@ -4,7 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
   devtool: false,
   mode: 'production',
-  entry: './src/index.js',
+  entry: ['@babel/polyfill', './src/index.js'],
   module: {
     rules: [
       {
@@ -28,12 +28,15 @@ module.exports = {
   output: {
     path: __dirname + '/dist',
     publicPath: '/',
-    filename: 'bundle.js'
+    filename: 'bundle.js',
   },
   plugins: [
+    new HtmlWebpackPlugin({
+      template: __dirname + '/src/index.html',
+    }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    new webpack.optimize.OccurrenceOrderPlugin()
   ],
   devServer: {
     port: 3000,
@@ -41,11 +44,9 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true,
     hot: true,
-    https: true
-  },
-  performance: {
-    hints: false,
-    maxEntrypointSize: 512000,
-    maxAssetSize: 512000
+    https: true,
+    proxy: {
+      '/api': 'http://localhost:3001/api'
+    }
   }
 };

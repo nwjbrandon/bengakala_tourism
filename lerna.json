@@ -1,6 +1,7 @@
 {
   "packages": [
-    "*-end"
+    "*-end",
+    "database"
   ],
   "version": "1.0.0"
 }
