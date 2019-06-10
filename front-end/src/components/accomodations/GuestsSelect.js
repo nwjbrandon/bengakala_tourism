@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Guestselect = () =>{
+const Guestselect = (props) =>{
   const classes  = useStyles();
 
   return(
@@ -26,8 +26,8 @@ const Guestselect = () =>{
         </Typography>
         <Grid container spacing={3}>
 
-          <NumberSelector division = {6} label = "Number of Males"/>
-          <NumberSelector division = {6} label = "Number of Females"/>
+          <NumberSelector changed = {props.malechanged} value = {props.males} division = {6} label = "Number of Males"/>
+          <NumberSelector changed = {props.femalechanged}  value = {props.females} division = {6} label = "Number of Females"/>
 
 
         </Grid>

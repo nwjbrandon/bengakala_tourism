@@ -10,7 +10,7 @@ const styles = {
     borderRadius: "2px"
   },
   input: {
-    color: "white",
+    color: "black",
 
   }
 };
@@ -20,7 +20,6 @@ const Datepicker = (props) =>{
   const { classes } = props;
 
   return(
-    
 
     <Grid item xs={12} sm={6}>
       <KeyboardDatePicker
@@ -31,13 +30,12 @@ const Datepicker = (props) =>{
         InputProps={{
           className: classes.input
         }}
-        placeholder="10/10/2018"
-        value={new Date()}
-        onChange={date =>{}}
+        value={props.val}
+        onChange={props.changed}
         format="DD/MM/YYYY"
         fullWidth
         shouldDisableDate = {(date) => {
-          return (new Date()  >= date);
+          return (props.min  >= date);
        }}
       />
     </Grid>

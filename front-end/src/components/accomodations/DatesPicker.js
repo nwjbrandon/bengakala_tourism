@@ -15,7 +15,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const Datespicker = () =>{
+const Datespicker = (props) =>{
   const classes  = useStyles();
   return(
     <React.Fragment>
@@ -27,8 +27,8 @@ const Datespicker = () =>{
         </Typography>
         <Grid container spacing={3}>
 
-          <Datepicker datelabel = "Check-In Date" />
-          <Datepicker datelabel = "Check-Out Date" />
+          <Datepicker changed = {props.checkInChange} min = {new Date()} val = {props.checkIn} datelabel = "Check-In Date" />
+          <Datepicker changed = {props.checkOutChange} min = {props.checkIn} val = {props.checkOut} datelabel = "Check-Out Date" />
         </Grid>
       </Paper>
       </Grid>

@@ -5,6 +5,7 @@ import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import CustomInput from './CustomInput'
 
+import {connect} from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
   label:{
@@ -13,7 +14,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-const AddressForm = (props) => {
+const PersonalDetailsForm = (props) => {
   const classes = useStyles();
 
   return (
@@ -25,8 +26,8 @@ const AddressForm = (props) => {
         <Grid item xs={12} sm={6}>
           <CustomInput
             id="firstName"
-            data={props.firstName}
-            onChangeHandler = {(e) => props.onFNChangeHandler(e.target.value)}
+            data={props.personalDetails.firstName}
+            onChangeHandler = {(e) => props.onFNChange(e.target.value)}
             name="firstName"
             label="First name"/>
         </Grid>
@@ -34,8 +35,8 @@ const AddressForm = (props) => {
           <CustomInput
             id="lastName"
             name="lastName"
-            onChangeHandler = {(e) => props.onLNChangeHandler(e.target.value)}
-            data={props.lastName}
+            onChangeHandler = {(e) => props.onLNChange(e.target.value)}
+            data={props.personalDetails.lastName}
             label="Last name"/>
         </Grid>
 
@@ -44,8 +45,8 @@ const AddressForm = (props) => {
             id="outlined-email-input"
             label="Email"
             type="email"
-            onChangeHandler = {(e) => props.onEChangeHandler(e.target.value)}
-            data={props.email}
+            onChangeHandler = {(e) => props.onEChange(e.target.value)}
+            data={props.personalDetails.email}
             name="email"/>
         </Grid>
 
@@ -54,8 +55,8 @@ const AddressForm = (props) => {
             id="country"
             name="country"
             label="Country"
-            onChangeHandler = {(e) => props.onCChangeHandler(e.target.value)}
-            data={props.country}
+            onChangeHandler = {(e) => props.onCChange(e.target.value)}
+            data={props.personalDetails.country}
           />
         </Grid>
 
@@ -65,4 +66,19 @@ const AddressForm = (props) => {
 }
 
 
-export default AddressForm;
+const mapStateToProps = state => {
+  return{
+    personalDetails:state.personalDetails,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onFNChange: (val) => dispatch({type:"FIRST_NAME" , payload:val}),
+    onLNChange: (val) => dispatch({type:"LAST_NAME" , payload:val}),
+    onEChange: (val) => dispatch({type:"EMAIL" , payload:val}),
+    onCChange: (val) => dispatch({type:"COUNTRY" , payload:val}),
+  }
+}
+
+export default connect(mapStateToProps , mapDispatchToProps)(PersonalDetailsForm);

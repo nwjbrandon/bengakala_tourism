@@ -10,7 +10,7 @@ const styles = {
     borderRadius: "2px"
   },
   input: {
-    color: "white",
+    color: "black",
 
   }
 };
@@ -28,8 +28,8 @@ const NumberSelector = (props) => {
           className: classes.input
         }}
         label={props.label}
-        // value={values.age}
-        onChange={() => {}}
+        value={props.value}
+        onChange={props.changed}
         type="number"
         // className={classes.textField}
         InputLabelProps={{

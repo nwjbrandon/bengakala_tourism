@@ -11,7 +11,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const Mealplan = () =>{
+const Mealplan = (props) =>{
   const classes  = useStyles();
 
   return(
@@ -25,9 +25,9 @@ const Mealplan = () =>{
         </Typography>
         <Grid container spacing={3}>
 
-          <MealCheckbox mealType = "Breakfast"/>
-          <MealCheckbox mealType = "Lunch"/>
-          <MealCheckbox mealType = "Dinner"/>
+          <MealCheckbox changed = {props.breakfastChange} checked = {props.breakfast} mealType = "Breakfast"/>
+          <MealCheckbox changed = {props.lunchChange} checked = {props.lunch} mealType = "Lunch"/>
+          <MealCheckbox changed = {props.dinnerChange} checked = {props.dinner} mealType = "Dinner"/>
 
         </Grid>
       </Paper>

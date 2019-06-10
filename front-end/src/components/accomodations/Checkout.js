@@ -66,8 +66,8 @@ const steps = ['Personal Details', 'Trip Details', 'Confirm your Trip'];
 const Checkout = (props) => {
 
   const toRender = [
-    <PersonalDetailsForm  {...props.alldata.personalDetails}/>,
-    <TripDetailsForm  {...props.alldata.tripDetails}/>,
+    <PersonalDetailsForm />,
+    <TripDetailsForm />,
     <Review />
   ]
   const classes = useStyles();
@@ -119,7 +119,7 @@ const Checkout = (props) => {
                   {toRender[activeStep]}
                   <div className={classes.buttons}>
                     {activeStep !== 0 && (
-                      <Button onClick={handleBack} className={classes.button}>
+                      <Button color="primary" onClick={handleBack} className={classes.button}>
                         Back
                       </Button>
                     )}
