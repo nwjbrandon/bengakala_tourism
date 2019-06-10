@@ -13,7 +13,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
-import LocationIcon from '@material-ui/icons/Locationon';
+import LocationIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/PermPhoneMsg';
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom'
