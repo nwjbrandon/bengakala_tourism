@@ -18,7 +18,7 @@ class Accomodation extends React.Component {
     this.state = {
       data: '',
       textArray : [
-        {title : "This is title 1 " , text: "This is a long description 1. It is long so that i can see whether it still looks good on the website."},
+        {title : "This is title 1 " , text: "This is anulrejrfbksbdkcjaksjcbkasckjabsck long description 1. It is long so that i can see whether it still looks good on the website."},
         {title : "This is title 2", text: "This is description 2"},
         {title :"This is title 3" , text: "This is description 3"},
         {title : "This is title 4", text: "This is description 4"},
