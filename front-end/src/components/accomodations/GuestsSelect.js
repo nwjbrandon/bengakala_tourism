@@ -1,41 +1,41 @@
 import React from 'react'
-import Datepicker from './Datepicker'
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import MealCheckbox from './MealCheckbox'
+import NumberSelector from './NumberSelector'
 import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
   },
-  label:{
-    marginBottom: "10px"
-  }
 }));
 
-const Datespicker = (props) =>{
+const Guestselect = (props) =>{
   const classes  = useStyles();
+
   return(
     <React.Fragment>
-
       <Grid item xs={12}>
-      <Paper className={classes.root}>
-        <Typography className={classes.label}>
-          Choose Your Dates
+      <Paper
+       className={classes.root}
+       >
+        <Typography >
+          Select Your Guest Count
         </Typography>
         <Grid container spacing={3}>
 
-          <Datepicker changed = {props.checkInChange} min = {new Date()} val = {props.checkIn} datelabel = "Check-In Date" />
-          <Datepicker changed = {props.checkOutChange} min = {props.checkIn} val = {props.checkOut} datelabel = "Check-Out Date" />
+          <NumberSelector changed = {props.malechanged} value = {props.males} division = {6} label = "Number of Males"/>
+          <NumberSelector changed = {props.femalechanged}  value = {props.females} division = {6} label = "Number of Females"/>
+
+
         </Grid>
       </Paper>
       </Grid>
 
     </React.Fragment>
-
   );
 }
 
-export default Datespicker;
+export default Guestselect

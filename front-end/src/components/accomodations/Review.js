@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
+import Youtube from './youtube'
 
 const useStyles = makeStyles(theme => ({
   listItem: {
@@ -11,6 +12,7 @@ const useStyles = makeStyles(theme => ({
   },
   title: {
     marginTop: theme.spacing(2),
+    color:"white"
   },
 }));
 
@@ -18,8 +20,11 @@ export default function Review() {
   const classes = useStyles();
 
   return (
-    <Typography variant="h6" gutterBottom className={classes.title}>
-      Confirm Your Trip
-    </Typography>
+    <React.Fragment>
+      <Typography variant="h6" gutterBottom className={classes.title}>
+        Confirm Your Trip
+      </Typography>
+    </React.Fragment>
+
   );
 }

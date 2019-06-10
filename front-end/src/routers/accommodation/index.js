@@ -3,6 +3,14 @@ import API from '../../api';
 import AccomodationsForm from '../../components/accomodations/Accomodations'
 import Slideshow from '../../components/accomodations/Slideshow'
 import bg from '../../components/accomodations/images/balivillage.jpg'
+import Tutorial from '../../components/accomodations/TutorialPage'
+
+
+import { createStore } from 'redux'
+import reducer from '../../reducers/accomodation'
+import { Provider } from 'react-redux'
+
+const store = createStore(reducer);
 
 class Accomodation extends React.Component {
   constructor(props) {
@@ -40,10 +48,14 @@ class Accomodation extends React.Component {
 
   };
     return (
-      <div style = {divStyle}>
-        <AccomodationsForm  />
-        <Slideshow textArr = {this.state.textArray} />
-      </div>
+      <Provider store = {store}>
+        <div style = {divStyle}>
+          <AccomodationsForm  />
+          <Slideshow textArr = {this.state.textArray} />
+          <Tutorial />
+        </div>
+      </Provider>
+
     )
   }
 }

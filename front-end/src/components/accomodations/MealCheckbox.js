@@ -11,8 +11,8 @@ const MealCheckbox = (props) =>{
           <FormControlLabel
             control={
               <Checkbox
-                // checked={state.checkedB}
-                // onChange={handleChange('checkedB')}
+                checked={props.checked}
+                onChange={props.changed}
                 value="checkedB"
                 color="primary"
               />

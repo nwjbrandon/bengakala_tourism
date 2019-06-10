@@ -12,15 +12,20 @@ import TripDetailsForm from './TripDetailsForm'
 import PersonalDetailsForm from './PersonalDetailsForm'
 import ConfirmationScreen from './ConfirmationScreen'
 import Slip from './Slip'
-
+import {MuiThemeProvider ,createMuiTheme} from '@material-ui/core'
+import red from '@material-ui/core/colors/blue'
 
 
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
   },
+  label:{
+    color: "white"
+  },
   layout: {
     width: 'auto',
+    background:"#42424240",
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
@@ -32,6 +37,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
+    background:"#21212150",
     padding: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
       marginTop: theme.spacing(6),
@@ -41,6 +47,8 @@ const useStyles = makeStyles(theme => ({
   },
   stepper: {
     padding: theme.spacing(3, 0, 5),
+    background:"#21212100",
+    color: "white"
   },
   buttons: {
     display: 'flex',
@@ -54,20 +62,14 @@ const useStyles = makeStyles(theme => ({
 
 const steps = ['Personal Details', 'Trip Details', 'Confirm your Trip'];
 
-function getStepContent(step) {
-  switch (step) {
-    case 0:
-      return <PersonalDetailsForm />;
-    case 1:
-      return <TripDetailsForm />;
-    case 2:
-      return <Slip />;
-    default:
-      throw new Error('Unknown step');
-  }
-}
 
 const Checkout = (props) => {
+
+  const toRender = [
+    <PersonalDetailsForm />,
+    <TripDetailsForm />,
+    <Review />
+  ]
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
@@ -79,56 +81,66 @@ const Checkout = (props) => {
     setActiveStep(activeStep - 1);
   };
 
+
+  const theme = createMuiTheme({
+    palette: {
+      primary: red
+    }
+  })
+
   return (
     <React.Fragment>
-      <CssBaseline />
-      <main className={classes.layout}>
-        <Paper className={classes.paper}>
+      <MuiThemeProvider theme = {theme}>
+        <CssBaseline />
+        <main className={classes.layout}>
+          <Paper className={classes.paper}>
 
-          <Typography component="h1" variant="h4" align="center">
-            Checkout
-          </Typography>
+            <Typography className={classes.label} component="h1" variant="h4" align="center">
+              Checkout
+            </Typography>
 
-          <Stepper activeStep={activeStep} className={classes.stepper}>
-            {steps.map(label => (
-              <Step key={label}>
-                <StepLabel>{label}</StepLabel>
-              </Step>
-            ))}
-          </Stepper>
+            <Stepper activeStep={activeStep} className={classes.stepper}>
+              {steps.map(label => (
+                <Step key={label}>
+                  <StepLabel className={classes.label}>{label}</StepLabel>
+                </Step>
+              ))}
+            </Stepper>
 
-          <React.Fragment>
+            <React.Fragment>
 
-            {activeStep === steps.length ? (
+              {activeStep === steps.length ? (
 
-              <ConfirmationScreen />
+                <ConfirmationScreen />
 
-            ) : (
+              ) : (
 
-              <React.Fragment>
-                {getStepContent(activeStep)}
-                <div className={classes.buttons}>
-                  {activeStep !== 0 && (
-                    <Button onClick={handleBack} className={classes.button}>
-                      Back
+                <React.Fragment>
+                  {toRender[activeStep]}
+                  <div className={classes.buttons}>
+                    {activeStep !== 0 && (
+                      <Button color="primary" onClick={handleBack} className={classes.button}>
+                        Back
+                      </Button>
+                    )}
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      onClick={handleNext}
+                      className={classes.button}
+                    >
+                      {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
                     </Button>
-                  )}
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={handleNext}
-                    className={classes.button}
-                  >
-                    {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                  </Button>
-                </div>
-              </React.Fragment>
+                  </div>
+                </React.Fragment>
 
-            )}
+              )}
 
-          </React.Fragment>
-        </Paper>
-      </main>
+            </React.Fragment>
+          </Paper>
+        </main>
+      </MuiThemeProvider>
+
     </React.Fragment>
   );
 }
