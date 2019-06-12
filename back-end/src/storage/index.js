@@ -1,4 +1,4 @@
-import DataBase from './mysql';
+import DataBase from './instance';
 
 const db = new DataBase();
 

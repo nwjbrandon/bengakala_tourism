@@ -21,10 +21,15 @@ npm run start
 ```
 
 ## Setting up of redis
-- Setup of MySQL on Ubuntu18
+- Setup of Redis on Ubuntu18
 ```
 sudo apt-get install redis-server
 sudo systemctl enable redis-server.service
+```
+- Setup of Redis on Windows (v3)
+```
+Download the zip file at https://github.com/microsoftarchive/redis/releases/tag/win-2.8.2104
+Click to run redis-server.exe
 ```
 
 ## Setting up of database

@@ -34,10 +34,15 @@ const getLogout = [
   }
 ];
 
+const errorAdmin = [
+  async (err, req, res, next) => res.status(401).send({ success: false, message: err }),
+];
+
 
 export default {
   get: getAdmin,
   login: loginAdmin,
   dashboard: getDashboard,
   logout: getLogout,
+  err: errorAdmin,
 };

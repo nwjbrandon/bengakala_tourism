@@ -1,6 +1,6 @@
 import express from 'express';
 import getAbout from './about';
-import getAccomodation from './accomodation';
+import accomodation from './accommodation';
 import getAdmin from './admin';
 import getAttraction from './attraction';
 import getContact from './contact';
@@ -13,8 +13,8 @@ const app = express();
 
 // endpoints not necessarily to protect
 app.get('/about', getAbout.get);
-app.get('/accommodation', getAccomodation.get);
-app.get('/accommodation/cost', getAccomodation.cost);
+app.get('/accommodation', accomodation.get);
+app.get('/accommodation/info', accomodation.info);
 app.get('/attraction', getAttraction.get);
 app.get('/contact', getContact.get);
 app.get('/faq', getFAQ.get);
@@ -22,7 +22,7 @@ app.get('/payment', getPayment.get);
 app.get('/admin', getAdmin.get);
 
 // endpoints must be protected
-app.post('/admin/login', passport.authenticate('local'), getAdmin.login);
+app.post('/admin/login', passport.authenticate('local', { failWithError: true }), getAdmin.login, getAdmin.err);
 app.get('/admin/dashboard', checkAuthentication, getAdmin.dashboard);
 app.get('/admin/logout', checkAuthentication, getAdmin.logout);
 

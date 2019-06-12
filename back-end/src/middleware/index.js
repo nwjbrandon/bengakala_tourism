@@ -12,7 +12,7 @@ passport.use(new LocalStrategy(
     usernameField: 'email'
   },
   (async (email, password, done) => {
-    const res = await db.fetchData('administrators', { email });
+    const res = await db.fetchData('ADMINISTRATOR', { email });
     if (res.length === 0) {
       return done(null, false, { message: 'user does not exist' });
     }
