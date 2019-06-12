@@ -6,14 +6,13 @@ import getAttraction from './attraction';
 import getContact from './contact';
 import getFAQ from './faq';
 import getPayment from './payment';
-import passport from '../middleware';
+import passport from '../middleware/strategy';
 import checkAuthentication from '../middleware/auth';
 
 const app = express();
 
 // endpoints not necessarily to protect
 app.get('/about', getAbout.get);
-app.get('/accommodation', accomodation.get);
 app.get('/accommodation/info', accomodation.info);
 app.get('/attraction', getAttraction.get);
 app.get('/contact', getContact.get);

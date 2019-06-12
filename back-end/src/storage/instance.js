@@ -1,7 +1,7 @@
 import mysql from 'mysql';
 import createMySQLWrap from 'mysql-wrap';
-import config from '../../config';
-import { JSON_BEAUTIFY } from '../../utils/parser';
+import config from '../config';
+import { JSON_BEAUTIFY } from '../utils/parser';
 
 const getConnection = () => {
   const connection = mysql.createPool(config.mySQL);
