@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import CustomInput from './CustomInput'
+import Buttons from './Buttons'
 
 import {connect} from 'react-redux'
 
@@ -61,6 +62,7 @@ const PersonalDetailsForm = (props) => {
         </Grid>
 
       </Grid>
+    
     </React.Fragment>
   );
 }

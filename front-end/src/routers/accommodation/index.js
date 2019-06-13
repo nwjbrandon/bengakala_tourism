@@ -29,7 +29,10 @@ class Accomodation extends React.Component {
   }
   componentDidMount() {
     API.get('/accommodation').then(res => {
-      this.setState({ data: res });
+      console.log("RES");
+      console.log(res);
+      dispatch({type:"EXCLUDE_DATES" , payload:res})
+      // this.setState({ data: res });
     })
   }
   render() {

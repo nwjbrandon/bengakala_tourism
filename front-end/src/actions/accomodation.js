@@ -1,0 +1,16 @@
+export const FIRST_NAME = 'FIRST_NAME';
+export const LAST_NAME = 'LAST_NAME';
+export const EMAIL = 'EMAIL';
+export const COUNTRY = 'COUNTRY';
+export const MALES = 'MALES';
+export const FEMALES = 'FEMALES';
+export const CARS = 'CARS';
+export const VANS = 'VANS';
+export const BIKES = 'BIKES';
+export const BREAKFAST = 'BREAKFAST';
+export const LUNCH = 'LUNCH';
+export const DINNER = 'DINNER';
+export const CHECK_IN = 'CHECK_IN';
+export const CHECK_OUT = 'CHECK_OUT';
+export const EXCLUDE_DATES = "EXCLUDE_DATES";
+export const ERR_MSG = "ERR_MSG";
