@@ -14,7 +14,8 @@ import ConfirmationScreen from './ConfirmationScreen'
 import Slip from './Slip'
 import {MuiThemeProvider ,createMuiTheme} from '@material-ui/core'
 import red from '@material-ui/core/colors/blue'
-
+import Buttons from './Buttons'
+import {connect} from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -65,8 +66,10 @@ const steps = ['Personal Details', 'Trip Details', 'Confirm your Trip'];
 
 const Checkout = (props) => {
 
+  let dispMsg = (<Typography>____</Typography>);
+
   const toRender = [
-    <PersonalDetailsForm />,
+    <PersonalDetailsForm/>,
     <TripDetailsForm />,
     <Review />
   ]
@@ -74,7 +77,22 @@ const Checkout = (props) => {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
-    setActiveStep(activeStep + 1);
+    if(activeStep == 0){
+        if(props.personalDetails.firstName === "" || props.personalDetails.lastName ==="" || props.personalDetails.email === "" || props.personalDetails.country === ""){
+          props.onError("Empty Important Fields Found!");
+        }else{
+          props.onError("");
+          setActiveStep(activeStep + 1);
+        }
+    }else if(activeStep == 1){
+        if((props.tripDetails.numberMales + props.tripDetails.numberFemales) == 0){
+          // dispMsg = (<Typography>Please Fill in All details!!</Typography>);
+          props.onError("Total Guests cannot be 0");
+        }else{
+          props.onError("");
+          setActiveStep(activeStep + 1);
+        }
+    }
   };
 
   const handleBack = () => {
@@ -110,30 +128,14 @@ const Checkout = (props) => {
             <React.Fragment>
 
               {activeStep === steps.length ? (
-
                 <ConfirmationScreen />
-
               ) : (
-
                 <React.Fragment>
                   {toRender[activeStep]}
-                  <div className={classes.buttons}>
-                    {activeStep !== 0 && (
-                      <Button color="primary" onClick={handleBack} className={classes.button}>
-                        Back
-                      </Button>
-                    )}
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      onClick={handleNext}
-                      className={classes.button}
-                    >
-                      {activeStep === steps.length - 1 ? 'Place order' : 'Next'}
-                    </Button>
-                  </div>
-                </React.Fragment>
+                  <Typography color="error" variant="h6">{props.errorMsg}</Typography>
+                  <Buttons activeStep = {activeStep} handleBack = {handleBack} handleNext = {handleNext} stepsLength = {steps.length}/>
 
+                </React.Fragment>
               )}
 
             </React.Fragment>
@@ -145,4 +147,20 @@ const Checkout = (props) => {
   );
 }
 
-export default Checkout
+
+
+const mapStateToProps = state => {
+  return{
+    personalDetails:state.personalDetails,
+    tripDetails:state.tripDetails,
+    errorMsg:state.errorMsg
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onError: (val) => dispatch({type:"ERR_MSG" , payload:val}),
+  }
+}
+
+export default connect(mapStateToProps ,mapDispatchToProps)(Checkout);

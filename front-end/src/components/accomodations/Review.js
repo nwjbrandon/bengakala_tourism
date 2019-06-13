@@ -2,29 +2,30 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Youtube from './youtube'
+import {connect} from 'react-redux'
 
-const useStyles = makeStyles(theme => ({
-  listItem: {
-    padding: theme.spacing(1, 0),
-  },
-  total: {
-    fontWeight: '700',
-  },
-  title: {
-    marginTop: theme.spacing(2),
-    color:"white"
-  },
-}));
 
-export default function Review() {
-  const classes = useStyles();
+const Review = (props) => {
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom className={classes.title}>
-        Confirm Your Trip
-      </Typography>
+      <div>{props.personalDetails.firstName} {props.personalDetails.lastName}</div>
+      <div>{props.personalDetails.country}</div>
+      <div>{props.personalDetails.email}</div>
+
+      <div>{props.tripDetails.numberMales}</div>
+      <div>{props.tripDetails.numberFemales}</div>
     </React.Fragment>
 
   );
 }
+
+const mapStateToProps = state => {
+  return{
+    personalDetails: state.personalDetails,
+    tripDetails:state.tripDetails,
+  };
+};
+
+
+export default connect(mapStateToProps)(Review)
