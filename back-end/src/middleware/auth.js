@@ -4,7 +4,11 @@ const checkAuthentication = (req, res, next) => {
     next();
   } else {
     // redirect to login page if user is not authenticated
-    res.redirect('/admin');
+    res.status(401).json({
+      data: {
+        error: 'Invalid Authentication'
+      }
+    });
   }
 };
 

@@ -18,7 +18,7 @@ import PhoneIcon from '@material-ui/icons/PermPhoneMsg';
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom'
 import {connect} from 'react-redux';
-import bg from './bgpic/Homepageimg.jpg'
+import bg from './bgpic/roadtovillage.jpg'
 
 
 const styles = theme => ({
@@ -26,13 +26,15 @@ const styles = theme => ({
     flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(3),
     height: '100%',
     [theme.breakpoints.up(500 + theme.spacing(6))]: {
-      width: 535,
-      margin: 'auto',
-      background: 'rgba(255, 255, 255, 0.9)',
-      boxShadow: 'none',
+    width: '37%',
+    margin: 'auto',
+    background: 'rgba(255, 255, 255, 0.9)',
+    boxShadow: 'none',
+    display: 'flex',
+    flexWrap: 'wrap',
     },
   },
   button: {
@@ -92,17 +94,17 @@ class Contact extends React.Component {
             direction="column"
             alignItems="center"
             justify="center"
-            style={{ minHeight: '105vh',
+            style={{ height: "100%",
             backgroundImage: `url(${bg})`,
             backgroundRepeat: "inital",
             backgroundSize: "cover",
-            width:"104%",
-            textAlign:"left"}}
+            width:"110%",
+            textAlign:"left",
+            paddingTop: 40}}
         >
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-
-              <Typography variant="h4" align="center" style={{ paddingTop: 20 }}>
+              <Typography variant="h4" align="center" style={{ paddingTop: 10 }}>
                 Contact Us!
               </Typography>
 
@@ -127,21 +129,30 @@ class Contact extends React.Component {
                 <Divider variant="inset" component="li" />
               </List>
 
+              <Grid item xs={12} sm={6}>
+                <TextField
+                    required
+                    label="Name"
+                    fullWidth
+                    autoComplete="name"
+                    margin="normal"
+                    variant="outlined"
+                    value={this.state.name}
+                    onChange={e => this.setState({name: e.target.value})}
+                />
+              </Grid>
 
-              <Typography variant="h6" style={{ paddingTop: 30 }}>
-                Your details:
-              </Typography>
-
-              <TextField
-                  required
-                  label="Name"
-                  fullWidth
-                  autoComplete="name"
-                  margin="normal"
-                  variant="outlined"
-                  value={this.state.name}
-                  onChange={e => this.setState({name: e.target.value})}
-              />
+              <Grid item xs={12} sm={6}>
+                <TextField
+                    label="Phone number"
+                    fullWidth
+                    autoComplete="Phone"
+                    margin="normal"
+                    variant="outlined"
+                    value={this.state.contact}
+                    onChange={e => this.setState({contact: e.target.value})}
+                />
+              </Grid>
 
               <TextField
                   required
@@ -152,16 +163,6 @@ class Contact extends React.Component {
                   variant="outlined"
                   value={this.state.email}
                   onChange={e => this.setState({email: e.target.value})}
-              />
-
-              <TextField
-                  label="Phone number"
-                  fullWidth
-                  autoComplete="Phone"
-                  margin="normal"
-                  variant="outlined"
-                  value={this.state.contact}
-                  onChange={e => this.setState({contact: e.target.value})}
               />
               <Divider />
 

@@ -1,24 +1,23 @@
-const express = require('express');
-const app = express();
+import _ from 'lodash';
+import db from '../../storage/db';
+import { TABLE_INFORMATION } from '../../storage/tableName';
 
-/**
- * This function comment is parsed by doctrine testing
- * @route GET /api
- * @group foo - Operations about user
- * @param {string} email.query.required - username or email - eg: user@domain
- * @param {string} password.query.required - user's password.
- * @returns {object} 200 - An array of user info
- * @returns {Error}  default - Unexpected error
- */
-const getFaq = [
-  async(req, res) => {
-    console.log('hi');
-    const info = { data: 'myFaq' };
-    res.send(info);
+const faqInfo = [
+  async (req, res) => {
+    const faqs = await db.fetchData(TABLE_INFORMATION, { type: 'faq' });
+    const ungroupedFaqs = _.map(faqs, faq => (
+      {
+        heading: faq.heading,
+        question: faq.title,
+        answer: faq.text,
+      }));
+    const groupedFaqs = _.groupBy(ungroupedFaqs, 'heading');
+    res.json({
+      data: groupedFaqs,
+    });
   },
 ];
 
 export default {
-  get: getFaq,
+  info: faqInfo,
 };
-

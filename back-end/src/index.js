@@ -14,7 +14,7 @@ import swaggerSpec from './configuration/swagger';
 const app = express();
 
 // implementation for linux developers
-console.log('Ensure redis and db server is setup for linux machines');
+console.log('Ensure redis and mysql server is setup for your machines');
 const RedisStore = connectRedis(session);
 const redisClient = redis.createClient();
 redisClient.on('error', (err) => {

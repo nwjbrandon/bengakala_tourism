@@ -1,19 +1,37 @@
 import React, { Component } from 'react';
-import './css/Slip.css';
 import Table from './Tabular';
 
 /* a fake customer */
-const customer= {
-  name: "John Doe",
-  email: "abcd@gmail.com",
-  date: { in: "Friday, 18 April 2020", out: "Sunday, 27 April 2020" },
-  duration: 9,
-  groupSize: 20,
-  home: { type: "Homestay", number: 5, price: 15 },
-  mealPlan: {type: "Breakfast and Dinner",
-    price: 10 },
-  transport: {type: { van : 2, car: 3, motorbike: 1 },
-    price: [40, 30, 15] },
+const personalDetails = {
+  firstName: "John",
+  lastName:"Doe",
+  email: "fake@gmail.com",
+  country: "fakeCountry",
+};
+
+const tripDetails = {
+  checkIn: "18/04/2020",
+  checkOut: "28/04/2020",
+  breakfast: true,
+  lunch :true ,
+  dinner :true,
+  numberMales: 7,
+  numberFemales: 3,
+  numberVans: 3,
+  numberCars: 4,
+  numberBikes: 2
+};
+
+const duration = 10
+
+const prices = {
+  home: 10,
+  breakfast: 1,
+  lunch :3 ,
+  dinner :2,
+  van: 15,
+  car: 10,
+  bike: 5
 }
 
 class App extends Component {
@@ -21,7 +39,9 @@ class App extends Component {
     super(props)
 
     this.state = {
-      customer: customer,
+      personalDetails: null,
+      tripDetails: null,
+      prices: null,
       costList: null,
       confirmation: false,
       edit: false,
@@ -30,22 +50,26 @@ class App extends Component {
     this.costGenerator = this.costGenerator.bind(this)
   }
 
-  componentWillMount () {
-    this.costGenerator(this.state.customer)
+  componentDidMount() {
+    this.setState({
+      personalDetails: personalDetails,
+      tripDetails: tripDetails,
+      prices: prices,
+    })
   }
 
-  costGenerator(customer) {
-    const duration = customer.duration
-    const groupSize = customer.groupSize
+  componentWillMount() {
+    this.costGenerator(this.state.tripDetails, prices)
+  }
 
-    const home_cost = customer.home.price * customer.home.number * duration
+  costGenerator(tripDetails, prices) {
+    const t = tripDetails;
+    const groupSize = t.numberMales + t.numberFemales
+
+    const home_cost = prices.home * 5 * duration
     const meal_cost = customer.mealPlan.price * duration * groupSize
-    let transport_cost = 0
-    if (customer.transport) {
-      const t = customer.transport
-      transport_cost = (t.type.van * t.price[0] + t.type.car * t.price[1] +
-        t.type.motorbike * t.price[2]) * duration
-    }
+    const transport_cost = (t.van * prices.van + t.car * prices.car +
+      t.bike * prices.bike) * duration
 
     const costArr = [home_cost, meal_cost, transport_cost]
 
@@ -65,23 +89,23 @@ class App extends Component {
         </h1>
         <div className='customer-details semi-bold'>
           <h4 className='header-sm left-text'>
-            {customer.name}
+            {personalDetails.firstName} {personalDetails.lastName}
           </h4>
           <h4 className='header-sm left-text'>
-            {customer.email}
+            {personalDetails.email}
           </h4>
           <h4 className='header-sm left-text'>
-            {customer.date.in} - {customer.date.out}
+            {tripDetails.checkIn} - {tripDetails.checkOut}
           </h4>
           <h4 className='header-sm left-text'>
-            Guests: {customer.groupSize}
+            Guests: {groupSize}
           </h4>
           <div class='price-breakdown medium-border-top medium-border-bottom'>
             <h4 className='header-sm'>
               Price Breakdown
             </h4>
             <Table
-              customer={customer}
+              tripDetails={tripDetails}
               costList={costList}
             />
           </div>
