@@ -5,7 +5,7 @@ const app = express();
 /**
  * This function comment is parsed by doctrine testing
  * @route GET /api
- * @group foo - Operations about user
+ * @group foo - Operations home user
  * @param {string} email.query.required - username or email - eg: user@domain
  * @param {string} password.query.required - user's password.
  * @returns {object} 200 - An array of user info

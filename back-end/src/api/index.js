@@ -1,5 +1,5 @@
 import express from 'express';
-import getAbout from './about';
+import home from './home';
 import accomodation from './accommodation';
 import getAdmin from './admin';
 import getAttraction from './attraction';
@@ -12,7 +12,7 @@ import checkAuthentication from '../middleware/auth';
 const app = express();
 
 // endpoints not necessarily to protect
-app.get('/about', getAbout.get);
+app.get('/home/info', home.info);
 app.get('/accommodation/info', accomodation.info);
 app.get('/attraction', getAttraction.get);
 app.get('/contact/info', contact.info);
