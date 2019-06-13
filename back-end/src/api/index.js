@@ -30,6 +30,7 @@ app.get('/payment', getPayment.get);
 app.post('/admin/login', passport.authenticate('local', { failWithError: true }), admin.login, admin.err);
 app.post('/admin/dashboard/test', checkAuthentication, dashboard.test);
 app.get('/admin/dashboard/contact', checkAuthentication, dashboardContact.get);
+app.post('/admin/dashboard/contact', checkAuthentication, dashboardContact.post);
 app.get('/admin/dashboard/accommodation', checkAuthentication, dashboardAccommodation.get);
 app.get('/admin/dashboard/attraction', checkAuthentication, dashboardAttraction.get);
 app.get('/admin/dashboard/faq', checkAuthentication, dashboardFaq.get);
