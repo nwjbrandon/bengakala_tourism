@@ -4,7 +4,7 @@ import accomodation from './accommodation';
 import getAdmin from './admin';
 import getAttraction from './attraction';
 import getContact from './contact';
-import getFAQ from './faq';
+import faq from './faq';
 import getPayment from './payment';
 import passport from '../middleware/strategy';
 import checkAuthentication from '../middleware/auth';
@@ -16,7 +16,7 @@ app.get('/about', getAbout.get);
 app.get('/accommodation/info', accomodation.info);
 app.get('/attraction', getAttraction.get);
 app.get('/contact', getContact.get);
-app.get('/faq', getFAQ.get);
+app.get('/faq/info', faq.info);
 app.get('/payment', getPayment.get);
 app.get('/admin', getAdmin.get);
 
