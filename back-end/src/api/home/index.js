@@ -11,7 +11,6 @@ const aboutInfo = [
       }));
     const missions = await db.fetchData(TABLE_INFORMATION, { type: 'mission' });
     const mission = _.head(missions).text;
-    console.log(mission);
     res.send({
       data: {
         stories,
