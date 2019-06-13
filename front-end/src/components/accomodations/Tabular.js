@@ -1,70 +1,52 @@
 import React from 'react';
 import './css/Tabular.css';
+import NestedTable from './NestedTable';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableCell from '@material-ui/core/TableCell';
+import TableHead from '@material-ui/core/TableHead';
+import TableRow from '@material-ui/core/TableRow';
 
 function totalCost(costArr) {
   const total = costArr.reduce((total, num) => total + num, 0)
   return total
 }
 
-export default function Table({ customer, costList }) {
+export default function MasterTable({ customer, costList }) {
   const t = customer.transport
   const d = customer.duration
 
   return (
-    <div className='outer-table table-font medium-border-bottom'>
-      <div className='outer-row medium-border-bottom'>
-        <div className='outer-cell bold'>Type</div>
-        <div className='outer-cell bold'>Qty</div>
-        <div className='outer-cell bold'>Price</div>
-      </div>
-      <div className='outer-row'>
-        <div className='outer-cell'>{ customer.home.type }</div>
-        <div className='outer-cell'>{ customer.home.number }</div>
-        <div className='outer-cell price'>${ costList[0] }</div>
-      </div>
-      <div className='outer-row'>
-        <div className='outer-cell'>{ customer.mealPlan.type }</div>
-        <div className='outer-cell'>{ customer.groupSize }</div>
-        <div className='outer-cell price'>${ costList[1] }</div>
-      </div>
-      { customer.transport
-          ?
-          <div className='outer-row'>
-            <div className='outer-cell'>Transport</div>
-            <div className='outer-cell'>
-              <div className='inner-table'>
-                <div className='inner-row'>
-                  <div className='inner-cell pad-right'>Vans</div>
-                  <div className='inner-cell pad-right'>{t.type.van}</div>
-                  <div className='inner-cell price'>  ${t.type.van * t.price[0] * d}</div>
-                </div>
-                <div className='inner-row'>
-                  <div className='inner-cell pad-right'>Cars</div>
-                  <div className='inner-cell pad-right'>{t.type.car}</div>
-                  <div className='inner-cell price'>  ${t.type.car * t.price[1] * d}</div>
-                </div>
-                <div className='inner-row'>
-                  <div className='inner-cell pad-right'>Motorbikes</div>
-                  <div className='inner-cell pad-right'>{t.type.motorbike}</div>
-                  <div className='inner-cell price '>  ${t.type.motorbike * t.price[2] * d}</div>
-                </div>
-              </div>
-            </div>
-            <div className='outer-cell price'>${ costList[2] }</div>
-          </div>
-          :
-          <div className='outer-row'>
-            <div className='outer-cell'>Transport</div>
-            <div className='outer-cell'>None</div>
-            <div className='outer-cell price'>$0</div>
-          </div>
-      }
-      <div className='vert-space'/>
-      <div className='outer-row bg-light'>
-        <div className='outer-cell'></div>
-        <div className='outer-cell bold'> Total </div>
-        <div className='outer-cell price bold'> ${totalCost(costList)}</div>
-      </div>
-    </div>
+    <Table>
+      <TableHeader>
+        <TableRow>
+          <TableCell>Type</TableCell>
+          <TableCell>Qty</TableCell>
+          <TableCell>Price</TableCell>
+        </TableRow>
+      </TableHeader>
+      <TableBody>
+        <TableRow>
+          <TableCell>{ customer.home.type }</TableCell>
+          <TableCell>{ customer.home.number }</TableCell>
+          <TableCell> ${ costList[0] } </TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell> { customer.mealPlan.type }</TableCell>
+          <TableCell> customer.groupSize }</TableCell>
+          <TableCell>${ costList[1] }</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell>Transport</TableCell>
+          <TableCell children={<NestedTable />}/>
+          <TableCell>${ costList[2] }</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell></TableCell>
+          <TableCell> Total </TableCell>
+          <TableCell> ${totalCost(costList)}</TableCell>
+        </TableRow>
+      </TableBody>
+    </Table>
   )
 }
