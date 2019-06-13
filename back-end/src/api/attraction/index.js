@@ -1,24 +1,22 @@
+import _ from 'lodash';
+import db from '../../storage/db';
+import { TABLE_INFORMATION } from '../../storage/tableName';
 
-const express = require('express');
-const app = express();
-
-/**
- * This function comment is parsed by doctrine testing
- * @route GET /api
- * @group foo - Operations home user
- * @param {string} email.query.required - username or email - eg: user@domain
- * @param {string} password.query.required - user's password.
- * @returns {object} 200 - An array of user info
- * @returns {Error}  default - Unexpected error
- */
-const getAttraction = [
-  async(req, res) => {
-    const info = { data: 'myAttraction' };
-    res.send(info);
+const attractionInfo = [
+  async (req, res) => {
+    const attractions = await db.fetchData(TABLE_INFORMATION, { type: 'attraction' });
+    const data = _.map(attractions, attraction => ({
+      [attraction.title]: {
+        imgUrl: attraction.imgUrl,
+        text: attraction.text,
+      },
+    }));
+    res.json({
+      data
+    });
   },
 ];
 
 export default {
-  get: getAttraction,
+  info: attractionInfo,
 };
-

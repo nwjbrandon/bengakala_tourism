@@ -2,7 +2,7 @@ import express from 'express';
 import home from './home';
 import accomodation from './accommodation';
 import getAdmin from './admin';
-import getAttraction from './attraction';
+import attraction from './attraction';
 import contact from './contact';
 import faq from './faq';
 import getPayment from './payment';
@@ -14,7 +14,7 @@ const app = express();
 // endpoints not necessarily to protect
 app.get('/home/info', home.info);
 app.get('/accommodation/info', accomodation.info);
-app.get('/attraction', getAttraction.get);
+app.get('/attraction/info', attraction.info);
 app.get('/contact/info', contact.info);
 app.get('/faq/info', faq.info);
 app.get('/payment', getPayment.get);
