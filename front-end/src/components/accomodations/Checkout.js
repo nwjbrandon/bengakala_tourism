@@ -71,7 +71,7 @@ const Checkout = (props) => {
   const toRender = [
     <PersonalDetailsForm/>,
     <TripDetailsForm />,
-    <Review />
+    <Slip />
   ]
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -79,7 +79,7 @@ const Checkout = (props) => {
   const handleNext = () => {
     if(activeStep == 0){
         if(props.personalDetails.firstName === "" || props.personalDetails.lastName ==="" || props.personalDetails.email === "" || props.personalDetails.country === ""){
-          props.onError("Empty Important Fields Found!");
+          props.onError("Important Fields Are Empty!");
         }else{
           props.onError("");
           setActiveStep(activeStep + 1);

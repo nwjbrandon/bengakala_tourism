@@ -4,7 +4,7 @@ import AccomodationsForm from '../../components/accomodations/Accomodations'
 import Slideshow from '../../components/accomodations/Slideshow'
 import bg from '../../components/accomodations/images/balivillage.jpg'
 import Tutorial from '../../components/accomodations/TutorialPage'
-
+import Navbar from '../../components/navbar'
 
 import { createStore } from 'redux'
 import reducer from '../../reducers/accomodation'
@@ -52,6 +52,7 @@ class Accomodation extends React.Component {
   };
     return (
       <Provider store = {store}>
+        <Navbar />
         <div style = {divStyle}>
           <AccomodationsForm  />
           <Slideshow textArr = {this.state.textArray} />
