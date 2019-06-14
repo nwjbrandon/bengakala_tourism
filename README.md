@@ -50,6 +50,7 @@ sudo mysql # enter mysql cli
 ```
 CREATE USER 'bengkala'@'localhost' IDENTIFIED BY 'bengkala';
 GRANT ALL PRIVILEGES ON * . * TO 'bengkala'@'localhost';
+ALTER USER 'bengkala'@'localhost' IDENTIFIED WITH mysql_native_password BY 'bengkala'; #for windows user
 FLUSH PRIVILEGES;
 ```
 
