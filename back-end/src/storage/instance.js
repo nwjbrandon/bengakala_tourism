@@ -18,6 +18,7 @@ class DataBase {
     this.updateData = this.updateData.bind(this);
     this.uuidExist = this.uuidExist.bind(this);
     this.filterFieldList = this.filterFieldList.bind(this);
+    this.changeListData = this.changeListData.bind(this);
   }
 
   // fectching utils from database
@@ -55,6 +56,22 @@ class DataBase {
   async filterFieldList(TABLE, params, field) {
     return this.fetchData(TABLE, params)
       .then(res => _.map(res, obj => obj[field]));
+  }
+
+  // update list of utils
+  async changeListData(TABLE, { updateList = [], saveList = [], deleteList = [] }) {
+    return this.conn.beginTransaction()
+      .then(() => Promise.all([
+        _.map(deleteList, deleteItem => this.deleteData(TABLE, deleteItem)),
+        _.map(updateList, updateItem => this.updateData(TABLE, updateItem.data, updateItem.params)),
+        _.map(saveList, saveItem => this.saveData(TABLE, saveItem)),
+      ]))
+      .then(() => {
+        this.conn.commit();
+      })
+      .catch(err => this.conn.rollback(() => {
+        throw err;
+      }));
   }
 }
 export default DataBase;
