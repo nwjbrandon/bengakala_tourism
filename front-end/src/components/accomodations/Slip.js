@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import MasterTable from './Tabular';
+import {connect} from 'react-redux'
 
 /* a fake customer */
-const personalDetails = {
-  firstName: "John",
-  lastName:"Doe",
-  email: "fake@gmail.com",
-  country: "fakeCountry",
-};
+// const personalDetails = {
+//   firstName: "John",
+//   lastName:"Doe",
+//   email: "fake@gmail.com",
+//   country: "fakeCountry",
+// };
 
 
 
@@ -15,32 +16,28 @@ class App extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      personalDetails: personalDetails,
-    }
   }
 
   render() {
-    const { personalDetails }  = this.state
 
     return (
       <div className='flex-center container medium-border-surround'>
-        <h1 className='header-lg center-text'>
+        <h1 style={{ color: 'white' }} className='header-lg center-text'>
           Here's your invoice
         </h1>
-        <div className='customer-details semi-bold'>
+        <div style={{ color: 'white' }} className='customer-details semi-bold'>
           <p> Billing informatiion </p>
           <h4 className='header-sm left-text'>
-            {personalDetails.firstName} {personalDetails.lastName} from {personalDetails.country}
+            {this.props.personalDetails.firstName} {this.props.personalDetails.lastName} from {this.props.personalDetails.country}
           </h4>
           <h4 className='header-sm left-text'>
-            {personalDetails.email}
+            {this.props.personalDetails.email}
           </h4>
-          <div class='price-breakdown medium-border-top medium-border-bottom'>
-            <h4 className='header-sm'>
+          <div>
+            <h4 style ={{ fontSize:"20px", color: 'black' }} className='header-sm'>
               Price Breakdown
             </h4>
-            <MasterTable />
+            <MasterTable tripDetails = {this.props.tripDetails}/>
           </div>
           <div className='vert-space'/>
         </div>
@@ -49,4 +46,12 @@ class App extends Component {
   }
 }
 
-export default App
+const mapStateToProps = state => {
+  return{
+    personalDetails: state.personalDetails,
+    tripDetails:state.tripDetails,
+  };
+};
+
+
+export default connect(mapStateToProps)(App)

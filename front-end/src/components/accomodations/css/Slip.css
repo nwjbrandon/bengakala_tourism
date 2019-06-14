@@ -26,6 +26,7 @@ body {
   font-size: 45px;
   font-weight: 400;
   margin: 20px;
+  color:white;
 }
 
 .header-sm {
@@ -38,6 +39,7 @@ body {
 
 .left-text {
   text-align: left;
+  color:white;
 }
 
 .btn {
