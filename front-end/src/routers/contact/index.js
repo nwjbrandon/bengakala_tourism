@@ -35,6 +35,7 @@ const styles = theme => ({
     boxShadow: 'none',
     display: 'flex',
     flexWrap: 'wrap',
+    paddingTop: 30,
     },
   },
   button: {
@@ -98,13 +99,14 @@ class Contact extends React.Component {
             backgroundImage: `url(${bg})`,
             backgroundRepeat: "inital",
             backgroundSize: "cover",
+            backgroundPosition: "center",
             width:"110%",
             textAlign:"left",
             paddingTop: 40}}
         >
           <Grid item xs={12}>
             <Paper className={classes.paper}>
-              <Typography variant="h4" align="center" style={{ paddingTop: 10 }}>
+              <Typography variant="h4" style={{ paddingTop: 10, padding: 17 }}>
                 Contact Us!
               </Typography>
 
