@@ -11,7 +11,6 @@ const getContactInfo = [
       return {
         title: v.title,
         text: v.text,
-        createdAt: v.createdAt,
         type: v.type,
         edit: v.edit,
       };
@@ -26,7 +25,11 @@ const postContactInfo = [
   async (req, res) => {
     const receivedData = req.body.data;
     const existingUUID = await db.filterFieldList(TABLE_INFORMATION, { type: 'contact' }, 'uuid');
-    const { updateList, saveList, deleteList } = processedDataToChangeInDB({ receivedData, existingUUID });
+    const {
+      updateList,
+      saveList,
+      deleteList
+    } = processedDataToChangeInDB({ receivedData, existingUUID });
     await db.changeListData(TABLE_INFORMATION, {
       updateList,
       saveList,
