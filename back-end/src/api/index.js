@@ -45,6 +45,7 @@ app.get('/admin/dashboard/faq', checkAuthentication, dashboardFaq.get);
 app.post('/admin/dashboard/faq', checkAuthentication, dashboardFaq.post);
 
 app.get('/admin/dashboard/home', checkAuthentication, dashboardHome.get);
+app.post('/admin/dashboard/home', checkAuthentication, dashboardHome.post);
 
 app.get('/admin/dashboard/settings', checkAuthentication, dashboardSettings.get);
 
