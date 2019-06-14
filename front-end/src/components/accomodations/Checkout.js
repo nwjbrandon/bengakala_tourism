@@ -71,7 +71,7 @@ const Checkout = (props) => {
   const toRender = [
     <PersonalDetailsForm/>,
     <TripDetailsForm />,
-    <Review />
+    <Slip />
   ]
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);

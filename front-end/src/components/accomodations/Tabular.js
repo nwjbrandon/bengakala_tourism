@@ -84,67 +84,67 @@ export default function MasterTable() {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell>Type</TableCell>
-          <TableCell>Qty</TableCell>
-          <TableCell>Price</TableCell>
+          <TableCell style={{ fontSize:"20px", color: 'cyan' }}>Type</TableCell>
+          <TableCell style={{ fontSize:"20px", color: 'cyan' }}>Qty</TableCell>
+          <TableCell style={{ fontSize:"20px", color: 'cyan' }}>Price</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
         {homeRow.map(row => (
           <TableRow>
-            <TableCell>{ row.desc }</TableCell>
-            <TableCell>{ row.qty }</TableCell>
-            <TableCell>{ row.price }</TableCell>
+            <TableCell style={{ color: 'white' }}>{ row.desc }</TableCell>
+            <TableCell style={{ color: 'white' }}>{ row.qty }</TableCell>
+            <TableCell style={{ color: 'white' }}>{ row.price }</TableCell>
           </TableRow>
         ))}
         <TableRow>
-          <TableCell>Meals</TableCell>
-          <TableCell></TableCell>
-          <TableCell></TableCell>
+          <TableCell style={{ color: 'white' }}>Meals</TableCell>
+          <TableCell style={{ color: 'white' }}></TableCell>
+          <TableCell style={{ color: 'white' }}></TableCell>
         </TableRow>
         {mealRow().map(row => (
-          <TableRow>
-            <TableCell align="center"> { row.desc }</TableCell>
-            <TableCell>{ row.qty }</TableCell>
-            <TableCell>{ row.price }</TableCell>
+          <TableRow style={{ color: 'white' }}>
+            <TableCell style={{ color: 'white' }} align="center"> { row.desc }</TableCell>
+            <TableCell style={{ color: 'white' }}>{ row.qty }</TableCell>
+            <TableCell style={{ color: 'white' }}>{ row.price }</TableCell>
           </TableRow>
         ))}
         <TableRow>
           <TableCell></TableCell>
-          <TableCell align="center">Meals total</TableCell>
-          <TableCell>{mealSub}</TableCell>
+          <TableCell style={{ color: 'white' }} align="center">Meals total</TableCell>
+          <TableCell style={{ color: 'white' }}>{mealSub}</TableCell>
         </TableRow>
         <TableRow>
-          <TableCell>Transport</TableCell>
-          <TableCell></TableCell>
-          <TableCell></TableCell>
+          <TableCell style={{ color: 'white' }}>Transport</TableCell>
+          <TableCell style={{ color: 'white' }}></TableCell>
+          <TableCell style={{ color: 'white' }}></TableCell>
         </TableRow>
         {transportRow.map(row => (
           <TableRow>
-            <TableCell align="center">{ row.desc }</TableCell>
-            <TableCell>{ row.qty }</TableCell>
-            <TableCell>{ row.price }</TableCell>
+            <TableCell style={{ color: 'white' }} align="center">{ row.desc }</TableCell>
+            <TableCell style={{ color: 'white' }} >{ row.qty }</TableCell>
+            <TableCell style={{ color: 'white' }}>{ row.price }</TableCell>
           </TableRow>
         ))}
         <TableRow>
           <TableCell></TableCell>
-          <TableCell align="center">Transport total</TableCell>
-          <TableCell>{transportSub}</TableCell>
+          <TableCell style={{ color: 'white' }} align="center">Transport total</TableCell>
+          <TableCell style={{ color: 'white' }}>{transportSub}</TableCell>
+        </TableRow>
+        <TableRow>
+          <TableCell style={{ color: 'white' }}></TableCell>
+          <TableCell style={{ color: 'white' }}> Subtotal </TableCell>
+          <TableCell style={{ color: 'white' }}>{subcost}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell></TableCell>
-          <TableCell> Subtotal </TableCell>
-          <TableCell>{subcost}</TableCell>
+          <TableCell style={{ color: 'white' }}> Taxes </TableCell>
+          <TableCell style={{ color: 'white' }}>{taxes}</TableCell>
         </TableRow>
         <TableRow>
           <TableCell></TableCell>
-          <TableCell> Taxes </TableCell>
-          <TableCell>{taxes}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell></TableCell>
-          <TableCell> Total </TableCell>
-          <TableCell>{total}</TableCell>
+          <TableCell style={{ color: 'white' }}> Total </TableCell>
+          <TableCell style={{ color: 'white' }}>{total}</TableCell>
         </TableRow>
       </TableBody>
     </Table>
