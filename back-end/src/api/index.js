@@ -48,6 +48,8 @@ app.get('/admin/dashboard/home', checkAuthentication, dashboardHome.get);
 app.post('/admin/dashboard/home', checkAuthentication, dashboardHome.post);
 
 app.get('/admin/dashboard/settings', checkAuthentication, dashboardSettings.get);
-
+app.put('/admin/dashboard/settings', checkAuthentication, dashboardSettings.put);
+app.delete('/admin/dashboard/settings', checkAuthentication, dashboardSettings.del);
+app.post('/admin/dashboard/settings', checkAuthentication, dashboardSettings.post);
 
 export default app;
