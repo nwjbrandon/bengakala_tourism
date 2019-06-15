@@ -5,7 +5,6 @@ import admin from './admin';
 import attraction from './attraction';
 import contact from './contact';
 import faq from './faq';
-import getPayment from './payment';
 import dashboard from './dashboard';
 import dashboardContact from './dashboard/contact';
 import dashboardAccommodation from './dashboard/accommodation';
@@ -21,17 +20,17 @@ const app = express();
 // endpoints not necessarily to protect
 app.get('/home/info', home.info);
 app.get('/accommodation/info', accommodation.info);
+app.post('/accommodation/info', accommodation.post);
 app.get('/attraction/info', attraction.info);
 app.get('/contact/info', contact.info);
 app.put('/contact/info', contact.put);
 app.get('/faq/info', faq.info);
-app.get('/payment', getPayment.get);
 
 // endpoints must be protected
 app.post('/admin/login', passport.authenticate('local', { failWithError: true }), admin.login, admin.err);
 app.get('/admin/logout', checkAuthentication, admin.logout);
 
-app.post('/admin/dashboard/test', checkAuthentication, dashboard.test);
+app.get('/admin/dashboard', checkAuthentication, dashboard.get);
 
 app.get('/admin/dashboard/contact', checkAuthentication, dashboardContact.get);
 app.post('/admin/dashboard/contact', checkAuthentication, dashboardContact.post);

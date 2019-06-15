@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import db from '../../storage/db';
-import {TABLE_ADMINISTRATOR, TABLE_INFORMATION} from '../../storage/tableName';
+import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
 
 const getContactInfo = [
