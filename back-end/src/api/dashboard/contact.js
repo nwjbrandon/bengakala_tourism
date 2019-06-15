@@ -1,12 +1,12 @@
 import _ from 'lodash';
 import db from '../../storage/db';
-import { TABLE_INFORMATION } from '../../storage/tableName';
+import {TABLE_ADMINISTRATOR, TABLE_INFORMATION} from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
 
 const getContactInfo = [
   async (req, res) => {
     const contacts = await db.fetchData(TABLE_INFORMATION, { type: 'contact' });
-    const data = _.mapValues(_.groupBy(contacts, 'uuid'), (value) => {
+    const contact = _.mapValues(_.groupBy(contacts, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         title: v.title,
@@ -15,8 +15,24 @@ const getContactInfo = [
         edit: v.edit,
       };
     });
+    const customers = await db.fetchData(TABLE_INFORMATION, { type: 'customer' });
+    const customer = _.mapValues(_.groupBy(customers, 'uuid'), (value) => {
+      const v = _.head(value);
+      return {
+        heading: v.heading,
+        subheading: v.subheading,
+        title: v.title,
+        paragraph: v.paragraph,
+        subparagraph: v.subparagraph,
+        type: v.type,
+        edit: v.edit,
+      };
+    });
     res.json({
-      data,
+      data: {
+        contact,
+        customer,
+      }
     });
   },
 ];
@@ -41,8 +57,19 @@ const postContactInfo = [
   },
 ];
 
+const deleteContactInfo = [
+  async (req, res) => {
+    const delContact = req.body.data;
+    const uuid = _.head(_.keys(delContact));
+    await db.deleteData(TABLE_INFORMATION, { uuid });
+    res.json({
+      data: 'success',
+    });
+  },
+];
 
 export default {
   get: getContactInfo,
   post: postContactInfo,
+  del: deleteContactInfo,
 };

@@ -23,6 +23,7 @@ app.get('/home/info', home.info);
 app.get('/accommodation/info', accommodation.info);
 app.get('/attraction/info', attraction.info);
 app.get('/contact/info', contact.info);
+app.put('/contact/info', contact.put);
 app.get('/faq/info', faq.info);
 app.get('/payment', getPayment.get);
 

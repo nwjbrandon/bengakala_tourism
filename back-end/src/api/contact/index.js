@@ -15,6 +15,31 @@ const contactInfo = [
   },
 ];
 
+const contactPut = [
+  async (req, res) => {
+    console.log(req.body.data);
+    const customer = req.body.data
+    const uuid = _.head(_.keys(customer));
+    const customerData = customer[uuid];
+    const data = _.assign({
+      uuid,
+      heading: customerData.name,
+      subheading: customerData.phone,
+      title: customerData.email,
+      paragraph: customerData.subject,
+      subparagraph: customerData.message,
+      edit: true,
+      type: 'customer',
+    });
+    await db.saveData(TABLE_INFORMATION, data);
+    res.json({
+      data: 'success'
+    });
+  },
+];
+
+
 export default {
   info: contactInfo,
+  put: contactPut,
 };
