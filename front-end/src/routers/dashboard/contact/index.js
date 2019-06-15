@@ -11,6 +11,8 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import _ from 'lodash'
+import ReactNotification from "react-notifications-component";
+import "react-notifications-component/dist/theme.css";
 
 import NavBar from '../../../components/dashboard/navBar';
 

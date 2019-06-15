@@ -5,10 +5,10 @@ import { TABLE_INFORMATION } from '../../storage/tableName';
 const contactInfo = [
   async (req, res) => {
     const contacts = await db.fetchData(TABLE_INFORMATION, { type: 'contact' });
-    const data = _.map(contacts, contact => (
-      {
-        [contact.title]: contact.text,
-      }));
+    const data = _.mapValues(_.groupBy(contacts, 'title'), (value) => {
+      const v = _.head(value);
+      return v.text;
+    });
     res.json({
       data,
     });
@@ -17,24 +17,40 @@ const contactInfo = [
 
 const contactPut = [
   async (req, res) => {
-    console.log(req.body.data);
-    const customer = req.body.data
-    const uuid = _.head(_.keys(customer));
-    const customerData = customer[uuid];
-    const data = _.assign({
-      uuid,
-      heading: customerData.name,
-      subheading: customerData.phone,
-      title: customerData.email,
-      paragraph: customerData.subject,
-      subparagraph: customerData.message,
-      edit: true,
-      type: 'customer',
-    });
-    await db.saveData(TABLE_INFORMATION, data);
-    res.json({
-      data: 'success'
-    });
+    try {
+      const {
+        uuid,
+        contact,
+        name,
+        subject,
+        message,
+        email,
+      } = req.body.data;
+      const data = _.assign({
+        uuid,
+        heading: name,
+        subheading: contact,
+        title: email,
+        paragraph: subject,
+        subparagraph: message,
+        edit: true,
+        type: 'customer',
+      });
+      await db.saveData(TABLE_INFORMATION, data);
+      return res.json({
+        data: {
+          code: 200,
+          message: 'We will get back to you shortly'
+        }
+      });
+    } catch (err) {
+      return res.status(500).json({
+        error: {
+          code: 500,
+          message: 'Server Error'
+        }
+      });
+    }
   },
 ];
 

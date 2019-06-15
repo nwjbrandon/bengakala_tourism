@@ -30,9 +30,9 @@ const delRequest = (url, data) => {
 
 const putRequest = (url, data) => {
   return new Promise((resolve, reject) => {
-    axios.put(httpUrl + url, data)
+    axios.put(httpUrl + url, data, { withCredentials: true })
     .then(response => {
-      resolve(response);
+      resolve(response.data.data);
     })
     .catch(error => {
       reject(error.response);
@@ -44,7 +44,7 @@ const postRequest = (url, data) => {
   return new Promise((resolve, reject) => {
     axios.post(httpUrl + url, data, { withCredentials: true })
     .then(response => {
-      resolve(response.data);
+      resolve(response.data.data);
     })
     .catch(error => {
       reject(error.response);
