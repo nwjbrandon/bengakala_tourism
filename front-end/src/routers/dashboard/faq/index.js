@@ -93,6 +93,11 @@ class DashboardFAQ extends Component {
         this.reset = this.reset.bind(this)
     }
 
+    componentWillMount() {
+        const { onMount } = this.props;
+        onMount();
+    }
+
     reset() {
         const newData = _.cloneDeep(this.state.origin)
         this.setState({ data: newData })
@@ -169,8 +174,9 @@ class DashboardFAQ extends Component {
     }
 
     render() {
-        const { classes } = this.props
-        const { title, data } = this.state
+        const { classes, displayedData } = this.props;
+        const { title, data } = this.state;
+        console.log(displayedData);
         return (
             <div className={classes.root}>
                 <CssBaseline />

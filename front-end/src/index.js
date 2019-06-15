@@ -29,7 +29,7 @@ import DashboardAbout from './containers/dashboard-about';
 import DashboardAccommodation from './routers/dashboard/accommodation';
 import DashboardAttraction from './routers/dashboard/attraction';
 import DashboardContact from './routers/dashboard/contact';
-import DashboardFAQ from './routers/dashboard/faq';
+import DashboardFAQ from './containers/dashboardFaq';
 import DashboardHome from './routers/dashboard/home';
 import DashboardPayment from './routers/dashboard/payment';
 import DashboardSettings from './routers/dashboard/settings';
