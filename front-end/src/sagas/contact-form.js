@@ -15,7 +15,6 @@ function* workerSaga(payload) {
     try {
         console.log(payload.payload);
         const data = yield call(submitForm, { data: payload.payload });
-        console.log(data);
         yield put(CONTACT_FORM_SUCCESS(data));
     } catch (error) {
         console.log(error);

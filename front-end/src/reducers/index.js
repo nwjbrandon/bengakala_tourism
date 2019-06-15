@@ -1,16 +1,15 @@
 import {combineReducers} from 'redux';
 import reduceReducers from 'reduce-reducers';
-import auth from './auth';
-import statements from './statements'
 import { dashboardAboutReducer } from './dashboard-about-onmount'
 import { contactOnMountReducer } from "./contact-onmount";
 import { contactFormReducer } from "./contact-form";
+import { dashboardOnMountReducer } from "./dashboard-onmount";
+import { adminLoginReducer } from "./admin-login";
 
 const allReducers = combineReducers({
-    admin: reduceReducers(statements, auth),
-    statements,
-    auth,
+    admin: reduceReducers(adminLoginReducer),
     dashboardAbout: reduceReducers(dashboardAboutReducer),
+    dashboard: reduceReducers(dashboardOnMountReducer),
     contact: reduceReducers(contactOnMountReducer, contactFormReducer),
 });
 
