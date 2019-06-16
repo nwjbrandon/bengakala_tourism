@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
-import DashboardFaq from '../routers/dashboard/faq';
+import DashboardFaq from './index';
 import {
     DASHBOARD_FAQ_ONMOUNT_REQUEST,
     DASHBOARD_FAQ_DELETE,
     DASHBOARD_FAQ_RESET,
     DASHBOARD_FAQ_NEW,
     DASHBOARD_FAQ_SUBMIT_REQUEST,
-} from "../actions/dashboardFaq";
+} from "../../../actions/dashboardFaq";
 
 function mapStateToProps(state) {
     return {

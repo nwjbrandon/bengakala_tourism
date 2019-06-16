@@ -23,13 +23,13 @@ import Notfound from './routers/notfound';
 import Payment from './routers/payment';
 
 // Protected Routes
-import Admin from './containers/admin';
-import Dashboard from './containers/dashboard';
+import Admin from './routers/admin/container';
+import Dashboard from './routers/dashboard/container';
 import DashboardAbout from './containers/dashboard-about';
 import DashboardAccommodation from './routers/dashboard/accommodation';
 import DashboardAttraction from './routers/dashboard/attraction';
-import DashboardContact from './routers/dashboard/contact';
-import DashboardFAQ from './containers/dashboardFaq';
+import DashboardContact from './routers/dashboard/contact/container';
+import DashboardFAQ from './routers/dashboard/faq/container';
 import DashboardHome from './routers/dashboard/home';
 import DashboardPayment from './routers/dashboard/payment';
 import DashboardSettings from './routers/dashboard/settings';

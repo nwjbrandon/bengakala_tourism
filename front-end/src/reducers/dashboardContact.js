@@ -4,21 +4,27 @@ import _cloneDeep from 'lodash/cloneDeep';
 import _assign from 'lodash/assign';
 
 const initialState = {
-    originalData: {},
-    displayedData: {},
+    originalData: {
+        contact: {},
+        customer: {},
+    },
+    displayedData: {
+        contact: {},
+        customer: {},
+    },
     fetching: false,
     error: false,
 };
 
-export const dashboardFaqReducer = handleActions({
-    "DASHBOARD_FAQ_ONMOUNT_REQUEST": (state) => {
+export const dashboardContactReducer = handleActions({
+    "DASHBOARD_CONTACT_ONMOUNT_REQUEST": (state) => {
         return {
             ...state,
             fetching: true,
             error: false,
         };
     },
-    "DASHBOARD_FAQ_ONMOUNT_SUCCESS": (state, action) => {
+    "DASHBOARD_CONTACT_ONMOUNT_SUCCESS": (state, action) => {
         return {
             ...state,
             fetching: false,
@@ -27,50 +33,28 @@ export const dashboardFaqReducer = handleActions({
             error: false,
         };
     },
-    "DASHBOARD_FAQ_ONMOUNT_ERROR": (state, action) => {
+    "DASHBOARD_CONTACT_ONMOUNT_ERROR": (state, action) => {
         return {
             ...state,
             fetching: false,
             error: action.payload,
         };
     },
-    "DASHBOARD_FAQ_DELETE": (state, action) => {
-        const { displayedData } = state;
-        const newDisplayedData = _omit(displayedData, action.payload);
-        return {
-            ...state,
-            displayedData: newDisplayedData,
-        };
-    },
-    "DASHBOARD_FAQ_RESET": (state) => {
+    "DASHBOARD_CONTACT_RESET": (state) => {
         const { originalData } = state;
         return {
             ...state,
             displayedData: _cloneDeep(originalData),
         };
     },
-    "DASHBOARD_FAQ_NEW": (state, action) => {
-        const { id, payload } = action.payload;
-        payload.edit = 0; // implementation of editable table not successful
-        const { displayedData }= _cloneDeep(state);
-        const newDisplayedData = _assign({
-            [id]: payload,
-            ...displayedData,
-        });
-        displayedData[id] = payload;
-        return {
-            ...state,
-            displayedData: newDisplayedData,
-        }
-    },
-    "DASHBOARD_FAQ_SUBMIT_REQUEST": (state) => {
+    "DASHBOARD_CONTACT_SUBMIT_REQUEST": (state) => {
         return {
             ...state,
             fetching: true,
             error: false,
         }
     },
-    "DASHBOARD_FAQ_SUBMIT_SUCCESS": (state, action) => {
+    "DASHBOARD_CONTACT_SUBMIT_SUCCESS": (state, action) => {
         return {
             ...state,
             originalData: _cloneDeep(action.payload),
@@ -78,17 +62,17 @@ export const dashboardFaqReducer = handleActions({
             error: false,
         }
     },
-    "DASHBOARD_FAQ_SUBMIT_ERROR": (state, action) => {
+    "DASHBOARD_CONTACT_SUBMIT_ERROR": (state, action) => {
         return {
             ...state,
             fetching: true,
             error: action.payload,
         }
     },
-    "DASHBOARD_FAQ_WATCH": (state, action) => {
+    "DASHBOARD_CONTACT_WATCH": (state, action) => {
         const { displayedData }= _cloneDeep(state);
-        const { uuid, field, value } = action.payload;
-        displayedData[uuid][field] = value;
+        const { uuid, field, value, type } = action.payload;
+        displayedData[type][uuid][field] = value;
         return {
             ...state,
             displayedData: displayedData,

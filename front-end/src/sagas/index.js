@@ -6,6 +6,7 @@ import contactForm from './contact-form';
 import dashboard from './dashboard';
 import adminLogin from './admin-login';
 import dashboardFaq from './dashboardFaq';
+import dashboardContact from './dashboardContact';
 
 export default function* rootSaga() {
   yield all([
@@ -14,6 +15,7 @@ export default function* rootSaga() {
     ...contactForm,
     ...dashboard,
     ...adminLogin,
-    ...dashboardFaq
+    ...dashboardFaq,
+    ...dashboardContact,
   ]);
 }
