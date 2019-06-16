@@ -84,6 +84,15 @@ export const dashboardFaqOnMountReducer = handleActions({
             fetching: true,
             error: action.payload,
         }
-    }
+    },
+    "DASHBOARD_FAQ_WATCH": (state, action) => {
+        const { displayedData }= _cloneDeep(state);
+        const { uuid, field, value } = action.payload;
+        displayedData[uuid][field] = value;
+        return {
+            ...state,
+            displayedData: displayedData,
+        }
+    },
 }, initialState);
 

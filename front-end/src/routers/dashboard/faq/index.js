@@ -8,7 +8,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import uuidv1 from 'uuid/v1';
 
-import DashBoardFaqEntries from '../../../components/dashboardFaq/dashboardFaqEntries';
+import DashBoardFaqEntries from '../../../components/dashboardFaq/dashboardFaqEntries.container';
 import NavBar from '../../../components/dashboard/navBar';
 
 
@@ -141,7 +141,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={title}
-                        placeholder="How to contact us?"
+                        placeholder="Ex. How to contact us?"
                         label="Question"
                         className={classes.button}
                         onChange={this.watchTitle}
@@ -151,7 +151,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={text}
-                        placeholder="You can contact us at XXX-XXXX-XXXX."
+                        placeholder="Ex. You can contact us at XXX-XXXX-XXXX."
                         label="Answer"
                         className={classes.button}
                         onChange={this.watchText}
@@ -161,6 +161,9 @@ class DashboardFAQ extends Component {
                             Save
                         </Button>
                     </Grid>
+                    <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
+                        Existing list of { navTitle }
+                    </Typography>
                     <DashBoardFaqEntries
                         data={displayedData}
                         entryAction={this.deleteEntry}
