@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import Dashboard from '../routers/dashboard';
-import { DASHBOARD_ONMOUNT_REQUEST } from "../actions/dashboard-onmount";
+import { DASHBOARD_ONMOUNT_REQUEST } from "../actions/dashboard";
 
 function mapStateToProps(state) {
     return {

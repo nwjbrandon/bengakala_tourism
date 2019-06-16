@@ -6,7 +6,7 @@ import {
     DASHBOARD_ONMOUNT_REQUEST_NAME,
     DASHBOARD_ONMOUNT_SUCCESS,
     DASHBOARD_ONMOUNT_ERROR
-} from "../actions/dashboard-onmount";
+} from "../actions/dashboard";
 
 function onMount() {
     return API.get('/admin/dashboard');
