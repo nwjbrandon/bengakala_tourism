@@ -1,4 +1,4 @@
-import {connect} from "react-redux";
+import { connect } from "react-redux";
 import DashboardFAQ from '../routers/dashboard/about';
 import {
     DASHBOARD_ABOUT_INSERT,

@@ -45,7 +45,7 @@ class DashboardFAQ extends Component {
         this.cancelEntry = this.cancelEntry.bind(this)
         this.editEntry = this.editEntry.bind(this)
         this.updateEntry = this.updateEntry.bind(this)
-        this.deleteEntry = this.deleteEntry.bind(this)
+        DashboardFAQ.deleteEntry = this.deleteEntry.bind(this)
         this.watchQuestionEntry = this.watchQuestionEntry.bind(this)
         this.watchTextEntry = this.watchTextEntry.bind(this)
         this.watchTypeEntry = this.watchTypeEntry.bind(this)

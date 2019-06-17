@@ -40,6 +40,7 @@ export default function ButtonAppBar() {
           <Typography variant="h6" className={classes.title}>
             Bengkala
           </Typography>
+          <Button color="inherit"><a style={navLinks} href={'/'}>Home</a></Button>
           {navlinks}
         </Toolbar>
       </AppBar>

@@ -1,5 +1,6 @@
 const config = {
   mySQL: {
+    connectionLimit: 10,
     host: 'localhost',
     user: 'bengkala',
     password: 'bengkala',

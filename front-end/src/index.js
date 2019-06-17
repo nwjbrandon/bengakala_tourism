@@ -17,20 +17,20 @@ import About from './routers/about';
 import Accommodation from './routers/accommodation';
 import Home from './routers/home';
 import Attraction from './routers/attraction';
-import Contact from './routers/contact';
+import Contact from './containers/contact';
 import Faq from './routers/faq';
 import Notfound from './routers/notfound';
 import Payment from './routers/payment';
 import Tutorial from './routers/tutorial'
 
 // Protected Routes
-import Admin from './routers/admin';
-import Dashboard from './routers/dashboard';
+import Admin from './routers/admin/container';
+import Dashboard from './routers/dashboard/container';
 import DashboardAbout from './containers/dashboard-about';
 import DashboardAccommodation from './routers/dashboard/accommodation';
 import DashboardAttraction from './routers/dashboard/attraction';
-import DashboardContact from './routers/dashboard/contact';
-import DashboardFAQ from './routers/dashboard/faq';
+import DashboardContact from './routers/dashboard/contact/container';
+import DashboardFAQ from './routers/dashboard/faq/container';
 import DashboardHome from './routers/dashboard/home';
 import DashboardPayment from './routers/dashboard/payment';
 import DashboardSettings from './routers/dashboard/settings';
@@ -41,6 +41,7 @@ import rootSagas from "./sagas";
 const persistConfig = {
   key: 'root',
   storage,
+  blacklist: ['contact']
 };
 const sagaMiddleware = createSagaMiddleware();
 const enhancers = composeWithDevTools(

@@ -1,5 +1,4 @@
 import React from 'react'
-import API from '../../api';
 import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
@@ -9,8 +8,6 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom'
-import {connect} from 'react-redux';
-import {signIn} from '../../actions/auth'
 
 const styles = theme => ({
   root: {
@@ -39,17 +36,17 @@ class Admin extends React.Component {
       password: '',
       email: '',
       error: '',
-    }
+    };
     this.submit = this.submit.bind(this);
   }
 
-  componentWillMount() {
-    console.log(this.props.auth);
-    this.setState({error: this.props.auth});
-  }
-
   submit() {
-    this.props.signIn();
+    const { login } = this.props;
+    const { password, email } = this.state;
+    login({
+      email,
+      password,
+    })
   }
 
   render() {
@@ -138,15 +135,4 @@ Admin.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-function mapStateToProps(state) {
-  return {
-  };
-}
-
-function matchDispatchToProps(dispatch){
-  return {
-    signIn: () => dispatch({type: "API_CALL_REQUEST"}),
-  }
-}
-
-export default connect(mapStateToProps, matchDispatchToProps)(withStyles(styles)(Admin));
+export default withStyles(styles)(Admin);

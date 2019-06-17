@@ -20,7 +20,6 @@ function* workerSaga() {
     };
     // testing API
     const data = yield call(onMount);
-    console.log(data);
     yield put(DASHBOARD_ABOUT_ONMOUNT(payload));
   } catch (error) {
     console.log(error)

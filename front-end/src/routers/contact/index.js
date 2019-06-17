@@ -1,6 +1,5 @@
 import React from 'react';
 import API from '../../api';
-import PropTypes from 'prop-types';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -15,11 +14,9 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import LocationIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/PermPhoneMsg';
-import { NavLink } from "react-router-dom";
-import { Link } from 'react-router-dom'
-import {connect} from 'react-redux';
 import bg from './bgpic/roadtovillage.jpg'
-
+import PropTypes from "prop-types";
+import uuid from 'uuid/v1';
 
 const styles = theme => ({
   root: {
@@ -28,14 +25,15 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing(3),
     height: '100%',
-    [theme.breakpoints.up(500 + theme.spacing(6))]: {
-    width: '37%',
+    width: 450,
     margin: 'auto',
     background: 'rgba(255, 255, 255, 0.9)',
     boxShadow: 'none',
     display: 'flex',
     flexWrap: 'wrap',
     paddingTop: 30,
+    [theme.breakpoints.up(500 + theme.spacing(6))]: {
+      width: 500,
     },
   },
   button: {
@@ -47,47 +45,39 @@ class Contact extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      //data: '',
-      address:'National University of Singapore, Kent Ridge',
-      mycontact:'(+65) Brandon',
       name: '',
       contact:'',
       subject:'',
       message:'',
       mailSent: false,
       email: '',
-      error: '',
-    }
+    };
     this.submit = this.submit.bind(this);
   }
 
-  handleFormSubmit( event ) {
-    event.preventDefault();
-    console.log(this.state);
-  }
-
-
   componentWillMount() {
-    console.log(this.props.auth);
-    this.setState({error: this.props.auth});
+    const { onMount } = this.props;
+    onMount();
   }
 
   submit() {
-    console.log(this.state);
-    const { email, password } = this.state;
-    const data = { email, password };
-    API.post('/admin/login', data)
-        .then(() => {
-          this.props.signIn();
-          this.props.history.push('/dashboard');
-        })
-        .catch(err =>{
-          this.setState({ error: err.data});
-        });
+    const {
+      contact,
+      name,
+      subject,
+      message,
+      email,
+    } = this.state;
+    const id = uuid();
+    const data = {
+      uuid: id, contact, name, subject, message, email
+    };
+    const { contactSubmit } = this.props;
+    contactSubmit(data);
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, data, errorMsg, successMsg } = this.props;
     return (
       <React.Fragment>
         <Grid
@@ -95,21 +85,20 @@ class Contact extends React.Component {
             direction="column"
             alignItems="center"
             justify="center"
-            style={{ height: "100%",
-            backgroundImage: `url(${bg})`,
-            backgroundRepeat: "inital",
-            backgroundSize: "cover",
-            backgroundPosition: "center",
-            width:"110%",
-            textAlign:"left",
-            paddingTop: 40}}
+            style={{
+              backgroundImage: `url(${bg})`,
+              backgroundRepeat: "inital",
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              textAlign:"left",
+              paddingTop: 40
+            }}
         >
           <Grid item xs={12}>
             <Paper className={classes.paper}>
               <Typography variant="h4" style={{ paddingTop: 10, padding: 17 }}>
                 Contact Us!
               </Typography>
-
               <List className={classes.root}>
                 <ListItem>
                   <ListItemAvatar>
@@ -117,7 +106,7 @@ class Contact extends React.Component {
                       <LocationIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary="Address" secondary={this.state.address} />
+                  <ListItemText primary="Address" secondary={ data['Address'] } />
                 </ListItem>
                 <Divider variant="inset" component="li" />
                 <ListItem>
@@ -126,7 +115,7 @@ class Contact extends React.Component {
                       <PhoneIcon />
                     </Avatar>
                   </ListItemAvatar>
-                  <ListItemText primary="Call Us" secondary={this.state.mycontact} />
+                  <ListItemText primary="Call Us" secondary={ data['Phone'] } />
                 </ListItem>
                 <Divider variant="inset" component="li" />
               </List>
@@ -198,15 +187,17 @@ class Contact extends React.Component {
                 <Button
                     variant="contained"
                     className={classes.button}
-                    component={Link}
-                    to="/"
+                    onClick={this.submit}
                 >
                   Submit
                 </Button>
               </Grid>
               <Grid container justify="center">
+                <Typography variant="body2" color="primary">
+                  { successMsg }
+                </Typography>
                 <Typography variant="body2" color="error">
-                  { this.state.error }
+                  { errorMsg }
                 </Typography>
               </Grid>
             </Paper>
@@ -216,5 +207,10 @@ class Contact extends React.Component {
     )
   }
 }
+
+Contact.propTypes = {
+  classes: PropTypes.object.isRequired,
+  data: PropTypes.object.isRequired,
+};
 
 export default withStyles(styles)(Contact);
