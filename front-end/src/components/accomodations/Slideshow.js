@@ -42,14 +42,24 @@ const Slideshow = (props) => {
     };
 
     var title =  {
-        color: "black",
+        color: "",
         textAlign: "centre",
         marginBottom: "40px",
         fontSize: "40px"
     }
+
+    var h1titletag = {
+      textAlign: "center",
+      /* font-size: 1em; */
+      marginBottom: "10px",
+      font: "30px arial, sans-serif",
+      fontWeight: "bold",
+      color: "white",
+      textShadow: "0 1px 2px rgba(black,.15)",
+    }
     return (
       <div style = {divStyle}>
-        <div style = {title}><h1 className= "h1titletag">Here are some things to see!</h1></div>
+        <div style = {title}><h1 style= {h1titletag}>Here are some things to see!</h1></div>
         <Slide {...properties}>
           {AllSlides}
         </Slide>

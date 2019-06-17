@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
+
 function SimpleExpansionPanel() {
   const classes = useStyles();
 
@@ -52,7 +53,27 @@ function SimpleExpansionPanel() {
     }
   ]
 
-  
+
+    var title =  {
+        color: "",
+        textAlign: "centre",
+        marginBottom: "40px",
+        fontSize: "40px",
+        background: "#21212160",
+        borderRadius:"5px"
+    }
+
+    var h1titletag = {
+      textAlign: "center",
+      /* font-size: 1em; */
+      marginBottom: "10px",
+      font: "20px arial, sans-serif",
+      color: "white",
+      textShadow: "0 1px 2px rgba(black,.15)",
+    }
+
+
+
   const videos = videoDetails.map((eachVideo)=>{
     return (
       <ExpansionPanel key = {eachVideo.title} className={classes.expansion}>
@@ -75,6 +96,7 @@ function SimpleExpansionPanel() {
 
   return (
     <div className={classes.root}>
+      <div style = {title}><h1 style= {h1titletag}>Browse through our video series to learn our very own Sign Language<br/>The Kolok Kolok!!</h1></div>
       {videos}
     </div>
   );

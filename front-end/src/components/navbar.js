@@ -23,7 +23,7 @@ const navLinks = {
   justifyContent: 'space-around',
 }
 
-const sections =['About', 'Accommodation', 'Admin', 'Attraction', 'Contact', 'Dashboard', 'FAQ'];
+const sections =['About', 'Accommodation', 'Admin', 'Attraction', 'Tutorial' ,'Contact', 'Dashboard', 'FAQ'];
 const navlinks = sections.map( section => {
     return(
       <Button color="inherit"><a style={navLinks} href={'/' + section}>{section}</a></Button>

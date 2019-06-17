@@ -21,6 +21,7 @@ import Contact from './routers/contact';
 import Faq from './routers/faq';
 import Notfound from './routers/notfound';
 import Payment from './routers/payment';
+import Tutorial from './routers/tutorial'
 
 // Protected Routes
 import Admin from './routers/admin';
@@ -61,6 +62,7 @@ const routing = (
             <Route exact path="/" component={ Home } />
             <Route exact path="/about" component={ About } />
             <Route exact path="/accommodation" component={ Accommodation} />
+            <Route exact path="/tutorial" component={ Tutorial } />
             <Route exact path="/admin" component={ Admin } />
             <Route exact path="/attraction" component={ Attraction } />
             <Route exact path="/contact" component={ Contact } />
