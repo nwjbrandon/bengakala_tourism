@@ -17,10 +17,21 @@ import PhoneIcon from '@material-ui/icons/PermPhoneMsg';
 import bg from './bgpic/roadtovillage.jpg'
 import PropTypes from "prop-types";
 import uuid from 'uuid/v1';
+import Navbar from '../../components/navbar'
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    backgroundImage: `url(${bg})`,
+    backgroundRepeat: "inital",
+    backgroundSize: "cover",
+    backgroundPosition: "top",
+    backgroundAttachment: "fixed",
+    textAlign:"left",
+    padding: 40,
+    overflow: 'hidden',
+    display: 'flex',
+    height: "90vh",
   },
   paper: {
     padding: theme.spacing(3),
@@ -31,6 +42,7 @@ const styles = theme => ({
     boxShadow: 'none',
     display: 'flex',
     flexWrap: 'wrap',
+    flexGrow: 1,
     paddingTop: 30,
     [theme.breakpoints.up(500 + theme.spacing(6))]: {
       width: 500,
@@ -80,45 +92,43 @@ class Contact extends React.Component {
     const { classes, data, errorMsg, successMsg } = this.props;
     return (
       <React.Fragment>
+        <Navbar/>
+        <div className={classes.root}>
         <Grid
             container spacing={10}
             direction="column"
             alignItems="center"
             justify="center"
-            style={{
-              backgroundImage: `url(${bg})`,
-              backgroundRepeat: "inital",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              textAlign:"left",
-              paddingTop: 40
-            }}
         >
-          <Grid item xs={12}>
+          <Grid item>
             <Paper className={classes.paper}>
-              <Typography variant="h4" style={{ paddingTop: 10, padding: 17 }}>
-                Contact Us!
-              </Typography>
-              <List className={classes.root}>
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <LocationIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary="Address" secondary={ data['Address'] } />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-                <ListItem>
-                  <ListItemAvatar>
-                    <Avatar>
-                      <PhoneIcon />
-                    </Avatar>
-                  </ListItemAvatar>
-                  <ListItemText primary="Call Us" secondary={ data['Phone'] } />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-              </List>
+              <Grid item xs={12}>
+                <Typography variant="h4" style={{ paddingTop: 10, padding: 17 }}>
+                  Contact Us!
+                </Typography>
+              </Grid>
+              <Grid item xs={12}>
+                <List>
+                  <ListItem>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <LocationIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary="Address" secondary={ data['Address'] } />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                  <ListItem>
+                    <ListItemAvatar>
+                      <Avatar>
+                        <PhoneIcon />
+                      </Avatar>
+                    </ListItemAvatar>
+                    <ListItemText primary="Call Us" secondary={ data['Phone'] } />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                </List>
+              </Grid>
 
               <Grid item xs={12} sm={6}>
                 <TextField
@@ -155,7 +165,6 @@ class Contact extends React.Component {
                   value={this.state.email}
                   onChange={e => this.setState({email: e.target.value})}
               />
-              <Divider />
 
               <Typography variant="h6" style={{ paddingTop: 30 }}>
                 Your message:
@@ -203,6 +212,7 @@ class Contact extends React.Component {
             </Paper>
           </Grid>
         </Grid>
+        </div>
       </React.Fragment>
     )
   }
