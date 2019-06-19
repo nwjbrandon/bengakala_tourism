@@ -16,19 +16,18 @@ import { withStyles } from '@material-ui/core/styles';
 import { typography } from '@material-ui/system';
 import bg from './pics/faqbackground.jpg';
 import bigbrandon from './pics/thebeast.jpg';
-import Navbar from '../../components/navbar'
 
 const styles = theme => ({
   root: {
     width: '100%',
     backgroundColor: theme.palette.background.paper,
     flexGrow: 1,
-    height: "100%",
+    height: "120vh",
     backgroundImage: `url(${bg})`,
     backgroundPosition: "top",
     backgroundRepeat: "initial",
     backgroundSize: "cover",
-    width:"100%",
+    backgroundAttachment: "fixed",
     textAlign:"left",
     paddingTop: 40
   },
@@ -37,9 +36,9 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing(3),
-    height: '100%',
+    height: '95%',
     [theme.breakpoints.up(500 + theme.spacing(6))]: {
-    width: '45%',
+    width: '35%',
     margin: 'auto',
     background: 'rgba(255, 255, 255, 0.9)',
     boxShadow: 'none',
