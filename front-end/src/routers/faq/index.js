@@ -80,7 +80,6 @@ class Faq extends React.Component {
     const {classes} = this.props;
     return (
       <React.Fragment>
-      <Navbar />
       <div className={classes.root}>
         <Grid
             container spacing={10}
