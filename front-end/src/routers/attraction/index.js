@@ -6,8 +6,21 @@ import Tutorial from '../../components/accomodations/TutorialPage'
 import Navbar from '../../components/navbar'
 
 import Container from '@material-ui/core/Container';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+
+import './attraction.css'
 
 class Attraction extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -24,15 +37,139 @@ class Attraction extends React.Component {
   render() {
 
     var halfStyle = {
-     width:"50%",
-     float:"left"
+      justifyContent:"center",
+     maxHeight:"200px",
   };
+  var gridStyle = {
+    paddingTop:"55px",
+  }
+    var gridItemStyle = {
+
+      overflowX:"hidden",
+      maxHeight:"350px",
+    };
+
+    var listStyle ={
+
+      margin: 0,
+      paddingTop:"55px",
+      height: "auto",
+      overflow: "scroll",
+      listStyle: "none",
+      whiteSpace: "nowrap",
+      listStyleType: "none !important",
+
+    }
 
     return (
       <div>
-        <h2 align = "center">{this.state.storyArray.imgTitle}</h2>
-        <p style={halfStyle}>{this.state.storyArray.story} </p>
-        <img src={this.state.storyArray.imgUrl} style={halfStyle}/>
+        <Navbar />
+    <ul>
+      <li>
+        <Card raised= "true" style={{height:"400px", maxWidth:"350px"}}>
+        <CardActionArea>
+          <div align="center"><img
+            src={this.state.storyArray.imgUrl}
+            title={this.state.storyArray.imgTitle} style={{maxHeight:"200px"}}
+          /></div>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+            {this.state.storyArray.imgTitle}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+            {this.state.storyArray.story}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+  <Button size="small" color="primary">
+    Share
+  </Button>
+  <Button size="small" color="primary">
+    Learn More
+  </Button>
+</CardActions>
+      </Card>
+      </li>
+      <li>
+        <Card raised= "true" style={{height:"400px", maxWidth:"350px"}}>
+        <CardActionArea>
+          <div align="center"><img
+            src={this.state.storyArray.imgUrl}
+            title={this.state.storyArray.imgTitle} style={{maxHeight:"200px"}}
+          /></div>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+            {this.state.storyArray.imgTitle}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+            {this.state.storyArray.story}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+  <Button size="small" color="primary">
+    Share
+  </Button>
+  <Button size="small" color="primary">
+    Learn More
+  </Button>
+</CardActions>
+      </Card>
+      </li>
+      <li>
+        <Card raised= "true" style={{height:"400px", maxWidth:"350px"}}>
+        <CardActionArea>
+          <div align="center"><img
+            src={this.state.storyArray.imgUrl}
+            title={this.state.storyArray.imgTitle} style={{maxHeight:"200px"}}
+          /></div>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+            {this.state.storyArray.imgTitle}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+            {this.state.storyArray.story}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+  <Button size="small" color="primary">
+    Share
+  </Button>
+  <Button size="small" color="primary">
+    Learn More
+  </Button>
+</CardActions>
+      </Card>
+      </li>
+      <li>
+        <Card raised= "true" style={{height:"400px", maxWidth:"350px"}}>
+        <CardActionArea>
+          <div align="center"><img
+            src={this.state.storyArray.imgUrl}
+            title={this.state.storyArray.imgTitle} style={{maxHeight:"200px"}}
+          /></div>
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+            {this.state.storyArray.imgTitle}
+            </Typography>
+            <Typography variant="body2" color="textSecondary" component="p">
+            {this.state.storyArray.story}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+  <Button size="small" color="primary">
+    Share
+  </Button>
+  <Button size="small" color="primary">
+    Learn More
+  </Button>
+</CardActions>
+      </Card>
+      </li>
+      </ul>
       </div>
     )
   }
