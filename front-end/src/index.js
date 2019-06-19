@@ -23,6 +23,8 @@ import Notfound from './routers/notfound';
 import Payment from './routers/payment';
 import Tutorial from './routers/tutorial'
 
+import Navbar from './components/navbar'
+
 // Protected Routes
 import Admin from './routers/admin/container';
 import Dashboard from './routers/dashboard/container';
@@ -34,6 +36,7 @@ import DashboardFAQ from './routers/dashboard/faq/container';
 import DashboardHome from './routers/dashboard/home';
 import DashboardPayment from './routers/dashboard/payment';
 import DashboardSettings from './routers/dashboard/settings';
+import './global.css'
 
 import rootReducers from './reducers';
 import rootSagas from "./sagas";
@@ -55,10 +58,13 @@ const store = createStore(
 sagaMiddleware.run(rootSagas);
 const persistor = persistStore(store);
 
+
 const routing = (
     <Provider store={ store }>
       <PersistGate persistor={ persistor } loading={null}>
+
         <Router>
+          <Navbar />
           <Switch>
             <Route exact path="/" component={ Home } />
             <Route exact path="/about" component={ About } />

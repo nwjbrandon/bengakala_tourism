@@ -30,7 +30,6 @@ class Attraction extends React.Component {
 
     return (
       <div>
-        <Navbar />
         <h2 align = "center">{this.state.storyArray.imgTitle}</h2>
         <p style={halfStyle}>{this.state.storyArray.story} </p>
         <img src={this.state.storyArray.imgUrl} style={halfStyle}/>

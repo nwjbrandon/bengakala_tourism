@@ -52,7 +52,6 @@ class Accomodation extends React.Component {
   };
     return (
       <Provider store = {store}>
-        <Navbar />
         <div style = {divStyle}>
           <AccomodationsForm  />
           <Slideshow textArr = {this.state.textArray} />

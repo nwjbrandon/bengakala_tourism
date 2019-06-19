@@ -35,7 +35,6 @@ class TutorialPage extends React.Component {
   };
     return (
       <div style = {{margin: "0px" ,padding:"0px"}}>
-        <Navbar />
         <div style = {divStyle}>
           <Tutorial />
         </div>

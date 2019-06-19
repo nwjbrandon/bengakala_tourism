@@ -80,7 +80,7 @@ class Contact extends React.Component {
     const { classes, data, errorMsg, successMsg } = this.props;
     return (
       <React.Fragment>
-        <Grid
+        <div
             container spacing={10}
             direction="column"
             alignItems="center"
@@ -202,7 +202,7 @@ class Contact extends React.Component {
               </Grid>
             </Paper>
           </Grid>
-        </Grid>
+        </div>
       </React.Fragment>
     )
   }
