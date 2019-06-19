@@ -1,0 +1,31 @@
+ul {
+    padding-top: 55px;
+    margin: 0;
+    overflow: scroll;
+    list-style: none;
+    white-space: nowrap;
+    margin-inline-end: 0px;
+    padding-inline-start: 0px !important;
+    overflow-y: hidden;
+
+}
+ul li {
+  margin: 0;
+  height: auto;
+  overflow: scroll;
+  white-space: nowrap;
+  display: inline-block ;
+  padding: 5px;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
+p {
+  white-space:normal;
+  max-height: 80px;
+  overflow:hidden;
+}
+
+Card {
+  height: 400px;
+  width: 350px;
+}
