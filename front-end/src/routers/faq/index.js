@@ -16,13 +16,21 @@ import { withStyles } from '@material-ui/core/styles';
 import { typography } from '@material-ui/system';
 import bg from './pics/faqbackground.jpg';
 import bigbrandon from './pics/thebeast.jpg';
+import Navbar from '../../components/navbar'
 
 const styles = theme => ({
   root: {
     width: '100%',
-    maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
     flexGrow: 1,
+    height: "100%",
+    backgroundImage: `url(${bg})`,
+    backgroundPosition: "top",
+    backgroundRepeat: "initial",
+    backgroundSize: "cover",
+    width:"100%",
+    textAlign:"left",
+    paddingTop: 40
   },
   inline: {
     display: 'inline',
@@ -71,21 +79,14 @@ class Faq extends React.Component {
   render() {
     const {classes} = this.props;
     return (
-      <div>
       <React.Fragment>
+      <Navbar />
+      <div className={classes.root}>
         <Grid
             container spacing={10}
             direction="column"
             alignItems="center"
             justify="center"
-            style={{ height: "100%",
-            backgroundImage: `url(${bg})`,
-            backgroundPosition: "center",
-            backgroundRepeat: "initial",
-            backgroundSize: "cover",
-            width:"110%",
-            textAlign:"left",
-            paddingTop: 40}}
         >
           <Grid item xs={12}>
             <Paper className={classes.paper}>
@@ -309,8 +310,8 @@ class Faq extends React.Component {
             </Paper>
           </Grid>
         </Grid>
-      </React.Fragment>
       </div>
+      </React.Fragment>
     )
   }
 }
