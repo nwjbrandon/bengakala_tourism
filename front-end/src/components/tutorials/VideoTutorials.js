@@ -86,7 +86,9 @@ function SimpleExpansionPanel() {
           <Typography className={classes.heading}>{eachVideo.title}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <div style = {{height: "400px" ,textAlign:"center", width: "100vh" , marginLeft: "auto", marginRight: "auto" ,marginBottom:"50px"}}>
+          <div style = {{paddingBottom: "56.25%" /* 16:9 */,
+          paddingTop: 25,
+          height: 0 ,textAlign:"center", width: "100%" , marginLeft: "auto", marginRight: "auto" ,marginBottom:"20px"}}>
             <Youtube youtubeId = {eachVideo.videoLink}/>
           </div>
         </ExpansionPanelDetails>

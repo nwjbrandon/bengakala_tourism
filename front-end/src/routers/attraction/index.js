@@ -63,7 +63,6 @@ class Attraction extends React.Component {
 
     return (
       <div>
-        <Navbar />
     <ul>
       <li>
         <Card raised= "true" style={{height:"400px", maxWidth:"350px"}}>
