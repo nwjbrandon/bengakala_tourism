@@ -31,11 +31,6 @@ const menuOptions = [
         icon: <Dashboard />
     },
     {
-        title: 'About',
-        to: '/dashboard/about',
-        icon: <Loyalty />
-    },
-    {
         title: 'Accommodation',
         to: '/dashboard/accommodation',
         icon: <Store />
@@ -60,12 +55,7 @@ const menuOptions = [
         to: '/dashboard/home',
         icon: <Home />
     },
-    {
-        title: 'Payment',
-        to: '/dashboard/payment',
-        icon: <Payment />
-    },
-]
+];
 
 const settingOptions = [
     {
@@ -73,7 +63,7 @@ const settingOptions = [
         to: '/dashboard/settings',
         icon: <Settings />
     },
-]
+];
 
 const drawerWidth = 240;
 
@@ -116,8 +106,8 @@ class SideDrawer extends React.Component {
         super(props);
         this.state = {
             openDrawer: false
-        }
-        this.handleCloseDrawer = this.props.handleCloseDrawer.bind(this)
+        };
+        this.handleCloseDrawer = this.props.handleCloseDrawer.bind(this);
         this.logout = this.logout.bind(this)
     }
 
@@ -128,7 +118,7 @@ class SideDrawer extends React.Component {
     }
 
     render() {
-        const { classes } = this.props
+        const { classes } = this.props;
         return (
             <div>
                 <div className={classes.toolbar}/>
@@ -168,11 +158,6 @@ SideDrawer.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-function mapStateToProps(state) {
-    return {
-    };
-}
-
 function matchDispatchToProps(dispatch){
     return {
         signOut: () => dispatch(signOut()),
@@ -180,4 +165,4 @@ function matchDispatchToProps(dispatch){
 }
 
 
-export default connect(mapStateToProps, matchDispatchToProps)(withStyles(styles)(withRouter(SideDrawer)));
+export default connect(null, matchDispatchToProps)(withStyles(styles)(withRouter(SideDrawer)));

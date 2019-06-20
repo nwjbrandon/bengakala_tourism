@@ -17,7 +17,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
-import './attraction.css'
+// import './attraction.css'
 const data= {
   "Funny Random Meme Dump":
   [{imgUrl: "https://i.imgur.com/WfkZGD7.jpg", text: "Come visit our museum located within the serene and tranquil Kranji countryside area in Singapore to uncover the myths and discover the benefits of edible bird’s nest for we are probably one of the most comprehensive collection of information about edible bird’s nest in the entire South-East Asia."}],

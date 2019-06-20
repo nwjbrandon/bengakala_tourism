@@ -1,6 +1,5 @@
 import {combineReducers} from 'redux';
 import reduceReducers from 'reduce-reducers';
-import { dashboardAboutReducer } from './dashboard-about-onmount'
 import { contactOnMountReducer } from "./contact-onmount";
 import { contactFormReducer } from "./contact-form";
 import { dashboardOnMountReducer } from "./dashboard";
@@ -13,7 +12,6 @@ import { dashboardHomeReducer } from "./dashboardHome";
 
 const allReducers = combineReducers({
     admin: reduceReducers(adminLoginReducer),
-    dashboardAbout: reduceReducers(dashboardAboutReducer),
     dashboard: reduceReducers(dashboardOnMountReducer),
     dashboardFaq: reduceReducers(dashboardFaqReducer),
     dashboardContact: reduceReducers(dashboardContactReducer),

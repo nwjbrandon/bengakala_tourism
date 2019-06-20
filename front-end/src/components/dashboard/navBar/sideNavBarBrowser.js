@@ -31,11 +31,6 @@ const sideNavBarBrowser = [
         icon: <Dashboard />
     },
     {
-        title: 'About',
-        to: '/dashboard/about',
-        icon: <Loyalty />
-    },
-    {
         title: 'Accommodation',
         to: '/dashboard/accommodation',
         icon: <Store />
@@ -60,12 +55,7 @@ const sideNavBarBrowser = [
         to: '/dashboard/home',
         icon: <Home />
     },
-    {
-        title: 'Payment',
-        to: '/dashboard/payment',
-        icon: <Payment />
-    },
-]
+];
 
 const settingOptions = [
     {
@@ -73,7 +63,7 @@ const settingOptions = [
         to: '/dashboard/settings',
         icon: <Settings />
     },
-]
+];
 
 const drawerWidth = 240;
 
@@ -116,7 +106,7 @@ class SideDrawer extends React.Component {
         super(props);
         this.state = {
             openDrawer: false
-        }
+        };
         this.handleCloseDrawer = this.props.handleCloseDrawer.bind(this)
         this.logout = this.logout.bind(this)
     }
