@@ -14,6 +14,7 @@ import uuidv1 from 'uuid/v1';
 import _ from 'lodash'
 
 import NavBar from '../../../components/dashboard/navBar';
+import DashBoardAttractionEntries from "../../../components/dashboardAttraction/dashboardAttractionEntries.container";
 
 const styles = theme => ({
     root: {
@@ -40,210 +41,141 @@ class DashboardFAQ extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: {
-                '1': {
-                    title: 'Water Theme Playground for Children',
-                    type: 'Fun',
-                    text: 'Coming Soon!',
-                    edit: false,
-                    copyTitle: 'Water Theme Playground for Children',
-                    copyType: 'Fun',
-                    copyText: 'Coming Soon!',
-                },
-            },
-            origin: {
-                '1': {
-                    title: 'Water Theme Playground for Children',
-                    type: 'Fun',
-                    text: 'Coming Soon!',
-                    edit: false,
-                    copyTitle: 'Water Theme Playground for Children',
-                    copyType: 'Fun',
-                    copyText: 'Coming Soon!',
-                },
-            },
-            title: 'Attraction',
-        }
-        this.cancelEntry = this.cancelEntry.bind(this)
-        this.editEntry = this.editEntry.bind(this)
-        this.updateEntry = this.updateEntry.bind(this)
-        DashboardFAQ.deleteEntry = this.deleteEntry.bind(this)
-        this.watchQuestionEntry = this.watchQuestionEntry.bind(this)
-        this.watchTextEntry = this.watchTextEntry.bind(this)
-        this.watchTypeEntry = this.watchTypeEntry.bind(this)
-        this.newEntry = this.newEntry.bind(this)
-        this.reset = this.reset.bind(this)
-    }
-
-    reset() {
-        const newData = _.cloneDeep(this.state.origin)
-        this.setState({ data: newData })
-    }
-
-    newEntry() {
-        const id = uuidv1()
-        let newData = this.state.data
-        newData[id] = {
+            data: {},
+            imgUrl: '',
             title: '',
-            type: '',
             text: '',
-            edit: true,
-            copyTitle: '',
-            copyType: '',
-            copyText: '',
-        }
-        this.setState({ data: newData })
+        };
+        this.deleteEntry = this.deleteEntry.bind(this);
+        this.resetEntries = this.resetEntries.bind(this);
+        this.newEntry = this.newEntry.bind(this);
+        this.watchImgUrl = this.watchImgUrl.bind(this);
+        this.watchTitle = this.watchTitle.bind(this);
+        this.watchText = this.watchText.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
-    watchQuestionEntry(event) {
-        let newData = this.state.data
-        const id = event.target.id
-        newData[id].copyTitle = event.target.value
-        this.setState({ data: newData })
-    }
-
-    watchTypeEntry(event) {
-        let newData = this.state.data
-        const id = event.target.id
-        newData[id].copyType = event.target.value
-        this.setState({ data: newData })
-    }
-
-    watchTextEntry(event) {
-        let newData = this.state.data
-        const id = event.target.id
-        newData[id].copyText = event.target.value
-        this.setState({ data: newData })
-    }
-
-    cancelEntry(event) {
-        let newData = this.state.data
-        const id = event.currentTarget.value
-        newData[id].edit = false
-        newData[id].copyText = newData[id].text
-        newData[id].copyType = newData[id].type
-        newData[id].copyTitle = newData[id].title
-        this.setState({ data: newData })
-    }
-
-    editEntry(event, data) {
-        let newData = this.state.data
-        const id = event.currentTarget.value
-        newData[id].edit = true
-        this.setState({ data: newData })
-    }
-
-    updateEntry(event) {
-        let newData = this.state.data
-        const id = event.currentTarget.value
-        newData[id].edit = false
-        newData[id].text = newData[id].copyText
-        newData[id].title = newData[id].copyTitle
-        newData[id].type = newData[id].copyType
-        this.setState({ data: newData })
+    componentDidMount() {
+        const { onMount } = this.props;
+        onMount();
     }
 
     deleteEntry(event) {
-        let newData = this.state.data
-        const id = event.currentTarget.value
-        delete newData[id]
-        this.setState({ data: newData })
+        const { deleteEntry } = this.props;
+        const id = event.currentTarget.value;
+        deleteEntry(id);
+    }
+
+    resetEntries () {
+        const { resetEntries } = this.props;
+        resetEntries();
+    }
+
+    newEntry () {
+        const { saveEntry } = this.props;
+        const id = uuidv1();
+        const {
+            imgUrl,
+            title,
+            text,
+        } = this.state;
+        const payload = {
+            imgUrl,
+            title,
+            text,
+            type: 'attraction',
+            edit: 0 // implement editable table did not succeed
+        };
+        saveEntry({ id, payload });
+        this.setState({
+            imgUrl: '',
+            title: '',
+            text: '',
+        });
+    }
+
+    watchImgUrl(event) {
+        this.setState({
+            imgUrl: event.target.value
+        });
+    }
+
+    watchTitle(event) {
+        this.setState({
+            title: event.target.value
+        });
+    }
+
+    watchText(event) {
+        this.setState({
+            text: event.target.value
+        });
+    }
+
+    submit() {
+        const { submit } = this.props;
+        submit();
     }
 
     render() {
-        const { classes } = this.props
-        const { title, data } = this.state
+        const { classes } = this.props;
+        const { imgUrl, title, text } = this.state;
+        const navTitle = 'Attraction';
         return (
             <div className={classes.root}>
                 <CssBaseline />
-                <NavBar title={title} />
+                <NavBar title={navTitle} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
+                    <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
+                        Create new { navTitle }
+                    </Typography>
+                    <TextField
+                        multiline={true}
+                        variant="outlined"
+                        fullWidth
+                        value={title}
+                        placeholder="Ex. Funny Random Meme Dump"
+                        label="Name of Event"
+                        className={classes.button}
+                        onChange={this.watchTitle}
+                    />
+                    <TextField
+                        multiline={true}
+                        variant="outlined"
+                        fullWidth
+                        value={imgUrl}
+                        placeholder="Ex. https://imgur.com/a/o0v57.jp.jpg"
+                        label="Imgur URL Links"
+                        className={classes.button}
+                        onChange={this.watchImgUrl}
+                    />
+                    <TextField
+                        multiline={true}
+                        variant="outlined"
+                        fullWidth
+                        value={text}
+                        placeholder="Ex. Come visit..."
+                        label="Description of Event"
+                        className={classes.button}
+                        onChange={this.watchText}
+                    />
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">
                         <Button variant="contained" onClick={this.newEntry} className={classes.button}>
-                            New
+                            Save
                         </Button>
                     </Grid>
-                    {Object.keys(data).map((item, index) => (
-                        <ExpansionPanel key={index}>
-                            <ExpansionPanelSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                            >
-                                <Typography className={classes.heading}>{ data[item].type }</Typography>
-                                &nbsp;-&nbsp;
-                                <Typography className={classes.heading}>{ data[item].title }</Typography>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                {data[item].edit ?
-                                    <Grid container alignItems="flex-start" justify="flex-start" direction="row">
-                                        <TextField
-                                            multiline={true}
-                                            variant="outlined"
-                                            fullWidth
-                                            value={data[item].copyTitle}
-                                            placeholder="Ex. Where are we located?"
-                                            label="Question"
-                                            className={classes.button}
-                                            onChange={this.watchQuestionEntry}
-                                            id={item}
-                                        />
-                                        <TextField
-                                            multiline={true}
-                                            variant="outlined"
-                                            fullWidth
-                                            value={data[item].copyType}
-                                            placeholder="Ex. General FAQ"
-                                            label="Type"
-                                            className={classes.button}
-                                            onChange={this.watchTypeEntry}
-                                            id={item}
-                                        />
-                                        <TextField
-                                            multiline={true}
-                                            variant="outlined"
-                                            fullWidth
-                                            value={data[item].copyText}
-                                            placeholder="We are located at Bengkala, Indonesia"
-                                            label="Answer"
-                                            className={classes.button}
-                                            onChange={this.watchTextEntry}
-                                            id={item}
-                                        />
-                                    </Grid>
-                                    :
-                                    <Typography>
-                                        { data[item].text } { data[item].edit }
-                                    </Typography>
-                                }
-                            </ExpansionPanelDetails>
-                            { data[item].edit ?
-                                <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                                    <Button variant="contained" color="secondary" value={item} onClick={this.cancelEntry} className={classes.button}>
-                                        Cancel
-                                    </Button>
-                                    <Button variant="contained" onClick={this.updateEntry} value={item} className={classes.button}>
-                                        Update
-                                    </Button>
-                                </Grid>
-                                :
-                                <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                                    <Button variant="contained" value={item} onClick={this.editEntry} className={classes.button}>
-                                        Edit
-                                    </Button>
-                                    <Button variant="contained" color="secondary" value={item} onClick={this.deleteEntry} className={classes.button}>
-                                        Delete
-                                    </Button>
-                                </Grid>
-                            }
-                        </ExpansionPanel>
-                    ))}
+                    <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
+                        Existing list of { navTitle }
+                    </Typography>
+                    <DashBoardAttractionEntries
+                        entryAction={this.deleteEntry}
+                    />
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                        <Button variant="contained" onClick={this.reset} className={classes.button}>
+                        <Button variant="contained" onClick={this.resetEntries} className={classes.button}>
                             Reset
                         </Button>
-                        <Button variant="contained" color="secondary" className={classes.button}>
+                        <Button variant="contained" color="secondary" onClick={this.submit} className={classes.button}>
                             Submit
                         </Button>
                     </Grid>

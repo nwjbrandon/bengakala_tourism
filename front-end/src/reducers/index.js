@@ -8,6 +8,8 @@ import { adminLoginReducer } from "./admin-login";
 import { dashboardFaqReducer } from "./dashboardFaq";
 import { dashboardContactReducer } from "./dashboardContact";
 import { dashboardAccommodationReducer } from "./dashboardAccommodation";
+import { dashboardAttractionReducer } from "./dashboardAttraction";
+import { dashboardHomeReducer } from "./dashboardHome";
 
 const allReducers = combineReducers({
     admin: reduceReducers(adminLoginReducer),
@@ -16,6 +18,8 @@ const allReducers = combineReducers({
     dashboardFaq: reduceReducers(dashboardFaqReducer),
     dashboardContact: reduceReducers(dashboardContactReducer),
     dashboardAccommodation: reduceReducers(dashboardAccommodationReducer),
+    dashboardAttraction: reduceReducers(dashboardAttractionReducer),
+    dashboardHome: reduceReducers(dashboardHomeReducer),
     contact: reduceReducers(contactOnMountReducer, contactFormReducer),
 });
 

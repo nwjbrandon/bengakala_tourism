@@ -30,10 +30,10 @@ import Admin from './routers/admin/container';
 import Dashboard from './routers/dashboard/container';
 import DashboardAbout from './containers/dashboard-about';
 import DashboardAccommodation from './routers/dashboard/accommodation/container';
-import DashboardAttraction from './routers/dashboard/attraction';
+import DashboardAttraction from './routers/dashboard/attraction/container';
 import DashboardContact from './routers/dashboard/contact/container';
 import DashboardFAQ from './routers/dashboard/faq/container';
-import DashboardHome from './routers/dashboard/home';
+import DashboardHome from './routers/dashboard/home/container';
 import DashboardPayment from './routers/dashboard/payment';
 import DashboardSettings from './routers/dashboard/settings';
 import './global.css'
