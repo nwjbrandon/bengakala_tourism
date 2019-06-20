@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
-import DashboardHomeEntries from './dashboardHomeEntries';
+import DashboardHomeEntries from './dashboardHomeMission';
 import {
     DASHBOARD_HOME_WATCH,
 } from "../../actions/dashboardHome";
 
 function mapStateToProps(state) {
     return {
-        displayedData: state.dashboardHome.displayedData.stories,
+        displayedData: state.dashboardHome.displayedData.objective,
     };
 }
 

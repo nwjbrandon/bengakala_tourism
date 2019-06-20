@@ -9,7 +9,9 @@ import Grid from '@material-ui/core/Grid';
 
 import NavBar from '../../../components/dashboard/navBar';
 import uuidv1 from "uuid/v1";
-import DashBoardHomeEntries from "../../../components/dashboardHome/dashboardHomeEntries.container";
+import DashBoardHomeStories from "../../../components/dashboardHome/dashboardHomeStories.container";
+import DashBoardHomeMission from "../../../components/dashboardHome/dashboardHomeMission.container";
+
 
 const styles = theme => ({
     root: {
@@ -103,7 +105,7 @@ class DashboardHome extends Component {
 
     render() {
         const { classes } = this.props;
-        const { heading, title, text } = this.state;
+        const { title, text } = this.state;
         const navTitle = 'Home';
         return (
             <div className={classes.root}>
@@ -111,6 +113,10 @@ class DashboardHome extends Component {
                 <NavBar title={navTitle} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
+                    <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
+                        Mission
+                    </Typography>
+                    <DashBoardHomeMission />
                     <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
                         Create new { navTitle }
                     </Typography>
@@ -142,7 +148,7 @@ class DashboardHome extends Component {
                     <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
                         Existing list of { navTitle }
                     </Typography>
-                    <DashBoardHomeEntries
+                    <DashBoardHomeStories
                         entryAction={this.deleteEntry}
                     />
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">

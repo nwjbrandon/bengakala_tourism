@@ -31,7 +31,7 @@ const styles = theme => ({
     }
 });
 
-class DashboardHomeEntries extends Component {
+class DashboardHomeMission extends Component {
     constructor(props) {
         super(props);
         this.watchTitle = this.watchTitle.bind(this);
@@ -47,7 +47,7 @@ class DashboardHomeEntries extends Component {
             value,
             uuid,
             field: 'title',
-            type: 'stories',
+            type: 'objective',
         })
     }
 
@@ -59,7 +59,7 @@ class DashboardHomeEntries extends Component {
             value,
             uuid,
             field: 'text',
-            type: 'stories',
+            type: 'objective',
         })
     }
 
@@ -71,7 +71,7 @@ class DashboardHomeEntries extends Component {
             value: value === 'true' ? 1 : 0,
             uuid,
             field: 'edit',
-            type: 'stories',
+            type: 'objective',
         })
     }
 
@@ -130,9 +130,6 @@ class DashboardHomeEntries extends Component {
                                     Edit
                                 </Button>
                             }
-                            <Button variant="contained" color="secondary" value={item} onClick={entryAction} className={classes.button}>
-                                Delete
-                            </Button>
                         </Grid>
                     </ExpansionPanel>
                 ))}
@@ -141,8 +138,8 @@ class DashboardHomeEntries extends Component {
     }
 }
 
-DashboardHomeEntries.propTypes = {
+DashboardHomeMission.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DashboardHomeEntries);
+export default withStyles(styles)(DashboardHomeMission);
