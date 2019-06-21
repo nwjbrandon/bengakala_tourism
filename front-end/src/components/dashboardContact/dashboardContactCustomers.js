@@ -37,12 +37,12 @@ class DashboardContactDetails extends Component {
     }
 
     deleteEntry(event) {
-        console.log(event.target.value);
+        const { del } = this.props;
+        del(event.currentTarget.value);
     }
 
     render() {
         const { classes, displayedData: data } = this.props;
-        console.log(data);
         return (
             <div>
                 {Object.keys(data).map((item) => (
@@ -71,7 +71,7 @@ class DashboardContactDetails extends Component {
                             </Grid>
                         </ExpansionPanelDetails>
                         <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                            <Button variant="contained" color="secondary" value={true} id={item} onClick={this.deleteEntry} className={classes.button}>
+                            <Button variant="contained" color="secondary" value={item} id={item} onClick={this.deleteEntry} className={classes.button}>
                                 Delete
                             </Button>
                         </Grid>

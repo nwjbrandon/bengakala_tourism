@@ -1,48 +1,79 @@
-import { call, put, takeLatest, select } from "redux-saga/effects";
+import { call, put, takeLatest } from "redux-saga/effects";
 import API from '../api';
 import {
     DASHBOARD_SETTINGS_ONMOUNT_REQUEST_NAME,
     DASHBOARD_SETTINGS_ONMOUNT_REQUEST,
     DASHBOARD_SETTINGS_ONMOUNT_SUCCESS,
     DASHBOARD_SETTINGS_ONMOUNT_ERROR,
-    DASHBOARD_SETTINGS_SUBMIT_REQUEST_NAME,
-    DASHBOARD_SETTINGS_SUBMIT_SUCCESS,
-    DASHBOARD_SETTINGS_SUBMIT_ERROR,
+    DASHBOARD_SETTINGS_CHANGE_ERROR,
+    DASHBOARD_SETTINGS_CHANGE_REQUEST_NAME,
+    DASHBOARD_SETTINGS_CHANGE_SUCCESS,
+    DASHBOARD_SETTINGS_CREATE_ERROR,
+    DASHBOARD_SETTINGS_CREATE_REQUEST_NAME,
+    DASHBOARD_SETTINGS_CREATE_SUCCESS,
+    DASHBOARD_SETTINGS_DELETE_ERROR,
+    DASHBOARD_SETTINGS_DELETE_REQUEST_NAME,
+    DASHBOARD_SETTINGS_DELETE_SUCCESS,
 } from "../actions/dashboardSettings";
-
-const displayedData = (state) => state.dashboardHome.displayedData;
 
 function onMount() {
     return API.get('/admin/dashboard/settings');
 }
 
-function submit(payload) {
-    return API.post('/admin/dashboard/settings', { data: payload});
-}
-
 function* workerSagaOnMount() {
     try {
         const data = yield call(onMount);
-        console.log(data);
         yield put(DASHBOARD_SETTINGS_ONMOUNT_SUCCESS(data));
     } catch (error) {
         yield put(DASHBOARD_SETTINGS_ONMOUNT_ERROR(error));
     }
 }
 
-function* workerSagaSubmit() {
+function changePassword(payload) {
+    return API.post('/admin/dashboard/settings', { data: payload});
+}
+
+function* workerSagaChangePassword(payload) {
     try {
-        const payload = yield select(displayedData);
-        // yield call(submit, payload);
-        // yield put(DASHBOARD_HOME_SUBMIT_SUCCESS(payload));
-        // yield put(DASHBOARD_FAQ_ONMOUNT_REQUEST()) update causes server to crash
+        yield call(changePassword, payload.payload);
+        yield put(DASHBOARD_SETTINGS_CHANGE_SUCCESS());
     } catch (error) {
-        yield put(DASHBOARD_HOME_SUBMIT_ERROR(error));
+        yield put(DASHBOARD_SETTINGS_CHANGE_ERROR(error));
+    }
+}
+
+function createUser(payload) {
+    return API.put('/admin/dashboard/settings', { data: payload});
+}
+
+function* workerSagaCreateUser(payload) {
+    try {
+        yield call(createUser, payload.payload);
+        yield put(DASHBOARD_SETTINGS_CREATE_SUCCESS());
+        yield put(DASHBOARD_SETTINGS_ONMOUNT_REQUEST())
+    } catch (error) {
+        yield put(DASHBOARD_SETTINGS_CREATE_ERROR(error));
+    }
+}
+
+
+function deleteUser(payload) {
+    return API.del('/admin/dashboard/settings', { data: payload});
+}
+
+function* workerSagaDeleteUser(payload) {
+    try {
+        yield call(deleteUser, payload.payload);
+        yield put(DASHBOARD_SETTINGS_DELETE_SUCCESS());
+        yield put(DASHBOARD_SETTINGS_ONMOUNT_REQUEST())
+    } catch (error) {
+        yield put(DASHBOARD_SETTINGS_DELETE_ERROR(error));
     }
 }
 
 export default [
     takeLatest(DASHBOARD_SETTINGS_ONMOUNT_REQUEST_NAME, workerSagaOnMount),
-    takeLatest(DASHBOARD_SETTINGS_SUBMIT_REQUEST_NAME, workerSagaSubmit),
-
+    takeLatest(DASHBOARD_SETTINGS_CHANGE_REQUEST_NAME, workerSagaChangePassword),
+    takeLatest(DASHBOARD_SETTINGS_CREATE_REQUEST_NAME, workerSagaCreateUser),
+    takeLatest(DASHBOARD_SETTINGS_DELETE_REQUEST_NAME, workerSagaDeleteUser),
 ]

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import bcrypt from 'bcryptjs';
 import db from '../../storage/db';
-import {TABLE_ADMINISTRATOR} from '../../storage/tableName';
+import { TABLE_ADMINISTRATOR } from '../../storage/tableName';
 
 const getContactInfo = [
   async (req, res) => {
@@ -27,7 +27,7 @@ const getContactInfo = [
         edit: v.edit,
       };
     });
-    res.json({
+    return res.json({
       data: {
         uneditable,
         editable
@@ -39,16 +39,12 @@ const getContactInfo = [
 const putContactInfo = [
   async (req, res) => {
     const newUser = req.body.data;
-    const uuid = _.head(_.keys(newUser));
-    const newUserData = _.assign({
-      uuid,
-      ...newUser[uuid],
-    });
-    const { password } = newUserData;
+    const { password } = newUser;
     const salt = bcrypt.genSaltSync(10);
-    newUserData.password = bcrypt.hashSync(password, salt);
-    await db.saveData(TABLE_ADMINISTRATOR, newUserData);
-    res.json({
+    newUser.password = bcrypt.hashSync(password, salt);
+    newUser.edit = 1;
+    await db.saveData(TABLE_ADMINISTRATOR, newUser);
+    return res.json({
       data: 'success',
     });
   },
@@ -56,10 +52,9 @@ const putContactInfo = [
 
 const deleteContactInfo = [
   async (req, res) => {
-    const delUser = req.body.data;
-    const uuid = _.head(_.keys(delUser));
+    const uuid = req.body.data;
     await db.deleteData(TABLE_ADMINISTRATOR, { uuid });
-    res.json({
+    return res.json({
       data: 'success',
     });
   },
@@ -76,7 +71,7 @@ const postContactInfo = [
     } else {
       console.log('password is not the same');
     }
-    res.json({
+    return res.json({
       data: 'success',
     });
   },

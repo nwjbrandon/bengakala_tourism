@@ -54,19 +54,19 @@ class Dashboard extends Component {
 
       ]
     };
-    Dashboard.confirmedCheckIn = Dashboard.confirmedCheckIn.bind(this);
+    this.confirmedCheckIn = this.confirmedCheckIn.bind(this);
   }
 
-  static confirmedCheckIn(event) {
-    // create one more api
-    console.log(event.currentTarget.value);
+  confirmedCheckIn(event) {
+    const { checkIn } = this.props;
+    checkIn(event.currentTarget.value);
   }
 
   componentWillMount() {
     const { onMount, } = this.props;
     onMount();
   }
-
+  /*
   addRemoveDate = (date) => {
 
     if (this.state.excludeDates.find(item => { return new Date(item).getTime() == new Date(date).getTime() })) {
@@ -97,22 +97,24 @@ class Dashboard extends Component {
     ];
   }
 
+  */
+
   render() {
     const { classes, heatmap, transactions, } = this.props;
     const { title } = this.state;
-    // const heatMapData = [
-    //   [
-    //     {
-    //       type: "date",
-    //       id: "Date"
-    //     },
-    //     {
-    //       type: "number",
-    //       id: "Number of Customers"
-    //     }
-    //   ],
-    //   ...heatmap,
-    // ];
+    const heatMapData = [
+      [
+        {
+          type: "date",
+          id: "Date"
+        },
+        {
+          type: "number",
+          id: "Number of Customers"
+        }
+      ],
+      ...heatmap,
+    ];
     return (
       <div className={classes.root}>
         <CssBaseline />
@@ -122,7 +124,8 @@ class Dashboard extends Component {
           <Typography variant='h4'>
             Number of Customers
             </Typography>
-          <Chart chartType="Calendar" align="center" width="100%" height="400px" data={this.state.numberCustomers} chartEvents={this.chartEvents} />
+          {/*<Chart chartType="Calendar" align="center" width="100%" height="400px" data={this.state.numberCustomers} chartEvents={this.chartEvents} />*/}
+          <Chart chartType="Calendar" align="center" width="100%" height="400px" data={heatMapData} />
           <Typography variant='h4'>
             Account Statements
             </Typography>
@@ -169,20 +172,20 @@ class Dashboard extends Component {
                         <Button variant="contained" color="secondary" disabled>
                           Yes
                             </Button>
-                      </TableCell>
-                    )
-                      : (
-                        <TableCell align="right">
-                          <Button variant="contained" value={row.uuid} onClick={Dashboard.confirmedCheckIn}>No</Button>
-                        </TableCell>
-                      )}
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </Paper>
-        </main>
-      </div>
+                          </TableCell>
+                        )
+                        : (
+                          <TableCell align="right">
+                            <Button variant="contained" value={row.uuid} onClick={this.confirmedCheckIn}>No</Button>
+                          </TableCell>
+                        )}
+                      </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </Paper>
+          </main>
+        </div>
     );
   }
 }

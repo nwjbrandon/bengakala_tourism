@@ -64,7 +64,6 @@ class DashboardContactDetails extends Component {
 
     render() {
         const { classes, displayedData: data } = this.props;
-        console.log(data);
         return (
             <div>
                 {Object.keys(data).map((item) => (
@@ -85,7 +84,7 @@ class DashboardContactDetails extends Component {
                                         fullWidth
                                         value={data[item].text}
                                         placeholder="Ex. You can contact us at XXX-XXXX-XXXX."
-                                        label="Answer"
+                                        label="Contact Details"
                                         className={classes.button}
                                         onChange={this.watchText}
                                         id={item}

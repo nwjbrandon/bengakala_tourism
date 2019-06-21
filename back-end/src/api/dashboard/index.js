@@ -29,7 +29,7 @@ const dashboardGet = [
     });
     const listOfDates = _.flatten(_.map(transactions, t => eachDay(t.dateFrom, t.dateTo)));
     const calendarHeatMap = _.countBy(listOfDates);
-    res.json({
+    return res.json({
       data: {
         transaction,
         calendarHeatMap,
@@ -38,7 +38,16 @@ const dashboardGet = [
   }
 ];
 
+const dashboardPost = [
+  async (req, res) => {
+    await db.updateData(TABLE_TRANSACTIONS, { checkedIn: true }, { uuid: req.body.data });
+    return res.json({
+      data: 'success',
+    });
+  }
+];
 
 export default {
-  get: dashboardGet
+  get: dashboardGet,
+  post: dashboardPost,
 };

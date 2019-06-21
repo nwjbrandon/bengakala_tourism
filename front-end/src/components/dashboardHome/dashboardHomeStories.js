@@ -96,8 +96,8 @@ class DashboardHomeStories extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].title}
-                                        placeholder="Ex. How to contact us?"
-                                        label="Question"
+                                        placeholder="Ex. One Island, Many Destination"
+                                        label="Title of Story"
                                         className={classes.button}
                                         onChange={this.watchTitle}
                                         id={item}
@@ -107,8 +107,8 @@ class DashboardHomeStories extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].text}
-                                        placeholder="Ex. You can contact us at XXX-XXXX-XXXX."
-                                        label="Answer"
+                                        placeholder="Ex. On Bali you can lose yourself in the chaos of Kuta..."
+                                        label="Content of Story"
                                         className={classes.button}
                                         onChange={this.watchText}
                                         id={item}

@@ -96,8 +96,8 @@ class DashboardHomeMission extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].title}
-                                        placeholder="Ex. How to contact us?"
-                                        label="Question"
+                                        placeholder="Ex. Mission"
+                                        label="Name"
                                         className={classes.button}
                                         onChange={this.watchTitle}
                                         id={item}
@@ -107,8 +107,8 @@ class DashboardHomeMission extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].text}
-                                        placeholder="Ex. You can contact us at XXX-XXXX-XXXX."
-                                        label="Answer"
+                                        placeholder="Ex. The mere mention of Bali evokes thoughts of a paradise..."
+                                        label="Statement"
                                         className={classes.button}
                                         onChange={this.watchText}
                                         id={item}

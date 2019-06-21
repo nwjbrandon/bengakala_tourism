@@ -33,7 +33,8 @@ class DashboardFAQ extends Component {
     constructor(props) {
         super(props);
         this.state = {};
-        this.reset = this.reset.bind(this)
+        this.reset = this.reset.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
     componentDidMount() {
@@ -44,6 +45,11 @@ class DashboardFAQ extends Component {
     reset() {
         const { resetEntries } = this.props;
         resetEntries();
+    }
+
+    submit() {
+        const { submit }  = this.props;
+        submit();
     }
 
     render() {
@@ -61,7 +67,7 @@ class DashboardFAQ extends Component {
                         <Button variant="contained" onClick={this.reset} className={classes.button}>
                             Reset
                         </Button>
-                        <Button variant="contained" color="secondary" className={classes.button}>
+                        <Button variant="contained" color="secondary" onClick={this.submit} className={classes.button}>
                             Submit
                         </Button>
                     </Grid>

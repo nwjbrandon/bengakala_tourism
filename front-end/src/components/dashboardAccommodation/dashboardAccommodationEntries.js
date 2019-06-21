@@ -34,20 +34,8 @@ const styles = theme => ({
 class DashboardContactDetails extends Component {
     constructor(props) {
         super(props);
-        this.watchTitle = this.watchTitle.bind(this);
         this.watchPricesString = this.watchPricesString.bind(this);
         this.editEntry = this.editEntry.bind(this);
-    }
-
-    watchTitle(event) {
-        const value = event.target.value;
-        const uuid = event.target.id;
-        const { watch } = this.props;
-        watch({
-            value,
-            uuid,
-            field: 'title',
-        })
     }
 
     watchPricesString(event) {
@@ -75,7 +63,6 @@ class DashboardContactDetails extends Component {
 
     render() {
         const { classes, displayedData: data } = this.props;
-        console.log(data);
         return (
             <div>
                 {Object.keys(data).map((item) => (
@@ -94,19 +81,8 @@ class DashboardContactDetails extends Component {
                                         multiline={true}
                                         variant="outlined"
                                         fullWidth
-                                        value={data[item].title}
-                                        placeholder="Ex. Breakfast"
-                                        label="Type of Product/Service"
-                                        className={classes.button}
-                                        onChange={this.watchTitle}
-                                        id={item}
-                                    />
-                                    <TextField
-                                        multiline={true}
-                                        variant="outlined"
-                                        fullWidth
                                         value={data[item].pricesString}
-                                        placeholder="5000000"
+                                        placeholder="Ex. 5000000"
                                         label="Cost"
                                         className={classes.button}
                                         onChange={this.watchPricesString}
