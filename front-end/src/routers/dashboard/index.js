@@ -39,12 +39,12 @@ class Dashboard extends Component {
     this.state = {
       title: 'Main',
     };
-    Dashboard.confirmedCheckIn = Dashboard.confirmedCheckIn.bind(this);
+    this.confirmedCheckIn = this.confirmedCheckIn.bind(this);
   }
 
-  static confirmedCheckIn(event) {
-    // create one more api
-    console.log(event.currentTarget.value);
+  confirmedCheckIn(event) {
+    const { checkIn } = this.props;
+    checkIn(event.currentTarget.value);
   }
 
   componentWillMount() {
@@ -128,7 +128,7 @@ class Dashboard extends Component {
                         )
                         : (
                           <TableCell align="right">
-                            <Button variant="contained" value={row.uuid} onClick={Dashboard.confirmedCheckIn}>No</Button>
+                            <Button variant="contained" value={row.uuid} onClick={this.confirmedCheckIn}>No</Button>
                           </TableCell>
                         )}
                       </TableRow>
