@@ -3,7 +3,7 @@ import API from '../../api';
 
 import bg from '../../components/accomodations/images/balivillage.jpg'
 import Tutorial from '../../components/tutorials/VideoTutorials'
-import Navbar from '../../components/navbar'
+import Navbar from '../../components/navBar/navbar'
 import Typography from '@material-ui/core/Typography';
 
 class TutorialPage extends React.Component {

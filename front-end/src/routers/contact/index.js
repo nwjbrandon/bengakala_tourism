@@ -27,7 +27,6 @@ const styles = theme => ({
     backgroundPosition: "top",
     backgroundAttachment: "fixed",
     textAlign:"left",
-    padding: 40,
     overflow: 'hidden',
     display: 'flex',
     height: "90vh",

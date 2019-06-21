@@ -22,7 +22,7 @@ import Notfound from './routers/notfound';
 import Payment from './routers/payment';
 import Tutorial from './routers/tutorial'
 
-import Navbar from './components/navbar'
+import Navbar from './components/navBar/navbar'
 
 // Protected Routes
 import Admin from './routers/admin/container';
@@ -33,6 +33,8 @@ import DashboardContact from './routers/dashboard/contact/container';
 import DashboardFAQ from './routers/dashboard/faq/container';
 import DashboardHome from './routers/dashboard/home/container';
 import DashboardSettings from './routers/dashboard/settings/container';
+
+// tmp solution to get rid of white gaps around the browser
 import './global.css'
 
 import rootReducers from './reducers';
@@ -59,7 +61,6 @@ const persistor = persistStore(store);
 const routing = (
     <Provider store={ store }>
       <PersistGate persistor={ persistor } loading={null}>
-
         <Router>
           <Navbar />
           <Switch>

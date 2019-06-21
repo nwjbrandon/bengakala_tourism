@@ -3,7 +3,7 @@ import API from '../../api';
 import Slideshow from '../../components/accomodations/Slideshow'
 import bg from '../../components/accomodations/images/balivillage.jpg'
 import Tutorial from '../../components/accomodations/TutorialPage'
-import Navbar from '../../components/navbar'
+import Navbar from '../../components/navBar/navbar'
 
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
