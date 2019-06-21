@@ -63,6 +63,7 @@ class DashboardFAQ extends Component {
         this.newUser = this.newUser.bind(this);
         this.closeCreate = this.closeCreate.bind(this);
         this.confirmCreate = this.confirmCreate.bind(this);
+        this.submit = this.submit.bind(this);
 
     }
 
@@ -71,20 +72,36 @@ class DashboardFAQ extends Component {
         onMount();
     }
 
+    submit() {
+        const { username, password, confirmedPassword } = this.state;
+        const { change } = this.props;
+        change({
+            email: username,
+            existingPassword: password,
+            newPassword: confirmedPassword,
+        })
+    }
+
     confirmCreate() {
         const {
             newUsername,
             newPassword,
-            newConfirmedPassword,
             newJobTitle,
             newPhone,
-            newEmail,
         } = this.state;
         const id = uuidv1();
-        console.log(id, newUsername, newPassword, newConfirmedPassword, newJobTitle, newPhone, newEmail);
         this.setState({
             openNew: false,
-        })
+        });
+        const { create } = this.props;
+        create({
+            uuid: id,
+            username: newUsername,
+            password: newPassword,
+            jobTitle: newJobTitle,
+            phone: newPhone,
+            email: newUsername,
+        });
     }
 
     closeCreate() {
@@ -109,16 +126,17 @@ class DashboardFAQ extends Component {
         this.setState({
             openDelete: false,
             delete: '',
-        })
+        });
     }
 
     confirmDelete() {
         const id = this.state.delete;
-        console.log(id);
         this.setState({
             delete: '',
             openDelete: false,
-        })
+        });
+        const { del } = this.props;
+        del(id);
     }
 
     deleteEntry(event) {
@@ -126,7 +144,7 @@ class DashboardFAQ extends Component {
         this.setState({
             delete: id,
             openDelete: true,
-        })
+        });
     }
 
     render() {
@@ -150,8 +168,8 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={username}
-                        placeholder="Ex. Where are we located?"
-                        label="Question"
+                        placeholder="Ex. test@example.com"
+                        label="Email"
                         className={classes.button}
                         onChange={(event) => { this.setState({ username: event.target.value})}}
                     />
@@ -160,18 +178,8 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={password}
-                        placeholder="Ex. Where are we located?"
-                        label="Question"
-                        className={classes.button}
-                        onChange={(event) => { this.setState({ password: event.target.value })}}
-                    />
-                    <TextField
-                        multiline={true}
-                        variant="outlined"
-                        fullWidth
-                        value={password}
-                        placeholder="Ex. Where are we located?"
-                        label="Question"
+                        placeholder="Ex. password"
+                        label="Current Password"
                         className={classes.button}
                         onChange={(event) => { this.setState({ password: event.target.value })}}
                     />
@@ -180,13 +188,13 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={confirmedPassword}
-                        placeholder="Ex. Where are we located?"
-                        label="Question"
+                        placeholder="Ex. password"
+                        label="New Password"
                         className={classes.button}
                         onChange={(event) => { this.setState({ confirmedPassword: event.target.value })}}
                     />
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                        <Button variant="contained" color="secondary" className={classes.button} onClick={this.submitEntry}>
+                        <Button variant="contained" color="secondary" className={classes.button} onClick={this.submit}>
                             Submit
                         </Button>
                     </Grid>
@@ -239,8 +247,8 @@ class DashboardFAQ extends Component {
                             variant="outlined"
                             fullWidth
                             value={newUsername}
-                            placeholder="Ex. Where are we located?"
-                            label="Question"
+                            placeholder="Ex. test@example.com"
+                            label="Username"
                             className={classes.button}
                             onChange={(event) => { this.setState({ newUsername: event.target.value })}}
                         />
@@ -249,8 +257,8 @@ class DashboardFAQ extends Component {
                             variant="outlined"
                             fullWidth
                             value={newPassword}
-                            placeholder="Ex. Where are we located?"
-                            label="Question"
+                            placeholder="Ex. password"
+                            label="Password"
                             className={classes.button}
                             onChange={(event) => { this.setState({ newPassword: event.target.value })}}
                         />
@@ -259,8 +267,8 @@ class DashboardFAQ extends Component {
                             variant="outlined"
                             fullWidth
                             value={newConfirmedPassword}
-                            placeholder="Ex. Where are we located?"
-                            label="Question"
+                            placeholder="Ex. password"
+                            label="Confirmed Password"
                             className={classes.button}
                             onChange={(event) => { this.setState({ newConfirmedPassword: event.target.value })}}
                         />
@@ -269,8 +277,8 @@ class DashboardFAQ extends Component {
                             variant="outlined"
                             fullWidth
                             value={newJobTitle}
-                            placeholder="Ex. Where are we located?"
-                            label="Question"
+                            placeholder="Ex. Officer"
+                            label="Job Title"
                             className={classes.button}
                             onChange={(event) => { this.setState({ newJobTitle: event.target.value })}}
                         />
@@ -279,20 +287,10 @@ class DashboardFAQ extends Component {
                             variant="outlined"
                             fullWidth
                             value={newPhone}
-                            placeholder="Ex. Where are we located?"
-                            label="Question"
+                            placeholder="Ex. 123456789"
+                            label="Phone"
                             className={classes.button}
                             onChange={(event) => { this.setState({ newPhone: event.target.value })}}
-                        />
-                        <TextField
-                            multiline={true}
-                            variant="outlined"
-                            fullWidth
-                            value={newEmail}
-                            placeholder="Ex. Where are we located?"
-                            label="Question"
-                            className={classes.button}
-                            onChange={(event) => { this.setState({ newEmail: event.target.value })}}
                         />
                     </DialogContent>
                     <DialogActions>
