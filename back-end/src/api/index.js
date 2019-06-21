@@ -35,6 +35,7 @@ app.post('/admin/dashboard', checkAuthentication, dashboard.post);
 
 app.get('/admin/dashboard/contact', checkAuthentication, dashboardContact.get);
 app.post('/admin/dashboard/contact', checkAuthentication, dashboardContact.post);
+app.delete('/admin/dashboard/contact', checkAuthentication, dashboardContact.del);
 
 app.get('/admin/dashboard/accommodation', checkAuthentication, dashboardAccommodation.get);
 app.post('/admin/dashboard/accommodation', checkAuthentication, dashboardAccommodation.post);

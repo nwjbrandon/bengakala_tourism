@@ -18,7 +18,7 @@ const getRequest = (url, data) => {
 
 const delRequest = (url, data) => {
   return new Promise((resolve, reject) => {
-    axios.delete(httpUrl + url, data)
+    axios.delete(httpUrl + url, { data })
     .then(response => {
       resolve(response.data.data);
     })

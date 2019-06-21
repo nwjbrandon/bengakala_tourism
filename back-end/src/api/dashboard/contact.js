@@ -59,8 +59,7 @@ const postContactInfo = [
 
 const deleteContactInfo = [
   async (req, res) => {
-    const delContact = req.body.data;
-    const uuid = _.head(_.keys(delContact));
+    const uuid = req.body.data;
     await db.deleteData(TABLE_INFORMATION, { uuid });
     res.json({
       data: 'success',
