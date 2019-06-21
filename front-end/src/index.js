@@ -65,7 +65,7 @@ const routing = (
           <Navbar />
           <Switch>
             <Route exact path="/" component={ Home } />
-            <Route exact path="/accommodation" component={ Accommodation} />
+            <Route exact path="/booking" component={ Accommodation} />
             <Route exact path="/tutorial" component={ Tutorial } />
             <Route exact path="/admin" component={ Admin } />
             <Route exact path="/attraction" component={ Attraction } />

@@ -1,5 +1,4 @@
 import React from 'react';
-import API from '../../api';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
