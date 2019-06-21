@@ -13,7 +13,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import createSagaMiddleware from "redux-saga";
 
 // Non Protected Routes
-import About from './routers/about';
 import Accommodation from './routers/accommodation';
 import Home from './routers/home';
 import Attraction from './routers/attraction';
@@ -28,14 +27,12 @@ import Navbar from './components/navbar'
 // Protected Routes
 import Admin from './routers/admin/container';
 import Dashboard from './routers/dashboard/container';
-import DashboardAbout from './containers/dashboard-about';
 import DashboardAccommodation from './routers/dashboard/accommodation/container';
-import DashboardAttraction from './routers/dashboard/attraction';
+import DashboardAttraction from './routers/dashboard/attraction/container';
 import DashboardContact from './routers/dashboard/contact/container';
 import DashboardFAQ from './routers/dashboard/faq/container';
-import DashboardHome from './routers/dashboard/home';
-import DashboardPayment from './routers/dashboard/payment';
-import DashboardSettings from './routers/dashboard/settings';
+import DashboardHome from './routers/dashboard/home/container';
+import DashboardSettings from './routers/dashboard/settings/container';
 import './global.css'
 
 import rootReducers from './reducers';
@@ -67,7 +64,6 @@ const routing = (
           <Navbar />
           <Switch>
             <Route exact path="/" component={ Home } />
-            <Route exact path="/about" component={ About } />
             <Route exact path="/accommodation" component={ Accommodation} />
             <Route exact path="/tutorial" component={ Tutorial } />
             <Route exact path="/admin" component={ Admin } />
@@ -76,13 +72,11 @@ const routing = (
             <Route exact path="/faq" component={ Faq } />
             <Route exact path="/payment" component={ Payment } />
             <Route exact path="/dashboard" component={ Dashboard } />
-            <Route exact path="/dashboard/about" component={ DashboardAbout } />
             <Route exact path="/dashboard/accommodation" component={ DashboardAccommodation } />
             <Route exact path="/dashboard/attraction" component={ DashboardAttraction } />
             <Route exact path="/dashboard/contact" component={ DashboardContact } />
             <Route exact path="/dashboard/faq" component={ DashboardFAQ } />
             <Route exact path="/dashboard/home" component={ DashboardHome } />
-            <Route exact path="/dashboard/payment" component={ DashboardPayment } />
             <Route exact path="/dashboard/settings" component={ DashboardSettings } />
             <Route component={ Notfound } />
           </Switch>

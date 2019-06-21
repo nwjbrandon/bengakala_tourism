@@ -3,15 +3,15 @@ import PropTypes from 'prop-types';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
-import ExpansionPanel from '@material-ui/core/ExpansionPanel';
-import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
-import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 import NavBar from '../../../components/dashboard/navBar';
+import uuidv1 from "uuid/v1";
+import DashBoardHomeStories from "../../../components/dashboardHome/dashboardHomeStories.container";
+import DashBoardHomeMission from "../../../components/dashboardHome/dashboardHomeMission.container";
+
 
 const styles = theme => ({
     root: {
@@ -34,188 +34,128 @@ const styles = theme => ({
     }
 });
 
-class DashboardFAQ extends Component {
+class DashboardHome extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: {
-                '1': {
-                    title: 'About Us',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                    edit: false,
-                    copyTitle: 'Address',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                },
-                '2': {
-                    title: 'Expansion Table 2',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                    edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                },
-            },
-            origin: {
-                '1': {
-                    title: 'Address',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                    edit: false,
-                    copyTitle: 'Address',
-                    copyText: 'Copy Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                },
-                '2': {
-                    title: 'Expansion Table 2',
-                    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                    edit: false,
-                    copyTitle: 'Copy Expansion Table 1',
-                    copyText: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacusex, sit amet blandit leo lobortis eget.',
-                },
-            },
-
-            title: 'Home',
-        }
-        this.cancelEntry = this.cancelEntry.bind(this)
-        this.editEntry = this.editEntry.bind(this)
-        this.updateEntry = this.updateEntry.bind(this)
-        DashboardFAQ.deleteEntry = this.deleteEntry.bind(this)
-        this.watchQuestionEntry = this.watchQuestionEntry.bind(this)
-        this.watchTextEntry = this.watchTextEntry.bind(this)
-        this.watchTypeEntry = this.watchTypeEntry.bind(this)
-        this.reset = this.reset.bind(this)
+            data: {},
+            title: '',
+            text: '',
+        };
+        this.deleteEntry = this.deleteEntry.bind(this);
+        this.resetEntries = this.resetEntries.bind(this);
+        this.newEntry = this.newEntry.bind(this);
+        this.watchTitle = this.watchTitle.bind(this);
+        this.watchText = this.watchText.bind(this);
+        this.submit = this.submit.bind(this);
     }
 
-    reset() {
-        this.setState({ data: this.state.origin })
-    }
-
-    watchQuestionEntry(event) {
-        let newData = this.state.data
-        const id = event.target.id
-        newData[id].copyTitle = event.target.value
-        this.setState({ data: newData })
-    }
-
-    watchTypeEntry(event) {
-        let newData = this.state.data
-        const id = event.target.id
-        newData[id].copyType = event.target.value
-        this.setState({ data: newData })
-    }
-
-    watchTextEntry(event) {
-        let newData = this.state.data
-        const id = event.target.id
-        newData[id].copyText = event.target.value
-        this.setState({ data: newData })
-    }
-
-    cancelEntry(event) {
-        let newData = this.state.data
-        const id = event.currentTarget.value
-        newData[id].edit = false
-        newData[id].copyText = newData[id].text
-        newData[id].copyTitle = newData[id].title
-        this.setState({ data: newData })
-    }
-
-    editEntry(event, data) {
-        let newData = this.state.data
-        const id = event.currentTarget.value
-        newData[id].edit = true
-        this.setState({ data: newData })
-    }
-
-    updateEntry(event) {
-        let newData = this.state.data
-        const id = event.currentTarget.value
-        newData[id].edit = false
-        newData[id].text = newData[id].copyText
-        newData[id].title = newData[id].copyTitle
-        this.setState({ data: newData })
+    componentDidMount() {
+        const { onMount } = this.props;
+        onMount();
     }
 
     deleteEntry(event) {
-        let newData = this.state.data
-        const id = event.currentTarget.value
-        delete newData[id]
-        this.setState({ data: newData })
+        const { deleteEntry } = this.props;
+        const id = event.currentTarget.value;
+        deleteEntry({ id, type: 'stories' });
+    }
+
+    resetEntries () {
+        const { resetEntries } = this.props;
+        resetEntries();
+    }
+
+    newEntry () {
+        const { saveEntry } = this.props;
+        const id = uuidv1();
+        const {
+            title,
+            text,
+        } = this.state;
+        const payload = {
+            title,
+            text,
+            type: 'home',
+            edit: 0 // implement editable table did not succeed
+        };
+        saveEntry({ id, payload, type: 'stories' });
+        this.setState({
+            title: '',
+            text: '',
+        });
+    }
+
+    watchTitle(event) {
+        this.setState({
+            title: event.target.value
+        });
+    }
+
+    watchText(event) {
+        this.setState({
+            text: event.target.value
+        });
+    }
+
+    submit() {
+        const { submit } = this.props;
+        submit();
     }
 
     render() {
-        const { classes } = this.props
-        const { title, data } = this.state
+        const { classes } = this.props;
+        const { title, text } = this.state;
+        const navTitle = 'Home';
         return (
             <div className={classes.root}>
                 <CssBaseline />
-                <NavBar title={title} />
+                <NavBar title={navTitle} />
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
-                    {Object.keys(data).map((item, index) => (
-                        <ExpansionPanel key={index}>
-                            <ExpansionPanelSummary
-                                expandIcon={<ExpandMoreIcon />}
-                                aria-controls="panel1a-content"
-                                id="panel1a-header"
-                            >
-                                <Typography className={classes.heading}>{ data[item].title }</Typography>
-                            </ExpansionPanelSummary>
-                            <ExpansionPanelDetails>
-                                {data[item].edit ?
-                                    <Grid container alignItems="flex-start" justify="flex-start" direction="row">
-                                        <TextField
-                                            multiline={true}
-                                            variant="outlined"
-                                            fullWidth
-                                            value={data[item].copyTitle}
-                                            placeholder="Ex. Where are we located?"
-                                            label="Question"
-                                            className={classes.button}
-                                            onChange={this.watchQuestionEntry}
-                                            id={item}
-                                        />
-                                        <TextField
-                                            multiline={true}
-                                            variant="outlined"
-                                            fullWidth
-                                            value={data[item].copyText}
-                                            placeholder="We are located at Bengkala, Indonesia"
-                                            label="Answer"
-                                            className={classes.button}
-                                            onChange={this.watchTextEntry}
-                                            id={item}
-                                        />
-                                    </Grid>
-                                    :
-                                    <Typography>
-                                        { data[item].text } { data[item].edit }
-                                    </Typography>
-                                }
-                            </ExpansionPanelDetails>
-                            { data[item].edit ?
-                                <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                                    <Button variant="contained" color="secondary" value={item} onClick={this.cancelEntry} className={classes.button}>
-                                        Cancel
-                                    </Button>
-                                    <Button variant="contained" onClick={this.updateEntry} value={item} className={classes.button}>
-                                        Update
-                                    </Button>
-                                </Grid>
-                                :
-                                <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                                    <Button variant="contained" value={item} onClick={this.editEntry} className={classes.button}>
-                                        Edit
-                                    </Button>
-                                    <Button variant="contained" color="secondary" value={item} onClick={this.deleteEntry} className={classes.button}>
-                                        Delete
-                                    </Button>
-                                </Grid>
-                            }
-                        </ExpansionPanel>
-                    ))}
+                    <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
+                        Mission
+                    </Typography>
+                    <DashBoardHomeMission />
+                    <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
+                        Create new { navTitle }
+                    </Typography>
+                    <TextField
+                        multiline={true}
+                        variant="outlined"
+                        fullWidth
+                        value={title}
+                        placeholder="Ex. How to contact us?"
+                        label="Question"
+                        className={classes.button}
+                        onChange={this.watchTitle}
+                    />
+                    <TextField
+                        multiline={true}
+                        variant="outlined"
+                        fullWidth
+                        value={text}
+                        placeholder="Ex. You can contact us at XXX-XXXX-XXXX."
+                        label="Answer"
+                        className={classes.button}
+                        onChange={this.watchText}
+                    />
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">
-                        <Button variant="contained" onClick={this.reset} className={classes.button}>
+                        <Button variant="contained" onClick={this.newEntry} className={classes.button}>
+                            Save
+                        </Button>
+                    </Grid>
+                    <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
+                        Existing list of { navTitle }
+                    </Typography>
+                    <DashBoardHomeStories
+                        entryAction={this.deleteEntry}
+                    />
+                    <Grid container alignItems="flex-start" justify="flex-end" direction="row">
+                        <Button variant="contained" onClick={this.resetEntries} className={classes.button}>
                             Reset
                         </Button>
-                        <Button variant="contained" color="secondary" className={classes.button}>
+                        <Button variant="contained" color="secondary" onClick={this.submit} className={classes.button}>
                             Submit
                         </Button>
                     </Grid>
@@ -225,8 +165,8 @@ class DashboardFAQ extends Component {
     }
 }
 
-DashboardFAQ.propTypes = {
+DashboardHome.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DashboardFAQ);
+export default withStyles(styles)(DashboardHome);
