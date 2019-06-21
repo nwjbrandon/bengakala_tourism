@@ -9,6 +9,7 @@ import dashboardContact from './dashboardContact';
 import dashboardAccommodation from './dashboardAccommodation';
 import dashboardAttraction from './dashboardAttraction';
 import dashboardHome from './dashboardHome';
+import dashboardSettings from './dashboardSettings';
 
 export default function* rootSaga() {
   yield all([
@@ -20,6 +21,7 @@ export default function* rootSaga() {
     ...dashboardContact,
     ...dashboardAccommodation,
     ...dashboardAttraction,
-    ...dashboardHome
+    ...dashboardHome,
+    ...dashboardSettings
   ]);
 }

@@ -32,7 +32,7 @@ import DashboardAttraction from './routers/dashboard/attraction/container';
 import DashboardContact from './routers/dashboard/contact/container';
 import DashboardFAQ from './routers/dashboard/faq/container';
 import DashboardHome from './routers/dashboard/home/container';
-import DashboardSettings from './routers/dashboard/settings';
+import DashboardSettings from './routers/dashboard/settings/container';
 import './global.css'
 
 import rootReducers from './reducers';
