@@ -105,8 +105,8 @@ class DashboardFAQEntries extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].title}
-                                        placeholder="Ex. General FAQ"
-                                        label="Type of Question"
+                                        placeholder="Ex. Funny Random Meme Dump"
+                                        label="Name of Event"
                                         className={classes.button}
                                         onChange={this.watchTitle}
                                         id={item}
@@ -116,8 +116,8 @@ class DashboardFAQEntries extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].imgUrl}
-                                        placeholder="Ex. How to contact us?"
-                                        label="Question"
+                                        placeholder="Ex. https://imgur.com/a/o0v57.jp.jpg"
+                                        label="Imgur URL Links"
                                         className={classes.button}
                                         onChange={this.watchImgUrl}
                                         id={item}
@@ -127,8 +127,8 @@ class DashboardFAQEntries extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].text}
-                                        placeholder="Ex. You can contact us at XXX-XXXX-XXXX."
-                                        label="Answer"
+                                        placeholder="Ex. Come visit..."
+                                        label="Description of Event"
                                         className={classes.button}
                                         onChange={this.watchText}
                                         id={item}
