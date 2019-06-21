@@ -1,7 +1,6 @@
 import React from 'react';
 import { Slide } from 'react-slideshow-image';
 import Eachslide from './EachSlide'
-import './css/Slideshow.css'
 
 const properties = {
   duration: 5000,

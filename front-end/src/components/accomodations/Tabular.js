@@ -9,8 +9,8 @@ const tripDetails = {
   checkIn: "18/04/2020",
   checkOut: "28/04/2020",
   breakfast: true,
-  lunch :true ,
-  dinner :false,
+  lunch: true,
+  dinner: false,
   numberMales: 7,
   numberFemales: 3,
   numberVans: 3,
@@ -25,8 +25,8 @@ const groupSize = 20
 const prices = {
   home: 10,
   breakfast: 1,
-  lunch :3 ,
-  dinner :2,
+  lunch: 3,
+  dinner: 2,
   van: 15,
   car: 10,
   bike: 5
@@ -84,17 +84,17 @@ export default function MasterTable() {
     <Table>
       <TableHead>
         <TableRow>
-          <TableCell style={{ fontSize:"20px", color: 'cyan' }}>Type</TableCell>
-          <TableCell style={{ fontSize:"20px", color: 'cyan' }}>Qty</TableCell>
-          <TableCell style={{ fontSize:"20px", color: 'cyan' }}>Price</TableCell>
+          <TableCell style={{ fontSize: "20px", color: 'cyan' }}>Type</TableCell>
+          <TableCell style={{ fontSize: "20px", color: 'cyan' }}>Qty</TableCell>
+          <TableCell style={{ fontSize: "20px", color: 'cyan' }}>Price</TableCell>
         </TableRow>
       </TableHead>
       <TableBody>
         {homeRow.map(row => (
           <TableRow>
-            <TableCell style={{ color: 'white' }}>{ row.desc }</TableCell>
-            <TableCell style={{ color: 'white' }}>{ row.qty }</TableCell>
-            <TableCell style={{ color: 'white' }}>{ row.price }</TableCell>
+            <TableCell style={{ color: 'white' }}>{row.desc}</TableCell>
+            <TableCell style={{ color: 'white' }}>{row.qty}</TableCell>
+            <TableCell style={{ color: 'white' }}>{row.price}</TableCell>
           </TableRow>
         ))}
         <TableRow>
@@ -104,9 +104,9 @@ export default function MasterTable() {
         </TableRow>
         {mealRow().map(row => (
           <TableRow style={{ color: 'white' }}>
-            <TableCell style={{ color: 'white' }} align="center"> { row.desc }</TableCell>
-            <TableCell style={{ color: 'white' }}>{ row.qty }</TableCell>
-            <TableCell style={{ color: 'white' }}>{ row.price }</TableCell>
+            <TableCell style={{ color: 'white' }} align="center"> {row.desc}</TableCell>
+            <TableCell style={{ color: 'white' }}>{row.qty}</TableCell>
+            <TableCell style={{ color: 'white' }}>{row.price}</TableCell>
           </TableRow>
         ))}
         <TableRow>
@@ -121,9 +121,9 @@ export default function MasterTable() {
         </TableRow>
         {transportRow.map(row => (
           <TableRow>
-            <TableCell style={{ color: 'white' }} align="center">{ row.desc }</TableCell>
-            <TableCell style={{ color: 'white' }} >{ row.qty }</TableCell>
-            <TableCell style={{ color: 'white' }}>{ row.price }</TableCell>
+            <TableCell style={{ color: 'white' }} align="center">{row.desc}</TableCell>
+            <TableCell style={{ color: 'white' }} >{row.qty}</TableCell>
+            <TableCell style={{ color: 'white' }}>{row.price}</TableCell>
           </TableRow>
         ))}
         <TableRow>

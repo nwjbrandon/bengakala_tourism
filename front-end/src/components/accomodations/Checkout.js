@@ -5,28 +5,28 @@ import Paper from '@material-ui/core/Paper';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import Review from './Review';
 import TripDetailsForm from './TripDetailsForm'
 import PersonalDetailsForm from './PersonalDetailsForm'
 import ConfirmationScreen from './ConfirmationScreen'
 import Slip from './Slip'
-import {MuiThemeProvider ,createMuiTheme} from '@material-ui/core'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 import red from '@material-ui/core/colors/blue'
 import Buttons from './Buttons'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+
+import API from '../../api';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
     position: 'relative',
   },
-  label:{
+  label: {
     color: "white"
   },
   layout: {
     width: 'auto',
-    background:"#42424240",
+    background: "#42424240",
     marginLeft: theme.spacing(2),
     marginRight: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
@@ -38,7 +38,7 @@ const useStyles = makeStyles(theme => ({
   paper: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(3),
-    background:"#21212150",
+    background: "#21212150",
     padding: theme.spacing(2),
     [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
       marginTop: theme.spacing(6),
@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
   },
   stepper: {
     padding: theme.spacing(3, 0, 5),
-    background:"#21212100",
+    background: "#21212100",
     color: "white"
   },
   buttons: {
@@ -69,7 +69,7 @@ const Checkout = (props) => {
   let dispMsg = (<Typography>____</Typography>);
 
   const toRender = [
-    <PersonalDetailsForm/>,
+    <PersonalDetailsForm />,
     <TripDetailsForm />,
     <Slip />
   ]
@@ -77,21 +77,26 @@ const Checkout = (props) => {
   const [activeStep, setActiveStep] = React.useState(0);
 
   const handleNext = () => {
-    if(activeStep == 0){
-        if(props.personalDetails.firstName === "" || props.personalDetails.lastName ==="" || props.personalDetails.email === "" || props.personalDetails.country === ""){
-          props.onError("Important Fields Are Empty!");
-        }else{
-          props.onError("");
-          setActiveStep(activeStep + 1);
-        }
-    }else if(activeStep == 1){
-        if((props.tripDetails.numberMales + props.tripDetails.numberFemales) == 0){
-          // dispMsg = (<Typography>Please Fill in All details!!</Typography>);
-          props.onError("Total Guests cannot be 0");
-        }else{
-          props.onError("");
-          setActiveStep(activeStep + 1);
-        }
+    if (activeStep == 0) {
+      if (props.personalDetails.firstName === "" || props.personalDetails.lastName === "" || props.personalDetails.email === "" || props.personalDetails.country === "") {
+        props.onError("Important Fields Are Empty!");
+      } else {
+        props.onError("");
+        setActiveStep(activeStep + 1);
+      }
+    } else if (activeStep == 1) {
+      if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) == 0) {
+        props.onError("Total Guests cannot be 0");
+      } else {
+        props.onError("");
+        setActiveStep(activeStep + 1);
+      }
+    } else if (activeStep == 2) {
+      API.post('/accommodation', {
+        personalDetails: { ...props.personalDetails },
+        tripDetails: { ...props.tripDetails }
+      });
+      setActiveStep(activeStep + 1);
     }
   };
 
@@ -108,7 +113,7 @@ const Checkout = (props) => {
 
   return (
     <React.Fragment>
-      <MuiThemeProvider theme = {theme}>
+      <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <main className={classes.layout}>
           <Paper className={classes.paper}>
@@ -130,13 +135,13 @@ const Checkout = (props) => {
               {activeStep === steps.length ? (
                 <ConfirmationScreen />
               ) : (
-                <React.Fragment>
-                  {toRender[activeStep]}
-                  <Typography color="error" variant="h6">{props.errorMsg}</Typography>
-                  <Buttons activeStep = {activeStep} handleBack = {handleBack} handleNext = {handleNext} stepsLength = {steps.length}/>
+                  <React.Fragment>
+                    {toRender[activeStep]}
+                    <Typography color="error" variant="h6">{props.errorMsg}</Typography>
+                    <Buttons activeStep={activeStep} handleBack={handleBack} handleNext={handleNext} stepsLength={steps.length} />
 
-                </React.Fragment>
-              )}
+                  </React.Fragment>
+                )}
 
             </React.Fragment>
           </Paper>
@@ -150,17 +155,17 @@ const Checkout = (props) => {
 
 
 const mapStateToProps = state => {
-  return{
-    personalDetails:state.personalDetails,
-    tripDetails:state.tripDetails,
-    errorMsg:state.errorMsg
+  return {
+    personalDetails: state.personalDetails,
+    tripDetails: state.tripDetails,
+    errorMsg: state.errorMsg
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onError: (val) => dispatch({type:"ERR_MSG" , payload:val}),
+    onError: (val) => dispatch({ type: "ERR_MSG", payload: val }),
   }
 }
 
-export default connect(mapStateToProps ,mapDispatchToProps)(Checkout);
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

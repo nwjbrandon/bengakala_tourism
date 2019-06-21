@@ -29,7 +29,7 @@ import Navbar from './components/navbar'
 import Admin from './routers/admin/container';
 import Dashboard from './routers/dashboard/container';
 import DashboardAbout from './containers/dashboard-about';
-import DashboardAccommodation from './routers/dashboard/accommodation';
+import DashboardAccommodation from './routers/dashboard/accommodation/container';
 import DashboardAttraction from './routers/dashboard/attraction';
 import DashboardContact from './routers/dashboard/contact/container';
 import DashboardFAQ from './routers/dashboard/faq/container';
