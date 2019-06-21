@@ -10,7 +10,7 @@ import {
     DASHBOARD_ACCOMMODATION_SUBMIT_ERROR,
 } from "../actions/dashboardAccommodation";
 
-const displayedData = (state) => state.dashboardFaq.displayedData;
+const displayedData = (state) => state.dashboardAccommodation.displayedData;
 
 function onMount() {
     return API.get('/admin/dashboard/accommodation');
