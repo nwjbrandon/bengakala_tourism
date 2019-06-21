@@ -32,8 +32,8 @@ function* workerSagaOnMount() {
 function* workerSagaSubmit() {
     try {
         const payload = yield select(displayedData);
-        // yield call(submit, payload);
-        // yield put(DASHBOARD_HOME_SUBMIT_SUCCESS(payload));
+        yield call(submit, payload);
+        yield put(DASHBOARD_HOME_SUBMIT_SUCCESS(payload));
         // yield put(DASHBOARD_FAQ_ONMOUNT_REQUEST()) update causes server to crash
     } catch (error) {
         yield put(DASHBOARD_HOME_SUBMIT_ERROR(error));
@@ -43,5 +43,4 @@ function* workerSagaSubmit() {
 export default [
     takeLatest(DASHBOARD_HOME_ONMOUNT_REQUEST_NAME, workerSagaOnMount),
     takeLatest(DASHBOARD_HOME_SUBMIT_REQUEST_NAME, workerSagaSubmit),
-
 ]
