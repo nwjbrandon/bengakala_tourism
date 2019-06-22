@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
+import { Route, Switch, Router } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
@@ -64,11 +64,10 @@ const store = createStore(
 sagaMiddleware.run(rootSagas);
 const persistor = persistStore(store);
 
-
 const routing = (
     <Provider store={ store }>
       <PersistGate persistor={ persistor } loading={null}>
-        <Router>
+        <Router history={history}>
           <Navbar />
           <Switch>
             <Route exact path="/" component={ Home } />
