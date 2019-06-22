@@ -16,10 +16,6 @@ const useStyles = makeStyles(theme => ({
     display: "flex",
     flexDirection: "column"
   },
-  title: {
-    margin: theme.spacing(4, 0, 2),
-    padding: "30px"
-  },
   root: {
     width: '100%',
     flexGrow: 1
@@ -53,6 +49,16 @@ const useStyles = makeStyles(theme => ({
     paddingBottom: "56.25%" /* 16:9 */,
     paddingTop: 0,
     height: 0, textAlign: "center"
+  },
+  videoDescription: {
+    background: "#111111",
+    color: "white",
+    width: "auto",
+    height: "auto",
+    textAlign: "center",
+    fontSize: "30px",
+    fontStyle: "bold",
+    padding: "10px",
   }
 }));
 
@@ -65,35 +71,41 @@ function SimpleExpansionPanel() {
   const videoDetails = [
     {
       title: "Tutorial 1",
-      videoLink: "SzHo_DP4-8Q"
+      videoLink: "SzHo_DP4-8Q",
+      videoDescription: "Rick and Morty go on a fun Journey"
     },
     {
       title: "Tutorial 2",
-      videoLink: "TyCWscXbBvA"
+      videoLink: "TyCWscXbBvA",
+      videoDescription: "Rick and Morty get Shwifty"
     },
     {
       title: "Tutorial 3",
-      videoLink: "qn_TimF_J8Y"
+      videoLink: "qn_TimF_J8Y",
+      videoDescription: "Morty is going on an adventuree"
     },
     {
       title: "Tutorial 4",
-      videoLink: "SzHo_DP4-8Q"
+      videoLink: "SzHo_DP4-8Q",
+      videoDescription: "An Awesome Video about an old man"
     },
     {
       title: "Tutorial 5",
-      videoLink: "TyCWscXbBvA"
+      videoLink: "TyCWscXbBvA",
+      videoDescription: "Get Swifty. I am MR BULL DOg"
     }
 
   ]
 
 
   var title = {
-    color: "",
+    color: "white",
     textAlign: "centre",
     marginBottom: "40px",
     fontSize: "50px",
-    background: "#21212190",
-    borderRadius: "5px"
+    background: "#00000099",
+    borderRadius: "5px",
+    padding: "10px"
   }
 
   var h1titletag = {
@@ -141,6 +153,7 @@ function SimpleExpansionPanel() {
     <div className={classes.root}>
       <div style={title}><h1 style={h1titletag}>Browse through our video series to learn our very own Sign Language : The Kolok Kolok!!</h1></div>
 
+      <div className={classes.videoDescription}>{videoDetails[videoId].videoDescription}</div>
       <div className={classes.container}>
         <Grid style={{ height: "100%" }} container spacing={0}>
           <Grid item xs={12} sm={12} md={9}>
@@ -155,6 +168,7 @@ function SimpleExpansionPanel() {
           </Grid>
         </Grid>
       </div>
+
     </div>
   );
 }
