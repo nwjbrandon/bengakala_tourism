@@ -7,7 +7,8 @@ const aboutInfo = [
     const homes = await db.fetchData(TABLE_INFORMATION, { type: 'home' });
     const stories = _.map(homes, home => (
       {
-        [home.title]: home.text,
+        title: home.title,
+        text: home.text,
       }));
     const missions = await db.fetchData(TABLE_INFORMATION, { type: 'mission' });
     const mission = _.head(missions).text;

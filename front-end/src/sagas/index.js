@@ -2,6 +2,7 @@ import { all } from 'redux-saga/effects';
 
 import contactOnMount from './contact-onmount';
 import contactForm from './contact-form';
+import homeOnMount from './home';
 import dashboard from './dashboard';
 import adminLogin from './admin-login';
 import dashboardFaq from './dashboardFaq';
@@ -15,6 +16,7 @@ export default function* rootSaga() {
   yield all([
     ...contactOnMount,
     ...contactForm,
+    ...homeOnMount,
     ...dashboard,
     ...adminLogin,
     ...dashboardFaq,

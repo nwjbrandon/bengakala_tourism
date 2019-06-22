@@ -10,6 +10,7 @@ import { dashboardAccommodationReducer } from "./dashboardAccommodation";
 import { dashboardAttractionReducer } from "./dashboardAttraction";
 import { dashboardHomeReducer } from "./dashboardHome";
 import { dashboardSettingsReducer } from "./dashboardSettings";
+import { homeOnMountReducer } from "./home";
 
 const allReducers = combineReducers({
     admin: reduceReducers(adminLoginReducer),
@@ -21,6 +22,7 @@ const allReducers = combineReducers({
     dashboardHome: reduceReducers(dashboardHomeReducer),
     dashboardSettings: reduceReducers(dashboardSettingsReducer),
     contact: reduceReducers(contactOnMountReducer, contactFormReducer),
+    home: reduceReducers(homeOnMountReducer),
 });
 
 export default allReducers
