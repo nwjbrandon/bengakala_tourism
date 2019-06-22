@@ -42,7 +42,7 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...tempcpyPersonal },
       tripDetails: { ...state.tripDetails },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.LAST_NAME) {
     const tempcpyPersonal = { ...state.personalDetails };
@@ -51,7 +51,7 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...tempcpyPersonal },
       tripDetails: { ...state.tripDetails },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.EMAIL) {
     const tempcpyPersonal = { ...state.personalDetails };
@@ -60,7 +60,7 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...tempcpyPersonal },
       tripDetails: { ...state.tripDetails },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.COUNTRY) {
     const tempcpyPersonal = { ...state.personalDetails };
@@ -69,7 +69,7 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...tempcpyPersonal },
       tripDetails: { ...state.tripDetails },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.MALES) {
     const tempcpyTrip = { ...state.tripDetails };
@@ -78,7 +78,7 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.FEMALES) {
     const tempcpyTrip = { ...state.tripDetails };
@@ -87,7 +87,7 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.CARS) {
     const tempcpyTrip = { ...state.tripDetails };
@@ -96,7 +96,7 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.VANS) {
     const tempcpyTrip = { ...state.tripDetails };
@@ -105,7 +105,7 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.BIKES) {
     const tempcpyTrip = { ...state.tripDetails };
@@ -114,7 +114,7 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   }
   else if (action.type === actionTypes.BREAKFAST) {
@@ -124,7 +124,7 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.LUNCH) {
     const tempcpyTrip = { ...state.tripDetails };
@@ -133,7 +133,7 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.DINNER) {
     const tempcpyTrip = { ...state.tripDetails };
@@ -142,7 +142,7 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.CHECK_IN) {
     const tempcpyTrip = { ...state.tripDetails };
@@ -154,7 +154,7 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.CHECK_OUT) {
     const tempcpyTrip = { ...state.tripDetails };
@@ -163,18 +163,23 @@ const reducer = (state = initialState, action) => {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.EXCLUDE_DATES) {
     console.log("INSIDE DISPATCH")
-    return state;
+    return {
+      personalDetails: { ...state.personalDetails },
+      tripDetails: { ...state.tripDetails },
+      excludeDates: [...actionTypes.payload],
+      cost: { ...state.cost }
+    }
   } else if (action.type === actionTypes.ERR_MSG) {
     return {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...state.tripDetails },
       errorMsg: action.payload,
       excludeDates: [...state.excludeDates],
-      cost:{...state.cost}
+      cost: { ...state.cost }
     }
 
   }

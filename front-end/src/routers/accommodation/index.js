@@ -26,16 +26,14 @@ class Accomodation extends React.Component {
     }
   }
   componentDidMount() {
-    API.get('/accommodation').then(res => {
+    API.get('/accommodation/info').then(res => {
       console.log("RES");
-      console.log(res);
-      dispatch({ type: "EXCLUDE_DATES", payload: res })
+      console.log(res.excludedData);
+      store.dispatch({ type: "EXCLUDE_DATES", payload: res.excludedData })
       // this.setState({ data: res });
     })
   }
   render() {
-
-
 
     var divStyle = {
       padding: 50,

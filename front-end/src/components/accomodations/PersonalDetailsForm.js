@@ -1,15 +1,13 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
-import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import CustomInput from './CustomInput'
-import Buttons from './Buttons'
-
-import {connect} from 'react-redux'
+import * as actionTypes from '../../actions/accomodation';
+import { connect } from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
-  label:{
+  label: {
     color: "white"
   }
 }));
@@ -28,17 +26,17 @@ const PersonalDetailsForm = (props) => {
           <CustomInput
             id="firstName"
             data={props.personalDetails.firstName}
-            onChangeHandler = {(e) => props.onFNChange(e.target.value)}
+            onChangeHandler={(e) => props.onFNChange(e.target.value)}
             name="firstName"
-            label="First name"/>
+            label="First name" />
         </Grid>
         <Grid item xs={12} sm={6}>
           <CustomInput
             id="lastName"
             name="lastName"
-            onChangeHandler = {(e) => props.onLNChange(e.target.value)}
+            onChangeHandler={(e) => props.onLNChange(e.target.value)}
             data={props.personalDetails.lastName}
-            label="Last name"/>
+            label="Last name" />
         </Grid>
 
         <Grid item xs={12} sm={6}>
@@ -46,9 +44,9 @@ const PersonalDetailsForm = (props) => {
             id="outlined-email-input"
             label="Email"
             type="email"
-            onChangeHandler = {(e) => props.onEChange(e.target.value)}
+            onChangeHandler={(e) => props.onEChange(e.target.value)}
             data={props.personalDetails.email}
-            name="email"/>
+            name="email" />
         </Grid>
 
         <Grid item xs={12} sm={6}>
@@ -56,31 +54,31 @@ const PersonalDetailsForm = (props) => {
             id="country"
             name="country"
             label="Country"
-            onChangeHandler = {(e) => props.onCChange(e.target.value)}
+            onChangeHandler={(e) => props.onCChange(e.target.value)}
             data={props.personalDetails.country}
           />
         </Grid>
 
       </Grid>
-    
+
     </React.Fragment>
   );
 }
 
 
 const mapStateToProps = state => {
-  return{
-    personalDetails:state.personalDetails,
+  return {
+    personalDetails: state.personalDetails,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onFNChange: (val) => dispatch({type:"FIRST_NAME" , payload:val}),
-    onLNChange: (val) => dispatch({type:"LAST_NAME" , payload:val}),
-    onEChange: (val) => dispatch({type:"EMAIL" , payload:val}),
-    onCChange: (val) => dispatch({type:"COUNTRY" , payload:val}),
+    onFNChange: (val) => dispatch({ type: actionTypes.FIRST_NAME, payload: val }),
+    onLNChange: (val) => dispatch({ type: actionTypes.LAST_NAME, payload: val }),
+    onEChange: (val) => dispatch({ type: actionTypes.EMAIL, payload: val }),
+    onCChange: (val) => dispatch({ type: actionTypes.COUNTRY, payload: val }),
   }
 }
 
-export default connect(mapStateToProps , mapDispatchToProps)(PersonalDetailsForm);
+export default connect(mapStateToProps, mapDispatchToProps)(PersonalDetailsForm);

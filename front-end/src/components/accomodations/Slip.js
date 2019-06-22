@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import MasterTable from './Tabular';
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
+
 
 /* a fake customer */
 // const personalDetails = {
@@ -34,12 +35,12 @@ class App extends Component {
             {this.props.personalDetails.email}
           </h4>
           <div>
-            <h4 style ={{ fontSize:"20px", color: 'black' }} className='header-sm'>
+            <h4 style={{ fontSize: "20px", color: 'black' }} className='header-sm'>
               Price Breakdown
             </h4>
-            <MasterTable tripDetails = {this.props.tripDetails}/>
+            <MasterTable tripDetails={this.props.tripDetails} />
           </div>
-          <div className='vert-space'/>
+          <div className='vert-space' />
         </div>
       </div>
     );
@@ -47,9 +48,9 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  return{
+  return {
     personalDetails: state.personalDetails,
-    tripDetails:state.tripDetails,
+    tripDetails: state.tripDetails,
   };
 };
 

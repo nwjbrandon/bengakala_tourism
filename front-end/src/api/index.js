@@ -42,6 +42,7 @@ const putRequest = (url, data) => {
 
 const postRequest = (url, data) => {
   return new Promise((resolve, reject) => {
+    console.log("Testing")
     axios.post(httpUrl + url, data, { withCredentials: true })
       .then(response => {
         resolve(response.data.data);
