@@ -19,16 +19,19 @@ import uuid from 'uuid/v1';
 
 const styles = theme => ({
   root: {
-    flexGrow: 1,
-    backgroundImage: `url(${bg})`,
-    backgroundRepeat: "inital",
-    backgroundSize: "cover",
-    backgroundPosition: "top",
-    backgroundAttachment: "fixed",
-    textAlign:"left",
     overflow: 'hidden',
     display: 'flex',
-    height: "90vh",
+    width: '100%',
+    backgroundColor: theme.palette.background.paper,
+    flexGrow: 1,
+    height: "100vh",
+    backgroundImage: `url(${bg})`,
+    backgroundPosition: "top",
+    backgroundRepeat: "initial",
+    backgroundSize: "cover",
+    backgroundAttachment: "fixed",
+    textAlign:"left",
+    paddingTop: 40
   },
   paper: {
     padding: theme.spacing(3),
