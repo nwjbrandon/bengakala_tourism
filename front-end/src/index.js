@@ -17,7 +17,7 @@ import Accommodation from './routers/accommodation';
 import Home from './routers/home';
 import Attraction from './routers/attraction';
 import Contact from './containers/contact';
-import Faq from './routers/faq';
+import Faq from './routers/faq/container';
 import Notfound from './routers/notfound';
 import Payment from './routers/payment';
 import Tutorial from './routers/tutorial'
