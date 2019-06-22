@@ -1,5 +1,4 @@
 import React from 'react';
-import API from '../../api';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
@@ -27,7 +26,6 @@ const styles = theme => ({
     backgroundPosition: "top",
     backgroundAttachment: "fixed",
     textAlign:"left",
-    padding: 40,
     overflow: 'hidden',
     display: 'flex',
     height: "90vh",

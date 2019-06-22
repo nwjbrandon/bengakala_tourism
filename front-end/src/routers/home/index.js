@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 //import App from './App';
 
-import Navbar from '../../components/navbar.js'
+import Navbar from '../../components/navBar/navbar.js'
 import Background from './components/background.js'
 import Middlenav from './components/middlenav.js'
 import Content from './components/content.js'

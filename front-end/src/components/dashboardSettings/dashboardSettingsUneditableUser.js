@@ -6,9 +6,6 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Button from '@material-ui/core/Button';
-import Grid from '@material-ui/core/Grid';
-import TextField from "@material-ui/core/TextField";
 
 const styles = theme => ({
     root: {
@@ -76,7 +73,7 @@ class DashboardSettingsUneditableUser extends Component {
     }
 
     render() {
-        const { classes, displayedData: data, entryAction, } = this.props;
+        const { classes, displayedData: data, } = this.props;
         return (
             <div>
                 {Object.keys(data).map((item) => (

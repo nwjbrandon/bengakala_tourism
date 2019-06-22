@@ -39,31 +39,63 @@ export const dashboardSettingsReducer = handleActions({
             error: action.payload,
         };
     },
-    "DASHBOARD_SETTINGS_DELETE": (state, action) => {
-        const { id, type } = action.payload;
-        const { displayedData } = _cloneDeep(state);
-        displayedData[type] = _omit(displayedData[type], id);
-        return {
-            ...state,
-            displayedData: displayedData
-        };
-    },
-    "DASHBOARD_SETTINGS_SUBMIT_REQUEST": (state) => {
+    "DASHBOARD_SETTINGS_DELETE_REQUEST": (state) => {
         return {
             ...state,
             fetching: true,
             error: false,
         }
     },
-    "DASHBOARD_SETTINGS_SUBMIT_SUCCESS": (state, action) => {
+    "DASHBOARD_SETTINGS_DELETE_SUCCESS": (state) => {
         return {
             ...state,
-            originalData: _cloneDeep(action.payload),
+            fetching: false,
+            error: false,
+        }
+    },
+    "DASHBOARD_SETTINGS_DELETE_ERROR": (state, action) => {
+        return {
+            ...state,
+            fetching: true,
+            error: action.payload,
+        }
+    },
+    "DASHBOARD_SETTINGS_CREATE_REQUEST": (state) => {
+        return {
+            ...state,
             fetching: true,
             error: false,
         }
     },
-    "DASHBOARD_SETTINGS_SUBMIT_ERROR": (state, action) => {
+    "DASHBOARD_SETTINGS_CREATE_SUCCESS": (state) => {
+        return {
+            ...state,
+            fetching: false,
+            error: false,
+        }
+    },
+    "DASHBOARD_SETTINGS_CREATE_ERROR": (state, action) => {
+        return {
+            ...state,
+            fetching: true,
+            error: action.payload,
+        }
+    },
+    "DASHBOARD_SETTINGS_CHANGE_REQUEST": (state) => {
+        return {
+            ...state,
+            fetching: true,
+            error: false,
+        }
+    },
+    "DASHBOARD_SETTINGS_CHANGE_SUCCESS": (state) => {
+        return {
+            ...state,
+            fetching: false,
+            error: false,
+        }
+    },
+    "DASHBOARD_SETTINGS_CHANGE_ERROR": (state, action) => {
         return {
             ...state,
             fetching: true,

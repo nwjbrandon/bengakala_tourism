@@ -108,7 +108,7 @@ class DashboardContact extends Component {
 
     submit() {
         const { submit } = this.props;
-        // submit();
+        submit();
     }
 
     render() {

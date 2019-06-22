@@ -32,8 +32,8 @@ function* workerSagaOnMount() {
 function* workerSagaSubmit() {
     try {
         const payload = yield select(displayedData);
-        // yield call(submit, payload);
-        // yield put(DASHBOARD_FAQ_SUBMIT_SUCCESS(payload));
+        yield call(submit, payload);
+        yield put(DASHBOARD_ATTRACTION_SUBMIT_SUCCESS(payload));
         // yield put(DASHBOARD_FAQ_ONMOUNT_REQUEST()) update causes server to crash
     } catch (error) {
         yield put(DASHBOARD_ATTRACTION_SUBMIT_ERROR(error));
