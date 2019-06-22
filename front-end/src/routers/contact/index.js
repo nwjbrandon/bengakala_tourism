@@ -13,37 +13,30 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import LocationIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/PermPhoneMsg';
-import bg from './bgpic/roadtovillage.jpg'
+import bg from './bgpic/roadtovillage.jpg';
 import PropTypes from "prop-types";
 import uuid from 'uuid/v1';
 
 const styles = theme => ({
   root: {
-    overflow: 'hidden',
     display: 'flex',
-    width: '100%',
-    backgroundColor: theme.palette.background.paper,
-    flexGrow: 1,
-    height: "100vh",
-    backgroundImage: `url(${bg})`,
+  },
+  bgImage: {
+    padding: 50,
     backgroundPosition: "top",
     backgroundRepeat: "initial",
     backgroundSize: "cover",
-    backgroundAttachment: "fixed",
-    textAlign:"left",
-    paddingTop: 40
+    width: "100%",
+    backgroundImage: `url(${bg})`,
+    textAlign: "left"
   },
   paper: {
     padding: theme.spacing(3),
-    height: '95%',
     width: 450,
     margin: 'auto',
-    background: 'rgba(255, 255, 255, 0.9)',
-    boxShadow: 'none',
     display: 'flex',
     flexWrap: 'wrap',
     flexGrow: 1,
-    paddingTop: 30,
     [theme.breakpoints.up(500 + theme.spacing(6))]: {
       width: 500,
     },
@@ -93,124 +86,125 @@ class Contact extends React.Component {
     return (
       <React.Fragment>
         <div className={classes.root}>
-        <Grid
-            container spacing={10}
-            direction="column"
-            alignItems="center"
-            justify="center"
-        >
-          <Grid item>
-            <Paper className={classes.paper}>
-              <Grid item xs={12}>
-                <Typography variant="h4" style={{ paddingTop: 10, padding: 17 }}>
-                  Contact Us!
-                </Typography>
+          <div className={classes.bgImage}>
+            <Grid
+                container
+                alignItems="center"
+                justify="center"
+            >
+              <Grid item>
+                <Paper className={classes.paper}>
+                  <Grid item xs={12}>
+                    <Typography variant="h4" style={{ paddingTop: 10, padding: 17 }}>
+                      Contact Us!
+                    </Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <List>
+                      <ListItem>
+                        <ListItemAvatar>
+                          <Avatar>
+                            <LocationIcon />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Address" secondary={ data['Address'] } />
+                      </ListItem>
+                      <Divider variant="inset" component="li" />
+                      <ListItem>
+                        <ListItemAvatar>
+                          <Avatar>
+                            <PhoneIcon />
+                          </Avatar>
+                        </ListItemAvatar>
+                        <ListItemText primary="Call Us" secondary={ data['Phone'] } />
+                      </ListItem>
+                      <Divider variant="inset" component="li" />
+                    </List>
+                  </Grid>
+
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                        required
+                        label="Name"
+                        fullWidth
+                        autoComplete="name"
+                        margin="normal"
+                        variant="outlined"
+                        value={this.state.name}
+                        onChange={e => this.setState({name: e.target.value})}
+                    />
+                  </Grid>
+
+                  <Grid item xs={12} sm={6}>
+                    <TextField
+                        label="Phone number"
+                        fullWidth
+                        autoComplete="Phone"
+                        margin="normal"
+                        variant="outlined"
+                        value={this.state.contact}
+                        onChange={e => this.setState({contact: e.target.value})}
+                    />
+                  </Grid>
+
+                  <TextField
+                      required
+                      label="Email"
+                      fullWidth
+                      autoComplete="email"
+                      margin="normal"
+                      variant="outlined"
+                      value={this.state.email}
+                      onChange={e => this.setState({email: e.target.value})}
+                  />
+
+                  <Typography variant="h6" style={{ paddingTop: 30 }}>
+                    Your message:
+                  </Typography>
+
+                  <TextField
+                      required
+                      label="Subject"
+                      fullWidth
+                      margin="normal"
+                      variant="outlined"
+                      value={this.state.subject}
+                      onChange={e => this.setState({subject: e.target.value})}
+                  />
+
+                  <TextField
+                      required
+                      label="Message"
+                      fullWidth
+                      margin="normal"
+                      variant="outlined"
+                      multiline
+                      rows="7"
+                      value={this.state.message}
+                      onChange={e => this.setState({message: e.target.value})}
+                  />
+
+                  <Grid container justify="center" style={{ paddingTop: 20 }}>
+                    <Button
+                        variant="contained"
+                        className={classes.button}
+                        onClick={this.submit}
+                    >
+                      Submit
+                    </Button>
+                  </Grid>
+                  <Grid container justify="center">
+                    <Typography variant="body2" color="primary">
+                      { successMsg }
+                    </Typography>
+                    <Typography variant="body2" color="error">
+                      { errorMsg }
+                    </Typography>
+                  </Grid>
+                </Paper>
               </Grid>
-              <Grid item xs={12}>
-                <List>
-                  <ListItem>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <LocationIcon />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary="Address" secondary={ data['Address'] } />
-                  </ListItem>
-                  <Divider variant="inset" component="li" />
-                  <ListItem>
-                    <ListItemAvatar>
-                      <Avatar>
-                        <PhoneIcon />
-                      </Avatar>
-                    </ListItemAvatar>
-                    <ListItemText primary="Call Us" secondary={ data['Phone'] } />
-                  </ListItem>
-                  <Divider variant="inset" component="li" />
-                </List>
-              </Grid>
-
-              <Grid item xs={12} sm={6}>
-                <TextField
-                    required
-                    label="Name"
-                    fullWidth
-                    autoComplete="name"
-                    margin="normal"
-                    variant="outlined"
-                    value={this.state.name}
-                    onChange={e => this.setState({name: e.target.value})}
-                />
-              </Grid>
-
-              <Grid item xs={12} sm={6}>
-                <TextField
-                    label="Phone number"
-                    fullWidth
-                    autoComplete="Phone"
-                    margin="normal"
-                    variant="outlined"
-                    value={this.state.contact}
-                    onChange={e => this.setState({contact: e.target.value})}
-                />
-              </Grid>
-
-              <TextField
-                  required
-                  label="Email"
-                  fullWidth
-                  autoComplete="email"
-                  margin="normal"
-                  variant="outlined"
-                  value={this.state.email}
-                  onChange={e => this.setState({email: e.target.value})}
-              />
-
-              <Typography variant="h6" style={{ paddingTop: 30 }}>
-                Your message:
-              </Typography>
-
-              <TextField
-                  required
-                  label="Subject"
-                  fullWidth
-                  margin="normal"
-                  variant="outlined"
-                  value={this.state.subject}
-                  onChange={e => this.setState({subject: e.target.value})}
-              />
-
-              <TextField
-                  required
-                  label="Message"
-                  fullWidth
-                  margin="normal"
-                  variant="outlined"
-                  multiline
-                  rows="7"
-                  value={this.state.message}
-                  onChange={e => this.setState({message: e.target.value})}
-              />
-
-              <Grid container justify="center" style={{ paddingTop: 20 }}>
-                <Button
-                    variant="contained"
-                    className={classes.button}
-                    onClick={this.submit}
-                >
-                  Submit
-                </Button>
-              </Grid>
-              <Grid container justify="center">
-                <Typography variant="body2" color="primary">
-                  { successMsg }
-                </Typography>
-                <Typography variant="body2" color="error">
-                  { errorMsg }
-                </Typography>
-              </Grid>
-            </Paper>
-          </Grid>
-        </Grid>
+            </Grid>
+          </div>
         </div>
       </React.Fragment>
     )

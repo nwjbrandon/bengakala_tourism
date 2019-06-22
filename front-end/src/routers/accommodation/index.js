@@ -1,8 +1,8 @@
 import React from 'react';
 import API from '../../api';
-import AccomodationsForm from '../../components/accomodations/Accomodations'
-import Slideshow from '../../components/accomodations/Slideshow'
-import bg from '../../components/accomodations/images/balivillage.jpg'
+import AccomodationsForm from '../../components/accomodations/Accomodations';
+import Slideshow from '../../components/accomodations/Slideshow';
+import bg from '../../components/accomodations/images/balivillage.jpg';
 
 import { createStore } from 'redux'
 import reducer from '../../reducers/accomodation'
@@ -40,11 +40,9 @@ class Accomodation extends React.Component {
       backgroundPosition: "top",
       backgroundRepeat: "initial",
       backgroundSize: "cover",
-      // height:"250vh",
       width: "100%",
       backgroundImage: `url(${bg})`,
       textAlign: "left"
-
     };
     return (
       <Provider store={store}>

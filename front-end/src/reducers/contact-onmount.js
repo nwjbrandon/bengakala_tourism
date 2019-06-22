@@ -1,7 +1,7 @@
 import { handleActions } from 'redux-actions';
 
 const initialState = {
-    data: [],
+    data: {},
     fetching: false,
     error: false,
 };
