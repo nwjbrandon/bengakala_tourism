@@ -2,8 +2,8 @@ import { handleActions } from 'redux-actions';
 
 const initialState = {
     data: {
-        stories: {},
-        mission: {},
+        stories: [],
+        mission: "",
     },
     fetching: false,
     error: false,
