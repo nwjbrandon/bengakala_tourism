@@ -5,7 +5,7 @@ import contactForm from './contact-form';
 import homeOnMount from './home';
 import faqOnMount from './faq';
 import dashboard from './dashboard';
-import adminLogin from './admin-login';
+import adminLogin from './admin';
 import dashboardFaq from './dashboardFaq';
 import dashboardContact from './dashboardContact';
 import dashboardAccommodation from './dashboardAccommodation';

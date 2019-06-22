@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
 import { persistStore, persistReducer } from 'redux-persist';
@@ -11,6 +11,8 @@ import storage from 'redux-persist/lib/storage'; // defaults to localStorage for
 import { PersistGate } from 'redux-persist/integration/react';
 
 import createSagaMiddleware from "redux-saga";
+
+import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 
 // Non Protected Routes
 import Accommodation from './routers/accommodation';
@@ -40,6 +42,9 @@ import './global.css'
 import rootReducers from './reducers';
 import rootSagas from "./sagas";
 
+import { createBrowserHistory } from 'history';
+export const history = createBrowserHistory();
+
 const persistConfig = {
   key: 'root',
   storage,
@@ -47,12 +52,14 @@ const persistConfig = {
 };
 const sagaMiddleware = createSagaMiddleware();
 const enhancers = composeWithDevTools(
-    applyMiddleware(sagaMiddleware)
+    //compose(applyMiddleware(sagaMiddleware, routerMiddleware(history()))),
+    applyMiddleware(sagaMiddleware, routerMiddleware(history)),
 );
-const persistedReducer = persistReducer(persistConfig, rootReducers);
+
+const persistedReducer = persistReducer(persistConfig, rootReducers(history));
 const store = createStore(
     persistedReducer,
-    enhancers
+    enhancers,
 );
 sagaMiddleware.run(rootSagas);
 const persistor = persistStore(store);

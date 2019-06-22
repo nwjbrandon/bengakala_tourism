@@ -1,4 +1,5 @@
 import { call, put, takeLatest } from "redux-saga/effects";
+import { push, } from "connected-react-router";
 
 import API from '../api';
 import {
@@ -15,6 +16,7 @@ function* workerSaga(payload) {
     try {
         const data = yield call(login, payload.payload);
         yield put(ADMIN_LOGIN_SUCCESS(data));
+        yield put(push('/dashboard'));
     } catch (error) {
         console.log(error);
         yield put(ADMIN_LOGIN_ERROR(error));
