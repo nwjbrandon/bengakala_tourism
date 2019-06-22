@@ -1,0 +1,8 @@
+import { createAction } from 'redux-actions';
+
+export const HOME_ONMOUNT_REQUEST_NAME = 'HOME_ONMOUNT_REQUEST';
+export const HOME_ONMOUNT_REQUEST = createAction(HOME_ONMOUNT_REQUEST_NAME);
+export const HOME_ONMOUNT_SUCCESS_NAME = 'HOME_ONMOUNT_SUCCESS';
+export const HOME_ONMOUNT_SUCCESS = createAction(HOME_ONMOUNT_SUCCESS_NAME);
+export const HOME_ONMOUNT_ERROR_NAME = 'HOME_ONMOUNT_ERROR';
+export const HOME_ONMOUNT_ERROR = createAction(HOME_ONMOUNT_ERROR_NAME);

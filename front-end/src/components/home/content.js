@@ -1,24 +1,33 @@
 import React, {Component} from 'react';
+import { withStyles } from '@material-ui/core/styles';
 
-const segMent ={
-  margin: '0',
-  paddingTop: '60px',
-  paddingBottom: '45px',
-}
-const conTainer ={
-  boxSizing: 'border-box',
-  maxWidth: '1290px',
-  marginLeft: '100px',
-  marginRight: '100px',
-  position: 'relative',
-}
-const articleStyle ={
-  display: 'block',
-  marginLeft: 'auto',
-  marginRight: 'auto',
-  boxSizing: 'inherit',
-  textSizeAdjust: '100%',
-}
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: theme.spacing(0, 3),
+  },
+  segment: {
+    margin: '0',
+    paddingTop: '60px',
+    paddingBottom: '45px',
+  },
+  container: {
+    boxSizing: 'border-box',
+    maxWidth: '1290px',
+    marginLeft: '100px',
+    marginRight: '100px',
+    position: 'relative',
+  },
+  articleStyle: {
+    display: 'block',
+    marginLeft: 'auto',
+    marginRight: 'auto',
+    boxSizing: 'inherit',
+    textSizeAdjust: '100%',
+  }
+});
+
 const contentHeader = {
   margin: '0',
   fontSize: '28px',
@@ -30,8 +39,8 @@ const contentHeader = {
   marginTop: '0',
   position: 'relative',
   textSizeAdjust: '100%',
-}
-const separaTor ={
+};
+const separator ={
   backgroundColor: '#f8304b',
   display: 'block',
   width: '85px',
@@ -41,7 +50,7 @@ const separaTor ={
   marginTop: '15px',
   verticalAlign: 'baseline',
   opacity: '1',
-}
+};
 const contentNarrative={
   boxSizing: 'border-box',
   color: '#2C3643',
@@ -53,7 +62,7 @@ const contentNarrative={
   textSizeAdjust: '100%',
   lineHeight: '28px',
   textAlign: 'center',
-}
+};
 
 const myTitlestyle={
   boxSizing: 'inherit',
@@ -68,7 +77,7 @@ const myTitlestyle={
   textAlign: 'left',
   textRendering: 'optimizelegibility',
   textSizeAdjust: '100%',
-}
+};
 
 const myTextstyle = {
   boxSizing: 'border-box',
@@ -76,8 +85,9 @@ const myTextstyle = {
   display: 'block',
   fontSize: '16px',
   lineHeight: '26px',
-}
+};
 
+// For testing
 const textArray = [
   {
     title : "Island of the Gods" ,
@@ -93,42 +103,45 @@ const textArray = [
   },
 ];
 
-class Longdescription extends Component {
-  render() {
-    return(
-      <div>
-        <h2 style={myTitlestyle}>
-          {this.props.myTitle}
-        </h2>
-        <p style={myTextstyle}>
-          {this.props.myText}
-        </p>
-      </div>
-    );
-  }
-}
-
 class Content extends Component {
+  componentDidMount() {
+    const { onMount } = this.props;
+    onMount();
+  }
+
   render() {
+    const { stories, mission, classes } = this.props;
     return(
-      <div style={segMent}>
-        <div style={conTainer}>
-          <article style={articleStyle}>
-            <h2 style={contentHeader}> Welcome to Bengkala Village </h2>
-            <div style={separaTor}></div>
-            <div style={contentNarrative}>
-              <p>The mere mention of Bali evokes thoughts of a paradise. It's more than a place; it's a mood, an aspiration, a tropical state of mind. This sentence is very long because i want to see how it will look like if its very long</p>
-            </div>
-            <div>
-              <Longdescription myTitle={textArray[0].title} myText={textArray[0].text} />
-              <Longdescription myTitle={textArray[1].title} myText={textArray[1].text} />
-              <Longdescription myTitle={textArray[2].title} myText={textArray[2].text} />
-            </div>
-          </article>
+      <div className={classes.root}>
+        <div className={classes.segment}>
+          <div className={classes.container}>
+            <article className={classes.articleStyle}>
+              <h2 style={contentHeader}> Welcome to Bengkala Village </h2>
+              <div style={separator} />
+              <div style={contentNarrative}>
+                <p>{ mission }</p>
+              </div>
+              <div>
+                {
+                  stories.map(text => (
+                      <div key={text.title}>
+                        <h2 style={myTitlestyle}>
+                          {text.title}
+                        </h2>
+                        <p style={myTextstyle}>
+                          {text.text}
+                        </p>
+                      </div>
+                  ))
+                }
+              </div>
+            </article>
+          </div>
         </div>
       </div>
+
     );
   }
 }
 
-export default Content
+export default withStyles(styles)(Content)

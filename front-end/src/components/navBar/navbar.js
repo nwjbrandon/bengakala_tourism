@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 const sections =['attraction',  'booking', 'tutorial' ,'contact', 'faq'];
 const navlinks = sections.map( section => {
     return(
-      <Button key = {section} color="inherit" component={Link} to={section}>{ section }</Button>
+      <Button key={section} color="inherit" component={Link} to={section}>{ section }</Button>
     )
 });
 
@@ -67,7 +67,7 @@ export default function ButtonAppBar() {
               >
                   {
                     sections.map(section => (
-                      <MenuItem className={classes.menuItem} onClick={handleClose} component={Link} to={section}>
+                      <MenuItem className={classes.menuItem} onClick={handleClose} component={Link} to={section} key={section}>
                         { section }
                       </MenuItem>
                       ))

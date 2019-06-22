@@ -81,7 +81,7 @@ class Faq extends React.Component {
       <React.Fragment>
         <div className={classes.root}>
           <Grid
-            container spacing={10}
+            container
             direction="column"
             alignItems="center"
             justify="center"
