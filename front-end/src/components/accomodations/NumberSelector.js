@@ -39,6 +39,10 @@ const NumberSelector = (props) => {
         margin="normal"
         fullWidth
       />
+      {props.occupancy ?
+        <p style={{ fontSize: "10px", color: "grey", fontStyle: "italics", margin: "0px", padding: "0px" }}>Max Occupancy :{props.occupancy}</p>
+        : null
+      }
     </Grid>
   );
 

@@ -3,8 +3,7 @@ import API from '../../api';
 
 import bg from '../../components/accomodations/images/balivillage.jpg'
 import Tutorial from '../../components/tutorials/VideoTutorials'
-import Navbar from '../../components/navBar/navbar'
-import Typography from '@material-ui/core/Typography';
+
 
 class TutorialPage extends React.Component {
   constructor(props) {
@@ -21,21 +20,32 @@ class TutorialPage extends React.Component {
   render() {
 
     var divStyle = {
-      padding: 50 ,
+      padding: 50,
       backgroundPosition: "top",
       backgroundRepeat: "initial",
       backgroundSize: "cover",
-      // height:"250vh",
-      minHeight:"100vh",
-      width:"auto",
+      width: "auto",
+      height: "100vh",
       backgroundImage: `url(${bg})`,
-      textAlign:"left",
-      justifyContent:"center"
+      textAlign: "left",
+      justifyContent: "center"
 
-  };
+    };
+
+    // var divStyle = {
+    //   padding: 50,
+    //   backgroundPosition: "top",
+    //   backgroundRepeat: "initial",
+    //   backgroundSize: "cover",
+    //   // height:"250vh",
+    //   width: "100%",
+    //   backgroundImage: `url(${bg})`,
+    //   textAlign: "left"
+
+    // };
     return (
-      <div style = {{margin: "0px" ,padding:"0px"}}>
-        <div style = {divStyle}>
+      <div>
+        <div style={divStyle}>
           <Tutorial />
         </div>
       </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -6,7 +6,9 @@ import Paper from '@material-ui/core/Paper';
 import * as actionTypes from '../../actions/accomodation';
 import Datespicker from './DatesPicker'
 import Mealplan from './Mealplan'
-import NumberSelector from './NumberSelector'
+import TransportSelect from './TransportSelect'
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Checkbox from '@material-ui/core/Checkbox';
 
 import Guests from './GuestsSelect.js'
 
@@ -41,20 +43,6 @@ const TripDetailsForm = (props) => {
         />
 
         <Guests malechanged={(e) => props.onMaleChange(e.target.value)} femalechanged={(e) => props.onFemaleChange(e.target.value)} males={props.tripDetails.numberMales} females={props.tripDetails.numberFemales} />
-
-        <Grid item xs={12}>
-          <Paper className={classes.root}>
-            <Typography >
-              Select Your Vehicles
-            </Typography>
-
-            <Grid container spacing={3}>
-              <NumberSelector changed={(e) => props.onCarChange(e.target.value)} value={props.tripDetails.numberCars} division={4} label="Cars" />
-              <NumberSelector changed={(e) => props.onVanChange(e.target.value)} value={props.tripDetails.numberVans} division={4} label="Vans" />
-              <NumberSelector changed={(e) => props.onBikeChange(e.target.value)} value={props.tripDetails.numberBikes} division={4} label="MotorBikes" />
-            </Grid>
-          </Paper>
-        </Grid>
 
       </Grid>
     </React.Fragment>
