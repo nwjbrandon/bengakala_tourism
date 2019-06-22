@@ -15,6 +15,8 @@ import red from '@material-ui/core/colors/blue'
 import Buttons from './Buttons'
 import { connect } from 'react-redux'
 
+import TransportDetails from './TransportDetails'
+
 import API from '../../api';
 
 const useStyles = makeStyles(theme => ({
@@ -22,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
   },
   label: {
-    color: "white"
+    color: red
   },
   layout: {
     width: 'auto',
@@ -61,7 +63,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const steps = ['Personal Details', 'Trip Details', 'Confirm your Trip'];
+const steps = ['Personal Details', 'Trip Details', 'Transportation Preferences', 'Confirm your Trip'];
 
 
 const Checkout = (props) => {
@@ -71,6 +73,7 @@ const Checkout = (props) => {
   const toRender = [
     <PersonalDetailsForm />,
     <TripDetailsForm />,
+    <TransportDetails />,
     <Slip />
   ]
   const classes = useStyles();
@@ -87,15 +90,19 @@ const Checkout = (props) => {
     } else if (activeStep == 1) {
       if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) == 0) {
         props.onError("Total Guests cannot be 0");
+      } else if (props.tripDetails.numberMales < 0 || props.tripDetails.numberFemales < 0) {
+        props.onError("There cannot be Negative number of Guests!!");
       } else {
         props.onError("");
         setActiveStep(activeStep + 1);
       }
-    } else if (activeStep == 2) {
+    } else if (activeStep == 3) {
       API.post('/accommodation', {
         personalDetails: { ...props.personalDetails },
         tripDetails: { ...props.tripDetails }
       });
+      setActiveStep(activeStep + 1);
+    } else {
       setActiveStep(activeStep + 1);
     }
   };
@@ -124,8 +131,8 @@ const Checkout = (props) => {
 
             <Stepper activeStep={activeStep} className={classes.stepper}>
               {steps.map(label => (
-                <Step key={label}>
-                  <StepLabel className={classes.label}>{label}</StepLabel>
+                <Step className={classes.label} key={label}>
+                  <StepLabel className={classes.label}><p style={{ color: "white" }}>{label}</p></StepLabel>
                 </Step>
               ))}
             </Stepper>

@@ -19,7 +19,7 @@ import bigbrandon from './pics/thebeast.jpg';
 
 const styles = theme => ({
   root: {
-    width: '100%',
+    width: 'auto',
     backgroundColor: theme.palette.background.paper,
     flexGrow: 1,
     height: "120vh",
@@ -28,7 +28,7 @@ const styles = theme => ({
     backgroundRepeat: "initial",
     backgroundSize: "cover",
     backgroundAttachment: "fixed",
-    textAlign:"left",
+    textAlign: "left",
     paddingTop: 40
   },
   inline: {
@@ -38,12 +38,12 @@ const styles = theme => ({
     padding: theme.spacing(3),
     height: '95%',
     [theme.breakpoints.up(500 + theme.spacing(6))]: {
-    width: '35%',
-    margin: 'auto',
-    background: 'rgba(255, 255, 255, 0.9)',
-    boxShadow: 'none',
-    display: 'flex',
-    flexWrap: 'wrap',
+      width: '35%',
+      margin: 'auto',
+      background: 'rgba(255, 255, 255, 0.9)',
+      boxShadow: 'none',
+      display: 'flex',
+      flexWrap: 'wrap',
     },
   },
 });
@@ -76,239 +76,239 @@ class Faq extends React.Component {
   }
 
   render() {
-    const {classes} = this.props;
+    const { classes } = this.props;
     return (
       <React.Fragment>
-      <div className={classes.root}>
-        <Grid
+        <div className={classes.root}>
+          <Grid
             container
             direction="column"
             alignItems="center"
             justify="center"
-        >
-          <Grid item xs={12}>
-            <Paper className={classes.paper}>
-              <Typography variant="h4" style={{ paddingTop: 10, padding: 17 }}>
-                Frequently Asked Questions
+          >
+            <Grid item xs={12}>
+              <Paper className={classes.paper}>
+                <Typography variant="h4" style={{ paddingTop: 10, padding: 17 }}>
+                  Frequently Asked Questions
               </Typography>
-              <List
-                subheader={
-                  <ListSubheader component="div" id="nested-list-subheader">
-                    <h1>General FAQ</h1>
-                  </ListSubheader>
-                }>
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar src="https://material-ui.com/static/images/avatar/1.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary = {this.state.gq1}
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="textPrimary"
-                        >
-                          to Tendou Kane
+                <List
+                  subheader={
+                    <ListSubheader component="div" id="nested-list-subheader">
+                      <h1>General FAQ</h1>
+                    </ListSubheader>
+                  }>
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar src="https://material-ui.com/static/images/avatar/1.jpg" />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={this.state.gq1}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            color="textPrimary"
+                          >
+                            to Tendou Kane
                         </Typography>
-                        {" — " + this.state.ga1}
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar src="https://material-ui.com/static/images/avatar/2.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary = {this.state.gq2}
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="textPrimary"
-                        >
-                          to Sumeet Jose
+                          {" — " + this.state.ga1}
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar src="https://material-ui.com/static/images/avatar/2.jpg" />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={this.state.gq2}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            color="textPrimary"
+                          >
+                            to Sumeet Jose
                         </Typography>
-                        {" — " + this.state.ga2}
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar src="https://cdn180.picsart.com/232191442018212.png?r1024x1024" />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary = {this.state.gq3}
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="textPrimary"
-                        >
-                          to Takagi Nanako
+                          {" — " + this.state.ga2}
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar src="https://cdn180.picsart.com/232191442018212.png?r1024x1024" />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={this.state.gq3}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            color="textPrimary"
+                          >
+                            to Takagi Nanako
                         </Typography>
-                        {" — " + this.state.ga3}
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-              </List>
+                          {" — " + this.state.ga3}
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                </List>
 
 
 
-              <List
-                subheader={
-                  <ListSubheader component="div" id="nested-list-subheader">
-                    <h1>Security FAQ</h1>
-                  </ListSubheader>
-                }>
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar src="https://material-ui.com/static/images/avatar/3.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary = {this.state.sq1}
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="textPrimary"
-                        >
-                          to Ruo Qing
+                <List
+                  subheader={
+                    <ListSubheader component="div" id="nested-list-subheader">
+                      <h1>Security FAQ</h1>
+                    </ListSubheader>
+                  }>
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar src="https://material-ui.com/static/images/avatar/3.jpg" />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={this.state.sq1}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            color="textPrimary"
+                          >
+                            to Ruo Qing
                         </Typography>
-                        {" — " + this.state.sa1}
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar src="https://material-ui.com/static/images/avatar/4.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary = {this.state.sq2}
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="textPrimary"
-                        >
-                          to Dan Ming
+                          {" — " + this.state.sa1}
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar src="https://material-ui.com/static/images/avatar/4.jpg" />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={this.state.sq2}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            color="textPrimary"
+                          >
+                            to Dan Ming
                         </Typography>
-                        {" — " + this.state.sa2}
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar src="https://material-ui.com/static/images/avatar/5.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary = {this.state.sq3}
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="textPrimary"
-                        >
-                          to Abhi Pradeep
+                          {" — " + this.state.sa2}
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar src="https://material-ui.com/static/images/avatar/5.jpg" />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={this.state.sq3}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            color="textPrimary"
+                          >
+                            to Abhi Pradeep
                         </Typography>
-                        {" — " + this.state.sa3}
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-              </List>
+                          {" — " + this.state.sa3}
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                </List>
 
 
 
-              <List
-                subheader={
-                  <ListSubheader component="div" id="nested-list-subheader">
-                    <h1>Other FAQ</h1>
-                  </ListSubheader>
-                }>
+                <List
+                  subheader={
+                    <ListSubheader component="div" id="nested-list-subheader">
+                      <h1>Other FAQ</h1>
+                    </ListSubheader>
+                  }>
 
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar src="https://material-ui.com/static/images/avatar/6.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary = {this.state.oq1}
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="textPrimary"
-                        >
-                          to Alex Vincent
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar src="https://material-ui.com/static/images/avatar/6.jpg" />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={this.state.oq1}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            color="textPrimary"
+                          >
+                            to Alex Vincent
                         </Typography>
-                        {" — " + this.state.oa1}
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar src="https://material-ui.com/static/images/avatar/7.jpg" />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary = {this.state.oq2}
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="textPrimary"
-                        >
-                          to Celine Yan
+                          {" — " + this.state.oa1}
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar src="https://material-ui.com/static/images/avatar/7.jpg" />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={this.state.oq2}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            color="textPrimary"
+                          >
+                            to Celine Yan
                         </Typography>
-                        {" — " + this.state.oa2}
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-                <Divider variant="inset" component="li" />
-                <ListItem alignItems="flex-start">
-                  <ListItemAvatar>
-                    <Avatar src={bigbrandon} />
-                  </ListItemAvatar>
-                  <ListItemText
-                    primary = {this.state.oq3}
-                    secondary={
-                      <React.Fragment>
-                        <Typography
-                          component="span"
-                          variant="body2"
-                          color="textPrimary"
-                        >
-                          to Devansh Jagtap
+                          {" — " + this.state.oa2}
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                  <Divider variant="inset" component="li" />
+                  <ListItem alignItems="flex-start">
+                    <ListItemAvatar>
+                      <Avatar src={bigbrandon} />
+                    </ListItemAvatar>
+                    <ListItemText
+                      primary={this.state.oq3}
+                      secondary={
+                        <React.Fragment>
+                          <Typography
+                            component="span"
+                            variant="body2"
+                            color="textPrimary"
+                          >
+                            to Devansh Jagtap
                         </Typography>
-                        {" — " + this.state.oa3}
-                      </React.Fragment>
-                    }
-                  />
-                </ListItem>
-              </List>
-            </Paper>
+                          {" — " + this.state.oa3}
+                        </React.Fragment>
+                      }
+                    />
+                  </ListItem>
+                </List>
+              </Paper>
+            </Grid>
           </Grid>
-        </Grid>
-      </div>
+        </div>
       </React.Fragment>
     )
   }
