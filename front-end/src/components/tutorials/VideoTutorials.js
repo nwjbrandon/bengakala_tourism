@@ -18,7 +18,7 @@ const useStyles = makeStyles(theme => ({
     color: "white"
   },
   expansion: {
-    background:"#11111170",
+    background: "#11111170",
   }
 }));
 
@@ -54,29 +54,29 @@ function SimpleExpansionPanel() {
   ]
 
 
-    var title =  {
-        color: "",
-        textAlign: "centre",
-        marginBottom: "40px",
-        fontSize: "40px",
-        background: "#21212160",
-        borderRadius:"5px"
-    }
+  var title = {
+    color: "",
+    textAlign: "centre",
+    marginBottom: "40px",
+    fontSize: "50px",
+    background: "#21212190",
+    borderRadius: "5px"
+  }
 
-    var h1titletag = {
-      textAlign: "center",
-      /* font-size: 1em; */
-      marginBottom: "10px",
-      font: "20px arial, sans-serif",
-      color: "white",
-      textShadow: "0 1px 2px rgba(black,.15)",
-    }
+  var h1titletag = {
+    textAlign: "center",
+    /* font-size: 1em; */
+    marginBottom: "10px",
+    font: "20px arial, sans-serif",
+    color: "white",
+    textShadow: "0 1px 2px rgba(black,.15)",
+  }
 
 
 
-  const videos = videoDetails.map((eachVideo)=>{
+  const videos = videoDetails.map((eachVideo) => {
     return (
-      <ExpansionPanel key = {eachVideo.title} className={classes.expansion}>
+      <ExpansionPanel key={eachVideo.title} className={classes.expansion}>
         <ExpansionPanelSummary
           className={classes.expansion}
           expandIcon={<ExpandMoreIcon />}
@@ -86,10 +86,12 @@ function SimpleExpansionPanel() {
           <Typography className={classes.heading}>{eachVideo.title}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <div style = {{paddingBottom: "56.25%" /* 16:9 */,
-          paddingTop: 25,
-          height: 0 ,textAlign:"center", width: "100%" , marginLeft: "auto", marginRight: "auto" ,marginBottom:"20px"}}>
-            <Youtube youtubeId = {eachVideo.videoLink}/>
+          <div style={{
+            paddingBottom: "56.25%" /* 16:9 */,
+            paddingTop: 25,
+            height: 0, textAlign: "center", width: "100%", marginLeft: "auto", marginRight: "auto", marginBottom: "20px"
+          }}>
+            <Youtube youtubeId={eachVideo.videoLink} />
           </div>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -98,7 +100,7 @@ function SimpleExpansionPanel() {
 
   return (
     <div className={classes.root}>
-      <div style = {title}><h1 style= {h1titletag}>Browse through our video series to learn our very own Sign Language<br/>The Kolok Kolok!!</h1></div>
+      <div style={title}><h1 style={h1titletag}>Browse through our video series to learn our very own Sign Language : The Kolok Kolok!!</h1></div>
       {videos}
     </div>
   );

@@ -10,27 +10,26 @@ const useStyles = makeStyles(theme => ({
   root: {
     padding: theme.spacing(3, 2),
   },
-  label:{
+  label: {
     marginBottom: "10px"
   }
 }));
 
-const Datespicker = (props) =>{
-  const classes  = useStyles();
-  return(
+const Datespicker = (props) => {
+  const classes = useStyles();
+  return (
     <React.Fragment>
 
       <Grid item xs={12}>
-      <Paper className={classes.root}>
-        <Typography className={classes.label}>
-          Choose Your Dates
+        <Paper className={classes.root}>
+          <Typography className={classes.label}>
+            Choose Your Dates
         </Typography>
-        <Grid container spacing={3}>
-
-          <Datepicker changed = {props.checkInChange} min = {new Date()} val = {props.checkIn} datelabel = "Check-In Date" />
-          <Datepicker changed = {props.checkOutChange} min = {props.checkIn} val = {props.checkOut} datelabel = "Check-Out Date" />
-        </Grid>
-      </Paper>
+          <Grid container spacing={3}>
+            <Datepicker excludeDates={props.excludeDates} changed={props.checkInChange} min={new Date()} val={props.checkIn} datelabel="Check-In Date" />
+            <Datepicker excludeDates={props.excludeDates} changed={props.checkOutChange} min={props.checkIn} val={props.checkOut} datelabel="Check-Out Date" />
+          </Grid>
+        </Paper>
       </Grid>
 
     </React.Fragment>

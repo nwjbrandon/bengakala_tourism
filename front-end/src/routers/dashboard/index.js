@@ -14,6 +14,8 @@ import Paper from '@material-ui/core/Paper';
 import format from 'date-fns/format';
 import Button from '@material-ui/core/Button';
 
+import API from '../../api'
+
 const styles = theme => ({
   root: {
     display: 'flex',
@@ -81,6 +83,43 @@ class Dashboard extends Component {
       tempExcludeDates.push(date)
       this.setState({ excludeDates: [...tempExcludeDates], numberCustomers: [...tempNumberCustomers] })
     }
+
+    const sendData = {
+      data: {
+        cost: [
+          {
+            Breakfast: "30000"
+          },
+          {
+            Lunch: "50000"
+          },
+          {
+            Dinner: "50000"
+          },
+          {
+            Accommodation: "100000"
+          },
+          {
+            Car: "100000"
+          },
+          {
+            Van: "100000"
+          },
+          {
+            Bike: "50000"
+          }
+        ],
+        excludedData: []
+      }
+    }
+    sendData.data.excludedData = [...this.state.excludeDates]
+
+    console.log(sendData)
+    API.post('/accommodation/info', sendData).then(res => {
+      console.log("RES");
+      console.log(res)
+    })
+
 
     // console.log(this.state.excludeDates)
   }

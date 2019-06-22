@@ -10,7 +10,7 @@ const accommodationInfo = [
     res.json({
       data: {
         cost,
-        excludedData: [],
+        excludedDates: [],
       }
     });
   },
