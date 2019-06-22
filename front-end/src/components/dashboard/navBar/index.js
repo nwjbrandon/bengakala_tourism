@@ -9,8 +9,8 @@ import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 
-import SideDrawerBrowser from './sideNavBarBrowser';
-import SideDrawerMobile from './sideNavBarMobile';
+import SideDrawerBrowser from './sideNavBarBrowser.container';
+import SideDrawerMobile from './sideNavBarMobile.container';
 
 const drawerWidth = 240;
 

@@ -24,8 +24,6 @@ import Notfound from './routers/notfound';
 import Payment from './routers/payment';
 import Tutorial from './routers/tutorial'
 
-import Navbar from './components/navBar/navbar'
-
 // Protected Routes
 import Admin from './routers/admin/container';
 import Dashboard from './routers/dashboard/container';
@@ -39,6 +37,8 @@ import DashboardSettings from './routers/dashboard/settings/container';
 // tmp solution to get rid of white gaps around the browser
 import './global.css'
 
+import ProtectedRoutes from './app';
+import Navbar from './components/navBar/navbar'
 import rootReducers from './reducers';
 import rootSagas from "./sagas";
 
@@ -70,21 +70,23 @@ const routing = (
         <Router history={history}>
           <Navbar />
           <Switch>
-            <Route exact path="/" component={ Home } />
-            <Route exact path="/booking" component={ Accommodation} />
-            <Route exact path="/tutorial" component={ Tutorial } />
-            <Route exact path="/admin" component={ Admin } />
-            <Route exact path="/attraction" component={ Attraction } />
-            <Route exact path="/contact" component={ Contact } />
-            <Route exact path="/faq" component={ Faq } />
-            <Route exact path="/payment" component={ Payment } />
-            <Route exact path="/dashboard" component={ Dashboard } />
-            <Route exact path="/dashboard/accommodation" component={ DashboardAccommodation } />
-            <Route exact path="/dashboard/attraction" component={ DashboardAttraction } />
-            <Route exact path="/dashboard/contact" component={ DashboardContact } />
-            <Route exact path="/dashboard/faq" component={ DashboardFAQ } />
-            <Route exact path="/dashboard/home" component={ DashboardHome } />
-            <Route exact path="/dashboard/settings" component={ DashboardSettings } />
+            <ProtectedRoutes exact path="/" component={ Home } secret={false} />
+            <ProtectedRoutes exact path="/booking" component={ Accommodation } secret={false} />
+            <ProtectedRoutes exact path="/tutorial" component={ Tutorial } secret={false} />
+            <ProtectedRoutes exact path="/admin" component={ Admin } secret={false} />
+            <ProtectedRoutes exact path="/attraction" component={ Attraction } secret={false} />
+            <ProtectedRoutes exact path="/contact" component={ Contact } secret={false} />
+            <ProtectedRoutes exact path="/faq" component={ Faq } secret={false} />
+            <ProtectedRoutes exact path="/payment" component={ Payment } secret={false} />
+
+            <ProtectedRoutes exact path="/dashboard" component={ Dashboard } secret={true} />
+            <ProtectedRoutes exact path="/dashboard/accommodation" component={ DashboardAccommodation } secret={true} />
+            <ProtectedRoutes exact path="/dashboard/attraction" component={ DashboardAttraction } secret={true} />
+            <ProtectedRoutes exact path="/dashboard/contact" component={ DashboardContact } secret={true} />
+            <ProtectedRoutes exact path="/dashboard/faq" component={ DashboardFAQ } secret={true} />
+            <ProtectedRoutes exact path="/dashboard/home" component={ DashboardHome } secret={true} />
+            <ProtectedRoutes exact path="/dashboard/settings" component={ DashboardSettings } secret={true} />
+            
             <Route component={ Notfound } />
           </Switch>
         </Router>
