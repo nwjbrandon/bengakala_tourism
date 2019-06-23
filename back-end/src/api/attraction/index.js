@@ -6,10 +6,9 @@ const attractionInfo = [
   async (req, res) => {
     const attractions = await db.fetchData(TABLE_INFORMATION, { type: 'attraction' });
     const data = _.map(attractions, attraction => ({
-      [attraction.title]: {
-        imgUrl: attraction.imgUrl,
-        text: attraction.text,
-      },
+      title: attraction.title,
+      imgUrl: attraction.imgUrl,
+      text: attraction.text,
     }));
     res.json({
       data
