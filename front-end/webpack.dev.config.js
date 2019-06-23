@@ -48,6 +48,8 @@ module.exports = {
     hot: true,
     proxy: {
       '/api': 'http://www.bengkala.social/api'
-    }
+    },
+    compress: true,
+    disableHostCheck: true,
   }
 };
