@@ -11,7 +11,7 @@ import PersonalDetailsForm from './PersonalDetailsForm'
 import ConfirmationScreen from './ConfirmationScreen'
 import Slip from './Slip'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core'
-import red from '@material-ui/core/colors/blue'
+import blue from '@material-ui/core/colors/blue'
 import Buttons from './Buttons'
 import { connect } from 'react-redux'
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles(theme => ({
     position: 'relative',
   },
   label: {
-    color: red
+    color: blue
   },
   layout: {
     width: 'auto',
@@ -114,7 +114,7 @@ const Checkout = (props) => {
 
   const theme = createMuiTheme({
     palette: {
-      primary: red
+      primary: blue
     }
   })
 
