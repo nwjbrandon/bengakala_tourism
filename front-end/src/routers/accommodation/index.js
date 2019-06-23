@@ -48,7 +48,6 @@ class Accomodation extends React.Component {
       <Provider store={store}>
         <div style={divStyle}>
           <AccomodationsForm />
-          <Slideshow textArr={this.state.textArray} />
         </div>
       </Provider>
 

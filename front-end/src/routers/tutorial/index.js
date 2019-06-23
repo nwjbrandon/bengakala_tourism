@@ -25,7 +25,7 @@ class TutorialPage extends React.Component {
       backgroundRepeat: "initial",
       backgroundSize: "cover",
       width: "auto",
-      height: "100vh",
+      height: "150vh",
       backgroundImage: `url(${bg})`,
       textAlign: "left",
       justifyContent: "center"

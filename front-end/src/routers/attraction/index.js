@@ -25,7 +25,7 @@ class Attraction extends React.Component {
     }
   }
   componentDidMount() {
-    API.get('/attraction').then(res => {
+    API.get('/attraction/info').then(res => {
       console.log("RES");
       console.log(res);
       this.setState({ data: res });
