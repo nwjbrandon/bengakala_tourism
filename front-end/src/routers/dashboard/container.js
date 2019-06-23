@@ -6,6 +6,7 @@ function mapStateToProps(state) {
     return {
         heatmap: state.dashboard.heatmap,
         transactions: state.dashboard.transactions,
+        auth: state.admin.auth,
     };
 }
 

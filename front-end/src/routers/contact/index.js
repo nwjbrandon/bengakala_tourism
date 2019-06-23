@@ -22,7 +22,8 @@ const styles = theme => ({
     display: 'flex',
   },
   bgImage: {
-    padding: 50,
+    paddingTop: 50,
+    paddingBottom: 50,
     backgroundPosition: "top",
     backgroundRepeat: "initial",
     backgroundSize: "cover",

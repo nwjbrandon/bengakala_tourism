@@ -3,7 +3,7 @@ import reduceReducers from 'reduce-reducers';
 import { contactOnMountReducer } from "./contact-onmount";
 import { contactFormReducer } from "./contact-form";
 import { dashboardOnMountReducer } from "./dashboard";
-import { adminLoginReducer } from "./admin-login";
+import { adminLoginReducer } from "./admin";
 import { dashboardFaqReducer } from "./dashboardFaq";
 import { dashboardContactReducer } from "./dashboardContact";
 import { dashboardAccommodationReducer } from "./dashboardAccommodation";
@@ -11,8 +11,10 @@ import { dashboardAttractionReducer } from "./dashboardAttraction";
 import { dashboardHomeReducer } from "./dashboardHome";
 import { dashboardSettingsReducer } from "./dashboardSettings";
 import { homeOnMountReducer } from "./home";
+import { faqOnMountReducer } from "./faq";
+import { connectRouter } from 'connected-react-router'
 
-const allReducers = combineReducers({
+const allReducers = (history) => combineReducers({
     admin: reduceReducers(adminLoginReducer),
     dashboard: reduceReducers(dashboardOnMountReducer),
     dashboardFaq: reduceReducers(dashboardFaqReducer),
@@ -23,6 +25,8 @@ const allReducers = combineReducers({
     dashboardSettings: reduceReducers(dashboardSettingsReducer),
     contact: reduceReducers(contactOnMountReducer, contactFormReducer),
     home: reduceReducers(homeOnMountReducer),
+    faq: reduceReducers(faqOnMountReducer),
+    router: connectRouter(history),
 });
 
 export default allReducers

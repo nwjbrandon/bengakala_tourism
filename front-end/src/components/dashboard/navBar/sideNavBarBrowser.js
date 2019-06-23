@@ -1,28 +1,22 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import { withStyles } from '@material-ui/core/styles';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import { Link } from 'react-router-dom'
 import Dashboard from '@material-ui/icons/Dashboard';
-import Loyalty from '@material-ui/icons/Loyalty';
 import Home from '@material-ui/icons/Home';
 import Faq from '@material-ui/icons/QuestionAnswer';
-import Payment from '@material-ui/icons/Payment';
 import Permphone from '@material-ui/icons/PermPhoneMsg';
 import Settings from '@material-ui/icons/Settings';
 import Store from '@material-ui/icons/Store';
 import Terrain from '@material-ui/icons/Terrain';
 import Exittoapp from '@material-ui/icons/ExitToApp';
 import {connect} from 'react-redux';
-import {signOut} from '../../../actions/auth'
 import {withRouter} from 'react-router-dom';
-import API from '../../../api'
 
 const sideNavBarBrowser = [
     {
@@ -101,7 +95,7 @@ const styles = theme => ({
     },
 });
 
-class SideDrawer extends React.Component {
+class SideDrawer extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -112,9 +106,8 @@ class SideDrawer extends React.Component {
     }
 
     logout() {
-        this.props.signOut();
-        this.props.history.push('/admin');
-        API.get('/admin/logout');
+        const { logout } = this.props;
+        logout();
     }
 
     render() {

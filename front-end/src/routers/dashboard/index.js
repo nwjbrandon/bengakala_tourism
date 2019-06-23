@@ -13,6 +13,7 @@ import TableRow from '@material-ui/core/TableRow';
 import Paper from '@material-ui/core/Paper';
 import format from 'date-fns/format';
 import Button from '@material-ui/core/Button';
+import  { Redirect } from 'react-router-dom';
 
 import API from '../../api'
 
@@ -64,10 +65,11 @@ class Dashboard extends Component {
     checkIn(event.currentTarget.value);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const { onMount, } = this.props;
     onMount();
   }
+
   /*
   addRemoveDate = (date) => {
 

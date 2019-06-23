@@ -31,5 +31,29 @@ export const adminLoginReducer = handleActions({
             auth: false,
         };
     },
+    "ADMIN_LOGOUT_REQUEST": (state) => {
+        return {
+            ...state,
+            fetching: true,
+            error: false,
+            auth: false,
+        };
+    },
+    "ADMIN_LOGOUT_SUCCESS": (state) => {
+        return {
+            ...state,
+            fetching: false,
+            error: false,
+            auth: false,
+        };
+    },
+    "ADMIN_LOGOUT_ERROR": (state, action) => {
+        return {
+            ...state,
+            fetching: false,
+            error: action.payload,
+            auth: false,
+        };
+    },
 }, initialState);
 

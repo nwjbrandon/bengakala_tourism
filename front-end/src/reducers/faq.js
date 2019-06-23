@@ -1,23 +1,20 @@
 import { handleActions } from 'redux-actions';
 
 const initialState = {
-    data: {
-        stories: [],
-        mission: "",
-    },
+    data: {},
     fetching: false,
     error: false,
 };
 
-export const homeOnMountReducer = handleActions({
-    "HOME_ONMOUNT_REQUEST": (state) => {
+export const faqOnMountReducer = handleActions({
+    "FAQ_ONMOUNT_REQUEST": (state) => {
         return {
             ...state,
             fetching: true,
             error: false,
         };
     },
-    "HOME_ONMOUNT_SUCCESS": (state, action) => {
+    "FAQ_ONMOUNT_SUCCESS": (state, action) => {
         return {
             ...state,
             fetching: false,
@@ -25,7 +22,7 @@ export const homeOnMountReducer = handleActions({
             error: false,
         };
     },
-    "HOME_ONMOUNT_ERROR": (state, action) => {
+    "FAQ_ONMOUNT_ERROR": (state, action) => {
         return {
             ...state,
             fetching: false,
