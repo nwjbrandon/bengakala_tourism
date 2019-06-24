@@ -53,7 +53,7 @@ class Attraction extends React.Component {
       backgroundPosition: "top",
       backgroundRepeat: "initial",
       backgroundSize: "cover",
-      width: "100%",
+      width: "auto",
       backgroundImage: `url(${bg})`,
       textAlign: "left"
     };
