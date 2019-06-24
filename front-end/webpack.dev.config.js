@@ -47,9 +47,9 @@ module.exports = {
     historyApiFallback: true,
     hot: true,
     proxy: {
-      '/api': 'http://www.bengkala.social/api'
+      '/api': 'https://bengkala.social/api'
     },
     compress: true,
-    disableHostCheck: true,
+      public: 'bengkala.social'
   }
 };
