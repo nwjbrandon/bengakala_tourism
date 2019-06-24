@@ -103,9 +103,29 @@ const Checkout = (props) => {
         setActiveStep(activeStep + 1);
       }
     } else if (activeStep == 3) {
-      API.post('/accommodation', {
-        personalDetails: { ...props.personalDetails },
-        tripDetails: { ...props.tripDetails }
+      console.log(props.tripDetails.checkIn.toISOString())
+      API.post('/accommodation/info', {
+        data: {
+          "firstName": props.personalDetails.firstName,
+          "lastName": props.personalDetails.lastName,
+          "email": props.personalDetails.email,
+          "country": props.personalDetails.country,
+          "dateFrom": "2019-01-29",
+          "dateTo": "2019-01-29",
+          "males": props.tripDetails.numberMales,
+          "females": props.tripDetails.numberFemales,
+          "cars": props.tripDetails.numberCars,
+          "van": props.tripDetails.numberVans,
+          "breakfast": (props.tripDetails.breakfast ? 1 : 0),
+          "lunch": (props.tripDetails.lunch ? 1 : 0),
+          "dinner": (props.tripDetails.dinner ? 1 : 0),
+          "motorbikes": props.tripDetails.numberBikes,
+          "createdAt": "2019-01-29",
+        }
+      }).then((res) => {
+        console.log(res);
+      }).catch((err) => {
+        console.log(err)
       });
       setActiveStep(activeStep + 1);
     } else {
