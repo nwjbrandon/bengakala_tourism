@@ -79,10 +79,16 @@ const Checkout = (props) => {
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
 
+  const isValidEmail = (email) => {
+    return email.includes("@") && email.includes('.') && email.split('@').length > 1 && email.split('@')[1] !== "";
+  }
+
   const handleNext = () => {
     if (activeStep == 0) {
       if (props.personalDetails.firstName === "" || props.personalDetails.lastName === "" || props.personalDetails.email === "" || props.personalDetails.country === "") {
         props.onError("Important Fields Are Empty!");
+      } else if (!isValidEmail(props.personalDetails.email)) {
+        props.onError("Oops doesnt look like a valid email address!");
       } else {
         props.onError("");
         setActiveStep(activeStep + 1);
