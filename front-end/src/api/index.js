@@ -1,7 +1,7 @@
 import axios from 'axios';
 import config from '../config';
 
-const httpUrl = 'http://www.bengkala.social/api';
+const httpUrl = 'https://bengkala.social/api';
 // const httpsUrl = `http://${ config.react.domainName }:${ config.react.portNumber }/api`;
 axios.defaults.withCredentials = true;
 const getRequest = (url, data) => {
