@@ -17,6 +17,7 @@ const useStyles = makeStyles(theme => ({
         paddingTop: "1%",
         paddingLeft: "5%",
         paddingRight: "5%",
+        width: "auto",
         background: "#FFFFFF00",
     },
     gridList: {
