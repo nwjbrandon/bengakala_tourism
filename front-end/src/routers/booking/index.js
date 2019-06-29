@@ -30,12 +30,9 @@ class Accomodation extends React.Component {
 
     var divStyle = {
       padding: 50,
-      backgroundPosition: "top",
-      backgroundRepeat: "initial",
-      backgroundSize: "cover",
       width: "100%",
-      backgroundImage: `url(${bg})`,
-      textAlign: "left"
+      textAlign: "left",
+      backgroundColor: 'aquamarine',
     };
     return (
       <Provider store={store}>
