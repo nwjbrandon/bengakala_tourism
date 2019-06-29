@@ -21,7 +21,6 @@ import Attraction from './routers/attraction';
 import Contact from './containers/contact';
 import Faq from './routers/faq/container';
 import Notfound from './routers/notfound';
-import Payment from './routers/payment';
 import Tutorial from './routers/tutorial'
 
 // Protected Routes
@@ -77,7 +76,6 @@ const routing = (
             <ProtectedRoutes exact path="/attraction" component={ Attraction } secret={false} />
             <ProtectedRoutes exact path="/contact" component={ Contact } secret={false} />
             <ProtectedRoutes exact path="/faq" component={ Faq } secret={false} />
-            <ProtectedRoutes exact path="/payment" component={ Payment } secret={false} />
 
             <ProtectedRoutes exact path="/dashboard" component={ Dashboard } secret={true} />
             <ProtectedRoutes exact path="/dashboard/accommodation" component={ DashboardAccommodation } secret={true} />
