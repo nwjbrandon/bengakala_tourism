@@ -27,7 +27,7 @@ class App extends Component {
           Here's your invoice
         </h1>
         <div style={{ color: 'white' }} className='customer-details semi-bold'>
-          <p> Billing informatiion </p>
+          <p> Billing information </p>
           <h4 className='header-sm left-text'>
             {this.props.personalDetails.firstName} {this.props.personalDetails.lastName} from {this.props.personalDetails.country}
           </h4>
