@@ -15,19 +15,19 @@ import createSagaMiddleware from "redux-saga";
 import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 
 // Non Protected Routes
-import Accommodation from './routers/accommodation';
+import Accommodation from './routers/booking';
 import Home from './routers/home';
 import Attraction from './routers/attraction';
 import Contact from './routers/contact/container';
 import Faq from './routers/faq/container';
 import Notfound from './routers/notfound';
 import Payment from './routers/payment';
-import Tutorial from './routers/tutorial'
+import Tutorial from './routers/resources'
 
 // Protected Routes
 import Admin from './routers/admin/container';
 import Dashboard from './routers/dashboard/container';
-import DashboardAccommodation from './routers/dashboard/accommodation/container';
+import DashboardAccommodation from './routers/dashboard/booking/container';
 import DashboardAttraction from './routers/dashboard/attraction/container';
 import DashboardContact from './routers/dashboard/contact/container';
 import DashboardFAQ from './routers/dashboard/faq/container';
@@ -68,11 +68,10 @@ const routing = (
     <Provider store={ store }>
       <PersistGate persistor={ persistor } loading={null}>
         <Router history={history}>
-          <Navbar />
           <Switch>
             <ProtectedRoutes exact path="/" component={ Home } secret={false} />
             <ProtectedRoutes exact path="/booking" component={ Accommodation } secret={false} />
-            <ProtectedRoutes exact path="/tutorial" component={ Tutorial } secret={false} />
+            <ProtectedRoutes exact path="/resources" component={ Tutorial } secret={false} />
             <ProtectedRoutes exact path="/admin" component={ Admin } secret={false} />
             <ProtectedRoutes exact path="/attraction" component={ Attraction } secret={false} />
             <ProtectedRoutes exact path="/contact" component={ Contact } secret={false} />
@@ -80,7 +79,7 @@ const routing = (
             <ProtectedRoutes exact path="/payment" component={ Payment } secret={false} />
 
             <ProtectedRoutes exact path="/dashboard" component={ Dashboard } secret={true} />
-            <ProtectedRoutes exact path="/dashboard/accommodation" component={ DashboardAccommodation } secret={true} />
+            <ProtectedRoutes exact path="/dashboard/booking" component={ DashboardAccommodation } secret={true} />
             <ProtectedRoutes exact path="/dashboard/attraction" component={ DashboardAttraction } secret={true} />
             <ProtectedRoutes exact path="/dashboard/contact" component={ DashboardContact } secret={true} />
             <ProtectedRoutes exact path="/dashboard/faq" component={ DashboardFAQ } secret={true} />

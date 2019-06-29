@@ -15,12 +15,14 @@ import LocationIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/PermPhoneMsg';
 import PropTypes from "prop-types";
 import uuid from 'uuid/v1';
+import Navbar from "../../components/navBar/navbar";
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
   },
   paper: {
+    backgroundColor: 'aquamarine',
     padding: theme.spacing(2),
     height: 800,
     margin: 'auto',
@@ -34,6 +36,7 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing(1),
+    backgroundColor: 'teal',
   },
 });
 
@@ -76,6 +79,7 @@ class Contact extends React.Component {
     const { classes, data, errorMsg, successMsg } = this.props;
     return (
       <React.Fragment>
+        <Navbar />
         <div className={classes.root}>
             <Grid
                 container

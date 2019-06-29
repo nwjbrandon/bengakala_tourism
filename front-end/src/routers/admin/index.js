@@ -8,6 +8,7 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom'
+import Navbar from "../../components/navBar/navbar";
 
 const styles = theme => ({
   root: {
@@ -53,6 +54,7 @@ class Admin extends React.Component {
     const { classes } = this.props;
     return (
         <React.Fragment>
+          <Navbar />
           <Grid
               container
               direction="column"
