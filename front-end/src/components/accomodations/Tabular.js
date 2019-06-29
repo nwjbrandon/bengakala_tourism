@@ -5,6 +5,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+/*
 const tripDetails = {
   checkIn: "18/04/2020",
   checkOut: "28/04/2020",
@@ -31,6 +32,7 @@ const prices = {
   car: 10,
   bike: 5
 }
+*/
 
 function priceRow(qty, unit) {
   return qty * unit * duration;
