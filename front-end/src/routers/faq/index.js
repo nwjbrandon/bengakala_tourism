@@ -4,26 +4,21 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import bg from './pics/faqbackground.jpg';
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-  },
-  bgImage: {
-    paddingTop: 50,
-    paddingBottom: 50,
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    width: "100%",
-    backgroundImage: `url(${bg})`,
+    flexGrow: 1,
   },
   paper: {
-    width: 450,
+    padding: theme.spacing(2),
+    height: 800,
     margin: 'auto',
-    [theme.breakpoints.up(550 + theme.spacing(6))]: {
-      width: 600,
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexGrow: 1,
+    width: 450,
+    [theme.breakpoints.up(500 + theme.spacing(6))]: {
+      width: 500,
     },
   },
 });
@@ -44,7 +39,6 @@ class Faq extends React.Component {
     return (
       <React.Fragment>
         <div className={classes.root}>
-          <div className={classes.bgImage}>
             <Grid
                 container
                 direction="column"
@@ -104,7 +98,6 @@ class Faq extends React.Component {
                 </Paper>
               </Grid>
             </Grid>
-          </div>
         </div>
       </React.Fragment>
     )

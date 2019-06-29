@@ -18,7 +18,7 @@ import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 import Accommodation from './routers/accommodation';
 import Home from './routers/home';
 import Attraction from './routers/attraction';
-import Contact from './containers/contact';
+import Contact from './routers/contact/container';
 import Faq from './routers/faq/container';
 import Notfound from './routers/notfound';
 import Payment from './routers/payment';

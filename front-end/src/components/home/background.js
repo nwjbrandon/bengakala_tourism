@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import Bg from '../../routers/home/pictures/bgimg.jpg'
+import Bg from '../../assets/img/bgimg.jpg'
 
 const bgStyles = {
   backgroundImage: `url(${Bg})`,
@@ -35,7 +35,12 @@ const topCaption = {
   letterSpacing: '-.02rem',
   lineHeight: '1'
 };
-
+const banner = {
+  color: '#fff',
+  fontSize: '40px',
+  letterSpacing: '-.02rem',
+  lineHeight: '1'
+};
 class Background extends Component {
   render() {
     return (
@@ -46,6 +51,7 @@ class Background extends Component {
               <h1 style={topCaption}>Bali, Indonesia</h1>
             </div>
             <h2 style={bgCaption}>Bengkala Village</h2>
+            <p style={banner}>This is a banner</p>
           </div>
         </div>
 

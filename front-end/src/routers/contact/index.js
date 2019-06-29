@@ -13,31 +13,21 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import LocationIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/PermPhoneMsg';
-import bg from './bgpic/roadtovillage.jpg';
 import PropTypes from "prop-types";
 import uuid from 'uuid/v1';
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-  },
-  bgImage: {
-    paddingTop: 50,
-    paddingBottom: 50,
-    backgroundPosition: "top",
-    backgroundRepeat: "initial",
-    backgroundSize: "cover",
-    width: "100%",
-    backgroundImage: `url(${bg})`,
-    textAlign: "left"
+    flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(3),
-    width: 450,
+    padding: theme.spacing(2),
+    height: 800,
     margin: 'auto',
     display: 'flex',
     flexWrap: 'wrap',
     flexGrow: 1,
+    width: 450,
     [theme.breakpoints.up(500 + theme.spacing(6))]: {
       width: 500,
     },
@@ -87,13 +77,14 @@ class Contact extends React.Component {
     return (
       <React.Fragment>
         <div className={classes.root}>
-          <div className={classes.bgImage}>
             <Grid
                 container
+                direction="column"
                 alignItems="center"
                 justify="center"
+                style={{ minHeight: '100vh' }}
             >
-              <Grid item>
+              <Grid item xs={12}>
                 <Paper className={classes.paper}>
                   <Grid item xs={12}>
                     <Typography variant="h4" style={{ paddingTop: 10, padding: 17 }}>
@@ -205,7 +196,6 @@ class Contact extends React.Component {
                 </Paper>
               </Grid>
             </Grid>
-          </div>
         </div>
       </React.Fragment>
     )
