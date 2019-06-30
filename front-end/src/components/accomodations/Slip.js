@@ -38,7 +38,7 @@ class App extends Component {
             <h4 style={{ fontSize: "20px", color: 'black' }} className='header-sm'>
               Price Breakdown
             </h4>
-            <MasterTable tripDetails={this.props.tripDetails} />
+            <MasterTable tripDetails={this.props.tripDetails} cost={this.props.cost} />
           </div>
           <div className='vert-space' />
         </div>
@@ -51,6 +51,7 @@ const mapStateToProps = state => {
   return {
     personalDetails: state.personalDetails,
     tripDetails: state.tripDetails,
+    cost: state.cost,
   };
 };
 
