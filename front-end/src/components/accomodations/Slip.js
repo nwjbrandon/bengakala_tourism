@@ -24,8 +24,6 @@ const App = (props) => {
 
   const classes = useStyles();
 
-  const {personalDetails, tripDetails, cost} = props;
-
   return (
     <div className='flex-center container medium-border-surround'>
       <Typography className={classes.label} variant="h4">
@@ -33,16 +31,16 @@ const App = (props) => {
         </Typography>
       <div>
         <Typography className={classes.label} variant="h6">
-          {personalDetails.firstName} {personalDetails.lastName} from {personalDetails.country}
+          {props.personalDetails.firstName} {props.personalDetails.lastName} from {props.personalDetails.country}
         </Typography>
         <Typography className={classes.label} variant="h6">
-          {personalDetails.email}
+          {props.personalDetails.email}
         </Typography>
         <div>
           <Typography className={classes.label} variant="h5">
             Price Breakdown
             </Typography>
-          <MasterTable tripDetails={tripDetails} cost={cost} />
+          <MasterTable tripDetails={props.tripDetails} cost={props.cost} />
         </div>
       </div>
     </div>
