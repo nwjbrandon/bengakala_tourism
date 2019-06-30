@@ -118,7 +118,7 @@ export default class MasterTable extends React.Component {
     const groupSize = parseInt(tripDetails.numberFemales) + parseInt(tripDetails.numberMales)
     const mealRow = this.mealRow(tripDetails.breakfast, tripDetails.lunch, tripDetails.dinner,
       cost.breakfast, cost.lunch, cost.dinner, groupSize)
-    const homeRow = [this.createRow('HomeStay', groupSize / 4, cost.accomodation)]
+    const homeRow = [this.createRow('HomeStay', Math.floor(groupSize / 4), cost.accomodation)]
     return (
       <Table>
         <TableHead>
