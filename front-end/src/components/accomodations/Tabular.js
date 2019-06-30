@@ -38,17 +38,17 @@ export default class MasterTable extends React.Component {
   constructor(props) {
     super(props)
 
-    this.priceRow = priceRow.bind(this)
-    this.createRow = createRow.bind(this)
-    this.mealRow = mealRow.bind(this)
-    this.subtotal = subtotal.bind(this)
-    this.totalCost = totalCost.bind(this)
-    this.date_diff_indays = date_diff_indays.bind(this)
+    this.priceRow = this.priceRow.bind(this)
+    this.createRow = this.createRow.bind(this)
+    this.mealRow = this.mealRow.bind(this)
+    this.subtotal = this.subtotal.bind(this)
+    this.totalCost = this.totalCost.bind(this)
+    this.date_diff_indays = this.date_diff_indays.bind(this)
   }
 
   date_diff_indays = (date1, date2) => {
-    dt1 = new Date(date1);
-    dt2 = new Date(date2);
+    const dt1 = new Date(date1);
+    const dt2 = new Date(date2);
     return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24));
   }
 
@@ -58,7 +58,7 @@ export default class MasterTable extends React.Component {
 
   createRow = (desc, qty, unit) => {
     const duration = this.date_diff_indays(this.props.tripDetails.checkIn, this.props.tripDetails.checkOut)
-    const price = priceRow(qty, unit, duration)
+    const price = this.priceRow(qty, unit, duration)
     return { desc, qty, price };
   }
 
@@ -83,13 +83,13 @@ export default class MasterTable extends React.Component {
 
     let arr = []
     if (b) {
-      arr[0] = createRow('Breakfast', groupSize, bCost)
+      arr[0] = this.createRow('Breakfast', groupSize, bCost)
     }
     if (l) {
-      arr[1] = createRow('Lunch', groupSize, lCost)
+      arr[1] = this.createRow('Lunch', groupSize, lCost)
     }
     if (d) {
-      arr[2] = createRow('Dinner', groupSize, dCost)
+      arr[2] = this.createRow('Dinner', groupSize, dCost)
     }
     return arr;
   }
@@ -115,17 +115,17 @@ export default class MasterTable extends React.Component {
 
   render() {
     const { tripDetails, cost } = this.props
-    const groupSize = tripDetails.numberFemales + tripDetails.numberMales
+    const groupSize = parseInt(tripDetails.numberFemales) + parseInt(tripDetails.numberMales)
     const mealRow = this.mealRow(tripDetails.breakfast, tripDetails.lunch, tripDetails.dinner,
       cost.breakfast, cost.lunch, cost.dinner, groupSize)
-    const homeRow = this.createRow('HomeStay', groupSize / 4, cost.accommodation)
+    const homeRow = [this.createRow('HomeStay', groupSize / 4, cost.accomodation)]
     return (
       <Table>
         <TableHead>
           <TableRow>
             <TableCell style={{ fontSize: "20px", color: 'cyan' }}>Type</TableCell>
             <TableCell style={{ fontSize: "20px", color: 'cyan' }}>Qty</TableCell>
-            <TableCell style={{ fontSize: "20px", color: 'cyan' }}>Price</TableCell>
+            <TableCell style={{ fontSize: "20px", color: 'cyan' }}>Price (IDR)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -171,7 +171,7 @@ export default class MasterTable extends React.Component {
           <TableRow>
             <TableCell></TableCell>
             <TableCell style={{ color: 'white' }}> Total </TableCell>
-            <TableCell style={{ color: 'white' }}>{this.totalCost([this.subtotal(mealRow), homeRow.price])}</TableCell>
+            <TableCell style={{ color: 'white' }}>{this.totalCost([this.subtotal(mealRow), homeRow[0].price])}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
