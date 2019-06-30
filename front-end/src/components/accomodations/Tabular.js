@@ -143,9 +143,9 @@ export default function MasterTable(props) {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell style={{ fontSize: "20px", color: 'cyan' }}>Type</TableCell>
-            <TableCell style={{ fontSize: "20px", color: 'cyan' }}>Qty</TableCell>
-            <TableCell style={{ fontSize: "20px", color: 'cyan' }}>Price (IDR)</TableCell>
+            <TableCell style={{ fontSize: "20px", color: 'green' }}>Type</TableCell>
+            <TableCell style={{ fontSize: "20px", color: 'green' }}>Qty</TableCell>
+            <TableCell style={{ fontSize: "20px", color: 'green' }}>Price (IDR)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -153,7 +153,7 @@ export default function MasterTable(props) {
             <TableRow>
               <TableCell style={{ color: 'black' }}>{row.desc}</TableCell>
               <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
-              <TableCell style={{ color: 'black' }}>{row.price}</TableCell>
+              <TableCell style={{ color: 'blue' }}>{row.price}</TableCell>
             </TableRow>
           ))}
           <TableRow>
@@ -163,14 +163,14 @@ export default function MasterTable(props) {
           </TableRow>
           {mealRow.map(row => (
             <TableRow style={{ color: 'black' }}>
-              <TableCell style={{ color: 'black' }} align="center"> {row.desc}</TableCell>
+              <TableCell style={{ color: 'black' }} align="center">{row.desc}</TableCell>
               <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
               <TableCell style={{ color: 'black' }}>{row.price}</TableCell>
             </TableRow>
           ))}
           <TableRow>
             <TableCell></TableCell>
-            <TableCell style={{ color: 'blue' }} align="center">Meals total</TableCell>
+            <TableCell style={{ color: 'blue' }}>Meals total</TableCell>
             <TableCell style={{ color: 'blue' }}>{subtotal(mealRow)}</TableCell>
           </TableRow>
           {/* <TableRow>
@@ -190,7 +190,7 @@ export default function MasterTable(props) {
             </TableRow> */}
           <TableRow>
             <TableCell></TableCell>
-            <TableCell style={{ color: 'blue' }}> Total </TableCell>
+            <TableCell style={{ color: 'blue' }}>Total</TableCell>
             <TableCell style={{ color: 'blue' }}>{totalCost([subtotal(mealRow), homeRow[0].price])}</TableCell>
           </TableRow>
         </TableBody>

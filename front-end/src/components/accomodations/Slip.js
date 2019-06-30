@@ -28,11 +28,10 @@ const App = (props) => {
 
   return (
     <div className='flex-center container medium-border-surround'>
-      <Typography className={classes.label} variant="h3">
+      <Typography className={classes.label} variant="h4">
         Here's your invoice
         </Typography>
       <div>
-        <Typography className={classes.label} variant="h4"> Billing information </Typography>
         <Typography className={classes.label} variant="h6">
           {personalDetails.firstName} {personalDetails.lastName} from {personalDetails.country}
         </Typography>
@@ -40,7 +39,7 @@ const App = (props) => {
           {personalDetails.email}
         </Typography>
         <div>
-          <Typography className={classes.label} variant="h4">
+          <Typography className={classes.label} variant="h5">
             Price Breakdown
             </Typography>
           <MasterTable tripDetails={tripDetails} cost={cost} />
