@@ -1,5 +1,5 @@
 import express from 'express';
-import { check } from 'express-validator/check';
+import { check, validationResult } from 'express-validator/check';
 import home from './home';
 import accommodation from './accommodation';
 import admin from './admin';
@@ -42,7 +42,31 @@ app.put('/contact/info', [
 app.get('/faq/info', faq.info);
 
 // endpoints must be protected
-app.post('/admin/login', passport.authenticate('local', { failWithError: true }), admin.login, admin.err);
+app.post('/admin/login', [
+  check('email').exists().not().isEmpty()
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('Valid Username is Required'),
+  check('password').exists().not().isEmpty()
+    .withMessage('Password is Required'),
+],
+[
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const message = errors.array()[0].msg;
+      return res.status(422).json({
+        error: {
+          code: 422,
+          message,
+        }
+      });
+    }
+    next();
+    return 1;
+  }
+],
+passport.authenticate('local', { failWithError: true }), admin.login, admin.err);
 app.get('/admin/logout', checkAuthentication, admin.logout);
 
 app.get('/admin/dashboard', checkAuthentication, dashboard.get);

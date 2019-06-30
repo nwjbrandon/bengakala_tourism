@@ -10,19 +10,27 @@ import {
     ADMIN_LOGOUT_SUCCESS,
     ADMIN_LOGOUT_ERROR
 } from "../actions/admin";
+import {TOAST_ERROR_SHOW, TOAST_SUCCESS_SHOW} from "../actions/toast";
 
-function login(data) {
-    return API.post('/admin/login', data);
+function login({...data}) {
+    return API.post('/admin/login', {...data});
 }
 
 function* workerSagaLogin(payload) {
     try {
         const data = yield call(login, payload.payload);
         yield put(ADMIN_LOGIN_SUCCESS(data));
+        yield put(TOAST_SUCCESS_SHOW('Contact Form Submitted'));
         yield put(push('/dashboard'));
     } catch (error) {
-        console.log(error);
         yield put(ADMIN_LOGIN_ERROR(error));
+        if (error.status === 401) {
+            yield put(TOAST_ERROR_SHOW('Invalid Username or Password'));
+        } else if (error.status === 422) {
+            yield put(TOAST_ERROR_SHOW(error.data.error.message));
+        } else {
+            yield put(TOAST_ERROR_SHOW('Oops something went wrong'));
+        }
     }
 }
 

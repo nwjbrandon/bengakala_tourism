@@ -20,7 +20,6 @@ const contactInfo = [
 const contactPut = [
   async (req, res) => {
     const errors = validationResult(req);
-    console.log(req.body);
     if (!errors.isEmpty()) {
       console.log(errors.array());
       const message = errors.array()[0].msg;

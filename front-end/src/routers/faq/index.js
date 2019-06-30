@@ -18,9 +18,9 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     flexGrow: 1,
-    width: 450,
-    [theme.breakpoints.up(700 + theme.spacing(6))]: {
-      width: 700,
+    width: '90%',
+    [theme.breakpoints.up(450)]: {
+      width: 450,
     },
   },
 });
