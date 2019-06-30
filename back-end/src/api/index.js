@@ -21,6 +21,10 @@ const app = express();
 app.get('/home/info', home.info);
 app.get('/accommodation/info', accommodation.info);
 app.post('/accommodation/info', accommodation.post);
+
+//TODO
+
+
 app.get('/attraction/info', attraction.info);
 app.get('/contact/info', contact.info);
 app.put('/contact/info', contact.put);

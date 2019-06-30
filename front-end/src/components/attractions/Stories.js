@@ -54,6 +54,7 @@ const useStyles = makeStyles(theme => ({
         font: "20px arial, sans-serif",
         color: "white",
         textShadow: "0 1px 2px rgba(black,.15)",
+        height: "50px"
     },
 
     titleBar: {
@@ -86,9 +87,36 @@ export default function SingleLineGridList(props) {
     const classes = useStyles();
 
     const [open, setOpen] = useState(false);
-    const [dataID, setDataID] = useState("");
+    const [dataID, setDataID] = useState(undefined);
 
     const [modalStyle] = React.useState(getModalStyle);
+    console.log("The Data");
+    console.log(props.data)
+
+    // const cardRow = props.data.map((item) => {
+
+    //     <GridListTile className={classes.gridListTile}>
+    //         <img style={{ height: "400px" }} src={item.imgUrl} alt={item.title} />
+    //         <GridListTileBar
+    //             title={item.title}
+    //             classes={{
+    //                 root: classes.titleBar,
+    //                 title: classes.title,
+    //             }}
+    //             actionIcon={
+    //                 <Button onClick={() => {
+    //                     setDataID({ ...item });
+    //                     setOpen(true);
+    //                 }
+    //                 } size="small" className={classes.title}>
+    //                     Read More
+    //                     </Button>
+    //             }
+    //         />
+    //     </GridListTile>
+
+
+    // });
 
 
 
@@ -135,10 +163,10 @@ export default function SingleLineGridList(props) {
             >
                 <div style={modalStyle} className={classes.paper}>
                     <Typography variant="h6" id="story_title">
-                        {dataID}
+                        {dataID.title}
                     </Typography>
                     <Typography variant="subtitle1" id="story_description">
-                        {props.data[dataID][0].text}
+                        {dataID.text}
                     </Typography>
                 </div>
             </Modal> : null}
