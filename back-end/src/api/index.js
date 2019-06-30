@@ -27,18 +27,17 @@ app.get('/attraction/info', attraction.info);
 app.get('/contact/info', contact.info);
 app.put('/contact/info', [
   check('email').exists().not().isEmpty()
-    .withMessage('No Email Given')
     .normalizeEmail()
     .isEmail()
-    .withMessage('Invalid Email'),
-  check('contact').exists().not().isEmpty()
-    .withMessage('No Contact'),
-  check('subject').exists().not().isEmpty()
-    .withMessage('No Subject Given'),
-  check('message').exists().not().isEmpty()
-    .withMessage('No Message Given'),
+    .withMessage('Valid Email is Required'),
   check('name').exists().not().isEmpty()
-    .withMessage('No Name Given'),
+    .withMessage('Name is Required'),
+  check('contact').exists().not().isEmpty()
+    .withMessage('Contact is Required'),
+  check('subject').exists().not().isEmpty()
+    .withMessage('Subject is Required'),
+  check('message').exists().not().isEmpty()
+    .withMessage('Message is Required'),
 ], contact.put);
 app.get('/faq/info', faq.info);
 

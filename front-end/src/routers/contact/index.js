@@ -26,14 +26,14 @@ const styles = theme => ({
   paper: {
     backgroundColor: 'aquamarine',
     padding: theme.spacing(2),
-    height: 820,
+    height: '100%',
     margin: 'auto',
     display: 'flex',
     flexWrap: 'wrap',
     flexGrow: 1,
-    width: 450,
-    [theme.breakpoints.up(500 + theme.spacing(6))]: {
-      width: 500,
+    width: '90%',
+    [theme.breakpoints.up(450)]: {
+      width: 450,
     },
   },
   button: {
@@ -137,6 +137,7 @@ class Contact extends React.Component {
 
                   <Grid item xs={12} sm={6}>
                     <TextField
+                        required
                         label="Phone number"
                         fullWidth
                         autoComplete="Phone"
@@ -192,14 +193,6 @@ class Contact extends React.Component {
                     >
                       Submit
                     </Button>
-                  </Grid>
-                  <Grid container justify="center">
-                    <Typography variant="body2" color="primary">
-                      { successMsg }
-                    </Typography>
-                    <Typography variant="body2" color="error">
-                      { errorMsg }
-                    </Typography>
                   </Grid>
                 </Paper>
               </Grid>

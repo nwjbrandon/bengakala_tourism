@@ -6,8 +6,6 @@ import { CONTACT_FORM_REQUEST } from "../../actions/contact-form";
 function mapStateToProps(state) {
     return {
         data: state.contact.data,
-        successMsg: state.contact.successMsg,
-        errorMsg: state.contact.errorMsg,
     };
 }
 

@@ -31,7 +31,7 @@ export const contactFormReducer = handleActions({
             ...state,
             fetching: false,
             error: true,
-            errorMsg: action.payload.data.error.message,
+            errorMsg: action.payload,
             successMsg: '',
         };
     },
