@@ -7,17 +7,17 @@ import {
     CONTACT_FORM_ERROR
 } from "../actions/contact-form";
 
-function submitForm({ data }) {
-    return API.put('/contact/info', { data });
+function submitForm({...data}) {
+    return API.put('/contact/info', {...data});
 }
 
 function* workerSaga(payload) {
     try {
         console.log(payload.payload);
-        const data = yield call(submitForm, { data: payload.payload });
+        const data = yield call(submitForm, payload.payload);
         yield put(CONTACT_FORM_SUCCESS(data));
     } catch (error) {
-        console.log(error);
+        console.log('inside saga ', error);
         yield put(CONTACT_FORM_ERROR(error));
     }
 }

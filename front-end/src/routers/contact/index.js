@@ -24,7 +24,7 @@ const styles = theme => ({
   paper: {
     backgroundColor: 'aquamarine',
     padding: theme.spacing(2),
-    height: 800,
+    height: 820,
     margin: 'auto',
     display: 'flex',
     flexWrap: 'wrap',
@@ -72,7 +72,9 @@ class Contact extends React.Component {
       uuid: id, contact, name, subject, message, email
     };
     const { contactSubmit } = this.props;
-    contactSubmit(data);
+    contactSubmit({
+      uuid: id, contact, name, subject, message, email
+    });
   }
 
   render() {

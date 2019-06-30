@@ -1,4 +1,5 @@
 import express from 'express';
+import { check } from 'express-validator/check';
 import home from './home';
 import accommodation from './accommodation';
 import admin from './admin';
@@ -15,6 +16,7 @@ import dashboardSettings from './dashboard/settings';
 import passport from '../middleware/strategy';
 import checkAuthentication from '../middleware/auth';
 
+
 const app = express();
 
 // endpoints not necessarily to protect
@@ -23,7 +25,21 @@ app.get('/accommodation/info', accommodation.info);
 app.post('/accommodation/info', accommodation.post);
 app.get('/attraction/info', attraction.info);
 app.get('/contact/info', contact.info);
-app.put('/contact/info', contact.put);
+app.put('/contact/info', [
+  check('email').exists().not().isEmpty()
+    .withMessage('No Email Given')
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('Invalid Email'),
+  check('contact').exists().not().isEmpty()
+    .withMessage('No Contact'),
+  check('subject').exists().not().isEmpty()
+    .withMessage('No Subject Given'),
+  check('message').exists().not().isEmpty()
+    .withMessage('No Message Given'),
+  check('name').exists().not().isEmpty()
+    .withMessage('No Name Given'),
+], contact.put);
 app.get('/faq/info', faq.info);
 
 // endpoints must be protected
