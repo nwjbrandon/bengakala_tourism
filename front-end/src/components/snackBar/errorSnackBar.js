@@ -4,14 +4,14 @@ import { withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CloseIcon from '@material-ui/icons/Close';
-import { green } from '@material-ui/core/colors';
+import { red } from '@material-ui/core/colors';
 
 const styles = () => ({
   root: {
     display: 'flex',
   },
-  success: {
-    background: green[500],
+  error: {
+    background: red[500],
   },
 });
 
@@ -38,7 +38,7 @@ class SuccessSnackBar extends Component {
           }}
           ContentProps={{
             classes: {
-              root: classes.success
+              root: classes.error
             }
           }}
           open={open}

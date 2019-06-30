@@ -17,6 +17,7 @@ import PropTypes from "prop-types";
 import uuid from 'uuid/v1';
 import Navbar from "../../components/navBar/navbar";
 import SuccessToast from '../../components/snackBar/successSnackBar.container';
+import ErrorToast from '../../components/snackBar/errorSnackBar.container';
 
 const styles = theme => ({
   root: {
@@ -205,6 +206,7 @@ class Contact extends React.Component {
             </Grid>
         </div>
         <SuccessToast />
+        <ErrorToast />
       </React.Fragment>
     )
   }

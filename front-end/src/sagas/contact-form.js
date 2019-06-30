@@ -9,6 +9,7 @@ import {
 
 import {
     TOAST_SUCCESS_SHOW,
+    TOAST_ERROR_SHOW,
 } from "../actions/toast";
 
 function submitForm({...data}) {
@@ -22,6 +23,8 @@ function* workerSaga(payload) {
         yield put(TOAST_SUCCESS_SHOW('Contact Form Submitted'));
     } catch (error) {
         yield put(CONTACT_FORM_ERROR(error));
+        console.log(error.data.error.message);
+        yield put(TOAST_ERROR_SHOW(error.data.error.message))
     }
 }
 
