@@ -16,6 +16,7 @@ import PhoneIcon from '@material-ui/icons/PermPhoneMsg';
 import PropTypes from "prop-types";
 import uuid from 'uuid/v1';
 import Navbar from "../../components/navBar/navbar";
+import SuccessToast from '../../components/snackBar/successSnackBar.container';
 
 const styles = theme => ({
   root: {
@@ -203,6 +204,7 @@ class Contact extends React.Component {
               </Grid>
             </Grid>
         </div>
+        <SuccessToast />
       </React.Fragment>
     )
   }

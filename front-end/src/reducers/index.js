@@ -12,9 +12,11 @@ import { dashboardHomeReducer } from "./dashboardHome";
 import { dashboardSettingsReducer } from "./dashboardSettings";
 import { homeOnMountReducer } from "./home";
 import { faqOnMountReducer } from "./faq";
-import { connectRouter } from 'connected-react-router'
+import { connectRouter } from 'connected-react-router';
+import { toastReducer } from "./toast";
 
 const allReducers = (history) => combineReducers({
+    toast: reduceReducers(toastReducer),
     admin: reduceReducers(adminLoginReducer),
     dashboard: reduceReducers(dashboardOnMountReducer),
     dashboardFaq: reduceReducers(dashboardFaqReducer),

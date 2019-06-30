@@ -48,7 +48,7 @@ export const history = createBrowserHistory();
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['contact']
+  blacklist: ['contact', 'toast']
 };
 const sagaMiddleware = createSagaMiddleware();
 const enhancers = composeWithDevTools(

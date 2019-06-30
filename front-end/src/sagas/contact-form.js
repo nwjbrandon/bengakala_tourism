@@ -7,17 +7,20 @@ import {
     CONTACT_FORM_ERROR
 } from "../actions/contact-form";
 
+import {
+    TOAST_SUCCESS_SHOW,
+} from "../actions/toast";
+
 function submitForm({...data}) {
     return API.put('/contact/info', {...data});
 }
 
 function* workerSaga(payload) {
     try {
-        console.log(payload.payload);
         const data = yield call(submitForm, payload.payload);
         yield put(CONTACT_FORM_SUCCESS(data));
+        yield put(TOAST_SUCCESS_SHOW('Contact Form Submitted'));
     } catch (error) {
-        console.log('inside saga ', error);
         yield put(CONTACT_FORM_ERROR(error));
     }
 }
