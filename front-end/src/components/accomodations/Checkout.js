@@ -137,17 +137,6 @@ const Checkout = (props) => {
     setActiveStep(activeStep - 1);
   };
 
-  const sendEmail = () => {
-    console.log("Attempting to send customer an invoice")
-    API.post('/email/post', {
-      data: {
-        email: props.personalDetails.email,
-        total: 1000,
-      }
-    })
-  }
-
-
   const theme = createMuiTheme({
     palette: {
       primary: blue

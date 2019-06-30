@@ -57,7 +57,7 @@ export default class MasterTable extends React.Component {
   }
 
   createRow = (desc, qty, unit) => {
-    const duration = this.date_diff_indays(tripDetails.checkIn, tripDetails.checkOut)
+    const duration = this.date_diff_indays(this.props.tripDetails.checkIn, this.props.tripDetails.checkOut)
     const price = priceRow(qty, unit, duration)
     return { desc, qty, price };
   }
