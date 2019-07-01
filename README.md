@@ -111,11 +111,23 @@ pm2 stop <id>
 pm2 start <id>
 pm2 save
 ```
-
+- Setting up of SSL Certificate (Let's Encrypt)
+```
+sudo apt install epel-release
+sudo apt install certbot
+certbot certonly --standalone -d bengkala.social # prompt you to input your email address to remind you to renew
+```
+- Renewal of SSL Certificate
+```
+systemctl stop nginx # necessary to for certbot to connect to third party server
+certbot renew
+systemctl start nginx
+```
 - Setting up nginx
 ```
 sudo vim /etc/nginx/sites-available/default
 ```
+- Copy the following into the nginx default config for http. If you have setup ssl cert with let's encrypt, set up using the nginx config in the  devops dir.
 ```
 . . .
     location / {
@@ -135,13 +147,47 @@ sudo vim /etc/nginx/sites-available/default
         proxy_cache_bypass $http_upgrade;
     }
 }
-
 ```
 ```
 sudo nginx -t # check for syntax errors
 sudo systemctl restart nginx # if changes doesnt happen, just reboot as tmp solution
 ```
-
+- Create a bash script 
+```
+touch run.sh renew.sh
+sudo chmod 775 run.sh
+sudo chmod 775 renew.sh 
+```
+- Add the following inside run.sh
+```
+systemctl stop nginx
+git pull
+pm2 update
+systemctl start nginx
+```
+- Add the following inside renew.sh
+```
+systemctl stop nginx
+certbot renew
+systemctl start nginx
+```
+- Create a config file (bengkala.config) for database dump
+```
+[client]
+user = bengkala
+password = bengkala
+```
+- Create a CronJob
+```
+sudo crontab -e
+```
+- Add the following into the CronJob
+```
+0 1 * * * /usr/bin/mysqldump --defaults-extra-file=/home/bengkala/bengkala.config -u bengkala > full-backup-$(date +\%F).sql
+0 0 * * 0 echo "Created SQL dump created on $(date +\%F)" >> /home/bengkala/cron.log
+0 0 1 * * /bin/bash -c "/home/bengkala/renew.sh"
+0 0 1 * * echo "Renewed SSL Cert from on $(date +\%F)" >> /home/bengkala/cron.log
+```
 ## References
 - https://codeburst.io/getting-started-with-react-router-5c978f70df91
 - https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-16-04
@@ -153,3 +199,4 @@ sudo systemctl restart nginx # if changes doesnt happen, just reboot as tmp solu
 - https://stackoverflow.com/questions/11804202/how-do-i-setup-a-ssl-certificate-for-an-express-js-server
 - https://flaviocopes.com/express-https-self-signed-certificate/
 - https://flaviocopes.com/express-letsencrypt-ssl/
+- https://www.youtube.com/watch?v=d4QDyHLHZ9c&list=PLQlWzK5tU-gDyxC1JTpyC2avvJlt3hrIh&index=14
