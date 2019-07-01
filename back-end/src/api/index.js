@@ -5,6 +5,7 @@ import admin from './admin';
 import attraction from './attraction';
 import contact from './contact';
 import faq from './faq';
+import snap from './snap';
 import dashboard from './dashboard';
 import dashboardContact from './dashboard/contact';
 import dashboardAccommodation from './dashboard/accommodation';
@@ -25,6 +26,7 @@ app.get('/attraction/info', attraction.info);
 app.get('/contact/info', contact.info);
 app.put('/contact/info', contact.put);
 app.get('/faq/info', faq.info);
+app.post('/snap/info', snap.post);
 
 // endpoints must be protected
 app.post('/admin/login', passport.authenticate('local', { failWithError: true }), admin.login, admin.err);
