@@ -1,36 +1,51 @@
+/* eslint-disable quote-props */
 import axios from 'axios';
-// initialize snap client object
-
-// preparing Snap API parameter ( refer to: https://snap-docs.midtrans.com ) minimum parameter example:
-/*
-// Going to wrap the params in the front end so as to make it easier to add data i may need
-// sample data below
-const parameter = {
-  transaction_details: {
-    order_id: 'test-transaction-123',
-    gross_amount: 200000
-  },
-  credit_card: {?par
-    secure: true
-  }
-};
-*/
+import base64 from 'base-64';
 
 // promised based snap tokenisation
+// refer to "backend integration" in  https://snap-docs.midtrans.com/#endpoint
 const snapTokenPost = [
   async (req, res) => {
+    let snapRes;
     const config = {
       headers: {
-        Accept: 'application/json',
-        'Content-type': 'applications/json',
-        Authorization: Base64('My_SERVER_key + ""'),
+        'Accept': 'application/json',
+        'Content-type': 'application/json',
+        'Authorization': base64.encode('My_SERVER_key + ""'),
       }
     };
-    const parameters = req.body.data; // the transaction details from front-end
-    const token = await axios.post('https://app.sandbox.midtrans.com/snap/v1/transactionsparameters', parameters, config)
-    // the promise above may give errors, how to handle them within async?
+    // preparing Snap API parameter ( refer to: https://snap-docs.midtrans.com ) minimum parameter example:
+    const parameters = {
+      'transaction_details': {
+        'order_id': Math.round((new Date()).getTime() / 1000),
+        'gross_amount': req.body.totalCost
+      },
+      'credit_card': {
+        'secure': true
+      },
+      'customer_details': {
+        'frist_name': req.body.frist_name,
+        'last_name': req.body.last_name,
+        'email': req.body.email,
+      }
+    };
+    /*
+      send the transaction data to the database here here!
+      const transaction = {
+          order_id: parameters.transaction_details.order_id
+          amount: 
+          status: pending // change to success/failure based on response from the backend
+      }
+    */
+
+    try {
+      snapRes = await axios.post('https://app.sandbox.midtrans.com/snap/v1/transactionsparameters', parameters, config);
+    } catch (error) {
+      // log the error response (stored in an array hence map is used)
+      error.map(e => console.log(e));
+    }
     res.json({
-      data: token,
+      data: snapRes.token, // only send the token to the front
     });
   },
 ];
