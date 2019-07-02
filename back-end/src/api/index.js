@@ -1,4 +1,5 @@
 import express from 'express';
+import { check } from 'express-validator/check';
 import home from './home';
 import accommodation from './accommodation';
 import admin from './admin';
@@ -39,7 +40,20 @@ app.get('/faq/info', faq.info);
 
 // endpoints must be protected
 app.post('/admin/login',
-  adminValidators,
+  [
+    check('email').exists().not().isEmpty()
+      .normalizeEmail()
+      .isEmail()
+      .withMessage('Valid Email is Required'),
+    check('name').exists().not().isEmpty()
+      .withMessage('Name is Required'),
+    check('contact').exists().not().isEmpty()
+      .withMessage('Contact is Required'),
+    check('subject').exists().not().isEmpty()
+      .withMessage('Subject is Required'),
+    check('message').exists().not().isEmpty()
+      .withMessage('Message is Required'),
+  ],
   errorHandling,
   passport.authenticate('local', { failWithError: true }),
   admin.login,
