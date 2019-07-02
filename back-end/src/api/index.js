@@ -20,8 +20,9 @@ import {
   dashboardAttractionValidators,
   dashboardFaqValidators,
   dashboardHomeValidators,
-  adminValidators,
+  contactValidators,
   dashboardContactValidators,
+  adminValidators,
   errorHandling,
 } from '../middleware/validator';
 
@@ -33,27 +34,14 @@ app.get('/accommodation/info', accommodation.info);
 app.post('/accommodation/info', accommodation.post);
 app.get('/attraction/info', attraction.info);
 app.get('/contact/info', contact.info);
-app.put('/contact/info', [
-
-], contact.put);
+app.put('/contact/info',
+  contactValidators,
+  contact.put);
 app.get('/faq/info', faq.info);
 
 // endpoints must be protected
 app.post('/admin/login',
-  [
-    check('email').exists().not().isEmpty()
-      .normalizeEmail()
-      .isEmail()
-      .withMessage('Valid Email is Required'),
-    check('name').exists().not().isEmpty()
-      .withMessage('Name is Required'),
-    check('contact').exists().not().isEmpty()
-      .withMessage('Contact is Required'),
-    check('subject').exists().not().isEmpty()
-      .withMessage('Subject is Required'),
-    check('message').exists().not().isEmpty()
-      .withMessage('Message is Required'),
-  ],
+  adminValidators,
   errorHandling,
   passport.authenticate('local', { failWithError: true }),
   admin.login,

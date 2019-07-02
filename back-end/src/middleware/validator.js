@@ -18,7 +18,7 @@ export const errorHandling = [
   }
 ];
 
-export const adminValidators = [
+export const contactValidators = [
   check('email').exists().not().isEmpty()
     .normalizeEmail()
     .isEmail()
@@ -31,6 +31,15 @@ export const adminValidators = [
     .withMessage('Subject is Required'),
   check('message').exists().not().isEmpty()
     .withMessage('Message is Required'),
+];
+
+export const adminValidators = [
+  check('email').exists().not().isEmpty()
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('Valid Username is Required'),
+  check('password').exists().not().isEmpty()
+    .withMessage('Password is Required'),
 ];
 
 export const dashboardAccommodationValidators = [
