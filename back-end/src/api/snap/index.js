@@ -6,27 +6,28 @@ import base64 from 'base-64';
 // refer to "backend integration" in  https://snap-docs.midtrans.com/#endpoint
 const snapTokenPost = [
   async (req, res) => {
+    console.log('Making a token request');
     let snapRes;
     const config = {
       headers: {
         'Accept': 'application/json',
         'Content-type': 'application/json',
-        'Authorization': base64.encode('My_SERVER_key + ""'),
+        'Authorization': base64.encode('server key :'),
       }
     };
     // preparing Snap API parameter ( refer to: https://snap-docs.midtrans.com ) minimum parameter example:
     const parameters = {
       'transaction_details': {
         'order_id': Math.round((new Date()).getTime() / 1000),
-        'gross_amount': req.body.totalCost
+        'gross_amount': req.body.data.gross_amount
       },
       'credit_card': {
         'secure': true
       },
       'customer_details': {
-        'frist_name': req.body.frist_name,
-        'last_name': req.body.last_name,
-        'email': req.body.email,
+        'frist_name': req.body.data.first_name,
+        'last_name': req.body.data.last_name,
+        'email': req.body.data.email,
       }
     };
     /*
@@ -41,11 +42,10 @@ const snapTokenPost = [
     try {
       snapRes = await axios.post('https://app.sandbox.midtrans.com/snap/v1/transactionsparameters', parameters, config);
     } catch (error) {
-      // log the error response (stored in an array hence map is used)
-      error.map(e => console.log(e));
+      console.log(error);
     }
     res.json({
-      data: snapRes.token, // only send the token to the front
+      data: snapRes, // send token or error message to the front end
     });
   },
 ];
