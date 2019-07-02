@@ -40,7 +40,7 @@ const App = (props) => {
           <Typography className={classes.label} variant="h5">
             Price Breakdown
             </Typography>
-          <MasterTable tripDetails={props.tripDetails} cost={props.cost} />
+          <MasterTable tripDetails={props.tripDetails} cost={props.cost} grossAmount={props.grossAmount} />
         </div>
       </div>
     </div>
@@ -52,6 +52,7 @@ const mapStateToProps = state => {
     personalDetails: state.personalDetails,
     tripDetails: state.tripDetails,
     cost: state.cost,
+    grossAmount: state.grossAmount,  
   };
 };
 

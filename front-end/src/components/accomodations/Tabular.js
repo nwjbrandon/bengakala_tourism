@@ -1,11 +1,13 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux'
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import * as actionTypes from '../../actions/accomodation';
 
 /*
 const tripDetails = {
@@ -45,7 +47,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-export default function MasterTable(props) {
+const MasterTable = (props) => {
   /*
   constructor(props) {
     super(props)
@@ -123,7 +125,7 @@ export default function MasterTable(props) {
   // const mealSub = subtotal(mealRow())
   // const total = totalCost([mealSub, homeRow[0].price])
 
-  /* Final Calculations */
+  /* Calculations functions */
   const subtotal = (items) => {
     return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
   }
@@ -133,10 +135,25 @@ export default function MasterTable(props) {
   }
 
 
+
+
   /* Creating the rows */
   const mealRow = createMealRow(tripDetails.breakfast, tripDetails.lunch, tripDetails.dinner,
     cost.breakfast, cost.lunch, cost.dinner, groupSize)
   const homeRow = [createRow('HomeStay', Math.floor(groupSize / 4), cost.accomodation)]
+
+  /* Cost values */
+  const mealCost = subtotal(mealRow);
+
+  const calcTotal = () => {
+    const finalCost =  totalCost([mealCost, homeRow[0].price]);
+
+    if (props.grossAmount == 0) {
+      props.onAmountChange(finalCost)
+    }
+
+    return finalCost;
+  }
 
   return (
     <Paper className={classes.root}>
@@ -171,7 +188,7 @@ export default function MasterTable(props) {
           <TableRow>
             <TableCell></TableCell>
             <TableCell style={{ color: 'blue' }}>Meals total</TableCell>
-            <TableCell style={{ color: 'blue' }}>{subtotal(mealRow)}</TableCell>
+            <TableCell style={{ color: 'blue' }}>{mealCost}</TableCell>
           </TableRow>
           {/* <TableRow>
               <TableCell style={{ color: 'black' }}>Transport</TableCell>
@@ -191,10 +208,20 @@ export default function MasterTable(props) {
           <TableRow>
             <TableCell></TableCell>
             <TableCell style={{ color: 'blue' }}>Total</TableCell>
-            <TableCell style={{ color: 'blue' }}>{totalCost([subtotal(mealRow), homeRow[0].price])}</TableCell>
+            <TableCell style={{ color: 'blue' }}>{calcTotal()}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
     </Paper>
   )
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAmountChange: (val) => dispatch({ type: actionTypes.GROSS_AMOUNT, payload: val})
+  }
+
+}
+
+
+export default connect(mapDispatchToProps)(MasterTable)

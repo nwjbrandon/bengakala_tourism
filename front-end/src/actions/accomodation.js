@@ -14,3 +14,5 @@ export const CHECK_IN = 'CHECK_IN';
 export const CHECK_OUT = 'CHECK_OUT';
 export const EXCLUDE_DATES = "EXCLUDE_DATES";
 export const ERR_MSG = "ERR_MSG";
+export const GROSS_AMOUNT = "GROSS_AMT"
+// export const ORDER_ID = "ORDER_ID"

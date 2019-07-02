@@ -33,7 +33,7 @@ const snapTokenPost = [
       send the transaction data to the database here here!
       const transaction = {
           order_id: parameters.transaction_details.order_id
-          amount: 
+          amount:
           status: pending // change to success/failure based on response from the backend
       }
     */

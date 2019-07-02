@@ -137,6 +137,10 @@ const Checkout = (props) => {
     setActiveStep(activeStep - 1);
   };
 
+  const test = () => {
+    console.log(props.grossAmount)
+  }
+
   const theme = createMuiTheme({
     palette: {
       primary: blue
@@ -166,7 +170,7 @@ const Checkout = (props) => {
 
               {activeStep === steps.length ? (
                 <React.Fragment>
-                  {sendEmail}
+                  {test()}
                   <ConfirmationScreen email={props.personalDetails.email} />
                 </React.Fragment>
               ) : (
@@ -193,6 +197,7 @@ const mapStateToProps = state => {
   return {
     personalDetails: state.personalDetails,
     tripDetails: state.tripDetails,
+    grossAmount: state.grossAmount,
     errorMsg: state.errorMsg
   };
 };
