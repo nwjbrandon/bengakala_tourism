@@ -16,8 +16,8 @@ class ConfirmationScreen extends React.Component {
     return (
       <div>
         <p>Thank you!</p>
-        <p>A confirmation email with the invoice attached has been sent to {this.props.email}
-          please make cash payment upon arrival at our village.
+        <p>A confirmation email with the invoice attached has been sent to {this.props.email} 
+          please make cash payment of {this.props.grossAmount}IDR upon arrival at our village.
         </p>
       </div>
     );

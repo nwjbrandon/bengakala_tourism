@@ -137,10 +137,6 @@ const Checkout = (props) => {
     setActiveStep(activeStep - 1);
   };
 
-  const test = () => {
-    console.log(props.grossAmount)
-  }
-
   const theme = createMuiTheme({
     palette: {
       primary: blue
@@ -170,8 +166,7 @@ const Checkout = (props) => {
 
               {activeStep === steps.length ? (
                 <React.Fragment>
-                  {test()}
-                  <ConfirmationScreen email={props.personalDetails.email} />
+                  <ConfirmationScreen email={props.personalDetails.email} grossAmount={props.grossAmount} />
                 </React.Fragment>
               ) : (
                   <React.Fragment>

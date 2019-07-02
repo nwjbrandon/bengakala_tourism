@@ -7,7 +7,6 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import * as actionTypes from '../../actions/accomodation';
 
 /*
 const tripDetails = {
@@ -134,9 +133,6 @@ const MasterTable = (props) => {
     return arr.reduce((total, num) => num + total, 0);
   }
 
-
-
-
   /* Creating the rows */
   const mealRow = createMealRow(tripDetails.breakfast, tripDetails.lunch, tripDetails.dinner,
     cost.breakfast, cost.lunch, cost.dinner, groupSize)
@@ -148,11 +144,10 @@ const MasterTable = (props) => {
   const calcTotal = () => {
     const finalCost =  totalCost([mealCost, homeRow[0].price]);
 
-    if (props.grossAmount == 0) {
+    if (props.grossAmount != finalCost)
       props.onAmountChange(finalCost)
-    }
 
-    return finalCost;
+    return finalCost
   }
 
   return (
@@ -218,10 +213,10 @@ const MasterTable = (props) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAmountChange: (val) => dispatch({ type: actionTypes.GROSS_AMOUNT, payload: val})
+    onAmountChange: (val) => dispatch({ type: "GROSS_AMOUNT", payload: val}),
   }
 
 }
 
 
-export default connect(mapDispatchToProps)(MasterTable)
+export default connect(null, mapDispatchToProps)(MasterTable)
