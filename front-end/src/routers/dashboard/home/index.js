@@ -11,6 +11,8 @@ import NavBar from '../../../components/dashboard/navBar';
 import uuidv1 from "uuid/v1";
 import DashBoardHomeStories from "../../../components/dashboardHome/dashboardHomeStories.container";
 import DashBoardHomeMission from "../../../components/dashboardHome/dashboardHomeMission.container";
+import SuccessToast from "../../../components/snackBar/successSnackBar.container";
+import ErrorToast from "../../../components/snackBar/errorSnackBar.container";
 
 
 const styles = theme => ({
@@ -160,6 +162,8 @@ class DashboardHome extends Component {
                         </Button>
                     </Grid>
                 </main>
+                <SuccessToast />
+                <ErrorToast />
             </div>
         );
     }

@@ -20,7 +20,7 @@ function* workerSaga(payload) {
     try {
         const data = yield call(submitForm, payload.payload);
         yield put(CONTACT_FORM_SUCCESS(data));
-        yield put(TOAST_SUCCESS_SHOW('Contact Form Submitted'));
+        yield put(TOAST_SUCCESS_SHOW('Your response has been submitted'));
     } catch (error) {
         yield put(CONTACT_FORM_ERROR(error));
         yield put(TOAST_ERROR_SHOW(error.data.error.message));

@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 
 import NavBar from '../../../components/dashboard/navBar';
 import DashboardAccommodationEntries from '../../../components/dashboardBooking/dashboardBookingEntries.container'
+import SuccessToast from "../../../components/snackBar/successSnackBar.container";
+import ErrorToast from "../../../components/snackBar/errorSnackBar.container";
 
 const styles = theme => ({
     root: {
@@ -72,6 +74,8 @@ class DashboardFAQ extends Component {
                         </Button>
                     </Grid>
                 </main>
+                <SuccessToast />
+                <ErrorToast />
             </div>
         );
     }

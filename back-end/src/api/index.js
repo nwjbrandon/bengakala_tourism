@@ -1,5 +1,4 @@
 import express from 'express';
-import { check, validationResult } from 'express-validator/check';
 import home from './home';
 import accommodation from './accommodation';
 import admin from './admin';
@@ -15,7 +14,15 @@ import dashboardHome from './dashboard/home';
 import dashboardSettings from './dashboard/settings';
 import passport from '../middleware/strategy';
 import checkAuthentication from '../middleware/auth';
-
+import {
+  dashboardAccommodationValidators,
+  dashboardAttractionValidators,
+  dashboardFaqValidators,
+  dashboardHomeValidators,
+  adminValidators,
+  dashboardContactValidators,
+  errorHandling,
+} from '../middleware/validator';
 
 const app = express();
 
@@ -26,67 +33,57 @@ app.post('/accommodation/info', accommodation.post);
 app.get('/attraction/info', attraction.info);
 app.get('/contact/info', contact.info);
 app.put('/contact/info', [
-  check('email').exists().not().isEmpty()
-    .normalizeEmail()
-    .isEmail()
-    .withMessage('Valid Email is Required'),
-  check('name').exists().not().isEmpty()
-    .withMessage('Name is Required'),
-  check('contact').exists().not().isEmpty()
-    .withMessage('Contact is Required'),
-  check('subject').exists().not().isEmpty()
-    .withMessage('Subject is Required'),
-  check('message').exists().not().isEmpty()
-    .withMessage('Message is Required'),
+
 ], contact.put);
 app.get('/faq/info', faq.info);
 
 // endpoints must be protected
-app.post('/admin/login', [
-  check('email').exists().not().isEmpty()
-    .normalizeEmail()
-    .isEmail()
-    .withMessage('Valid Username is Required'),
-  check('password').exists().not().isEmpty()
-    .withMessage('Password is Required'),
-],
-[
-  async (req, res, next) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      const message = errors.array()[0].msg;
-      return res.status(422).json({
-        error: {
-          code: 422,
-          message,
-        }
-      });
-    }
-    next();
-    return 1;
-  }
-],
-passport.authenticate('local', { failWithError: true }), admin.login, admin.err);
+app.post('/admin/login',
+  adminValidators,
+  errorHandling,
+  passport.authenticate('local', { failWithError: true }),
+  admin.login,
+  admin.err);
 app.get('/admin/logout', checkAuthentication, admin.logout);
 
 app.get('/admin/dashboard', checkAuthentication, dashboard.get);
 app.post('/admin/dashboard', checkAuthentication, dashboard.post);
 
 app.get('/admin/dashboard/contact', checkAuthentication, dashboardContact.get);
-app.post('/admin/dashboard/contact', checkAuthentication, dashboardContact.post);
+app.post('/admin/dashboard/contact',
+  checkAuthentication,
+  dashboardContactValidators,
+  errorHandling,
+  dashboardContact.post);
 app.delete('/admin/dashboard/contact', checkAuthentication, dashboardContact.del);
 
-app.get('/admin/dashboard/accommodation', checkAuthentication, dashboardAccommodation.get);
-app.post('/admin/dashboard/accommodation', checkAuthentication, dashboardAccommodation.post);
+app.get('/admin/dashboard/booking', checkAuthentication, dashboardAccommodation.get);
+app.post('/admin/dashboard/booking',
+  checkAuthentication,
+  dashboardAccommodationValidators,
+  errorHandling,
+  dashboardAccommodation.post);
 
 app.get('/admin/dashboard/attraction', checkAuthentication, dashboardAttraction.get);
-app.post('/admin/dashboard/attraction', checkAuthentication, dashboardAttraction.post);
+app.post('/admin/dashboard/attraction',
+  checkAuthentication,
+  dashboardAttractionValidators,
+  errorHandling,
+  dashboardAttraction.post);
 
 app.get('/admin/dashboard/faq', checkAuthentication, dashboardFaq.get);
-app.post('/admin/dashboard/faq', checkAuthentication, dashboardFaq.post);
+app.post('/admin/dashboard/faq',
+  checkAuthentication,
+  dashboardFaqValidators,
+  errorHandling,
+  dashboardFaq.post);
 
 app.get('/admin/dashboard/home', checkAuthentication, dashboardHome.get);
-app.post('/admin/dashboard/home', checkAuthentication, dashboardHome.post);
+app.post('/admin/dashboard/home',
+  checkAuthentication,
+  dashboardHomeValidators,
+  errorHandling,
+  dashboardHome.post);
 
 app.get('/admin/dashboard/settings', checkAuthentication, dashboardSettings.get);
 app.put('/admin/dashboard/settings', checkAuthentication, dashboardSettings.put);

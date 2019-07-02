@@ -10,6 +10,8 @@ import uuidv1 from 'uuid/v1';
 
 import NavBar from '../../../components/dashboard/navBar';
 import DashBoardAttractionEntries from "../../../components/dashboardAttraction/dashboardAttractionEntries.container";
+import SuccessToast from "../../../components/snackBar/successSnackBar.container";
+import ErrorToast from "../../../components/snackBar/errorSnackBar.container";
 
 const styles = theme => ({
     root: {
@@ -175,6 +177,8 @@ class DashboardFAQ extends Component {
                         </Button>
                     </Grid>
                 </main>
+                <SuccessToast />
+                <ErrorToast />
             </div>
         );
     }

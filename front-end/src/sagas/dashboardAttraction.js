@@ -9,6 +9,8 @@ import {
     DASHBOARD_ATTRACTION_SUBMIT_SUCCESS,
     DASHBOARD_ATTRACTION_SUBMIT_ERROR,
 } from "../actions/dashboardAttraction";
+import {TOAST_ERROR_SHOW, TOAST_SUCCESS_SHOW} from "../actions/toast";
+import {ADMIN_LOGOUT_REQUEST} from "../actions/admin";
 
 const displayedData = (state) => state.dashboardAttraction.displayedData;
 
@@ -34,9 +36,17 @@ function* workerSagaSubmit() {
         const payload = yield select(displayedData);
         yield call(submit, payload);
         yield put(DASHBOARD_ATTRACTION_SUBMIT_SUCCESS(payload));
+        yield put(TOAST_SUCCESS_SHOW('Refresh the page to see the changes'));
         // yield put(DASHBOARD_FAQ_ONMOUNT_REQUEST()) update causes server to crash
     } catch (error) {
         yield put(DASHBOARD_ATTRACTION_SUBMIT_ERROR(error));
+        if (error.status === 401) {
+            yield put(ADMIN_LOGOUT_REQUEST());
+        } else if (error.status === 422) {
+            yield put(TOAST_ERROR_SHOW(error.data.error.message));
+        } else {
+            yield put(TOAST_ERROR_SHOW('Oops something went wrong'));
+        }
     }
 }
 

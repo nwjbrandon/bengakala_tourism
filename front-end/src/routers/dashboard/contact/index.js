@@ -11,6 +11,8 @@ import DashBoardContactDetails from '../../../components/dashboardContact/dashbo
 import DashBoardContactCustomers from '../../../components/dashboardContact/dashboardContactCustomers.container';
 
 import NavBar from '../../../components/dashboard/navBar';
+import SuccessToast from "../../../components/snackBar/successSnackBar.container";
+import ErrorToast from "../../../components/snackBar/errorSnackBar.container";
 
 
 const styles = theme => ({
@@ -137,6 +139,8 @@ class DashboardContact extends Component {
                     </Typography>
                     <DashBoardContactCustomers />
                 </main>
+                <SuccessToast />
+                <ErrorToast />
             </div>
         );
     }
