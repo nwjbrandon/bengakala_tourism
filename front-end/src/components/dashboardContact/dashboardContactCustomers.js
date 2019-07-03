@@ -8,6 +8,7 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
+import format from 'date-fns/format';
 
 const styles = theme => ({
     root: {
@@ -52,7 +53,7 @@ class DashboardContactDetails extends Component {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography className={classes.heading}>Subject: { data[item].paragraph }</Typography>
+                            <Typography className={classes.heading}>Subject: { data[item].paragraph } - { format(data[item].date, 'MM/DD/YYYY')} </Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                             <Grid>

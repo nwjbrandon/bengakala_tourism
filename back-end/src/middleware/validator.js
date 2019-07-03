@@ -1,5 +1,8 @@
 import { check, validationResult } from 'express-validator/check';
 import _ from 'lodash';
+import bcrypt from 'bcryptjs';
+import db from '../storage/db';
+import { TABLE_ADMINISTRATOR } from '../storage/tableName';
 
 export const errorHandling = [
   async (req, res, next) => {
@@ -49,7 +52,7 @@ export const dashboardAccommodationValidators = [
         throw Error('Cannot be empty');
       }
       _.map(data, (item) => {
-        if (_.isNaN(_.toNumber(item.pricesString))) {
+        if (_.isNaN(_.toNumber(item.pricesString)) || item.pricesString === '') {
           throw Error('Not a valid number');
         }
         if (item.edit === 1) {
@@ -99,10 +102,18 @@ export const dashboardFaqValidators = [
 export const dashboardHomeValidators = [
   check('data')
     .custom((data) => {
-      if (data === {}) {
+      if (_.isEmpty(data.stories) || _.isEmpty(data.objective)) {
         throw Error('Cannot be empty');
       }
-      _.map(data, (item) => {
+      _.map(data.stories, (item) => {
+        if (item.title === '' || item.text === '') {
+          throw Error('Field cannot be empty');
+        }
+        if (item.edit === 1) {
+          throw Error('You need to update your changes.');
+        }
+      });
+      _.map(data.objective, (item) => {
         if (item.title === '' || item.text === '') {
           throw Error('Field cannot be empty');
         }
@@ -130,4 +141,87 @@ export const dashboardContactValidators = [
       });
       return true;
     })
+];
+
+
+export const dashboardNewUserValidators = [
+  check('username')
+    .exists()
+    .isString()
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('Valid email is required')
+    .custom(async (email) => {
+      const user = await db.fetchData(TABLE_ADMINISTRATOR, { email });
+      if (user.length !== 0) {
+        throw new Error('User exists');
+      }
+      return true;
+    }),
+  check('password')
+    .exists()
+    .isString()
+    .isLength({ min: 5 })
+    .withMessage('Password is too short')
+    .custom(async (password, { req }) => {
+      if (password !== req.body.confirmedPassword) {
+        throw new Error('Passwords do not match');
+      }
+      return true;
+    }),
+  check('email')
+    .exists()
+    .isString()
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('Valid email is required')
+    .custom(async (email) => {
+      const user = await db.fetchData(TABLE_ADMINISTRATOR, { email });
+      if (user.length !== 0) {
+        throw new Error('User exists');
+      }
+      return true;
+    }),
+  check('jobTitle')
+    .exists()
+    .isString()
+    .withMessage('Job Title is required'),
+  check('phone')
+    .exists()
+    .isString()
+    .withMessage('Phone number is required'),
+];
+
+
+export const dashboardChangePasswordValidators = [
+  check('email')
+    .exists()
+    .isString()
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('Valid email is required')
+    .custom(async (email) => {
+      const info = await db.fetchData(TABLE_ADMINISTRATOR, { email });
+      if (info.length === 0) {
+        throw new Error('User does not exist');
+      }
+      return true;
+    }),
+  check('existingPassword')
+    .exists()
+    .isString()
+    .withMessage('Valid password is required')
+    .custom(async (existingPassword, { req }) => {
+      const { email } = req.body;
+      const info = _.head(await db.fetchData(TABLE_ADMINISTRATOR, { email }));
+      if (bcrypt.compareSync(existingPassword, info.password)) {
+        return true;
+      }
+      throw new Error('Invalid password');
+    }),
+  check('newPassword')
+    .exists()
+    .isString()
+    .isLength({ min: 5 })
+    .withMessage('Password is too short'),
 ];

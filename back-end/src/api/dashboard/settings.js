@@ -38,7 +38,7 @@ const getContactInfo = [
 
 const putContactInfo = [
   async (req, res) => {
-    const newUser = req.body.data;
+    const newUser = req.body;
     const { password } = newUser;
     const salt = bcrypt.genSaltSync(10);
     newUser.password = bcrypt.hashSync(password, salt);
@@ -62,15 +62,10 @@ const deleteContactInfo = [
 
 const postContactInfo = [
   async (req, res) => {
-    const { email, existingPassword, newPassword } = req.body.data;
-    const info = _.head(await db.fetchData(TABLE_ADMINISTRATOR, { email }));
+    const { email, newPassword } = req.body;
     const salt = bcrypt.genSaltSync(10);
     const password = bcrypt.hashSync(newPassword, salt);
-    if (bcrypt.compareSync(existingPassword, info.password)) {
-      await db.updateData(TABLE_ADMINISTRATOR, { password }, { email });
-    } else {
-      console.log('password is not the same');
-    }
+    await db.updateData(TABLE_ADMINISTRATOR, { password }, { email });
     return res.json({
       data: 'success',
     });

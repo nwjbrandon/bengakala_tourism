@@ -127,8 +127,8 @@ class DashboardHome extends Component {
                         variant="outlined"
                         fullWidth
                         value={title}
-                        placeholder="Ex. How to contact us?"
-                        label="Question"
+                        placeholder="Ex. History of Bengkala"
+                        label="Heading"
                         className={classes.button}
                         onChange={this.watchTitle}
                     />
@@ -137,8 +137,8 @@ class DashboardHome extends Component {
                         variant="outlined"
                         fullWidth
                         value={text}
-                        placeholder="Ex. You can contact us at XXX-XXXX-XXXX."
-                        label="Answer"
+                        placeholder="Ex. Bengkala has a rich historical culture..."
+                        label="Description"
                         className={classes.button}
                         onChange={this.watchText}
                     />

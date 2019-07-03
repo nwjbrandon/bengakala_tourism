@@ -26,6 +26,7 @@ const getContactInfo = [
         subparagraph: v.subparagraph,
         type: v.type,
         edit: v.edit,
+        date: v.createdAt,
       };
     });
     res.json({

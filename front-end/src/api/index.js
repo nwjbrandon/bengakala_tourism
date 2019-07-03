@@ -1,8 +1,8 @@
 import axios from 'axios';
 import config from '../config';
 
-const httpUrl = 'https://bengkala.social/api';
-// const httpUrl = 'http://localhost:3001/api';
+// const httpUrl = 'https://bengkala.social/api';
+const httpUrl = 'http://localhost:3001/api';
 axios.defaults.withCredentials = true;
 const getRequest = (url, data) => {
   return new Promise((resolve, reject) => {

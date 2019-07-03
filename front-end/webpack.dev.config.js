@@ -46,10 +46,7 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true,
     hot: true,
-    proxy: {
-      '/api': 'https://bengkala.social/api'
-    },
     compress: true,
-      public: 'bengkala.social'
+    public: 'bengkala.social',
   }
 };

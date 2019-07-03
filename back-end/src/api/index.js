@@ -1,5 +1,4 @@
 import express from 'express';
-import { check } from 'express-validator/check';
 import home from './home';
 import accommodation from './accommodation';
 import admin from './admin';
@@ -23,6 +22,8 @@ import {
   contactValidators,
   dashboardContactValidators,
   adminValidators,
+  dashboardNewUserValidators,
+  dashboardChangePasswordValidators,
   errorHandling,
 } from '../middleware/validator';
 
@@ -88,8 +89,16 @@ app.post('/admin/dashboard/home',
   dashboardHome.post);
 
 app.get('/admin/dashboard/settings', checkAuthentication, dashboardSettings.get);
-app.put('/admin/dashboard/settings', checkAuthentication, dashboardSettings.put);
+app.put('/admin/dashboard/settings',
+  checkAuthentication,
+  dashboardNewUserValidators,
+  errorHandling,
+  dashboardSettings.put);
 app.delete('/admin/dashboard/settings', checkAuthentication, dashboardSettings.del);
-app.post('/admin/dashboard/settings', checkAuthentication, dashboardSettings.post);
+app.post('/admin/dashboard/settings',
+  checkAuthentication,
+  dashboardChangePasswordValidators,
+  errorHandling,
+  dashboardSettings.post);
 
 export default app;
