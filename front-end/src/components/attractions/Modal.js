@@ -3,10 +3,8 @@ import PropTypes from "prop-types";
 import {
   Button,
   Dialog,
-  DialogActions,
   Card,
   CardContent,
-  CardActionArea,
   CardActions,
   Typography
 } from "@material-ui/core";
@@ -32,7 +30,7 @@ const Modal = ({ description, imgSrc, onCloseModal, openModal, title }) => (
         </CardContent>
     <CardActions>
       <Button onClick={onCloseModal} color="primary">
-        Okay
+        Close
       </Button>
     </CardActions>
     </Card>

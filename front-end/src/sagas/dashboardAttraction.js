@@ -15,11 +15,11 @@ import {ADMIN_LOGOUT_REQUEST} from "../actions/admin";
 const displayedData = (state) => state.dashboardAttraction.displayedData;
 
 function onMount() {
-    return API.get('/admin/dashboard/attraction');
+    return API.get('/admin/dashboard/media');
 }
 
 function submit(payload) {
-    return API.post('/admin/dashboard/attraction', { data: payload});
+    return API.post('/admin/dashboard/media', { data: payload});
 }
 
 function* workerSagaOnMount() {

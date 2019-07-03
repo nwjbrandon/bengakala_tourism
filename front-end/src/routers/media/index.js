@@ -1,11 +1,19 @@
 import React from 'react';
-import API from '../../api';
 import Modal from '../../components/attractions/Modal'
-import Stories from '../../components/attractions/Stories'
-import Slideshow from '../../components/accomodations/Slideshow'
-import bg from '../../components/accomodations/images/balivillage.jpg';
 import Navbar from "../../components/navBar/navbar";
-
+import Card from '@material-ui/core/Card';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
+import { withStyles } from '@material-ui/core/styles';
+import Grid from '@material-ui/core/Grid';
+import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
+import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
+import _div from 'lodash/divide';
+import _floor from 'lodash/floor';
 
 const data = [
   {
@@ -45,9 +53,38 @@ const data = [
   }
 ];
 
+const styles = theme => ({
+  root: {
+    flexGrow: 1,
+  },
+  card: {
+    width: '90%',
+    [theme.breakpoints.up(450)]: {
+      width: 450,
+    },
+    margin: `${theme.spacing(3)}px auto`,
+  },
+  buttons: {
+    width: '90%',
+    [theme.breakpoints.up(450)]: {
+      width: 450,
+    },
+    margin: `${theme.spacing(3)}px auto`,
+  }
+});
 
 class Attraction extends React.Component {
-  state = { description: "", openModal: false, title: "", imgSrc: "" };
+  constructor(props) {
+    super(props);
+    this.state = {
+      description: "", openModal: false, title: "", imgSrc: "",
+      page: 0, rowsPerPage: 5,
+    };
+    this.handleCloseModal = this.handleCloseModal.bind(this);
+    this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.handleNext = this.handleNext.bind(this);
+    this.handlePrevious = this.handlePrevious.bind(this);
+  }
 
   handleOpenModal = ({ description, title, imgSrc }) => {
     this.setState({ description, openModal: true, title, imgSrc });
@@ -57,82 +94,64 @@ class Attraction extends React.Component {
     this.setState({ openModal: false });
   };
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      textArray: [
-        { title: "This is title 1 ", text: "This is anulrejrfbksbdkcjaksjcbkasckjabsck long description 1. It is long so that i can see whether it still looks good on the website." },
-        { title: "This is title 2", text: "This is description 2" },
-        { title: "This is title 3", text: "This is description 3" },
-        { title: "This is title 4", text: "This is description 4" },
-        { title: "This is title 5", text: "This is description 5" },
-        { title: "This is title 6", text: "This is description 6" },
-      ]
-    }
-  }
-  componentDidMount() {
-    API.get('/attraction/info').then(res => {
-      console.log("RES");
-      console.log(res);
-      this.setState({ data: res });
-    })
-  }
+  handleNext = () => {
+    const { page } = this.state;
+    this.setState({ page: page + 1})
+  };
+
+  handlePrevious = () => {
+    const { page } = this.state;
+    this.setState({ page: page - 1})
+  };
+
   render() {
-
-    var divStyle = {
-      padding: 50,
-      backgroundPosition: "top",
-      backgroundRepeat: "initial",
-      backgroundSize: "cover",
-      width: "auto",
-      backgroundImage: `url(${bg})`,
-      textAlign: "left"
-    };
-    var storyTitle = {
-            color: "white",
-            textAlign: "centre",
-            marginBottom: "40px",
-            fontSize: "50px",
-            background: "#00000099",
-            borderRadius: "5px",
-            padding: "10px"
-        };
-
-    var storyh1titletag = {
-            textAlign: "center",
-            /* font-size: 1em; */
-            marginBottom: "10px",
-            font: "20px arial, sans-serif",
-            color: "white",
-            textShadow: "0 1px 2px rgba(black,.15)",
-        };
-    var attraction = {
-      paddingTop: "55px",
-      margin: "0",
-      overflow: "scroll",
-      listStyle: "none",
-      whiteSpace: "nowrap",
-      overflowY: "hidden",
-    };
+    const { classes } = this.props;
+    const { page, rowsPerPage } = this.state;
+    const maxPage = _floor(_div(data.length, rowsPerPage));
 
     return (
-          <section style={divStyle}>
-            <Navbar />
-            <div className={storyTitle}><h1 className={storyh1titletag}>Come Listen to Our Stories!!</h1></div>
-            <ul style={attraction}>
-              {data.map(props => (
-                  <Stories
-                      key={props.title}
-                      {...props}
-                      handleOpenModal={this.handleOpenModal}
-                  />
-              ))}
-            </ul>
-            <Modal {...this.state} onCloseModal={this.handleCloseModal} />
-            <Slideshow textArr={this.state.textArray} />
-          </section>
+        <div className={classes.root}>
+          <Navbar />
+          {
+            data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
+                <Card className={classes.card} key={item.title}>
+                  <CardActionArea>
+                    <CardMedia
+                        component="img"
+                        alt={item.title}
+                        height="140"
+                        image={item.imgSrc}
+                        title={item.title}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        { item.title }
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        { item.description }
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button size="small" value={item} color="primary" onClick={() => this.handleOpenModal({...item})}>
+                      Read More
+                    </Button>
+                  </CardActions>
+                </Card>
+            ))
+          }
+          <Modal {...this.state} onCloseModal={this.handleCloseModal} />
+          <Grid container justify="center" spacing={10} className={classes.buttons}>
+            <Button size="small" color="primary" onClick={this.handlePrevious} disabled={page === 0} >
+              <KeyboardArrowLeft /> Previous Page
+            </Button>
+            <Button size="small" color="primary" onClick={this.handleNext} disabled={page === maxPage}>
+              Next Page <KeyboardArrowRight />
+            </Button>
+          </Grid>
+        </div>
     )
   }
 }
 
-export default Attraction
+export default withStyles(styles)(Attraction);

@@ -80,7 +80,7 @@ class DashboardFAQ extends Component {
             imgUrl,
             title,
             text,
-            type: 'attraction',
+            type: 'media',
             edit: 0 // implement editable table did not succeed
         };
         saveEntry({ id, payload });
@@ -117,7 +117,7 @@ class DashboardFAQ extends Component {
     render() {
         const { classes } = this.props;
         const { imgUrl, title, text } = this.state;
-        const navTitle = 'Attraction';
+        const navTitle = 'Media';
         return (
             <div className={classes.root}>
                 <CssBaseline />
