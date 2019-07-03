@@ -4,6 +4,7 @@ import Modal from '../../components/attractions/Modal'
 import Stories from '../../components/attractions/Stories'
 import Slideshow from '../../components/accomodations/Slideshow'
 import bg from '../../components/accomodations/images/balivillage.jpg';
+import Navbar from "../../components/navBar/navbar";
 
 
 const data = [
@@ -115,20 +116,21 @@ class Attraction extends React.Component {
     };
 
     return (
-      <section style={divStyle}>
-      <div className={storyTitle}><h1 className={storyh1titletag}>Come Listen to Our Stories!!</h1></div>
-      <ul style={attraction}>
-        {data.map(props => (
-          <Stories
-            key={props.title}
-            {...props}
-            handleOpenModal={this.handleOpenModal}
-          />
-        ))}
-      </ul>
-      <Modal {...this.state} onCloseModal={this.handleCloseModal} />
-      <Slideshow textArr={this.state.textArray} />
-      </section>
+          <section style={divStyle}>
+            <Navbar />
+            <div className={storyTitle}><h1 className={storyh1titletag}>Come Listen to Our Stories!!</h1></div>
+            <ul style={attraction}>
+              {data.map(props => (
+                  <Stories
+                      key={props.title}
+                      {...props}
+                      handleOpenModal={this.handleOpenModal}
+                  />
+              ))}
+            </ul>
+            <Modal {...this.state} onCloseModal={this.handleCloseModal} />
+            <Slideshow textArr={this.state.textArray} />
+          </section>
     )
   }
 }
