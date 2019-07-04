@@ -70,6 +70,24 @@ export const dashboardAttractionValidators = [
         throw Error('Cannot be empty');
       }
       _.map(data, (item) => {
+        if (item.title === '' || item.text === '' || item.imgUrl === '' || item.heading === '') {
+          throw Error('Field cannot be empty');
+        }
+        if (item.edit === 1) {
+          throw Error('You need to update your changes.');
+        }
+      });
+      return true;
+    })
+];
+
+export const dashboardResoucesValidators = [
+  check('data')
+    .custom((data) => {
+      if (_.isEmpty(data)) {
+        throw Error('Cannot be empty');
+      }
+      _.map(data, (item) => {
         if (item.title === '' || item.text === '' || item.imgUrl === '') {
           throw Error('Field cannot be empty');
         }
@@ -80,6 +98,7 @@ export const dashboardAttractionValidators = [
       return true;
     })
 ];
+
 
 export const dashboardFaqValidators = [
   check('data')

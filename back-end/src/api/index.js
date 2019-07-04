@@ -9,6 +9,7 @@ import dashboard from './dashboard';
 import dashboardContact from './dashboard/contact';
 import dashboardAccommodation from './dashboard/accommodation';
 import dashboardAttraction from './dashboard/attraction';
+import dashboardResources from './dashboard/resouces';
 import dashboardFaq from './dashboard/faq';
 import dashboardHome from './dashboard/home';
 import dashboardSettings from './dashboard/settings';
@@ -24,6 +25,7 @@ import {
   adminValidators,
   dashboardNewUserValidators,
   dashboardChangePasswordValidators,
+  dashboardResoucesValidators,
   errorHandling,
 } from '../middleware/validator';
 
@@ -34,7 +36,7 @@ app.get('/home/info', home.info);
 app.get('/accommodation/info', accommodation.info);
 app.post('/accommodation/info', accommodation.post);
 
-//TODO
+// TODO
 
 
 app.get('/attraction/info', attraction.info);
@@ -78,6 +80,14 @@ app.post('/admin/dashboard/media',
   dashboardAttractionValidators,
   errorHandling,
   dashboardAttraction.post);
+
+app.get('/admin/dashboard/resources', checkAuthentication, dashboardResources.get);
+app.post('/admin/dashboard/resources',
+  checkAuthentication,
+  dashboardResoucesValidators,
+  errorHandling,
+  dashboardResources.post);
+
 
 app.get('/admin/dashboard/faq', checkAuthentication, dashboardFaq.get);
 app.post('/admin/dashboard/faq',

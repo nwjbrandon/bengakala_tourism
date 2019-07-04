@@ -17,6 +17,7 @@ import Settings from '@material-ui/icons/Settings';
 import Store from '@material-ui/icons/Store';
 import Terrain from '@material-ui/icons/Terrain';
 import Exittoapp from '@material-ui/icons/ExitToApp';
+import Movie from '@material-ui/icons/Movie';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
@@ -50,6 +51,11 @@ const menuOptions = [
         title: 'Home',
         to: '/dashboard/home',
         icon: <Home />
+    },
+    {
+        title: 'Resources',
+        to: '/dashboard/resources',
+        icon: <Movie />
     },
 ];
 

@@ -12,6 +12,7 @@ import { dashboardHomeReducer } from "./dashboardHome";
 import { dashboardSettingsReducer } from "./dashboardSettings";
 import { homeOnMountReducer } from "./home";
 import { faqOnMountReducer } from "./faq";
+import { dashboardResourcesReducer } from "./dashboardResources";
 import { connectRouter } from 'connected-react-router';
 import { toastReducer } from "./toast";
 
@@ -25,6 +26,7 @@ const allReducers = (history) => combineReducers({
     dashboardAttraction: reduceReducers(dashboardAttractionReducer),
     dashboardHome: reduceReducers(dashboardHomeReducer),
     dashboardSettings: reduceReducers(dashboardSettingsReducer),
+    dashboardResources: reduceReducers(dashboardResourcesReducer),
     contact: reduceReducers(contactOnMountReducer, contactFormReducer),
     home: reduceReducers(homeOnMountReducer),
     faq: reduceReducers(faqOnMountReducer),

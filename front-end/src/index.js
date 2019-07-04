@@ -32,6 +32,7 @@ import DashboardAttraction from './routers/dashboard/media/container';
 import DashboardContact from './routers/dashboard/contact/container';
 import DashboardFAQ from './routers/dashboard/faq/container';
 import DashboardHome from './routers/dashboard/home/container';
+import DashboardResources from './routers/dashboard/resources/container';
 import DashboardSettings from './routers/dashboard/settings/container';
 
 // tmp solution to get rid of white gaps around the browser
@@ -84,6 +85,7 @@ const routing = (
             <ProtectedRoutes exact path="/dashboard/contact" component={ DashboardContact } secret={true} />
             <ProtectedRoutes exact path="/dashboard/faq" component={ DashboardFAQ } secret={true} />
             <ProtectedRoutes exact path="/dashboard/home" component={ DashboardHome } secret={true} />
+            <ProtectedRoutes exact path="/dashboard/resources" component={ DashboardResources } secret={true} />
             <ProtectedRoutes exact path="/dashboard/settings" component={ DashboardSettings } secret={true} />
             
             <Route component={ Notfound } />

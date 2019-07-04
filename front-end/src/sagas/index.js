@@ -11,6 +11,7 @@ import dashboardContact from './dashboardContact';
 import dashboardAccommodation from './dashboardAccommodation';
 import dashboardAttraction from './dashboardAttraction';
 import dashboardHome from './dashboardHome';
+import dashboardResources from './dashboardResources';
 import dashboardSettings from './dashboardSettings';
 import toast from './toast'
 
@@ -28,6 +29,7 @@ export default function* rootSaga() {
     ...dashboardAccommodation,
     ...dashboardAttraction,
     ...dashboardHome,
-    ...dashboardSettings
+    ...dashboardSettings,
+    ...dashboardResources,
   ]);
 }
