@@ -1,175 +1,69 @@
-import React, { useState } from 'react';
-import { makeStyles } from '@material-ui/core/styles';
-import GridList from '@material-ui/core/GridList';
-import Button from '@material-ui/core/Button';
-import { GridListTile } from '@material-ui/core';
-import GridListTileBar from '@material-ui/core/GridListTileBar';
-import Typography from '@material-ui/core/Typography';
-import Modal from '@material-ui/core/Modal';
+import React, { PureComponent } from "react";
+import {
+    Button,
+    Typography,
+    Modal,
+    Card,
+    CardMedia,
+    CardContent,
+    CardActions,
+    CardActionArea
+} from "@material-ui/core";
+import PropTypes from "prop-types";
 
+const storie = {
+    margin: "0",
+    height: "auto",
+    overflow: "scroll",
+    whiteSpace: "nowrap",
+    display: "inline-block",
+    padding: "5px",
+    overflowX: "hidden",
+    overflowY: "hidden"
+};
+const desc = {
+    whiteSpace: "normal",
+    maxHeight: "80px",
+    overflow: "hidden",
+};
+class Stories extends React.Component {
 
-const useStyles = makeStyles(theme => ({
-    root: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-around',
-        overflow: 'hidden',
-        paddingTop: "1%",
-        paddingLeft: "5%",
-        paddingRight: "5%",
-        width: "auto",
-        background: "#FFFFFF00",
-    },
-    gridList: {
-        flexWrap: 'nowrap',
-        transform: 'translateZ(0)',
-        height: '400px'
-    },
-    gridListTile: {
-        flexWrap: 'nowrap',
-        transform: 'translateZ(0)',
-        height: '400px'
-    },
-    title: {
-        color: "white",
-    },
-    h1titletag: {
-        color: "white",
-    },
-
-    Storytitle: {
-        color: "white",
-        textAlign: "centre",
-        marginBottom: "40px",
-        fontSize: "50px",
-        background: "#00000099",
-        borderRadius: "5px",
-        padding: "10px"
-    },
-
-    Storyh1titletag: {
-        textAlign: "center",
-        /* font-size: 1em; */
-        marginBottom: "10px",
-        font: "20px arial, sans-serif",
-        color: "white",
-        textShadow: "0 1px 2px rgba(black,.15)",
-        height: "50px"
-    },
-
-    titleBar: {
-        background:
-            'linear-gradient(to top, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.3) 70%, rgba(0,0,0,0) 100%)',
-    },
-    paper: {
-        position: 'absolute',
-        width: 400,
-        backgroundColor: theme.palette.background.paper,
-        boxShadow: theme.shadows[5],
-        padding: theme.spacing(4),
-        outline: 'none',
-    },
-}));
-
-
-function getModalStyle() {
-    return {
-        top: `${50}%`,
-        left: `${50}%`,
-        transform: `translate(-${50}%, -${50}%)`,
+    openModal = () => {
+        const { description, handleOpenModal, imgSrc, title } = this.props;
+        handleOpenModal({ description, imgSrc, title });
     };
-}
 
+    render = () => (
 
-
-
-export default function SingleLineGridList(props) {
-    const classes = useStyles();
-
-    const [open, setOpen] = useState(false);
-    const [dataID, setDataID] = useState(undefined);
-
-    const [modalStyle] = React.useState(getModalStyle);
-    console.log("The Data");
-    console.log(props.data)
-
-    const cardRow = props.data.map((item) => {
-
-        <GridListTile className={classes.gridListTile}>
-            <img style={{ height: "400px" }} src={item.imgUrl} alt={item.title} />
-            <GridListTileBar
-                title={item.title}
-                classes={{
-                    root: classes.titleBar,
-                    title: classes.title,
-                }}
-                actionIcon={
-                    <Button onClick={() => {
-                        setDataID({ ...item });
-                        setOpen(true);
-                    }
-                    } size="small" className={classes.title}>
-                        Read More
-                        </Button>
-                }
-            />
-        </GridListTile>
-
-
-    });
-
-
-
-    // const cardRow = Object.keys(props.data).map(keyVal =>
-    //     props.data[keyVal].map((item, index) => (
-    //         <GridListTile className={classes.gridListTile}>
-    //             <img style={{ height: "400px" }} src={item.imgUrl} alt={keyVal} />
-    //             <GridListTileBar
-    //                 title={keyVal}
-    //                 classes={{
-    //                     root: classes.titleBar,
-    //                     title: classes.title,
-    //                 }}
-    //                 actionIcon={
-    //                     <Button onClick={() => {
-    //                         setDataID(keyVal);
-    //                         setOpen(true);
-    //                     }
-    //                     } size="small" className={classes.title}>
-    //                         Read More
-    //                     </Button>
-    //                 }
-    //             />
-    //         </GridListTile>
-
-    //     ))
-    // );
-
-
-
-    return (
-        <div className={classes.root}>
-            <div className={classes.Storytitle}><h1 className={classes.Storyh1titletag}>Come Listen to Our Stories!!</h1></div>
-
-            <GridList cellHeight="auto" className={classes.gridList} cols={4}>
-                {cardRow}
-            </GridList>
-
-            {open ? <Modal
-                aria-labelledby="simple-modal-title"
-                aria-describedby="simple-modal-description"
-                open={open}
-                onClose={() => setOpen(false)}
-            >
-                <div style={modalStyle} className={classes.paper}>
-                    <Typography variant="h6" id="story_title">
-                        {dataID.title}
-                    </Typography>
-                    <Typography variant="subtitle1" id="story_description">
-                        {dataID.text}
-                    </Typography>
-                </div>
-            </Modal> : null}
-        </div>
+        <React.Fragment>
+            <li style={storie}>
+                <Card raised="true" style={{ height: "400px", maxWidth: "350px" }}>
+                    <CardContent>
+                        <Typography gutterBottom variant="h5" component="h2">
+                            {this.props.title}
+                        </Typography>
+                        <div align="center" style={{ paddingTop: "5px", marginTop: "10px" }}>
+                            <img src={this.props.imgSrc} title={this.props.title} style={{ maxHeight: "200px" }} /></div>
+                        <Typography style={desc} variant="body2" color="textSecondary" component="p">
+                            {this.props.description}
+                        </Typography>
+                    </CardContent>
+                    <CardActions>
+                        <Button style={{ bottom: "10px" }} size="small" color="primary" onClick={this.openModal}>
+                            Read More
+        </Button>
+                    </CardActions>
+                </Card>
+            </li>
+        </React.Fragment>
     );
 }
+
+Stories.propTypes = {
+    description: PropTypes.string.isRequired,
+    handleOpenModal: PropTypes.func.isRequired,
+    imgSrc: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired
+};
+
+export default Stories;

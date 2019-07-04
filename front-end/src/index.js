@@ -17,7 +17,7 @@ import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 // Non Protected Routes
 import Accommodation from './routers/booking';
 import Home from './routers/home';
-import Attraction from './routers/attraction';
+import Attraction from './routers/media';
 import Contact from './routers/contact/container';
 import Faq from './routers/faq/container';
 import Notfound from './routers/notfound';
@@ -28,7 +28,7 @@ import Tutorial from './routers/resources'
 import Admin from './routers/admin/container';
 import Dashboard from './routers/dashboard/container';
 import DashboardAccommodation from './routers/dashboard/booking/container';
-import DashboardAttraction from './routers/dashboard/attraction/container';
+import DashboardAttraction from './routers/dashboard/media/container';
 import DashboardContact from './routers/dashboard/contact/container';
 import DashboardFAQ from './routers/dashboard/faq/container';
 import DashboardHome from './routers/dashboard/home/container';
@@ -73,14 +73,14 @@ const routing = (
             <ProtectedRoutes exact path="/booking" component={ Accommodation } secret={false} />
             <ProtectedRoutes exact path="/resources" component={ Tutorial } secret={false} />
             <ProtectedRoutes exact path="/admin" component={ Admin } secret={false} />
-            <ProtectedRoutes exact path="/attraction" component={ Attraction } secret={false} />
+            <ProtectedRoutes exact path="/media" component={ Attraction } secret={false} />
             <ProtectedRoutes exact path="/contact" component={ Contact } secret={false} />
             <ProtectedRoutes exact path="/faq" component={ Faq } secret={false} />
             <ProtectedRoutes exact path="/payment" component={ Payment } secret={false} />
 
             <ProtectedRoutes exact path="/dashboard" component={ Dashboard } secret={true} />
             <ProtectedRoutes exact path="/dashboard/booking" component={ DashboardAccommodation } secret={true} />
-            <ProtectedRoutes exact path="/dashboard/attraction" component={ DashboardAttraction } secret={true} />
+            <ProtectedRoutes exact path="/dashboard/media" component={ DashboardAttraction } secret={true} />
             <ProtectedRoutes exact path="/dashboard/contact" component={ DashboardContact } secret={true} />
             <ProtectedRoutes exact path="/dashboard/faq" component={ DashboardFAQ } secret={true} />
             <ProtectedRoutes exact path="/dashboard/home" component={ DashboardHome } secret={true} />

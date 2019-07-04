@@ -72,7 +72,7 @@ class DashboardContactDetails extends Component {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography className={classes.heading}>Products/Services: { data[item].title }</Typography>
+                            <Typography className={classes.heading}>Item: { data[item].title }</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                             {data[item].edit ?

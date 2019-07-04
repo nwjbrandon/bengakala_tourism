@@ -17,6 +17,8 @@ import "react-notifications-component/dist/theme.css";
 import DashBoardEditableUser from '../../../components/dashboardSettings/dashboardSettingsEditableUser.container';
 import DashBoardUneditableUser from '../../../components/dashboardSettings/dashboardSettingsUneditableUser.container';
 import NavBar from '../../../components/dashboard/navBar';
+import SuccessToast from "../../../components/snackBar/successSnackBar.container";
+import ErrorToast from "../../../components/snackBar/errorSnackBar.container";
 
 const styles = theme => ({
     root: {
@@ -51,7 +53,7 @@ class DashboardFAQ extends Component {
             openNew: false,
             newUsername: '',
             newPassword: '',
-            newComfirmedPassword: '',
+            newConfirmedPassword: '',
             newJobTitle: '',
             newPhone: '',
             newEmail: '',
@@ -87,17 +89,19 @@ class DashboardFAQ extends Component {
             newUsername,
             newPassword,
             newJobTitle,
+            newConfirmedPassword,
             newPhone,
         } = this.state;
         const id = uuidv1();
         this.setState({
             openNew: false,
         });
-        const { create } = this.props;
+        const { create, } = this.props;
         create({
             uuid: id,
             username: newUsername,
             password: newPassword,
+            confirmedPassword: newConfirmedPassword,
             jobTitle: newJobTitle,
             phone: newPhone,
             email: newUsername,
@@ -164,7 +168,6 @@ class DashboardFAQ extends Component {
                         Change User Password
                     </Typography>
                     <TextField
-                        multiline={true}
                         variant="outlined"
                         fullWidth
                         value={username}
@@ -174,19 +177,19 @@ class DashboardFAQ extends Component {
                         onChange={(event) => { this.setState({ username: event.target.value})}}
                     />
                     <TextField
-                        multiline={true}
                         variant="outlined"
                         fullWidth
                         value={password}
                         placeholder="Ex. password"
                         label="Current Password"
+                        type="password"
                         className={classes.button}
                         onChange={(event) => { this.setState({ password: event.target.value })}}
                     />
                     <TextField
-                        multiline={true}
                         variant="outlined"
                         fullWidth
+                        type="password"
                         value={confirmedPassword}
                         placeholder="Ex. password"
                         label="New Password"
@@ -210,6 +213,8 @@ class DashboardFAQ extends Component {
                         </Button>
                     </Grid>
                 </main>
+                <SuccessToast />
+                <ErrorToast />
                 <Dialog
                     open={openDelete}
                     onClose={this.closeDelete}
@@ -243,7 +248,6 @@ class DashboardFAQ extends Component {
                             Create new user.
                         </DialogContentText>
                         <TextField
-                            multiline={true}
                             variant="outlined"
                             fullWidth
                             value={newUsername}
@@ -253,27 +257,26 @@ class DashboardFAQ extends Component {
                             onChange={(event) => { this.setState({ newUsername: event.target.value })}}
                         />
                         <TextField
-                            multiline={true}
                             variant="outlined"
                             fullWidth
                             value={newPassword}
                             placeholder="Ex. password"
                             label="Password"
+                            type="password"
                             className={classes.button}
                             onChange={(event) => { this.setState({ newPassword: event.target.value })}}
                         />
                         <TextField
-                            multiline={true}
                             variant="outlined"
                             fullWidth
                             value={newConfirmedPassword}
                             placeholder="Ex. password"
                             label="Confirmed Password"
+                            type="password"
                             className={classes.button}
                             onChange={(event) => { this.setState({ newConfirmedPassword: event.target.value })}}
                         />
                         <TextField
-                            multiline={true}
                             variant="outlined"
                             fullWidth
                             value={newJobTitle}
@@ -283,7 +286,6 @@ class DashboardFAQ extends Component {
                             onChange={(event) => { this.setState({ newJobTitle: event.target.value })}}
                         />
                         <TextField
-                            multiline={true}
                             variant="outlined"
                             fullWidth
                             value={newPhone}

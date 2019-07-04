@@ -11,6 +11,8 @@ import NavBar from '../../../components/dashboard/navBar';
 import uuidv1 from "uuid/v1";
 import DashBoardHomeStories from "../../../components/dashboardHome/dashboardHomeStories.container";
 import DashBoardHomeMission from "../../../components/dashboardHome/dashboardHomeMission.container";
+import SuccessToast from "../../../components/snackBar/successSnackBar.container";
+import ErrorToast from "../../../components/snackBar/errorSnackBar.container";
 
 
 const styles = theme => ({
@@ -125,8 +127,8 @@ class DashboardHome extends Component {
                         variant="outlined"
                         fullWidth
                         value={title}
-                        placeholder="Ex. How to contact us?"
-                        label="Question"
+                        placeholder="Ex. History of Bengkala"
+                        label="Heading"
                         className={classes.button}
                         onChange={this.watchTitle}
                     />
@@ -135,8 +137,8 @@ class DashboardHome extends Component {
                         variant="outlined"
                         fullWidth
                         value={text}
-                        placeholder="Ex. You can contact us at XXX-XXXX-XXXX."
-                        label="Answer"
+                        placeholder="Ex. Bengkala has a rich historical culture..."
+                        label="Description"
                         className={classes.button}
                         onChange={this.watchText}
                     />
@@ -160,6 +162,8 @@ class DashboardHome extends Component {
                         </Button>
                     </Grid>
                 </main>
+                <SuccessToast />
+                <ErrorToast />
             </div>
         );
     }

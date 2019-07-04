@@ -10,6 +10,8 @@ import uuidv1 from 'uuid/v1';
 
 import NavBar from '../../../components/dashboard/navBar';
 import DashBoardAttractionEntries from "../../../components/dashboardAttraction/dashboardAttractionEntries.container";
+import SuccessToast from "../../../components/snackBar/successSnackBar.container";
+import ErrorToast from "../../../components/snackBar/errorSnackBar.container";
 
 const styles = theme => ({
     root: {
@@ -78,7 +80,7 @@ class DashboardFAQ extends Component {
             imgUrl,
             title,
             text,
-            type: 'attraction',
+            type: 'media',
             edit: 0 // implement editable table did not succeed
         };
         saveEntry({ id, payload });
@@ -115,7 +117,7 @@ class DashboardFAQ extends Component {
     render() {
         const { classes } = this.props;
         const { imgUrl, title, text } = this.state;
-        const navTitle = 'Attraction';
+        const navTitle = 'Media';
         return (
             <div className={classes.root}>
                 <CssBaseline />
@@ -175,6 +177,8 @@ class DashboardFAQ extends Component {
                         </Button>
                     </Grid>
                 </main>
+                <SuccessToast />
+                <ErrorToast />
             </div>
         );
     }

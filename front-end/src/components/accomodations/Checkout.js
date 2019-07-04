@@ -1,7 +1,8 @@
-import React from 'react';
-import { makeStyles } from '@material-ui/core/styles';
+import React, { useState, useEffect } from 'react';
+import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -14,28 +15,28 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 import blue from '@material-ui/core/colors/blue'
 import Buttons from './Buttons'
 import { connect } from 'react-redux'
+import MobileStepper from '@material-ui/core/MobileStepper';
+import LinearProgress from '@material-ui/core/LinearProgress';
 
 import TransportDetails from './TransportDetails'
 
 import API from '../../api';
 
 const useStyles = makeStyles(theme => ({
-  appBar: {
-    position: 'relative',
-  },
   label: {
-    color: blue
+    color: blue,
+    marginBottom: 10
   },
   layout: {
     width: 'auto',
     background: "#42424240",
-    marginLeft: theme.spacing(2),
-    marginRight: theme.spacing(2),
-    [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-      width: 600,
-      marginLeft: 'auto',
-      marginRight: 'auto',
-    },
+    // marginLeft: theme.spacing(2),
+    // marginRight: theme.spacing(2),
+    // [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
+    //   width: 600,
+    //   marginLeft: 'auto',
+    //   marginRight: 'auto',
+    // },
   },
   paper: {
     marginTop: theme.spacing(3),
@@ -61,6 +62,10 @@ const useStyles = makeStyles(theme => ({
     marginTop: theme.spacing(3),
     marginLeft: theme.spacing(1),
   },
+  root: {
+    maxWidth: 400,
+    flexGrow: 1,
+  },
 }));
 
 const steps = ['Personal Details', 'Trip Details', 'Transportation Preferences', 'Confirm your Trip'];
@@ -78,6 +83,13 @@ const Checkout = (props) => {
   ]
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
+
+  const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
+    setWindowWidth(window.innerWidth);
+  });
 
   const isValidEmail = (email) => {
     return email.includes("@") && email.includes('.') && email.split('@').length > 1 && email.split('@')[1] !== "";
@@ -137,12 +149,36 @@ const Checkout = (props) => {
     setActiveStep(activeStep - 1);
   };
 
+  const BorderLinearProgress = withStyles({
+    root: {
+      height: 10,
+    },
+    bar: {
+      borderRadius: 20,
+    },
+  })(LinearProgress);
+
 
   const theme = createMuiTheme({
     palette: {
       primary: blue
     }
-  })
+  });
+
+  const MStepper = (<BorderLinearProgress
+    className={classes.margin}
+    variant="determinate"
+    color="primary"
+    value={activeStep * 100 / 4} />
+  );
+
+  const normalStepper = (<Stepper activeStep={activeStep} className={classes.stepper}>
+    {steps.map(label => (
+      <Step className={classes.label} key={label}>
+        <StepLabel className={classes.label}><p style={{ color: "white" }}>{label}</p></StepLabel>
+      </Step>
+    ))}
+  </Stepper>);
 
   return (
     <React.Fragment>
@@ -155,13 +191,8 @@ const Checkout = (props) => {
               Checkout
             </Typography>
 
-            <Stepper activeStep={activeStep} className={classes.stepper}>
-              {steps.map(label => (
-                <Step className={classes.label} key={label}>
-                  <StepLabel className={classes.label}><p style={{ color: "white" }}>{label}</p></StepLabel>
-                </Step>
-              ))}
-            </Stepper>
+            {windowWidth < 600 ? MStepper : normalStepper}
+
 
             <React.Fragment>
 
