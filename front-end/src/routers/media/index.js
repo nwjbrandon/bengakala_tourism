@@ -18,6 +18,7 @@ import _floor from 'lodash/floor';
 const data = [
   {
     title: "Funny Random Meme Dump",
+    summary: "Come visit our museum located within the serene and tranquil",
     description: "Come visit our museum located within the serene and tranquil Kranji countryside area in Singapore to uncover the myths and discover the benefits of edible bird’s nest for we are probably one of the most comprehensive collection of information about edible bird’s nest in the entire South-East Asia.",
     imgSrc: "https://d39gusjpdm7p1o.cloudfront.net/data/layout_grouping/static_page_step/20784_a330628091ede7eb1548d6cda58e0357.jpg?ver=1477297804"
   },
@@ -28,26 +29,31 @@ const data = [
   },
   {
     title: "Feme Dump",
+    summary: "Come visit our museum located within the serene and tranquil ",
     description: "Come visit our museum located within the serene and tranquil Kranji countryside area in Singapore to uncover the myths and discover the benefits of edible bird’s nest for we are probably one of the most comprehensive collection of information about edible bird’s nest in the entire South-East Asia.",
     imgSrc: "https://static.amazon.jobs/locations/7/thumbnails/Paris_-_Thumbnail.jpg?1454183453"
   },
   {
     title: "Nappinith my human",
+    summary: "At World of Birdnest Museum, we aim to play an educational ",
     description: "At World of Birdnest Museum, we aim to play an educational role in sharing the information in depth about edible bird’s nest, the swiftlet species which their secretion produces the edible bird’s nest. We also curate works on caves bird’s nest to nests from swiftlet’s ranching farms and about sustainable farming, its trade and the past and ongoing scientific development on the medicinal properties of edible bird’s nest.",
     imgSrc: "https://www.findingtheuniverse.com/wp-content/uploads/2017/12/Eiffel2BTower2BParis2B1_by_Laurence2BNorah255B4255D.jpg"
   },
   {
     title: "Fun Meme Dump",
+    summary: "Come visit our museum located within the serene and tranquil ",
     description: "Come visit our museum located within the serene and tranquil Kranji countryside area in Singapore to uncover the myths and discover the benefits of edible bird’s nest for we are probably one of the most comprehensive collection of information about edible bird’s nest in the entire South-East Asia.",
     imgSrc: "https://www.findingtheuniverse.com/wp-content/uploads/2017/12/Eiffel2BTower2BParis2B1_by_Laurence2BNorah255B4255D.jpg"
   },
   {
     title: "Napng with my human",
+    summary: "At World of Birdnest Museum, we aim to play an educational ",
     description: "At World of Birdnest Museum, we aim to play an educational role in sharing the information in depth about edible bird’s nest, the swiftlet species which their secretion produces the edible bird’s nest. We also curate works on caves bird’s nest to nests from swiftlet’s ranching farms and about sustainable farming, its trade and the past and ongoing scientific development on the medicinal properties of edible bird’s nest.",
     imgSrc: "https://www.findingtheuniverse.com/wp-content/uploads/2017/12/Eiffel2BTower2BParis2B1_by_Laurence2BNorah255B4255D.jpg"
   },
   {
     title: "Femump",
+    summary: "Come visit our museum located within the serene and tranquil ",
     description: "Come visit our museum located within the serene and tranquil Kranji countryside area in Singapore to uncover the myths and discover the benefits of edible bird’s nest for we are probably one of the most comprehensive collection of information about edible bird’s nest in the entire South-East Asia.",
     imgSrc: "https://www.findingtheuniverse.com/wp-content/uploads/2017/12/Eiffel2BTower2BParis2B1_by_Laurence2BNorah255B4255D.jpg"
   }
@@ -61,6 +67,9 @@ const styles = theme => ({
     width: '90%',
     [theme.breakpoints.up(450)]: {
       width: 450,
+    },
+    [theme.breakpoints.up(700)]: {
+      width: 600,
     },
     margin: `${theme.spacing(3)}px auto`,
   },
@@ -110,6 +119,7 @@ class Attraction extends React.Component {
     const maxPage = _floor(_div(data.length, rowsPerPage));
 
     return (
+<<<<<<< HEAD
       <div className={classes.root}>
         <Navbar />
         {
@@ -135,6 +145,33 @@ class Attraction extends React.Component {
               <CardActions>
                 <Button size="small" value={item} color="primary" onClick={() => this.handleOpenModal({ ...item })}>
                   Read More
+=======
+        <div className={classes.root}>
+          <Navbar />
+          {
+            data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
+                <Card className={classes.card} key={item.title}>
+                  <CardActionArea>
+                    <CardMedia
+                        component="img"
+                        alt={item.title}
+                        height="140"
+                        image={item.imgSrc}
+                        title={item.title}
+                    />
+                    <CardContent>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        { item.title }
+                      </Typography>
+                      <Typography variant="body2" color="textSecondary" component="p">
+                        { item.summary }
+                      </Typography>
+                    </CardContent>
+                  </CardActionArea>
+                  <CardActions>
+                    <Button size="small" value={item} color="primary" onClick={() => this.handleOpenModal({...item})}>
+                      Read More
+>>>>>>> 57a6333d81fad8e0f8a292eb15ea80faa81483b5
                     </Button>
               </CardActions>
             </Card>

@@ -36,7 +36,7 @@ module.exports = {
     }),
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
-    new webpack.optimize.OccurrenceOrderPlugin()
+    new webpack.optimize.OccurrenceOrderPlugin(),
   ],
   devServer: {
     port: 3000,
@@ -44,10 +44,7 @@ module.exports = {
     contentBase: './dist',
     historyApiFallback: true,
     hot: true,
-    proxy: {
-      '/api': 'http://www.bengkala.social/api'
-    },
     compress: true,
-    disableHostCheck: true,
+    public: 'bengkala.social',
   }
 };
