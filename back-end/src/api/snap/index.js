@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 /* eslint-disable quote-props */
 import midtransClient from 'midtrans-client';
 
@@ -55,7 +56,8 @@ const snapTokenPost = [
   async (req, res) => {
     console.log('retrieving snap token');
     // get data from front-end
-    const {first_name, last_name, email, gross_amount} = req.body.data;
+    // eslint-disable-next-line object-curly-newline
+    const { first_name, last_name, email, gross_amount } = req.body.data;
     // Create Snap API instance
     const snap = new midtransClient.Snap({
       isProduction: false,
