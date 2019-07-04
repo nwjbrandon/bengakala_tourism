@@ -137,56 +137,7 @@ const Checkout = (props) => {
     setActiveStep(activeStep - 1);
   };
 
-  /* Includes a callback to show snap loading, success, etc screens */
-  const callSnap = () => {
-    snap.show(); // the snap loading screen
-    handleTokenReq((error, snapToken) => {
-      if (error) {
-        snap.hide();
-        console.log(error)
-      } else {
-        console.log('calling snap pay')
-        snap.pay(snapToken, {
-          onSuccess: (result) => { console.log('success'); console.log(result); alert('Payment Success') },
-          onPending: function (result) { console.log('pending'); console.log(result); alert('Payment Pending') },
-          onError: function (result) { console.log('error'); console.log(result); alert('Payment Error') },
-          onClose: function () {
-            console.log('customer closed the popup without finishing the payment');
-            alert('Please do not close the payment pop-up')
-          }
-        })
-      }
-    })
-  }
-
-  const handleTokenReq = (callback) => {
-    console.log('handling token request')
-    const snapRes = getToken();
-    if (snapRes.token) {
-      callback(null, snapRes.token)
-    } else if (snapRes.error_messages) {
-      error_messages.map((err) => console.log(err)) // snap errors are stored in array
-      callSnap(new Error('Unable to process payment, please try again later'), null)
-    }
-  }
-
-  // get the token (or error) from the back-end
-  const getToken = () => {
-    console.log('getting token from backend')
-    API.post('/snap/info', {
-      data: {
-        'first_name': props.personalDetails.firstName,
-        'last_name': props.personalDetails.lastName,
-        'email': props.personalDetails.email,
-        'gross_amount': props.personalDetails.grossAmount,
-      }
-    }).then((res) => {
-      console.log(res);
-      return res;
-    }).catch((err) => {
-      console.log(err);
-    });
-  }
+  
 
   const theme = createMuiTheme({
     palette: {
@@ -217,8 +168,7 @@ const Checkout = (props) => {
 
               {activeStep === steps.length ? (
                 <React.Fragment>
-                  {callSnap()}
-                  <ConfirmationScreen email={props.personalDetails.email} grossAmount={props.grossAmount} />
+                  <ConfirmationScreen personalDetails={props.personalDetails} grossAmount={props.grossAmount} />
                 </React.Fragment>
               ) : (
                   <React.Fragment>
