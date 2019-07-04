@@ -20,7 +20,7 @@ function* workerSagaLogin(payload) {
     try {
         const data = yield call(login, payload.payload);
         yield put(ADMIN_LOGIN_SUCCESS(data));
-        yield put(TOAST_SUCCESS_SHOW('Contact Form Submitted'));
+        yield put(TOAST_SUCCESS_SHOW('Successfully Login'));
         yield put(push('/dashboard'));
     } catch (error) {
         yield put(ADMIN_LOGIN_ERROR(error));

@@ -72,8 +72,8 @@ app.post('/admin/dashboard/booking',
   errorHandling,
   dashboardAccommodation.post);
 
-app.get('/admin/dashboard/attraction', checkAuthentication, dashboardAttraction.get);
-app.post('/admin/dashboard/attraction',
+app.get('/admin/dashboard/media', checkAuthentication, dashboardAttraction.get);
+app.post('/admin/dashboard/media',
   checkAuthentication,
   dashboardAttractionValidators,
   errorHandling,

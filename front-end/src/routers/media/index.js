@@ -119,33 +119,6 @@ class Attraction extends React.Component {
     const maxPage = _floor(_div(data.length, rowsPerPage));
 
     return (
-<<<<<<< HEAD
-      <div className={classes.root}>
-        <Navbar />
-        {
-          data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
-            <Card className={classes.card} key={item.title}>
-              <CardActionArea>
-                <CardMedia
-                  component="img"
-                  alt={item.title}
-                  height="140"
-                  image={item.imgSrc}
-                  title={item.title}
-                />
-                <CardContent>
-                  <Typography gutterBottom variant="h5" component="h2">
-                    {item.title}
-                  </Typography>
-                  {/*<Typography variant="body2" color="textSecondary" component="p">
-                    {item.description}
-          </Typography>*/}
-                </CardContent>
-              </CardActionArea>
-              <CardActions>
-                <Button size="small" value={item} color="primary" onClick={() => this.handleOpenModal({ ...item })}>
-                  Read More
-=======
         <div className={classes.root}>
           <Navbar />
           {
@@ -171,7 +144,6 @@ class Attraction extends React.Component {
                   <CardActions>
                     <Button size="small" value={item} color="primary" onClick={() => this.handleOpenModal({...item})}>
                       Read More
->>>>>>> 57a6333d81fad8e0f8a292eb15ea80faa81483b5
                     </Button>
               </CardActions>
             </Card>

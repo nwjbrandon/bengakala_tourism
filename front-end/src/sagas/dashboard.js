@@ -32,6 +32,11 @@ function* workerSagaOnMount() {
         yield put(DASHBOARD_ONMOUNT_SUCCESS({ heatmap, transactions }));
     } catch (error) {
         yield put(DASHBOARD_ONMOUNT_ERROR(error));
+        if (error.status === 401) {
+            yield put(ADMIN_LOGOUT_REQUEST());
+        } else {
+            yield put(TOAST_ERROR_SHOW('Oops something went wrong'));
+        }
     }
 }
 
