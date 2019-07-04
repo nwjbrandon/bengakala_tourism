@@ -18,7 +18,6 @@ import { connect } from 'react-redux'
 import TransportDetails from './TransportDetails'
 
 import API from '../../api';
-import snap from '../../../../back-end/src/api/snap';
 
 const useStyles = makeStyles(theme => ({
   appBar: {
@@ -140,12 +139,13 @@ const Checkout = (props) => {
 
   /* Includes a callback to show snap loading, success, etc screens */
   const callSnap = () => {
-    // snap.show(); // the snap loading screen
-    handleTokenReq((error, snaptoken) => {
+    snap.show(); // the snap loading screen
+    handleTokenReq((error, snapToken) => {
       if (error) {
-        // snap.hide();
+        snap.hide();
         console.log(error)
       } else {
+        console.log('calling snap pay')
         snap.pay(snapToken, {
           onSuccess: (result) => { console.log('success'); console.log(result); alert('Payment Success') },
           onPending: function (result) { console.log('pending'); console.log(result); alert('Payment Pending') },
@@ -160,23 +160,25 @@ const Checkout = (props) => {
   }
 
   const handleTokenReq = (callback) => {
+    console.log('handling token request')
     const snapRes = getToken();
     if (snapRes.token) {
-      callback(null, snapToken)
+      callback(null, snapRes.token)
     } else if (snapRes.error_messages) {
-      console.log(error_messages.map((err) => err)) // snap errors are stored in array
+      error_messages.map((err) => console.log(err)) // snap errors are stored in array
       callSnap(new Error('Unable to process payment, please try again later'), null)
     }
   }
 
   // get the token (or error) from the back-end
   const getToken = () => {
+    console.log('getting token from backend')
     API.post('/snap/info', {
       data: {
-        "first_name": props.personalDetails.firstName,
-        "last_name": props.personalDetails.lastName,
-        "email": props.personalDetails.email,
-        "gross_amount": props.personalDetails.grossAmount,
+        'first_name': props.personalDetails.firstName,
+        'last_name': props.personalDetails.lastName,
+        'email': props.personalDetails.email,
+        'gross_amount': props.personalDetails.grossAmount,
       }
     }).then((res) => {
       console.log(res);
