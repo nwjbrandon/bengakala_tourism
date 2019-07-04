@@ -29,18 +29,32 @@ class Accomodation extends React.Component {
   render() {
 
     var divStyle = {
-      padding: 50,
+      padding: 25,
       width: "100%",
-      textAlign: "left",
+      height: "100%",
+      textAlign: "center",
       backgroundColor: 'aquamarine',
+      margin: 0,
+
+    };
+
+    var containerdivStyle = {
+      width: "auto",
+      height: "auto",
+      backgroundColor: 'aquamarine',
+      margin: 0,
+      padding: 0
+
     };
     return (
-      <Provider store={store}>
-        <Navbar />
-        <div style={divStyle}>
-          <AccomodationsForm />
-        </div>
-      </Provider>
+      <div style={containerdivStyle}>
+        <Provider store={store}>
+          <Navbar />
+          <div style={divStyle}>
+            <AccomodationsForm />
+          </div>
+        </Provider>
+      </div>
 
     )
   }

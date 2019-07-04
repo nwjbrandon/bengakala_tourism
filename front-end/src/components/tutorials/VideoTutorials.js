@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Youtube from './youtube'
 import { Button } from '@material-ui/core';
@@ -45,7 +45,7 @@ const useStyles = makeStyles(theme => ({
     width: "100%",
     marginLeft: "auto",
     marginRight: "auto",
-    marginBottom: "20px",
+    marginBottom: "2%",
     paddingBottom: "56.25%" /* 16:9 */,
     paddingTop: 0,
     height: 0,
@@ -56,15 +56,22 @@ const useStyles = makeStyles(theme => ({
     width: "auto",
     height: "auto",
     textAlign: "center",
-    fontSize: "30px",
+    fontSize: "100%",
     fontStyle: "bold",
-    padding: "10px",
+    // padding: "10px",
   }
 }));
 
 
 function SimpleExpansionPanel() {
   const classes = useStyles();
+
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+  useEffect(() => {
+    window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
+    setWindowWidth(window.innerWidth);
+  });
 
   const [videoId, setVideoId] = useState(0);
 
@@ -101,18 +108,18 @@ function SimpleExpansionPanel() {
   const title = {
     color: "white",
     textAlign: "centre",
-    marginBottom: "40px",
-    fontSize: "50px",
+    marginBottom: "2%",
+    fontSize: "100%",
     background: "#00000099",
     borderRadius: "5px",
-    padding: "10px"
+    padding: "5px",
+    height: "auto"
   };
 
   const h1titletag = {
     textAlign: "center",
-    /* font-size: 1em; */
-    marginBottom: "10px",
-    font: "20px arial, sans-serif",
+    marginBottom: "2%",
+    fontSize: "100%",
     color: "white",
     textShadow: "0 1px 2px rgba(black,.15)",
   };
@@ -125,7 +132,7 @@ function SimpleExpansionPanel() {
 
   return (
     <div className={classes.root}>
-      <div style={title}><h1 style={h1titletag}>Browse through our video series to learn our very own Sign Language : The Kolok Kolok!!</h1></div>
+      <div style={title}><h1 style={h1titletag}>Browse through our video series to learn our very own Sign Language : The Kata Kolok!!</h1></div>
 
       <div className={classes.videoDescription}>{videoDetails[videoId].videoDescription}</div>
       <div className={classes.container}>
