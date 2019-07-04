@@ -1,13 +1,11 @@
 import { connect } from "react-redux";
-import Contact from '../routers/contact';
-import { CONTACT_ONMOUNT_REQUEST } from "../actions/contact-onmount";
-import { CONTACT_FORM_REQUEST } from "../actions/contact-form";
+import Contact from './index';
+import { CONTACT_ONMOUNT_REQUEST } from "../../actions/contact-onmount";
+import { CONTACT_FORM_REQUEST } from "../../actions/contact-form";
 
 function mapStateToProps(state) {
     return {
         data: state.contact.data,
-        successMsg: state.contact.successMsg,
-        errorMsg: state.contact.errorMsg,
     };
 }
 

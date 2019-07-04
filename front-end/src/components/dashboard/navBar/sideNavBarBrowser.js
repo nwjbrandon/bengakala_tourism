@@ -25,8 +25,8 @@ const sideNavBarBrowser = [
         icon: <Dashboard />
     },
     {
-        title: 'Accommodation',
-        to: '/dashboard/accommodation',
+        title: 'Booking',
+        to: '/dashboard/booking',
         icon: <Store />
     },
     {

@@ -117,7 +117,7 @@ class Dashboard extends Component {
     sendData.data.excludedData = [...this.state.excludeDates]
 
     console.log(sendData)
-    API.post('/accommodation/info', sendData).then(res => {
+    API.post('/booking/info', sendData).then(res => {
       console.log("RES");
       console.log(res)
     })

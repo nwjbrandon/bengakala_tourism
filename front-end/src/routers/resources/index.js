@@ -3,7 +3,7 @@ import API from '../../api';
 
 import bg from '../../components/accomodations/images/balivillage.jpg'
 import Tutorial from '../../components/tutorials/VideoTutorials'
-
+import Navbar from "../../components/navBar/navbar";
 
 class TutorialPage extends React.Component {
   constructor(props) {
@@ -13,38 +13,23 @@ class TutorialPage extends React.Component {
     }
   }
   componentDidMount() {
-    API.get('/tutorial').then(res => {
+    API.get('/resources').then(res => {
       this.setState({ data: res });
     })
   }
   render() {
 
-    var divStyle = {
+    const divStyle = {
       padding: 50,
-      backgroundPosition: "top",
-      backgroundRepeat: "initial",
-      backgroundSize: "cover",
       width: "auto",
       height: "150vh",
-      backgroundImage: `url(${bg})`,
       textAlign: "left",
       justifyContent: "center"
-
     };
 
-    // var divStyle = {
-    //   padding: 50,
-    //   backgroundPosition: "top",
-    //   backgroundRepeat: "initial",
-    //   backgroundSize: "cover",
-    //   // height:"250vh",
-    //   width: "100%",
-    //   backgroundImage: `url(${bg})`,
-    //   textAlign: "left"
-
-    // };
     return (
       <div>
+        <Navbar />
         <div style={divStyle}>
           <Tutorial />
         </div>

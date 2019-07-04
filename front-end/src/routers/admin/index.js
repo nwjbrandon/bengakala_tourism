@@ -8,6 +8,9 @@ import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom'
+import Navbar from "../../components/navBar/navbar";
+import SuccessToast from "../../components/snackBar/successSnackBar.container";
+import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 
 const styles = theme => ({
   root: {
@@ -17,9 +20,9 @@ const styles = theme => ({
     padding: theme.spacing(2),
     height: 500,
     margin: 'auto',
-    width: 450,
-    [theme.breakpoints.up(500 + theme.spacing(6))]: {
-      width: 500,
+    width: '90%',
+    [theme.breakpoints.up(450)]: {
+      width: 450,
     },
   },
   button: {
@@ -53,6 +56,7 @@ class Admin extends React.Component {
     const { classes } = this.props;
     return (
         <React.Fragment>
+          <Navbar />
           <Grid
               container
               direction="column"
@@ -116,14 +120,11 @@ class Admin extends React.Component {
                     Sign In
                   </Button>
                 </Grid>
-                <Grid container justify="center">
-                  <Typography variant="body2" color="error">
-                    { this.state.error }
-                  </Typography>
-                </Grid>
               </Paper>
             </Grid>
           </Grid>
+          <SuccessToast />
+          <ErrorToast />
         </React.Fragment>
 
     )

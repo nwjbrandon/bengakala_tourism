@@ -4,26 +4,23 @@ import Typography from '@material-ui/core/Typography';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
-import bg from './pics/faqbackground.jpg';
+import Navbar from "../../components/navBar/navbar";
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-  },
-  bgImage: {
-    paddingTop: 50,
-    paddingBottom: 50,
-    backgroundPosition: "center",
-    backgroundRepeat: "no-repeat",
-    backgroundSize: "cover",
-    width: "100%",
-    backgroundImage: `url(${bg})`,
+    flexGrow: 1,
   },
   paper: {
-    width: 450,
+    backgroundColor: 'aquamarine',
+    padding: theme.spacing(2),
+    height: 800,
     margin: 'auto',
-    [theme.breakpoints.up(550 + theme.spacing(6))]: {
-      width: 600,
+    display: 'flex',
+    flexWrap: 'wrap',
+    flexGrow: 1,
+    width: '90%',
+    [theme.breakpoints.up(450)]: {
+      width: 450,
     },
   },
 });
@@ -43,8 +40,8 @@ class Faq extends React.Component {
     const { classes, data } = this.props;
     return (
       <React.Fragment>
+        <Navbar />
         <div className={classes.root}>
-          <div className={classes.bgImage}>
             <Grid
                 container
                 direction="column"
@@ -54,7 +51,7 @@ class Faq extends React.Component {
               <Grid item xs={12}>
                 <Paper className={classes.paper}>
                   <Grid container alignContent='center'>
-                    <Typography variant="h4" style={{ paddingTop: 20, margin: 'auto' }}>
+                    <Typography variant="h4" style={{ paddingTop: 10, margin: 'auto' }}>
                       Frequently Asked Questions
                     </Typography>
                   </Grid>
@@ -66,20 +63,20 @@ class Faq extends React.Component {
                                 component="span"
                                 variant="h5"
                                 color="textPrimary"
-                                style={{ paddingTop: 20, margin: 'auto' }}
+                                style={{ paddingTop: 10, margin: 'auto' }}
                             >
                               { FAQ_TYPE }
                             </Typography>
                           </Grid>
                           {
                             data[FAQ_TYPE].map(datum => (
-                                <div style={{ padding: 20 }}>
+                                <div style={{ padding: 10 }}>
                                   <div>
                                     <Typography
                                         component="span"
                                         variant="h6"
                                         color="textPrimary"
-                                        style={{ paddingTop: 10 }}
+                                        style={{ paddingTop: 5 }}
                                     >
                                       { datum.question }
                                     </Typography>
@@ -89,7 +86,7 @@ class Faq extends React.Component {
                                         component="span"
                                         variant="body1"
                                         color="textPrimary"
-                                        style={{ paddingDown: 10 }}
+                                        style={{ paddingDown: 5 }}
                                     >
                                       { datum.answer }
                                     </Typography>
@@ -104,7 +101,6 @@ class Faq extends React.Component {
                 </Paper>
               </Grid>
             </Grid>
-          </div>
         </div>
       </React.Fragment>
     )

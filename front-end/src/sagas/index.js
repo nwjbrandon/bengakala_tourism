@@ -12,9 +12,11 @@ import dashboardAccommodation from './dashboardAccommodation';
 import dashboardAttraction from './dashboardAttraction';
 import dashboardHome from './dashboardHome';
 import dashboardSettings from './dashboardSettings';
+import toast from './toast'
 
 export default function* rootSaga() {
   yield all([
+    ...toast,
     ...contactOnMount,
     ...contactForm,
     ...homeOnMount,

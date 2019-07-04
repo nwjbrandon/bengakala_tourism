@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import DashboardAccommodation from './dashboardAccommodationEntries';
+import DashboardAccommodation from './dashboardBookingEntries';
 import {
     DASHBOARD_ACCOMMODATION_WATCH,
 } from "../../actions/dashboardAccommodation";

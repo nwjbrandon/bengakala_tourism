@@ -7,6 +7,7 @@ import bg from '../../components/accomodations/images/balivillage.jpg';
 import { createStore } from 'redux'
 import reducer from '../../reducers/accomodation'
 import { Provider } from 'react-redux'
+import Navbar from "../../components/navBar/navbar";
 
 const store = createStore(reducer);
 
@@ -18,7 +19,7 @@ class Accomodation extends React.Component {
     }
   }
   componentDidMount() {
-    API.get('/accommodation/info').then(res => {
+    API.get('/booking/info').then(res => {
       console.log("RES");
       console.log(res.excludedData);
       store.dispatch({ type: "EXCLUDE_DATES", payload: res.excludedData })
@@ -29,15 +30,13 @@ class Accomodation extends React.Component {
 
     var divStyle = {
       padding: 50,
-      backgroundPosition: "top",
-      backgroundRepeat: "initial",
-      backgroundSize: "cover",
       width: "100%",
-      backgroundImage: `url(${bg})`,
-      textAlign: "left"
+      textAlign: "left",
+      backgroundColor: 'aquamarine',
     };
     return (
       <Provider store={store}>
+        <Navbar />
         <div style={divStyle}>
           <AccomodationsForm />
         </div>

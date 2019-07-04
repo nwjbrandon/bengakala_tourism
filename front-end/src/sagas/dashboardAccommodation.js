@@ -13,11 +13,11 @@ import {
 const displayedData = (state) => state.dashboardAccommodation.displayedData;
 
 function onMount() {
-    return API.get('/admin/dashboard/accommodation');
+    return API.get('/admin/dashboard/booking');
 }
 
 function submit(payload) {
-    return API.post('/admin/dashboard/accommodation', { data: payload});
+    return API.post('/admin/dashboard/booking', { data: payload});
 }
 
 function* workerSagaOnMount() {

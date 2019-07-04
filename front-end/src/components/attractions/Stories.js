@@ -93,57 +93,57 @@ export default function SingleLineGridList(props) {
     console.log("The Data");
     console.log(props.data)
 
-    // const cardRow = props.data.map((item) => {
+    const cardRow = props.data.map((item) => {
 
-    //     <GridListTile className={classes.gridListTile}>
-    //         <img style={{ height: "400px" }} src={item.imgUrl} alt={item.title} />
-    //         <GridListTileBar
-    //             title={item.title}
-    //             classes={{
-    //                 root: classes.titleBar,
-    //                 title: classes.title,
-    //             }}
-    //             actionIcon={
-    //                 <Button onClick={() => {
-    //                     setDataID({ ...item });
-    //                     setOpen(true);
-    //                 }
-    //                 } size="small" className={classes.title}>
-    //                     Read More
-    //                     </Button>
-    //             }
-    //         />
-    //     </GridListTile>
-
-
-    // });
-
-
-
-    const cardRow = Object.keys(props.data).map(keyVal =>
-        props.data[keyVal].map((item, index) => (
-            <GridListTile className={classes.gridListTile}>
-                <img style={{ height: "400px" }} src={item.imgUrl} alt={keyVal} />
-                <GridListTileBar
-                    title={keyVal}
-                    classes={{
-                        root: classes.titleBar,
-                        title: classes.title,
-                    }}
-                    actionIcon={
-                        <Button onClick={() => {
-                            setDataID(keyVal);
-                            setOpen(true);
-                        }
-                        } size="small" className={classes.title}>
-                            Read More
-                        </Button>
+        <GridListTile className={classes.gridListTile}>
+            <img style={{ height: "400px" }} src={item.imgUrl} alt={item.title} />
+            <GridListTileBar
+                title={item.title}
+                classes={{
+                    root: classes.titleBar,
+                    title: classes.title,
+                }}
+                actionIcon={
+                    <Button onClick={() => {
+                        setDataID({ ...item });
+                        setOpen(true);
                     }
-                />
-            </GridListTile>
+                    } size="small" className={classes.title}>
+                        Read More
+                        </Button>
+                }
+            />
+        </GridListTile>
 
-        ))
-    );
+
+    });
+
+
+
+    // const cardRow = Object.keys(props.data).map(keyVal =>
+    //     props.data[keyVal].map((item, index) => (
+    //         <GridListTile className={classes.gridListTile}>
+    //             <img style={{ height: "400px" }} src={item.imgUrl} alt={keyVal} />
+    //             <GridListTileBar
+    //                 title={keyVal}
+    //                 classes={{
+    //                     root: classes.titleBar,
+    //                     title: classes.title,
+    //                 }}
+    //                 actionIcon={
+    //                     <Button onClick={() => {
+    //                         setDataID(keyVal);
+    //                         setOpen(true);
+    //                     }
+    //                     } size="small" className={classes.title}>
+    //                         Read More
+    //                     </Button>
+    //                 }
+    //             />
+    //         </GridListTile>
+
+    //     ))
+    // );
 
 
 

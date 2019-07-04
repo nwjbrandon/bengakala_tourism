@@ -48,7 +48,7 @@ const useStyles = makeStyles(theme => ({
     marginBottom: "20px",
     paddingBottom: "56.25%" /* 16:9 */,
     paddingTop: 0,
-    height: 0, textAlign: "center"
+    height: 0,
   },
   videoDescription: {
     background: "#111111",
@@ -95,10 +95,10 @@ function SimpleExpansionPanel() {
       videoDescription: "Get Swifty. I am MR BULL DOg"
     }
 
-  ]
+  ];
 
 
-  var title = {
+  const title = {
     color: "white",
     textAlign: "centre",
     marginBottom: "40px",
@@ -106,42 +106,16 @@ function SimpleExpansionPanel() {
     background: "#00000099",
     borderRadius: "5px",
     padding: "10px"
-  }
+  };
 
-  var h1titletag = {
+  const h1titletag = {
     textAlign: "center",
     /* font-size: 1em; */
     marginBottom: "10px",
     font: "20px arial, sans-serif",
     color: "white",
     textShadow: "0 1px 2px rgba(black,.15)",
-  }
-
-
-
-  // const videos = videoDetails.map((eachVideo) => {
-  //   return (
-  //     <ExpansionPanel key={eachVideo.title} className={classes.expansion}>
-  //       <ExpansionPanelSummary
-  //         className={classes.expansion}
-  //         expandIcon={<ExpandMoreIcon />}
-  //         aria-controls="panel1a-content"
-  //         id="panel1a-header"
-  //       >
-  //         <Typography className={classes.heading}>{eachVideo.title}</Typography>
-  //       </ExpansionPanelSummary>
-  //       <ExpansionPanelDetails>
-  //         <div style={{
-  //           paddingBottom: "56.25%" /* 16:9 */,
-  //           paddingTop: 25,
-  //           height: 0, textAlign: "center", width: "100%", marginLeft: "auto", marginRight: "auto", marginBottom: "20px"
-  //         }}>
-  //           <Youtube />
-  //         </div>
-  //       </ExpansionPanelDetails>
-  //     </ExpansionPanel>
-  //   );
-  // });
+  };
 
   const videoTitleList = videoDetails.map((item, index) => {
     return (

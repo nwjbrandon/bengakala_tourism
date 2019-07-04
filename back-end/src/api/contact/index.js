@@ -1,4 +1,6 @@
 import _ from 'lodash';
+import { validationResult, } from 'express-validator/check';
+
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
 
@@ -17,6 +19,17 @@ const contactInfo = [
 
 const contactPut = [
   async (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      console.log(errors.array());
+      const message = errors.array()[0].msg;
+      return res.status(422).json({
+        error: {
+          code: 422,
+          message,
+        }
+      });
+    }
     try {
       const {
         uuid,
@@ -25,7 +38,7 @@ const contactPut = [
         subject,
         message,
         email,
-      } = req.body.data;
+      } = req.body;
       const data = _.assign({
         uuid,
         heading: name,

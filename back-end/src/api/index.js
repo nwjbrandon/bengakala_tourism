@@ -1,4 +1,5 @@
 import express from 'express';
+import { check, validationResult } from 'express-validator/check';
 import home from './home';
 import accommodation from './accommodation';
 import admin from './admin';
@@ -15,6 +16,7 @@ import dashboardSettings from './dashboard/settings';
 import passport from '../middleware/strategy';
 import checkAuthentication from '../middleware/auth';
 
+
 const app = express();
 
 // endpoints not necessarily to protect
@@ -27,11 +29,48 @@ app.post('/accommodation/info', accommodation.post);
 
 app.get('/attraction/info', attraction.info);
 app.get('/contact/info', contact.info);
-app.put('/contact/info', contact.put);
+app.put('/contact/info', [
+  check('email').exists().not().isEmpty()
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('Valid Email is Required'),
+  check('name').exists().not().isEmpty()
+    .withMessage('Name is Required'),
+  check('contact').exists().not().isEmpty()
+    .withMessage('Contact is Required'),
+  check('subject').exists().not().isEmpty()
+    .withMessage('Subject is Required'),
+  check('message').exists().not().isEmpty()
+    .withMessage('Message is Required'),
+], contact.put);
 app.get('/faq/info', faq.info);
 
 // endpoints must be protected
-app.post('/admin/login', passport.authenticate('local', { failWithError: true }), admin.login, admin.err);
+app.post('/admin/login', [
+  check('email').exists().not().isEmpty()
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('Valid Username is Required'),
+  check('password').exists().not().isEmpty()
+    .withMessage('Password is Required'),
+],
+[
+  async (req, res, next) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      const message = errors.array()[0].msg;
+      return res.status(422).json({
+        error: {
+          code: 422,
+          message,
+        }
+      });
+    }
+    next();
+    return 1;
+  }
+],
+passport.authenticate('local', { failWithError: true }), admin.login, admin.err);
 app.get('/admin/logout', checkAuthentication, admin.logout);
 
 app.get('/admin/dashboard', checkAuthentication, dashboard.get);

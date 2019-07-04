@@ -13,37 +13,32 @@ import ListItemAvatar from '@material-ui/core/ListItemAvatar';
 import Avatar from '@material-ui/core/Avatar';
 import LocationIcon from '@material-ui/icons/LocationOn';
 import PhoneIcon from '@material-ui/icons/PermPhoneMsg';
-import bg from './bgpic/roadtovillage.jpg';
 import PropTypes from "prop-types";
 import uuid from 'uuid/v1';
+import Navbar from "../../components/navBar/navbar";
+import SuccessToast from '../../components/snackBar/successSnackBar.container';
+import ErrorToast from '../../components/snackBar/errorSnackBar.container';
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-  },
-  bgImage: {
-    paddingTop: 50,
-    paddingBottom: 50,
-    backgroundPosition: "top",
-    backgroundRepeat: "initial",
-    backgroundSize: "cover",
-    width: "100%",
-    backgroundImage: `url(${bg})`,
-    textAlign: "left"
+    flexGrow: 1,
   },
   paper: {
-    padding: theme.spacing(3),
-    width: 450,
+    backgroundColor: 'aquamarine',
+    padding: theme.spacing(2),
+    height: '100%',
     margin: 'auto',
     display: 'flex',
     flexWrap: 'wrap',
     flexGrow: 1,
-    [theme.breakpoints.up(500 + theme.spacing(6))]: {
-      width: 500,
+    width: '90%',
+    [theme.breakpoints.up(450)]: {
+      width: 450,
     },
   },
   button: {
     margin: theme.spacing(1),
+    backgroundColor: 'teal',
   },
 });
 
@@ -79,21 +74,25 @@ class Contact extends React.Component {
       uuid: id, contact, name, subject, message, email
     };
     const { contactSubmit } = this.props;
-    contactSubmit(data);
+    contactSubmit({
+      uuid: id, contact, name, subject, message, email
+    });
   }
 
   render() {
     const { classes, data, errorMsg, successMsg } = this.props;
     return (
       <React.Fragment>
+        <Navbar />
         <div className={classes.root}>
-          <div className={classes.bgImage}>
             <Grid
                 container
+                direction="column"
                 alignItems="center"
                 justify="center"
+                style={{ minHeight: '100vh' }}
             >
-              <Grid item>
+              <Grid item xs={12}>
                 <Paper className={classes.paper}>
                   <Grid item xs={12}>
                     <Typography variant="h4" style={{ paddingTop: 10, padding: 17 }}>
@@ -138,6 +137,7 @@ class Contact extends React.Component {
 
                   <Grid item xs={12} sm={6}>
                     <TextField
+                        required
                         label="Phone number"
                         fullWidth
                         autoComplete="Phone"
@@ -194,19 +194,12 @@ class Contact extends React.Component {
                       Submit
                     </Button>
                   </Grid>
-                  <Grid container justify="center">
-                    <Typography variant="body2" color="primary">
-                      { successMsg }
-                    </Typography>
-                    <Typography variant="body2" color="error">
-                      { errorMsg }
-                    </Typography>
-                  </Grid>
                 </Paper>
               </Grid>
             </Grid>
-          </div>
         </div>
+        <SuccessToast />
+        <ErrorToast />
       </React.Fragment>
     )
   }

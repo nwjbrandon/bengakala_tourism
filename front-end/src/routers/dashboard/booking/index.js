@@ -6,7 +6,7 @@ import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 
 import NavBar from '../../../components/dashboard/navBar';
-import DashboardAccommodationEntries from '../../../components/dashboardAccommodation/dashboardAccommodationEntries.container'
+import DashboardAccommodationEntries from '../../../components/dashboardBooking/dashboardBookingEntries.container'
 
 const styles = theme => ({
     root: {
@@ -54,7 +54,7 @@ class DashboardFAQ extends Component {
 
     render() {
         const { classes } = this.props;
-        const title = 'Accommodation';
+        const title = 'Booking';
 
         return (
             <div className={classes.root}>

@@ -3,6 +3,7 @@ import API from '../../api';
 import Stories from '../../components/attractions/Stories'
 import Slideshow from '../../components/attractions/Slideshow';
 import bg from '../../components/accomodations/images/balivillage.jpg';
+import Navbar from "../../components/navBar/navbar";
 
 // import './attraction.css'
 
@@ -54,24 +55,12 @@ class Attraction extends React.Component {
     })
   }
   render() {
-
-    var divStyle = {
-      padding: 50,
-      backgroundPosition: "top",
-      backgroundRepeat: "initial",
-      backgroundSize: "cover",
-      width: "auto",
-      backgroundImage: `url(${bg})`,
-      textAlign: "left"
-    };
-
-    //     <Slideshow textArr={this.state.textArray} />
-
     return (
       <div >
-        {this.state.loading ? <div>Loading</div> : <Stories data={data} />}
-
-
+        <Navbar />
+        <Stories data={data}
+        />
+        <Slideshow textArr={this.state.textArray} />
       </div>
     )
   }
