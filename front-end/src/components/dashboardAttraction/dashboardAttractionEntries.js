@@ -38,6 +38,7 @@ class DashboardFAQEntries extends Component {
         this.watchTitle = this.watchTitle.bind(this);
         this.watchText = this.watchText.bind(this);
         this.editEntry = this.editEntry.bind(this);
+        this.watchHeading = this.watchHeading.bind(this);
     }
 
     watchImgUrl(event) {
@@ -59,6 +60,17 @@ class DashboardFAQEntries extends Component {
             value,
             uuid,
             field: 'title',
+        })
+    }
+
+    watchHeading(event) {
+        const value = event.target.value;
+        const uuid = event.target.id;
+        const { watch } = this.props;
+        watch({
+            value,
+            uuid,
+            field: 'heading',
         })
     }
 
@@ -126,6 +138,17 @@ class DashboardFAQEntries extends Component {
                                         multiline={true}
                                         variant="outlined"
                                         fullWidth
+                                        value={data[item].heading}
+                                        placeholder="Ex. Come visit..."
+                                        label="Summary of Event"
+                                        className={classes.button}
+                                        onChange={this.watchHeading}
+                                        id={item}
+                                    />
+                                    <TextField
+                                        multiline={true}
+                                        variant="outlined"
+                                        fullWidth
                                         value={data[item].text}
                                         placeholder="Ex. Come visit..."
                                         label="Description of Event"
@@ -138,6 +161,9 @@ class DashboardFAQEntries extends Component {
                                 <div>
                                     <Typography>
                                         { data[item].imgUrl }
+                                    </Typography>
+                                    <Typography>
+                                        { data[item].heading }
                                     </Typography>
                                     <Typography>
                                         { data[item].text }

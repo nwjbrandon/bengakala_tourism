@@ -42,6 +42,7 @@ class DashboardFAQ extends Component {
             imgUrl: '',
             title: '',
             text: '',
+            heading: '',
         };
         this.deleteEntry = this.deleteEntry.bind(this);
         this.resetEntries = this.resetEntries.bind(this);
@@ -49,6 +50,7 @@ class DashboardFAQ extends Component {
         this.watchImgUrl = this.watchImgUrl.bind(this);
         this.watchTitle = this.watchTitle.bind(this);
         this.watchText = this.watchText.bind(this);
+        this.watchHeading = this.watchHeading.bind(this);
         this.submit = this.submit.bind(this);
     }
 
@@ -75,11 +77,13 @@ class DashboardFAQ extends Component {
             imgUrl,
             title,
             text,
+            heading,
         } = this.state;
         const payload = {
             imgUrl,
             title,
             text,
+            heading,
             type: 'media',
             edit: 0 // implement editable table did not succeed
         };
@@ -88,6 +92,7 @@ class DashboardFAQ extends Component {
             imgUrl: '',
             title: '',
             text: '',
+            heading: '',
         });
     }
 
@@ -100,6 +105,12 @@ class DashboardFAQ extends Component {
     watchTitle(event) {
         this.setState({
             title: event.target.value
+        });
+    }
+
+    watchHeading(event) {
+        this.setState({
+            heading: event.target.value
         });
     }
 
@@ -116,7 +127,7 @@ class DashboardFAQ extends Component {
 
     render() {
         const { classes } = this.props;
-        const { imgUrl, title, text } = this.state;
+        const { imgUrl, title, text, heading } = this.state;
         const navTitle = 'Media';
         return (
             <div className={classes.root}>
@@ -146,6 +157,16 @@ class DashboardFAQ extends Component {
                         label="Imgur URL Links"
                         className={classes.button}
                         onChange={this.watchImgUrl}
+                    />
+                    <TextField
+                        multiline={true}
+                        variant="outlined"
+                        fullWidth
+                        value={heading}
+                        placeholder="Ex. Come visit..."
+                        label="Summary of Event"
+                        className={classes.button}
+                        onChange={this.watchHeading}
                     />
                     <TextField
                         multiline={true}

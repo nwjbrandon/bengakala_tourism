@@ -9,6 +9,7 @@ const getAttractionInfo = [
     const data = _.mapValues(_.groupBy(attractions, 'uuid'), (value) => {
       const v = _.head(value);
       return {
+        heading: v.heading,
         title: v.title,
         text: v.text,
         type: v.type,
