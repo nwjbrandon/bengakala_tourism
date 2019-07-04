@@ -48,7 +48,7 @@ export const adminValidators = [
 export const dashboardAccommodationValidators = [
   check('data')
     .custom((data) => {
-      if (data === {}) {
+      if (_.isEmpty(data)) {
         throw Error('Cannot be empty');
       }
       _.map(data, (item) => {
@@ -66,7 +66,7 @@ export const dashboardAccommodationValidators = [
 export const dashboardAttractionValidators = [
   check('data')
     .custom((data) => {
-      if (data === {}) {
+      if (_.isEmpty(data)) {
         throw Error('Cannot be empty');
       }
       _.map(data, (item) => {
@@ -84,7 +84,7 @@ export const dashboardAttractionValidators = [
 export const dashboardFaqValidators = [
   check('data')
     .custom((data) => {
-      if (data === {}) {
+      if (_.isEmpty(data)) {
         throw Error('Cannot be empty');
       }
       _.map(data, (item) => {
@@ -128,7 +128,7 @@ export const dashboardHomeValidators = [
 export const dashboardContactValidators = [
   check('data')
     .custom((data) => {
-      if (data === {}) {
+      if (_.isEmpty(data)) {
         throw Error('Cannot be empty');
       }
       _.map(data, (item) => {
