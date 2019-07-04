@@ -96,12 +96,12 @@ class Attraction extends React.Component {
 
   handleNext = () => {
     const { page } = this.state;
-    this.setState({ page: page + 1})
+    this.setState({ page: page + 1 })
   };
 
   handlePrevious = () => {
     const { page } = this.state;
-    this.setState({ page: page - 1})
+    this.setState({ page: page - 1 })
   };
 
   render() {
@@ -110,46 +110,46 @@ class Attraction extends React.Component {
     const maxPage = _floor(_div(data.length, rowsPerPage));
 
     return (
-        <div className={classes.root}>
-          <Navbar />
-          {
-            data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
-                <Card className={classes.card} key={item.title}>
-                  <CardActionArea>
-                    <CardMedia
-                        component="img"
-                        alt={item.title}
-                        height="140"
-                        image={item.imgSrc}
-                        title={item.title}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        { item.title }
-                      </Typography>
-                      <Typography variant="body2" color="textSecondary" component="p">
-                        { item.description }
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" value={item} color="primary" onClick={() => this.handleOpenModal({...item})}>
-                      Read More
+      <div className={classes.root}>
+        <Navbar />
+        {
+          data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
+            <Card className={classes.card} key={item.title}>
+              <CardActionArea>
+                <CardMedia
+                  component="img"
+                  alt={item.title}
+                  height="140"
+                  image={item.imgSrc}
+                  title={item.title}
+                />
+                <CardContent>
+                  <Typography gutterBottom variant="h5" component="h2">
+                    {item.title}
+                  </Typography>
+                  {/*<Typography variant="body2" color="textSecondary" component="p">
+                    {item.description}
+          </Typography>*/}
+                </CardContent>
+              </CardActionArea>
+              <CardActions>
+                <Button size="small" value={item} color="primary" onClick={() => this.handleOpenModal({ ...item })}>
+                  Read More
                     </Button>
-                  </CardActions>
-                </Card>
-            ))
-          }
-          <Modal {...this.state} onCloseModal={this.handleCloseModal} />
-          <Grid container justify="center" spacing={10} className={classes.buttons}>
-            <Button size="small" color="primary" onClick={this.handlePrevious} disabled={page === 0} >
-              <KeyboardArrowLeft /> Previous Page
+              </CardActions>
+            </Card>
+          ))
+        }
+        <Modal {...this.state} onCloseModal={this.handleCloseModal} />
+        <Grid container justify="center" spacing={10} className={classes.buttons}>
+          <Button size="small" color="primary" onClick={this.handlePrevious} disabled={page === 0} >
+            <KeyboardArrowLeft /> Previous Page
             </Button>
-            <Button size="small" color="primary" onClick={this.handleNext} disabled={page === maxPage}>
-              Next Page <KeyboardArrowRight />
-            </Button>
-          </Grid>
-        </div>
+          <Button size="small" color="primary" onClick={this.handleNext} disabled={page === maxPage}>
+            Next Page <KeyboardArrowRight />
+          </Button>
+        </Grid>
+      </div>
     )
   }
 }

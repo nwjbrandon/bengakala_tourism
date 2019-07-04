@@ -31,7 +31,8 @@ class Accomodation extends React.Component {
     var divStyle = {
       padding: 25,
       width: "100%",
-      height: "100%",
+      minHeight: "100vh",
+      height: "auto",
       textAlign: "center",
       backgroundColor: 'aquamarine',
       margin: 0,

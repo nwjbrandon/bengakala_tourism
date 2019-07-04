@@ -24,8 +24,7 @@ import API from '../../api';
 
 const useStyles = makeStyles(theme => ({
   label: {
-    color: blue,
-    marginBottom: 10
+    color: blue
   },
   layout: {
     width: 'auto',
@@ -50,7 +49,7 @@ const useStyles = makeStyles(theme => ({
     },
   },
   stepper: {
-    padding: theme.spacing(3, 0, 5),
+    // padding: theme.spacing(3, 0, 5),
     background: "#21212100",
     color: "white"
   },
