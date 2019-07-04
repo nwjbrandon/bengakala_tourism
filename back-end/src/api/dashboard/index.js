@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { eachDay } from 'date-fns';
 import db from '../../storage/db';
-import { TABLE_TRANSACTIONS } from '../../storage/tableName';
+import { TABLE_INFORMATION, TABLE_TRANSACTIONS } from '../../storage/tableName';
 
 const dashboardGet = [
   async (req, res) => {
@@ -47,7 +47,18 @@ const dashboardPost = [
   }
 ];
 
+const dashboardDel = [
+  async (req, res) => {
+    const uuid = req.body.data;
+    await db.deleteData(TABLE_TRANSACTIONS, { uuid });
+    return res.json({
+      data: 'success',
+    });
+  }
+];
+
 export default {
   get: dashboardGet,
   post: dashboardPost,
+  del: dashboardDel,
 };

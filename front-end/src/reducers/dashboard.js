@@ -52,5 +52,26 @@ export const dashboardOnMountReducer = handleActions({
             error: action.payload,
         };
     },
+    "DASHBOARD_DELETE_CHECKIN_REQUEST": (state) => {
+        return {
+            ...state,
+            fetching: true,
+            error: false,
+        };
+    },
+    "DASHBOARD_DELETE_CHECKIN_SUCCESS": (state) => {
+        return {
+            ...state,
+            fetching: true,
+            error: false,
+        };
+    },
+    "DASHBOARD_DELETE_CHECKIN_ERROR": (state, action) => {
+        return {
+            ...state,
+            fetching: false,
+            error: action.payload,
+        };
+    },
 }, initialState);
 

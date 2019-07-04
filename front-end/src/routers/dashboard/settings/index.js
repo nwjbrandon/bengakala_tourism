@@ -242,10 +242,10 @@ class DashboardFAQ extends Component {
                     aria-labelledby="alert-dialog-title"
                     aria-describedby="alert-dialog-description"
                 >
-                    <DialogTitle id="alert-dialog-title">{"Create New User"}</DialogTitle>
+                    <DialogTitle id="alert-dialog-title">{"New User"}</DialogTitle>
                     <DialogContent>
                         <DialogContentText id="alert-dialog-description">
-                            Create new user.
+                            Fill up the form below
                         </DialogContentText>
                         <TextField
                             variant="outlined"

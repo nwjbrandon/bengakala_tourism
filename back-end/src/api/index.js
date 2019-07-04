@@ -55,6 +55,7 @@ app.get('/admin/logout', checkAuthentication, admin.logout);
 
 app.get('/admin/dashboard', checkAuthentication, dashboard.get);
 app.post('/admin/dashboard', checkAuthentication, dashboard.post);
+app.delete('/admin/dashboard', checkAuthentication, dashboard.del);
 
 app.get('/admin/dashboard/contact', checkAuthentication, dashboardContact.get);
 app.post('/admin/dashboard/contact',
