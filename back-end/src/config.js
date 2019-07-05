@@ -37,6 +37,6 @@ const config = {
     basedir: __dirname,
     files: ['./api/**/*.js']
   },
-}
+};
 
 export default config;

@@ -6,7 +6,7 @@ import attraction from './attraction';
 import contact from './contact';
 import faq from './faq';
 import resources from './resources';
-// import snap from './snap';
+import snap from './snap';
 import dashboard from './dashboard';
 import dashboardContact from './dashboard/contact';
 import dashboardAccommodation from './dashboard/accommodation';
@@ -45,7 +45,7 @@ app.put('/contact/info',
   errorHandling,
   contact.put);
 app.get('/faq/info', faq.info);
-// app.post('/snap/info', snap.post);
+app.post('/snap/info', snap.post);
 
 // endpoints must be protected
 app.post('/admin/login',
