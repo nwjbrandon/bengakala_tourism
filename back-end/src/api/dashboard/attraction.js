@@ -5,7 +5,7 @@ import { processedDataToChangeInDB } from '../../utils/processedData';
 
 const getAttractionInfo = [
   async (req, res) => {
-    const attractions = await db.fetchData(TABLE_INFORMATION, { type: 'attraction' });
+    const attractions = await db.fetchData(TABLE_INFORMATION, { type: 'media' });
     const data = _.mapValues(_.groupBy(attractions, 'uuid'), (value) => {
       const v = _.head(value);
       return {
@@ -26,7 +26,7 @@ const getAttractionInfo = [
 const postAttractionInfo = [
   async (req, res) => {
     const receivedData = req.body.data;
-    const existingUUID = await db.filterFieldList(TABLE_INFORMATION, { type: 'attraction' }, 'uuid');
+    const existingUUID = await db.filterFieldList(TABLE_INFORMATION, { type: 'media' }, 'uuid');
     const {
       updateList,
       saveList,
