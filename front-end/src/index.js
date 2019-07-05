@@ -17,11 +17,11 @@ import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
 // Non Protected Routes
 import Accommodation from './routers/booking';
 import Home from './routers/home';
-import Attraction from './routers/media';
+import Attraction from './routers/media/container';
 import Contact from './routers/contact/container';
 import Faq from './routers/faq/container';
 import Notfound from './routers/notfound';
-import Tutorial from './routers/tutorial'
+import Resources from './routers/resources'
 
 // Protected Routes
 import Admin from './routers/admin/container';
@@ -71,7 +71,7 @@ const routing = (
           <Switch>
             <ProtectedRoutes exact path="/" component={ Home } secret={false} />
             <ProtectedRoutes exact path="/booking" component={ Accommodation } secret={false} />
-            <ProtectedRoutes exact path="/resources" component={ Tutorial } secret={false} />
+            <ProtectedRoutes exact path="/resources" component={ Resources } secret={false} />
             <ProtectedRoutes exact path="/admin" component={ Admin } secret={false} />
             <ProtectedRoutes exact path="/media" component={ Attraction } secret={false} />
             <ProtectedRoutes exact path="/contact" component={ Contact } secret={false} />

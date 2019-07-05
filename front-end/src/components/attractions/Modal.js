@@ -9,7 +9,7 @@ import {
   Typography
 } from "@material-ui/core";
 
-const Modal = ({ description, imgSrc, onCloseModal, openModal, title }) => (
+const Modal = ({ text, imgUrl, onCloseModal, openModal, title }) => (
   <Dialog
     open={openModal}
     onClose={onCloseModal}
@@ -23,9 +23,9 @@ const Modal = ({ description, imgSrc, onCloseModal, openModal, title }) => (
       {title}
       </Typography>
         <div align="center" style={{paddingTop:"5px", marginTop:"10px"}}>
-<img src={imgSrc} title={title} alt={title} style={{maxHeight:"200px"}}/></div>
+<img src={imgUrl} title={title} alt={title} style={{maxHeight:"200px"}}/></div>
           <Typography variant="body2" color="textSecondary" component="p">
-          {description}
+          {text}
           </Typography>
         </CardContent>
     <CardActions>

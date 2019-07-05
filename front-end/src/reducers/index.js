@@ -2,6 +2,7 @@ import {combineReducers} from 'redux';
 import reduceReducers from 'reduce-reducers';
 import { contactOnMountReducer } from "./contact-onmount";
 import { contactFormReducer } from "./contact-form";
+import { attractionReducer } from "./attraction";
 import { dashboardOnMountReducer } from "./dashboard";
 import { adminLoginReducer } from "./admin";
 import { dashboardFaqReducer } from "./dashboardFaq";
@@ -28,6 +29,7 @@ const allReducers = (history) => combineReducers({
     dashboardSettings: reduceReducers(dashboardSettingsReducer),
     dashboardResources: reduceReducers(dashboardResourcesReducer),
     contact: reduceReducers(contactOnMountReducer, contactFormReducer),
+    attraction: reduceReducers(attractionReducer),
     home: reduceReducers(homeOnMountReducer),
     faq: reduceReducers(faqOnMountReducer),
     router: connectRouter(history),

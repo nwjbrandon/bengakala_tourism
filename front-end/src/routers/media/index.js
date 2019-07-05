@@ -19,43 +19,44 @@ const data = [
   {
     title: "Funny Random Meme Dump",
     summary: "Come visit our museum located within the serene and tranquil",
-    description: "Come visit our museum located within the serene and tranquil Kranji countryside area in Singapore to uncover the myths and discover the benefits of edible bird’s nest for we are probably one of the most comprehensive collection of information about edible bird’s nest in the entire South-East Asia.",
-    imgSrc: "https://d39gusjpdm7p1o.cloudfront.net/data/layout_grouping/static_page_step/20784_a330628091ede7eb1548d6cda58e0357.jpg?ver=1477297804"
+    text: "Come visit our museum located within the serene and tranquil Kranji countryside area in Singapore to uncover the myths and discover the benefits of edible bird’s nest for we are probably one of the most comprehensive collection of information about edible bird’s nest in the entire South-East Asia.",
+    imgUrl: "https://d39gusjpdm7p1o.cloudfront.net/data/layout_grouping/static_page_step/20784_a330628091ede7eb1548d6cda58e0357.jpg?ver=1477297804"
   },
   {
     title: "Napping with my human",
-    description: "At World of Birdnest Museum, we aim to play an educational role in sharing the information in depth about edible bird’s nest, the swiftlet species which their secretion produces the edible bird’s nest. We also curate works on caves bird’s nest to nests from swiftlet’s ranching farms and about sustainable farming, its trade and the past and ongoing scientific development on the medicinal properties of edible bird’s nest.",
-    imgSrc: "https://cdn2.tourmontparnasse56.com/wp-content/uploads/2018/07/@david_fossa-2.jpg"
+    summary: "wfve",
+    text: "At World of Birdnest Museum, we aim to play an educational role in sharing the information in depth about edible bird’s nest, the swiftlet species which their secretion produces the edible bird’s nest. We also curate works on caves bird’s nest to nests from swiftlet’s ranching farms and about sustainable farming, its trade and the past and ongoing scientific development on the medicinal properties of edible bird’s nest.",
+    imgUrl: "https://cdn2.tourmontparnasse56.com/wp-content/uploads/2018/07/@david_fossa-2.jpg"
   },
   {
     title: "Feme Dump",
     summary: "Come visit our museum located within the serene and tranquil ",
-    description: "Come visit our museum located within the serene and tranquil Kranji countryside area in Singapore to uncover the myths and discover the benefits of edible bird’s nest for we are probably one of the most comprehensive collection of information about edible bird’s nest in the entire South-East Asia.",
-    imgSrc: "https://static.amazon.jobs/locations/7/thumbnails/Paris_-_Thumbnail.jpg?1454183453"
+    text: "Come visit our museum located within the serene and tranquil Kranji countryside area in Singapore to uncover the myths and discover the benefits of edible bird’s nest for we are probably one of the most comprehensive collection of information about edible bird’s nest in the entire South-East Asia.",
+    imgUrl: "https://static.amazon.jobs/locations/7/thumbnails/Paris_-_Thumbnail.jpg?1454183453"
   },
   {
     title: "Nappinith my human",
     summary: "At World of Birdnest Museum, we aim to play an educational ",
-    description: "At World of Birdnest Museum, we aim to play an educational role in sharing the information in depth about edible bird’s nest, the swiftlet species which their secretion produces the edible bird’s nest. We also curate works on caves bird’s nest to nests from swiftlet’s ranching farms and about sustainable farming, its trade and the past and ongoing scientific development on the medicinal properties of edible bird’s nest.",
-    imgSrc: "https://www.findingtheuniverse.com/wp-content/uploads/2017/12/Eiffel2BTower2BParis2B1_by_Laurence2BNorah255B4255D.jpg"
+    text: "At World of Birdnest Museum, we aim to play an educational role in sharing the information in depth about edible bird’s nest, the swiftlet species which their secretion produces the edible bird’s nest. We also curate works on caves bird’s nest to nests from swiftlet’s ranching farms and about sustainable farming, its trade and the past and ongoing scientific development on the medicinal properties of edible bird’s nest.",
+    imgUrl: "https://www.findingtheuniverse.com/wp-content/uploads/2017/12/Eiffel2BTower2BParis2B1_by_Laurence2BNorah255B4255D.jpg"
   },
   {
     title: "Fun Meme Dump",
     summary: "Come visit our museum located within the serene and tranquil ",
-    description: "Come visit our museum located within the serene and tranquil Kranji countryside area in Singapore to uncover the myths and discover the benefits of edible bird’s nest for we are probably one of the most comprehensive collection of information about edible bird’s nest in the entire South-East Asia.",
-    imgSrc: "https://www.findingtheuniverse.com/wp-content/uploads/2017/12/Eiffel2BTower2BParis2B1_by_Laurence2BNorah255B4255D.jpg"
+    text: "Come visit our museum located within the serene and tranquil Kranji countryside area in Singapore to uncover the myths and discover the benefits of edible bird’s nest for we are probably one of the most comprehensive collection of information about edible bird’s nest in the entire South-East Asia.",
+    imgUrl: "https://www.findingtheuniverse.com/wp-content/uploads/2017/12/Eiffel2BTower2BParis2B1_by_Laurence2BNorah255B4255D.jpg"
   },
   {
     title: "Napng with my human",
     summary: "At World of Birdnest Museum, we aim to play an educational ",
-    description: "At World of Birdnest Museum, we aim to play an educational role in sharing the information in depth about edible bird’s nest, the swiftlet species which their secretion produces the edible bird’s nest. We also curate works on caves bird’s nest to nests from swiftlet’s ranching farms and about sustainable farming, its trade and the past and ongoing scientific development on the medicinal properties of edible bird’s nest.",
-    imgSrc: "https://www.findingtheuniverse.com/wp-content/uploads/2017/12/Eiffel2BTower2BParis2B1_by_Laurence2BNorah255B4255D.jpg"
+    text: "At World of Birdnest Museum, we aim to play an educational role in sharing the information in depth about edible bird’s nest, the swiftlet species which their secretion produces the edible bird’s nest. We also curate works on caves bird’s nest to nests from swiftlet’s ranching farms and about sustainable farming, its trade and the past and ongoing scientific development on the medicinal properties of edible bird’s nest.",
+    imgUrl: "https://www.findingtheuniverse.com/wp-content/uploads/2017/12/Eiffel2BTower2BParis2B1_by_Laurence2BNorah255B4255D.jpg"
   },
   {
     title: "Femump",
     summary: "Come visit our museum located within the serene and tranquil ",
-    description: "Come visit our museum located within the serene and tranquil Kranji countryside area in Singapore to uncover the myths and discover the benefits of edible bird’s nest for we are probably one of the most comprehensive collection of information about edible bird’s nest in the entire South-East Asia.",
-    imgSrc: "https://www.findingtheuniverse.com/wp-content/uploads/2017/12/Eiffel2BTower2BParis2B1_by_Laurence2BNorah255B4255D.jpg"
+    text: "Come visit our museum located within the serene and tranquil Kranji countryside area in Singapore to uncover the myths and discover the benefits of edible bird’s nest for we are probably one of the most comprehensive collection of information about edible bird’s nest in the entire South-East Asia.",
+    imgUrl: "https://www.findingtheuniverse.com/wp-content/uploads/2017/12/Eiffel2BTower2BParis2B1_by_Laurence2BNorah255B4255D.jpg"
   }
 ];
 
@@ -86,7 +87,7 @@ class Attraction extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      description: "", openModal: false, title: "", imgSrc: "",
+      text: "", openModal: false, title: "", imgUrl: "",
       page: 0, rowsPerPage: 5,
     };
     this.handleCloseModal = this.handleCloseModal.bind(this);
@@ -95,8 +96,8 @@ class Attraction extends React.Component {
     this.handlePrevious = this.handlePrevious.bind(this);
   }
 
-  handleOpenModal = ({ description, title, imgSrc }) => {
-    this.setState({ description, openModal: true, title, imgSrc });
+  handleOpenModal = ({ text, title, imgUrl }) => {
+    this.setState({ text, openModal: true, title, imgUrl });
   };
 
   handleCloseModal = () => {
@@ -113,8 +114,13 @@ class Attraction extends React.Component {
     this.setState({ page: page - 1 })
   };
 
+  componentDidMount() {
+    const { onMount } = this.props;
+    onMount();
+  }
+
   render() {
-    const { classes } = this.props;
+    const { classes, data } = this.props;
     const { page, rowsPerPage } = this.state;
     const maxPage = _floor(_div(data.length, rowsPerPage));
 
@@ -129,7 +135,7 @@ class Attraction extends React.Component {
                         component="img"
                         alt={item.title}
                         height="140"
-                        image={item.imgSrc}
+                        image={item.imgUrl}
                         title={item.title}
                     />
                     <CardContent>
