@@ -196,7 +196,9 @@ const Checkout = (props) => {
             <React.Fragment>
 
               {activeStep === steps.length ? (
-                <ConfirmationScreen />
+                <React.Fragment>
+                  <ConfirmationScreen personalDetails={props.personalDetails} grossAmount={props.grossAmount} />
+                </React.Fragment>
               ) : (
                   <React.Fragment>
                     {toRender[activeStep]}
@@ -221,6 +223,7 @@ const mapStateToProps = state => {
   return {
     personalDetails: state.personalDetails,
     tripDetails: state.tripDetails,
+    grossAmount: state.grossAmount,
     errorMsg: state.errorMsg
   };
 };

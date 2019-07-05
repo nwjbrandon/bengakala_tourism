@@ -1,10 +1,14 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
+import { connect } from 'react-redux'
+import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+/*
 const tripDetails = {
   checkIn: "18/04/2020",
   checkOut: "28/04/2020",
@@ -31,122 +35,188 @@ const prices = {
   car: 10,
   bike: 5
 }
+*/
+const useStyles = makeStyles(theme => ({
+  root: {
+    marginTop: theme.spacing(3),
+    color: "black",
+  },
+  table: {
+    minWidth: 500,
+  },
+}));
 
-function priceRow(qty, unit) {
-  return qty * unit * duration;
-}
+const MasterTable = (props) => {
+  /*
+  constructor(props) {
+    super(props)
 
-function createRow(desc, qty, unit) {
-  const price = priceRow(qty, unit)
-  return { desc, qty, price };
-}
-
-const homeRow = [
-  createRow('Homestay', groupSize / 4, prices.home),
-]
-
-function mealRow() {
-  let arr = []
-  if (tripDetails.breakfast) {
-    arr[0] = createRow('Breakfast', groupSize, prices.breakfast)
+    this.priceRow = this.priceRow.bind(this)
+    this.createRow = this.createRow.bind(this)
+    this.mealRow = this.mealRow.bind(this)
+    this.subtotal = this.subtotal.bind(this)
+    this.totalCost = this.totalCost.bind(this)
+    this.date_diff_indays = this.date_diff_indays.bind(this)
   }
-  if (tripDetails.lunch) {
-    arr[1] = createRow('Lunch', groupSize, prices.lunch)
+  */
+  const classes = useStyles()
+  const { tripDetails, cost } = props
+  const groupSize = parseInt(tripDetails.numberFemales) + parseInt(tripDetails.numberMales)
+
+  const date_diff_indays = (date1, date2) => {
+    const dt1 = new Date(date1);
+    const dt2 = new Date(date2);
+    return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24));
   }
-  if (tripDetails.dinner) {
-    arr[2] = createRow('Dinner', groupSize, prices.lunch)
+
+  /* Calculate the price of each service */
+  const priceRow = (qty, unit, duration) => {
+    return qty * unit * duration;
   }
-  return arr;
-}
 
-const transportRow = [
-  createRow('Vans', tripDetails.numberVans, prices.van),
-  createRow('Cars', tripDetails.numberCars, prices.car),
-  createRow('Bikes', tripDetails.numberBikes, prices.bike),
-]
+  const createRow = (desc, qty, unit) => {
+    const duration = date_diff_indays(tripDetails.checkIn, tripDetails.checkOut)
+    const price = priceRow(qty, unit, duration)
+    return { desc, qty, price };
+  }
 
-const transportSub = subtotal(transportRow)
-const mealSub = subtotal(mealRow())
-const subcost = totalCost([mealSub, transportSub, homeRow[0].price])
-const taxes = 0.029 * subcost
-const total = taxes + subcost
+  /*
+  renderHomeRow = (groupSize, homePrice) => {
 
-function subtotal(items) {
-  return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
-}
+    const homeRow = this.createRow('Homestay', groupSize / 4, homePrice)
 
-function totalCost(arr) {
-  return arr.reduce((total, num) => num + total, 0);
-}
+    return (
+      homeRow.map(row => (
+        <TableRow>
+          <TableCell style={{ color: 'black' }}>{row.desc}</TableCell>
+          <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
+          <TableCell style={{ color: 'black' }}>{row.price}</TableCell>
+        </TableRow>
+      ))
+    )
+  }
+  */
 
-export default function MasterTable() {
+  const createMealRow = (b, l, d, bCost, lCost, dCost, groupSize) => {
+
+    let arr = []
+
+    if (b) {
+      arr[0] = createRow('Breakfast', groupSize, bCost)
+    }
+    if (l) {
+      arr[1] = createRow('Lunch', groupSize, lCost)
+    }
+    if (d) {
+      arr[2] = createRow('Dinner', groupSize, dCost)
+    }
+    return arr;
+  }
+
+  /*
+  const transportRow = [
+    createRow('Vans', tripDetails.numberVans, prices.van),
+    createRow('Cars', tripDetails.numberCars, prices.car),
+    createRow('Bikes', tripDetails.numberBikes, prices.bike),
+  ]
+  */
+
+  // const mealSub = subtotal(mealRow())
+  // const total = totalCost([mealSub, homeRow[0].price])
+
+  /* Calculations functions */
+  const subtotal = (items) => {
+    return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
+  }
+
+  const totalCost = (arr) => {
+    return arr.reduce((total, num) => num + total, 0);
+  }
+
+  /* Creating the rows */
+  const mealRow = createMealRow(tripDetails.breakfast, tripDetails.lunch, tripDetails.dinner,
+    cost.breakfast, cost.lunch, cost.dinner, groupSize)
+  const homeRow = [createRow('HomeStay', Math.floor(groupSize / 4), cost.accomodation)]
+
+  /* Cost values */
+  const mealCost = subtotal(mealRow);
+
+  const calcTotal = () => {
+    const finalCost =  totalCost([mealCost, homeRow[0].price]);
+
+    if (props.grossAmount != finalCost)
+      props.onAmountChange(finalCost)
+
+    return finalCost
+  }
+
   return (
-    <Table>
-      <TableHead>
-        <TableRow>
-          <TableCell style={{ fontSize: "20px", color: 'cyan' }}>Type</TableCell>
-          <TableCell style={{ fontSize: "20px", color: 'cyan' }}>Qty</TableCell>
-          <TableCell style={{ fontSize: "20px", color: 'cyan' }}>Price</TableCell>
-        </TableRow>
-      </TableHead>
-      <TableBody>
-        {homeRow.map(row => (
+    <Paper className={classes.root}>
+      <Table className={classes.table}>
+        <TableHead>
           <TableRow>
-            <TableCell style={{ color: 'white' }}>{row.desc}</TableCell>
-            <TableCell style={{ color: 'white' }}>{row.qty}</TableCell>
-            <TableCell style={{ color: 'white' }}>{row.price}</TableCell>
+            <TableCell style={{ fontSize: "20px", color: 'green' }}>Type</TableCell>
+            <TableCell style={{ fontSize: "20px", color: 'green' }}>Qty</TableCell>
+            <TableCell style={{ fontSize: "20px", color: 'green' }}>Price (IDR)</TableCell>
           </TableRow>
-        ))}
-        <TableRow>
-          <TableCell style={{ color: 'white' }}>Meals</TableCell>
-          <TableCell style={{ color: 'white' }}></TableCell>
-          <TableCell style={{ color: 'white' }}></TableCell>
-        </TableRow>
-        {mealRow().map(row => (
-          <TableRow style={{ color: 'white' }}>
-            <TableCell style={{ color: 'white' }} align="center"> {row.desc}</TableCell>
-            <TableCell style={{ color: 'white' }}>{row.qty}</TableCell>
-            <TableCell style={{ color: 'white' }}>{row.price}</TableCell>
-          </TableRow>
-        ))}
-        <TableRow>
-          <TableCell></TableCell>
-          <TableCell style={{ color: 'white' }} align="center">Meals total</TableCell>
-          <TableCell style={{ color: 'white' }}>{mealSub}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell style={{ color: 'white' }}>Transport</TableCell>
-          <TableCell style={{ color: 'white' }}></TableCell>
-          <TableCell style={{ color: 'white' }}></TableCell>
-        </TableRow>
-        {transportRow.map(row => (
+        </TableHead>
+        <TableBody>
+          {homeRow.map(row => (
+            <TableRow>
+              <TableCell style={{ color: 'black' }}>{row.desc}</TableCell>
+              <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
+              <TableCell style={{ color: 'blue' }}>{row.price}</TableCell>
+            </TableRow>
+          ))}
           <TableRow>
-            <TableCell style={{ color: 'white' }} align="center">{row.desc}</TableCell>
-            <TableCell style={{ color: 'white' }} >{row.qty}</TableCell>
-            <TableCell style={{ color: 'white' }}>{row.price}</TableCell>
+            <TableCell style={{ color: 'black' }}>Meals</TableCell>
+            <TableCell style={{ color: 'black' }}></TableCell>
+            <TableCell style={{ color: 'black' }}></TableCell>
           </TableRow>
-        ))}
-        <TableRow>
-          <TableCell></TableCell>
-          <TableCell style={{ color: 'white' }} align="center">Transport total</TableCell>
-          <TableCell style={{ color: 'white' }}>{transportSub}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell style={{ color: 'white' }}></TableCell>
-          <TableCell style={{ color: 'white' }}> Subtotal </TableCell>
-          <TableCell style={{ color: 'white' }}>{subcost}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell></TableCell>
-          <TableCell style={{ color: 'white' }}> Taxes </TableCell>
-          <TableCell style={{ color: 'white' }}>{taxes}</TableCell>
-        </TableRow>
-        <TableRow>
-          <TableCell></TableCell>
-          <TableCell style={{ color: 'white' }}> Total </TableCell>
-          <TableCell style={{ color: 'white' }}>{total}</TableCell>
-        </TableRow>
-      </TableBody>
-    </Table>
+          {mealRow.map(row => (
+            <TableRow style={{ color: 'black' }}>
+              <TableCell style={{ color: 'black' }} align="center">{row.desc}</TableCell>
+              <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
+              <TableCell style={{ color: 'black' }}>{row.price}</TableCell>
+            </TableRow>
+          ))}
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell style={{ color: 'blue' }}>Meals total</TableCell>
+            <TableCell style={{ color: 'blue' }}>{mealCost}</TableCell>
+          </TableRow>
+          {/* <TableRow>
+              <TableCell style={{ color: 'black' }}>Transport</TableCell>
+              <TableCell style={{ color: 'black' }}></TableCell>
+              <TableCell style={{ color: 'black' }}></TableCell>
+            </TableRow> 
+            <TableRow>
+              <TableCell style={{ color: 'black' }}></TableCell>
+              <TableCell style={{ color: 'black' }}> Subtotal </TableCell>
+              <TableCell style={{ color: 'black' }}>{subcost}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell style={{ color: 'black' }}> Taxes </TableCell>
+              <TableCell style={{ color: 'black' }}>{taxes}</TableCell>
+            </TableRow> */}
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell style={{ color: 'blue' }}>Total</TableCell>
+            <TableCell style={{ color: 'blue' }}>{calcTotal()}</TableCell>
+          </TableRow>
+        </TableBody>
+      </Table>
+    </Paper>
   )
 }
+
+const mapDispatchToProps = dispatch => {
+  return {
+    onAmountChange: (val) => dispatch({ type: "GROSS_AMOUNT", payload: val}),
+  }
+
+}
+
+
+export default connect(null, mapDispatchToProps)(MasterTable)

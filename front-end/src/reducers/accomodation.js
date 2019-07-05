@@ -29,6 +29,7 @@ const initialState = {
     lunch: 20000,
     dinner: 20000
   },
+  grossAmount: 0,
   errorMsg: ""
 
 }
@@ -181,8 +182,16 @@ const reducer = (state = initialState, action) => {
       excludeDates: [...state.excludeDates],
       cost: { ...state.cost }
     }
-
-  }
+  } else if (action.type === actionTypes.GROSS_AMOUNT) {
+    console.log("storing the total amount")
+    return {
+      personalDetails: { ...state.personalDetails },
+      tripDetails: { ...state.tripDetails },
+      excludeDates: [...state.excludeDates],
+      cost: { ...state.cost },
+      grossAmount: action.payload
+    } 
+  } 
   return state;
 };
 

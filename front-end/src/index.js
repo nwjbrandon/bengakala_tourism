@@ -21,8 +21,7 @@ import Attraction from './routers/media';
 import Contact from './routers/contact/container';
 import Faq from './routers/faq/container';
 import Notfound from './routers/notfound';
-import Payment from './routers/payment';
-import Tutorial from './routers/resources'
+import Tutorial from './routers/tutorial'
 
 // Protected Routes
 import Admin from './routers/admin/container';
@@ -77,7 +76,6 @@ const routing = (
             <ProtectedRoutes exact path="/media" component={ Attraction } secret={false} />
             <ProtectedRoutes exact path="/contact" component={ Contact } secret={false} />
             <ProtectedRoutes exact path="/faq" component={ Faq } secret={false} />
-            <ProtectedRoutes exact path="/payment" component={ Payment } secret={false} />
 
             <ProtectedRoutes exact path="/dashboard" component={ Dashboard } secret={true} />
             <ProtectedRoutes exact path="/dashboard/booking" component={ DashboardAccommodation } secret={true} />
