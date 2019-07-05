@@ -14,7 +14,6 @@ const snapTokenPost = [
       serverKey,
       clientKey
     });
-
     // eslint-disable-next-line camelcase
     const order_id = uuid();
     const parameter = {
@@ -31,9 +30,7 @@ const snapTokenPost = [
         email,
       }
     };
-
     const snapToken = await snap.createTransactionToken(parameter);
-
     res.json({
       data: {
         snapToken,

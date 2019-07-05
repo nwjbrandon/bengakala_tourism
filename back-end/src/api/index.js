@@ -28,6 +28,7 @@ import {
   dashboardNewUserValidators,
   dashboardChangePasswordValidators,
   dashboardResoucesValidators,
+  midtransValidators,
   errorHandling,
 } from '../middleware/validator';
 
@@ -45,7 +46,10 @@ app.put('/contact/info',
   errorHandling,
   contact.put);
 app.get('/faq/info', faq.info);
-app.post('/snap/info', snap.post);
+app.post('/snap/info',
+  midtransValidators,
+  errorHandling,
+  snap.post);
 
 // endpoints must be protected
 app.post('/admin/login',

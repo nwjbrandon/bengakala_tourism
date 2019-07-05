@@ -21,6 +21,21 @@ export const errorHandling = [
   }
 ];
 
+
+export const midtransValidators = [
+  check('email').exists().not().isEmpty()
+    .normalizeEmail()
+    .isEmail()
+    .withMessage('Email is Required'),
+  check('first_name').exists().not().isEmpty()
+    .withMessage('First Name is Required'),
+  check('last_name').exists().not().isEmpty()
+    .withMessage('Last Name is Required'),
+  check('gross_amount').exists().not().isEmpty()
+    .isNumeric()
+    .withMessage('Gross Amount is Required'),
+];
+
 export const contactValidators = [
   check('email').exists().not().isEmpty()
     .normalizeEmail()
