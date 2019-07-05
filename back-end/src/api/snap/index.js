@@ -61,8 +61,8 @@ const snapTokenPost = [
     // Create Snap API instance
     const snap = new midtransClient.Snap({
       isProduction: false,
-      serverKey: 'SB-Mid-server-Mix8cvIyBndvfoY_5kaHtiGD',
-      clientKey: 'SB-Mid-client-wF39uWF-TULcPRnv'
+      serverKey: '',
+      clientKey: ''
     });
 
     const parameter = {
