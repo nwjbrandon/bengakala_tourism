@@ -63,7 +63,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-function SimpleExpansionPanel() {
+function SimpleExpansionPanel({ data }) {
   const classes = useStyles();
 
   const [windowWidth, setWindowWidth] = useState(window.innerWidth);
@@ -74,36 +74,6 @@ function SimpleExpansionPanel() {
   });
 
   const [videoId, setVideoId] = useState(0);
-
-  const videoDetails = [
-    {
-      title: "Tutorial 1",
-      videoLink: "SzHo_DP4-8Q",
-      videoDescription: "Rick and Morty go on a fun Journey"
-    },
-    {
-      title: "Tutorial 2",
-      videoLink: "TyCWscXbBvA",
-      videoDescription: "Rick and Morty get Shwifty"
-    },
-    {
-      title: "Tutorial 3",
-      videoLink: "qn_TimF_J8Y",
-      videoDescription: "Morty is going on an adventuree"
-    },
-    {
-      title: "Tutorial 4",
-      videoLink: "SzHo_DP4-8Q",
-      videoDescription: "An Awesome Video about an old man"
-    },
-    {
-      title: "Tutorial 5",
-      videoLink: "TyCWscXbBvA",
-      videoDescription: "Get Swifty. I am MR BULL DOg"
-    }
-
-  ];
-
 
   const title = {
     color: "white",
@@ -124,7 +94,7 @@ function SimpleExpansionPanel() {
     textShadow: "0 1px 2px rgba(black,.15)",
   };
 
-  const videoTitleList = videoDetails.map((item, index) => {
+  const videoTitleList = data.map((item, index) => {
     return (
       <Button key={index} onClick={() => setVideoId(index)} className={classes.buttonFull}>{item.title}</Button>
     );
@@ -132,24 +102,29 @@ function SimpleExpansionPanel() {
 
   return (
     <div className={classes.root}>
-      <div style={title}><h1 style={h1titletag}>Browse through our video series to learn our very own Sign Language : The Kata Kolok!!</h1></div>
-
-      <div className={classes.videoDescription}>{videoDetails[videoId].videoDescription}</div>
-      <div className={classes.container}>
-        <Grid style={{ height: "100%" }} container spacing={0}>
-          <Grid item xs={12} sm={12} md={9}>
-            <div className={classes.demo}>
-              <Youtube youtubeId={videoDetails[videoId].videoLink} />
+      {
+        data.length === 0
+            ? <div />
+            :
+            <div>
+              <div style={title}><h1 style={h1titletag}>Browse through our video series to learn our very own Sign Language : The Kata Kolok!!</h1></div>
+              <div className={classes.videoDescription}>{data[videoId].videoDescription}</div>
+              <div className={classes.container}>
+                <Grid style={{ height: "100%" }} container spacing={0}>
+                  <Grid item xs={12} sm={12} md={9}>
+                    <div className={classes.demo}>
+                      <Youtube youtubeId={data[videoId].videoLink} />
+                    </div>
+                  </Grid>
+                  <Grid item xs={12} sm={12} md={3}>
+                    <div className={classes.demo}>
+                      {videoTitleList}
+                    </div>
+                  </Grid>
+                </Grid>
+              </div>
             </div>
-          </Grid>
-          <Grid item xs={12} sm={12} md={3}>
-            <div className={classes.demo}>
-              {videoTitleList}
-            </div>
-          </Grid>
-        </Grid>
-      </div>
-
+      }
     </div>
   );
 }

@@ -3,6 +3,7 @@ import { all } from 'redux-saga/effects';
 import contactOnMount from './contact-onmount';
 import contactForm from './contact-form';
 import attraction from './attraction';
+import resources from './resources';
 import homeOnMount from './home';
 import faqOnMount from './faq';
 import dashboard from './dashboard';
@@ -22,6 +23,7 @@ export default function* rootSaga() {
     ...contactOnMount,
     ...contactForm,
     ...attraction,
+    ...resources,
     ...homeOnMount,
     ...faqOnMount,
     ...dashboard,

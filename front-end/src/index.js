@@ -21,7 +21,7 @@ import Attraction from './routers/media/container';
 import Contact from './routers/contact/container';
 import Faq from './routers/faq/container';
 import Notfound from './routers/notfound';
-import Resources from './routers/resources'
+import Resources from './routers/resources/container'
 
 // Protected Routes
 import Admin from './routers/admin/container';

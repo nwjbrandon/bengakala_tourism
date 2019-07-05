@@ -1,7 +1,6 @@
 import React from 'react';
 import API from '../../api';
 
-import bg from '../../components/accomodations/images/balivillage.jpg'
 import Tutorial from '../../components/tutorials/VideoTutorials'
 import Navbar from "../../components/navBar/navbar";
 
@@ -12,11 +11,12 @@ class TutorialPage extends React.Component {
       data: '',
     }
   }
+
   componentDidMount() {
-    API.get('/resources').then(res => {
-      this.setState({ data: res });
-    })
+    const { onMount } = this.props;
+    onMount();
   }
+
   render() {
 
     const divStyle = {
@@ -27,11 +27,16 @@ class TutorialPage extends React.Component {
       justifyContent: "center"
     };
 
+    const { data } = this.props;
+    console.log('insde resource');
+    console.log(data);
+    console.log('insde resources');
+
     return (
       <div>
         <Navbar />
         <div style={divStyle}>
-          <Tutorial />
+          <Tutorial data={data} />
         </div>
       </div>
     )

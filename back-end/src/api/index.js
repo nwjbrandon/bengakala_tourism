@@ -5,6 +5,7 @@ import admin from './admin';
 import attraction from './attraction';
 import contact from './contact';
 import faq from './faq';
+import resources from './resources';
 // import snap from './snap';
 import dashboard from './dashboard';
 import dashboardContact from './dashboard/contact';
@@ -36,10 +37,7 @@ const app = express();
 app.get('/home/info', home.info);
 app.get('/accommodation/info', accommodation.info);
 app.post('/accommodation/info', accommodation.post);
-
-// TODO
-
-
+app.get('/resources/info', resources.info);
 app.get('/attraction/info', attraction.info);
 app.get('/contact/info', contact.info);
 app.put('/contact/info',

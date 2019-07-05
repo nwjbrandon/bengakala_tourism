@@ -3,6 +3,7 @@ import reduceReducers from 'reduce-reducers';
 import { contactOnMountReducer } from "./contact-onmount";
 import { contactFormReducer } from "./contact-form";
 import { attractionReducer } from "./attraction";
+import { resourcesReducer } from "./resources";
 import { dashboardOnMountReducer } from "./dashboard";
 import { adminLoginReducer } from "./admin";
 import { dashboardFaqReducer } from "./dashboardFaq";
@@ -33,6 +34,7 @@ const allReducers = (history) => combineReducers({
     home: reduceReducers(homeOnMountReducer),
     faq: reduceReducers(faqOnMountReducer),
     router: connectRouter(history),
+    resources: reduceReducers(resourcesReducer),
 });
 
 export default allReducers
