@@ -35,6 +35,7 @@ import {
 const app = express();
 
 // endpoints not necessarily to protect
+app.get('/testing', (req, res) => res.json({ data: 'v1.0' }));
 app.get('/home/info', home.info);
 app.get('/accommodation/info', accommodation.info);
 app.post('/accommodation/info', accommodation.post);
