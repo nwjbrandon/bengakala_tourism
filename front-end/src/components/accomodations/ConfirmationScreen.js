@@ -61,9 +61,11 @@ class ConfirmationScreen extends React.Component {
     const snapToken = this.getToken();
     console.log("snaptoken", snapToken)
     if (snapToken) {
-      this.callback(null, snapToken)
+      callback(null, snapToken)
+      console.log("Not Error")
     } else {
-      this.callSnap(new Error('Unable to process payment, please try again later'), null)
+      callback(new Error('Unable to process payment, please try again later'), null)
+      console.log("Error")
     }
   }
 
