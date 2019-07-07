@@ -21,6 +21,10 @@ class ConfirmationScreen extends React.Component {
     date: new Date(),
   }
 
+  componentDidMount() {
+    { this.callSnap() }
+  }
+
   onChange = date => this.setState({ date })
 
   /* Includes a callback to show snap loading, success, etc screens */
@@ -34,9 +38,9 @@ class ConfirmationScreen extends React.Component {
         console.log('calling snap pay')
         snap.pay(snapToken, {
           onSuccess: (result) => { console.log('success'); console.log(result); alert('Payment Success') },
-          onPending: function (result) { console.log('pending'); console.log(result); alert('Payment Pending') },
-          onError: function (result) { console.log('error'); console.log(result); alert('Payment Error') },
-          onClose: function () {
+          onPending: (result) => { console.log('pending'); console.log(result); alert('Payment Pending') },
+          onError: (result) => { console.log('error'); console.log(result); alert('Payment Error') },
+          onClose: () => {
             console.log('customer closed the popup without finishing the payment');
             alert('Please do not close the payment pop-up')
           }
@@ -68,7 +72,7 @@ class ConfirmationScreen extends React.Component {
       }
     }).then((res) => {
       console.log(res);
-      return res;
+      return res.snapToken;
     }).catch((err) => {
       console.log(err);
     });
@@ -76,15 +80,12 @@ class ConfirmationScreen extends React.Component {
 
   render() {
     return (
-      <React.Fragment>
-        {this.callSnap()}
-        <div>
-          <p>Thank you!</p>
-          <p>A confirmation email with the invoice attached has been sent to {this.props.email}
-            please make cash payment of {this.props.grossAmount}IDR upon arrival at our village.
+      <div>
+        <p>Thank you!</p>
+        <p>A confirmation email with the invoice attached has been sent to {this.props.email}
+          please make cash payment of {this.props.grossAmount}IDR upon arrival at our village.
           </p>
-        </div>
-      </React.Fragment>
+      </div>
     );
   }
 }
