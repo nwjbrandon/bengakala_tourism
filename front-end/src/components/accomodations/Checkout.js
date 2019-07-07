@@ -17,6 +17,7 @@ import Buttons from './Buttons'
 import { connect } from 'react-redux'
 import MobileStepper from '@material-ui/core/MobileStepper';
 
+import * as actionTypes from '../../actions/accomodation';
 import CloseIcon from '@material-ui/icons/Close';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -228,7 +229,6 @@ const Checkout = (props) => {
                         style={
                           { backgroundColor: 'red' }
                         }
-                        variant="error"
                         aria-describedby="client-snackbar"
                         message={
                           <span id="client-snackbar" >
@@ -260,16 +260,16 @@ const Checkout = (props) => {
 
 const mapStateToProps = state => {
   return {
-    personalDetails: state.personalDetails,
-    tripDetails: state.tripDetails,
-    grossAmount: state.grossAmount,
-    errorMsg: state.errorMsg
+    personalDetails: state.booking.personalDetails,
+    tripDetails: state.booking.tripDetails,
+    grossAmount: state.booking.grossAmount,
+    errorMsg: state.booking.errorMsg
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    onError: (val) => dispatch({ type: "ERR_MSG", payload: val }),
+    onError: (val) => dispatch({ type: actionTypes.ERR_MSG, payload: val }),
   }
 }
 

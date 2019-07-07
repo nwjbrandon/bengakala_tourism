@@ -68,7 +68,7 @@ const PersonalDetailsForm = (props) => {
 
 const mapStateToProps = state => {
   return {
-    personalDetails: state.personalDetails,
+    personalDetails: state.booking.personalDetails,
   };
 };
 

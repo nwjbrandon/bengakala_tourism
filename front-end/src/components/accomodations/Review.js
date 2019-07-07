@@ -2,7 +2,7 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Youtube from './youtube'
-import {connect} from 'react-redux'
+import { connect } from 'react-redux'
 
 
 const Review = (props) => {
@@ -21,9 +21,9 @@ const Review = (props) => {
 }
 
 const mapStateToProps = state => {
-  return{
-    personalDetails: state.personalDetails,
-    tripDetails:state.tripDetails,
+  return {
+    personalDetails: state.booking.personalDetails,
+    tripDetails: state.booking.tripDetails,
   };
 };
 

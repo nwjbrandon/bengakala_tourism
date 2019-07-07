@@ -65,10 +65,10 @@ const App = (props) => {
 
 const mapStateToProps = state => {
   return {
-    personalDetails: state.personalDetails,
-    tripDetails: state.tripDetails,
-    cost: state.cost,
-    grossAmount: state.grossAmount,
+    personalDetails: state.booking.personalDetails,
+    tripDetails: state.booking.tripDetails,
+    cost: state.booking.cost,
+    grossAmount: state.booking.grossAmount,
   };
 };
 

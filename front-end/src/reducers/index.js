@@ -1,4 +1,4 @@
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 import reduceReducers from 'reduce-reducers';
 import { contactOnMountReducer } from "./contact-onmount";
 import { contactFormReducer } from "./contact-form";
@@ -17,6 +17,7 @@ import { faqOnMountReducer } from "./faq";
 import { dashboardResourcesReducer } from "./dashboardResources";
 import { connectRouter } from 'connected-react-router';
 import { toastReducer } from "./toast";
+import bookingReducer from './accomodation'
 
 const allReducers = (history) => combineReducers({
     toast: reduceReducers(toastReducer),
@@ -35,6 +36,7 @@ const allReducers = (history) => combineReducers({
     faq: reduceReducers(faqOnMountReducer),
     router: connectRouter(history),
     resources: reduceReducers(resourcesReducer),
+    booking: reduceReducers(bookingReducer)
 });
 
 export default allReducers

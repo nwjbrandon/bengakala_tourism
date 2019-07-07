@@ -81,8 +81,8 @@ const TransportDetailsForm = (props) => {
 
 const mapStateToProps = state => {
     return {
-        tripDetails: state.tripDetails,
-        excludeDates: state.excludeDates
+        tripDetails: state.booking.tripDetails,
+        excludeDates: state.booking.excludeDates
     };
 };
 
