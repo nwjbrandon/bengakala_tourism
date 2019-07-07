@@ -149,8 +149,8 @@ const MasterTable = (props) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {homeRow.map(row => (
-            <TableRow>
+          {homeRow.map((row, index) => (
+            <TableRow key={index}>
               <TableCell style={{ color: 'black' }}>{row.desc}</TableCell>
               <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
               <TableCell style={{ color: 'black' }}>{row.unit}</TableCell>
@@ -169,8 +169,8 @@ const MasterTable = (props) => {
             <TableCell style={{ color: 'black' }}></TableCell>
             <TableCell style={{ color: 'black' }}></TableCell>
           </TableRow>
-          {mealRow.map(row => (
-            <TableRow style={{ color: 'black' }}>
+          {mealRow.map((row, index) => (
+            <TableRow key={index} style={{ color: 'black' }}>
               <TableCell style={{ color: 'black' }} align="center">{row.desc}</TableCell>
               <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
               <TableCell style={{ color: 'black' }}>{row.unit}</TableCell>
