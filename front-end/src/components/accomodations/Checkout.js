@@ -128,7 +128,7 @@ const Checkout = (props) => {
         setActiveStep(activeStep + 1);
       }
     } else if (activeStep == 3) {
-      console.log(props.tripDetails.checkIn.toISOString())
+      // console.log(props.tripDetails.checkIn.toISOString())
       API.post('/booking/info', {
         data: {
           "firstName": props.personalDetails.firstName,

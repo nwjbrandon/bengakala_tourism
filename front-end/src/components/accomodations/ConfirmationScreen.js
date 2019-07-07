@@ -21,14 +21,8 @@ class ConfirmationScreen extends React.Component {
     date: new Date(),
   }
 
-  componentDidMount() {
-    { this.callSnap() }
-  }
-
-  onChange = date => this.setState({ date })
-
-  /* Includes a callback to show snap loading, success, etc screens */
   callSnap = () => {
+    // snap.hide();
     snap.show(); // the snap loading screen
     this.handleTokenReq((error, snapToken) => {
       if (error) {
@@ -49,13 +43,27 @@ class ConfirmationScreen extends React.Component {
     })
   }
 
+
+  componentDidMount() {
+    this.callSnap()
+  }
+
+  componentWillUnmount() {
+    // snap.hide();
+  }
+
+  onChange = date => this.setState({ date })
+
+  /* Includes a callback to show snap loading, success, etc screens */
+
   handleTokenReq = (callback) => {
     console.log('handling token request')
     const snapToken = this.getToken();
+    console.log("snaptoken", snapToken)
     if (snapToken) {
-      callback(null, snapToken)
+      this.callback(null, snapToken)
     } else {
-      callSnap(new Error('Unable to process payment, please try again later'), null)
+      this.callSnap(new Error('Unable to process payment, please try again later'), null)
     }
   }
 
