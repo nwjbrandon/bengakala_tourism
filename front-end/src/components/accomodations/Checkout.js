@@ -32,7 +32,10 @@ const useStyles = makeStyles(theme => ({
   },
   layout: {
     width: 'auto',
+    maxWidth: '900px',
     background: "#42424240",
+    marginLeft: 'auto',
+    marginRight: 'auto'
     // marginLeft: theme.spacing(2),
     // marginRight: theme.spacing(2),
     // [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {

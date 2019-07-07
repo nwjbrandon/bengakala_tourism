@@ -3,6 +3,7 @@ import Calendar from 'react-calendar';
 import CalendarHeatmap from 'react-calendar-heatmap';
 import 'react-calendar-heatmap/dist/styles.css';
 import ReactTooltip from 'react-tooltip';
+import API from '../../api'
 
 
 
