@@ -74,12 +74,12 @@ class ConfirmationScreen extends React.Component {
     const { personalDetails, grossAmount } = this.props
     console.log('getting token from backend')
     API.post('/snap/info', {
-      data: {
-        'first_name': personalDetails.firstName,
-        'last_name': personalDetails.lastName,
-        'email': personalDetails.email,
-        'gross_amount': grossAmount,
-      }
+
+      'first_name': personalDetails.firstName,
+      'last_name': personalDetails.lastName,
+      'email': personalDetails.email,
+      'gross_amount': grossAmount,
+
     }).then((res) => {
       console.log(res);
       return res.snapToken;
