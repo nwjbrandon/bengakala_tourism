@@ -167,7 +167,6 @@ const reducer = (state = initialState, action) => {
       cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.EXCLUDE_DATES) {
-    console.log("INSIDE DISPATCH")
     return {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...state.tripDetails },
@@ -183,15 +182,14 @@ const reducer = (state = initialState, action) => {
       cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.GROSS_AMOUNT) {
-    console.log("storing the total amount")
     return {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...state.tripDetails },
       excludeDates: [...state.excludeDates],
       cost: { ...state.cost },
       grossAmount: action.payload
-    } 
-  } 
+    }
+  }
   return state;
 };
 

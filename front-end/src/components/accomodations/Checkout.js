@@ -16,11 +16,15 @@ import blue from '@material-ui/core/colors/blue'
 import Buttons from './Buttons'
 import { connect } from 'react-redux'
 import MobileStepper from '@material-ui/core/MobileStepper';
+
+import CloseIcon from '@material-ui/icons/Close';
 import LinearProgress from '@material-ui/core/LinearProgress';
-
+import Snackbar from '@material-ui/core/Snackbar';
+import SnackbarContent from '@material-ui/core/SnackbarContent';
 import TransportDetails from './TransportDetails'
-
+import IconButton from '@material-ui/core/IconButton';
 import API from '../../api';
+import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
   label: {
@@ -82,7 +86,7 @@ const Checkout = (props) => {
   ]
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
-
+  const [openSnackBar, setSnackBar] = React.useState(false);
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
 
   useEffect(() => {
@@ -98,19 +102,25 @@ const Checkout = (props) => {
     if (activeStep == 0) {
       if (props.personalDetails.firstName === "" || props.personalDetails.lastName === "" || props.personalDetails.email === "" || props.personalDetails.country === "") {
         props.onError("Important Fields Are Empty!");
+        setSnackBar(true);
       } else if (!isValidEmail(props.personalDetails.email)) {
         props.onError("Oops doesnt look like a valid email address!");
+        setSnackBar(true);
       } else {
         props.onError("");
+        setSnackBar(false);
         setActiveStep(activeStep + 1);
       }
     } else if (activeStep == 1) {
       if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) == 0) {
         props.onError("Total Guests cannot be 0");
+        setSnackBar(true);
       } else if (props.tripDetails.numberMales < 0 || props.tripDetails.numberFemales < 0) {
         props.onError("There cannot be Negative number of Guests!!");
+        setSnackBar(true);
       } else {
         props.onError("");
+        setSnackBar(false);
         setActiveStep(activeStep + 1);
       }
     } else if (activeStep == 3) {
@@ -202,7 +212,33 @@ const Checkout = (props) => {
               ) : (
                   <React.Fragment>
                     {toRender[activeStep]}
-                    <Typography color="error" variant="h6">{props.errorMsg}</Typography>
+                    <Snackbar
+                      anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                      }}
+                      open={openSnackBar}
+                      autoHideDuration={3000}
+                      onClose={() => setSnackBar(false)}
+                    >
+                      <SnackbarContent
+                        style={
+                          { backgroundColor: 'red' }
+                        }
+                        variant="error"
+                        aria-describedby="client-snackbar"
+                        message={
+                          <span id="client-snackbar" >
+                            {props.errorMsg}
+                          </span>
+                        }
+                        action={[
+                          <IconButton key="close" aria-label="Close" color="inherit" onClick={() => setSnackBar(false)}>
+                            <CloseIcon />
+                          </IconButton>,
+                        ]}
+                      />
+                    </Snackbar>
                     <Buttons activeStep={activeStep} handleBack={handleBack} handleNext={handleNext} stepsLength={steps.length} />
 
                   </React.Fragment>

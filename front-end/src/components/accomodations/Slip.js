@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import MasterTable from './Tabular';
+import MasterTableMobile from './TabularMobile';
 import { connect } from 'react-redux'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles';
+import { Paper } from '@material-ui/core';
 
 
 
@@ -22,25 +24,39 @@ const useStyles = makeStyles(theme => {
 
 const App = (props) => {
 
+  const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
+
+  React.useEffect(() => {
+    window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
+    setWindowWidth(window.innerWidth);
+  });
+
   const classes = useStyles();
 
   return (
     <div className='flex-center container medium-border-surround'>
       <Typography className={classes.label} variant="h4">
-        Here's your invoice
+        Here's your Order
         </Typography>
       <div>
-        <Typography className={classes.label} variant="h6">
-          {props.personalDetails.firstName} {props.personalDetails.lastName} from {props.personalDetails.country}
-        </Typography>
-        <Typography className={classes.label} variant="h6">
-          {props.personalDetails.email}
-        </Typography>
+        <Paper>
+          <Typography className={classes.label} variant="h6">
+            {props.personalDetails.firstName} {props.personalDetails.lastName} from {props.personalDetails.country}
+          </Typography>
+          <Typography className={classes.label} variant="h6">
+            {props.personalDetails.email}
+          </Typography>
+        </Paper>
         <div>
           <Typography className={classes.label} variant="h5">
             Price Breakdown
             </Typography>
-          <MasterTable tripDetails={props.tripDetails} cost={props.cost} grossAmount={props.grossAmount} />
+          {windowWidth > 600 ?
+
+            <MasterTable tripDetails={props.tripDetails} cost={props.cost} grossAmount={props.grossAmount} /> :
+            <MasterTableMobile tripDetails={props.tripDetails} cost={props.cost} grossAmount={props.grossAmount} />
+          }
+
         </div>
       </div>
     </div>
@@ -52,7 +68,7 @@ const mapStateToProps = state => {
     personalDetails: state.personalDetails,
     tripDetails: state.tripDetails,
     cost: state.cost,
-    grossAmount: state.grossAmount,  
+    grossAmount: state.grossAmount,
   };
 };
 

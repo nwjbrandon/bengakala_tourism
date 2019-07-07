@@ -37,6 +37,8 @@ const prices = {
 }
 */
 const useStyles = makeStyles(theme => ({
+
+
   root: {
     marginTop: theme.spacing(3),
     color: "black",
@@ -47,27 +49,22 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const MasterTable = (props) => {
-  /*
-  constructor(props) {
-    super(props)
 
-    this.priceRow = this.priceRow.bind(this)
-    this.createRow = this.createRow.bind(this)
-    this.mealRow = this.mealRow.bind(this)
-    this.subtotal = this.subtotal.bind(this)
-    this.totalCost = this.totalCost.bind(this)
-    this.date_diff_indays = this.date_diff_indays.bind(this)
-  }
-  */
   const classes = useStyles()
   const { tripDetails, cost } = props
   const groupSize = parseInt(tripDetails.numberFemales) + parseInt(tripDetails.numberMales)
+
+  console.log("COST", cost)
+
 
   const date_diff_indays = (date1, date2) => {
     const dt1 = new Date(date1);
     const dt2 = new Date(date2);
     return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(), dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(), dt1.getDate())) / (1000 * 60 * 60 * 24));
   }
+
+  const numOfDays = date_diff_indays(tripDetails.checkIn, tripDetails.checkOut)
+
 
   /* Calculate the price of each service */
   const priceRow = (qty, unit, duration) => {
@@ -77,25 +74,8 @@ const MasterTable = (props) => {
   const createRow = (desc, qty, unit) => {
     const duration = date_diff_indays(tripDetails.checkIn, tripDetails.checkOut)
     const price = priceRow(qty, unit, duration)
-    return { desc, qty, price };
+    return { desc, qty, unit, price };
   }
-
-  /*
-  renderHomeRow = (groupSize, homePrice) => {
-
-    const homeRow = this.createRow('Homestay', groupSize / 4, homePrice)
-
-    return (
-      homeRow.map(row => (
-        <TableRow>
-          <TableCell style={{ color: 'black' }}>{row.desc}</TableCell>
-          <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
-          <TableCell style={{ color: 'black' }}>{row.price}</TableCell>
-        </TableRow>
-      ))
-    )
-  }
-  */
 
   const createMealRow = (b, l, d, bCost, lCost, dCost, groupSize) => {
 
@@ -136,13 +116,14 @@ const MasterTable = (props) => {
   /* Creating the rows */
   const mealRow = createMealRow(tripDetails.breakfast, tripDetails.lunch, tripDetails.dinner,
     cost.breakfast, cost.lunch, cost.dinner, groupSize)
-  const homeRow = [createRow('HomeStay', Math.floor(groupSize / 4), cost.accomodation)]
+  const homeRow = [createRow('HomeStay', groupSize, cost.accomodation)]
+
 
   /* Cost values */
   const mealCost = subtotal(mealRow);
 
   const calcTotal = () => {
-    const finalCost =  totalCost([mealCost, homeRow[0].price]);
+    const finalCost = totalCost([mealCost, homeRow[0].price]);
 
     if (props.grossAmount != finalCost)
       props.onAmountChange(finalCost)
@@ -155,8 +136,15 @@ const MasterTable = (props) => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
+            <TableCell style={{ fontSize: "20px", color: 'olive' }}>Number of days of stay: </TableCell>
+            <TableCell style={{ fontSize: "20px", color: 'olive' }}>{numOfDays}</TableCell>
+            <TableCell style={{ fontSize: "20px", color: 'olive' }}></TableCell>
+            <TableCell style={{ fontSize: "20px", color: 'olive' }}></TableCell>
+          </TableRow>
+          <TableRow>
             <TableCell style={{ fontSize: "20px", color: 'green' }}>Type</TableCell>
-            <TableCell style={{ fontSize: "20px", color: 'green' }}>Qty</TableCell>
+            <TableCell style={{ fontSize: "20px", color: 'green' }}>No. of people</TableCell>
+            <TableCell style={{ fontSize: "20px", color: 'green' }}>Unit Price per day(IDR)</TableCell>
             <TableCell style={{ fontSize: "20px", color: 'green' }}>Price (IDR)</TableCell>
           </TableRow>
         </TableHead>
@@ -165,11 +153,19 @@ const MasterTable = (props) => {
             <TableRow>
               <TableCell style={{ color: 'black' }}>{row.desc}</TableCell>
               <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
-              <TableCell style={{ color: 'blue' }}>{row.price}</TableCell>
+              <TableCell style={{ color: 'black' }}>{row.unit}</TableCell>
+              <TableCell style={{ color: 'black' }}>{row.price}</TableCell>
             </TableRow>
           ))}
           <TableRow>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell style={{ color: 'blue' }}>Accommodation total</TableCell>
+            <TableCell style={{ color: 'blue' }}>{homeRow[0].price}</TableCell>
+          </TableRow>
+          <TableRow>
             <TableCell style={{ color: 'black' }}>Meals</TableCell>
+            <TableCell style={{ color: 'black' }}></TableCell>
             <TableCell style={{ color: 'black' }}></TableCell>
             <TableCell style={{ color: 'black' }}></TableCell>
           </TableRow>
@@ -177,10 +173,12 @@ const MasterTable = (props) => {
             <TableRow style={{ color: 'black' }}>
               <TableCell style={{ color: 'black' }} align="center">{row.desc}</TableCell>
               <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
+              <TableCell style={{ color: 'black' }}>{row.unit}</TableCell>
               <TableCell style={{ color: 'black' }}>{row.price}</TableCell>
             </TableRow>
           ))}
           <TableRow>
+            <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell style={{ color: 'blue' }}>Meals total</TableCell>
             <TableCell style={{ color: 'blue' }}>{mealCost}</TableCell>
@@ -202,6 +200,7 @@ const MasterTable = (props) => {
             </TableRow> */}
           <TableRow>
             <TableCell></TableCell>
+            <TableCell></TableCell>
             <TableCell style={{ color: 'blue' }}>Total</TableCell>
             <TableCell style={{ color: 'blue' }}>{calcTotal()}</TableCell>
           </TableRow>
@@ -213,7 +212,7 @@ const MasterTable = (props) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onAmountChange: (val) => dispatch({ type: "GROSS_AMOUNT", payload: val}),
+    onAmountChange: (val) => dispatch({ type: "GROSS_AMOUNT", payload: val }),
   }
 
 }
