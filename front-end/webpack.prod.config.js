@@ -1,5 +1,6 @@
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 module.exports = {
   devtool: false,
@@ -34,17 +35,19 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: __dirname + '/src/index.html',
     }),
-    new webpack.HotModuleReplacementPlugin(),
     new webpack.NamedModulesPlugin(),
     new webpack.optimize.OccurrenceOrderPlugin(),
+    new webpack.optimize.ModuleConcatenationPlugin(),
   ],
   devServer: {
     port: 3000,
     overlay: true,
     contentBase: './dist',
     historyApiFallback: true,
-    hot: true,
     compress: true,
     public: 'bengkala.social',
-  }
+  },
+  optimization: {
+    minimizer: [new UglifyJsPlugin()],
+  },
 };

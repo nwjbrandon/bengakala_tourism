@@ -6,7 +6,7 @@ import attraction from './attraction';
 import contact from './contact';
 import faq from './faq';
 import resources from './resources';
-// import snap from './snap';
+import snap from './snap';
 import dashboard from './dashboard';
 import dashboardContact from './dashboard/contact';
 import dashboardAccommodation from './dashboard/accommodation';
@@ -28,12 +28,14 @@ import {
   dashboardNewUserValidators,
   dashboardChangePasswordValidators,
   dashboardResoucesValidators,
+  midtransValidators,
   errorHandling,
 } from '../middleware/validator';
 
 const app = express();
 
 // endpoints not necessarily to protect
+app.get('/testing', (req, res) => res.json({ data: 'v1.0' }));
 app.get('/home/info', home.info);
 app.get('/accommodation/info', accommodation.info);
 app.post('/accommodation/info', accommodation.post);
@@ -45,7 +47,10 @@ app.put('/contact/info',
   errorHandling,
   contact.put);
 app.get('/faq/info', faq.info);
-// app.post('/snap/info', snap.post);
+app.post('/snap/info',
+  midtransValidators,
+  errorHandling,
+  snap.post);
 
 // endpoints must be protected
 app.post('/admin/login',
