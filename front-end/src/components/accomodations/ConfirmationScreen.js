@@ -12,36 +12,59 @@ class ConfirmationScreen extends React.Component {
   constructor(props) {
     super(props)
 
-    this.callSnap = this.callSnap.bind(this)
-    this.handleTokenReq = this.handleTokenReq.bind(this)
-    this.getToken = this.getToken.bind(this)
+    // this.callSnap = this.callSnap.bind(this)
+    // this.handleTokenReq = this.handleTokenReq.bind(this)
+    // this.getToken = this.getToken.bind(this)
   }
 
   state = {
     date: new Date(),
   }
 
-  callSnap = () => {
-    // snap.hide();
-    snap.show(); // the snap loading screen
-    this.handleTokenReq((error, snapToken) => {
-      if (error) {
-        snap.hide();
-        console.log(error)
-      } else {
-        console.log('calling snap pay')
-        snap.pay(snapToken, {
-          onSuccess: (result) => { console.log('success'); console.log(result); alert('Payment Success') },
-          onPending: (result) => { console.log('pending'); console.log(result); alert('Payment Pending') },
-          onError: (result) => { console.log('error'); console.log(result); alert('Payment Error') },
-          onClose: () => {
-            console.log('customer closed the popup without finishing the payment');
-            alert('Please do not close the payment pop-up')
-          }
-        })
-      }
-    })
+  callSnap = async () => {
+    snap.show();
+    console.log('handling token request like a boss')
+    const snapToken = await this.getToken();
+    console.log("snaptoken", snapToken)
+    if (snapToken) {
+      console.log('calling snap pay')
+      snap.pay(snapToken, {
+        onSuccess: (result) => { console.log('success'); console.log(result); alert('Payment Success') },
+        onPending: (result) => { console.log('pending'); console.log(result); alert('Payment Pending') },
+        onError: (result) => { console.log('error'); console.log(result); alert('Payment Error') },
+        onClose: () => {
+          console.log('customer closed the popup without finishing the payment');
+          alert('Please do not close the payment pop-up')
+        }
+      })
+
+    } else {
+      snap.hide();
+      console.log(error)
+    }
   }
+
+  // callSnap = () => {
+  //   // snap.hide();
+  //   snap.show(); // the snap loading screen
+  //   this.handleTokenReq((error, snapToken) => {
+  //     if (error) {
+  //       snap.hide();
+  //       console.log(error)
+  //     } else {
+  //       console.log('calling snap pay')
+  //       snap.pay(snapToken, {
+  //         onSuccess: (result) => { console.log('success'); console.log(result); alert('Payment Success') },
+  //         onPending: (result) => { console.log('pending'); console.log(result); alert('Payment Pending') },
+  //         onError: (result) => { console.log('error'); console.log(result); alert('Payment Error') },
+  //         onClose: () => {
+  //           console.log('customer closed the popup without finishing the payment');
+  //           alert('Please do not close the payment pop-up')
+  //         }
+  //       })
+  //     }
+  //   })
+  // }
 
 
   componentDidMount() {
@@ -56,37 +79,48 @@ class ConfirmationScreen extends React.Component {
 
   /* Includes a callback to show snap loading, success, etc screens */
 
-  handleTokenReq = async (callback) => {
-    console.log('handling token request')
-    const snapToken = await this.getToken();
-    console.log("snaptoken", snapToken)
-    if (snapToken) {
-      await callback(null, snapToken)
-      console.log("Not Error")
-    } else {
-      await callback(new Error('Unable to process payment, please try again later'), null)
-      console.log("Error")
-      
-    }
-  }
+  // handleTokenReq = async (callback) => {
+  //   console.log('handling token request')
+  //   const snapToken = await this.getToken();
+  //   console.log("snaptoken", snapToken)
+  //   if (snapToken) {
+  //     await callback(null, snapToken)
+  //     console.log("Not Error")
+  //   } else {
+  //     await callback(new Error('Unable to process payment, please try again later'), null)
+  //     console.log("Error")
+
+  //   }
+  // }
 
   // get the token (or error) from the back-end
-  getToken = () => {
+  getToken = async () => {
     const { personalDetails, grossAmount } = this.props
     console.log('getting token from backend')
-    API.post('/snap/info', {
+    const res = await API.post('/snap/info', {
 
       'first_name': personalDetails.firstName,
       'last_name': personalDetails.lastName,
       'email': personalDetails.email,
       'gross_amount': grossAmount,
 
-    }).then((res) => {
-      console.log(res);
-      return res.snapToken;
-    }).catch((err) => {
-      console.log(err);
     });
+
+    console.log("Response", res)
+    if (res) {
+      return res.snapToken;
+    } else {
+      return null;
+    }
+
+
+    // .then((res) => {
+    //   console.log(res);
+    //   return res.snapToken;
+    // }).catch((err) => {
+    //   console.log(err);
+    //   return null;
+    // });
   }
 
   render() {
