@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts --max_old_space_size=1023 build",
     "test": "react-scripts test",
+    "serve": "serve -s build -l 3000",
     "eject": "react-scripts eject"
   },
   "author": "Project Bali - NUS",
