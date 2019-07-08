@@ -161,7 +161,7 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch){
     return {
-        signOut: () => dispatch(signOut()),
+
     }
 }
 

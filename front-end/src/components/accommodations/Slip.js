@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import MasterTable from './Tabular';
 import MasterTableMobile from './TabularMobile';
 import { connect } from 'react-redux'
@@ -6,21 +6,8 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles';
 import { Paper } from '@material-ui/core';
 
-
-
-/* a fake customer */
-// const personalDetails = {
-//   firstName: "John",
-//   lastName:"Doe",
-//   email: "fake@gmail.com",
-//   country: "fakeCountry",
-// };
-
-const useStyles = makeStyles(theme => {
-  label: {
-    color: "white"
-  }
-})
+const useStyles = makeStyles(() => {
+});
 
 const App = (props) => {
 
@@ -29,7 +16,7 @@ const App = (props) => {
   React.useEffect(() => {
     window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
     setWindowWidth(window.innerWidth);
-  });
+  }, []);
 
   const classes = useStyles();
 
@@ -61,7 +48,7 @@ const App = (props) => {
       </div>
     </div>
   );
-}
+};
 
 const mapStateToProps = state => {
   return {

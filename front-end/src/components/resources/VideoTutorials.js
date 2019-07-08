@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Youtube from './youtube'
 import { Button } from '@material-ui/core';
@@ -65,13 +65,6 @@ const useStyles = makeStyles(theme => ({
 
 function SimpleExpansionPanel({ data }) {
   const classes = useStyles();
-
-  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-
-  useEffect(() => {
-    window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
-    setWindowWidth(window.innerWidth);
-  });
 
   const [videoId, setVideoId] = useState(0);
 

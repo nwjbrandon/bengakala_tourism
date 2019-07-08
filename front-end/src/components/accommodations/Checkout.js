@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
-import Button from '@material-ui/core/Button';
 import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
@@ -15,8 +14,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 import blue from '@material-ui/core/colors/blue'
 import Buttons from './Buttons'
 import { connect } from 'react-redux'
-import MobileStepper from '@material-ui/core/MobileStepper';
-
 import * as actionTypes from '../../actions/accomodation';
 import CloseIcon from '@material-ui/icons/Close';
 import LinearProgress from '@material-ui/core/LinearProgress';
@@ -25,7 +22,6 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import TransportDetails from './TransportDetails'
 import IconButton from '@material-ui/core/IconButton';
 import API from '../../api';
-import { red } from '@material-ui/core/colors';
 
 const useStyles = makeStyles(theme => ({
   label: {
@@ -37,13 +33,6 @@ const useStyles = makeStyles(theme => ({
     background: "#42424240",
     marginLeft: 'auto',
     marginRight: 'auto'
-    // marginLeft: theme.spacing(2),
-    // marginRight: theme.spacing(2),
-    // [theme.breakpoints.up(600 + theme.spacing(2) * 2)]: {
-    //   width: 600,
-    //   marginLeft: 'auto',
-    //   marginRight: 'auto',
-    // },
   },
   paper: {
     marginTop: theme.spacing(3),
@@ -57,7 +46,6 @@ const useStyles = makeStyles(theme => ({
     },
   },
   stepper: {
-    // padding: theme.spacing(3, 0, 5),
     background: "#21212100",
     color: "white"
   },
@@ -80,14 +68,12 @@ const steps = ['Personal Details', 'Trip Details', 'Transportation Preferences',
 
 const Checkout = (props) => {
 
-  let dispMsg = (<Typography>____</Typography>);
-
   const toRender = [
     <PersonalDetailsForm />,
     <TripDetailsForm />,
     <TransportDetails />,
     <Slip />
-  ]
+  ];
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [openSnackBar, setSnackBar] = React.useState(false);
@@ -96,14 +82,14 @@ const Checkout = (props) => {
   useEffect(() => {
     window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
     setWindowWidth(window.innerWidth);
-  });
+  }, []);
 
   const isValidEmail = (email) => {
     return email.includes("@") && email.includes('.') && email.split('@').length > 1 && email.split('@')[1] !== "";
-  }
+  };
 
   const handleNext = () => {
-    if (activeStep == 0) {
+    if (activeStep === 0) {
       if (props.personalDetails.firstName === "" || props.personalDetails.lastName === "" || props.personalDetails.email === "" || props.personalDetails.country === "") {
         props.onError("Important Fields Are Empty!");
         setSnackBar(true);
@@ -115,8 +101,8 @@ const Checkout = (props) => {
         setSnackBar(false);
         setActiveStep(activeStep + 1);
       }
-    } else if (activeStep == 1) {
-      if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) == 0) {
+    } else if (activeStep === 1) {
+      if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) === 0) {
         props.onError("Total Guests cannot be 0");
         setSnackBar(true);
       } else if (props.tripDetails.numberMales < 0 || props.tripDetails.numberFemales < 0) {
@@ -127,7 +113,7 @@ const Checkout = (props) => {
         setSnackBar(false);
         setActiveStep(activeStep + 1);
       }
-    } else if (activeStep == 3) {
+    } else if (activeStep === 3) {
       // console.log(props.tripDetails.checkIn.toISOString())
       API.post('/booking/info', {
         data: {

@@ -161,7 +161,7 @@ SideDrawer.propTypes = {
 
 function matchDispatchToProps(dispatch){
     return {
-        signOut: () => dispatch(signOut()),
+
     }
 }
 

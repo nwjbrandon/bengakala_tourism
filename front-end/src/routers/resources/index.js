@@ -1,7 +1,5 @@
 import React from 'react';
-import API from '../../api';
-
-import Tutorial from '../../components/tutorials/VideoTutorials'
+import Tutorial from '../../components/resources/VideoTutorials'
 import Navbar from "../../components/navBar/navbar";
 
 class TutorialPage extends React.Component {

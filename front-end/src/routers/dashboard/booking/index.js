@@ -114,7 +114,7 @@ class DashboardFAQ extends Component {
 
     addRemoveDate = (date) => {
 
-        if (this.state.excludeDates.find(item => { return new Date(item).getTime() == new Date(date).getTime() })) {
+        if (this.state.excludeDates.find(item => { return new Date(item).getTime() === new Date(date).getTime() })) {
             const tempExcludeDates = this.state.excludeDates.filter(item => new Date(item).getTime() !== new Date(date).getTime());
             const tempNumberCustomers = this.state.numberCustomers.filter(item => new Date(item[0]).getTime() !== new Date(date).getTime());
             this.setState({ excludeDates: [...tempExcludeDates], numberCustomers: [...tempNumberCustomers] })

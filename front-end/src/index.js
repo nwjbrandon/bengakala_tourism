@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Route, Switch, Router } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
 import { persistStore, persistReducer } from 'redux-persist';
@@ -12,7 +12,7 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import createSagaMiddleware from "redux-saga";
 
-import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
+import { routerMiddleware, } from 'connected-react-router';
 
 // Non Protected Routes
 import Accommodation from './routers/booking';
@@ -38,7 +38,6 @@ import DashboardSettings from './routers/dashboard/settings/container';
 import './global.css'
 
 import ProtectedRoutes from './app';
-import Navbar from './components/navBar/navbar'
 import rootReducers from './reducers';
 import rootSagas from "./sagas";
 
@@ -48,7 +47,14 @@ export const history = createBrowserHistory();
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['contact', 'toast']
+  blacklist: [
+    'contact',
+    'toast',
+    'attraction',
+    'home',
+    'faq',
+    'resources',
+  ]
 };
 const sagaMiddleware = createSagaMiddleware();
 const enhancers = composeWithDevTools(

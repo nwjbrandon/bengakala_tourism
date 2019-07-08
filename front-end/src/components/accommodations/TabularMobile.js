@@ -126,7 +126,7 @@ const MasterTable = (props) => {
     const calcTotal = () => {
         const finalCost = totalCost([mealCost, homeRow[0].price]);
 
-        if (props.grossAmount != finalCost)
+        if (props.grossAmount !== finalCost)
             props.onAmountChange(finalCost)
 
         return finalCost

@@ -1,8 +1,7 @@
-import { call, put, takeLatest, select, delay } from "redux-saga/effects";
+import { call, put, takeLatest, select, } from "redux-saga/effects";
 import API from '../api';
 import {
     DASHBOARD_ACCOMMODATION_ONMOUNT_REQUEST_NAME,
-    DASHBOARD_ACCOMMODATION_ONMOUNT_REQUEST,
     DASHBOARD_ACCOMMODATION_ONMOUNT_SUCCESS,
     DASHBOARD_ACCOMMODATION_ONMOUNT_ERROR,
     DASHBOARD_ACCOMMODATION_SUBMIT_REQUEST_NAME,
@@ -42,7 +41,6 @@ function* workerSagaSubmit() {
         yield call(submit, payload);
         yield put(DASHBOARD_ACCOMMODATION_SUBMIT_SUCCESS(payload));
         yield put(TOAST_SUCCESS_SHOW('Refresh the page to see the changes'));
-        // yield put(DASHBOARD_ACCOMMODATION_ONMOUNT_REQUEST())
     } catch (error) {
         yield put(DASHBOARD_ACCOMMODATION_SUBMIT_ERROR(error));
         if (error.status === 401) {

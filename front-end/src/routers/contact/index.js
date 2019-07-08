@@ -70,9 +70,6 @@ class Contact extends React.Component {
       email,
     } = this.state;
     const id = uuid();
-    const data = {
-      uuid: id, contact, name, subject, message, email
-    };
     const { contactSubmit } = this.props;
     contactSubmit({
       uuid: id, contact, name, subject, message, email
@@ -80,7 +77,7 @@ class Contact extends React.Component {
   }
 
   render() {
-    const { classes, data, errorMsg, successMsg } = this.props;
+    const { classes, data, } = this.props;
     return (
       <React.Fragment>
         <Navbar />

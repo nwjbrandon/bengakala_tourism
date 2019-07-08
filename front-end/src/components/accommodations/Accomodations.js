@@ -1,20 +1,11 @@
 import React from 'react';
 import Checkout from './Checkout'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 import { MuiPickersUtilsProvider } from '@material-ui/pickers';
 
 // pick utils
 import MomentUtils from '@date-io/moment';
 
-class Accomodations extends React.Component {
-
-
-  constructor(props) {
-    super(props);
-
-  }
-
-
+class Accommodations extends React.Component {
   render() {
     return (
       <div style={{ textAlign: "center" }}>
@@ -29,4 +20,4 @@ class Accomodations extends React.Component {
 }
 
 
-export default (Accomodations);
+export default (Accommodations);

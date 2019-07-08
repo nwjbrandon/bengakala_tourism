@@ -1,6 +1,4 @@
-import {handleActions} from 'redux-actions';
-import _omit from 'lodash/omit';
-import _cloneDeep from 'lodash/cloneDeep';
+import { handleActions } from 'redux-actions';
 
 const initialState = {
     originalData: {

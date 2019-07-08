@@ -3,7 +3,6 @@ import React from 'react'
 export default (props) => {
   return (
     <div
-      // className="video"
       style={{
         position: "relative",
         paddingBottom: "56.25%" /* 16:9 */,
@@ -19,6 +18,7 @@ export default (props) => {
           width: "100%",
           height: "100%"
         }}
+        title={props.youtubeId}
         src={'https://www.youtube.com/embed/' + props.youtubeId}
         frameBorder="0"
       />

@@ -1,12 +1,7 @@
 import React from 'react';
 import API from '../../api';
-import AccomodationsForm from '../../components/accomodations/Accomodations';
+import AccomodationsForm from '../../components/accommodations/Accomodations';
 
-import bg from '../../components/accomodations/images/balivillage.jpg';
-
-// import { createStore } from 'redux'
-// import reducer from '../../reducers/index'
-// import { Provider } from 'react-redux'
 import Navbar from "../../components/navBar/navbar";
 
 import { connect } from 'react-redux'
