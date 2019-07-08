@@ -56,16 +56,17 @@ class ConfirmationScreen extends React.Component {
 
   /* Includes a callback to show snap loading, success, etc screens */
 
-  handleTokenReq = (callback) => {
+  handleTokenReq = async (callback) => {
     console.log('handling token request')
-    const snapToken = this.getToken();
+    const snapToken = await this.getToken();
     console.log("snaptoken", snapToken)
     if (snapToken) {
-      callback(null, snapToken)
+      await callback(null, snapToken)
       console.log("Not Error")
     } else {
-      callback(new Error('Unable to process payment, please try again later'), null)
+      await callback(new Error('Unable to process payment, please try again later'), null)
       console.log("Error")
+      
     }
   }
 
