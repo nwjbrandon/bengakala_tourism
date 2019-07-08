@@ -54,6 +54,7 @@ const persistConfig = {
     'home',
     'faq',
     'resources',
+    'booking',
   ]
 };
 const sagaMiddleware = createSagaMiddleware();
