@@ -37,10 +37,10 @@ const app = express();
 // endpoints not necessarily to protect
 app.get('/testing', (req, res) => res.json({ data: 'v1.0' }));
 app.get('/home/info', home.info);
-app.get('/accommodation/info', accommodation.info);
-app.post('/accommodation/info', accommodation.post);
+app.get('/booking/info', accommodation.info);
+app.post('/booking/info', accommodation.post);
 app.get('/resources/info', resources.info);
-app.get('/attraction/info', attraction.info);
+app.get('/bulletin/info', attraction.info);
 app.get('/contact/info', contact.info);
 app.put('/contact/info',
   contactValidators,
@@ -80,8 +80,8 @@ app.post('/admin/dashboard/booking',
   errorHandling,
   dashboardAccommodation.post);
 
-app.get('/admin/dashboard/media', checkAuthentication, dashboardAttraction.get);
-app.post('/admin/dashboard/media',
+app.get('/admin/dashboard/bulletin', checkAuthentication, dashboardAttraction.get);
+app.post('/admin/dashboard/bulletin',
   checkAuthentication,
   dashboardAttractionValidators,
   errorHandling,
