@@ -18,7 +18,7 @@ exports.up = function(db) {
   return db.addColumn('TRANSACTIONS', 'checkedIn',
       {
         type: 'boolean',
-        defaultValue: true,
+        defaultValue: false,
       });
 };
 

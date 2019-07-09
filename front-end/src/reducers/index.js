@@ -1,14 +1,13 @@
 import { combineReducers } from 'redux';
 import reduceReducers from 'reduce-reducers';
-import { contactOnMountReducer } from "./contact-onmount";
-import { contactFormReducer } from "./contact-form";
-import { attractionReducer } from "./attraction";
+import { contactReducer } from "./contact";
+import { bulletinReducer } from "./bulletin";
 import { resourcesReducer } from "./resources";
 import { dashboardOnMountReducer } from "./dashboard";
 import { adminLoginReducer } from "./admin";
 import { dashboardFaqReducer } from "./dashboardFaq";
 import { dashboardContactReducer } from "./dashboardContact";
-import { dashboardAccommodationReducer } from "./dashboardAccommodation";
+import { dashboardBookingReducer } from "./dashboardBooking";
 import { dashboardAttractionReducer } from "./dashboardAttraction";
 import { dashboardHomeReducer } from "./dashboardHome";
 import { dashboardSettingsReducer } from "./dashboardSettings";
@@ -25,13 +24,13 @@ const allReducers = (history) => combineReducers({
     dashboard: reduceReducers(dashboardOnMountReducer),
     dashboardFaq: reduceReducers(dashboardFaqReducer),
     dashboardContact: reduceReducers(dashboardContactReducer),
-    dashboardAccommodation: reduceReducers(dashboardAccommodationReducer),
+    dashboardBooking: reduceReducers(dashboardBookingReducer),
     dashboardAttraction: reduceReducers(dashboardAttractionReducer),
     dashboardHome: reduceReducers(dashboardHomeReducer),
     dashboardSettings: reduceReducers(dashboardSettingsReducer),
     dashboardResources: reduceReducers(dashboardResourcesReducer),
-    contact: reduceReducers(contactOnMountReducer, contactFormReducer),
-    attraction: reduceReducers(attractionReducer),
+    contact: reduceReducers(contactReducer),
+    bulletin: reduceReducers(bulletinReducer),
     home: reduceReducers(homeOnMountReducer),
     faq: reduceReducers(faqOnMountReducer),
     router: connectRouter(history),

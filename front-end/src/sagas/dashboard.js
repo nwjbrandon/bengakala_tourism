@@ -23,7 +23,7 @@ function onMount() {
 
 function* workerSagaOnMount() {
     try {
-        const { calendarHeatMap, transaction } = yield call(onMount);
+        const { data: { calendarHeatMap, transaction } } = yield call(onMount);
         const heatmap = _map(calendarHeatMap, (frequency, date) => [new Date(date), frequency]);
         const transactions = _map(transaction, (info, id) => _assign({
             uuid: id,
@@ -32,10 +32,18 @@ function* workerSagaOnMount() {
         yield put(DASHBOARD_ONMOUNT_SUCCESS({ heatmap, transactions }));
     } catch (error) {
         yield put(DASHBOARD_ONMOUNT_ERROR(error));
-        if (error.status === 401) {
-            yield put(ADMIN_LOGOUT_REQUEST());
-        } else {
-            yield put(TOAST_ERROR_SHOW('Oops something went wrong'));
+        const res = error.response;
+        if (res) {
+            if (res.status === 401) {
+                yield put(ADMIN_LOGOUT_REQUEST());
+            } else if (res.status === 422) {
+                yield put(TOAST_ERROR_SHOW(res.data.error.message));
+            } else {
+                yield put(TOAST_ERROR_SHOW('Oops something went wrong'));
+            }
+        }
+        if (error.message === "Network Error") {
+            yield put(TOAST_ERROR_SHOW('Server Error'));
         }
     }
 }
@@ -52,12 +60,18 @@ function* workerSagaCheckIn(payload) {
         yield put(DASHBOARD_ONMOUNT_REQUEST());
     } catch (error) {
         yield put(DASHBOARD_CHECKIN_ERROR(error));
-        if (error.status === 401) {
-            yield put(ADMIN_LOGOUT_REQUEST());
-        } else if (error.status === 422) {
-            yield put(TOAST_ERROR_SHOW(error.data.error.message));
-        } else {
-            yield put(TOAST_ERROR_SHOW('Oops something went wrong'));
+        const res = error.response;
+        if (res) {
+            if (res.status === 401) {
+                yield put(ADMIN_LOGOUT_REQUEST());
+            } else if (res.status === 422) {
+                yield put(TOAST_ERROR_SHOW(res.data.error.message));
+            } else {
+                yield put(TOAST_ERROR_SHOW('Oops something went wrong'));
+            }
+        }
+        if (error.message === "Network Error") {
+            yield put(TOAST_ERROR_SHOW('Server Error'));
         }
     }
 }
@@ -68,19 +82,24 @@ function deleteCheckIn(payload) {
 
 function* workerSagaDeleteCheckIn(payload) {
     try {
-        console.log(payload.payload)
         yield call(deleteCheckIn, payload.payload);
         yield put(DASHBOARD_DELETE_CHECKIN_SUCCESS());
         yield put(TOAST_SUCCESS_SHOW('Refresh the page to see the changes'));
         yield put(DASHBOARD_ONMOUNT_REQUEST());
     } catch (error) {
         yield put(DASHBOARD_DELETE_CHECKIN_ERROR(error));
-        if (error.status === 401) {
-            yield put(ADMIN_LOGOUT_REQUEST());
-        } else if (error.status === 422) {
-            yield put(TOAST_ERROR_SHOW(error.data.error.message));
-        } else {
-            yield put(TOAST_ERROR_SHOW('Oops something went wrong'));
+        const res = error.response;
+        if (res) {
+            if (res.status === 401) {
+                yield put(ADMIN_LOGOUT_REQUEST());
+            } else if (res.status === 422) {
+                yield put(TOAST_ERROR_SHOW(res.data.error.message));
+            } else {
+                yield put(TOAST_ERROR_SHOW('Oops something went wrong'));
+            }
+        }
+        if (error.message === "Network Error") {
+            yield put(TOAST_ERROR_SHOW('Server Error'));
         }
     }
 }

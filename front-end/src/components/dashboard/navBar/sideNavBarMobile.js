@@ -33,8 +33,8 @@ const menuOptions = [
         icon: <Store />
     },
     {
-        title: 'Media',
-        to: '/dashboard/media',
+        title: 'Bulletin',
+        to: '/dashboard/bulletin',
         icon: <Terrain />
     },
     {
@@ -161,7 +161,7 @@ SideDrawer.propTypes = {
 
 function matchDispatchToProps(dispatch){
     return {
-        signOut: () => dispatch(signOut()),
+
     }
 }
 

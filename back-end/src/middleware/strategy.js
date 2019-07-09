@@ -1,6 +1,7 @@
 import passport from 'passport';
 import passportLocal from 'passport-local';
 import bcrypt from 'bcryptjs';
+import _ from 'lodash';
 import db from '../storage/db';
 import { TABLE_ADMINISTRATOR } from '../storage/tableName';
 
@@ -14,11 +15,13 @@ passport.use(new LocalStrategy(
   },
   (async (email, password, done) => {
     const res = await db.fetchData(TABLE_ADMINISTRATOR, { email });
+    const user = _.head(res);
+    const { password: hash, createdAt, ...userInfo } = user;
     if (res.length === 0) {
       return done(null, false, { message: 'user does not exist' });
     }
     if (bcrypt.compareSync(password, res[0].password)) {
-      return done(null, { email, password });
+      return done(null, { userInfo });
     }
     return done(null, false, { message: 'incorrect password' });
   })

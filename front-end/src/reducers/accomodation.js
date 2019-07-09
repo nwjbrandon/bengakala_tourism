@@ -170,7 +170,7 @@ const reducer = (state = initialState, action) => {
     return {
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...state.tripDetails },
-      excludeDates: [...actionTypes.payload],
+      //excludeDates: [...actionTypes.payload],
       cost: { ...state.cost }
     }
   } else if (action.type === actionTypes.ERR_MSG) {

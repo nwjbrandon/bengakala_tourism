@@ -31,8 +31,8 @@ const sideNavBarBrowser = [
         icon: <Store />
     },
     {
-        title: 'Media',
-        to: '/dashboard/media',
+        title: 'Bulletin',
+        to: '/dashboard/bulletin',
         icon: <Terrain />
     },
     {
@@ -161,7 +161,7 @@ function mapStateToProps(state) {
 
 function matchDispatchToProps(dispatch){
     return {
-        signOut: () => dispatch(signOut()),
+
     }
 }
 

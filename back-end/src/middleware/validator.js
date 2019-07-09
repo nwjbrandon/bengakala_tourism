@@ -1,6 +1,7 @@
 import { check, validationResult } from 'express-validator/check';
 import _ from 'lodash';
 import bcrypt from 'bcryptjs';
+import Big from 'big.js';
 import db from '../storage/db';
 import { TABLE_ADMINISTRATOR } from '../storage/tableName';
 
@@ -21,7 +22,6 @@ export const errorHandling = [
   }
 ];
 
-
 export const midtransValidators = [
   check('email').exists().not().isEmpty()
     .normalizeEmail()
@@ -33,7 +33,13 @@ export const midtransValidators = [
     .withMessage('Last Name is Required'),
   check('gross_amount').exists().not().isEmpty()
     .isNumeric()
-    .withMessage('Gross Amount is Required'),
+    .withMessage('Gross Amount is Required')
+    .custom(value => {
+        if (Big(value).gtl(0.01)) {
+            return true;
+        }
+        throw Error('Payment cannot be less than 0.01');
+    }),
 ];
 
 export const contactValidators = [
@@ -60,7 +66,7 @@ export const adminValidators = [
     .withMessage('Password is Required'),
 ];
 
-export const dashboardAccommodationValidators = [
+export const dashboardBookingValidators = [
   check('data')
     .custom((data) => {
       if (_.isEmpty(data)) {
@@ -78,7 +84,7 @@ export const dashboardAccommodationValidators = [
     })
 ];
 
-export const dashboardAttractionValidators = [
+export const dashboardBulletinValidators = [
   check('data')
     .custom((data) => {
       if (_.isEmpty(data)) {

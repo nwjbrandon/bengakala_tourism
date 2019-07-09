@@ -24,7 +24,6 @@ const styles = theme => ({
     flexGrow: 1,
   },
   paper: {
-    backgroundColor: 'aquamarine',
     padding: theme.spacing(2),
     height: '100%',
     margin: 'auto',
@@ -38,7 +37,6 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing(1),
-    backgroundColor: 'teal',
   },
 });
 
@@ -70,9 +68,6 @@ class Contact extends React.Component {
       email,
     } = this.state;
     const id = uuid();
-    const data = {
-      uuid: id, contact, name, subject, message, email
-    };
     const { contactSubmit } = this.props;
     contactSubmit({
       uuid: id, contact, name, subject, message, email
@@ -80,7 +75,7 @@ class Contact extends React.Component {
   }
 
   render() {
-    const { classes, data, errorMsg, successMsg } = this.props;
+    const { classes, data, } = this.props;
     return (
       <React.Fragment>
         <Navbar />

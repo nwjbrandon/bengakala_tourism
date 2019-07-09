@@ -5,13 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon",
-    "prod": "cross-env NODE_ENV=development npm-run-all server",
+    "serve": "cross-env NODE_ENV=development npm-run-all server",
     "dev": "cross-env NODE_ENV=development npm-run-all server",
-    "server": "babel-node ./src/index.js",
-    "lint": "eslint \"./src/**/*.js\"",
-    "test": "mocha",
-    "coverageHtml": "nyc --reporter=html mocha",
-    "coverageText": "nyc --reporter=html mocha"
+    "server": "babel-node ./src/index.js"
   },
   "author": "",
   "license": "ISC",
@@ -23,6 +19,7 @@
     "babel-eslint": "^10.0.1",
     "base-64": "^0.1.0",
     "bcryptjs": "^2.4.3",
+    "big.js": "^5.2.2",
     "body-parser": "^1.19.0",
     "chai": "^4.2.0",
     "connect-redis": "^3.4.1",

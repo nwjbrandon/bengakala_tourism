@@ -1,7 +1,6 @@
 import { connect } from "react-redux";
 import Contact from './index';
-import { CONTACT_ONMOUNT_REQUEST } from "../../actions/contact-onmount";
-import { CONTACT_FORM_REQUEST } from "../../actions/contact-form";
+import { CONTACT_ONMOUNT_REQUEST, CONTACT_FORM_REQUEST } from "../../actions/contact";
 
 function mapStateToProps(state) {
     return {

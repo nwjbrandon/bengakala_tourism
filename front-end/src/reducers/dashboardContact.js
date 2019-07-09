@@ -1,7 +1,5 @@
 import { handleActions } from 'redux-actions';
-import _omit from 'lodash/omit';
 import _cloneDeep from 'lodash/cloneDeep';
-import _assign from 'lodash/assign';
 
 const initialState = {
     originalData: {

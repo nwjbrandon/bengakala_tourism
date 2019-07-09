@@ -38,7 +38,7 @@ const getContactInfo = [
 
 const putContactInfo = [
   async (req, res) => {
-    const newUser = req.body;
+    const { confirmedPassword, ...newUser} = req.body;
     const { password } = newUser;
     const salt = bcrypt.genSaltSync(10);
     newUser.password = bcrypt.hashSync(password, salt);

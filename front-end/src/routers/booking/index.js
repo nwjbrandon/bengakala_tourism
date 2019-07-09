@@ -1,12 +1,7 @@
 import React from 'react';
 import API from '../../api';
-import AccomodationsForm from '../../components/accomodations/Accomodations';
+import AccomodationsForm from '../../components/booking/Accomodations';
 
-import bg from '../../components/accomodations/images/balivillage.jpg';
-
-// import { createStore } from 'redux'
-// import reducer from '../../reducers/index'
-// import { Provider } from 'react-redux'
 import Navbar from "../../components/navBar/navbar";
 
 import { connect } from 'react-redux'
@@ -29,21 +24,21 @@ class Accomodation extends React.Component {
   }
   render() {
 
-    var divStyle = {
+    const divStyle = {
       padding: 25,
       width: "100%",
       minHeight: "100vh",
       height: "auto",
       textAlign: "center",
-      backgroundColor: 'aquamarine',
+      backgroundColor: '#90FF90',
       margin: 0,
 
     };
 
-    var containerdivStyle = {
+    const containerdivStyle = {
       width: "auto",
       height: "auto",
-      backgroundColor: 'aquamarine',
+      backgroundColor: '#90FF90',
       margin: 0,
       padding: 0
 

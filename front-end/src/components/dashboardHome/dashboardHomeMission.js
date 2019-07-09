@@ -76,7 +76,7 @@ class DashboardHomeMission extends Component {
     }
 
     render() {
-        const { classes, displayedData: data, entryAction, } = this.props;
+        const { classes, displayedData: data, } = this.props;
         return (
             <div>
                 {Object.keys(data).map((item) => (

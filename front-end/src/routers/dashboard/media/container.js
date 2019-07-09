@@ -6,7 +6,7 @@ import {
     DASHBOARD_ATTRACTION_RESET,
     DASHBOARD_ATTRACTION_NEW,
     DASHBOARD_ATTRACTION_SUBMIT_REQUEST,
-} from "../../../actions/dashboardAttraction";
+} from "../../../actions/dashboardBulletin";
 
 function matchDispatchToProps(dispatch){
     return {

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { Route, Switch, Router } from 'react-router-dom';
 
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware, compose } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
 
 import { persistStore, persistReducer } from 'redux-persist';
@@ -12,12 +12,12 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import createSagaMiddleware from "redux-saga";
 
-import { routerMiddleware, ConnectedRouter } from 'connected-react-router';
+import { routerMiddleware } from 'connected-react-router';
 
 // Non Protected Routes
 import Accommodation from './routers/booking';
 import Home from './routers/home';
-import Attraction from './routers/media/container';
+import Bulletin from './routers/bulletin/container';
 import Contact from './routers/contact/container';
 import Faq from './routers/faq/container';
 import Notfound from './routers/notfound';
@@ -27,7 +27,7 @@ import Resources from './routers/resources/container'
 import Admin from './routers/admin/container';
 import Dashboard from './routers/dashboard/container';
 import DashboardAccommodation from './routers/dashboard/booking/container';
-import DashboardAttraction from './routers/dashboard/media/container';
+import DashboardBulletin from './routers/dashboard/media/container';
 import DashboardContact from './routers/dashboard/contact/container';
 import DashboardFAQ from './routers/dashboard/faq/container';
 import DashboardHome from './routers/dashboard/home/container';
@@ -38,7 +38,6 @@ import DashboardSettings from './routers/dashboard/settings/container';
 import './global.css'
 
 import ProtectedRoutes from './app';
-import Navbar from './components/navBar/navbar'
 import rootReducers from './reducers';
 import rootSagas from "./sagas";
 
@@ -48,7 +47,23 @@ export const history = createBrowserHistory();
 const persistConfig = {
   key: 'root',
   storage,
-  blacklist: ['contact', 'toast']
+  blacklist: [
+    'toast',
+    'dashboard',
+    'dashboardFaq',
+    'dashboardContact',
+    'dashboardBooking',
+    'dashboardAttraction',
+    'dashboardHome',
+    'dashboardSettings',
+    'dashboardResources',
+    'contact',
+    'bulletin',
+    'home',
+    'faq',
+    'resources',
+    'booking'
+  ]
 };
 const sagaMiddleware = createSagaMiddleware();
 const enhancers = composeWithDevTools(
@@ -73,13 +88,13 @@ const routing = (
             <ProtectedRoutes exact path="/booking" component={ Accommodation } secret={false} />
             <ProtectedRoutes exact path="/resources" component={ Resources } secret={false} />
             <ProtectedRoutes exact path="/admin" component={ Admin } secret={false} />
-            <ProtectedRoutes exact path="/media" component={ Attraction } secret={false} />
+            <ProtectedRoutes exact path="/bulletin" component={ Bulletin } secret={false} />
             <ProtectedRoutes exact path="/contact" component={ Contact } secret={false} />
             <ProtectedRoutes exact path="/faq" component={ Faq } secret={false} />
 
             <ProtectedRoutes exact path="/dashboard" component={ Dashboard } secret={true} />
             <ProtectedRoutes exact path="/dashboard/booking" component={ DashboardAccommodation } secret={true} />
-            <ProtectedRoutes exact path="/dashboard/media" component={ DashboardAttraction } secret={true} />
+            <ProtectedRoutes exact path="/dashboard/bulletin" component={ DashboardBulletin } secret={true} />
             <ProtectedRoutes exact path="/dashboard/contact" component={ DashboardContact } secret={true} />
             <ProtectedRoutes exact path="/dashboard/faq" component={ DashboardFAQ } secret={true} />
             <ProtectedRoutes exact path="/dashboard/home" component={ DashboardHome } secret={true} />
