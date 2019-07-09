@@ -24,6 +24,7 @@ import IconButton from '@material-ui/core/IconButton';
 import API from '../../api';
 
 // import callSnap from './snapPayment'
+const snap = window.snap;
 
 const useStyles = makeStyles(theme => ({
   label: {
@@ -144,7 +145,7 @@ const Checkout = (props) => {
 
     } else {
       snap.hide();
-      console.log(error)
+      // console.log(error)
     }
   }
 
@@ -163,7 +164,7 @@ const Checkout = (props) => {
 
     console.log("Response", res)
     if (res) {
-      return res.snapToken;
+      return res.data.snapToken;
     } else {
       return null;
     }
@@ -195,40 +196,11 @@ const Checkout = (props) => {
         setSnackBar(false);
         setActiveStep(activeStep + 1);
       }
-<<<<<<< HEAD:front-end/src/components/accomodations/Checkout.js
     } else if (activeStep == 3) {
 
       callSnap();
 
       // setActiveStep(activeStep + 1);
-=======
-    } else if (activeStep === 3) {
-      // console.log(props.tripDetails.checkIn.toISOString())
-      API.post('/booking/info', {
-        data: {
-          "firstName": props.personalDetails.firstName,
-          "lastName": props.personalDetails.lastName,
-          "email": props.personalDetails.email,
-          "country": props.personalDetails.country,
-          "dateFrom": "2019-01-29",
-          "dateTo": "2019-01-29",
-          "males": props.tripDetails.numberMales,
-          "females": props.tripDetails.numberFemales,
-          "cars": props.tripDetails.numberCars,
-          "van": props.tripDetails.numberVans,
-          "breakfast": (props.tripDetails.breakfast ? 1 : 0),
-          "lunch": (props.tripDetails.lunch ? 1 : 0),
-          "dinner": (props.tripDetails.dinner ? 1 : 0),
-          "motorbikes": props.tripDetails.numberBikes,
-          "createdAt": "2019-01-29",
-        }
-      }).then((res) => {
-        console.log(res);
-      }).catch((err) => {
-        console.log(err)
-      });
-      setActiveStep(activeStep + 1);
->>>>>>> bce3c664c28123939d0da83c4afca2ac9cd4d497:front-end/src/components/booking/Checkout.js
     } else {
       setActiveStep(activeStep + 1);
     }

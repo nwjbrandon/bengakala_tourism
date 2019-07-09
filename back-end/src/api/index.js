@@ -49,8 +49,8 @@ app.put('/contact/info',
   contact.put);
 app.get('/faq/info', faq.info);
 app.post('/snap/info',
-  midtransValidators,
-  errorHandling,
+  // midtransValidators,
+  // errorHandling,
   snap.post);
 
 app.post('/sendEmail', emailSender.send);
