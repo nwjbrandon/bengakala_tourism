@@ -23,6 +23,9 @@ import TransportDetails from './TransportDetails'
 import IconButton from '@material-ui/core/IconButton';
 import API from '../../api';
 
+// import callSnap from './snapPayment'
+const snap = window.snap;
+
 const useStyles = makeStyles(theme => ({
   label: {
     color: blue
@@ -88,6 +91,86 @@ const Checkout = (props) => {
     return email.includes("@") && email.includes('.') && email.split('@').length > 1 && email.split('@')[1] !== "";
   };
 
+  const publishToBackend = () => {
+    API.post('/booking/info', {
+      data: {
+        "firstName": props.personalDetails.firstName,
+        "lastName": props.personalDetails.lastName,
+        "email": props.personalDetails.email,
+        "country": props.personalDetails.country,
+        "dateFrom": "2019-01-29",
+        "dateTo": "2019-01-29",
+        "males": props.tripDetails.numberMales,
+        "females": props.tripDetails.numberFemales,
+        "cars": props.tripDetails.numberCars,
+        "van": props.tripDetails.numberVans,
+        "breakfast": (props.tripDetails.breakfast ? 1 : 0),
+        "lunch": (props.tripDetails.lunch ? 1 : 0),
+        "dinner": (props.tripDetails.dinner ? 1 : 0),
+        "motorbikes": props.tripDetails.numberBikes,
+        "createdAt": "2019-01-29",
+      }
+    }).then((res) => {
+      console.log(res);
+    }).catch((err) => {
+      console.log(err)
+    });
+  }
+
+  const callSnap = async () => {
+    snap.show();
+    console.log('handling token request like a boss')
+    const snapToken = await getToken();
+    console.log("snaptoken", snapToken)
+
+
+    if (snapToken) {
+      console.log('calling snap pay')
+      snap.pay(snapToken, {
+        onSuccess: (result) => {
+          setActiveStep(activeStep + 1);
+          publishToBackend();
+          console.log('success'); console.log(result); alert('Payment Success')
+        },
+        onPending: (result) => {
+          console.log('pending'); console.log(result); alert('Payment Pending')
+        },
+        onError: (result) => { console.log('error'); console.log(result); alert('Payment Error') },
+        onClose: () => {
+
+          console.log('customer closed the popup without finishing the payment');
+          alert('Please do not close the payment pop-up')
+        },
+      })
+
+    } else {
+      snap.hide();
+      // console.log(error)
+    }
+  }
+
+
+  const getToken = async () => {
+    const { personalDetails, grossAmount } = props
+    console.log('getting token from backend')
+    const res = await API.post('/snap/info', {
+
+      'first_name': personalDetails.firstName,
+      'last_name': personalDetails.lastName,
+      'email': personalDetails.email,
+      'gross_amount': grossAmount,
+
+    });
+
+    console.log("Response", res)
+    if (res) {
+      return res.data.snapToken;
+    } else {
+      return null;
+    }
+
+  }
+
   const handleNext = () => {
     if (activeStep === 0) {
       if (props.personalDetails.firstName === "" || props.personalDetails.lastName === "" || props.personalDetails.email === "" || props.personalDetails.country === "") {
@@ -113,32 +196,11 @@ const Checkout = (props) => {
         setSnackBar(false);
         setActiveStep(activeStep + 1);
       }
-    } else if (activeStep === 3) {
-      // console.log(props.tripDetails.checkIn.toISOString())
-      API.post('/booking/info', {
-        data: {
-          "firstName": props.personalDetails.firstName,
-          "lastName": props.personalDetails.lastName,
-          "email": props.personalDetails.email,
-          "country": props.personalDetails.country,
-          "dateFrom": "2019-01-29",
-          "dateTo": "2019-01-29",
-          "males": props.tripDetails.numberMales,
-          "females": props.tripDetails.numberFemales,
-          "cars": props.tripDetails.numberCars,
-          "van": props.tripDetails.numberVans,
-          "breakfast": (props.tripDetails.breakfast ? 1 : 0),
-          "lunch": (props.tripDetails.lunch ? 1 : 0),
-          "dinner": (props.tripDetails.dinner ? 1 : 0),
-          "motorbikes": props.tripDetails.numberBikes,
-          "createdAt": "2019-01-29",
-        }
-      }).then((res) => {
-        console.log(res);
-      }).catch((err) => {
-        console.log(err)
-      });
-      setActiveStep(activeStep + 1);
+    } else if (activeStep == 3) {
+
+      callSnap();
+
+      // setActiveStep(activeStep + 1);
     } else {
       setActiveStep(activeStep + 1);
     }
@@ -197,7 +259,7 @@ const Checkout = (props) => {
 
               {activeStep === steps.length ? (
                 <React.Fragment>
-                  <ConfirmationScreen personalDetails={props.personalDetails} grossAmount={props.grossAmount} />
+                  <ConfirmationScreen personalDetails={props.personalDetails} tripDetails={props.tripDetails} grossAmount={props.grossAmount} />
                 </React.Fragment>
               ) : (
                   <React.Fragment>

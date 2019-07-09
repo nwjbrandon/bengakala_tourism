@@ -29,7 +29,7 @@ const snapTokenPost = [
         first_name,
         last_name,
         email,
-      }
+      },
     };
     const snapToken = await snap.createTransactionToken(parameter);
     res.json({
