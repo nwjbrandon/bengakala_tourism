@@ -2,18 +2,19 @@ import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
-import {validationResult} from "express-validator/check";
 
-const getAccommodationInfo = [
+const getBulletinInfo = [
   async (req, res) => {
-    const costs = await db.fetchData(TABLE_INFORMATION, { type: 'cost' });
-    const data = _.mapValues(_.groupBy(costs, 'uuid'), (value) => {
+    const attractions = await db.fetchData(TABLE_INFORMATION, { type: 'media' });
+    const data = _.mapValues(_.groupBy(attractions, 'uuid'), (value) => {
       const v = _.head(value);
       return {
+        heading: v.heading,
         title: v.title,
-        pricesString: v.pricesString,
+        text: v.text,
         type: v.type,
         edit: v.edit,
+        imgUrl: v.imgUrl,
       };
     });
     res.json({
@@ -22,20 +23,10 @@ const getAccommodationInfo = [
   },
 ];
 
-const postAccommodationInfo = [
+const postBulletinInfo = [
   async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      const message = errors.array()[0].msg;
-      return res.status(422).json({
-        error: {
-          code: 422,
-          message,
-        }
-      });
-    }
     const receivedData = req.body.data;
-    const existingUUID = await db.filterFieldList(TABLE_INFORMATION, { type: 'cost' }, 'uuid');
+    const existingUUID = await db.filterFieldList(TABLE_INFORMATION, { type: 'media' }, 'uuid');
     const {
       updateList,
       saveList,
@@ -46,7 +37,7 @@ const postAccommodationInfo = [
       saveList,
       deleteList,
     });
-    return res.json({
+    res.json({
       data: 'success'
     });
   },
@@ -54,6 +45,6 @@ const postAccommodationInfo = [
 
 
 export default {
-  get: getAccommodationInfo,
-  post: postAccommodationInfo,
+  get: getBulletinInfo,
+  post: postBulletinInfo,
 };

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
+import Typography from '@material-ui/core/Typography';
 import Youtube from './youtube'
 import { Button } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
@@ -56,9 +57,7 @@ const useStyles = makeStyles(theme => ({
     width: "auto",
     height: "auto",
     textAlign: "center",
-    fontSize: "100%",
     fontStyle: "bold",
-    // padding: "10px",
   }
 }));
 
@@ -72,19 +71,10 @@ function SimpleExpansionPanel({ data }) {
     color: "white",
     textAlign: "centre",
     marginBottom: "2%",
-    fontSize: "100%",
     background: "#00000099",
     borderRadius: "5px",
     padding: "5px",
     height: "auto"
-  };
-
-  const h1titletag = {
-    textAlign: "center",
-    marginBottom: "2%",
-    fontSize: "100%",
-    color: "white",
-    textShadow: "0 1px 2px rgba(black,.15)",
   };
 
   const videoTitleList = data.map((item, index) => {
@@ -100,8 +90,8 @@ function SimpleExpansionPanel({ data }) {
             ? <div />
             :
             <div>
-              <div style={title}><h1 style={h1titletag}>Browse through our video series to learn our very own Sign Language : The Kata Kolok!!</h1></div>
-              <div className={classes.videoDescription}>{data[videoId].videoDescription}</div>
+              <Typography variant="h4" style={title}>Learn more about our very own culture, history, and sign language : The Kata Kolok!!</Typography>
+              <Typography variant="h5" className={classes.videoDescription}>{data[videoId].videoDescription}</Typography>
               <div className={classes.container}>
                 <Grid style={{ height: "100%" }} container spacing={0}>
                   <Grid item xs={12} sm={12} md={9}>

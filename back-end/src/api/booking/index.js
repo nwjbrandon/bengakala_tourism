@@ -3,7 +3,7 @@ import uuidv1 from 'uuid/v1';
 import db from '../../storage/db';
 import { TABLE_INFORMATION, TABLE_TRANSACTIONS } from '../../storage/tableName';
 
-const accommodationInfo = [
+const bookingInfo = [
   async (req, res) => {
     const services = await db.fetchData(TABLE_INFORMATION, { type: 'cost' });
     const cost = _.map(services, service => ({ [service.title]: service.pricesString }));
@@ -16,7 +16,7 @@ const accommodationInfo = [
   },
 ];
 
-const accommodationPost = [
+const bookingPost = [
   async (req, res) => {
     const paymentData = req.body.data;
     const uuid = uuidv1();
@@ -31,6 +31,6 @@ const accommodationPost = [
   }
 ];
 export default {
-  info: accommodationInfo,
-  post: accommodationPost
+  info: bookingInfo,
+  post: bookingPost
 };
