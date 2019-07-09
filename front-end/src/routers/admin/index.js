@@ -6,7 +6,6 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import { NavLink } from "react-router-dom";
 import { Link } from 'react-router-dom'
 import Navbar from "../../components/navBar/navbar";
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
@@ -98,11 +97,6 @@ class Admin extends React.Component {
                     value={this.state.password}
                     onChange={e => this.setState({password: e.target.value})}
                 />
-                <Grid container justify="flex-end">
-                  <Typography variant="body2">
-                    <NavLink to="/forgot-password">Forgot Password?</NavLink>
-                  </Typography>
-                </Grid>
                 <Grid container justify="center" style={{ paddingTop: 20 }}>
                   <Button
                       variant="contained"

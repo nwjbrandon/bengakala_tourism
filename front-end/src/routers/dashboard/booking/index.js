@@ -9,7 +9,7 @@ import API from '../../../api'
 import Chart from "react-google-charts";
 
 import NavBar from '../../../components/dashboard/navBar';
-import DashboardAccommodationEntries from '../../../components/dashboardBooking/dashboardBookingEntries.container'
+import DashboardBookingEntries from '../../../components/dashboardBooking/dashboardBookingEntries.container'
 import SuccessToast from "../../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../../components/snackBar/errorSnackBar.container";
 import { Typography } from '@material-ui/core';
@@ -35,7 +35,7 @@ const styles = theme => ({
     }
 });
 
-class DashboardFAQ extends Component {
+class DashboardBooking extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -141,7 +141,7 @@ class DashboardFAQ extends Component {
                     <Typography variant='h4'>
                         Select Individual Cost
                 </Typography>
-                    <DashboardAccommodationEntries />
+                    <DashboardBookingEntries />
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">
                         <Button variant="contained" onClick={this.reset} className={classes.button}>
                             Reset
@@ -168,8 +168,8 @@ class DashboardFAQ extends Component {
     }
 }
 
-DashboardFAQ.propTypes = {
+DashboardBooking.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(DashboardFAQ);
+export default withStyles(styles)(DashboardBooking);

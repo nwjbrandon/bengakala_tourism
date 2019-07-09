@@ -24,7 +24,6 @@ const styles = theme => ({
     flexGrow: 1,
   },
   paper: {
-    backgroundColor: 'aquamarine',
     padding: theme.spacing(2),
     height: '100%',
     margin: 'auto',
@@ -38,7 +37,6 @@ const styles = theme => ({
   },
   button: {
     margin: theme.spacing(1),
-    backgroundColor: 'teal',
   },
 });
 

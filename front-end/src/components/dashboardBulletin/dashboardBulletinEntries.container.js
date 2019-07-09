@@ -1,8 +1,8 @@
 import { connect } from "react-redux";
-import DashboardAttractionEntries from './dashboardAttractionEntries';
+import DashboardAttractionEntries from './dashboardBulletinEntries';
 import {
     DASHBOARD_ATTRACTION_WATCH,
-} from "../../actions/dashboardAttraction";
+} from "../../actions/dashboardBulletin";
 
 function mapStateToProps(state) {
     return {

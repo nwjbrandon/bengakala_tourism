@@ -9,7 +9,7 @@ import {
 import { TOAST_ERROR_SHOW } from "../actions/toast";
 
 function onMount() {
-    return API.get('/attraction/info');
+    return API.get('/bulletin/info');
 }
 
 function* workerSaga() {

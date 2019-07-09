@@ -31,8 +31,8 @@ const sideNavBarBrowser = [
         icon: <Store />
     },
     {
-        title: 'Media',
-        to: '/dashboard/media',
+        title: 'Bulletin',
+        to: '/dashboard/bulletin',
         icon: <Terrain />
     },
     {

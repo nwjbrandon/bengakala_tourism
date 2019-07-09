@@ -87,7 +87,6 @@ const Modal = ({
 
 Modal.propTypes = {
   onCloseModal: PropTypes.func.isRequired,
-  openModal: PropTypes.bool.isRequired,
 };
 
 export default Modal;

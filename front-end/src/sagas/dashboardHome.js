@@ -23,7 +23,7 @@ function submit(payload) {
 
 function* workerSagaOnMount() {
     try {
-        const data = yield call(onMount);
+        const { data } = yield call(onMount);
         yield put(DASHBOARD_HOME_ONMOUNT_SUCCESS(data));
     } catch (error) {
         yield put(DASHBOARD_HOME_ONMOUNT_ERROR(error));

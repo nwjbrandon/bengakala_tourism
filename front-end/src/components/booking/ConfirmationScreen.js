@@ -53,9 +53,10 @@ class ConfirmationScreen extends React.Component {
       'gross_amount': grossAmount,
 
     });
-    if (res) {
-      console.log(res);
-      return res.snapToken;
+    const { snapToken } = res.data;
+    if (snapToken) {
+      console.log(snapToken);
+      return snapToken;
     } else {
       return null;
     }
