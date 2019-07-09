@@ -155,7 +155,7 @@ class DashboardFAQ extends Component {
         const { classes } = this.props;
         const {
             openDelete, confirmedPassword, password, username,
-            openNew, newUsername, newPassword, newConfirmedPassword, newJobTitle, newPhone, newEmail,
+            openNew, newUsername, newPassword, newConfirmedPassword, newJobTitle, newPhone,
         } = this.state;
         const title = 'Settings';
         return (

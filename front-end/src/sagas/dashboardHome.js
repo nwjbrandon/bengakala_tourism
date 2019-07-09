@@ -2,7 +2,6 @@ import { call, put, takeLatest, select } from "redux-saga/effects";
 import API from '../api';
 import {
     DASHBOARD_HOME_ONMOUNT_REQUEST_NAME,
-    DASHBOARD_HOME_ONMOUNT_REQUEST,
     DASHBOARD_HOME_ONMOUNT_SUCCESS,
     DASHBOARD_HOME_ONMOUNT_ERROR,
     DASHBOARD_HOME_SUBMIT_REQUEST_NAME,
@@ -24,7 +23,7 @@ function submit(payload) {
 
 function* workerSagaOnMount() {
     try {
-        const data = yield call(onMount);
+        const { data } = yield call(onMount);
         yield put(DASHBOARD_HOME_ONMOUNT_SUCCESS(data));
     } catch (error) {
         yield put(DASHBOARD_HOME_ONMOUNT_ERROR(error));
@@ -42,7 +41,6 @@ function* workerSagaSubmit() {
         yield call(submit, payload);
         yield put(DASHBOARD_HOME_SUBMIT_SUCCESS(payload));
         yield put(TOAST_SUCCESS_SHOW('Refresh the page to see the changes'));
-        // yield put(DASHBOARD_FAQ_ONMOUNT_REQUEST()) update causes server to crash
     } catch (error) {
         yield put(DASHBOARD_HOME_SUBMIT_ERROR(error));
         if (error.status === 401) {

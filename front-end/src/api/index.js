@@ -7,10 +7,10 @@ const getRequest = (url, data) => {
   return new Promise((resolve, reject) => {
     axios.get(httpUrl + url, { params: data || {}, withCredentials: true })
       .then(response => {
-        resolve(response.data.data);
+        resolve(response.data);
       })
       .catch(error => {
-        reject(error.response.data);
+        reject(error);
       })
   })
 };
@@ -19,10 +19,10 @@ const delRequest = (url, data) => {
   return new Promise((resolve, reject) => {
     axios.delete(httpUrl + url, { data })
       .then(response => {
-        resolve(response.data.data);
+        resolve(response.data);
       })
       .catch(error => {
-        reject(error.response.data);
+        reject(error);
       })
   })
 };
@@ -31,10 +31,10 @@ const putRequest = (url, data) => {
   return new Promise((resolve, reject) => {
     axios.put(httpUrl + url, data, { withCredentials: true })
       .then(response => {
-        resolve(response.data.data);
+        resolve(response.data);
       })
       .catch(error => {
-        reject(error.response);
+        reject(error);
       })
   })
 };
@@ -43,11 +43,11 @@ const postRequest = (url, data) => {
   return new Promise((resolve, reject) => {
     axios.post(httpUrl + url, data, { withCredentials: true })
       .then(response => {
-        resolve(response.data.data);
+        resolve(response.data);
         console.log(response)
       })
       .catch(error => {
-        reject(error.response);
+        reject(error);
       })
   })
 };

@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const sections =['media',  'booking', 'resources' ,'contact', 'faq'];
+const sections =['bulletin',  'booking', 'resources' ,'contact', 'faq'];
 const navlinks = sections.map( section => {
     return(
       <Button key={section} color="inherit" component={Link} to={section}>{ section }</Button>
@@ -46,7 +46,7 @@ export default function ButtonAppBar() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: 'green' }}>
+      <AppBar position="static" style={{ backgroundColor: 'brown' }}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Button color="inherit" component={Link} to="/" >Bengkala</Button>

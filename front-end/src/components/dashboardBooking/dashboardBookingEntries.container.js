@@ -1,19 +1,19 @@
 import { connect } from "react-redux";
-import DashboardAccommodation from './dashboardBookingEntries';
+import DashboardBooking from './dashboardBookingEntries';
 import {
-    DASHBOARD_ACCOMMODATION_WATCH,
-} from "../../actions/dashboardAccommodation";
+    DASHBOARD_BOOKING_WATCH,
+} from "../../actions/dashboardBooking";
 
 function mapStateToProps(state) {
     return {
-        displayedData: state.dashboardAccommodation.displayedData,
+        displayedData: state.dashboardBooking.displayedData,
     };
 }
 
 function matchDispatchToProps(dispatch){
     return {
-        watch: (payload) => dispatch(DASHBOARD_ACCOMMODATION_WATCH(payload)),
+        watch: (payload) => dispatch(DASHBOARD_BOOKING_WATCH(payload)),
     }
 }
 
-export default connect(mapStateToProps, matchDispatchToProps)(DashboardAccommodation);
+export default connect(mapStateToProps, matchDispatchToProps)(DashboardBooking);

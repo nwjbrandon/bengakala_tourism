@@ -9,7 +9,7 @@ import Grid from '@material-ui/core/Grid';
 import uuidv1 from 'uuid/v1';
 
 import NavBar from '../../../components/dashboard/navBar';
-import DashBoardAttractionEntries from "../../../components/dashboardAttraction/dashboardAttractionEntries.container";
+import DashBoardAttractionEntries from "../../../components/dashboardBulletin/dashboardBulletinEntries.container";
 import SuccessToast from "../../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../../components/snackBar/errorSnackBar.container";
 

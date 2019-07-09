@@ -5,13 +5,14 @@ import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import { withStyles } from '@material-ui/core/styles';
 import Navbar from "../../components/navBar/navbar";
+import SuccessToast from "../../components/snackBar/successSnackBar.container";
+import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
   },
   paper: {
-    backgroundColor: 'aquamarine',
     padding: theme.spacing(2),
     height: 800,
     margin: 'auto',
@@ -56,8 +57,8 @@ class Faq extends React.Component {
                     </Typography>
                   </Grid>
                   {
-                    Object.keys(data).map(FAQ_TYPE => (
-                        <div>
+                    Object.keys(data).map((FAQ_TYPE, index) => (
+                        <div key={index}>
                           <Grid container alignContent='center'>
                             <Typography
                                 component="span"
@@ -69,8 +70,8 @@ class Faq extends React.Component {
                             </Typography>
                           </Grid>
                           {
-                            data[FAQ_TYPE].map(datum => (
-                                <div style={{ padding: 10 }}>
+                            data[FAQ_TYPE].map((datum, index) => (
+                                <div key={index} style={{ padding: 10 }}>
                                   <div>
                                     <Typography
                                         component="span"
@@ -102,6 +103,8 @@ class Faq extends React.Component {
               </Grid>
             </Grid>
         </div>
+        <SuccessToast />
+        <ErrorToast />
       </React.Fragment>
     )
   }

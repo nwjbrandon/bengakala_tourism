@@ -1,17 +1,17 @@
 import { connect } from "react-redux";
-import DashboardAccommodation from './index';
+import DashboardBooking from './index';
 import {
-    DASHBOARD_ACCOMMODATION_ONMOUNT_REQUEST,
-    DASHBOARD_ACCOMMODATION_RESET,
-    DASHBOARD_ACCOMMODATION_SUBMIT_REQUEST,
-} from "../../../actions/dashboardAccommodation";
+    DASHBOARD_BOOKING_ONMOUNT_REQUEST,
+    DASHBOARD_BOOKING_RESET,
+    DASHBOARD_BOOKING_SUBMIT_REQUEST,
+} from "../../../actions/dashboardBooking";
 
 function matchDispatchToProps(dispatch){
     return {
-        onMount: () => dispatch(DASHBOARD_ACCOMMODATION_ONMOUNT_REQUEST()),
-        resetEntries: () => dispatch(DASHBOARD_ACCOMMODATION_RESET()),
-        submit: () => dispatch(DASHBOARD_ACCOMMODATION_SUBMIT_REQUEST()),
+        onMount: () => dispatch(DASHBOARD_BOOKING_ONMOUNT_REQUEST()),
+        resetEntries: () => dispatch(DASHBOARD_BOOKING_RESET()),
+        submit: () => dispatch(DASHBOARD_BOOKING_SUBMIT_REQUEST()),
     }
 }
 
-export default connect(null, matchDispatchToProps)(DashboardAccommodation);
+export default connect(null, matchDispatchToProps)(DashboardBooking);

@@ -8,7 +8,7 @@ import {
 } from "../actions/toast";
 
 function* workerSagaSuccessWatcher() {
-    yield delay(5000);
+    yield delay(3000);
     yield put(TOAST_SUCCESS_CLEAR());
 }
 
@@ -17,7 +17,7 @@ function* workerSagaSuccessToast() {
 }
 
 function* workerSagaErrorWatcher() {
-    yield delay(5000);
+    yield delay(3000);
     yield put(TOAST_ERROR_CLEAR());
 }
 

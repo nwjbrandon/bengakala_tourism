@@ -31,10 +31,6 @@ const styles = theme => ({
 });
 
 class DashboardSettingsEditableUser extends Component {
-    constructor(props) {
-        super(props);
-    }
-
     render() {
         const { classes, displayedData: data, entryAction, } = this.props;
         return (
