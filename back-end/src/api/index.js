@@ -7,6 +7,7 @@ import contact from './contact';
 import faq from './faq';
 import resources from './resources';
 import snap from './snap';
+import emailSender from './emailSender/emailSender';
 import dashboard from './dashboard';
 import dashboardContact from './dashboard/contact';
 import dashboardAccommodation from './dashboard/accommodation';
@@ -51,6 +52,8 @@ app.post('/snap/info',
   midtransValidators,
   errorHandling,
   snap.post);
+
+app.post('/sendEmail', emailSender.send);
 
 // endpoints must be protected
 app.post('/admin/login',
