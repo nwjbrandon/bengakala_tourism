@@ -7,6 +7,7 @@ import {
     DASHBOARD_FAQ_SUBMIT_REQUEST_NAME,
     DASHBOARD_FAQ_SUBMIT_SUCCESS,
     DASHBOARD_FAQ_SUBMIT_ERROR,
+    DASHBOARD_FAQ_ONMOUNT_REQUEST
 } from "../actions/dashboardFaq";
 import { TOAST_ERROR_SHOW, TOAST_SUCCESS_SHOW } from "../actions/toast";
 import { ADMIN_LOGOUT_REQUEST } from "../actions/admin";
@@ -49,6 +50,7 @@ function* workerSagaSubmit() {
         yield call(submit, payload);
         yield put(DASHBOARD_FAQ_SUBMIT_SUCCESS(payload));
         yield put(TOAST_SUCCESS_SHOW('Refresh the page to see the changes'));
+        yield put(DASHBOARD_FAQ_ONMOUNT_REQUEST())
     } catch (error) {
         yield put(DASHBOARD_FAQ_SUBMIT_ERROR(error));
         const res = error.response;

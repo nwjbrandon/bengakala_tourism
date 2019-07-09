@@ -2,9 +2,10 @@ import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
+import {wrapAsync} from "../../middleware/errorHandling";
 
 const getContactInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const contacts = await db.fetchData(TABLE_INFORMATION, { type: 'contact' });
     const contact = _.mapValues(_.groupBy(contacts, 'uuid'), (value) => {
       const v = _.head(value);
@@ -35,11 +36,11 @@ const getContactInfo = [
         customer,
       }
     });
-  },
+  }),
 ];
 
 const postContactInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const receivedData = req.body.data;
     const existingUUID = await db.filterFieldList(TABLE_INFORMATION, { type: 'contact' }, 'uuid');
     const {
@@ -55,17 +56,17 @@ const postContactInfo = [
     res.json({
       data: 'success'
     });
-  },
+  }),
 ];
 
 const deleteContactInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const uuid = req.body.data;
     await db.deleteData(TABLE_INFORMATION, { uuid });
     res.json({
       data: 'success',
     });
-  },
+  }),
 ];
 
 export default {

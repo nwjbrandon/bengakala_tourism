@@ -2,9 +2,10 @@ import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
+import {wrapAsync} from "../../middleware/errorHandling";
 
 const getBulletinInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const attractions = await db.fetchData(TABLE_INFORMATION, { type: 'media' });
     const data = _.mapValues(_.groupBy(attractions, 'uuid'), (value) => {
       const v = _.head(value);
@@ -20,11 +21,11 @@ const getBulletinInfo = [
     res.json({
       data,
     });
-  },
+  }),
 ];
 
 const postBulletinInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const receivedData = req.body.data;
     const existingUUID = await db.filterFieldList(TABLE_INFORMATION, { type: 'media' }, 'uuid');
     const {
@@ -40,7 +41,7 @@ const postBulletinInfo = [
     res.json({
       data: 'success'
     });
-  },
+  }),
 ];
 
 

@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
+import {wrapAsync} from "../../middleware/errorHandling";
 
 const resourcesInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const attractions = await db.fetchData(TABLE_INFORMATION, { type: 'video' });
     const data = _.map(attractions, attraction => ({
       title: attraction.title,
@@ -13,7 +14,7 @@ const resourcesInfo = [
     res.json({
       data
     });
-  },
+  }),
 ];
 
 export default {

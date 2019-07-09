@@ -31,7 +31,7 @@ import {
   midtransValidators,
   errorHandling,
 } from '../middleware/validator';
-
+import { errorHandler } from '../middleware/errorHandling';
 const app = express();
 
 // endpoints not necessarily to protect
@@ -122,4 +122,5 @@ app.post('/admin/dashboard/settings',
   errorHandling,
   dashboardSettings.post);
 
+app.use(errorHandler);
 export default app;

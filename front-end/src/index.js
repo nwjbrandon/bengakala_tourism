@@ -27,7 +27,7 @@ import Resources from './routers/resources/container'
 import Admin from './routers/admin/container';
 import Dashboard from './routers/dashboard/container';
 import DashboardAccommodation from './routers/dashboard/booking/container';
-import DashboardBulletin from './routers/dashboard/media/container';
+import DashboardBulletin from './routers/dashboard/bulletin/container';
 import DashboardContact from './routers/dashboard/contact/container';
 import DashboardFAQ from './routers/dashboard/faq/container';
 import DashboardHome from './routers/dashboard/home/container';
@@ -53,7 +53,7 @@ const persistConfig = {
     'dashboardFaq',
     'dashboardContact',
     'dashboardBooking',
-    'dashboardAttraction',
+    'dashboardBulletin',
     'dashboardHome',
     'dashboardSettings',
     'dashboardResources',

@@ -2,9 +2,10 @@ import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
+import {wrapAsync} from "../../middleware/errorHandling";
 
 const getContactInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const homes = await db.fetchData(TABLE_INFORMATION, { type: 'home' });
     const stories = _.mapValues(_.groupBy(homes, 'uuid'), (value) => {
       const v = _.head(value);
@@ -31,11 +32,11 @@ const getContactInfo = [
         objective
       }
     });
-  },
+  }),
 ];
 
 const postHomeInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const { stories: receivedData, objective } = req.body.data;
     const existingUUID = await db.filterFieldList(TABLE_INFORMATION, { type: 'home' }, 'uuid');
     const {
@@ -56,7 +57,7 @@ const postHomeInfo = [
     res.json({
       data: 'success'
     });
-  },
+  }),
 ];
 
 

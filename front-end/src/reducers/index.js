@@ -8,7 +8,7 @@ import { adminLoginReducer } from "./admin";
 import { dashboardFaqReducer } from "./dashboardFaq";
 import { dashboardContactReducer } from "./dashboardContact";
 import { dashboardBookingReducer } from "./dashboardBooking";
-import { dashboardAttractionReducer } from "./dashboardAttraction";
+import { dashboardBulletinReducer } from "./dashboardBulletin";
 import { dashboardHomeReducer } from "./dashboardHome";
 import { dashboardSettingsReducer } from "./dashboardSettings";
 import { homeOnMountReducer } from "./home";
@@ -25,7 +25,7 @@ const allReducers = (history) => combineReducers({
     dashboardFaq: reduceReducers(dashboardFaqReducer),
     dashboardContact: reduceReducers(dashboardContactReducer),
     dashboardBooking: reduceReducers(dashboardBookingReducer),
-    dashboardAttraction: reduceReducers(dashboardAttractionReducer),
+    dashboardBulletin: reduceReducers(dashboardBulletinReducer),
     dashboardHome: reduceReducers(dashboardHomeReducer),
     dashboardSettings: reduceReducers(dashboardSettingsReducer),
     dashboardResources: reduceReducers(dashboardResourcesReducer),
