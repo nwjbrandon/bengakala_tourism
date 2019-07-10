@@ -2,10 +2,10 @@ import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
-import {validationResult} from "express-validator/check";
+import { wrapAsync } from "../../middleware/errorHandling";
 
 const getBookingInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const costs = await db.fetchData(TABLE_INFORMATION, { type: 'cost' });
     const data = _.mapValues(_.groupBy(costs, 'uuid'), (value) => {
       const v = _.head(value);
@@ -19,28 +19,18 @@ const getBookingInfo = [
     res.json({
       data,
     });
-  },
+  }),
 ];
 
 const postBookingInfo = [
-  async (req, res) => {
-    const errors = validationResult(req);
-    if (!errors.isEmpty()) {
-      const message = errors.array()[0].msg;
-      return res.status(422).json({
-        error: {
-          code: 422,
-          message,
-        }
-      });
-    }
+  wrapAsync(async (req, res) => {
     const receivedData = req.body.data;
-    const existingUUID = await db.filterFieldList(TABLE_INFORMATION, { type: 'cost' }, 'uuid');
+    const existingUUID = await db.filterFieldList(TABLE_INFORMATION, {type: 'cost'}, 'uuid');
     const {
       updateList,
       saveList,
       deleteList
-    } = processedDataToChangeInDB({ receivedData, existingUUID });
+    } = processedDataToChangeInDB({receivedData, existingUUID});
     await db.changeListData(TABLE_INFORMATION, {
       updateList,
       saveList,
@@ -49,7 +39,7 @@ const postBookingInfo = [
     return res.json({
       data: 'success'
     });
-  },
+  })
 ];
 
 

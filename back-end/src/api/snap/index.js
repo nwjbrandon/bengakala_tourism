@@ -1,9 +1,10 @@
 import midtransClient from 'midtrans-client';
 import uuid from 'uuid/v1';
 import { serverKey, clientKey } from '../../secret/midtransSecret';
+import {wrapAsync} from "../../middleware/errorHandling";
 
 const snapTokenPost = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const {
       // eslint-disable-next-line camelcase
       first_name, last_name, email, gross_amount
@@ -28,7 +29,7 @@ const snapTokenPost = [
         first_name,
         last_name,
         email,
-      }
+      },
     };
     const snapToken = await snap.createTransactionToken(parameter);
     res.json({
@@ -37,7 +38,7 @@ const snapTokenPost = [
         order_id
       },
     });
-  }
+  })
 ];
 
 export default {

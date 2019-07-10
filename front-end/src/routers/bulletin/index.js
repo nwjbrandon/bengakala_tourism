@@ -14,6 +14,7 @@ import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 import _div from 'lodash/divide';
 import _floor from 'lodash/floor';
+import dateFnsFormat from 'date-fns/format';
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 
@@ -96,10 +97,13 @@ class Attraction extends React.Component {
                         title={item.title}
                     />
                     <CardContent>
+                      <Typography gutterBottom variant="body2" component="h2">
+                        { dateFnsFormat(item.createdAt, 'YYYY/MM/DD HH:mm') }
+                      </Typography>
                       <Typography gutterBottom variant="h5" component="h2">
                         { item.title }
                       </Typography>
-                      <Typography variant="body2" color="textSecondary" component="p">
+                      <Typography variant="body1" color="textSecondary" component="p">
                         { item.summary }
                       </Typography>
                     </CardContent>

@@ -7,6 +7,7 @@ import contact from './contact';
 import faq from './faq';
 import resources from './resources';
 import snap from './snap';
+import emailSender from './emailSender/emailSender';
 import dashboard from './dashboard';
 import dashboardContact from './dashboard/contact';
 import dashboardBooking from './dashboard/booking';
@@ -31,7 +32,7 @@ import {
   midtransValidators,
   errorHandling,
 } from '../middleware/validator';
-
+import { errorHandler } from '../middleware/errorHandling';
 const app = express();
 
 // endpoints not necessarily to protect
@@ -48,9 +49,11 @@ app.put('/contact/info',
   contact.put);
 app.get('/faq/info', faq.info);
 app.post('/snap/info',
-  midtransValidators,
-  errorHandling,
+  // midtransValidators,
+  // errorHandling,
   snap.post);
+
+app.post('/sendEmail', emailSender.send);
 
 // endpoints must be protected
 app.post('/admin/login',
@@ -122,4 +125,5 @@ app.post('/admin/dashboard/settings',
   errorHandling,
   dashboardSettings.post);
 
+app.use(errorHandler);
 export default app;

@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
+import {wrapAsync} from "../../middleware/errorHandling";
 
 const faqInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const faqs = await db.fetchData(TABLE_INFORMATION, { type: 'faq' });
     const ungroupedFaqs = _.map(faqs, faq => (
       {
@@ -15,7 +16,7 @@ const faqInfo = [
     res.json({
       data: groupedFaqs,
     });
-  },
+  }),
 ];
 
 export default {

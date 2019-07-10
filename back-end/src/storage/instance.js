@@ -60,16 +60,16 @@ class DataBase {
 
   // update list of utils
   async changeListData(TABLE, { updateList = [], saveList = [], deleteList = [] }) {
-    return this.conn.beginTransaction()
-      .then(() => Promise.all([
+    return await this.conn.beginTransaction()
+      .then(async () => await Promise.all([
         _.map(deleteList, deleteItem => this.deleteData(TABLE, deleteItem)),
         _.map(updateList, updateItem => this.updateData(TABLE, updateItem.data, updateItem.params)),
         _.map(saveList, saveItem => this.saveData(TABLE, saveItem)),
       ]))
-      .then(() => {
-        this.conn.commit();
+      .then(async () => {
+        await this.conn.commit();
       })
-      .catch(err => this.conn.rollback(() => {
+      .catch(async (err) => await this.conn.rollback(() => {
         throw err;
       }));
   }

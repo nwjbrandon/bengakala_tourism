@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts --max_old_space_size=1023 build",
+    "build": "react-scripts --max_old_space_size=512 build",
     "test": "react-scripts test",
     "serve": "serve -s build -l 3000",
     "eject": "react-scripts eject"
@@ -23,6 +23,7 @@
     "history": "^4.9.0",
     "lodash": "^4.17.11",
     "moment": "^2.24.0",
+    "nodemailer": "^6.2.1",
     "react": "^16.8.6",
     "react-calendar": "^2.19.0",
     "react-calendar-heatmap": "^1.8.0",
