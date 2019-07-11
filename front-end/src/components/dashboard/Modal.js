@@ -30,6 +30,7 @@ const Modal = ({
                    onCloseModal,
                    confirmedCheckIn,
                    deleteCheckIn,
+                   cash,
                    openModal = false,
                }) => (
   <Dialog
@@ -66,6 +67,9 @@ const Modal = ({
               </Typography>
               <Typography variant="body1" color="textSecondary" component="p">
                   Cars: {cars} Vans: {van} Motorbikes: {motorbikes}
+              </Typography>
+              <Typography variant="body1" color="textSecondary" component="p">
+                  Payment Mode: {cash === 1? "Paid through Midtrans": "Pay by Cash"}
               </Typography>
           </CardContent>
           <CardActions>

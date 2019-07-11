@@ -24,7 +24,8 @@ const dashboardGet = [
         cars: v.cars,
         van: v.van,
         motorbikes: v.motorbikes,
-        checkedIn: v.checkedIn
+        checkedIn: v.checkedIn,
+        cash: v.cash
       };
     });
     const listOfDates = _.flatten(_.map(transactions, t => eachDay(t.dateFrom, t.dateTo)));

@@ -63,6 +63,7 @@ class Dashboard extends Component {
       motorbikes: '0',
       checkedIn: 0,
       uuid: '',
+      cash: 0,
     };
     this.confirmedCheckIn = this.confirmedCheckIn.bind(this);
     this.deleteCheckIn = this.deleteCheckIn.bind(this);
@@ -107,6 +108,7 @@ class Dashboard extends Component {
                        van,
                        motorbikes,
                        checkedIn,
+                       cash,
                        uuid,
   }) => {
     this.setState({
@@ -127,6 +129,7 @@ class Dashboard extends Component {
       motorbikes,
       checkedIn,
       uuid,
+      cash,
     });
   };
 
