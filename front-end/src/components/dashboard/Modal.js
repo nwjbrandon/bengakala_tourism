@@ -8,12 +8,12 @@ import {
   CardActions,
   Typography
 } from "@material-ui/core";
+import dateFnsFormat from "date-fns/format";
 
 const Modal = ({
                    firstName,
                    lastName,
                    email,
-                   phone,
                    country,
                    dateFrom,
                    dateTo,
@@ -39,30 +39,32 @@ const Modal = ({
     aria-describedby="alert-dialog-description"
     scroll="paper"
   >
-      Customer Order
       <Card>
           <CardContent>
               <Typography gutterBottom variant="h5" component="h2">
                   Customer Name: {lastName}, {firstName}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography variant="body1" color="textSecondary" component="p">
                   FirstName: {firstName} LastName: {lastName}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                  Email: {email} Phone: {phone} Country: {country}
+              <Typography variant="body1" color="textSecondary" component="p">
+                  Email: {email}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
-                  Date From: {dateFrom} Date To: {dateTo}
+              <Typography variant="body1" color="textSecondary" component="p">
+                  Country: {country}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography variant="body1" color="textSecondary" component="p">
+                  Date From: { dateFnsFormat(dateFrom, 'YYYY/MM/DD') } Date To: { dateFnsFormat(dateTo, 'YYYY/MM/DD') }
+              </Typography>
+              <Typography variant="body1" color="textSecondary" component="p">
                   Males: {males} Female: {females}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography variant="body1" color="textSecondary" component="p">
                   Breakfast: {breakfast ? "Yes": "No"}&nbsp;
                   Lunch: {lunch ? "Yes": "No"}&nbsp;
                   Dinner: {dinner ? "Yes": "No"}
               </Typography>
-              <Typography variant="body2" color="textSecondary" component="p">
+              <Typography variant="body1" color="textSecondary" component="p">
                   Cars: {cars} Vans: {van} Motorbikes: {motorbikes}
               </Typography>
           </CardContent>

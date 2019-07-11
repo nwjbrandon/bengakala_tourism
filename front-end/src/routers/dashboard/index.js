@@ -50,7 +50,6 @@ class Dashboard extends Component {
       firstName: '',
       lastName: '',
       email: '',
-      phone: '',
       country: '',
       dateFrom: '',
       dateTo: '',
@@ -96,7 +95,6 @@ class Dashboard extends Component {
                        firstName,
                        lastName,
                        email,
-                       phone,
                        country,
                        dateFrom,
                        dateTo,
@@ -116,7 +114,6 @@ class Dashboard extends Component {
       openModal: true,
       lastName,
       email,
-      phone,
       country,
       dateFrom,
       dateTo,
@@ -179,7 +176,6 @@ class Dashboard extends Component {
                     <TableCell align="right">First Name</TableCell>
                     <TableCell align="right">Last Name</TableCell>
                     <TableCell align="right">Email</TableCell>
-                    <TableCell align="right">Contact</TableCell>
                     <TableCell align="right">Expand</TableCell>
                   </TableRow>
                 </TableHead>
@@ -189,7 +185,6 @@ class Dashboard extends Component {
                         <TableCell align="right">{row.firstName}</TableCell>
                         <TableCell align="right">{row.lastName}</TableCell>
                         <TableCell align="right">{row.email}</TableCell>
-                        <TableCell align="right">{row.phone}</TableCell>
                         <TableCell align="right">
                           <Button
                               size="small"

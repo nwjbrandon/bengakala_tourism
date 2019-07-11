@@ -4,10 +4,10 @@ import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
 import {wrapAsync} from "../../middleware/errorHandling";
 
-const getBulletinInfo = [
+const getStoriesInfo = [
   wrapAsync(async (req, res) => {
-    const attractions = await db.fetchData(TABLE_INFORMATION, { type: 'media' });
-    const data = _.mapValues(_.groupBy(attractions, 'uuid'), (value) => {
+    const stories = await db.fetchData(TABLE_INFORMATION, { type: 'media' });
+    const data = _.mapValues(_.groupBy(stories, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         heading: v.heading,
@@ -24,7 +24,7 @@ const getBulletinInfo = [
   }),
 ];
 
-const postBulletinInfo = [
+const postStoriesInfo = [
   wrapAsync(async (req, res) => {
     const receivedData = req.body.data;
     const existingUUID = await db.filterFieldList(TABLE_INFORMATION, { type: 'media' }, 'uuid');
@@ -46,6 +46,6 @@ const postBulletinInfo = [
 
 
 export default {
-  get: getBulletinInfo,
-  post: postBulletinInfo,
+  get: getStoriesInfo,
+  post: postStoriesInfo,
 };

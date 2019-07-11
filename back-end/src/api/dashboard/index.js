@@ -13,7 +13,6 @@ const dashboardGet = [
         firstName: v.firstName,
         lastName: v.lastName,
         email: v.email,
-        phone: v.phone,
         country: v.country,
         dateFrom: v.dateFrom,
         dateTo: v.dateTo,
