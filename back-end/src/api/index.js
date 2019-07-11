@@ -2,17 +2,17 @@ import express from 'express';
 import home from './home';
 import booking from './booking';
 import admin from './admin';
-import bulletin from './bulletin';
+import stories from './stories';
 import contact from './contact';
 import faq from './faq';
-import resources from './resources';
+import explore from './explore';
 import snap from './snap';
 import emailSender from './emailSender/emailSender';
 import dashboard from './dashboard';
 import dashboardContact from './dashboard/contact';
 import dashboardBooking from './dashboard/booking';
-import dashboardBulletin from './dashboard/bulletin';
-import dashboardResources from './dashboard/resouces';
+import dashboardStories from './dashboard/stories';
+import dashboardExplore from './dashboard/explore';
 import dashboardFaq from './dashboard/faq';
 import dashboardHome from './dashboard/home';
 import dashboardSettings from './dashboard/settings';
@@ -20,7 +20,7 @@ import passport from '../middleware/strategy';
 import checkAuthentication from '../middleware/auth';
 import {
   dashboardBookingValidators,
-  dashboardBulletinValidators,
+  dashboardStoriesValidators,
   dashboardFaqValidators,
   dashboardHomeValidators,
   contactValidators,
@@ -28,7 +28,7 @@ import {
   adminValidators,
   dashboardNewUserValidators,
   dashboardChangePasswordValidators,
-  dashboardResoucesValidators,
+  dashboardExploreValidators,
   midtransValidators,
   errorHandling,
 } from '../middleware/validator';
@@ -40,8 +40,8 @@ app.get('/testing', (req, res) => res.json({ data: 'v1.0' }));
 app.get('/home/info', home.info);
 app.get('/booking/info', booking.info);
 app.post('/booking/info', booking.post);
-app.get('/resources/info', resources.info);
-app.get('/bulletin/info', bulletin.info);
+app.get('/explore/info', explore.info);
+app.get('/stories/info', stories.info);
 app.get('/contact/info', contact.info);
 app.put('/contact/info',
   contactValidators,
@@ -83,19 +83,19 @@ app.post('/admin/dashboard/booking',
   errorHandling,
   dashboardBooking.post);
 
-app.get('/admin/dashboard/bulletin', checkAuthentication, dashboardBulletin.get);
-app.post('/admin/dashboard/bulletin',
+app.get('/admin/dashboard/stories', checkAuthentication, dashboardStories.get);
+app.post('/admin/dashboard/stories',
   checkAuthentication,
-  dashboardBulletinValidators,
+  dashboardStoriesValidators,
   errorHandling,
-  dashboardBulletin.post);
+  dashboardStories.post);
 
-app.get('/admin/dashboard/resources', checkAuthentication, dashboardResources.get);
-app.post('/admin/dashboard/resources',
+app.get('/admin/dashboard/explore', checkAuthentication, dashboardExplore.get);
+app.post('/admin/dashboard/explore',
   checkAuthentication,
-  dashboardResoucesValidators,
+  dashboardExploreValidators,
   errorHandling,
-  dashboardResources.post);
+  dashboardExplore.post);
 
 
 app.get('/admin/dashboard/faq', checkAuthentication, dashboardFaq.get);

@@ -34,7 +34,7 @@ const menuOptions = [
     },
     {
         title: 'Bulletin',
-        to: '/dashboard/bulletin',
+        to: '/dashboard/stories',
         icon: <Terrain />
     },
     {
@@ -54,7 +54,7 @@ const menuOptions = [
     },
     {
         title: 'Resources',
-        to: '/dashboard/resources',
+        to: '/dashboard/explore',
         icon: <Movie />
     },
 ];

@@ -17,21 +17,21 @@ import { routerMiddleware } from 'connected-react-router';
 // Non Protected Routes
 import Accommodation from './routers/booking';
 import Home from './routers/home';
-import Bulletin from './routers/bulletin/container';
+import Stories from './routers/stories/container';
 import Contact from './routers/contact/container';
 import Faq from './routers/faq/container';
 import Notfound from './routers/notfound';
-import Resources from './routers/resources/container'
+import Explore from './routers/explore/container'
 
 // Protected Routes
 import Admin from './routers/admin/container';
 import Dashboard from './routers/dashboard/container';
 import DashboardAccommodation from './routers/dashboard/booking/container';
-import DashboardBulletin from './routers/dashboard/bulletin/container';
+import DashboardStories from './routers/dashboard/stories/container';
 import DashboardContact from './routers/dashboard/contact/container';
 import DashboardFAQ from './routers/dashboard/faq/container';
 import DashboardHome from './routers/dashboard/home/container';
-import DashboardResources from './routers/dashboard/resources/container';
+import DashboardExplore from './routers/dashboard/explore/container';
 import DashboardSettings from './routers/dashboard/settings/container';
 
 // tmp solution to get rid of white gaps around the browser
@@ -53,15 +53,15 @@ const persistConfig = {
     'dashboardFaq',
     'dashboardContact',
     'dashboardBooking',
-    'dashboardBulletin',
+    'dashboardStories',
     'dashboardHome',
     'dashboardSettings',
-    'dashboardResources',
+    'dashboardExplore',
     'contact',
-    'bulletin',
+    'stories',
     'home',
     'faq',
-    'resources',
+    'explore',
     'booking'
   ]
 };
@@ -86,19 +86,19 @@ const routing = (
           <Switch>
             <ProtectedRoutes exact path="/" component={ Home } secret={false} />
             <ProtectedRoutes exact path="/booking" component={ Accommodation } secret={false} />
-            <ProtectedRoutes exact path="/resources" component={ Resources } secret={false} />
+            <ProtectedRoutes exact path="/explore" component={ Explore } secret={false} />
             <ProtectedRoutes exact path="/admin" component={ Admin } secret={false} />
-            <ProtectedRoutes exact path="/bulletin" component={ Bulletin } secret={false} />
+            <ProtectedRoutes exact path="/stories" component={ Stories } secret={false} />
             <ProtectedRoutes exact path="/contact" component={ Contact } secret={false} />
             <ProtectedRoutes exact path="/faq" component={ Faq } secret={false} />
 
             <ProtectedRoutes exact path="/dashboard" component={ Dashboard } secret={true} />
             <ProtectedRoutes exact path="/dashboard/booking" component={ DashboardAccommodation } secret={true} />
-            <ProtectedRoutes exact path="/dashboard/bulletin" component={ DashboardBulletin } secret={true} />
+            <ProtectedRoutes exact path="/dashboard/stories" component={ DashboardStories } secret={true} />
             <ProtectedRoutes exact path="/dashboard/contact" component={ DashboardContact } secret={true} />
             <ProtectedRoutes exact path="/dashboard/faq" component={ DashboardFAQ } secret={true} />
             <ProtectedRoutes exact path="/dashboard/home" component={ DashboardHome } secret={true} />
-            <ProtectedRoutes exact path="/dashboard/resources" component={ DashboardResources } secret={true} />
+            <ProtectedRoutes exact path="/dashboard/explore" component={ DashboardExplore } secret={true} />
             <ProtectedRoutes exact path="/dashboard/settings" component={ DashboardSettings } secret={true} />
             
             <Route component={ Notfound } />

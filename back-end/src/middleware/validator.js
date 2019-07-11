@@ -84,7 +84,7 @@ export const dashboardBookingValidators = [
     })
 ];
 
-export const dashboardBulletinValidators = [
+export const dashboardStoriesValidators = [
   check('data')
     .custom((data) => {
       if (_.isEmpty(data)) {
@@ -102,7 +102,7 @@ export const dashboardBulletinValidators = [
     })
 ];
 
-export const dashboardResoucesValidators = [
+export const dashboardExploreValidators = [
   check('data')
     .custom((data) => {
       if (_.isEmpty(data)) {
