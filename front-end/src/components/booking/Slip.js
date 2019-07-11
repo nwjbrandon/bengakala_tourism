@@ -38,12 +38,10 @@ const App = (props) => {
           <Typography className={classes.label} variant="h5">
             Price Breakdown
             </Typography>
-          {windowWidth > 600 ?
-
-            <MasterTable tripDetails={props.tripDetails} cost={props.cost} grossAmount={props.grossAmount} /> :
-            <MasterTableMobile tripDetails={props.tripDetails} cost={props.cost} grossAmount={props.grossAmount} />
+          {windowWidth > 600
+            ?  <MasterTable tripDetails={props.tripDetails} cost={props.cost} calcData = {props.calcData} />
+            :  <MasterTableMobile tripDetails={props.tripDetails} cost={props.cost} calcData={props.calcData} />
           }
-
         </div>
       </div>
     </div>
@@ -55,7 +53,6 @@ const mapStateToProps = state => {
     personalDetails: state.booking.personalDetails,
     tripDetails: state.booking.tripDetails,
     cost: state.booking.cost,
-    grossAmount: state.booking.grossAmount,
   };
 };
 

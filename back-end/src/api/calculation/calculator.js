@@ -20,16 +20,25 @@ const calculationsPost = [
 
     const itemCost = (val) => {
       const bigVal = new Big(val);
-      return bigVal.add(groupSize).add(numOfDays);
+      return bigVal.mul(groupSize).mul(numOfDays);
     };
-
     const accomodation = itemCost(costData.accomodation);
 
-    const breakfast = itemCost(costData.breakfast);
+    let breakfast, lunch, dinner;
 
-    const lunch = itemCost(costData.lunch);
+    const calcMeal = () => {
+      if (tripData.breakfast) {
+        breakfast = itemCost(costData.breakfast);
+      } 
+      if (tripData.lunch) {
+        lunch = itemCost(costData.lunch);
+      } 
+      if (tripData.dinner) {
+        dinner = itemCost(costData.dinner);
+      }
+    }
 
-    const dinner = itemCost(costData.dinner);
+    calcMeal();
 
     const mealPlan = breakfast.add(lunch).add(dinner);
 

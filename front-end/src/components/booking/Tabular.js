@@ -1,6 +1,5 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { connect } from 'react-redux'
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -21,11 +20,11 @@ const useStyles = makeStyles(theme => ({
 const MasterTable = (props) => {
 
   const classes = useStyles()
-  const { tripDetails, cost } = props
-  const groupSize = parseInt(tripDetails.numberFemales) + parseInt(tripDetails.numberMales)
+  const { tripDetails, costData, calcData } = props
 
-  console.log("COST", cost)
+  console.log("COST", costData)
 
+  const groupSize = tripDetails.numberMales + tripDetails.numberFemales;
 
   const date_diff_indays = (date1, date2) => {
     const dt1 = new Date(date1);
@@ -36,70 +35,29 @@ const MasterTable = (props) => {
   const numOfDays = date_diff_indays(tripDetails.checkIn, tripDetails.checkOut)
 
 
-  /* Calculate the price of each service */
-  const priceRow = (qty, unit, duration) => {
-    return qty * unit * duration;
-  }
-
-  const createRow = (desc, qty, unit) => {
-    const duration = date_diff_indays(tripDetails.checkIn, tripDetails.checkOut)
-    const price = priceRow(qty, unit, duration)
+  const createRow = (desc, qty, unit, price) => {
     return { desc, qty, unit, price };
   }
 
-  const createMealRow = (b, l, d, bCost, lCost, dCost, groupSize) => {
+  const createMealRow = () => {
 
-    let arr = []
+    let arr = [];
 
-    if (b) {
-      arr[0] = createRow('Breakfast', groupSize, bCost)
+    if (tripDetails.breakfast) {
+      arr[0] = createRow('Breakfast', groupSize, costData.breakfast, calcData.breakfast)
     }
-    if (l) {
-      arr[1] = createRow('Lunch', groupSize, lCost)
+    if (tripDetails.lunch) {
+      arr[1] = createRow('Lunch', groupSize, costData.lunch, calcData.lunch)
     }
-    if (d) {
-      arr[2] = createRow('Dinner', groupSize, dCost)
+    if (tripDetails.dinner) {
+      arr[2] = createRow('Dinner', groupSize, costData.dinner, calcData.dinner)
     }
     return arr;
   }
 
-  /*
-  const transportRow = [
-    createRow('Vans', tripDetails.numberVans, prices.van),
-    createRow('Cars', tripDetails.numberCars, prices.car),
-    createRow('Bikes', tripDetails.numberBikes, prices.bike),
-  ]
-  */
-
-  // const mealSub = subtotal(mealRow())
-  // const total = totalCost([mealSub, homeRow[0].price])
-
-  /* Calculations functions */
-  const subtotal = (items) => {
-    return items.map(({ price }) => price).reduce((sum, i) => sum + i, 0);
-  }
-
-  const totalCost = (arr) => {
-    return arr.reduce((total, num) => num + total, 0);
-  }
-
   /* Creating the rows */
-  const mealRow = createMealRow(tripDetails.breakfast, tripDetails.lunch, tripDetails.dinner,
-    cost.breakfast, cost.lunch, cost.dinner, groupSize)
-  const homeRow = [createRow('HomeStay', groupSize, cost.accomodation)]
-
-
-  /* Cost values */
-  const mealCost = subtotal(mealRow);
-
-  const calcTotal = () => {
-    const finalCost = totalCost([mealCost, homeRow[0].price]);
-
-    if (props.grossAmount !== finalCost)
-      props.onAmountChange(finalCost)
-
-    return finalCost
-  }
+  const mealRow = createMealRow()
+  const homeRow = [createRow('HomeStay', groupSize, costData.accomodation, calcData.accomodation)]
 
   return (
     <Paper className={classes.root}>
@@ -151,13 +109,13 @@ const MasterTable = (props) => {
             <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell style={{ color: 'blue' }}>Meals total</TableCell>
-            <TableCell style={{ color: 'blue' }}>{mealCost}</TableCell>
+            <TableCell style={{ color: 'blue' }}>{calcData.mealPlan}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell style={{ color: 'blue' }}>Total</TableCell>
-            <TableCell style={{ color: 'blue' }}>{calcTotal()}</TableCell>
+            <TableCell style={{ color: 'blue' }}>{calcData.subTotal}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
@@ -165,12 +123,4 @@ const MasterTable = (props) => {
   )
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    onAmountChange: (val) => dispatch({ type: "GROSS_AMOUNT", payload: val }),
-  }
-
-}
-
-
-export default connect(null, mapDispatchToProps)(MasterTable)
+export default MasterTable;
