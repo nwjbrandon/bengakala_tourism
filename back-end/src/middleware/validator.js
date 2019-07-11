@@ -35,10 +35,10 @@ export const midtransValidators = [
     .isNumeric()
     .withMessage('Gross Amount is Required')
     .custom(value => {
-        if (Big(value).gtl(0.01)) {
-            return true;
-        }
-        throw Error('Payment cannot be less than 0.01');
+      if (Big(value).gte(0.01)) {
+        return true;
+      }
+      throw Error('Payment cannot be less than 0.01');
     }),
 ];
 

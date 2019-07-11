@@ -1,32 +1,92 @@
-import nodemailer from 'nodemailer';
+const Email = require('email-templates');
+const path = require('path');
 
 export default async function main(emailContent) {
 
-    const transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'bengkalaproject2019@gmail.com',
-            pass: 'Bengkala2019'
-        }
+
+    const email = await new Email({
+        juice: true,
+        juiceResources: {
+            preserveImportant: true,
+            webResources: {
+                relativeTo: path.join(__dirname, 'build')
+            }
+        },
+        message: {
+            from: 'bengkalaproject2019@gmail.com'
+        },
+        send: true,
+        transport: {
+            service: 'gmail',
+            auth: {
+                user: 'bengkalaproject2019@gmail.com',
+                pass: 'Bengkala2019'
+            }
+        },
+        // htmlToText: false // <----- HERE
     });
 
-    const emailBody = emailContent.bodyText + JSON.stringify(emailContent.personalDetails) + JSON.stringify(emailContent.tripDetails);
 
-
-    const mailOptions = {
-        from: 'bengkalaproject2019@gmail.com',
-        to: emailContent.toEmail,
-        subject: emailContent.subject,
-        text: emailBody,
-    };
-
-    await transporter.sendMail(mailOptions, function (err, info) {
-        if (err)
-            console.log(err)
-        else
-            console.log(info);
-        console.log("Message sent: %s", info.messageId);
-        console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-    });
+    await email
+        .send({
+            template: path.join(__dirname, 'emails', 'template'),
+            message: {
+                to: emailContent.toEmail
+            },
+            locals: {
+                ...emailContent
+            }
+        })
+        .then(res => {
+            console.log("RESPONDE", res)
+        })
+        .catch((err) => {
+            console.log("Error BRO", err)
+        });
 
 }
+
+
+// main(
+//     {
+//         toEmail: "paulroopson.pradeep@gmail.com",
+//         grossAmount: 100,
+//         personalDetails: {
+//             firstName: "NAmaswi",
+//             lastName: "Avlani",
+//             email: "paulroopson.pradeep@gmail.com",
+//             country: "Singapore",
+//         },
+//         tripDetails: {
+//             checkIn: "tmro",
+//             checkOut: "dayafter",
+//             breakfast: false,
+//             lunch: false,
+//             dinner: false,
+//             numberMales: 0,
+//             numberFemales: 0,
+//             numberVans: 0,
+//             numberCars: 0,
+//             numberBikes: 0
+//         },
+//         grossAmount: 100,
+//         cost: {
+//             accomodation: 100000,
+//             van: 50000,
+//             car: 50000,
+//             bike: 50000,
+//             breakfast: 20000,
+//             lunch: 20000,
+//             dinner: 20000
+//         },
+//         price: {
+//             accommodation: 100000,
+//             van: 50000,
+//             car: 50000,
+//             bike: 50000,
+//             breakfast: 20000,
+//             lunch: 20000,
+//             dinner: 20000
+//         },
+//     }
+// );

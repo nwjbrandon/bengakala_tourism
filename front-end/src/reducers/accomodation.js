@@ -1,5 +1,11 @@
 import * as actionTypes from '../actions/booking';
 
+const tomorrow = new Date();
+tomorrow.setDate(new Date().getDate() + 1)
+const dayafter = new Date();
+dayafter.setDate(tomorrow.getDate() + 1)
+
+
 const initialState = {
   personalDetails: {
     firstName: "",
@@ -8,8 +14,8 @@ const initialState = {
     country: "",
   },
   tripDetails: {
-    checkIn: new Date(),
-    checkOut: new Date(),
+    checkIn: tomorrow,
+    checkOut: dayafter,
     breakfast: false,
     lunch: false,
     dinner: false,
@@ -17,7 +23,7 @@ const initialState = {
     numberFemales: 0,
     numberVans: 0,
     numberCars: 0,
-    numberBikes: 0
+    numberBikes: 0,
   },
   excludeDates: [],
   cost: {
@@ -29,8 +35,17 @@ const initialState = {
     lunch: 20000,
     dinner: 20000
   },
+  price: {
+    accomodation: 0,
+    breakfast: 0,
+    lunch: 0,
+    dinner: 0,
+    mealPlan: 0,
+    subTotal: 0,
+  },
   grossAmount: 0,
-  errorMsg: ""
+  errorMsg: "",
+  numberOfDays: 0
 
 }
 
@@ -40,6 +55,7 @@ const reducer = (state = initialState, action) => {
     const tempcpyPersonal = { ...state.personalDetails };
     tempcpyPersonal.firstName = action.payload;
     return {
+      ...state,
       personalDetails: { ...tempcpyPersonal },
       tripDetails: { ...state.tripDetails },
       excludeDates: [...state.excludeDates],
@@ -49,6 +65,7 @@ const reducer = (state = initialState, action) => {
     const tempcpyPersonal = { ...state.personalDetails };
     tempcpyPersonal.lastName = action.payload;
     return {
+      ...state,
       personalDetails: { ...tempcpyPersonal },
       tripDetails: { ...state.tripDetails },
       excludeDates: [...state.excludeDates],
@@ -58,6 +75,7 @@ const reducer = (state = initialState, action) => {
     const tempcpyPersonal = { ...state.personalDetails };
     tempcpyPersonal.email = action.payload;
     return {
+      ...state,
       personalDetails: { ...tempcpyPersonal },
       tripDetails: { ...state.tripDetails },
       excludeDates: [...state.excludeDates],
@@ -67,6 +85,7 @@ const reducer = (state = initialState, action) => {
     const tempcpyPersonal = { ...state.personalDetails };
     tempcpyPersonal.country = action.payload;
     return {
+      ...state,
       personalDetails: { ...tempcpyPersonal },
       tripDetails: { ...state.tripDetails },
       excludeDates: [...state.excludeDates],
@@ -76,6 +95,7 @@ const reducer = (state = initialState, action) => {
     const tempcpyTrip = { ...state.tripDetails };
     tempcpyTrip.numberMales = action.payload;
     return {
+      ...state,
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
@@ -85,6 +105,7 @@ const reducer = (state = initialState, action) => {
     const tempcpyTrip = { ...state.tripDetails };
     tempcpyTrip.numberFemales = action.payload;
     return {
+      ...state,
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
@@ -94,6 +115,7 @@ const reducer = (state = initialState, action) => {
     const tempcpyTrip = { ...state.tripDetails };
     tempcpyTrip.numberCars = action.payload;
     return {
+      ...state,
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
@@ -103,6 +125,7 @@ const reducer = (state = initialState, action) => {
     const tempcpyTrip = { ...state.tripDetails };
     tempcpyTrip.numberVans = action.payload;
     return {
+      ...state,
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
@@ -112,6 +135,7 @@ const reducer = (state = initialState, action) => {
     const tempcpyTrip = { ...state.tripDetails };
     tempcpyTrip.numberBikes = action.payload;
     return {
+      ...state,
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
@@ -122,6 +146,7 @@ const reducer = (state = initialState, action) => {
     const tempcpyTrip = { ...state.tripDetails };
     tempcpyTrip.breakfast = !tempcpyTrip.breakfast;
     return {
+      ...state,
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
@@ -131,6 +156,7 @@ const reducer = (state = initialState, action) => {
     const tempcpyTrip = { ...state.tripDetails };
     tempcpyTrip.lunch = !tempcpyTrip.lunch;
     return {
+      ...state,
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
@@ -140,6 +166,7 @@ const reducer = (state = initialState, action) => {
     const tempcpyTrip = { ...state.tripDetails };
     tempcpyTrip.dinner = !tempcpyTrip.dinner;
     return {
+      ...state,
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
@@ -152,6 +179,7 @@ const reducer = (state = initialState, action) => {
       tempcpyTrip.checkOut = action.payload;
     }
     return {
+      ...state,
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
@@ -161,6 +189,7 @@ const reducer = (state = initialState, action) => {
     const tempcpyTrip = { ...state.tripDetails };
     tempcpyTrip.checkOut = action.payload;
     return {
+      ...state,
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...tempcpyTrip },
       excludeDates: [...state.excludeDates],
@@ -168,6 +197,7 @@ const reducer = (state = initialState, action) => {
     }
   } else if (action.type === actionTypes.EXCLUDE_DATES) {
     return {
+      ...state,
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...state.tripDetails },
       //excludeDates: [...actionTypes.payload],
@@ -175,6 +205,7 @@ const reducer = (state = initialState, action) => {
     }
   } else if (action.type === actionTypes.ERR_MSG) {
     return {
+      ...state,
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...state.tripDetails },
       errorMsg: action.payload,
@@ -183,11 +214,24 @@ const reducer = (state = initialState, action) => {
     }
   } else if (action.type === actionTypes.GROSS_AMOUNT) {
     return {
+      ...state,
       personalDetails: { ...state.personalDetails },
       tripDetails: { ...state.tripDetails },
       excludeDates: [...state.excludeDates],
       cost: { ...state.cost },
       grossAmount: action.payload
+    }
+  } else if (action.type === actionTypes.PAYMENT_CALC) {
+
+    return {
+      ...state,
+      price: { ...action.payload }
+    }
+  } else if (action.type === actionTypes.NUMBER_OF_DAYS) {
+
+    return {
+      ...state,
+      numberOfDays: action.payload
     }
   }
   return state;

@@ -53,11 +53,11 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    onMaleChange: (val) => dispatch({ type: actionTypes.MALES, payload: val }),
-    onFemaleChange: (val) => dispatch({ type: actionTypes.FEMALES, payload: val }),
-    onCarChange: (val) => dispatch({ type: actionTypes.CARS, payload: val }),
-    onVanChange: (val) => dispatch({ type: actionTypes.VANS, payload: val }),
-    onBikeChange: (val) => dispatch({ type: actionTypes.BIKES, payload: val }),
+    onMaleChange: (val) => dispatch({ type: actionTypes.MALES, payload: parseInt(val, 10) }),
+    onFemaleChange: (val) => dispatch({ type: actionTypes.FEMALES, payload: parseInt(val, 10) }),
+    onCarChange: (val) => dispatch({ type: actionTypes.CARS, payload: parseInt(val, 10) }),
+    onVanChange: (val) => dispatch({ type: actionTypes.VANS, payload: parseInt(val, 10) }),
+    onBikeChange: (val) => dispatch({ type: actionTypes.BIKES, payload: parseInt(val, 10) }),
     breakfastChange: () => dispatch({ type: actionTypes.BREAKFAST }),
     lunchChange: () => dispatch({ type: actionTypes.LUNCH }),
     dinnerChange: () => dispatch({ type: actionTypes.DINNER }),

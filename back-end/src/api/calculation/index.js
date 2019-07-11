@@ -5,14 +5,15 @@ const dateDiffIndays = (date1, date2) => {
   const dt2 = new Date(date2);
   return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(),
     dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(),
-    dt1.getDate())) / (1000 * 60 * 60 * 24));
+      dt1.getDate())) / (1000 * 60 * 60 * 24));
 };
+
 
 const calculationsPost = [
   async (req, res) => {
-    const tripData = req.body.data;
+    const tripData = req.body.data.tripDetails;
+    const costData = req.body.data.cost;
 
-    const costData = req.body.data;
 
     const groupSize = new Big(tripData.numberMales + tripData.numberFemales);
 
@@ -29,10 +30,10 @@ const calculationsPost = [
     const calcMeal = () => {
       if (tripData.breakfast) {
         breakfast = itemCost(costData.breakfast);
-      } 
+      }
       if (tripData.lunch) {
         lunch = itemCost(costData.lunch);
-      } 
+      }
       if (tripData.dinner) {
         dinner = itemCost(costData.dinner);
       }
@@ -54,8 +55,9 @@ const calculationsPost = [
     };
 
     res.json({
-      data: packageCost,
+      data: "success",
     });
+
   }
 ];
 

@@ -81,6 +81,8 @@ const Checkout = (props) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [openSnackBar, setSnackBar] = React.useState(false);
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
+  const [cashPayment, setCashPayment] = React.useState(true);
+  const [orderID, setOrderID] = React.useState(undefined);
 
   useEffect(() => {
     window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
@@ -164,6 +166,7 @@ const Checkout = (props) => {
 
     console.log("Response", res)
     if (res) {
+      setOrderID(res.order_id);
       return res.data.snapToken;
     } else {
       return null;
@@ -196,15 +199,29 @@ const Checkout = (props) => {
         setSnackBar(false);
         setActiveStep(activeStep + 1);
       }
-    } else if (activeStep === 3) {
-
-      callSnap();
-
-      // setActiveStep(activeStep + 1);
     } else {
       setActiveStep(activeStep + 1);
     }
   };
+
+  const handleCash = () => {
+    if (activeStep === 3) {
+
+
+
+      setActiveStep(activeStep + 1);
+    }
+  }
+
+  const handleCard = () => {
+    if (activeStep === 3) {
+      setCashPayment(false);
+
+      callSnap();
+
+      // setActiveStep(activeStep + 1);
+    }
+  }
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
@@ -259,7 +276,14 @@ const Checkout = (props) => {
 
               {activeStep === steps.length ? (
                 <React.Fragment>
-                  <ConfirmationScreen personalDetails={props.personalDetails} tripDetails={props.tripDetails} grossAmount={props.grossAmount} />
+                  <ConfirmationScreen
+                    cashPayment={cashPayment}
+                    numberOfDays={props.numberOfDays}
+                    orderId={orderID}
+                    cost={props.cost}
+                    personalDetails={props.personalDetails}
+                    tripDetails={props.tripDetails}
+                    price={props.price} />
                 </React.Fragment>
               ) : (
                   <React.Fragment>
@@ -290,7 +314,13 @@ const Checkout = (props) => {
                         ]}
                       />
                     </Snackbar>
-                    <Buttons activeStep={activeStep} handleBack={handleBack} handleNext={handleNext} stepsLength={steps.length} />
+                    <Buttons
+                      activeStep={activeStep}
+                      handleBack={handleBack}
+                      handleCash={handleCash}
+                      handleCard={handleCard}
+                      handleNext={handleNext}
+                      stepsLength={steps.length} />
 
                   </React.Fragment>
                 )}
@@ -310,8 +340,11 @@ const mapStateToProps = state => {
   return {
     personalDetails: state.booking.personalDetails,
     tripDetails: state.booking.tripDetails,
+    cost: state.booking.cost,
+    price: state.booking.price,
     grossAmount: state.booking.grossAmount,
-    errorMsg: state.booking.errorMsg
+    errorMsg: state.booking.errorMsg,
+    numberOfDays: state.booking.numberOfDays
   };
 };
 
