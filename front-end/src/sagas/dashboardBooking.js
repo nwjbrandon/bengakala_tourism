@@ -12,14 +12,8 @@ import {
 import { TOAST_ERROR_SHOW, TOAST_SUCCESS_SHOW } from "../actions/toast";
 import { ADMIN_LOGOUT_REQUEST } from "../actions/admin";
 
-const displayedData = (state) => state.dashboardBooking.displayedData;
-
 function onMount() {
     return API.get('/admin/dashboard/booking');
-}
-
-function submit(payload) {
-    return API.post('/admin/dashboard/booking', { data: payload});
 }
 
 function* workerSagaOnMount() {
@@ -44,11 +38,20 @@ function* workerSagaOnMount() {
     }
 }
 
+
+const displayedDataSelector = (state) => state.dashboardBooking.displayedData;
+const excludedDatesSelector = (state) => state.dashboardBooking.excludedDates;
+
+function submit(payload) {
+    return API.post('/admin/dashboard/booking', { data: payload});
+}
+
 function* workerSagaSubmit() {
     try {
-        const payload = yield select(displayedData);
-        yield call(submit, payload);
-        yield put(DASHBOARD_BOOKING_SUBMIT_SUCCESS(payload));
+        const displayedData = yield select(displayedDataSelector);
+        const excludedDates = yield select(excludedDatesSelector);
+        yield call(submit, { displayedData, excludedDates });
+        yield put(DASHBOARD_BOOKING_SUBMIT_SUCCESS({ displayedData, excludedDates }));
         yield put(TOAST_SUCCESS_SHOW('Refresh the page to see the changes'));
         yield put(DASHBOARD_BOOKING_ONMOUNT_REQUEST());
     } catch (error) {

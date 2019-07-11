@@ -24,7 +24,7 @@ const getBookingInfo = [
 
 const postBookingInfo = [
   wrapAsync(async (req, res) => {
-    const receivedData = req.body.data;
+    const receivedData = req.body.data.displayedData;
     const existingUUID = await db.filterFieldList(TABLE_INFORMATION, {type: 'cost'}, 'uuid');
     const {
       updateList,
@@ -36,6 +36,7 @@ const postBookingInfo = [
       saveList,
       deleteList,
     });
+    console.log(req.body.data.excludedDates);
     return res.json({
       data: 'success'
     });

@@ -69,10 +69,10 @@ export const adminValidators = [
 export const dashboardBookingValidators = [
   check('data')
     .custom((data) => {
-      if (_.isEmpty(data)) {
+      if (_.isEmpty(data.displayedData)) {
         throw Error('Cannot be empty');
       }
-      _.map(data, (item) => {
+      _.map(data.displayedData, (item) => {
         if (_.isNaN(_.toNumber(item.pricesString)) || item.pricesString === '') {
           throw Error('Not a valid number');
         }
