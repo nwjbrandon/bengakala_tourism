@@ -2,7 +2,7 @@ import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
-import * as actionTypes from '../../actions/accomodation';
+import * as actionTypes from '../../actions/booking';
 import Datespicker from './DatesPicker'
 import Mealplan from './Mealplan'
 import Guests from './GuestsSelect.js'

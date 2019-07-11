@@ -3,7 +3,7 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
-import * as actionTypes from '../../actions/accomodation';
+import * as actionTypes from '../../actions/booking';
 
 import TransportSelect from './TransportSelect'
 import FormControlLabel from '@material-ui/core/FormControlLabel';

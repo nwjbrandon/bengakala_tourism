@@ -2,23 +2,23 @@ import { call, put, takeLatest } from "redux-saga/effects";
 
 import API from '../api';
 import {
-    RESOURCES_ONMOUNT_REQUEST_NAME,
-    RESOURCES_ONMOUNT_SUCCESS,
-    RESOURCES_ONMOUNT_ERROR
-} from "../actions/resources";
+    EXPLORE_ONMOUNT_REQUEST_NAME,
+    EXPLORE_ONMOUNT_SUCCESS,
+    EXPLORE_ONMOUNT_ERROR
+} from "../actions/explore";
 import { TOAST_ERROR_SHOW } from "../actions/toast";
 
 function onMount() {
-    return API.get('/resources/info');
+    return API.get('/explore/info');
 }
 
 function* workerSaga() {
     try {
         const { data } = yield call(onMount);
-        yield put(RESOURCES_ONMOUNT_SUCCESS(data));
+        yield put(EXPLORE_ONMOUNT_SUCCESS(data));
     } catch (error) {
         console.log(error.message);
-        yield put(RESOURCES_ONMOUNT_ERROR(error));
+        yield put(EXPLORE_ONMOUNT_ERROR(error));
         if (error.message === "Network Error") {
             yield put(TOAST_ERROR_SHOW('Server Error'));
         }
@@ -26,5 +26,5 @@ function* workerSaga() {
 }
 
 export default [
-    takeLatest(RESOURCES_ONMOUNT_REQUEST_NAME, workerSaga),
+    takeLatest(EXPLORE_ONMOUNT_REQUEST_NAME, workerSaga),
 ]

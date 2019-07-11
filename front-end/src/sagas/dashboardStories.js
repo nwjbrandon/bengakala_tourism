@@ -1,33 +1,33 @@
 import { call, put, takeLatest, select } from "redux-saga/effects";
 import API from '../api';
 import {
-    DASHBOARD_RESOURCES_ONMOUNT_REQUEST_NAME,
-    DASHBOARD_RESOURCES_ONMOUNT_SUCCESS,
-    DASHBOARD_RESOURCES_ONMOUNT_ERROR,
-    DASHBOARD_RESOURCES_SUBMIT_REQUEST_NAME,
-    DASHBOARD_RESOURCES_SUBMIT_SUCCESS,
-    DASHBOARD_RESOURCES_SUBMIT_ERROR,
-    DASHBOARD_RESOURCES_ONMOUNT_REQUEST
-} from "../actions/dashboardResources";
+    DASHBOARD_STORIES_ONMOUNT_REQUEST_NAME,
+    DASHBOARD_STORIES_ONMOUNT_SUCCESS,
+    DASHBOARD_STORIES_ONMOUNT_ERROR,
+    DASHBOARD_STORIES_SUBMIT_REQUEST_NAME,
+    DASHBOARD_STORIES_SUBMIT_SUCCESS,
+    DASHBOARD_STORIES_SUBMIT_ERROR,
+    DASHBOARD_STORIES_ONMOUNT_REQUEST
+} from "../actions/dashboardStories";
 import {TOAST_ERROR_SHOW, TOAST_SUCCESS_SHOW} from "../actions/toast";
 import {ADMIN_LOGOUT_REQUEST} from "../actions/admin";
 
-const displayedData = (state) => state.dashboardResources.displayedData;
+const displayedData = (state) => state.dashboardStories.displayedData;
 
 function onMount() {
-    return API.get('/admin/dashboard/resources');
+    return API.get('/admin/dashboard/stories');
 }
 
 function submit(payload) {
-    return API.post('/admin/dashboard/resources', { data: payload});
+    return API.post('/admin/dashboard/stories', { data: payload});
 }
 
 function* workerSagaOnMount() {
     try {
         const { data } = yield call(onMount);
-        yield put(DASHBOARD_RESOURCES_ONMOUNT_SUCCESS(data));
+        yield put(DASHBOARD_STORIES_ONMOUNT_SUCCESS(data));
     } catch (error) {
-        yield put(DASHBOARD_RESOURCES_ONMOUNT_ERROR(error));
+        yield put(DASHBOARD_STORIES_ONMOUNT_ERROR(error));
         const res = error.response;
         if (res) {
             if (res.status === 401) {
@@ -48,11 +48,11 @@ function* workerSagaSubmit() {
     try {
         const payload = yield select(displayedData);
         yield call(submit, payload);
-        yield put(DASHBOARD_RESOURCES_SUBMIT_SUCCESS(payload));
+        yield put(DASHBOARD_STORIES_SUBMIT_SUCCESS(payload));
         yield put(TOAST_SUCCESS_SHOW('Refresh the page to see the changes'));
-        yield put(DASHBOARD_RESOURCES_ONMOUNT_REQUEST())
+        yield put(DASHBOARD_STORIES_ONMOUNT_REQUEST());
     } catch (error) {
-        yield put(DASHBOARD_RESOURCES_SUBMIT_ERROR(error));
+        yield put(DASHBOARD_STORIES_SUBMIT_ERROR(error));
         const res = error.response;
         if (res) {
             if (res.status === 401) {
@@ -70,7 +70,7 @@ function* workerSagaSubmit() {
 }
 
 export default [
-    takeLatest(DASHBOARD_RESOURCES_ONMOUNT_REQUEST_NAME, workerSagaOnMount),
-    takeLatest(DASHBOARD_RESOURCES_SUBMIT_REQUEST_NAME, workerSagaSubmit),
+    takeLatest(DASHBOARD_STORIES_ONMOUNT_REQUEST_NAME, workerSagaOnMount),
+    takeLatest(DASHBOARD_STORIES_SUBMIT_REQUEST_NAME, workerSagaSubmit),
 
 ]

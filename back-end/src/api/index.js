@@ -40,8 +40,8 @@ app.get('/testing', (req, res) => res.json({ data: 'v1.0' }));
 app.get('/home/info', home.info);
 app.get('/booking/info', booking.info);
 app.post('/booking/info', booking.post);
-app.get('/resources/info', resources.info);
-app.get('/bulletin/info', bulletin.info);
+app.get('/explore/info', resources.info);
+app.get('/stories/info', bulletin.info);
 app.get('/contact/info', contact.info);
 app.put('/contact/info',
   contactValidators,
@@ -83,15 +83,15 @@ app.post('/admin/dashboard/booking',
   errorHandling,
   dashboardBooking.post);
 
-app.get('/admin/dashboard/bulletin', checkAuthentication, dashboardBulletin.get);
-app.post('/admin/dashboard/bulletin',
+app.get('/admin/dashboard/stories', checkAuthentication, dashboardBulletin.get);
+app.post('/admin/dashboard/stories',
   checkAuthentication,
   dashboardBulletinValidators,
   errorHandling,
   dashboardBulletin.post);
 
-app.get('/admin/dashboard/resources', checkAuthentication, dashboardResources.get);
-app.post('/admin/dashboard/resources',
+app.get('/admin/dashboard/explore', checkAuthentication, dashboardResources.get);
+app.post('/admin/dashboard/explore',
   checkAuthentication,
   dashboardResoucesValidators,
   errorHandling,

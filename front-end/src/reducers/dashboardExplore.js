@@ -10,15 +10,15 @@ const initialState = {
     error: false,
 };
 
-export const dashboardBulletinReducer = handleActions({
-    "DASHBOARD_BULLETIN_ONMOUNT_REQUEST": (state) => {
+export const dashboardExploreReducer = handleActions({
+    "DASHBOARD_EXPLORE_ONMOUNT_REQUEST": (state) => {
         return {
             ...state,
             fetching: true,
             error: false,
         };
     },
-    "DASHBOARD_BULLETIN_ONMOUNT_SUCCESS": (state, action) => {
+    "DASHBOARD_EXPLORE_ONMOUNT_SUCCESS": (state, action) => {
         return {
             ...state,
             fetching: false,
@@ -27,14 +27,14 @@ export const dashboardBulletinReducer = handleActions({
             error: false,
         };
     },
-    "DASHBOARD_BULLETIN_ONMOUNT_ERROR": (state, action) => {
+    "DASHBOARD_EXPLORE_ONMOUNT_ERROR": (state, action) => {
         return {
             ...state,
             fetching: false,
             error: action.payload,
         };
     },
-    "DASHBOARD_BULLETIN_DELETE": (state, action) => {
+    "DASHBOARD_EXPLORE_DELETE": (state, action) => {
         const { displayedData } = state;
         const newDisplayedData = _omit(displayedData, action.payload);
         return {
@@ -42,14 +42,14 @@ export const dashboardBulletinReducer = handleActions({
             displayedData: newDisplayedData,
         };
     },
-    "DASHBOARD_BULLETIN_RESET": (state) => {
+    "DASHBOARD_EXPLORE_RESET": (state) => {
         const { originalData } = state;
         return {
             ...state,
             displayedData: _cloneDeep(originalData),
         };
     },
-    "DASHBOARD_BULLETIN_NEW": (state, action) => {
+    "DASHBOARD_EXPLORE_NEW": (state, action) => {
         const { id, payload } = action.payload;
         payload.edit = 0; // implementation of editable table not successful
         const { displayedData }= _cloneDeep(state);
@@ -63,14 +63,14 @@ export const dashboardBulletinReducer = handleActions({
             displayedData: newDisplayedData,
         }
     },
-    "DASHBOARD_BULLETIN_SUBMIT_REQUEST": (state) => {
+    "DASHBOARD_EXPLORE_SUBMIT_REQUEST": (state) => {
         return {
             ...state,
             fetching: true,
             error: false,
         }
     },
-    "DASHBOARD_BULLETIN_SUBMIT_SUCCESS": (state, action) => {
+    "DASHBOARD_EXPLORE_SUBMIT_SUCCESS": (state, action) => {
         return {
             ...state,
             originalData: _cloneDeep(action.payload),
@@ -78,14 +78,14 @@ export const dashboardBulletinReducer = handleActions({
             error: false,
         }
     },
-    "DASHBOARD_BULLETIN_SUBMIT_ERROR": (state, action) => {
+    "DASHBOARD_EXPLORE_SUBMIT_ERROR": (state, action) => {
         return {
             ...state,
             fetching: true,
             error: action.payload,
         }
     },
-    "DASHBOARD_BULLETIN_WATCH": (state, action) => {
+    "DASHBOARD_EXPLORE_WATCH": (state, action) => {
         const { displayedData }= _cloneDeep(state);
         const { uuid, field, value } = action.payload;
         displayedData[uuid][field] = value;

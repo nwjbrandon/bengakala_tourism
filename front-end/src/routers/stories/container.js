@@ -1,18 +1,18 @@
 import { connect } from "react-redux";
 import Media from './index';
 import {
-    BULLETIN_ONMOUNT_REQUEST,
-} from "../../actions/bulletin";
+    STORIES_ONMOUNT_REQUEST,
+} from "../../actions/stories";
 
 function matchStateToProps(state) {
     return {
-        data: state.bulletin.data,
+        data: state.stories.data,
     }
 }
 
 function matchDispatchToProps(dispatch){
     return {
-        onMount: () => dispatch(BULLETIN_ONMOUNT_REQUEST()),
+        onMount: () => dispatch(STORIES_ONMOUNT_REQUEST()),
     }
 }
 

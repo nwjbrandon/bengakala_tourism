@@ -1,18 +1,18 @@
 import { connect } from "react-redux";
 import Resources from './index';
 import {
-    RESOURCES_ONMOUNT_REQUEST,
-} from "../../actions/resources";
+    EXPLORE_ONMOUNT_REQUEST,
+} from "../../actions/explore";
 
 function matchStateToProps(state) {
     return {
-        data: state.resources.data,
+        data: state.explore.data,
     }
 }
 
 function matchDispatchToProps(dispatch){
     return {
-        onMount: () => dispatch(RESOURCES_ONMOUNT_REQUEST()),
+        onMount: () => dispatch(EXPLORE_ONMOUNT_REQUEST()),
     }
 }
 

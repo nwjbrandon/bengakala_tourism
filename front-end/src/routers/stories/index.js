@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../../components/bulletin/Modal'
+import Modal from '../../components/stories/Modal'
 import Navbar from "../../components/navBar/navbar";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';

@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const sections =['bulletin',  'booking', 'resources' ,'contact', 'faq'];
+const sections =['stories',  'booking', 'explore' ,'contact', 'faq'];
 const navlinks = sections.map( section => {
     return(
       <Button key={section} color="inherit" component={Link} to={section}>{ section }</Button>

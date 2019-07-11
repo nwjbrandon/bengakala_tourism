@@ -1,19 +1,19 @@
 import { combineReducers } from 'redux';
 import reduceReducers from 'reduce-reducers';
 import { contactReducer } from "./contact";
-import { bulletinReducer } from "./bulletin";
-import { resourcesReducer } from "./resources";
+import { storiesReducer } from "./stories";
+import { exploreReducer } from "./explore";
 import { dashboardOnMountReducer } from "./dashboard";
 import { adminLoginReducer } from "./admin";
 import { dashboardFaqReducer } from "./dashboardFaq";
 import { dashboardContactReducer } from "./dashboardContact";
 import { dashboardBookingReducer } from "./dashboardBooking";
-import { dashboardBulletinReducer } from "./dashboardBulletin";
+import { dashboardStoriesReducer } from "./dashboardStories";
 import { dashboardHomeReducer } from "./dashboardHome";
 import { dashboardSettingsReducer } from "./dashboardSettings";
 import { homeOnMountReducer } from "./home";
 import { faqOnMountReducer } from "./faq";
-import { dashboardResourcesReducer } from "./dashboardResources";
+import { dashboardExploreReducer } from "./dashboardExplore";
 import { connectRouter } from 'connected-react-router';
 import { toastReducer } from "./toast";
 import bookingReducer from './accomodation'
@@ -25,16 +25,16 @@ const allReducers = (history) => combineReducers({
     dashboardFaq: reduceReducers(dashboardFaqReducer),
     dashboardContact: reduceReducers(dashboardContactReducer),
     dashboardBooking: reduceReducers(dashboardBookingReducer),
-    dashboardBulletin: reduceReducers(dashboardBulletinReducer),
+    dashboardStories: reduceReducers(dashboardStoriesReducer),
     dashboardHome: reduceReducers(dashboardHomeReducer),
     dashboardSettings: reduceReducers(dashboardSettingsReducer),
-    dashboardResources: reduceReducers(dashboardResourcesReducer),
+    dashboardExplore: reduceReducers(dashboardExploreReducer),
     contact: reduceReducers(contactReducer),
-    bulletin: reduceReducers(bulletinReducer),
+    stories: reduceReducers(storiesReducer),
     home: reduceReducers(homeOnMountReducer),
     faq: reduceReducers(faqOnMountReducer),
     router: connectRouter(history),
-    resources: reduceReducers(resourcesReducer),
+    explore: reduceReducers(exploreReducer),
     booking: reduceReducers(bookingReducer)
 });
 

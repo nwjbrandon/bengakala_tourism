@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/accomodation';
+import * as actionTypes from '../actions/booking';
 
 const initialState = {
   personalDetails: {

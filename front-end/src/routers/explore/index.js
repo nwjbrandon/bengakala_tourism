@@ -1,5 +1,5 @@
 import React from 'react';
-import Tutorial from '../../components/resources/VideoTutorials'
+import Tutorial from '../../components/explore/VideoTutorials'
 import Navbar from "../../components/navBar/navbar";
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
