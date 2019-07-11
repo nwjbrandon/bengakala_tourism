@@ -6,8 +6,9 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles';
 import { Paper } from '@material-ui/core';
 import API from '../../api'
+import calculator from './calculation'
 
-import * as actionTypes from '../../actions/accomodation';
+import * as actionTypes from '../../actions/booking';
 
 const useStyles = makeStyles(() => {
 });
@@ -23,21 +24,21 @@ const App = (props) => {
   }, []);
 
 
-  // React.useEffect(() => {
-  //   const fetchData = async () => {
-  //     const result = await API.post('booking/calculate', {
-  //       data: {
-  //         tripDetails: props.tripDetails,
-  //         cost: props.cost
-  //       }
-  //     })
-  //     props.onPriceUpdated(result.data);
-  //     setCalculationComplete(true);
-  //     // setData(result.data);
-  //   };
+  React.useEffect(() => {
 
-  //   fetchData();
-  // }, []);
+
+    const costBreakDown = calculator({
+      tripDetails: props.tripDetails,
+      cost: props.cost
+    });
+
+    props.onPriceUpdated(costBreakDown.price);
+    console.log(costBreakDown.numberOfDays)
+    props.onNumberOfDaysUpdated(costBreakDown.numberOfDays);
+    setCalculationComplete(true);
+    // setData(result.data);
+
+  }, []);
 
   const classes = useStyles();
 
@@ -59,12 +60,10 @@ const App = (props) => {
           <Typography className={classes.label} variant="h5">
             Price Breakdown
             </Typography>
-          {windowWidth > 600 ?
-
-            <MasterTable calcState={calculationComplete} tripDetails={props.tripDetails} cost={props.cost} grossAmount={props.grossAmount} /> :
-            <MasterTableMobile calcState={calculationComplete} tripDetails={props.tripDetails} cost={props.cost} grossAmount={props.grossAmount} />
+          {windowWidth > 600
+            ? <MasterTable tripDetails={props.tripDetails} costData={props.cost} calcData={props.price} />
+            : <MasterTableMobile tripDetails={props.tripDetails} costData={props.cost} calcData={props.price} />
           }
-
         </div>
       </div>
     </div>
@@ -77,13 +76,15 @@ const mapStateToProps = state => {
     tripDetails: state.booking.tripDetails,
     cost: state.booking.cost,
     grossAmount: state.booking.grossAmount,
-    price: state.booking.price
+    price: state.booking.price,
+    numberOfDays: state.booking.numberOfDays
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onPriceUpdated: (val) => dispatch({ type: actionTypes.PAYMENT_CALC, payload: val }),
+    onNumberOfDaysUpdated: (val) => dispatch({ type: actionTypes.NUMBER_OF_DAYS, payload: val }),
   }
 }
 

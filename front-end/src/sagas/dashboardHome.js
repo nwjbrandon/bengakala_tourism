@@ -7,6 +7,7 @@ import {
     DASHBOARD_HOME_SUBMIT_REQUEST_NAME,
     DASHBOARD_HOME_SUBMIT_SUCCESS,
     DASHBOARD_HOME_SUBMIT_ERROR,
+    DASHBOARD_HOME_ONMOUNT_REQUEST
 } from "../actions/dashboardHome";
 import {ADMIN_LOGOUT_REQUEST} from "../actions/admin";
 import {TOAST_ERROR_SHOW, TOAST_SUCCESS_SHOW} from "../actions/toast";
@@ -41,6 +42,7 @@ function* workerSagaSubmit() {
         yield call(submit, payload);
         yield put(DASHBOARD_HOME_SUBMIT_SUCCESS(payload));
         yield put(TOAST_SUCCESS_SHOW('Refresh the page to see the changes'));
+        yield put(DASHBOARD_HOME_ONMOUNT_REQUEST())
     } catch (error) {
         yield put(DASHBOARD_HOME_SUBMIT_ERROR(error));
         if (error.status === 401) {

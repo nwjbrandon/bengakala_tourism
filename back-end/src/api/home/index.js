@@ -1,9 +1,10 @@
 import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
+import {wrapAsync} from "../../middleware/errorHandling";
 
 const aboutInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const homes = await db.fetchData(TABLE_INFORMATION, { type: 'home' });
     const stories = _.map(homes, home => (
       {
@@ -18,7 +19,7 @@ const aboutInfo = [
         mission,
       }
     });
-  },
+  }),
 ];
 
 export default {

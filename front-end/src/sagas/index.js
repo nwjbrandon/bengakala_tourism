@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
 
 import contact from './contact';
-import attraction from './bulletin';
-import resources from './resources';
+import attraction from './stories';
+import resources from './explore';
 import homeOnMount from './home';
 import faqOnMount from './faq';
 import dashboard from './dashboard';
@@ -10,9 +10,9 @@ import adminLogin from './admin';
 import dashboardFaq from './dashboardFaq';
 import dashboardContact from './dashboardContact';
 import dashboardAccommodation from './dashboardBooking';
-import dashboardAttraction from './dashboardBulletin';
+import dashboardAttraction from './dashboardStories';
 import dashboardHome from './dashboardHome';
-import dashboardResources from './dashboardResources';
+import dashboardResources from './dashboardExplore';
 import dashboardSettings from './dashboardSettings';
 import toast from './toast'
 

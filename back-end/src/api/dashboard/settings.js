@@ -2,9 +2,10 @@ import _ from 'lodash';
 import bcrypt from 'bcryptjs';
 import db from '../../storage/db';
 import { TABLE_ADMINISTRATOR } from '../../storage/tableName';
+import {wrapAsync} from "../../middleware/errorHandling";
 
 const getContactInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const editableAdmin = await db.fetchData(TABLE_ADMINISTRATOR, { edit: true });
     const editable = _.mapValues(_.groupBy(editableAdmin, 'uuid'), (value) => {
       const v = _.head(value);
@@ -33,11 +34,11 @@ const getContactInfo = [
         editable
       }
     });
-  },
+  }),
 ];
 
 const putContactInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const { confirmedPassword, ...newUser} = req.body;
     const { password } = newUser;
     const salt = bcrypt.genSaltSync(10);
@@ -47,21 +48,21 @@ const putContactInfo = [
     return res.json({
       data: 'success',
     });
-  },
+  }),
 ];
 
 const deleteContactInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const uuid = req.body.data;
     await db.deleteData(TABLE_ADMINISTRATOR, { uuid });
     return res.json({
       data: 'success',
     });
-  },
+  }),
 ];
 
 const postContactInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const { email, newPassword } = req.body;
     const salt = bcrypt.genSaltSync(10);
     const password = bcrypt.hashSync(newPassword, salt);
@@ -69,7 +70,7 @@ const postContactInfo = [
     return res.json({
       data: 'success',
     });
-  },
+  }),
 ];
 
 

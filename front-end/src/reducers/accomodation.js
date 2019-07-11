@@ -1,4 +1,4 @@
-import * as actionTypes from '../actions/accomodation';
+import * as actionTypes from '../actions/booking';
 
 const tomorrow = new Date();
 tomorrow.setDate(new Date().getDate() + 1)
@@ -23,7 +23,7 @@ const initialState = {
     numberFemales: 0,
     numberVans: 0,
     numberCars: 0,
-    numberBikes: 0
+    numberBikes: 0,
   },
   excludeDates: [],
   cost: {
@@ -41,10 +41,11 @@ const initialState = {
     lunch: 0,
     dinner: 0,
     mealPlan: 0,
-    grossAmount: 0,
+    subTotal: 0,
   },
   grossAmount: 0,
-  errorMsg: ""
+  errorMsg: "",
+  numberOfDays: 0
 
 }
 
@@ -225,6 +226,12 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       price: { ...action.payload }
+    }
+  } else if (action.type === actionTypes.NUMBER_OF_DAYS) {
+
+    return {
+      ...state,
+      numberOfDays: action.payload
     }
   }
   return state;

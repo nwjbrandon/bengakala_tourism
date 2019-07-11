@@ -1,12 +1,14 @@
+import { wrapAsync } from "../../middleware/errorHandling";
+
 const loginAdmin = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     req.session.key = req.body.email;
     res.json({ data: 'success' });
-  },
+  }),
 ];
 
 const getLogout = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     req.session.destroy((err) => {
       if (err) {
         res.status(400).json({ error: 'logout error' });
@@ -14,7 +16,7 @@ const getLogout = [
         res.json({ data: 'success' });
       }
     });
-  }
+  })
 ];
 
 const errorAdmin = [

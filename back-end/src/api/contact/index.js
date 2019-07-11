@@ -1,10 +1,10 @@
 import _ from 'lodash';
-
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
+import {wrapAsync} from "../../middleware/errorHandling";
 
 const contactInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const contacts = await db.fetchData(TABLE_INFORMATION, { type: 'contact' });
     const data = _.mapValues(_.groupBy(contacts, 'title'), (value) => {
       const v = _.head(value);
@@ -13,11 +13,11 @@ const contactInfo = [
     res.json({
       data,
     });
-  },
+  }),
 ];
 
 const contactPut = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     try {
       const {
         uuid,
@@ -52,7 +52,7 @@ const contactPut = [
         }
       });
     }
-  },
+  }),
 ];
 
 

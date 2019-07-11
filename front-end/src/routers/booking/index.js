@@ -30,7 +30,7 @@ class Accomodation extends React.Component {
       minHeight: "100vh",
       height: "auto",
       textAlign: "center",
-      backgroundColor: '#90FF90',
+      backgroundColor: '#CCC',
       margin: 0,
 
     };
@@ -38,7 +38,7 @@ class Accomodation extends React.Component {
     const containerdivStyle = {
       width: "auto",
       height: "auto",
-      backgroundColor: '#90FF90',
+      backgroundColor: '#CCC',
       margin: 0,
       padding: 0
 

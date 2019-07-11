@@ -72,7 +72,7 @@
             <tr class="details">
                 <td>Credit Card</td>
                 
-                <td>IDR #{grossAmount}</td>
+                <td>IDR #{price.subTotal}</td>
             </tr>
             
             <tr class="heading">
@@ -87,9 +87,9 @@
                 <td></td>
             </tr>
             <tr class="subitem">
-                <td>#{numberDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
+                <td>#{numberOfDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
                 
-                <td>#{price.accommodation}</td>
+                <td>IDR #{price.accomodation}</td>
             </tr>
 
 
@@ -98,20 +98,20 @@
                 <td></td>
             </tr>
             <tr class="subitem">
-                <td>Breakfast for #{numberDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
+                <td>Breakfast for #{numberOfDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
                 
-                <td>#{price.accommodation}</td>
+                <td>IDR #{price.breakfast}</td>
             </tr>
             <tr class="subitem">
-                <td>Lunch for #{numberDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
+                <td>Lunch for #{numberOfDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
                 
-                <td>#{price.accommodation}</td>
+                <td>IDR #{price.lunch}</td>
             </tr>
 
             <tr class="subitem">
-                <td>Dinner for #{numberDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
+                <td>Dinner for #{numberOfDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
                 
-                <td>#{price.accommodation}</td>
+                <td>IDR #{price.dinner}</td>
             </tr>
             
             <tr class="item last">
@@ -121,9 +121,9 @@
             </tr>
             
             <tr class="total">
-                <td>Total Ammount Paid:</td>
+                <td>#{cashPayment ? "Total Due Upon Arrival:" : "Total Amount Paid:"}</td>
                 
-                <td>IDR #{grossAmount}</td>
+                <td>IDR #{price.subTotal}</td>
             </tr>
         </table>
     </div>

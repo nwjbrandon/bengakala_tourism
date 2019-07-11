@@ -11,10 +11,11 @@ class ConfirmationScreen extends React.Component {
       toEmail: this.props.personalDetails.email,
       personalDetails: { ...this.props.personalDetails },
       tripDetails: { ...this.props.tripDetails },
-      grossAmount: this.props.grossAmount,
       cost: this.props.cost,
-      price: this.props.cost,
-      orderId: this.props.orderId
+      price: this.props.price,
+      orderId: this.props.orderId,
+      numberOfDays: this.props.numberOfDays,
+      cashPayment: this.props.cashPayment
       // bodyText: "Thank you for choosing Bengkala as your holiday getaway",
       // subject: "Trip Confirmation"
     });
@@ -25,9 +26,7 @@ class ConfirmationScreen extends React.Component {
     return (
       <div>
         <p>Thank you!</p>
-        <p>A confirmation email with the invoice attached has been sent to {this.props.personalDetails.email}
-          please make cash payment of {this.props.grossAmount}IDR upon arrival at our village.
-          </p>
+        <p>A confirmation email with the invoice attached has been sent to {this.props.personalDetails.email}</p>
       </div>
     );
   }

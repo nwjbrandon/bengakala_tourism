@@ -54,6 +54,7 @@ function* workerSagaSubmit() {
         yield call(submit, payload);
         yield put(DASHBOARD_CONTACT_SUBMIT_SUCCESS(payload));
         yield put(TOAST_SUCCESS_SHOW('Refresh the page to see the changes'));
+        yield put(DASHBOARD_CONTACT_ONMOUNT_REQUEST())
     } catch (error) {
         yield put(DASHBOARD_CONTACT_SUBMIT_ERROR(error));
         const res = error.response;

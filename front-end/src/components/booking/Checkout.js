@@ -14,7 +14,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 import blue from '@material-ui/core/colors/blue'
 import Buttons from './Buttons'
 import { connect } from 'react-redux'
-import * as actionTypes from '../../actions/accomodation';
+import * as actionTypes from '../../actions/booking';
 import CloseIcon from '@material-ui/icons/Close';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import Snackbar from '@material-ui/core/Snackbar';
@@ -81,9 +81,8 @@ const Checkout = (props) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [openSnackBar, setSnackBar] = React.useState(false);
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
-
-  //TODO remove random initialisation
-  const [orderID, setOrderID] = React.useState("qwefgr43wsdv");
+  const [cashPayment, setCashPayment] = React.useState(true);
+  const [orderID, setOrderID] = React.useState(undefined);
 
   useEffect(() => {
     window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
@@ -133,7 +132,7 @@ const Checkout = (props) => {
         onSuccess: (result) => {
           setActiveStep(activeStep + 1);
           publishToBackend();
-          console.log('success'); console.log(result); alert('Payment Success')
+          console.log('success'); console.log(result);
         },
         onPending: (result) => {
           console.log('pending'); console.log(result); alert('Payment Pending')
@@ -216,10 +215,11 @@ const Checkout = (props) => {
 
   const handleCard = () => {
     if (activeStep === 3) {
+      setCashPayment(false);
 
-      // callSnap();
+      callSnap();
 
-      setActiveStep(activeStep + 1);
+      // setActiveStep(activeStep + 1);
     }
   }
 
@@ -276,7 +276,14 @@ const Checkout = (props) => {
 
               {activeStep === steps.length ? (
                 <React.Fragment>
-                  <ConfirmationScreen orderId={orderID} cost={props.cost} personalDetails={props.personalDetails} tripDetails={props.tripDetails} grossAmount={props.grossAmount} />
+                  <ConfirmationScreen
+                    cashPayment={cashPayment}
+                    numberOfDays={props.numberOfDays}
+                    orderId={orderID}
+                    cost={props.cost}
+                    personalDetails={props.personalDetails}
+                    tripDetails={props.tripDetails}
+                    price={props.price} />
                 </React.Fragment>
               ) : (
                   <React.Fragment>
@@ -334,8 +341,10 @@ const mapStateToProps = state => {
     personalDetails: state.booking.personalDetails,
     tripDetails: state.booking.tripDetails,
     cost: state.booking.cost,
+    price: state.booking.price,
     grossAmount: state.booking.grossAmount,
-    errorMsg: state.booking.errorMsg
+    errorMsg: state.booking.errorMsg,
+    numberOfDays: state.booking.numberOfDays
   };
 };
 

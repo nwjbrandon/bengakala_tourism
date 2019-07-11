@@ -1,10 +1,11 @@
 import _ from 'lodash';
 import uuidv1 from 'uuid/v1';
+import { wrapAsync } from "../../middleware/errorHandling";
 import db from '../../storage/db';
 import { TABLE_INFORMATION, TABLE_TRANSACTIONS } from '../../storage/tableName';
 
 const bookingInfo = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const services = await db.fetchData(TABLE_INFORMATION, { type: 'cost' });
     const cost = _.map(services, service => ({ [service.title]: service.pricesString }));
     res.json({
@@ -13,11 +14,11 @@ const bookingInfo = [
         excludedDates: [],
       }
     });
-  },
+  }),
 ];
 
 const bookingPost = [
-  async (req, res) => {
+  wrapAsync(async (req, res) => {
     const paymentData = req.body.data;
     const uuid = uuidv1();
     const confirmedData = _.assign({
@@ -28,7 +29,7 @@ const bookingPost = [
     res.json({
       data: 'success',
     });
-  }
+  })
 ];
 export default {
   info: bookingInfo,
