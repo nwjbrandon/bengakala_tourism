@@ -1,0 +1,131 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="/css/app.css", data-inline>
+</head>
+
+<body>
+    <div class="invoice-box">
+        <table cellpadding="0" cellspacing="0">
+            <tr class="top">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td class="title">
+                                <img src="https://www.varadaborneotour.com/wp-content/uploads/2019/01/WONDERFUL-INDOENSIA-ORANGUTAN.png" style="width:100%; max-width:300px;">
+                            </td>
+                            
+                            <td>Invoice #:#{orderId}<br>#{new Date()}</td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            
+            <tr class="information">
+                <td colspan="2">
+                    <table>
+                        <tr>
+                            <td>Name: #{personalDetails.firstName} #{personalDetails.lastName}<br>Email: #{personalDetails.email} <br>Total Guests Count: #{tripDetails.numberMales + tripDetails.numberFemales} <br>Check In: #{tripDetails.checkIn}<br>Check Out: #{tripDetails.checkOut}</td>
+                            
+                            <td></td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+            <tr class="heading">
+                <td>Unit Prices</td>
+                
+                <td>Price</td>
+            </tr>
+            
+            <tr class="items">
+                <td>Accommodation per Night per Person</td>
+                
+                <td>IDR #{cost.accomodation}</td>
+            </tr>
+            <tr class="items">
+                <td>Breakfast per day per Person</td>
+                
+                <td>IDR #{cost.breakfast}</td>
+            </tr>
+            <tr class="items">
+                <td>Lunch per day per Person</td>
+                
+                <td>IDR #{cost.lunch}</td>
+            </tr>
+            
+            <tr class="items">
+                <td>Dinner per day per Person</td>
+                
+                <td>IDR #{cost.dinner}</td>
+            </tr>
+            
+            
+            
+            <tr class="heading">
+                <td>Payment Method</td>
+                
+                <td>Gross Amount</td>
+            </tr>
+            
+            <tr class="details">
+                <td>Credit Card</td>
+                
+                <td>IDR #{grossAmount}</td>
+            </tr>
+            
+            <tr class="heading">
+                <td>Item</td>
+                
+                <td>Price</td>
+            </tr>
+            
+            <tr class="item">
+                <td>Accommodation</td>
+                
+                <td></td>
+            </tr>
+            <tr class="subitem">
+                <td>#{numberDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
+                
+                <td>#{price.accommodation}</td>
+            </tr>
+
+
+             <tr class="item">
+                <td>Meal Plan</td>
+                <td></td>
+            </tr>
+            <tr class="subitem">
+                <td>Breakfast for #{numberDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
+                
+                <td>#{price.accommodation}</td>
+            </tr>
+            <tr class="subitem">
+                <td>Lunch for #{numberDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
+                
+                <td>#{price.accommodation}</td>
+            </tr>
+
+            <tr class="subitem">
+                <td>Dinner for #{numberDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
+                
+                <td>#{price.accommodation}</td>
+            </tr>
+            
+            <tr class="item last">
+                <td></td>
+                
+                <td></td>
+            </tr>
+            
+            <tr class="total">
+                <td>Total Ammount Paid:</td>
+                
+                <td>IDR #{grossAmount}</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>

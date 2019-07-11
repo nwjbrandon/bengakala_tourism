@@ -5,6 +5,9 @@ import { connect } from 'react-redux'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles';
 import { Paper } from '@material-ui/core';
+import API from '../../api'
+
+import * as actionTypes from '../../actions/accomodation';
 
 const useStyles = makeStyles(() => {
 });
@@ -12,11 +15,29 @@ const useStyles = makeStyles(() => {
 const App = (props) => {
 
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
+  const [calculationComplete, setCalculationComplete] = React.useState(false);
 
   React.useEffect(() => {
     window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
     setWindowWidth(window.innerWidth);
   }, []);
+
+
+  // React.useEffect(() => {
+  //   const fetchData = async () => {
+  //     const result = await API.post('booking/calculate', {
+  //       data: {
+  //         tripDetails: props.tripDetails,
+  //         cost: props.cost
+  //       }
+  //     })
+  //     props.onPriceUpdated(result.data);
+  //     setCalculationComplete(true);
+  //     // setData(result.data);
+  //   };
+
+  //   fetchData();
+  // }, []);
 
   const classes = useStyles();
 
@@ -40,8 +61,8 @@ const App = (props) => {
             </Typography>
           {windowWidth > 600 ?
 
-            <MasterTable tripDetails={props.tripDetails} cost={props.cost} grossAmount={props.grossAmount} /> :
-            <MasterTableMobile tripDetails={props.tripDetails} cost={props.cost} grossAmount={props.grossAmount} />
+            <MasterTable calcState={calculationComplete} tripDetails={props.tripDetails} cost={props.cost} grossAmount={props.grossAmount} /> :
+            <MasterTableMobile calcState={calculationComplete} tripDetails={props.tripDetails} cost={props.cost} grossAmount={props.grossAmount} />
           }
 
         </div>
@@ -56,8 +77,15 @@ const mapStateToProps = state => {
     tripDetails: state.booking.tripDetails,
     cost: state.booking.cost,
     grossAmount: state.booking.grossAmount,
+    price: state.booking.price
   };
 };
 
+const mapDispatchToProps = dispatch => {
+  return {
+    onPriceUpdated: (val) => dispatch({ type: actionTypes.PAYMENT_CALC, payload: val }),
+  }
+}
 
-export default connect(mapStateToProps)(App)
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

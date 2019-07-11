@@ -12,8 +12,11 @@ class ConfirmationScreen extends React.Component {
       personalDetails: { ...this.props.personalDetails },
       tripDetails: { ...this.props.tripDetails },
       grossAmount: this.props.grossAmount,
-      bodyText: "Thank you for choosing Bengkala as your holiday getaway",
-      subject: "Trip Confirmation"
+      cost: this.props.cost,
+      price: this.props.cost,
+      orderId: this.props.orderId
+      // bodyText: "Thank you for choosing Bengkala as your holiday getaway",
+      // subject: "Trip Confirmation"
     });
 
   }
