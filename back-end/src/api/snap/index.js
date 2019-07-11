@@ -1,3 +1,5 @@
+/* eslint-disable object-curly-spacing */
+/* eslint-disable quotes */
 import midtransClient from 'midtrans-client';
 import uuid from 'uuid/v1';
 import { serverKey, clientKey } from '../../secret/midtransSecret';

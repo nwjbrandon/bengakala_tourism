@@ -130,7 +130,7 @@ const Checkout = (props) => {
         onSuccess: (result) => {
           setActiveStep(activeStep + 1);
           publishToBackend();
-          console.log('success'); console.log(result); alert('Payment Success')
+          console.log('success'); console.log(result);
         },
         onPending: (result) => {
           console.log('pending'); console.log(result); alert('Payment Pending')
@@ -196,7 +196,7 @@ const Checkout = (props) => {
         setSnackBar(false);
         setActiveStep(activeStep + 1);
       }
-    } else if (activeStep == 3) {
+    } else if (activeStep === 3) {
 
       callSnap();
 

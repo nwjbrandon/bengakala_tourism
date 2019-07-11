@@ -8,37 +8,7 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
-/*
-const tripDetails = {
-  checkIn: "18/04/2020",
-  checkOut: "28/04/2020",
-  breakfast: true,
-  lunch: true,
-  dinner: false,
-  numberMales: 7,
-  numberFemales: 3,
-  numberVans: 3,
-  numberCars: 4,
-  numberBikes: 2
-};
-
-const duration = 10
-
-const groupSize = 20
-
-const prices = {
-  home: 10,
-  breakfast: 1,
-  lunch: 3,
-  dinner: 2,
-  van: 15,
-  car: 10,
-  bike: 5
-}
-*/
 const useStyles = makeStyles(theme => ({
-
-
   root: {
     marginTop: theme.spacing(3),
     color: "black",
@@ -183,21 +153,6 @@ const MasterTable = (props) => {
             <TableCell style={{ color: 'blue' }}>Meals total</TableCell>
             <TableCell style={{ color: 'blue' }}>{mealCost}</TableCell>
           </TableRow>
-          {/* <TableRow>
-              <TableCell style={{ color: 'black' }}>Transport</TableCell>
-              <TableCell style={{ color: 'black' }}></TableCell>
-              <TableCell style={{ color: 'black' }}></TableCell>
-            </TableRow> 
-            <TableRow>
-              <TableCell style={{ color: 'black' }}></TableCell>
-              <TableCell style={{ color: 'black' }}> Subtotal </TableCell>
-              <TableCell style={{ color: 'black' }}>{subcost}</TableCell>
-            </TableRow>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell style={{ color: 'black' }}> Taxes </TableCell>
-              <TableCell style={{ color: 'black' }}>{taxes}</TableCell>
-            </TableRow> */}
           <TableRow>
             <TableCell></TableCell>
             <TableCell></TableCell>
