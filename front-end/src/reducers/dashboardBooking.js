@@ -22,8 +22,9 @@ export const dashboardBookingReducer = handleActions({
         return {
             ...state,
             fetching: false,
-            displayedData: action.payload,
-            originalData: action.payload,
+            displayedData: action.payload.costs,
+            originalData: action.payload.costs,
+            excludedDates: action.payload.excludedDates,
             error: false,
         };
     },
@@ -52,7 +53,8 @@ export const dashboardBookingReducer = handleActions({
     "DASHBOARD_BOOKING_SUBMIT_SUCCESS": (state, action) => {
         return {
             ...state,
-            originalData: _cloneDeep(action.payload),
+            originalData: _cloneDeep(action.payload.displayedData),
+            excludedDates: _cloneDeep(action.payload.excludedDates),
             fetching: true,
             error: false,
         }

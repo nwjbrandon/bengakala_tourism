@@ -11,6 +11,7 @@ import {
 } from "../actions/dashboardBooking";
 import { TOAST_ERROR_SHOW, TOAST_SUCCESS_SHOW } from "../actions/toast";
 import { ADMIN_LOGOUT_REQUEST } from "../actions/admin";
+import _map from "lodash/map";
 
 function onMount() {
     return API.get('/admin/dashboard/booking');
@@ -18,8 +19,10 @@ function onMount() {
 
 function* workerSagaOnMount() {
     try {
-        const { data } = yield call(onMount);
-        yield put(DASHBOARD_BOOKING_ONMOUNT_SUCCESS(data));
+        const { data: { costs, dates } } = yield call(onMount);
+        const excludedDates = _map(dates, item => [new Date(item[0]), item[1]]);
+
+        yield put(DASHBOARD_BOOKING_ONMOUNT_SUCCESS({ costs, excludedDates }));
     } catch (error) {
         yield put(DASHBOARD_BOOKING_ONMOUNT_ERROR(error));
         const res = error.response;

@@ -2,16 +2,18 @@ import _ from 'lodash';
 import uuidv1 from 'uuid/v1';
 import { wrapAsync } from "../../middleware/errorHandling";
 import db from '../../storage/db';
-import { TABLE_INFORMATION, TABLE_TRANSACTIONS } from '../../storage/tableName';
+import {TABLE_EXCLUDED_DATES, TABLE_INFORMATION, TABLE_TRANSACTIONS} from '../../storage/tableName';
 
 const bookingInfo = [
   wrapAsync(async (req, res) => {
     const services = await db.fetchData(TABLE_INFORMATION, { type: 'cost' });
     const cost = _.map(services, service => ({ [service.title]: service.pricesString }));
+    const excludedDatesData = await db.fetchData(TABLE_EXCLUDED_DATES);
+    const excludedDates = _.map(excludedDatesData, (data) => data.date);
     res.json({
       data: {
         cost,
-        excludedDates: [],
+        excludedDates,
       }
     });
   }),
