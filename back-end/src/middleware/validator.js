@@ -35,10 +35,10 @@ export const midtransValidators = [
     .isNumeric()
     .withMessage('Gross Amount is Required')
     .custom(value => {
-        if (Big(value).gtl(0.01)) {
-            return true;
-        }
-        throw Error('Payment cannot be less than 0.01');
+      if (Big(value).gte(0.01)) {
+        return true;
+      }
+      throw Error('Payment cannot be less than 0.01');
     }),
 ];
 
@@ -69,10 +69,10 @@ export const adminValidators = [
 export const dashboardBookingValidators = [
   check('data')
     .custom((data) => {
-      if (_.isEmpty(data)) {
+      if (_.isEmpty(data.displayedData)) {
         throw Error('Cannot be empty');
       }
-      _.map(data, (item) => {
+      _.map(data.displayedData, (item) => {
         if (_.isNaN(_.toNumber(item.pricesString)) || item.pricesString === '') {
           throw Error('Not a valid number');
         }

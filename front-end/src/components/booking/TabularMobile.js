@@ -57,7 +57,7 @@ const MasterTable = (props) => {
 
     /* Creating the rows */
     const mealRow = createMealRow();
-    const homeRow = [createRow('HomeStay', calcData.accomodation)]
+    const homeRow = [createRow('HomeStay', calcData.accommodation)]
 
     return (
         <React.Fragment>
@@ -66,13 +66,13 @@ const MasterTable = (props) => {
                 <Table className={classes.table}>
                     <TableBody>
                         <TableRow>
-                            <TableCell style={{ color: 'black' }}>Accomodation</TableCell>
+                            <TableCell style={{ color: 'black' }}>Accommodation</TableCell>
                             <TableCell style={{ color: 'black' }}></TableCell>
                         </TableRow>
 
                         <TableRow>
                             <TableCell style={{ color: 'black' }} align="center">HomeStay</TableCell>
-                            <TableCell style={{ color: 'black' }}>{costData.accomodation}</TableCell>
+                            <TableCell style={{ color: 'black' }}>{costData.accommodation}</TableCell>
                         </TableRow>
 
                         <TableRow style={{ color: 'black' }}>

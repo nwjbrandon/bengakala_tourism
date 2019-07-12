@@ -57,7 +57,7 @@ const MasterTable = (props) => {
 
   /* Creating the rows */
   const mealRow = createMealRow()
-  const homeRow = [createRow('HomeStay', groupSize, costData.accomodation, calcData.accomodation)]
+  const homeRow = [createRow('HomeStay', groupSize, costData.accommodation, calcData.accommodation)]
 
   return (
     <Paper className={classes.root}>

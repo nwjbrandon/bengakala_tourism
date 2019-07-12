@@ -17,8 +17,8 @@ const useStyles = makeStyles(theme => ({
 const Buttons = (props) => {
   const classes = useStyles();
 
-  return (
-    <div className={classes.buttons}>
+  const btns = (props.activeStep === props.stepsLength - 1 ?
+    (<div className={classes.buttons}>
       {props.activeStep !== 0 && (
         <Button color="primary" onClick={props.handleBack} className={classes.button}>
           Back
@@ -27,12 +27,38 @@ const Buttons = (props) => {
       <Button
         variant="contained"
         color="primary"
+        onClick={props.handleCash}
+        className={classes.button}
+      >Pay by Cash</Button>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={props.handleCard}
+        className={classes.button}
+      >Pay by Credit Card</Button>
+    </div>)
+    :
+    (<div className={classes.buttons}>
+      {props.activeStep !== 0 && (
+        <Button color="primary" onClick={props.handleBack} className={classes.button}>
+          Back
+        </Button>
+      )}
+
+      <Button
+        variant="contained"
+        color="primary"
         onClick={props.handleNext}
         className={classes.button}
-      >
-        {props.activeStep === props.stepsLength - 1 ? 'Place order' : 'Next'}
-      </Button>
-    </div>
+      >Next</Button>
+
+    </div>)
+
+
+  );
+
+  return (
+    <React.Fragment>{btns}</React.Fragment>
   );
 }
 

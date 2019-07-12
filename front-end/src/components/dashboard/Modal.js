@@ -42,6 +42,9 @@ const Modal = ({
   >
       <Card>
           <CardContent>
+              <Typography gutterBottom variant="headline" component="h2">
+                  Transaction ID: { uuid }
+              </Typography>
               <Typography gutterBottom variant="h5" component="h2">
                   Customer Name: {lastName}, {firstName}
               </Typography>

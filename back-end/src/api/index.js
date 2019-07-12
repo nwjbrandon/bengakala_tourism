@@ -4,6 +4,7 @@ import booking from './booking';
 import admin from './admin';
 import stories from './stories';
 import contact from './contact';
+import calculation from './calculation';
 import faq from './faq';
 import explore from './explore';
 import snap from './snap';
@@ -49,11 +50,13 @@ app.put('/contact/info',
   contact.put);
 app.get('/faq/info', faq.info);
 app.post('/snap/info',
-  // midtransValidators,
-  // errorHandling,
+  midtransValidators,
+  errorHandling,
   snap.post);
 
 app.post('/sendEmail', emailSender.send);
+
+// app.get('/calculation', calculation.post);
 
 // endpoints must be protected
 app.post('/admin/login',

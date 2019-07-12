@@ -10,6 +10,7 @@ const dashboardGet = [
     const transaction = _.mapValues(_.groupBy(transactions, 'uuid'), (value) => {
       const v = _.head(value);
       return {
+        uuid: v.uuid,
         firstName: v.firstName,
         lastName: v.lastName,
         email: v.email,
