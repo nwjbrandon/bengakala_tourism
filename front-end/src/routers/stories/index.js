@@ -22,22 +22,29 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
   },
-  card: {
+  
+  container: {
+    float: 'left',
     width: '90%',
-    [theme.breakpoints.up(450)]: {
-      width: 450,
+    [theme.breakpoints.up(600)]: {
+      width: '50%',
     },
-    [theme.breakpoints.up(700)]: {
-      width: 600,
-    },
+  },
+  card: {
+    height: '360px',
+    width: '90%',
     margin: `${theme.spacing(3)}px auto`,
   },
   buttons: {
+    clear: 'both',
     width: '90%',
     [theme.breakpoints.up(450)]: {
       width: 450,
     },
     margin: `${theme.spacing(3)}px auto`,
+  },
+  media: {
+    maxHeight:"140px"
   }
 });
 
@@ -87,12 +94,13 @@ class Attraction extends React.Component {
           <Navbar />
           {
             data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
+              <div className={classes.container}>
                 <Card className={classes.card} key={item.title}>
                   <CardActionArea>
                     <CardMedia
                         component="img"
                         alt={item.title}
-                        height="140"
+                        style={classes.media}
                         image={item.imgUrl}
                         title={item.title}
                     />
@@ -109,11 +117,12 @@ class Attraction extends React.Component {
                     </CardContent>
                   </CardActionArea>
                   <CardActions>
-                    <Button size="small" value={item} color="primary" onClick={() => this.handleOpenModal({...item})}>
+                    <Button style ={{bottom: "10px"}} size="small" value={item} color="primary" onClick={() => this.handleOpenModal({...item})}>
                       Read More
                     </Button>
               </CardActions>
             </Card>
+          </div>
           ))
         }
         <Modal {...this.state} onCloseModal={this.handleCloseModal} />
