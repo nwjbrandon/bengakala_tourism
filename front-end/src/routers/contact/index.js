@@ -85,7 +85,7 @@ class Contact extends React.Component {
                 direction="column"
                 alignItems="center"
                 justify="center"
-                style={{ minHeight: '100vh' }}
+                style={{ minHeight: '100vh' margin:'24px auto' }}
             >
               <Grid item xs={12}>
                 <Paper className={classes.paper}>
