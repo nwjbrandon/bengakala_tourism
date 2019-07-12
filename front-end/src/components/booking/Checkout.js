@@ -82,7 +82,7 @@ const Checkout = (props) => {
   const [openSnackBar, setSnackBar] = React.useState(false);
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
   const [cashPayment, setCashPayment] = React.useState(true);
-  const [orderID, setOrderID] = React.useState(undefined);
+  const [orderID, setOrderID] = React.useState("undef");
 
   useEffect(() => {
     window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
@@ -121,10 +121,11 @@ const Checkout = (props) => {
     return str
   }
 
-  const publishToBackend = () => {
+  const publishToBackend = (tokenID) => {
+    console.log("orderID", tokenID)
     API.post('/booking/info', {
       data: {
-        // "uuid":  orderID,
+        "uuid": tokenID,
         "firstName": props.personalDetails.firstName,
         "lastName": props.personalDetails.lastName,
         "email": props.personalDetails.email,
@@ -153,8 +154,11 @@ const Checkout = (props) => {
   const callSnap = async () => {
     snap.show();
     console.log('handling token request like a boss')
-    const snapToken = await getToken();
-    console.log("snaptoken", snapToken)
+    const res = await getToken();
+    const snapToken = res.data.snapToken
+    const orderUID = res.data.order_id
+    setOrderID(orderUID)
+    console.log("IDS", { snapToken, orderUID })
 
 
     if (snapToken) {
@@ -162,7 +166,7 @@ const Checkout = (props) => {
       snap.pay(snapToken, {
         onSuccess: (result) => {
           setActiveStep(activeStep + 1);
-          publishToBackend();
+          publishToBackend(orderUID);
           console.log('success'); console.log(result);
         },
         onPending: (result) => {
@@ -198,7 +202,7 @@ const Checkout = (props) => {
     console.log("Response", res)
     if (res) {
       setOrderID(res.order_id);
-      return res.data.snapToken;
+      return res;
     } else {
       return null;
     }
@@ -251,9 +255,10 @@ const Checkout = (props) => {
   const handleCash = () => {
     if (activeStep === 3) {
 
-      setOrderID(uuidv1());
+      const uuid = uuidv1();
+      setOrderID(uuid)
 
-      publishToBackend();
+      publishToBackend(uuid);
 
       setActiveStep(activeStep + 1);
     }

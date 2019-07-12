@@ -22,9 +22,7 @@ const bookingInfo = [
 const bookingPost = [
   wrapAsync(async (req, res) => {
     const paymentData = req.body.data;
-    const uuid = uuidv1();
     const confirmedData = _.assign({
-      uuid,
       ...paymentData,
     });
     await db.saveData(TABLE_TRANSACTIONS, confirmedData);
