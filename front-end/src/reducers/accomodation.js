@@ -27,7 +27,7 @@ const initialState = {
   },
   excludeDates: [],
   cost: {
-    accomodation: 100000,
+    accommodation: 100000,
     van: 50000,
     car: 50000,
     bike: 50000,
@@ -36,7 +36,7 @@ const initialState = {
     dinner: 20000
   },
   price: {
-    accomodation: 0,
+    accommodation: 0,
     breakfast: 0,
     lunch: 0,
     dinner: 0,
@@ -232,6 +232,18 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       numberOfDays: action.payload
+    }
+  } else if (action.type === actionTypes.LOAD_COST) {
+
+    return {
+      ...state,
+      cost: { ...action.payload }
+    }
+  } else if (action.type === actionTypes.LOAD_DATES) {
+
+    return {
+      ...state,
+      excludeDates: [...action.payload]
     }
   }
   return state;

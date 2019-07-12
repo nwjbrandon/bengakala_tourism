@@ -23,7 +23,7 @@ const calculationsPost = (data) => {
         const bigVal = new Big(val);
         return bigVal.mul(groupSize).mul(numOfDays);
     };
-    const accomodation = itemCost(costData.accomodation);
+    const accommodation = itemCost(costData.accommodation);
 
     let breakfast = new Big(0);
     let lunch = new Big(0);
@@ -45,10 +45,10 @@ const calculationsPost = (data) => {
 
     const mealPlan = breakfast.add(lunch).add(dinner);
 
-    const subTotal = mealPlan.add(accomodation);
+    const subTotal = mealPlan.add(accommodation);
 
     const packageCost = {
-        accomodation: Number(accomodation),
+        accommodation: Number(accommodation),
         breakfast: Number(breakfast),
         lunch: Number(lunch),
         dinner: Number(dinner),

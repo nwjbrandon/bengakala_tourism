@@ -62,5 +62,5 @@ const calculationsPost = [
 ];
 
 export default {
-  post: calculationsPost
+  info: calculationsPost
 };

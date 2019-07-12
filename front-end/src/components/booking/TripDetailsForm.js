@@ -28,7 +28,7 @@ const TripDetailsForm = (props) => {
         Enter Your Trip Details
       </Typography>
       <Grid container spacing={3}>
-        <Datespicker excludeDates={[new Date('2019-06-26T03:24:00'), new Date('2019-06-30T03:24:00'), new Date('2019-07-11T03:24:00')]} checkInChange={(date) => props.checkInChange(date)} checkOutChange={(date) => props.checkOutChange(date)} checkIn={props.tripDetails.checkIn} checkOut={props.tripDetails.checkOut} />
+        <Datespicker excludeDates={props.excludeDates} checkInChange={(date) => props.checkInChange(date)} checkOutChange={(date) => props.checkOutChange(date)} checkIn={props.tripDetails.checkIn} checkOut={props.tripDetails.checkOut} />
 
         <Mealplan
           breakfastChange={props.breakfastChange} lunchChange={props.lunchChange} dinnerChange={props.dinnerChange}

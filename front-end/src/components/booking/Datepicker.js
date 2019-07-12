@@ -36,7 +36,8 @@ const Datepicker = (props) => {
         fullWidth
         shouldDisableDate={(date) => {
           return (props.min >= date) || props.excludeDates.find(item => {
-            return item.getDate() === new Date(date).getDate() && item.getMonth() === new Date(date).getMonth() && item.getFullYear() === new Date(date).getFullYear()
+            const currDate = new Date(item);
+            return currDate.getDate() === new Date(date).getDate() && currDate.getMonth() === new Date(date).getMonth() && currDate.getFullYear() === new Date(date).getFullYear()
           });
         }}
       />

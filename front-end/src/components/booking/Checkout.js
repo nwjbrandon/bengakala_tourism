@@ -89,6 +89,27 @@ const Checkout = (props) => {
     setWindowWidth(window.innerWidth);
   }, []);
 
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const result = await API.get('/booking/info');
+
+      const cost = result.data.cost;
+      const excludeDates = result.data.excludedDates;
+      const costObj = {};
+      cost.map((item) => {
+        const keyval = Object.keys(item)[0].toString().toLowerCase();
+        costObj[keyval] = item[Object.keys(item)[0].toString()]
+      })
+      props.updateCost(costObj);
+
+      props.updateDates(excludeDates);
+      console.log(excludeDates)
+    };
+
+    fetchData();
+  }, []);
+
   const isValidEmail = (email) => {
     return email.includes("@") && email.includes('.') && email.split('@').length > 1 && email.split('@')[1] !== "";
   };
@@ -173,6 +194,16 @@ const Checkout = (props) => {
     }
 
   }
+  const excludedDatesEngulfed = () => {
+    const checkIn = new Date(props.tripDetails.checkIn);
+    const checkOut = new Date(props.tripDetails.checkOut);
+    const result = props.excludeDates.find((item) => {
+      const currDate = new Date(item)
+      return (currDate >= checkIn && currDate <= checkOut);
+    })
+
+    return result;
+  }
 
   const handleNext = () => {
     if (activeStep === 0) {
@@ -193,6 +224,9 @@ const Checkout = (props) => {
         setSnackBar(true);
       } else if (props.tripDetails.numberMales < 0 || props.tripDetails.numberFemales < 0) {
         props.onError("There cannot be Negative number of Guests!!");
+        setSnackBar(true);
+      } else if (excludedDatesEngulfed()) {
+        props.onError("Sorry, we are not able to accommodate you on some dates that you have Chosen. Please reselect check in and check out dates.");
         setSnackBar(true);
       } else {
         props.onError("");
@@ -344,13 +378,16 @@ const mapStateToProps = state => {
     price: state.booking.price,
     grossAmount: state.booking.grossAmount,
     errorMsg: state.booking.errorMsg,
-    numberOfDays: state.booking.numberOfDays
+    numberOfDays: state.booking.numberOfDays,
+    excludeDates: state.booking.excludeDates
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     onError: (val) => dispatch({ type: actionTypes.ERR_MSG, payload: val }),
+    updateCost: (val) => dispatch({ type: actionTypes.LOAD_COST, payload: val }),
+    updateDates: (val) => dispatch({ type: actionTypes.LOAD_DATES, payload: val })
   }
 }
 
