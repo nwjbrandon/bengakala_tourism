@@ -22,6 +22,7 @@ const calculationsPost = [
       const bigVal = new Big(val);
       return bigVal.mul(groupSize).mul(numOfDays);
     };
+    
     const accomodation = itemCost(costData.accomodation);
 
     let breakfast, lunch, dinner;
