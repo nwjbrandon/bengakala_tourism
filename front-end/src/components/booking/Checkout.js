@@ -22,7 +22,7 @@ import SnackbarContent from '@material-ui/core/SnackbarContent';
 import TransportDetails from './TransportDetails'
 import IconButton from '@material-ui/core/IconButton';
 import API from '../../api';
-
+import uuidv1 from 'uuid/v1';
 // import callSnap from './snapPayment'
 const snap = window.snap;
 
@@ -114,24 +114,34 @@ const Checkout = (props) => {
     return email.includes("@") && email.includes('.') && email.split('@').length > 1 && email.split('@')[1] !== "";
   };
 
+  const constructStringDate = (date) => {
+    const DateObj = date ? new Date(date) : new Date();
+    const str = `${DateObj.getFullYear()}-${DateObj.getMonth()}-${DateObj.getDate()}`
+    console.log(str)
+    return str
+  }
+
   const publishToBackend = () => {
     API.post('/booking/info', {
       data: {
+        // "uuid":  orderID,
         "firstName": props.personalDetails.firstName,
         "lastName": props.personalDetails.lastName,
         "email": props.personalDetails.email,
         "country": props.personalDetails.country,
-        "dateFrom": "2019-01-29",
-        "dateTo": "2019-01-29",
+        "dateFrom": constructStringDate(props.tripDetails.checkIn),
+        "dateTo": constructStringDate(props.tripDetails.checkOut),
         "males": props.tripDetails.numberMales,
         "females": props.tripDetails.numberFemales,
         "cars": props.tripDetails.numberCars,
         "van": props.tripDetails.numberVans,
-        "breakfast": (props.tripDetails.breakfast ? 1 : 0),
-        "lunch": (props.tripDetails.lunch ? 1 : 0),
-        "dinner": (props.tripDetails.dinner ? 1 : 0),
+        "breakfast": (props.tripDetails.breakfast),
+        "lunch": (props.tripDetails.lunch),
+        "dinner": (props.tripDetails.dinner),
         "motorbikes": props.tripDetails.numberBikes,
-        "createdAt": "2019-01-29",
+        "createdAt": constructStringDate(),
+        "checkedIn": false,
+        "cash": cashPayment
       }
     }).then((res) => {
       console.log(res);
@@ -241,7 +251,9 @@ const Checkout = (props) => {
   const handleCash = () => {
     if (activeStep === 3) {
 
+      setOrderID(uuidv1());
 
+      publishToBackend();
 
       setActiveStep(activeStep + 1);
     }

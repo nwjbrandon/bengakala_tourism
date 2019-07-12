@@ -2,7 +2,7 @@ import _ from 'lodash';
 import uuidv1 from 'uuid/v1';
 import { wrapAsync } from "../../middleware/errorHandling";
 import db from '../../storage/db';
-import {TABLE_EXCLUDED_DATES, TABLE_INFORMATION, TABLE_TRANSACTIONS} from '../../storage/tableName';
+import { TABLE_EXCLUDED_DATES, TABLE_INFORMATION, TABLE_TRANSACTIONS } from '../../storage/tableName';
 
 const bookingInfo = [
   wrapAsync(async (req, res) => {
