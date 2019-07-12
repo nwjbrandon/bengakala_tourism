@@ -1,6 +1,8 @@
 const Email = require('email-templates');
 const path = require('path');
 
+import { USEREMAIL, USERPASS } from '../../src/secret/emailSecret'
+
 export default async function main(emailContent) {
 
 
@@ -13,17 +15,18 @@ export default async function main(emailContent) {
             }
         },
         message: {
-            from: 'bengkalaproject2019@gmail.com'
+            from: USEREMAIL
         },
         send: true,
         transport: {
             service: 'gmail',
             auth: {
-                user: 'bengkalaproject2019@gmail.com',
-                pass: 'Bengkala2019'
+                user: USEREMAIL,
+                pass: USERPASS
             }
         },
-        // htmlToText: false // <----- HERE
+        preview: false
+        // htmlToText: false 
     });
 
 

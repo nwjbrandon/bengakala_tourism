@@ -153,14 +153,14 @@ const Checkout = (props) => {
 
 
   const getToken = async () => {
-    const { personalDetails, grossAmount } = props
+    const { personalDetails, price } = props
     console.log('getting token from backend')
     const res = await API.post('/snap/info', {
 
       'first_name': personalDetails.firstName,
       'last_name': personalDetails.lastName,
       'email': personalDetails.email,
-      'gross_amount': grossAmount,
+      'gross_amount': price.subTotal,
 
     });
 
@@ -290,8 +290,8 @@ const Checkout = (props) => {
                     {toRender[activeStep]}
                     <Snackbar
                       anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
+                        vertical: 'bottom',
+                        horizontal: 'left',
                       }}
                       open={openSnackBar}
                       autoHideDuration={3000}

@@ -56,7 +56,7 @@ app.post('/snap/info',
 
 app.post('/sendEmail', emailSender.send);
 
-app.get('/calculation', calculation.post);
+// app.get('/calculation', calculation.post);
 
 // endpoints must be protected
 app.post('/admin/login',

@@ -27,13 +27,13 @@ const Buttons = (props) => {
       <Button
         variant="contained"
         color="primary"
-        onClick={props.handleNext}
+        onClick={props.handleCash}
         className={classes.button}
       >Pay by Cash</Button>
       <Button
         variant="contained"
         color="primary"
-        onClick={props.handleNext}
+        onClick={props.handleCard}
         className={classes.button}
       >Pay by Credit Card</Button>
     </div>)
