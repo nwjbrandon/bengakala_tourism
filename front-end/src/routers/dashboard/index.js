@@ -20,22 +20,19 @@ import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 const styles = theme => ({
   root: {
     display: 'flex',
+    overflowX: 'auto',
+    width: '100%'
   },
   toolbar: theme.mixins.toolbar,
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
   },
-  paper: {
-    width: '100%',
-    marginTop: theme.spacing(3),
-  },
   table: {
     minWidth: 650,
   },
   tableWrapper: {
-    overflowX: 'scroll',
-    maxWidth: 500,
+    marginTop: theme.spacing(3),
   },
 });
 
@@ -167,11 +164,16 @@ class Dashboard extends Component {
           <Typography variant='h4'>
             Number of Customers
           </Typography>
-          <Chart chartType="Calendar" align="center" width="100%" height="400px" data={heatMapData} />
+          <Chart
+              chartType="Calendar"
+              data={heatMapData}
+              width="100%"
+              height="400px"
+          />
           <Typography variant='h4'>
             Account Statements
-            </Typography>
-          <Paper className={classes.paper}>
+          </Typography>
+          <Paper className={classes.tableWrapper}>
               <Table className={classes.table}>
                 <TableHead>
                   <TableRow>
