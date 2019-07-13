@@ -7,7 +7,7 @@ import {wrapAsync} from "../../middleware/errorHandling";
 const dashboardGet = [
   wrapAsync(async (req, res) => {
     const transactions = await db.fetchData(TABLE_TRANSACTIONS);
-    const transaction = _.mapValues(_.groupBy(transactions, 'uuid'), (value) => {
+    const transactionData = _.mapValues(_.groupBy(transactions, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         uuid: v.uuid,
@@ -26,9 +26,11 @@ const dashboardGet = [
         van: v.van,
         motorbikes: v.motorbikes,
         checkedIn: v.checkedIn,
-        cash: v.cash
+        cash: v.cash,
+        createdAt: v.createdAt,
       };
     });
+    const transaction = _.orderBy(transactionData, ['createdAt'], ['desc']);
     const listOfDates = _.flatten(_.map(transactions, t => eachDay(t.dateFrom, t.dateTo)));
     const calendarHeatMap = _.countBy(listOfDates);
     return res.json({
