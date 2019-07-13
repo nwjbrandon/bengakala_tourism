@@ -107,11 +107,8 @@ class Content extends Component {
     return(
       <div className={classes.root}>
         <div className={classes.paper}>
-          <h2 style={contentHeader}> Welcome to Bengkala Village </h2>
+          <h2 style={contentHeader}>{ mission }</h2>
           <div style={separator} />
-          <div style={contentNarrative}>
-            <p>{ mission }</p>
-          </div>
           <div>
             {
               stories.map(text => (
@@ -121,7 +118,7 @@ class Content extends Component {
                     </h2>
                     <p style={myTextstyle}>
                       {text.text.split("\n").map((i,key) => (
-                          <div key={key}>{i}</div>
+                          <div style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</div>
                       ))}
                     </p>
                   </div>

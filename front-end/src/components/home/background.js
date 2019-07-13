@@ -50,8 +50,8 @@ class Background extends Component {
             <div>
               <h1 style={topCaption}>Bali, Indonesia</h1>
             </div>
-            <h2 style={bgCaption}>Bengkala Village</h2>
-            <p style={banner}>This is a banner</p>
+            <h2 style={bgCaption}>Bengkala</h2>
+            <p style={banner}>Explore Kolok and many more!</p>
           </div>
         </div>
 

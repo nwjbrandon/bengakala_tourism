@@ -26,10 +26,9 @@ const styles = theme => ({
     flexGrow: 1,
     padding: theme.spacing(3),
   },
-  root1: {
+  paper: {
     width: '100%',
     marginTop: theme.spacing(3),
-    overflowX: 'auto',
   },
   table: {
     minWidth: 650,
@@ -172,7 +171,7 @@ class Dashboard extends Component {
           <Typography variant='h4'>
             Account Statements
             </Typography>
-          <Paper className={classes.root1}>
+          <Paper className={classes.paper}>
               <Table className={classes.table}>
                 <TableHead>
                   <TableRow>
