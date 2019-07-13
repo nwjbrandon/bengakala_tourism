@@ -108,7 +108,7 @@ class DashboardHome extends Component {
     render() {
         const { classes } = this.props;
         const { title, text } = this.state;
-        const navTitle = 'Home';
+        const navTitle = 'Home item';
         return (
             <div className={classes.root}>
                 <CssBaseline />
@@ -116,7 +116,7 @@ class DashboardHome extends Component {
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
-                        Mission
+                        Summary
                     </Typography>
                     <DashBoardHomeMission />
                     <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>

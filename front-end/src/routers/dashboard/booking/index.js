@@ -84,7 +84,7 @@ class DashboardBooking extends Component {
 
                     <div className={classes.toolbar} />
                     <Typography variant='h4'>
-                        Select Individual Cost
+                        Edit Costs for Items
                 </Typography>
                     <DashboardBookingEntries />
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">
@@ -97,7 +97,7 @@ class DashboardBooking extends Component {
                     </Grid>
 
                     <Typography variant='h4'>
-                        Exclude Dates
+                        Excluding Dates
                   </Typography>
                     <Chart
                         chartType="Calendar"

@@ -128,7 +128,7 @@ class DashboardFAQ extends Component {
     render() {
         const { classes } = this.props;
         const { imgUrl, title, text, heading } = this.state;
-        const navTitle = 'Media';
+        const navTitle = 'Stories';
         return (
             <div className={classes.root}>
                 <CssBaseline />
