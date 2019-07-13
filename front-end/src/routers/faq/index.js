@@ -15,7 +15,6 @@ const styles = theme => ({
   },
   paper: {
     padding: theme.spacing(2),
-    height: 800,
     margin: 'auto',
     display: 'flex',
     flexWrap: 'wrap',
@@ -44,67 +43,57 @@ class Faq extends React.Component {
       <React.Fragment>
         <Navbar />
         <div className={classes.root}>
-            <Grid
-                container
-                direction="column"
-                alignItems="center"
-                justify="center"
-            >
-              <Grid item xs={12}>
-                <Paper className={classes.paper}>
-                  <Grid container alignContent='center'>
-                    <Typography variant="h4" style={{ paddingTop: 10, margin: 'auto' }}>
-                      Frequently Asked Questions
-                    </Typography>
+          <Paper className={classes.paper}>
+            <Typography variant="h4" style={{ paddingTop: 10, margin: 'auto' }}>
+              Frequently Asked Questions
+            </Typography>
+            <Grid justify="center" container spacing={3}>
+
+            {
+              Object.keys(data).map((FAQ_TYPE, index) => (
+                  <Grid item xs={12} md={12} key={index}>
+                    <Grid container alignContent='center'>
+                      <Typography
+                          component="span"
+                          variant="h5"
+                          color="textPrimary"
+                          style={{ paddingTop: 10, margin: 'auto' }}
+                      >
+                        { FAQ_TYPE }
+                      </Typography>
+                    </Grid>
+                    {
+                      data[FAQ_TYPE].map((datum, index) => (
+                          <div key={index} style={{ padding: 10 }}>
+                            <div>
+                              <Typography
+                                  component="span"
+                                  variant="h6"
+                                  color="textPrimary"
+                                  style={{ paddingTop: 5 }}
+                              >
+                                { datum.question }
+                              </Typography>
+                            </div>
+                            <div>
+                              <Typography
+                                  component="span"
+                                  variant="body1"
+                                  color="textPrimary"
+                                  style={{ paddingDown: 5 }}
+                              >
+                                { datum.answer }
+                              </Typography>
+                            </div>
+                            <Divider />
+                          </div>
+                      ))
+                    }
                   </Grid>
-                  {
-                    Object.keys(data).map((FAQ_TYPE, index) => (
-                        <div key={index}>
-                          <Grid container alignContent='center'>
-                            <Typography
-                                component="span"
-                                variant="h5"
-                                color="textPrimary"
-                                style={{ paddingTop: 10, margin: 'auto' }}
-                            >
-                              { FAQ_TYPE }
-                            </Typography>
-                          </Grid>
-                          {
-                            data[FAQ_TYPE].map((datum, index) => (
-                                <div key={index} style={{ padding: 10 }}>
-                                  <div>
-                                    <Typography
-                                        component="span"
-                                        variant="h6"
-                                        color="textPrimary"
-                                        style={{ paddingTop: 5 }}
-                                    >
-                                      { datum.question }
-                                    </Typography>
-                                  </div>
-                                  <div>
-                                    <Typography
-                                        component="span"
-                                        variant="body1"
-                                        color="textPrimary"
-                                        style={{ paddingDown: 5 }}
-                                    >
-                                      {datum.answer.split("\n").map((i,key) => (
-                                          <div key={key}>{i}</div>
-                                      ))}
-                                    </Typography>
-                                  </div>
-                                  <Divider />
-                                </div>
-                            ))
-                          }
-                        </div>
-                    ))
-                  }
-                </Paper>
-              </Grid>
+              ))
+            }
             </Grid>
+          </Paper>
         </div>
         <SuccessToast />
         <ErrorToast />

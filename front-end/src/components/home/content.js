@@ -61,18 +61,6 @@ const separator ={
   verticalAlign: 'baseline',
   opacity: '1',
 };
-const contentNarrative={
-  boxSizing: 'border-box',
-  color: '#2C3643',
-  display: 'block',
-  fontSize: '18px',
-  fontWeight: '100',
-  marginTop: '25px',
-  marginBottom: '25px',
-  textSizeAdjust: '100%',
-  lineHeight: '28px',
-  textAlign: 'center',
-};
 
 const myTitlestyle={
   boxSizing: 'inherit',
