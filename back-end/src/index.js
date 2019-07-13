@@ -14,14 +14,14 @@ import swaggerSpec from './configuration/swagger';
 const app = express();
 
 // implementation for linux developers
-console.log('Ensure redis and mysql server is setup for your machines');
+console.log('Attempting to initialize redis and mysql server is setup for your machines');
 const RedisStore = connectRedis(session);
 const redisClient = redis.createClient();
 redisClient.on('error', (err) => {
   console.log('Redis error:', err);
 });
 app.use(session({
-  secret: 'password',
+  secret: '$2a$10$YOtOxoncjCeh54HUJLNVKOlGz5uhlk9Z8ucdZBScw0nx3TPQgNeXa',
   name: 'Bengkala Tourism',
   resave: false,
   saveUninitialized: true,
@@ -29,11 +29,11 @@ app.use(session({
     host: 'localhost',
     port: 6379,
     client: redisClient,
-    ttl: 86400
+    ttl: 60 * 60,
   }),
 }));
 
-app.use(cookieParser('secretSign#143_!223'));
+app.use(cookieParser('$2a$10$Lfmg/wBnPWHzbQGJkFm9ZOvnhR79H368P01ElLIgmFVhuf.agF4qu'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: true }));
@@ -47,3 +47,4 @@ const startExpress = (portNumber) => {
   app.listen(portNumber);
 };
 startExpress(config.express.portNumber);
+console.log('Successfully initialize redis and mysql server is setup for your machines');
