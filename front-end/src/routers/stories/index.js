@@ -73,7 +73,7 @@ class Attraction extends React.Component {
   render() {
     const { classes, data } = this.props;
     const { page, rowsPerPage } = this.state;
-    const maxPage = _floor(_div(data.length, rowsPerPage));
+    const maxPage = _floor(_div(data.length - 1, rowsPerPage));
 
     return (
         <div className={classes.root}>
