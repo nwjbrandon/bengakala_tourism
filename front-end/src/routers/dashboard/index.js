@@ -20,8 +20,8 @@ import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 const styles = theme => ({
   root: {
     display: 'flex',
-    overflowX: 'auto',
-    width: '100%'
+    // overflowX: 'auto',
+    // width: '100%'
   },
   toolbar: theme.mixins.toolbar,
   content: {
