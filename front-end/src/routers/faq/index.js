@@ -11,6 +11,7 @@ import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    margin: `${theme.spacing(3)}px auto`
   },
   paper: {
     padding: theme.spacing(2),

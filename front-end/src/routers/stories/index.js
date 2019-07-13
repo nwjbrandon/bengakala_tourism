@@ -2,6 +2,7 @@ import React from 'react';
 import Modal from '../../components/stories/Modal'
 import Navbar from "../../components/navBar/navbar";
 import Card from '@material-ui/core/Card';
+import Paper from '@material-ui/core/Paper';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -23,13 +24,6 @@ const styles = theme => ({
     flexGrow: 1,
   },
   card: {
-    width: '90%',
-    [theme.breakpoints.up(450)]: {
-      width: 450,
-    },
-    [theme.breakpoints.up(700)]: {
-      width: 600,
-    },
     margin: `${theme.spacing(3)}px auto`,
   },
   buttons: {
@@ -38,7 +32,7 @@ const styles = theme => ({
       width: 450,
     },
     margin: `${theme.spacing(3)}px auto`,
-  }
+  },
 });
 
 class Attraction extends React.Component {
@@ -46,7 +40,7 @@ class Attraction extends React.Component {
     super(props);
     this.state = {
       text: "", openModal: false, title: "", imgUrl: "",
-      page: 0, rowsPerPage: 5,
+      page: 0, rowsPerPage: 6,
     };
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -85,37 +79,43 @@ class Attraction extends React.Component {
     return (
         <div className={classes.root}>
           <Navbar />
-          {
-            data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
-                <Card className={classes.card} key={item.title}>
-                  <CardActionArea>
-                    <CardMedia
-                        component="img"
-                        alt={item.title}
-                        height="140"
-                        image={item.imgUrl}
-                        title={item.title}
-                    />
-                    <CardContent>
-                      <Typography gutterBottom variant="body2" component="h2">
-                        { dateFnsFormat(item.createdAt, 'YYYY/MM/DD HH:mm') }
-                      </Typography>
-                      <Typography gutterBottom variant="h5" component="h2">
-                        { item.title }
-                      </Typography>
-                      <Typography variant="body1" color="textSecondary" component="p">
-                        { item.summary }
-                      </Typography>
-                    </CardContent>
-                  </CardActionArea>
-                  <CardActions>
-                    <Button size="small" value={item} color="primary" onClick={() => this.handleOpenModal({...item})}>
-                      Read More
-                    </Button>
-              </CardActions>
-            </Card>
-          ))
-        }
+          <div style={{ padding: '10px'}}>
+            <Grid justify="center" container spacing={3}>
+              {
+                data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
+                    <Grid item xs={12} sm={6}>
+                      <Card className={classes.card} key={item.title}>
+                        <CardActionArea>
+                          <CardMedia
+                              component="img"
+                              alt={item.title}
+                              height="300"
+                              image={item.imgUrl}
+                              title={item.title}
+                          />
+                          <CardContent>
+                            <Typography gutterBottom variant="body2" component="h2">
+                              { dateFnsFormat(item.createdAt, 'YYYY/MM/DD HH:mm') }
+                            </Typography>
+                            <Typography gutterBottom variant="h5" component="h2">
+                              { item.title }
+                            </Typography>
+                            <Typography variant="body1" color="textSecondary" component="p">
+                              { item.summary }
+                            </Typography>
+                          </CardContent>
+                        </CardActionArea>
+                        <CardActions>
+                          <Button size="small" value={item} color="primary" onClick={() => this.handleOpenModal({...item})}>
+                            Read More
+                          </Button>
+                        </CardActions>
+                      </Card>
+                    </Grid>
+                ))
+              }
+            </Grid>
+          </div>
         <Modal {...this.state} onCloseModal={this.handleCloseModal} />
         <Grid container justify="center" spacing={10} className={classes.buttons}>
           <Button size="small" color="primary" onClick={this.handlePrevious} disabled={page === 0} >

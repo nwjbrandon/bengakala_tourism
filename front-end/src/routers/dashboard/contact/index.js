@@ -123,7 +123,7 @@ class DashboardContact extends Component {
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
-                        Contact Details
+                        Our Contact Details
                     </Typography>
                     <DashBoardContactDetails />
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">
@@ -131,11 +131,11 @@ class DashboardContact extends Component {
                             Reset
                         </Button>
                         <Button variant="contained" color="secondary" onClick={this.submit} className={classes.button}>
-                            Submit
+                            Confirm
                         </Button>
                     </Grid>
                     <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
-                        Customer Queries
+                        Customer Feedbacks
                     </Typography>
                     <DashBoardContactCustomers />
                 </main>

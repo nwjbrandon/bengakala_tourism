@@ -165,7 +165,7 @@ class DashboardFAQ extends Component {
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
-                        Change User Password
+                        Change User's Password
                     </Typography>
                     <TextField
                         variant="outlined"
