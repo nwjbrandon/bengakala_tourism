@@ -127,7 +127,7 @@ class DashboardHome extends Component {
                         variant="outlined"
                         fullWidth
                         value={title}
-                        placeholder="Ex. History of Bengkala"
+                        placeholder="Eg. History of Bengkala"
                         label="Heading"
                         className={classes.button}
                         onChange={this.watchTitle}
@@ -137,7 +137,7 @@ class DashboardHome extends Component {
                         variant="outlined"
                         fullWidth
                         value={text}
-                        placeholder="Ex. Bengkala has a rich historical culture..."
+                        placeholder="Eg. Bengkala has a rich historical culture..."
                         label="Description"
                         className={classes.button}
                         onChange={this.watchText}
