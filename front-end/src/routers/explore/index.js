@@ -12,7 +12,7 @@ class TutorialPage extends React.Component {
 
   render() {
     const divStyle = {
-      padding: "2%",
+      padding: "0%",
       width: "auto",
       height: "150vh",
       textAlign: "left",

@@ -5,7 +5,8 @@ import AccomodationsForm from '../../components/booking/Accomodations';
 import Navbar from "../../components/navBar/navbar";
 
 import { connect } from 'react-redux'
-
+import Particles from 'react-particles-js';
+// import kiwi from '/assets/img/kiwi.svg'
 
 class Accomodation extends React.Component {
   constructor(props) {
@@ -30,26 +31,28 @@ class Accomodation extends React.Component {
       minHeight: "100vh",
       height: "auto",
       textAlign: "center",
-      backgroundColor: '#CCC',
+      backgroundColor: '#03A9F4',
       margin: 0,
 
     };
 
-    const containerdivStyle = {
-      width: "auto",
-      height: "auto",
-      backgroundColor: '#CCC',
-      margin: 0,
-      padding: 0
+    // const containerdivStyle = {
+    //   width: "auto",
+    //   height: "auto",
+    //   backgroundColor: '#CCC',
+    //   margin: 0,
+    //   padding: 0
 
-    };
+    // };
     return (
-      <div style={containerdivStyle}>
+      <React.Fragment>
         <Navbar />
+
         <div style={divStyle}>
           <AccomodationsForm />
         </div>
-      </div>
+
+      </React.Fragment>
 
     )
   }

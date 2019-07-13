@@ -91,7 +91,7 @@ const MasterTable = (props) => {
             <TableCell style={{ color: 'blue' }}>Accommodation total</TableCell>
             <TableCell style={{ color: 'blue' }}>{homeRow[0].price}</TableCell>
           </TableRow>
-          <TableRow>
+          <TableRow style={{ backgroundColor: '' }}>
             <TableCell style={{ color: 'black' }}>Meals</TableCell>
             <TableCell style={{ color: 'black' }}></TableCell>
             <TableCell style={{ color: 'black' }}></TableCell>
