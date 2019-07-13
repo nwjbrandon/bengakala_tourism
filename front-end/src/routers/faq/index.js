@@ -90,7 +90,9 @@ class Faq extends React.Component {
                                         color="textPrimary"
                                         style={{ paddingDown: 5 }}
                                     >
-                                      { datum.answer }
+                                      {datum.answer.split("\n").map((i,key) => (
+                                          <div key={key}>{i}</div>
+                                      ))}
                                     </Typography>
                                   </div>
                                   <Divider />

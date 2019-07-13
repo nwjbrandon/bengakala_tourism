@@ -120,7 +120,9 @@ class Content extends Component {
                       {text.title}
                     </h2>
                     <p style={myTextstyle}>
-                      {text.text}
+                      {text.text.split("\n").map((i,key) => (
+                          <div key={key}>{i}</div>
+                      ))}
                     </p>
                   </div>
               ))
