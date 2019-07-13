@@ -2,7 +2,6 @@ import React from 'react';
 import Modal from '../../components/stories/Modal'
 import Navbar from "../../components/navBar/navbar";
 import Card from '@material-ui/core/Card';
-import Paper from '@material-ui/core/Paper';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';

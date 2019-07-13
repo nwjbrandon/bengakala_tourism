@@ -13,7 +13,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import createSagaMiddleware from "redux-saga";
 
 import { routerMiddleware, } from 'connected-react-router';
-import { put, } from "redux-saga/effects";
 
 // Non Protected Routes
 import Accommodation from './routers/booking';
