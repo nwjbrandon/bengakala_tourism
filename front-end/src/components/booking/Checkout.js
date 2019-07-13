@@ -110,6 +110,12 @@ const Checkout = (props) => {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    window.onbeforeunload = () => {
+        return '';
+      }
+  }, []);
+
   const isValidEmail = (email) => {
     return email.includes("@") && email.includes('.') && email.split('@').length > 1 && email.split('@')[1] !== "";
   };
@@ -176,7 +182,7 @@ const Checkout = (props) => {
         onClose: () => {
 
           console.log('customer closed the popup without finishing the payment');
-          alert('Please do not close the payment pop-up')
+          alert('Please press the place order button to retry credit card payment');
         },
       })
 
