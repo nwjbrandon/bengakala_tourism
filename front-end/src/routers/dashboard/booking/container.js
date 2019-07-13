@@ -5,6 +5,8 @@ import {
     DASHBOARD_BOOKING_RESET,
     DASHBOARD_BOOKING_SUBMIT_REQUEST,
     DASHBOARD_BOOKING_DATE_WATCH,
+    DASHBOARD_BOOKING_DELETE,
+    DASHBOARD_BOOKING_NEW,
 } from "../../../actions/dashboardBooking";
 
 function mapStateToProps(state) {
@@ -19,6 +21,8 @@ function matchDispatchToProps(dispatch){
         resetEntries: () => dispatch(DASHBOARD_BOOKING_RESET()),
         submit: () => dispatch(DASHBOARD_BOOKING_SUBMIT_REQUEST()),
         watch: (date) => dispatch(DASHBOARD_BOOKING_DATE_WATCH(date)),
+        deleteEntry: (payload) => dispatch(DASHBOARD_BOOKING_DELETE(payload)),
+        saveEntry: (payload) => dispatch(DASHBOARD_BOOKING_NEW(payload)),
     }
 }
 

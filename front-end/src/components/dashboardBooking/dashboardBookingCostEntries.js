@@ -46,6 +46,7 @@ class DashboardContactDetails extends Component {
             value,
             uuid,
             field: 'pricesString',
+            type: 'costs'
         })
     }
 
@@ -57,6 +58,7 @@ class DashboardContactDetails extends Component {
             value: value === 'true' ? 1 : 0,
             uuid,
             field: 'edit',
+            type: 'costs'
         })
     }
 

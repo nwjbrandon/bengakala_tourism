@@ -87,7 +87,7 @@ class DashboardFAQ extends Component {
             text,
             heading,
             type: 'media',
-            edit: 0 // implement editable table did not succeed
+            edit: 1
         };
         saveEntry({ id, payload });
         this.setState({

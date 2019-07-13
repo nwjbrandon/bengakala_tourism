@@ -15,11 +15,17 @@ const bookingInfo = [
     const booked = _.map(_.countBy(listOfDates), (counts, date) => {
       return { date, counts };
     });
+    const bookingImagesData = await db.fetchData(TABLE_INFORMATION, { type: 'booking' });
+    const bookingImages = _.map(bookingImagesData, bookingImage => ({
+      title: bookingImage.title,
+      imgUrl: bookingImage.imgUrl,
+    }));
     res.json({
       data: {
         cost,
         excludedDates,
         booked,
+        bookingImages,
       }
     });
   }),
