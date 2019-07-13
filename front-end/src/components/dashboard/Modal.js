@@ -72,7 +72,7 @@ const Modal = ({
                   Cars: {cars} Vans: {van} Motorbikes: {motorbikes}
               </Typography>
               <Typography variant="body1" color="textSecondary" component="p">
-                  Payment Mode: {cash === 1? "Paid through Midtrans": "Pay by Cash"}
+                  Payment Mode: {cash === 1? "Pay by Cash" : "Paid through Midtrans"}
               </Typography>
           </CardContent>
           <CardActions>

@@ -18,7 +18,7 @@ exports.up = function(db) {
   return db.addColumn('TRANSACTIONS', 'cash',
       {
         type: 'boolean',
-        defaultValue: false,
+        defaultValue: true,
       });
 };
 
