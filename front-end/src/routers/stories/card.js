@@ -21,15 +21,15 @@ const ImageItem = (props) => {
         >
             <div style={{
                 height: "100%",
-                width: "100%",
+                width: "80%",
                 background: "#21212190",
                 display: 'flex',
                 flexDirection: 'column',
-                justifyContent: 'flex-end',
+                justifyContent: 'flex-start',
                 padding: "10%"
             }}
             >
-                <h3 style={{ fontFamily: "Montserrat, sans-serif", color: "white", }}>{props.date}</h3>
+                <h3 style={{ fontFamily: "Montserrat, sans-serif", color: "white", marginTop: 0, }}>{props.date}</h3>
                 <h3 style={{ fontFamily: "Montserrat, sans-serif", fontSize: "3em", marginTop: 0, color: "white" }}>{props.title}</h3>
             </div>
         </div >
