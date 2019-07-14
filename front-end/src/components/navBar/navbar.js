@@ -46,7 +46,7 @@ export default function ButtonAppBar() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: '#FFFFFF00' }}>
+      <AppBar position="static" style={{ backgroundColor: '#21212160' }}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Button color="inherit" component={Link} to="/" >Bengkala</Button>

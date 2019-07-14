@@ -6,7 +6,7 @@ const ImageItem = (props) => {
     return (
         <div
             style={{
-                backgroundImage: `url(${props.src})`,
+                backgroundImage: `url(${props.imgUrl})`,
                 maxHeight: "100%",
                 maxWidth: "100%",
                 height: 300,

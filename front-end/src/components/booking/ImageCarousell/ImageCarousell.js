@@ -8,7 +8,10 @@ import ImageItem from './ImageItem'
 
 const ImageCarousell = (props) => {
 
-    const children = props.data.map(i => <ImageItem {...i} />)
+    const [bookingImages, setBookingImages] = React.useState([]);
+
+    const children = bookingImages.map(i => <ImageItem {...i} />)
+    console.log("children", children)
 
     const changeActiveItem = (activeItemIndex) => setActiveItemIndex(activeItemIndex);
 
@@ -22,6 +25,23 @@ const ImageCarousell = (props) => {
     }, []);
 
 
+    React.useEffect(() => {
+        const fetchData = async () => {
+            const result = await API.get('/booking/info');
+            console.log(result.data)
+
+            const bookingImages = result.data.bookingImages;
+
+
+            setBookingImages([...bookingImages]);
+
+        };
+
+        fetchData();
+    }, []);
+
+
+
     const numofCards = windowWidth > 1100 ? 4 : (windowWidth > 800 ? 3 : (windowWidth > 600 ? 2 : 1));
 
 
@@ -30,35 +50,45 @@ const ImageCarousell = (props) => {
         <div style={{ margin: 10, paddingLeft: "2%", paddingRight: "2%", paddingBottom: "2%" }}>
             <h3 style={{ fontSize: '2em' }}>Explore Our Homes!</h3>
 
-            <ItemsCarousel
-                // Placeholder configurations
-                enablePlaceholder
-                numberOfPlaceholderItems={5}
-                minimumPlaceholderTime={1000}
-                placeholderItem={<div style={{ height: 300, background: '#900' }}>Placeholder</div>}
+            {children.length !== 0 ?
+                <ItemsCarousel
+                    // Placeholder configurations
+                    enablePlaceholder
+                    numberOfPlaceholderItems={5}
+                    minimumPlaceholderTime={1000}
+                    placeholderItem={<div style={{ height: 300, background: '#900' }}>Placeholder</div>}
 
-                numberOfCards={numofCards}
-                gutter={12}
-                showSlither={true}
-                firstAndLastGutter={true}
-                freeScrolling={false}
+                    numberOfCards={numofCards}
+                    gutter={12}
+                    showSlither={true}
+                    firstAndLastGutter={true}
+                    freeScrolling={false}
 
-                requestToChangeActive={changeActiveItem}
-                activeItemIndex={activeItemIndex}
-                activePosition={'center'}
+                    requestToChangeActive={changeActiveItem}
+                    activeItemIndex={activeItemIndex}
+                    activePosition={'center'}
 
-                chevronWidth={24}
-                rightChevron={[
-                    (<Chevron direction="left" />),
+                    chevronWidth={24}
+                    rightChevron={[
+                        (<Chevron direction="left" />),
 
-                ]}
-                leftChevron={[(<Chevron direction="right" />)]}
-                outsideChevron={false}
-            >
-                {children}
-            </ItemsCarousel>
+                    ]}
+                    leftChevron={[(<Chevron direction="right" />)]}
+                    outsideChevron={false}
+                >
+                    {children}
+                </ItemsCarousel>
 
-        </div>
+
+                :
+
+                <div>No data to display</div>
+
+
+            }
+
+
+        </div >
 
     );
 }

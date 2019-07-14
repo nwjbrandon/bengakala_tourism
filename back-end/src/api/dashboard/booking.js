@@ -18,6 +18,16 @@ const getBookingInfo = [
         edit: v.edit,
       };
     });
+    const bookingData = await db.fetchData(TABLE_INFORMATION, { type: 'booking' });
+    const booking = _.mapValues(_.groupBy(bookingData, 'uuid'), (value) => {
+      const v = _.head(value);
+      return {
+        title: v.title,
+        imgUrl: v.imgUrl,
+        type: v.type,
+        edit: v.edit,
+      };
+    });
     const excludedDatesData = await db.fetchData(TABLE_EXCLUDED_DATES);
     const excludedDates = _.map(excludedDatesData, (data) => {
       return [
@@ -29,6 +39,7 @@ const getBookingInfo = [
       data: {
         costs,
         dates: excludedDates,
+        booking,
       }
     });
   }),
@@ -36,19 +47,32 @@ const getBookingInfo = [
 
 const postBookingInfo = [
   wrapAsync(async (req, res) => {
-    const receivedData = req.body.data.displayedData;
-    const existingUUID = await db.filterFieldList(TABLE_INFORMATION, {type: 'cost'}, 'uuid');
+    const { displayedData: { costs, booking }, excludedDates } = req.body.data;
+
+    const existingCostsUUID = await db.filterFieldList(TABLE_INFORMATION, {type: 'cost'}, 'uuid');
     const {
-      updateList,
-      saveList,
-      deleteList
-    } = processedDataToChangeInDB({receivedData, existingUUID});
+      updateList: updateCostList,
+      saveList: saveCostList,
+      deleteList: deleteCostList
+    } = processedDataToChangeInDB({ receivedData: costs, existingUUID: existingCostsUUID});
     await db.changeListData(TABLE_INFORMATION, {
-      updateList,
-      saveList,
-      deleteList,
+      updateList: updateCostList,
+      saveList: saveCostList,
+      deleteList: deleteCostList,
     });
-    const excludedDates = req.body.data.excludedDates;
+
+    const existingBookingUUID = await db.filterFieldList(TABLE_INFORMATION, {type: 'booking'}, 'uuid');
+    const {
+      updateList: updateBookingList,
+      saveList: saveBookingList,
+      deleteList: deleteBookingList
+    } = processedDataToChangeInDB({ receivedData: booking, existingUUID: existingBookingUUID});
+    await db.changeListData(TABLE_INFORMATION, {
+      updateList: updateBookingList,
+      saveList: saveBookingList,
+      deleteList: deleteBookingList,
+    });
+
     await db.deleteData(TABLE_EXCLUDED_DATES);
     await excludedDates.forEach(async(item) => {
       await db.saveData(TABLE_EXCLUDED_DATES, {

@@ -12,12 +12,20 @@ const bookingInfo = [
     const excludedDates = _.map(excludedDatesData, (data) => data.date);
     const transactions = await db.fetchData(TABLE_TRANSACTIONS);
     const listOfDates = _.flatten(_.map(transactions, t => eachDay(t.dateFrom, t.dateTo)));
-    const booked = _.countBy(listOfDates);
+    const booked = _.map(_.countBy(listOfDates), (counts, date) => {
+      return { date, counts };
+    });
+    const bookingImagesData = await db.fetchData(TABLE_INFORMATION, { type: 'booking' });
+    const bookingImages = _.map(bookingImagesData, bookingImage => ({
+      title: bookingImage.title,
+      imgUrl: bookingImage.imgUrl,
+    }));
     res.json({
       data: {
         cost,
         excludedDates,
         booked,
+        bookingImages,
       }
     });
   }),

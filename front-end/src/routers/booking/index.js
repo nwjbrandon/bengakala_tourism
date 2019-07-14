@@ -36,7 +36,6 @@ class Accomodation extends React.Component {
       height: "auto",
       margin: 0,
       backgroundImage: `url(${bg})`,
-      maxHeight: "100vh",
       maxWidth: "100%",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
@@ -62,7 +61,7 @@ class Accomodation extends React.Component {
           <AccomodationsForm />
         </div>
 
-        <ImageCarousell data={[{ src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }, { src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }, { src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }, { src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }, { src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }]} />
+        <ImageCarousell />
 
 
       </div>

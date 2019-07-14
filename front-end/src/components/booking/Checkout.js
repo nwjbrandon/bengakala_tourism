@@ -108,7 +108,7 @@ const Checkout = (props) => {
       props.updateCost(costObj);
 
       props.updateDates(excludeDates);
-      // setBookedData([...result.data.booked])
+      setBookedData([...result.data.booked])
 
 
       console.log(excludeDates)
@@ -123,7 +123,7 @@ const Checkout = (props) => {
 
   const constructStringDate = (date) => {
     const DateObj = date ? new Date(date) : new Date();
-    const str = `${DateObj.getFullYear()}-${DateObj.getMonth()}-${DateObj.getDate()}`
+    const str = `${DateObj.getFullYear()}-${DateObj.getMonth() + 1}-${DateObj.getDate()}`
     console.log(str)
     return str
   }
@@ -228,19 +228,25 @@ const Checkout = (props) => {
   const fullyBookedDateChosen = () => {
     const checkIn = new Date(props.tripDetails.checkIn);
     const checkOut = new Date(props.tripDetails.checkOut);
+    console.log(checkIn)
+    console.log(checkOut)
     let maxFullDays = 0;
     let maxFullDate = null;
+    console.log("Booked", booked)
     const fallswithin = booked.filter((item) => {
       const itemDate = new Date(item.date)
+
       return (itemDate >= checkIn && itemDate <= checkOut);
     });
 
+    console.log("falls within", fallswithin);
+
     fallswithin.forEach((item) => {
       const itemDate = new Date(item.date)
-
-      if (maxFullDays < item.occupancy) {
-        maxFullDays = item.occupancy;
+      if (maxFullDays < item.counts) {
+        maxFullDays = item.counts;
         maxFullDate = itemDate;
+
       }
 
     });
@@ -276,9 +282,10 @@ const Checkout = (props) => {
         props.onError("Sorry, we are not able to accommodate you on some dates that you have Chosen. Please reselect check in and check out dates.");
         setSnackBar(true);
       } else {
-        const { dateWithLeastSlots, slotsAvailable } = fullyBookedDateChosen();
-        if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) > slotsAvailable) {
-          props.onError(`Sorry we do not have enough slots on ${constructStringDate(dateWithLeastSlots)} please reselect your check in and check out Dates`);
+        const { maxFullDate, maxFullDays } = fullyBookedDateChosen();
+        console.log("TESTING DATE QUOTA", maxFullDate, maxFullDays)
+        if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) > (30 - maxFullDays)) {
+          props.onError(`Sorry we do not have enough slots on ${constructStringDate(maxFullDate)} please reselect your check in and check out Dates`);
           setSnackBar(true);
         } else {
           props.onError("");

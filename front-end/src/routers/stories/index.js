@@ -2,7 +2,6 @@ import React from 'react';
 import Modal from '../../components/stories/Modal'
 import Navbar from "../../components/navBar/navbar";
 import Card from '@material-ui/core/Card';
-import Paper from '@material-ui/core/Paper';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
@@ -23,6 +22,8 @@ import MyCard from './card'
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    background: "#1976d2",
+    minHeight: "100vh"
   },
   card: {
     margin: `${theme.spacing(9)}px auto`,
@@ -76,7 +77,7 @@ class Attraction extends React.Component {
   render() {
     const { classes, data } = this.props;
     const { page, rowsPerPage } = this.state;
-    const maxPage = _floor(_div(data.length, rowsPerPage));
+    const maxPage = _floor(_div(data.length - 1, rowsPerPage));
 
     return (
       <div className={classes.root}>

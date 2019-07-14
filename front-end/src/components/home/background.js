@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import Bg from '../../assets/img/bgimg.jpg'
+import Navbar from '../navBar/navbar'
 
 const bgStyles = {
   backgroundImage: `url(${Bg})`,
   margin: 'none auto',
-  height: '90vh',
+  height: '100vh',
   backgroundSize: 'cover',
   display: 'flex',
   flexDirection: 'column',
@@ -15,7 +16,7 @@ const bgStyles = {
   maxWidth: '100%',
   boxSizing: 'inherit',
 };
-const captionWrap ={
+const captionWrap = {
   maxWidth: '500px',
   margin: '0 auto',
   alignItems: 'center',
@@ -45,15 +46,16 @@ class Background extends Component {
   render() {
     return (
 
-        <div style={bgStyles} >
-          <div style={captionWrap}>
-            <div>
-              <h1 style={topCaption}>Bali, Indonesia</h1>
-            </div>
-            <h2 style={bgCaption}>Bengkala</h2>
-            <p style={banner}>Explore Kolok and many more!</p>
+      <div style={bgStyles} >
+        <Navbar />
+        <div style={captionWrap}>
+          <div>
+            <h1 style={topCaption}>Bali, Indonesia</h1>
           </div>
+          <h2 style={bgCaption}>Bengkala</h2>
+          <p style={banner}>Explore Kolok and many more!</p>
         </div>
+      </div>
 
 
     );
