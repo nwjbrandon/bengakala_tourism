@@ -196,7 +196,7 @@ class DashboardFAQ extends Component {
                             Reset
                         </Button>
                         <Button variant="contained" color="secondary" onClick={this.submit} className={classes.button}>
-                            Submit
+                            Confirm changes
                         </Button>
                     </Grid>
                 </main>
