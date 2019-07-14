@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles';
 import { Paper } from '@material-ui/core';
+import API from '../../api'
 import calculator from './calculation'
 
 import * as actionTypes from '../../actions/booking';

@@ -5,7 +5,7 @@ const dateDiffIndays = (date1, date2) => {
   const dt2 = new Date(date2);
   return Math.floor((Date.UTC(dt2.getFullYear(), dt2.getMonth(),
     dt2.getDate()) - Date.UTC(dt1.getFullYear(), dt1.getMonth(),
-      dt1.getDate())) / (1000 * 60 * 60 * 24));
+    dt1.getDate())) / (1000 * 60 * 60 * 24));
 };
 
 
@@ -23,7 +23,7 @@ const calculationsPost = [
       const bigVal = new Big(val);
       return bigVal.mul(groupSize).mul(numOfDays);
     };
-    
+
     const accomodation = itemCost(costData.accomodation);
 
     let breakfast, lunch, dinner;
