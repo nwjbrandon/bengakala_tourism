@@ -171,7 +171,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={username}
-                        placeholder="Ex. test@example.com"
+                        placeholder="Eg. 123@example.com"
                         label="Email"
                         className={classes.button}
                         onChange={(event) => { this.setState({ username: event.target.value})}}
@@ -180,7 +180,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={password}
-                        placeholder="Ex. password"
+                        placeholder="Eg. password"
                         label="Current Password"
                         type="password"
                         className={classes.button}
@@ -191,7 +191,7 @@ class DashboardFAQ extends Component {
                         fullWidth
                         type="password"
                         value={confirmedPassword}
-                        placeholder="Ex. password"
+                        placeholder="Eg. password"
                         label="New Password"
                         className={classes.button}
                         onChange={(event) => { this.setState({ confirmedPassword: event.target.value })}}
@@ -251,8 +251,8 @@ class DashboardFAQ extends Component {
                             variant="outlined"
                             fullWidth
                             value={newUsername}
-                            placeholder="Ex. test@example.com"
-                            label="Username"
+                            placeholder="Eg. 123@example.com"
+                            label="Email"
                             className={classes.button}
                             onChange={(event) => { this.setState({ newUsername: event.target.value })}}
                         />
@@ -260,7 +260,7 @@ class DashboardFAQ extends Component {
                             variant="outlined"
                             fullWidth
                             value={newPassword}
-                            placeholder="Ex. password"
+                            placeholder="Eg. password"
                             label="Password"
                             type="password"
                             className={classes.button}
@@ -270,8 +270,8 @@ class DashboardFAQ extends Component {
                             variant="outlined"
                             fullWidth
                             value={newConfirmedPassword}
-                            placeholder="Ex. password"
-                            label="Confirmed Password"
+                            placeholder="Eg. password"
+                            label="Confirm Password"
                             type="password"
                             className={classes.button}
                             onChange={(event) => { this.setState({ newConfirmedPassword: event.target.value })}}
@@ -280,7 +280,7 @@ class DashboardFAQ extends Component {
                             variant="outlined"
                             fullWidth
                             value={newJobTitle}
-                            placeholder="Ex. Officer"
+                            placeholder="Eg. Officer"
                             label="Job Title"
                             className={classes.button}
                             onChange={(event) => { this.setState({ newJobTitle: event.target.value })}}
@@ -289,7 +289,7 @@ class DashboardFAQ extends Component {
                             variant="outlined"
                             fullWidth
                             value={newPhone}
-                            placeholder="Ex. 123456789"
+                            placeholder="Eg. +62 1234 5678"
                             label="Phone"
                             className={classes.button}
                             onChange={(event) => { this.setState({ newPhone: event.target.value })}}

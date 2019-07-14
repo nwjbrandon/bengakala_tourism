@@ -109,8 +109,8 @@ class DashboardHomeStories extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].title}
-                                        placeholder="Ex. One Island, Many Destination"
-                                        label="Title of Story"
+                                        placeholder="Eg. One Island, Many Destination"
+                                        label="Title of item"
                                         className={classes.button}
                                         onChange={this.watchTitle}
                                         id={item}
@@ -131,8 +131,8 @@ class DashboardHomeStories extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].text}
-                                        placeholder="Ex. On Bali you can lose yourself in the chaos of Kuta..."
-                                        label="Content of Story"
+                                        placeholder="Eg. On Bali you can lose yourself in the chaos of Kuta..."
+                                        label="Content of item"
                                         className={classes.button}
                                         onChange={this.watchText}
                                         id={item}

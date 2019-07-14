@@ -83,7 +83,7 @@ class DashboardContactDetails extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].text}
-                                        placeholder="Ex. You can contact us at XXX-XXXX-XXXX."
+                                        placeholder="Eg. You can contact us at: Bengkala / +62 1234 5678 / 10:00am"
                                         label="Contact Details"
                                         className={classes.button}
                                         onChange={this.watchText}

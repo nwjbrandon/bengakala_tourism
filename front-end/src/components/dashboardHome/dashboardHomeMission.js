@@ -109,8 +109,8 @@ class DashboardHomeMission extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].title}
-                                        placeholder="Ex. Mission"
-                                        label="Name"
+                                        placeholder="Eg. BALI’S DEAF VILLAGE, EVERYBODY SPEAK SIGN LANGUAGE"
+                                        label="Title"
                                         className={classes.button}
                                         onChange={this.watchTitle}
                                         id={item}
@@ -120,7 +120,7 @@ class DashboardHomeMission extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].imgUrl}
-                                        placeholder="Eg. https://imgur.com/a/o0v57.jp.jpg"
+                                        placeholder="Eg. https://i.imgur.com/E8AP41I.jpg"
                                         label="Image Url"
                                         className={classes.button}
                                         onChange={this.watchImgUrl}
@@ -131,8 +131,8 @@ class DashboardHomeMission extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].text}
-                                        placeholder="Ex. The mere mention of Bali evokes thoughts of a paradise..."
-                                        label="Statement"
+                                        placeholder="Eg. Have you ever imagined live in a village and communicate to each other without even say any words?"
+                                        label="Full summary"
                                         className={classes.button}
                                         onChange={this.watchText}
                                         id={item}

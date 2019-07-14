@@ -117,8 +117,8 @@ class DashboardFAQEntries extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].title}
-                                        placeholder="Ex. Funny Random Meme Dump"
-                                        label="Name of Event"
+                                        placeholder="Eg. Our first visit to Bengkala Village!"
+                                        label="Name of Story"
                                         className={classes.button}
                                         onChange={this.watchTitle}
                                         id={item}
@@ -128,7 +128,7 @@ class DashboardFAQEntries extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].imgUrl}
-                                        placeholder="Ex. https://imgur.com/a/o0v57.jp.jpg"
+                                        placeholder="Eg. https://imgur.com/a/o0v57.jp.jpg"
                                         label="Imgur URL Links"
                                         className={classes.button}
                                         onChange={this.watchImgUrl}
@@ -139,8 +139,8 @@ class DashboardFAQEntries extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].heading}
-                                        placeholder="Ex. Come visit..."
-                                        label="Summary of Event"
+                                        placeholder="Eg. We visited Bengkala village last month and loved it!!"
+                                        label="Summary of Story"
                                         className={classes.button}
                                         onChange={this.watchHeading}
                                         id={item}
@@ -150,8 +150,8 @@ class DashboardFAQEntries extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].text}
-                                        placeholder="Ex. Come visit..."
-                                        label="Description of Event"
+                                        placeholder="Eg. Last month, we visited Bengkala village to experience our first ever village home-stay experience. Bengkala village is unique in the way they integrate deaf members of community so seamlessly. Overall, it was fun, enjoyable and a genuine escape from our usual lives!"
+                                        label="Full description of Story"
                                         className={classes.button}
                                         onChange={this.watchText}
                                         id={item}

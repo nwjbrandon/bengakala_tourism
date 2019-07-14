@@ -138,8 +138,8 @@ class DashboardHome extends Component {
                         variant="outlined"
                         fullWidth
                         value={title}
-                        placeholder="Eg. History of Bengkala"
-                        label="Heading"
+                        placeholder="Eg. One Island, Many Destination"
+                        label="Title of item"
                         className={classes.button}
                         onChange={this.watchTitle}
                     />
@@ -158,8 +158,8 @@ class DashboardHome extends Component {
                         variant="outlined"
                         fullWidth
                         value={text}
-                        placeholder="Eg. Bengkala has a rich historical culture..."
-                        label="Description"
+                        placeholder="Eg. On Bali you can lose yourself in the chaos of Kuta..."
+                        label="Content of item"
                         className={classes.button}
                         onChange={this.watchText}
                     />

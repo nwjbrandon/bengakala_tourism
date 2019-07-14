@@ -125,15 +125,15 @@ class DashboardBooking extends Component {
                 <main className={classes.content}>
                     <div className={classes.toolbar} />
                     <Typography variant="h4" align="center" style={{ paddingTop: 40 }}>
-                        Create new Pictures
+                        Create new Accommodation item
                     </Typography>
                     <TextField
                         multiline={true}
                         variant="outlined"
                         fullWidth
                         value={title}
-                        placeholder="Eg. Funny Random Meme Dump"
-                        label="Name of Event"
+                        placeholder="Eg. Chief's House 1"
+                        label="Name of Accommodation/House"
                         className={classes.button}
                         onChange={(event) => this.setState({ title: event.currentTarget.value })}
                     />
@@ -153,7 +153,7 @@ class DashboardBooking extends Component {
                         </Button>
                     </Grid>
                     <Typography variant='h4'>
-                        Edit Pictures
+                        Edit Accommodation items
                     </Typography>
                     <DashboardBookingAccommodationEntries
                         entryAction={this.deleteEntry}

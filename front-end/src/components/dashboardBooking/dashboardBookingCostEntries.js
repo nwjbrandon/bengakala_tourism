@@ -84,7 +84,7 @@ class DashboardContactDetails extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].pricesString}
-                                        placeholder="Ex. 5000000"
+                                        placeholder="Eg. 5000000"
                                         label="Cost"
                                         className={classes.button}
                                         onChange={this.watchPricesString}

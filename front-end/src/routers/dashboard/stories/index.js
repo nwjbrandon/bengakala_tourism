@@ -145,8 +145,8 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={title}
-                        placeholder="Eg. Funny Random Meme Dump"
-                        label="Name of Event"
+                        placeholder="Eg. Our first visit to Bengkala Village!"
+                        label="Name of Story"
                         className={classes.button}
                         onChange={this.watchTitle}
                     />
@@ -165,8 +165,8 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={heading}
-                        placeholder="Eg. Come visit..."
-                        label="Summary of Event"
+                        placeholder="Eg. We visited Bengkala village last month and loved it!!"
+                        label="Summary of Story"
                         className={classes.button}
                         onChange={this.watchHeading}
                     />
@@ -175,8 +175,8 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={text}
-                        placeholder="Eg. Come visit..."
-                        label="Description of Event"
+                        placeholder="Eg. Last month, we visited Bengkala village to experience our first ever village home-stay experience. Bengkala village is unique in the way they integrate deaf members of community so seamlessly. Overall, it was fun, enjoyable and a genuine escape from our usual lives!"
+                        label="Full description of Story"
                         className={classes.button}
                         onChange={this.watchText}
                     />
