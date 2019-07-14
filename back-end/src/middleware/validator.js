@@ -158,7 +158,7 @@ export const dashboardHomeValidators = [
         throw Error('Cannot be empty');
       }
       _.map(data.stories, (item) => {
-        if (item.title === '' || item.text === '') {
+        if (item.title === '' || item.text === '' || item.imgUrl === '') {
           throw Error('Field cannot be empty');
         }
         if (item.edit === 1) {
@@ -166,7 +166,7 @@ export const dashboardHomeValidators = [
         }
       });
       _.map(data.objective, (item) => {
-        if (item.title === '' || item.text === '') {
+        if (item.title === '' || item.text === '' || item.imgUrl === '') {
           throw Error('Field cannot be empty');
         }
         if (item.edit === 1) {

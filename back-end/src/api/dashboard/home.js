@@ -14,6 +14,7 @@ const getContactInfo = [
         text: v.text,
         type: v.type,
         edit: v.edit,
+        imgUrl: v.imgUrl,
       };
     });
     const missions = await db.fetchData(TABLE_INFORMATION, { type: 'mission' });
@@ -24,6 +25,7 @@ const getContactInfo = [
         text: v.text,
         type: v.type,
         edit: v.edit,
+        imgUrl: v.imgUrl,
       };
     });
     res.json({

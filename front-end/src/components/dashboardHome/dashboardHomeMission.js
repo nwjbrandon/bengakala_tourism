@@ -37,6 +37,7 @@ class DashboardHomeMission extends Component {
         this.watchTitle = this.watchTitle.bind(this);
         this.watchText = this.watchText.bind(this);
         this.editEntry = this.editEntry.bind(this);
+        this.watchImgUrl = this.watchImgUrl.bind(this);
     }
 
     watchTitle(event) {
@@ -47,6 +48,18 @@ class DashboardHomeMission extends Component {
             value,
             uuid,
             field: 'title',
+            type: 'objective',
+        })
+    }
+
+    watchImgUrl(event) {
+        const value = event.target.value;
+        const uuid = event.target.id;
+        const { watch } = this.props;
+        watch({
+            value,
+            uuid,
+            field: 'imgUrl',
             type: 'objective',
         })
     }
@@ -106,6 +119,17 @@ class DashboardHomeMission extends Component {
                                         multiline={true}
                                         variant="outlined"
                                         fullWidth
+                                        value={data[item].imgUrl}
+                                        placeholder="Eg. https://imgur.com/a/o0v57.jp.jpg"
+                                        label="Image Url"
+                                        className={classes.button}
+                                        onChange={this.watchImgUrl}
+                                        id={item}
+                                    />
+                                    <TextField
+                                        multiline={true}
+                                        variant="outlined"
+                                        fullWidth
                                         value={data[item].text}
                                         placeholder="Ex. The mere mention of Bali evokes thoughts of a paradise..."
                                         label="Statement"
@@ -115,9 +139,14 @@ class DashboardHomeMission extends Component {
                                     />
                                 </Grid>
                                 :
-                                <Typography>
-                                    { data[item].text }
-                                </Typography>
+                                <div>
+                                    <Typography>
+                                        { data[item].imgUrl }
+                                    </Typography>
+                                    <Typography>
+                                        { data[item].text }
+                                    </Typography>
+                                </div>
                             }
                         </ExpansionPanelDetails>
                         <Grid container alignItems="flex-start" justify="flex-end" direction="row">

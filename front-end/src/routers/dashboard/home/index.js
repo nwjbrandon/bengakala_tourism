@@ -43,6 +43,7 @@ class DashboardHome extends Component {
             data: {},
             title: '',
             text: '',
+            imgUrl: '',
         };
         this.deleteEntry = this.deleteEntry.bind(this);
         this.resetEntries = this.resetEntries.bind(this);
@@ -50,6 +51,7 @@ class DashboardHome extends Component {
         this.watchTitle = this.watchTitle.bind(this);
         this.watchText = this.watchText.bind(this);
         this.submit = this.submit.bind(this);
+        this.watchImgUrl = this.watchImgUrl.bind(this);
     }
 
     componentDidMount() {
@@ -74,10 +76,12 @@ class DashboardHome extends Component {
         const {
             title,
             text,
+            imgUrl,
         } = this.state;
         const payload = {
             title,
             text,
+            imgUrl,
             type: 'home',
             edit: 1
         };
@@ -85,6 +89,7 @@ class DashboardHome extends Component {
         this.setState({
             title: '',
             text: '',
+            imgUrl: '',
         });
     }
 
@@ -100,6 +105,12 @@ class DashboardHome extends Component {
         });
     }
 
+    watchImgUrl(event) {
+        this.setState({
+            imgUrl: event.target.value
+        });
+    }
+
     submit() {
         const { submit } = this.props;
         submit();
@@ -107,7 +118,7 @@ class DashboardHome extends Component {
 
     render() {
         const { classes } = this.props;
-        const { title, text } = this.state;
+        const { title, text, imgUrl } = this.state;
         const navTitle = 'Home item';
         return (
             <div className={classes.root}>
@@ -131,6 +142,16 @@ class DashboardHome extends Component {
                         label="Heading"
                         className={classes.button}
                         onChange={this.watchTitle}
+                    />
+                    <TextField
+                        multiline={true}
+                        variant="outlined"
+                        fullWidth
+                        value={imgUrl}
+                        placeholder="Eg. https://imgur.com/a/o0v57.jp.jpg"
+                        label="Image Url"
+                        className={classes.button}
+                        onChange={this.watchImgUrl}
                     />
                     <TextField
                         multiline={true}
