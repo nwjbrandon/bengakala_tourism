@@ -14,7 +14,10 @@ const faqInfo = [
       }));
     const groupedFaqs = _.groupBy(ungroupedFaqs, 'heading');
     res.json({
-      data: groupedFaqs,
+      data: {
+          groupedFaqs,
+          ungroupedFaqs,
+      },
     });
   }),
 ];
