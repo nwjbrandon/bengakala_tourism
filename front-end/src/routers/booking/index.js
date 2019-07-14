@@ -6,7 +6,6 @@ import Navbar from "../../components/navBar/navbar";
 import bg from '../../assets/img/bgHouse.jpg'
 
 import { connect } from 'react-redux'
-import Particles from 'react-particles-js';
 
 import ImageCarousell from '../../components/booking/ImageCarousell/ImageCarousell'
 // import kiwi from '/assets/img/kiwi.svg'
@@ -18,14 +17,7 @@ class Accomodation extends React.Component {
       data: ''
     }
   }
-  componentDidMount() {
-    API.get('/booking/info').then(res => {
-      console.log("RES");
-      console.log(res.excludedData);
-      // store.dispatch({ type: "EXCLUDE_DATES", payload: res.excludedData })
-      // this.setState({ data: res });
-    })
-  }
+
   render() {
 
     const divStyle = {
@@ -44,14 +36,6 @@ class Accomodation extends React.Component {
 
     };
 
-    // const containerdivStyle = {
-    //   width: "auto",
-    //   height: "auto",
-    //   backgroundColor: '#CCC',
-    //   margin: 0,
-    //   padding: 0
-
-    // };
     return (
       <div >
 

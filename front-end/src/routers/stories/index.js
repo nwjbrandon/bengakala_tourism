@@ -3,11 +3,7 @@ import Modal from '../../components/stories/Modal'
 import Navbar from "../../components/navBar/navbar";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
@@ -89,27 +85,7 @@ class Attraction extends React.Component {
                 <Grid item xs={12} sm={6}>
                   <Card className={classes.card} key={item.title}>
                     <CardActionArea onClick={() => this.handleOpenModal({ ...item })}>
-                      {/*<CardMedia
-                        component="img"
-                        alt={item.title}
-                        height="300"
-                        image={item.imgUrl}
-                        title={item.title}
-                      />
-                      <CardContent>
-                        <Typography gutterBottom variant="body2" component="h2">
-                          {dateFnsFormat(item.createdAt, 'YYYY/MM/DD HH:mm')}
-                        </Typography>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          {item.title}
-                        </Typography>
-                        <Typography variant="body1" color="textSecondary" component="p">
-                          {item.summary}
-                        </Typography>
-                      </CardContent>*/}
-
                       <MyCard src={item.imgUrl} date={dateFnsFormat(item.createdAt, 'YYYY/MM/DD HH:mm')} title={item.title} summary={item.summary} />
-
                     </CardActionArea>
 
                   </Card>
