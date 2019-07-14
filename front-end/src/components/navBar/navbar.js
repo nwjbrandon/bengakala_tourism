@@ -26,11 +26,11 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const sections =['stories',  'booking', 'explore' ,'contact', 'faq'];
-const navlinks = sections.map( section => {
-    return(
-      <Button key={section} color="inherit" component={Link} to={section}>{ section }</Button>
-    )
+const sections = ['stories', 'booking', 'explore', 'contact', 'faq'];
+const navlinks = sections.map(section => {
+  return (
+    <Button key={section} color="inherit" component={Link} to={section}>{section}</Button>
+  )
 });
 
 export default function ButtonAppBar() {
@@ -46,7 +46,7 @@ export default function ButtonAppBar() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: 'green' }}>
+      <AppBar position="static" style={{ backgroundColor: '#21212160' }}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Button color="inherit" component={Link} to="/" >Bengkala</Button>
@@ -58,21 +58,21 @@ export default function ButtonAppBar() {
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="Menu" onClick={handleClick}>
               <MenuIcon />
             </IconButton>
-              <Menu
-                  id="simple-menu"
-                  anchorEl={anchorEl}
-                  keepMounted
-                  open={Boolean(anchorEl)}
-                  onClose={handleClose}
-              >
-                  {
-                    sections.map(section => (
-                      <MenuItem className={classes.menuItem} onClick={handleClose} component={Link} to={section} key={section}>
-                        { section }
-                      </MenuItem>
-                      ))
-                  }
-              </Menu>
+            <Menu
+              id="simple-menu"
+              anchorEl={anchorEl}
+              keepMounted
+              open={Boolean(anchorEl)}
+              onClose={handleClose}
+            >
+              {
+                sections.map(section => (
+                  <MenuItem className={classes.menuItem} onClick={handleClose} component={Link} to={section} key={section}>
+                    {section}
+                  </MenuItem>
+                ))
+              }
+            </Menu>
           </Hidden>
         </Toolbar>
       </AppBar>

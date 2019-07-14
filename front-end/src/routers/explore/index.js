@@ -12,16 +12,17 @@ class TutorialPage extends React.Component {
 
   render() {
     const divStyle = {
-      padding: "2%",
+      padding: "0%",
       width: "auto",
-      height: "150vh",
+      minHeight: "100vh",
       textAlign: "left",
-      justifyContent: "center"
+      justifyContent: "center",
+      
     };
 
     const { data } = this.props;
     return (
-      <div>
+      <div style={{ background: "#00897b" ,height: "auto" }}>
         <Navbar />
         <div style={divStyle}>
           <Tutorial data={data} />

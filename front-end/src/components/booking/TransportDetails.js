@@ -88,9 +88,9 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
     return {
-        onCarChange: (val) => dispatch({ type: actionTypes.CARS, payload: val }),
-        onVanChange: (val) => dispatch({ type: actionTypes.VANS, payload: val }),
-        onBikeChange: (val) => dispatch({ type: actionTypes.BIKES, payload: val }),
+        onCarChange: (val) => dispatch({ type: actionTypes.CARS, payload: parseInt(val, 10) }),
+        onVanChange: (val) => dispatch({ type: actionTypes.VANS, payload: parseInt(val, 10) }),
+        onBikeChange: (val) => dispatch({ type: actionTypes.BIKES, payload: parseInt(val, 10) }),
     }
 }
 

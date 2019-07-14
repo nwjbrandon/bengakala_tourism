@@ -33,7 +33,7 @@ const menuOptions = [
         icon: <Store />
     },
     {
-        title: 'Bulletin',
+        title: 'Stories',
         to: '/dashboard/stories',
         icon: <Terrain />
     },

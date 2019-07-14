@@ -69,12 +69,11 @@ function SimpleExpansionPanel({ data }) {
 
   const title = {
     color: "white",
-    textAlign: "centre",
-    marginBottom: "2%",
+    textAlign: "center",
     background: "#00000099",
-    borderRadius: "5px",
     padding: "5px",
-    height: "auto"
+    height: "auto",
+    fontSize: '2.5vw',
   };
 
   const videoTitleList = data.map((item, index) => {
@@ -87,26 +86,26 @@ function SimpleExpansionPanel({ data }) {
     <div className={classes.root}>
       {
         data.length === 0
-            ? <div />
-            :
-            <div>
-              <Typography variant="h4" style={title}>Learn more about our very own culture, history, and sign language : The Kata Kolok!!</Typography>
-              <Typography variant="h5" className={classes.videoDescription}>{data[videoId].videoDescription}</Typography>
-              <div className={classes.container}>
-                <Grid style={{ height: "100%" }} container spacing={0}>
-                  <Grid item xs={12} sm={12} md={9}>
-                    <div className={classes.demo}>
-                      <Youtube youtubeId={data[videoId].videoLink} />
-                    </div>
-                  </Grid>
-                  <Grid item xs={12} sm={12} md={3}>
-                    <div className={classes.demo}>
-                      {videoTitleList}
-                    </div>
-                  </Grid>
+          ? <div />
+          :
+          <div>
+            <Typography variant="h4" style={title}>Learn more about our very own culture, history, and sign language : The Kata Kolok!!</Typography>
+            <Typography variant="h5" className={classes.videoDescription}>{data[videoId].videoDescription}</Typography>
+            <div className={classes.container}>
+              <Grid style={{ height: "100%" }} container spacing={0}>
+                <Grid item xs={12} sm={12} md={9}>
+                  <div className={classes.demo}>
+                    <Youtube youtubeId={data[videoId].videoLink} />
+                  </div>
                 </Grid>
-              </div>
+                <Grid item xs={12} sm={12} md={3}>
+                  <div className={classes.demo}>
+                    {videoTitleList}
+                  </div>
+                </Grid>
+              </Grid>
             </div>
+          </div>
       }
     </div>
   );

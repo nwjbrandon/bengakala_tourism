@@ -9,9 +9,8 @@ class App extends Component {
   render() {
     return(
       <div>
-          <Navbar />
           <Background />
-        <Content />
+          <Content />
           <SuccessToast />
           <ErrorToast />
       </div>

@@ -1,18 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Switch, Router } from 'react-router-dom';
-
+import IdleTimer from 'react-idle-timer'
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import {composeWithDevTools} from 'redux-devtools-extension';
-
+import _includes from 'lodash/includes';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
 import { PersistGate } from 'redux-persist/integration/react';
 
 import createSagaMiddleware from "redux-saga";
 
-import { routerMiddleware } from 'connected-react-router';
+import { routerMiddleware, } from 'connected-react-router';
 
 // Non Protected Routes
 import Accommodation from './routers/booking';
@@ -40,7 +40,7 @@ import './global.css'
 import ProtectedRoutes from './app';
 import rootReducers from './reducers';
 import rootSagas from "./sagas";
-
+import { ADMIN_LOGOUT_REQUEST } from "./actions/admin";
 import { createBrowserHistory } from 'history';
 export const history = createBrowserHistory();
 
@@ -76,12 +76,32 @@ const store = createStore(
     persistedReducer,
     enhancers,
 );
+
 sagaMiddleware.run(rootSagas);
 const persistor = persistStore(store);
+
+const onIdle = () => {
+  if (_includes([
+      '/dashboard',
+      '/dashboard/home',
+      '/dashboard/booking',
+      '/dashboard/stories',
+      '/dashboard/settings',
+      '/dashboard/contact',
+      '/dashboard/faq',
+      '/dashboard/explore'
+  ], window.location.pathname)) {
+    store.dispatch(ADMIN_LOGOUT_REQUEST());
+  }
+};
 
 const routing = (
     <Provider store={ store }>
       <PersistGate persistor={ persistor } loading={null}>
+        <IdleTimer
+            onIdle={onIdle}
+            debounce={250}
+            timeout={1000 * 60 * 30} />
         <Router history={history}>
           <Switch>
             <ProtectedRoutes exact path="/" component={ Home } secret={false} />

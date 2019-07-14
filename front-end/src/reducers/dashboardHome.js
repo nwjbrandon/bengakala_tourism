@@ -57,7 +57,6 @@ export const dashboardHomeReducer = handleActions({
     },
     "DASHBOARD_HOME_NEW": (state, action) => {
         const { id, payload, type } = action.payload;
-        payload.edit = 0; // implementation of editable table not successful
         const { displayedData }= _cloneDeep(state);
         displayedData[type][id] = payload;
         return {

@@ -69,12 +69,24 @@ export const adminValidators = [
 export const dashboardBookingValidators = [
   check('data')
     .custom((data) => {
-      if (_.isEmpty(data.displayedData)) {
+      const { booking, costs } = data.displayedData;
+      if (_.isEmpty(booking)) {
         throw Error('Cannot be empty');
       }
-      _.map(data.displayedData, (item) => {
+      if (_.isEmpty(costs)) {
+        throw Error('Cannot be empty');
+      }
+      _.map(costs, (item) => {
         if (_.isNaN(_.toNumber(item.pricesString)) || item.pricesString === '') {
           throw Error('Not a valid number');
+        }
+        if (item.edit === 1) {
+          throw Error('You need to update your changes.');
+        }
+      });
+      _.map(booking, (item) => {
+        if ( item.imgUrl === '' || item.title === '') {
+            throw Error('Field cannot be empty');
         }
         if (item.edit === 1) {
           throw Error('You need to update your changes.');

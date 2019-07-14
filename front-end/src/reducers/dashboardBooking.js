@@ -1,10 +1,17 @@
 import { handleActions } from 'redux-actions';
 import _cloneDeep from 'lodash/cloneDeep';
 import isSameDay from 'date-fns/is_same_day';
+import _omit from "lodash/omit";
 
 const initialState = {
-    originalData: {},
-    displayedData: {},
+    originalData: {
+        costs: {},
+        booking: {},
+    },
+    displayedData: {
+        costs: {},
+        booking: {},
+    },
     excludedDates: [],
     fetching: false,
     error: false,
@@ -22,8 +29,8 @@ export const dashboardBookingReducer = handleActions({
         return {
             ...state,
             fetching: false,
-            displayedData: action.payload.costs,
-            originalData: action.payload.costs,
+            displayedData: action.payload.data,
+            originalData: action.payload.data,
             excludedDates: action.payload.excludedDates,
             error: false,
         };
@@ -68,8 +75,26 @@ export const dashboardBookingReducer = handleActions({
     },
     "DASHBOARD_BOOKING_WATCH": (state, action) => {
         const { displayedData }= _cloneDeep(state);
-        const { uuid, field, value } = action.payload;
-        displayedData[uuid][field] = value;
+        const { uuid, field, value, type } = action.payload;
+        displayedData[type][uuid][field] = value;
+        return {
+            ...state,
+            displayedData: displayedData,
+        }
+    },
+    "DASHBOARD_BOOKING_DELETE": (state, action) => {
+        const { displayedData: { booking, costs } } = state;
+        const { type, id } = action.payload;
+        const newDisplayedData = _omit(booking, id);
+        return {
+            ...state,
+            displayedData: { [type]: newDisplayedData, costs } ,
+        }
+    },
+    "DASHBOARD_BOOKING_NEW": (state, action) => {
+        const { id, payload, type } = action.payload;
+        const { displayedData }= _cloneDeep(state);
+        displayedData[type][id] = payload;
         return {
             ...state,
             displayedData: displayedData,

@@ -51,7 +51,6 @@ export const dashboardStoriesReducer = handleActions({
     },
     "DASHBOARD_STORIES_NEW": (state, action) => {
         const { id, payload } = action.payload;
-        payload.edit = 0; // implementation of editable table not successful
         const { displayedData }= _cloneDeep(state);
         const newDisplayedData = _assign({
             [id]: payload,

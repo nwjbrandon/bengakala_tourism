@@ -84,7 +84,7 @@ class DashboardFAQ extends Component {
             text,
             heading,
             type: 'video',
-            edit: 0 // implement editable table did not succeed
+            edit: 1
         };
         saveEntry({ id, payload });
         this.setState({
@@ -142,7 +142,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={title}
-                        placeholder="Ex. Funny Random Meme Dump"
+                        placeholder="Eg. Learn Bahasa Indonesia today!"
                         label="Name of Event"
                         className={classes.button}
                         onChange={this.watchTitle}
@@ -152,7 +152,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={imgUrl}
-                        placeholder="Ex. 9SKA6PmcLuQ"
+                        placeholder="Eg. 9SKA6PmcLuQ"
                         label="Video URL Links ID"
                         className={classes.button}
                         onChange={this.watchImgUrl}
@@ -163,7 +163,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={text}
-                        placeholder="Ex. Come visit..."
+                        placeholder="Eg. Come visit us and learn together in a fun and engaging way!"
                         label="Description of Event"
                         className={classes.button}
                         onChange={this.watchText}

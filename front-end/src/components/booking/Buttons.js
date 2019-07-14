@@ -20,7 +20,7 @@ const Buttons = (props) => {
   const btns = (props.activeStep === props.stepsLength - 1 ?
     (<div className={classes.buttons}>
       {props.activeStep !== 0 && (
-        <Button color="primary" onClick={props.handleBack} className={classes.button}>
+        <Button variant="contained" color="primary" onClick={props.handleBack} className={classes.button}>
           Back
         </Button>
       )}
@@ -40,7 +40,7 @@ const Buttons = (props) => {
     :
     (<div className={classes.buttons}>
       {props.activeStep !== 0 && (
-        <Button color="primary" onClick={props.handleBack} className={classes.button}>
+        <Button variant="contained" color="primary" onClick={props.handleBack} className={classes.button}>
           Back
         </Button>
       )}

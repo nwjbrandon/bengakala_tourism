@@ -6,7 +6,8 @@ import {
 
 function matchStateToProps(state) {
     return {
-        data: state.faq.data,
+        data: state.faq.data.groupedFaqs,
+        searchData: state.faq.data.ungroupedFaqs,
     }
 }
 

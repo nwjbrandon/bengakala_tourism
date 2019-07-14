@@ -16,6 +16,8 @@ import ErrorToast from "../../../components/snackBar/errorSnackBar.container";
 const styles = theme => ({
     root: {
         display: 'flex',
+        overflowX: 'auto',
+        width: '100%'
     },
     toolbar: theme.mixins.toolbar,
     content: {
@@ -85,7 +87,7 @@ class DashboardFAQ extends Component {
             text,
             heading,
             type: 'media',
-            edit: 0 // implement editable table did not succeed
+            edit: 1
         };
         saveEntry({ id, payload });
         this.setState({
@@ -143,7 +145,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={title}
-                        placeholder="Ex. Funny Random Meme Dump"
+                        placeholder="Eg. Funny Random Meme Dump"
                         label="Name of Event"
                         className={classes.button}
                         onChange={this.watchTitle}
@@ -153,7 +155,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={imgUrl}
-                        placeholder="Ex. https://imgur.com/a/o0v57.jp.jpg"
+                        placeholder="Eg. https://imgur.com/a/o0v57.jp.jpg"
                         label="Imgur URL Links"
                         className={classes.button}
                         onChange={this.watchImgUrl}
@@ -163,7 +165,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={heading}
-                        placeholder="Ex. Come visit..."
+                        placeholder="Eg. Come visit..."
                         label="Summary of Event"
                         className={classes.button}
                         onChange={this.watchHeading}
@@ -173,7 +175,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={text}
-                        placeholder="Ex. Come visit..."
+                        placeholder="Eg. Come visit..."
                         label="Description of Event"
                         className={classes.button}
                         onChange={this.watchText}

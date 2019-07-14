@@ -1,12 +1,12 @@
 import { connect } from "react-redux";
-import DashboardBooking from './dashboardBookingEntries';
+import DashboardBooking from './dashboardBookingCostEntries';
 import {
     DASHBOARD_BOOKING_WATCH,
 } from "../../actions/dashboardBooking";
 
 function mapStateToProps(state) {
     return {
-        displayedData: state.dashboardBooking.displayedData,
+        displayedData: state.dashboardBooking.displayedData.costs,
     };
 }
 

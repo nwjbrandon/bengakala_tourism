@@ -61,18 +61,6 @@ const separator ={
   verticalAlign: 'baseline',
   opacity: '1',
 };
-const contentNarrative={
-  boxSizing: 'border-box',
-  color: '#2C3643',
-  display: 'block',
-  fontSize: '18px',
-  fontWeight: '100',
-  marginTop: '25px',
-  marginBottom: '25px',
-  textSizeAdjust: '100%',
-  lineHeight: '28px',
-  textAlign: 'center',
-};
 
 const myTitlestyle={
   boxSizing: 'inherit',
@@ -107,11 +95,8 @@ class Content extends Component {
     return(
       <div className={classes.root}>
         <div className={classes.paper}>
-          <h2 style={contentHeader}> Welcome to Bengkala Village </h2>
+          <h2 style={contentHeader}>{ mission }</h2>
           <div style={separator} />
-          <div style={contentNarrative}>
-            <p>{ mission }</p>
-          </div>
           <div>
             {
               stories.map(text => (
@@ -120,7 +105,9 @@ class Content extends Component {
                       {text.title}
                     </h2>
                     <p style={myTextstyle}>
-                      {text.text}
+                      {text.text.split("\n").map((i,key) => (
+                          <div style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</div>
+                      ))}
                     </p>
                   </div>
               ))

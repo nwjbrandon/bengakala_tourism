@@ -19,10 +19,9 @@ function onMount() {
 
 function* workerSagaOnMount() {
     try {
-        const { data: { costs, dates } } = yield call(onMount);
+        const { data: { costs, dates, booking } } = yield call(onMount);
         const excludedDates = _map(dates, item => [new Date(item[0]), item[1]]);
-
-        yield put(DASHBOARD_BOOKING_ONMOUNT_SUCCESS({ costs, excludedDates }));
+        yield put(DASHBOARD_BOOKING_ONMOUNT_SUCCESS({ data: { costs, booking }, excludedDates }));
     } catch (error) {
         yield put(DASHBOARD_BOOKING_ONMOUNT_ERROR(error));
         const res = error.response;

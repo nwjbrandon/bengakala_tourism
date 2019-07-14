@@ -23,6 +23,8 @@ import TransportDetails from './TransportDetails'
 import IconButton from '@material-ui/core/IconButton';
 import API from '../../api';
 import uuidv1 from 'uuid/v1';
+import ImageCarousell from './ImageCarousell/ImageCarousell'
+
 // import callSnap from './snapPayment'
 const snap = window.snap;
 
@@ -83,6 +85,7 @@ const Checkout = (props) => {
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
   const [cashPayment, setCashPayment] = React.useState(true);
   const [orderID, setOrderID] = React.useState("undef");
+  const [booked, setBookedData] = React.useState([]);
 
   useEffect(() => {
     window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
@@ -93,6 +96,7 @@ const Checkout = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await API.get('/booking/info');
+      console.log(result.data)
 
       const cost = result.data.cost;
       const excludeDates = result.data.excludedDates;
@@ -104,6 +108,9 @@ const Checkout = (props) => {
       props.updateCost(costObj);
 
       props.updateDates(excludeDates);
+      setBookedData([...result.data.booked])
+
+
       console.log(excludeDates)
     };
 
@@ -122,12 +129,12 @@ const Checkout = (props) => {
 
   const constructStringDate = (date) => {
     const DateObj = date ? new Date(date) : new Date();
-    const str = `${DateObj.getFullYear()}-${DateObj.getMonth()}-${DateObj.getDate()}`
+    const str = `${DateObj.getFullYear()}-${DateObj.getMonth() + 1}-${DateObj.getDate()}`
     console.log(str)
     return str
   }
 
-  const publishToBackend = (tokenID) => {
+  const publishToBackend = (tokenID, cashOrNot) => {
     console.log("orderID", tokenID)
     API.post('/booking/info', {
       data: {
@@ -148,7 +155,7 @@ const Checkout = (props) => {
         "motorbikes": props.tripDetails.numberBikes,
         "createdAt": constructStringDate(),
         "checkedIn": false,
-        "cash": cashPayment
+        "cash": cashOrNot
       }
     }).then((res) => {
       console.log(res);
@@ -172,7 +179,7 @@ const Checkout = (props) => {
       snap.pay(snapToken, {
         onSuccess: (result) => {
           setActiveStep(activeStep + 1);
-          publishToBackend(orderUID);
+          publishToBackend(orderUID, false);
           console.log('success'); console.log(result);
         },
         onPending: (result) => {
@@ -224,6 +231,35 @@ const Checkout = (props) => {
 
     return result;
   }
+  const fullyBookedDateChosen = () => {
+    const checkIn = new Date(props.tripDetails.checkIn);
+    const checkOut = new Date(props.tripDetails.checkOut);
+    console.log(checkIn)
+    console.log(checkOut)
+    let maxFullDays = 0;
+    let maxFullDate = null;
+    console.log("Booked", booked)
+    const fallswithin = booked.filter((item) => {
+      const itemDate = new Date(item.date)
+
+      return (itemDate >= checkIn && itemDate <= checkOut);
+    });
+
+    console.log("falls within", fallswithin);
+
+    fallswithin.forEach((item) => {
+      const itemDate = new Date(item.date)
+      if (maxFullDays < item.counts) {
+        maxFullDays = item.counts;
+        maxFullDate = itemDate;
+
+      }
+
+    });
+
+    return { maxFullDate, maxFullDays }
+
+  }
 
   const handleNext = () => {
     if (activeStep === 0) {
@@ -239,14 +275,36 @@ const Checkout = (props) => {
         setActiveStep(activeStep + 1);
       }
     } else if (activeStep === 1) {
-      if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) === 0) {
+      if (props.tripDetails.numberMales < 0 || props.tripDetails.numberFemales < 0) {
+        props.onError("There cannot be Negative number of Guests!!");
+        setSnackBar(true);
+      } else if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) === 0) {
         props.onError("Total Guests cannot be 0");
         setSnackBar(true);
-      } else if (props.tripDetails.numberMales < 0 || props.tripDetails.numberFemales < 0) {
-        props.onError("There cannot be Negative number of Guests!!");
+      } else if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) > 30) {
+        props.onError("Sorry we are unable to accommodate more than 30 people.");
         setSnackBar(true);
       } else if (excludedDatesEngulfed()) {
         props.onError("Sorry, we are not able to accommodate you on some dates that you have Chosen. Please reselect check in and check out dates.");
+        setSnackBar(true);
+      } else {
+        const { maxFullDate, maxFullDays } = fullyBookedDateChosen();
+        console.log("TESTING DATE QUOTA", maxFullDate, maxFullDays)
+        if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) > (30 - maxFullDays)) {
+          props.onError(`Sorry we do not have enough slots on ${constructStringDate(maxFullDate)} please reselect your check in and check out Dates`);
+          setSnackBar(true);
+        } else {
+          props.onError("");
+          setSnackBar(false);
+          setActiveStep(activeStep + 1);
+        }
+
+
+      }
+    } else if (activeStep === 2) {
+
+      if (props.tripDetails.numberVans < 0 || props.tripDetails.numberCars < 0 || props.tripDetails.numberBikes < 0) {
+        props.onError("There cannot be Negative number of Vehicles!!");
         setSnackBar(true);
       } else {
         props.onError("");
@@ -264,7 +322,7 @@ const Checkout = (props) => {
       const uuid = uuidv1();
       setOrderID(uuid)
 
-      publishToBackend(uuid);
+      publishToBackend(uuid, true);
 
       setActiveStep(activeStep + 1);
     }
@@ -314,6 +372,7 @@ const Checkout = (props) => {
       </Step>
     ))}
   </Stepper>);
+
 
   return (
     <React.Fragment>
@@ -386,7 +445,6 @@ const Checkout = (props) => {
           </Paper>
         </main>
       </MuiThemeProvider>
-
     </React.Fragment>
   );
 }

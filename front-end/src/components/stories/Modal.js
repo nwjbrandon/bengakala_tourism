@@ -25,7 +25,9 @@ const Modal = ({ text, imgUrl, onCloseModal, openModal, title }) => (
         <div align="center" style={{paddingTop:"5px", marginTop:"10px"}}>
 <img src={imgUrl} title={title} alt={title} style={{maxHeight:"200px"}}/></div>
           <Typography variant="body2" color="textSecondary" component="p">
-          {text}
+              {text.split("\n").map((i,key) => (
+                  <div key={key}>{i}</div>
+              ))}
           </Typography>
         </CardContent>
     <CardActions>
