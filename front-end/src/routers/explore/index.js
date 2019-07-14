@@ -22,7 +22,7 @@ class TutorialPage extends React.Component {
 
     const { data } = this.props;
     return (
-      <div style={{ background: "#00897b" ,height: "100vh" }}>
+      <div style={{ background: "#00897b" ,height: "auto" }}>
         <Navbar />
         <div style={divStyle}>
           <Tutorial data={data} />
