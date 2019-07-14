@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Background from '../../components/home/background'
+import Background from '../../components/home/background.container'
 import Content from '../../components/home/content.container'
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
