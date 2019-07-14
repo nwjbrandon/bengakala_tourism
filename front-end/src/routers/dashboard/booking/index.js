@@ -163,7 +163,7 @@ class DashboardBooking extends Component {
                             Reset
                         </Button>
                         <Button variant="contained" color="secondary" onClick={this.submit} className={classes.button}>
-                            Submit
+                            Confirm changes
                         </Button>
                     </Grid>
 
@@ -176,7 +176,7 @@ class DashboardBooking extends Component {
                             Reset
                         </Button>
                         <Button variant="contained" color="secondary" onClick={this.submit} className={classes.button}>
-                            Submit
+                            Confirm changes
                         </Button>
                     </Grid>
 
@@ -199,7 +199,7 @@ class DashboardBooking extends Component {
                     />
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">
                         <Button variant="contained" color="secondary" onClick={this.submit} className={classes.button}>
-                            Submit
+                            Confirm changes
                         </Button>
                     </Grid>
                 </main>

@@ -198,7 +198,7 @@ class DashboardFAQ extends Component {
                     />
                     <Grid container alignItems="flex-start" justify="flex-end" direction="row">
                         <Button variant="contained" color="secondary" className={classes.button} onClick={this.submit}>
-                            Submit
+                            Confirm
                         </Button>
                     </Grid>
                     <br />
