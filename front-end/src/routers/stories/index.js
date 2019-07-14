@@ -18,11 +18,11 @@ import MyCard from './card'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    background: "#1976d2",
+    background: "#ffffff",
     minHeight: "100vh"
   },
   card: {
-    margin: `${theme.spacing(9)}px auto`,
+    margin: `${theme.spacing(0)}px auto`,
     maxWidth: 600
   },
   buttons: {
@@ -78,6 +78,7 @@ class Attraction extends React.Component {
     return (
       <div className={classes.root}>
         <Navbar />
+        <h3 style={{ fontSize: '2em', fontFamily: "Montserrat, sans-serif", paddingLeft: "5vw" }}>Listen to our Stories!</h3>
         <div style={{ padding: '10px' }}>
           <Grid justify="center" container spacing={3}>
             {

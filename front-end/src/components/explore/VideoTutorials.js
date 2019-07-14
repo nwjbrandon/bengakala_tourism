@@ -73,7 +73,8 @@ function SimpleExpansionPanel({ data }) {
     background: "#00000099",
     padding: "5px",
     height: "auto",
-    fontSize: '2.5vw',
+    fontSize: '20px',
+    fontFamily: "Montserrat, sans-serif",
   };
 
   const videoTitleList = data.map((item, index) => {
@@ -89,7 +90,8 @@ function SimpleExpansionPanel({ data }) {
           ? <div />
           :
           <div>
-            <Typography variant="h4" style={title}>Learn more about our very own culture, history, and sign language : The Kata Kolok!!</Typography>
+
+            <h3 style={{ fontSize: '1.5em', fontFamily: "Montserrat, sans-serif", paddingLeft: "2%" }}>Explore Our Village</h3>
             <Typography variant="h5" className={classes.videoDescription}>{data[videoId].videoDescription}</Typography>
             <div className={classes.container}>
               <Grid style={{ height: "100%" }} container spacing={0}>
