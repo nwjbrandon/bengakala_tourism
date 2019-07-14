@@ -84,8 +84,8 @@ const Checkout = (props) => {
   const [openSnackBar, setSnackBar] = React.useState(false);
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
   const [cashPayment, setCashPayment] = React.useState(true);
-  const [housesArr, setHousesArr] = React.useState([]);
   const [orderID, setOrderID] = React.useState("undef");
+  const [booked, setBookedData] = React.useState([]);
 
   useEffect(() => {
     window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
@@ -96,10 +96,10 @@ const Checkout = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await API.get('/booking/info');
+      console.log(result.data)
 
       const cost = result.data.cost;
       const excludeDates = result.data.excludedDates;
-      const houses = result.data.housesInfo;
       const costObj = {};
       cost.map((item) => {
         const keyval = Object.keys(item)[0].toString().toLowerCase();
@@ -108,7 +108,8 @@ const Checkout = (props) => {
       props.updateCost(costObj);
 
       props.updateDates(excludeDates);
-      setHousesArr(houses)
+      // setBookedData([...result.data.booked])
+
 
       console.log(excludeDates)
     };
@@ -224,6 +225,29 @@ const Checkout = (props) => {
 
     return result;
   }
+  const fullyBookedDateChosen = () => {
+    const checkIn = new Date(props.tripDetails.checkIn);
+    const checkOut = new Date(props.tripDetails.checkOut);
+    let maxFullDays = 0;
+    let maxFullDate = null;
+    const fallswithin = booked.filter((item) => {
+      const itemDate = new Date(item.date)
+      return (itemDate >= checkIn && itemDate <= checkOut);
+    });
+
+    fallswithin.forEach((item) => {
+      const itemDate = new Date(item.date)
+
+      if (maxFullDays < item.occupancy) {
+        maxFullDays = item.occupancy;
+        maxFullDate = itemDate;
+      }
+
+    });
+
+    return { maxFullDate, maxFullDays }
+
+  }
 
   const handleNext = () => {
     if (activeStep === 0) {
@@ -252,9 +276,17 @@ const Checkout = (props) => {
         props.onError("Sorry, we are not able to accommodate you on some dates that you have Chosen. Please reselect check in and check out dates.");
         setSnackBar(true);
       } else {
-        props.onError("");
-        setSnackBar(false);
-        setActiveStep(activeStep + 1);
+        const { dateWithLeastSlots, slotsAvailable } = fullyBookedDateChosen();
+        if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) > slotsAvailable) {
+          props.onError(`Sorry we do not have enough slots on ${constructStringDate(dateWithLeastSlots)} please reselect your check in and check out Dates`);
+          setSnackBar(true);
+        } else {
+          props.onError("");
+          setSnackBar(false);
+          setActiveStep(activeStep + 1);
+        }
+
+
       }
     } else if (activeStep === 2) {
 
@@ -400,9 +432,6 @@ const Checkout = (props) => {
           </Paper>
         </main>
       </MuiThemeProvider>
-
-      <ImageCarousell data={[{ src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }, { src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }, { src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }, { src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }, { src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }]} />
-
     </React.Fragment>
   );
 }

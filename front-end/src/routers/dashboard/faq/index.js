@@ -133,7 +133,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={heading}
-                        placeholder="Ex. General FAQ"
+                        placeholder="Eg. General FAQ"
                         label="Type of Question"
                         className={classes.button}
                         onChange={this.watchHeading}
@@ -143,7 +143,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={title}
-                        placeholder="Ex. How to contact us?"
+                        placeholder="Eg. How to contact us?"
                         label="Question"
                         className={classes.button}
                         onChange={this.watchTitle}
@@ -153,7 +153,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={text}
-                        placeholder="Ex. You can contact us at XXX-XXXX-XXXX."
+                        placeholder="Eg. You can contact us at XXX-XXXX-XXXX."
                         label="Answer"
                         className={classes.button}
                         onChange={this.watchText}

@@ -11,6 +11,7 @@ import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    margin: `${theme.spacing(3)}px auto`
   },
   paper: {
     padding: theme.spacing(2),
@@ -89,7 +90,9 @@ class Faq extends React.Component {
                                         color="textPrimary"
                                         style={{ paddingDown: 5 }}
                                     >
-                                      { datum.answer }
+                                      {datum.answer.split("\n").map((i,key) => (
+                                          <div key={key}>{i}</div>
+                                      ))}
                                     </Typography>
                                   </div>
                                   <Divider />

@@ -11,7 +11,7 @@ class App extends Component {
       <div>
           <Navbar />
           <Background />
-        <Content />
+          <Content />
           <SuccessToast />
           <ErrorToast />
       </div>

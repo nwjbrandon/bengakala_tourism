@@ -27,33 +27,39 @@ const ImageCarousell = (props) => {
 
 
     return (
-        <ItemsCarousel
-            // Placeholder configurations
-            enablePlaceholder
-            numberOfPlaceholderItems={5}
-            minimumPlaceholderTime={1000}
-            placeholderItem={<div style={{ height: 300, background: '#900' }}>Placeholder</div>}
+        <div style={{ margin: 10, paddingLeft: "2%", paddingRight: "2%", paddingBottom: "2%" }}>
+            <h3 style={{ fontSize: '2em' }}>Explore Our Homes!</h3>
 
-            numberOfCards={numofCards}
-            gutter={12}
-            showSlither={true}
-            firstAndLastGutter={true}
-            freeScrolling={false}
+            <ItemsCarousel
+                // Placeholder configurations
+                enablePlaceholder
+                numberOfPlaceholderItems={5}
+                minimumPlaceholderTime={1000}
+                placeholderItem={<div style={{ height: 300, background: '#900' }}>Placeholder</div>}
 
-            requestToChangeActive={changeActiveItem}
-            activeItemIndex={activeItemIndex}
-            activePosition={'center'}
+                numberOfCards={numofCards}
+                gutter={12}
+                showSlither={true}
+                firstAndLastGutter={true}
+                freeScrolling={false}
 
-            chevronWidth={24}
-            rightChevron={[
-                (<Chevron direction="left" />),
+                requestToChangeActive={changeActiveItem}
+                activeItemIndex={activeItemIndex}
+                activePosition={'center'}
 
-            ]}
-            leftChevron={[(<Chevron direction="right" />)]}
-            outsideChevron={false}
-        >
-            {children}
-        </ItemsCarousel>
+                chevronWidth={24}
+                rightChevron={[
+                    (<Chevron direction="left" />),
+
+                ]}
+                leftChevron={[(<Chevron direction="right" />)]}
+                outsideChevron={false}
+            >
+                {children}
+            </ItemsCarousel>
+
+        </div>
+
     );
 }
 

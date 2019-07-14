@@ -3,9 +3,12 @@ import API from '../../api';
 import AccomodationsForm from '../../components/booking/Accomodations';
 
 import Navbar from "../../components/navBar/navbar";
+import bg from '../../assets/img/bgHouse.jpg'
 
 import { connect } from 'react-redux'
 import Particles from 'react-particles-js';
+
+import ImageCarousell from '../../components/booking/ImageCarousell/ImageCarousell'
 // import kiwi from '/assets/img/kiwi.svg'
 
 class Accomodation extends React.Component {
@@ -26,13 +29,19 @@ class Accomodation extends React.Component {
   render() {
 
     const divStyle = {
-      padding: 25,
+      padding: 0,
+      marginTop: 0,
       width: "100%",
       minHeight: "100vh",
       height: "auto",
-      textAlign: "center",
-      backgroundColor: '#03A9F4',
       margin: 0,
+      backgroundImage: `url(${bg})`,
+      maxHeight: "100vh",
+      maxWidth: "100%",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      position: 'relative',
 
     };
 
@@ -45,14 +54,18 @@ class Accomodation extends React.Component {
 
     // };
     return (
-      <React.Fragment>
-        <Navbar />
+      <div >
+
 
         <div style={divStyle}>
+          <Navbar />
           <AccomodationsForm />
         </div>
 
-      </React.Fragment>
+        <ImageCarousell data={[{ src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }, { src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }, { src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }, { src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }, { src: "https://upload.wikimedia.org/wikipedia/commons/f/f9/Phoenicopterus_ruber_in_S%C3%A3o_Paulo_Zoo.jpg", title: "Flamingo" }]} />
+
+
+      </div>
 
     )
   }

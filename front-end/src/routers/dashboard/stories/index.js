@@ -16,6 +16,8 @@ import ErrorToast from "../../../components/snackBar/errorSnackBar.container";
 const styles = theme => ({
     root: {
         display: 'flex',
+        overflowX: 'auto',
+        width: '100%'
     },
     toolbar: theme.mixins.toolbar,
     content: {
@@ -128,7 +130,7 @@ class DashboardFAQ extends Component {
     render() {
         const { classes } = this.props;
         const { imgUrl, title, text, heading } = this.state;
-        const navTitle = 'Media';
+        const navTitle = 'Stories';
         return (
             <div className={classes.root}>
                 <CssBaseline />

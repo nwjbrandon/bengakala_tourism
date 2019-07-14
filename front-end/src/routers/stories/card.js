@@ -10,7 +10,6 @@ const ImageItem = (props) => {
                 maxHeight: "100%",
                 maxWidth: "100%",
                 height: 300,
-                borderRadius: 10,
                 backgroundSize: 'cover',
                 display: 'flex',
                 flexDirection: 'column',
@@ -20,20 +19,18 @@ const ImageItem = (props) => {
                 position: 'relative',
             }}
         >
-            <div
-                style={{
-                    background: "#21212190",
-                    borderBottomLeftRadius: 10,
-                    borderBottomRightRadius: 10,
-                    textAlign: "center"
-                }}
-            ><h3
-                style={{
-                    color: "white",
-                    borderBottomLeftRadius: 10,
-                    borderBottomRightRadius: 10
-                }}
-            >{props.title}</h3>
+            <div style={{
+                height: "100%",
+                width: "100%",
+                background: "#21212190",
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'flex-end',
+                padding: "10%"
+            }}
+            >
+                <h3 style={{ fontFamily: "Montserrat, sans-serif", color: "white", }}>{props.date}</h3>
+                <h3 style={{ fontFamily: "Montserrat, sans-serif", fontSize: "3em", marginTop: 0, color: "white" }}>{props.title}</h3>
             </div>
         </div >
     );
