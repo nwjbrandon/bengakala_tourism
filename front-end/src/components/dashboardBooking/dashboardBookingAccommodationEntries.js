@@ -97,8 +97,8 @@ class DashboardContactDetails extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].title}
-                                        placeholder="Ex. Funny Random Meme Dump"
-                                        label="Name of Event"
+                                        placeholder="Eg. Chief's House 1"
+                                        label="Name of Accommodation/House"
                                         className={classes.button}
                                         id={item}
                                         onChange={this.watchTitle}
@@ -108,7 +108,7 @@ class DashboardContactDetails extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].imgUrl}
-                                        placeholder="Ex. o0v57"
+                                        placeholder="Eg. https://imgur.com/a/o0v57.jp.jpg"
                                         label="Imgur URL Links"
                                         className={classes.button}
                                         id={item}

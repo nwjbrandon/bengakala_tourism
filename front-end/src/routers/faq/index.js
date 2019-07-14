@@ -8,6 +8,7 @@ import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 import TextField from "@material-ui/core/TextField";
 import _debounce from 'lodash/debounce';
+import Bg from '../../assets/img/lightbulb1.jpg'
 
 const styles = theme => ({
   root: {
@@ -16,6 +17,13 @@ const styles = theme => ({
   searchBar: {
     padding: theme.spacing(2),
     backgroundColor: '#ffe2a4',
+    backgroundSize: 'cover',
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    backgroundImage: `url(${Bg})`,
   },
   paper: {
     padding: theme.spacing(6),
@@ -40,13 +48,13 @@ class Faq extends React.Component {
   setDisplayedContacts = _debounce(value => {
     const { searchData, } = this.props;
     let filteredData = searchData.filter(
-        (datum) => {
-          if (value.length <= 1) {
-            return null;
-          }
-          return datum.answer.toLowerCase().indexOf(value) !== -1 ||
-                 datum.question.toLowerCase().indexOf(value) !== -1;
-        });
+      (datum) => {
+        if (value.length <= 1) {
+          return null;
+        }
+        return datum.answer.toLowerCase().indexOf(value) !== -1 ||
+          datum.question.toLowerCase().indexOf(value) !== -1;
+      });
     this.setState({
       filteredData,
       searching: false,
@@ -61,12 +69,12 @@ class Faq extends React.Component {
 
   render() {
     const { classes, data } = this.props;
-    const { value, filteredData, searching }  = this.state;
+    const { value, filteredData, searching } = this.state;
     return (
       <div>
         <Navbar />
         <div className={classes.root}>
-          <Paper className={classes.searchBar}>
+          <div className={classes.searchBar}>
             <Grid justify="center" container spacing={3}>
               <Grid item xs={12} md={6}>
                 <Typography variant="h4" style={{ paddingTop: 80 }}>
@@ -77,115 +85,115 @@ class Faq extends React.Component {
             <Grid justify="center" container spacing={3} style={{ paddingBottom: 80 }}>
               <Grid item xs={12} md={6}>
                 <TextField
-                    placeholder="Search..."
-                    margin="normal"
-                    fullWidth
-                    variant="outlined"
-                    InputLabelProps={{
-                      shrink: true,
-                    }}
-                    value={value}
-                    onChange={this.handleChange}
+                  placeholder="Search..."
+                  margin="normal"
+                  fullWidth
+                  variant="outlined"
+                  InputLabelProps={{
+                    shrink: true,
+                  }}
+                  value={value}
+                  onChange={this.handleChange}
                 />
               </Grid>
             </Grid>
-          </Paper>
-          <Paper  className={classes.paper}>
+          </div>
+          <Paper className={classes.paper}>
             {
               value.length <= 1 ?
-                  Object.keys(data).map((FAQ_TYPE, index) => (
-                      <div key={index} style={{ paddingTop: 20 }}>
-                        <Grid justify="center" container>
-                          <Grid item xs={12} md={8}>
-                            <Typography
-                                component="span"
-                                variant="h5"
-                                color="textPrimary"
-                            >
-                              { FAQ_TYPE }
-                            </Typography>
-                          </Grid>
-                          <Grid item xs={12} md={8}>
-                            <Typography>
-                              {
-                                data[FAQ_TYPE].map(datum=> (
-                                    <Typography style={{ paddingTop: 20 }}>
-                                      <Typography style={{ paddingTop: 10 }}>
-                                        <Typography
-                                            component="span"
-                                            variant="h6"
-                                            color="textPrimary"
-                                        >
-                                          Q:&nbsp;
-                                        </Typography>
-                                        { datum.question }
-                                      </Typography>
-                                      <Typography style={{ paddingTop: 10 }}>
-                                        <Typography
-                                            component="span"
-                                            variant="h6"
-                                            color="textPrimary"
-                                        >
-                                          A:&nbsp;
-                                        </Typography>
-                                        { datum.answer}
-                                      </Typography>
-                                    </Typography>
-                                ))
-                              }
-                            </Typography>
-                          </Grid>
-                        </Grid>
-                      </div>
-                  ))
-              :
-              filteredData.length === 0 ?
-              <div>
-                <Grid justify="center" container>
-                  {
-                    searching ? "Please Wait": "No Results Found"
-                  }
-                </Grid>
-              </div>
-              :
-              <div>
-                {
-                  filteredData.map((datum, index) => (
-                      <div key={index} style={{ paddingTop: 20 }}>
-                        <Grid justify="center" container>
-                          <Grid item xs={12} md={8}>
-                            <Typography>
+                Object.keys(data).map((FAQ_TYPE, index) => (
+                  <div key={index} style={{ paddingTop: 20 }}>
+                    <Grid justify="center" container>
+                      <Grid item xs={12} md={8}>
+                        <Typography
+                          component="span"
+                          variant="h5"
+                          color="textPrimary"
+                        >
+                          {FAQ_TYPE}
+                        </Typography>
+                      </Grid>
+                      <Grid item xs={12} md={8}>
+                        <Typography>
+                          {
+                            data[FAQ_TYPE].map(datum => (
                               <Typography style={{ paddingTop: 20 }}>
                                 <Typography style={{ paddingTop: 10 }}>
                                   <Typography
-                                      component="span"
-                                      variant="h6"
-                                      color="textPrimary"
+                                    component="span"
+                                    variant="h6"
+                                    color="textPrimary"
                                   >
                                     Q:&nbsp;
-                                  </Typography>
-                                  { datum.question }
+                                        </Typography>
+                                  {datum.question}
                                 </Typography>
                                 <Typography style={{ paddingTop: 10 }}>
                                   <Typography
+                                    component="span"
+                                    variant="h6"
+                                    color="textPrimary"
+                                  >
+                                    A:&nbsp;
+                                        </Typography>
+                                  {datum.answer}
+                                </Typography>
+                              </Typography>
+                            ))
+                          }
+                        </Typography>
+                      </Grid>
+                    </Grid>
+                  </div>
+                ))
+                :
+                filteredData.length === 0 ?
+                  <div>
+                    <Grid justify="center" container>
+                      {
+                        searching ? "Please Wait" : "No Results Found"
+                      }
+                    </Grid>
+                  </div>
+                  :
+                  <div>
+                    {
+                      filteredData.map((datum, index) => (
+                        <div key={index} style={{ paddingTop: 20 }}>
+                          <Grid justify="center" container>
+                            <Grid item xs={12} md={8}>
+                              <Typography>
+                                <Typography style={{ paddingTop: 20 }}>
+                                  <Typography style={{ paddingTop: 10 }}>
+                                    <Typography
                                       component="span"
                                       variant="h6"
                                       color="textPrimary"
-                                  >
-                                    A:&nbsp;
+                                    >
+                                      Q:&nbsp;
                                   </Typography>
-                                  { datum.answer}
+                                    {datum.question}
+                                  </Typography>
+                                  <Typography style={{ paddingTop: 10 }}>
+                                    <Typography
+                                      component="span"
+                                      variant="h6"
+                                      color="textPrimary"
+                                    >
+                                      A:&nbsp;
+                                  </Typography>
+                                    {datum.answer}
+                                  </Typography>
                                 </Typography>
-                                    </Typography>
-                            </Typography>
+                              </Typography>
+                            </Grid>
                           </Grid>
-                        </Grid>
-                      </div>
+                        </div>
                       )
 
-                  )
-                }
-              </div>
+                      )
+                    }
+                  </div>
             }
           </Paper>
         </div>

@@ -133,7 +133,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={heading}
-                        placeholder="Eg. General FAQ"
+                        placeholder="Eg. General FAQs"
                         label="Type of Question"
                         className={classes.button}
                         onChange={this.watchHeading}
@@ -153,7 +153,7 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={text}
-                        placeholder="Eg. You can contact us at XXX-XXXX-XXXX."
+                        placeholder="Eg. You can contact us at +62 1234 5678."
                         label="Answer"
                         className={classes.button}
                         onChange={this.watchText}
@@ -175,7 +175,7 @@ class DashboardFAQ extends Component {
                             Reset
                         </Button>
                         <Button variant="contained" color="secondary" onClick={this.submit} className={classes.button}>
-                            Submit
+                            Confirm changes
                         </Button>
                     </Grid>
                 </main>

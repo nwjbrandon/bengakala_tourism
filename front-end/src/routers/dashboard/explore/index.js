@@ -143,7 +143,7 @@ class DashboardFAQ extends Component {
                         fullWidth
                         value={title}
                         placeholder="Eg. Learn Bahasa Indonesia today!"
-                        label="Name of Event"
+                        label="Name of Explore video"
                         className={classes.button}
                         onChange={this.watchTitle}
                     />
@@ -163,8 +163,8 @@ class DashboardFAQ extends Component {
                         variant="outlined"
                         fullWidth
                         value={text}
-                        placeholder="Eg. Come visit us and learn together in a fun and engaging way!"
-                        label="Description of Event"
+                          placeholder="Eg. Come visit us and learn together in a fun and engaging way!"
+                        label="Description of Explore video"
                         className={classes.button}
                         onChange={this.watchText}
                     />
@@ -184,7 +184,7 @@ class DashboardFAQ extends Component {
                             Reset
                         </Button>
                         <Button variant="contained" color="secondary" onClick={this.submit} className={classes.button}>
-                            Submit
+                            Confirm changes
                         </Button>
                     </Grid>
                 </main>

@@ -10,9 +10,14 @@ const aboutInfo = [
       {
         title: home.title,
         text: home.text,
+        imgUrl: home.imgUrl,
       }));
-    const missions = await db.fetchData(TABLE_INFORMATION, { type: 'mission' });
-    const mission = _.head(missions).text;
+    const missions = _.head(await db.fetchData(TABLE_INFORMATION, { type: 'mission' }));
+    const mission = {
+      text: missions.text,
+      imgUrl: missions.imgUrl,
+      title: missions.title,
+    };
     res.send({
       data: {
         stories,

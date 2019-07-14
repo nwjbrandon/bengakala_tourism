@@ -107,7 +107,7 @@ class DashboardFAQEntries extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].heading}
-                                        placeholder="Ex. General FAQ"
+                                        placeholder="Eg. General FAQs"
                                         label="Type of Question"
                                         className={classes.button}
                                         onChange={this.watchHeading}
@@ -118,7 +118,7 @@ class DashboardFAQEntries extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].title}
-                                        placeholder="Ex. How to contact us?"
+                                        placeholder="Eg. How to contact us?"
                                         label="Question"
                                         className={classes.button}
                                         onChange={this.watchTitle}
@@ -129,7 +129,7 @@ class DashboardFAQEntries extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].text}
-                                        placeholder="Ex. You can contact us at XXX-XXXX-XXXX."
+                                        placeholder="Eg. You can contact us at +62 1234 5678."
                                         label="Answer"
                                         className={classes.button}
                                         onChange={this.watchText}

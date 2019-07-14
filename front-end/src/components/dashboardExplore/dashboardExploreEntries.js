@@ -38,7 +38,6 @@ class DashboardFAQEntries extends Component {
         this.watchTitle = this.watchTitle.bind(this);
         this.watchText = this.watchText.bind(this);
         this.editEntry = this.editEntry.bind(this);
-        this.watchHeading = this.watchHeading.bind(this);
     }
 
     watchImgUrl(event) {
@@ -60,17 +59,6 @@ class DashboardFAQEntries extends Component {
             value,
             uuid,
             field: 'title',
-        })
-    }
-
-    watchHeading(event) {
-        const value = event.target.value;
-        const uuid = event.target.id;
-        const { watch } = this.props;
-        watch({
-            value,
-            uuid,
-            field: 'heading',
         })
     }
 
@@ -117,8 +105,8 @@ class DashboardFAQEntries extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].title}
-                                        placeholder="Ex. Funny Random Meme Dump"
-                                        label="Name of Event"
+                                        placeholder="Eg. Learn Bahasa Indonesia today!"
+                                        label="Name of Explore video"
                                         className={classes.button}
                                         onChange={this.watchTitle}
                                         id={item}
@@ -128,8 +116,8 @@ class DashboardFAQEntries extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].imgUrl}
-                                        placeholder="Ex. o0v57"
-                                        label="Imgur URL Links"
+                                        placeholder="Eg. 9SKA6PmcLuQ"
+                                        label="Video URL Links ID"
                                         className={classes.button}
                                         onChange={this.watchImgUrl}
                                         id={item}
@@ -138,20 +126,9 @@ class DashboardFAQEntries extends Component {
                                         multiline={true}
                                         variant="outlined"
                                         fullWidth
-                                        value={data[item].heading}
-                                        placeholder="Ex. Come visit..."
-                                        label="Summary of Event"
-                                        className={classes.button}
-                                        onChange={this.watchHeading}
-                                        id={item}
-                                    />
-                                    <TextField
-                                        multiline={true}
-                                        variant="outlined"
-                                        fullWidth
                                         value={data[item].text}
-                                        placeholder="Ex. Come visit..."
-                                        label="Description of Event"
+                                        placeholder="Eg. Come visit us and learn together in a fun and engaging way!."
+                                        label="Description of Explore video"
                                         className={classes.button}
                                         onChange={this.watchText}
                                         id={item}
@@ -160,10 +137,10 @@ class DashboardFAQEntries extends Component {
                                 :
                                 <div>
                                     <Typography>
-                                        { data[item].imgUrl }
+                                        { data[item].title }
                                     </Typography>
                                     <Typography>
-                                        { data[item].heading }
+                                        { data[item].imgUrl }
                                     </Typography>
                                     <Typography>
                                         { data[item].text }

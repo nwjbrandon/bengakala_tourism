@@ -37,6 +37,19 @@ class DashboardHomeStories extends Component {
         this.watchTitle = this.watchTitle.bind(this);
         this.watchText = this.watchText.bind(this);
         this.editEntry = this.editEntry.bind(this);
+        this.watchImgUrl = this.watchImgUrl.bind(this);
+    }
+
+    watchImgUrl(event) {
+        const value = event.target.value;
+        const uuid = event.target.id;
+        const { watch } = this.props;
+        watch({
+            value,
+            uuid,
+            field: 'imgUrl',
+            type: 'stories',
+        })
     }
 
     watchTitle(event) {
@@ -96,8 +109,8 @@ class DashboardHomeStories extends Component {
                                         variant="outlined"
                                         fullWidth
                                         value={data[item].title}
-                                        placeholder="Ex. One Island, Many Destination"
-                                        label="Title of Story"
+                                        placeholder="Eg. One Island, Many Destination"
+                                        label="Title of item"
                                         className={classes.button}
                                         onChange={this.watchTitle}
                                         id={item}
@@ -106,18 +119,34 @@ class DashboardHomeStories extends Component {
                                         multiline={true}
                                         variant="outlined"
                                         fullWidth
+                                        value={data[item].imgUrl}
+                                        placeholder="Eg. https://imgur.com/a/o0v57.jp.jpg"
+                                        label="Image Url"
+                                        className={classes.button}
+                                        onChange={this.watchImgUrl}
+                                        id={item}
+                                    />
+                                    <TextField
+                                        multiline={true}
+                                        variant="outlined"
+                                        fullWidth
                                         value={data[item].text}
-                                        placeholder="Ex. On Bali you can lose yourself in the chaos of Kuta..."
-                                        label="Content of Story"
+                                        placeholder="Eg. On Bali you can lose yourself in the chaos of Kuta..."
+                                        label="Content of item"
                                         className={classes.button}
                                         onChange={this.watchText}
                                         id={item}
                                     />
                                 </Grid>
                                 :
-                                <Typography>
-                                    { data[item].text }
-                                </Typography>
+                                <div>
+                                    <Typography>
+                                        { data[item].imgUrl }
+                                    </Typography>
+                                    <Typography>
+                                        { data[item].text }
+                                    </Typography>
+                                </div>
                             }
                         </ExpansionPanelDetails>
                         <Grid container alignItems="flex-start" justify="flex-end" direction="row">
