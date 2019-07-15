@@ -20,7 +20,6 @@ import Marker from 'pigeon-marker'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundColor: 'white',
   },
   paper: {
     padding: theme.spacing(2),

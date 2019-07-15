@@ -18,8 +18,6 @@ import MyCard from './card'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    background: "#ffffff",
-    minHeight: "100vh"
   },
   card: {
     margin: `${theme.spacing(0)}px auto`,
@@ -83,7 +81,7 @@ class Attraction extends React.Component {
           <Grid justify="center" container spacing={3}>
             {
               data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
-                <Grid item xs={12} sm={6}>
+                <Grid item xs={12} md={6}>
                   <Card className={classes.card} key={item.title}>
                     <CardActionArea onClick={() => this.handleOpenModal({ ...item })}>
                       <MyCard src={item.imgUrl} date={dateFnsFormat(item.createdAt, 'YYYY/MM/DD HH:mm')} title={item.title} summary={item.summary} />
