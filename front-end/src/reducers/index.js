@@ -17,6 +17,7 @@ import { dashboardExploreReducer } from "./dashboardExplore";
 import { connectRouter } from 'connected-react-router';
 import { toastReducer } from "./toast";
 import bookingReducer from './accomodation'
+import { storyReducer } from "./story";
 
 const allReducers = (history) => combineReducers({
     toast: reduceReducers(toastReducer),
@@ -35,7 +36,8 @@ const allReducers = (history) => combineReducers({
     faq: reduceReducers(faqOnMountReducer),
     router: connectRouter(history),
     explore: reduceReducers(exploreReducer),
-    booking: reduceReducers(bookingReducer)
+    booking: reduceReducers(bookingReducer),
+    story: reduceReducers(storyReducer),
 });
 
 export default allReducers

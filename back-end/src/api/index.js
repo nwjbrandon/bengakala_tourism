@@ -4,7 +4,7 @@ import booking from './booking';
 import admin from './admin';
 import stories from './stories';
 import contact from './contact';
-import calculation from './calculation';
+import story from './story';
 import faq from './faq';
 import explore from './explore';
 import snap from './snap';
@@ -53,7 +53,7 @@ app.post('/snap/info',
   midtransValidators,
   errorHandling,
   snap.post);
-
+app.get('/story/:tag', story.get);
 app.post('/sendEmail', emailSender.send);
 
 // app.get('/calculation', calculation.post);
