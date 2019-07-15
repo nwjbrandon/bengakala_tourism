@@ -167,7 +167,7 @@ class Content extends Component {
                   <Grid justify="center" container>
                     <Grid item xs={12}>
                       <Card style={{
-                        backgroundImage: `url(${mission.imgUrl})`,
+                        backgroundImage: `url(${text.imgUrl})`,
                         margin: 'none auto',
                         backgroundSize: 'cover',
                         display: 'flex',
