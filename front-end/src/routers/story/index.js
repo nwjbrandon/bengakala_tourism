@@ -10,6 +10,7 @@ import {
 } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import dateFnsFormat from "date-fns/format";
+import { Link } from 'react-router-dom';
 
 const styles = () => ({
   root: {
@@ -33,18 +34,20 @@ const styles = () => ({
 class Story extends React.Component {
   constructor(props) {
     super(props);
-    this.handleClick = this.handleClick.bind(this);
   }
 
   componentDidMount() {
     const url = window.location.pathname;
-    const tag = url.substring(url.lastIndexOf('story/') + 6);
+    const tag = url.substring(url.lastIndexOf('story/s/') + 8);
     const { onMount } = this.props;
     onMount(tag);
   }
 
-  handleClick(link) {
-    window.open(window.location.origin + `/story/${link}`, '_self')
+  componentWillReceiveProps() {
+    const url = window.location.pathname;
+    const tag = url.substring(url.lastIndexOf('story/s/') + 8);
+    const { onMount } = this.props;
+    onMount(tag);
   }
 
   render() {
@@ -122,8 +125,8 @@ class Story extends React.Component {
                     <Grid container justify="center" spacing={2}>
                       <Grid item xs={12} sm={8} md={10}>
                         <Grid container justify="center">
-                          <Card className={classes.card} onClick={() => this.handleClick(stories.link)}>
-                            <CardActionArea>
+                          <Card className={classes.card}>
+                            <CardActionArea component={Link}  to={stories.link}>
                               <CardMedia
                                   className={classes.media}
                                   image={stories.imgUrl}
