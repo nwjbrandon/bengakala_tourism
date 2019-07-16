@@ -1,4 +1,5 @@
 import React from 'react';
+import { withRouter } from "react-router-dom";
 import { withStyles } from '@material-ui/core/styles';
 import Navbar from "../../components/navBar/navbar";
 import {
@@ -34,6 +35,7 @@ const styles = () => ({
 class Story extends React.Component {
   constructor(props) {
     super(props);
+    this.handlePageChange = this.handlePageChange.bind(this);
   }
 
   componentDidMount() {
@@ -43,10 +45,9 @@ class Story extends React.Component {
     onMount(tag);
   }
 
-  componentWillReceiveProps() {
-    const url = window.location.pathname;
-    const tag = url.substring(url.lastIndexOf('story/s/') + 8);
+  handlePageChange(tag) {
     const { onMount } = this.props;
+    this.props.history.push(`/story/s/${tag}`);
     onMount(tag);
   }
 
@@ -126,7 +127,7 @@ class Story extends React.Component {
                       <Grid item xs={12} sm={8} md={10}>
                         <Grid container justify="center">
                           <Card className={classes.card}>
-                            <CardActionArea component={Link}  to={stories.link}>
+                            <CardActionArea onClick={() => this.handlePageChange(stories.link)}>
                               <CardMedia
                                   className={classes.media}
                                   image={stories.imgUrl}
@@ -155,4 +156,4 @@ class Story extends React.Component {
   }
 }
 
-export default withStyles(styles)(Story);
+export default withStyles(styles)(withRouter(Story));

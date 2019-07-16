@@ -6,13 +6,14 @@ import {
 
 function matchStateToProps(state) {
     return {
-        data: state.stories.data,
+        pageStories: state.stories.data.pageStories,
+        latestStories: state.stories.data.latestStories,
     }
 }
 
 function matchDispatchToProps(dispatch){
     return {
-        onMount: () => dispatch(STORIES_ONMOUNT_REQUEST()),
+        onMount: (payload) => dispatch(STORIES_ONMOUNT_REQUEST(payload)),
     }
 }
 
