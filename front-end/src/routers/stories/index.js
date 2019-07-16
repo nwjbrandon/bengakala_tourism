@@ -15,6 +15,8 @@ import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 import MyCard from './card'
 
+import bg from '../../assets/img/bg2house.jpeg'
+
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -70,13 +72,30 @@ class Attraction extends React.Component {
     onMount();
   }
 
+
   render() {
     const { classes, data } = this.props;
     const { page, rowsPerPage } = this.state;
     const maxPage = _floor(_div(data.length - 1, rowsPerPage));
 
+    const divStyle = {
+      padding: 0,
+      marginTop: 0,
+      width: "100%",
+      minHeight: "100vh",
+      height: "auto",
+      margin: 0,
+      backgroundImage: `url(${bg})`,
+      maxWidth: "100%",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      position: 'relative',
+
+    };
+
     return (
-      <div className={classes.root}>
+      <div style={divStyle}>
         <Navbar />
         <h3 style={{ fontSize: '2em', fontFamily: "Montserrat, sans-serif", paddingLeft: "5vw" }}>Listen to our Stories!</h3>
         <div style={{ padding: '10px' }}>

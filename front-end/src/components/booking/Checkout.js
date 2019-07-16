@@ -172,6 +172,7 @@ const Checkout = (props) => {
       console.log('calling snap pay')
       snap.pay(snapToken, {
         onSuccess: (result) => {
+          console.log("result", result)
           setActiveStep(activeStep + 1);
           publishToBackend(orderUID, false);
           console.log('success'); console.log(result);
