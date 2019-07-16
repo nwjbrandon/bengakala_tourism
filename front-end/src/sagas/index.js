@@ -2,6 +2,7 @@ import { all } from 'redux-saga/effects';
 
 import contact from './contact';
 import attraction from './stories';
+import story from './story';
 import resources from './explore';
 import homeOnMount from './home';
 import faqOnMount from './faq';
@@ -21,6 +22,7 @@ export default function* rootSaga() {
     ...toast,
     ...contact,
     ...attraction,
+    ...story,
     ...resources,
     ...homeOnMount,
     ...faqOnMount,

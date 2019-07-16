@@ -55,8 +55,8 @@ export default async function main(emailContent) {
 //         toEmail: "paulroopson.pradeep@gmail.com",
 //         grossAmount: 100,
 //         personalDetails: {
-//             firstName: "NAmaswi",
-//             lastName: "Avlani",
+//             firstName: "Pradeep",
+//             lastName: "Paul",
 //             email: "paulroopson.pradeep@gmail.com",
 //             country: "Singapore",
 //         },

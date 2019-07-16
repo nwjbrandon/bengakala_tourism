@@ -1,4 +1,3 @@
-import _ from 'lodash';
 import sendEmail from '../../emailSender/emailSender'
 
 const send = [

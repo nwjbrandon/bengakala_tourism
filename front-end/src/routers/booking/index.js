@@ -1,5 +1,4 @@
 import React from 'react';
-import API from '../../api';
 import AccomodationsForm from '../../components/booking/Accomodations';
 
 import Navbar from "../../components/navBar/navbar";
