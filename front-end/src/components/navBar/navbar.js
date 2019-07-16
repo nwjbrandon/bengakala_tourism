@@ -26,10 +26,31 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-const sections = ['stories', 'booking', 'explore', 'contact', 'faq'];
+const sections = [
+  {
+    title: 'stories',
+    url: '/stories',
+  },
+  {
+    title: 'booking',
+    url: '/booking',
+  },
+  {
+    title: 'explore',
+    url: '/explore',
+  },
+  {
+    title: 'contact',
+    url: '/contact',
+  },
+  {
+    title: 'faq',
+    url: '/faq',
+  }
+];
 const navlinks = sections.map(section => {
   return (
-    <Button key={section} color="inherit" component={Link} to={section}>{section}</Button>
+    <Button key={section.title} color="inherit" component={Link} to={section.url}>{section.title}</Button>
   )
 });
 
@@ -46,7 +67,7 @@ export default function ButtonAppBar() {
   const classes = useStyles();
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: '#21212160' }}>
+      <AppBar position="static" style={{ backgroundColor: '#21212180' }}>
         <Toolbar>
           <Typography variant="h6" className={classes.title}>
             <Button color="inherit" component={Link} to="/" >Bengkala</Button>
@@ -67,8 +88,8 @@ export default function ButtonAppBar() {
             >
               {
                 sections.map(section => (
-                  <MenuItem className={classes.menuItem} onClick={handleClose} component={Link} to={section} key={section}>
-                    {section}
+                  <MenuItem className={classes.menuItem} onClick={handleClose} component={Link} to={section.url} key={section.title}>
+                    {section.title}
                   </MenuItem>
                 ))
               }

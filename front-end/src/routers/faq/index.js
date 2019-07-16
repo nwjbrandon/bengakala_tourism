@@ -8,7 +8,6 @@ import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 import TextField from "@material-ui/core/TextField";
 import _debounce from 'lodash/debounce';
-import Bg from '../../assets/img/lightbulb1.jpg'
 
 const styles = theme => ({
   root: {
@@ -23,7 +22,6 @@ const styles = theme => ({
     justifyContent: 'center',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    backgroundImage: `url(${Bg})`,
   },
   paper: {
     padding: theme.spacing(6),

@@ -22,6 +22,7 @@ import Contact from './routers/contact/container';
 import Faq from './routers/faq/container';
 import Notfound from './routers/notfound';
 import Explore from './routers/explore/container'
+import Story from './routers/story/container';
 
 // Protected Routes
 import Admin from './routers/admin/container';
@@ -62,7 +63,8 @@ const persistConfig = {
     'home',
     'faq',
     'explore',
-    'booking'
+    'booking',
+    'story'
   ]
 };
 const sagaMiddleware = createSagaMiddleware();
@@ -111,6 +113,7 @@ const routing = (
             <ProtectedRoutes exact path="/stories" component={ Stories } secret={false} />
             <ProtectedRoutes exact path="/contact" component={ Contact } secret={false} />
             <ProtectedRoutes exact path="/faq" component={ Faq } secret={false} />
+            <ProtectedRoutes path="/story/:tag" component={ Story } secret={false} />
 
             <ProtectedRoutes exact path="/dashboard" component={ Dashboard } secret={true} />
             <ProtectedRoutes exact path="/dashboard/booking" component={ DashboardAccommodation } secret={true} />

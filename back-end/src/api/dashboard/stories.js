@@ -26,7 +26,10 @@ const getStoriesInfo = [
 
 const postStoriesInfo = [
   wrapAsync(async (req, res) => {
-    const receivedData = req.body.data;
+    const receivedData = _.mapValues(req.body.data, (datum) => {
+      const subheading = datum.title.replace(/\W+/g, '-').toLowerCase();
+      return { subheading, ...datum };
+    });
     const existingUUID = await db.filterFieldList(TABLE_INFORMATION, { type: 'media' }, 'uuid');
     const {
       updateList,
