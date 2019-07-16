@@ -9,6 +9,7 @@ import Typography from '@material-ui/core/Typography';
 import TripDetailsForm from './TripDetailsForm'
 import PersonalDetailsForm from './PersonalDetailsForm'
 import ConfirmationScreen from './ConfirmationScreen'
+import PendingScreen from './PendingScreen'
 import Slip from './Slip'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core'
 import blue from '@material-ui/core/colors/blue'
@@ -134,6 +135,7 @@ const Checkout = (props) => {
     return str
   }
 
+  /* Needs to be moved to HTTP notification url or back end */
   const publishToBackend = (tokenID, cashOrNot) => {
     console.log("orderID", tokenID)
     API.post('/booking/info', {
@@ -164,6 +166,13 @@ const Checkout = (props) => {
     });
   }
 
+
+  const renderPending = () => {
+    return (
+      <PendingScreen email={props.personalDetails.email} />
+    )
+  }
+
   const callSnap = async () => {
     snap.show();
     console.log('handling token request like a boss')
@@ -178,12 +187,13 @@ const Checkout = (props) => {
       console.log('calling snap pay')
       snap.pay(snapToken, {
         onSuccess: (result) => {
-          setActiveStep(activeStep + 1);
-          publishToBackend(orderUID, false);
+          setActiveStep(activeStep + 1)
+          // publishToBackend(orderUID, false) (needs to be done in back end!);
           console.log('success'); console.log(result);
         },
         onPending: (result) => {
-          console.log('pending'); console.log(result); alert('Payment Pending')
+          console.log('pending'); console.log(result); 
+          renderPending() 
         },
         onError: (result) => { console.log('error'); console.log(result); alert('Payment Error') },
         onClose: () => {
