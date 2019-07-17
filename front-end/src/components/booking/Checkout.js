@@ -275,8 +275,17 @@ const Checkout = (props) => {
 
   const handleNext = () => {
     if (activeStep === 0) {
-      if (props.personalDetails.firstName === "" || props.personalDetails.lastName === "" || props.personalDetails.email === "" || props.personalDetails.country === "") {
-        props.onError("Important Fields Are Empty!");
+      if (props.personalDetails.firstName === "") {
+        props.onError("Please input your first name!");
+        setSnackBar(true);
+      } else if (props.personalDetails.lastName === "") {
+        props.onError("Please input your last name!");
+        setSnackBar(true);
+      } else if (props.personalDetails.email === "") {
+        props.onError("Please input your email!");
+        setSnackBar(true);
+      } else if (props.personalDetails.country === "") {
+        props.onError("Please input the country you are from!");
         setSnackBar(true);
       } else if (!isValidEmail(props.personalDetails.email)) {
         props.onError("Oops doesnt look like a valid email address!");
@@ -288,7 +297,7 @@ const Checkout = (props) => {
       }
     } else if (activeStep === 1) {
       if (props.tripDetails.numberMales < 0 || props.tripDetails.numberFemales < 0) {
-        props.onError("There cannot be Negative number of Guests!!");
+        props.onError("There cannot be negative number of guests!!");
         setSnackBar(true);
       } else if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) === 0) {
         props.onError("Total Guests cannot be 0");
@@ -389,7 +398,7 @@ const Checkout = (props) => {
   return (
     <React.Fragment>
       <Prompt
-        when={true}
+        when={activeStep > 0}
         message={ 'There are unsaved changes, Are your sure you want to leave the page?' }
       />
       <MuiThemeProvider theme={theme}>
