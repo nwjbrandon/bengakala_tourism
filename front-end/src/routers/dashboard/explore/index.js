@@ -42,6 +42,7 @@ class DashboardFAQ extends Component {
             imgUrl: '',
             title: '',
             text: '',
+            subheading: '',
         };
         this.deleteEntry = this.deleteEntry.bind(this);
         this.resetEntries = this.resetEntries.bind(this);
@@ -51,6 +52,7 @@ class DashboardFAQ extends Component {
         this.watchText = this.watchText.bind(this);
         this.watchHeading = this.watchHeading.bind(this);
         this.submit = this.submit.bind(this);
+        this.watchThumbnail = this.watchThumbnail.bind(this);
     }
 
     componentDidMount() {
@@ -77,12 +79,14 @@ class DashboardFAQ extends Component {
             title,
             text,
             heading,
+            subheading,
         } = this.state;
         const payload = {
             imgUrl,
             title,
             text,
             heading,
+            subheading,
             type: 'video',
             edit: 1
         };
@@ -92,12 +96,19 @@ class DashboardFAQ extends Component {
             title: '',
             text: '',
             heading: '',
+            subheading: '',
         });
     }
 
     watchImgUrl(event) {
         this.setState({
             imgUrl: event.target.value
+        });
+    }
+
+    watchThumbnail(event) {
+        this.setState({
+            subheading: event.target.value
         });
     }
 
@@ -126,7 +137,7 @@ class DashboardFAQ extends Component {
 
     render() {
         const { classes } = this.props;
-        const { imgUrl, title, text } = this.state;
+        const { imgUrl, title, text, subheading } = this.state;
         const navTitle = 'Explore resources';
         return (
             <div className={classes.root}>
@@ -147,6 +158,18 @@ class DashboardFAQ extends Component {
                         className={classes.button}
                         onChange={this.watchTitle}
                     />
+
+                    <TextField
+                        multiline={true}
+                        variant="outlined"
+                        fullWidth
+                        value={subheading}
+                        placeholder="Eg. 9SKA6PmcLuQ"
+                        label="Thumbnail URL Links"
+                        className={classes.button}
+                        onChange={this.watchThumbnail}
+                    />
+
                     <TextField
                         multiline={true}
                         variant="outlined"

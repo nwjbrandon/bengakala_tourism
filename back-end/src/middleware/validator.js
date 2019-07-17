@@ -121,7 +121,7 @@ export const dashboardExploreValidators = [
         throw Error('Cannot be empty');
       }
       _.map(data, (item) => {
-        if (item.title === '' || item.text === '' || item.imgUrl === '') {
+        if (item.title === '' || item.text === '' || item.imgUrl === '' || item.subheading === '') {
           throw Error('Field cannot be empty');
         }
         if (item.edit === 1) {

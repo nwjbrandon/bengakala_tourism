@@ -6,11 +6,13 @@ import {wrapAsync} from "../../middleware/errorHandling";
 const exploreInfo = [
   wrapAsync(async (req, res) => {
     const explores = await db.fetchData(TABLE_INFORMATION, { type: 'video' });
-    const data = _.map(explores, explore => ({
+    const data = _.orderBy(_.map(explores, explore => ({
       title: explore.title,
-      videoLink: explore.imgUrl,
-      videoDescription: explore.text,
-    }));
+      videoID: explore.imgUrl,
+      text: explore.text,
+      thumbnailUrl: explore.subheading,
+      createdAt: explore.createdAt,
+    })), ['createdAt'], ['desc']);
     res.json({
       data
     });
