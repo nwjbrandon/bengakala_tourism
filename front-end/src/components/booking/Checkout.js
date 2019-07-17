@@ -119,8 +119,8 @@ const Checkout = (props) => {
 
   useEffect(() => {
     window.onbeforeunload = () => {
-        return '';
-      }
+      return '';
+    }
   }, []);
 
   const isValidEmail = (email) => {
@@ -176,23 +176,25 @@ const Checkout = (props) => {
 
     if (snapToken) {
       console.log('calling snap pay')
-      snap.pay(snapToken, {
-        onSuccess: (result) => {
-          console.log("result", result)
-          setActiveStep(activeStep + 1);
-          publishToBackend(orderUID, false);
-          console.log('success'); console.log(result);
-        },
-        onPending: (result) => {
-          console.log('pending'); console.log(result); alert('Payment Pending')
-        },
-        onError: (result) => { console.log('error'); console.log(result); alert('Payment Error') },
-        onClose: () => {
+      snap.pay(snapToken);
+      // ,{
+      //   onSuccess: (result) => {
+      //     console.log("result", result)
+      //     setActiveStep(activeStep + 1);
+      //     publishToBackend(orderUID, false);
+      //     console.log('success'); console.log(result);
+      //   },
+      //   onPending: (result) => {
+      //     console.log('pending'); console.log(result); alert('Payment Pending')
+      //   },
+      //   onError: (result) => { console.log('error'); console.log(result); alert('Payment Error') },
+      //   onClose: () => {
 
-          console.log('customer closed the popup without finishing the payment');
-          alert('Please press the place order button to retry credit card payment');
-        },
-      })
+      //     console.log('customer closed the popup without finishing the payment');
+      //     alert('Please press the place order button to retry credit card payment');
+      //   },
+      // }
+
 
     } else {
       snap.hide();
