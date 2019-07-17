@@ -173,13 +173,6 @@ const Checkout = (props) => {
     });
   }
 
-
-  const renderPending = () => {
-    return (
-      <PendingScreen email={props.personalDetails.email} />
-    )
-  }
-
   const callSnap = async () => {
     snap.show();
     console.log('handling token request like a boss')
