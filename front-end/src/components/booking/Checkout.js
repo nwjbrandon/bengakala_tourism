@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Prompt } from 'react-router'
 import { makeStyles, withStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Paper from '@material-ui/core/Paper';
@@ -84,6 +85,7 @@ const Checkout = (props) => {
   const [activeStep, setActiveStep] = React.useState(0);
   const [openSnackBar, setSnackBar] = React.useState(false);
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
+  const [isPending, setPending] = React.useState(false);
   const [cashPayment, setCashPayment] = React.useState(true);
   const [orderID, setOrderID] = React.useState("undef");
   const [booked, setBookedData] = React.useState([]);
@@ -119,9 +121,15 @@ const Checkout = (props) => {
   }, []);
 
   useEffect(() => {
-    window.onbeforeunload = () => {
-        return '';
-      }
+    const onUnload = (e) => {
+      e.preventDefault();
+      e.returnValue = '';
+    }
+    window.addEventListener('beforeunload', onUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', onUnload);
+    }
   }, []);
 
   const isValidEmail = (email) => {
@@ -135,7 +143,6 @@ const Checkout = (props) => {
     return str
   }
 
-  /* Needs to be moved to HTTP notification url or back end */
   const publishToBackend = (tokenID, cashOrNot) => {
     console.log("orderID", tokenID)
     API.post('/booking/info', {
@@ -182,26 +189,22 @@ const Checkout = (props) => {
     setOrderID(orderUID)
     console.log("IDS", { snapToken, orderUID })
 
-
     if (snapToken) {
       console.log('calling snap pay')
       snap.pay(snapToken, {
         onSuccess: (result) => {
-<<<<<<< HEAD
-          setActiveStep(activeStep + 1)
-          // publishToBackend(orderUID, false) (needs to be done in back end!);
-=======
           console.log("result", result)
           setActiveStep(activeStep + 1);
           publishToBackend(orderUID, false);
->>>>>>> 7710ab00ea6666d6b62fd165cb0ff56ff6cba360
           console.log('success'); console.log(result);
         },
         onPending: (result) => {
           console.log('pending'); console.log(result); 
-          renderPending() 
+          publishToBackend(orderUID, false);
+          setActiveStep(activeStep + 1)
+          setPending(true)
         },
-        onError: (result) => { console.log('error'); console.log(result); alert('Payment Error') },
+        onError: (result) => { console.log('error'); console.log(result); alert('Payment Error, please try again') },
         onClose: () => {
 
           console.log('customer closed the popup without finishing the payment');
@@ -392,6 +395,10 @@ const Checkout = (props) => {
 
   return (
     <React.Fragment>
+      <Prompt
+        when={true}
+        message={ 'There are unsaved changes, Are your sure you want to leave the page?' }
+      />
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
         <main className={classes.layout}>
@@ -408,6 +415,9 @@ const Checkout = (props) => {
 
               {activeStep === steps.length ? (
                 <React.Fragment>
+                  {isPending ? (
+                    <PendingScreen email={props.personalDetails.email} />
+                  ) : ( 
                   <ConfirmationScreen
                     cashPayment={cashPayment}
                     numberOfDays={props.numberOfDays}
@@ -415,9 +425,9 @@ const Checkout = (props) => {
                     cost={props.cost}
                     personalDetails={props.personalDetails}
                     tripDetails={props.tripDetails}
-                    price={props.price} />
-                </React.Fragment>
-              ) : (
+                    price={props.price} /> )}
+              </React.Fragment> )
+                  : (
                   <React.Fragment>
                     {toRender[activeStep]}
                     <Snackbar
