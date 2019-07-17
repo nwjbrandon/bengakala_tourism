@@ -1,13 +1,15 @@
 import React from 'react'
 import 'react-calendar-heatmap/dist/styles.css';
 import API from '../../api'
-
+import { FRONT_END_PUBLIC_KEY } from '../../secrets/encryption'
+import SHA256 from 'crypto-js/sha256'
+import CryptoJS from 'crypto-js'
 
 class ConfirmationScreen extends React.Component {
 
   componentDidMount() {
 
-    API.post('/sendEmail', {
+    const emailMsgObj = {
       toEmail: this.props.personalDetails.email,
       personalDetails: { ...this.props.personalDetails },
       tripDetails: { ...this.props.tripDetails },
@@ -18,7 +20,17 @@ class ConfirmationScreen extends React.Component {
       cashPayment: this.props.cashPayment
       // bodyText: "Thank you for choosing Bengkala as your holiday getaway",
       // subject: "Trip Confirmation"
-    });
+    };
+
+    const emailMsg = JSON.stringify(emailMsgObj);
+
+    // const unencryptedMsg = SHA256(emailMsg);
+
+    const cipher = CryptoJS.AES.encrypt(emailMsg, FRONT_END_PUBLIC_KEY)
+
+    const emailMsgToBeSent = { msg: emailMsgObj, encrypt: cipher }
+
+    API.post('/sendEmail', emailMsgToBeSent);
 
   }
 

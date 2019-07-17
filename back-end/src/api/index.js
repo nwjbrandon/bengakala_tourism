@@ -9,6 +9,7 @@ import faq from './faq';
 import explore from './explore';
 import snap from './snap';
 import emailSender from './emailSender/emailSender';
+import notification from './notification';
 import dashboard from './dashboard';
 import dashboardContact from './dashboard/contact';
 import dashboardBooking from './dashboard/booking';
@@ -55,6 +56,8 @@ app.post('/snap/info',
   snap.post);
 app.get('/story/:tag', story.get);
 app.post('/sendEmail', emailSender.send);
+
+app.post('/notification/handling', notification.post)
 
 // app.get('/calculation', calculation.post);
 

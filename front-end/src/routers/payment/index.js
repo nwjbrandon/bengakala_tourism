@@ -1,25 +1,22 @@
 import React from 'react';
 import API from '../../api';
 
+
+const getData = async(req, res) => {
+  return req.body
+}
+
 class Payment extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: '',
-    }
-  } 
+   
   componentDidMount() {
-    API.get('/payment').then(res => {
-      this.setState({ data: res });
-    })
+    const transaction_data = getData();
+
+    console.log(transaction_data)
+    // API.post('/notification/post') {
+      
+    }
   }
-  render() {
-    return (
-      <div>
-      <h1>{ this.state.data }</h1>
-      </div>
-    )
-  }
+
 }
 
 export default Payment
