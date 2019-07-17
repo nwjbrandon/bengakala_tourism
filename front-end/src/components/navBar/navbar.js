@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
 const sections = [
   {
     title: 'stories',
-    url: '/stories',
+    url: '/stories/p/1',
   },
   {
     title: 'booking',

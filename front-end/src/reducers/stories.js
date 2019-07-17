@@ -1,7 +1,10 @@
 import { handleActions } from 'redux-actions';
 
 const initialState = {
-    data: [],
+    data: {
+        latestStories: [],
+        pageStories: [],
+    },
     fetching: false,
     error: false,
 };

@@ -11,7 +11,6 @@ const ImageCarousell = (props) => {
     const [bookingImages, setBookingImages] = React.useState([]);
 
     const children = bookingImages.map(i => <ImageItem {...i} />)
-    console.log("children", children)
 
     const changeActiveItem = (activeItemIndex) => setActiveItemIndex(activeItemIndex);
 

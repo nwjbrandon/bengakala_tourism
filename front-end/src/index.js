@@ -110,10 +110,10 @@ const routing = (
             <ProtectedRoutes exact path="/booking" component={ Accommodation } secret={false} />
             <ProtectedRoutes exact path="/explore" component={ Explore } secret={false} />
             <ProtectedRoutes exact path="/admin" component={ Admin } secret={false} />
-            <ProtectedRoutes exact path="/stories" component={ Stories } secret={false} />
+            <ProtectedRoutes exact path="/stories/p/:page" component={ Stories } secret={false} />
             <ProtectedRoutes exact path="/contact" component={ Contact } secret={false} />
             <ProtectedRoutes exact path="/faq" component={ Faq } secret={false} />
-            <ProtectedRoutes path="/story/:tag" component={ Story } secret={false} />
+            <ProtectedRoutes exact path="/story/s/:tag" component={ Story } secret={false} />
 
             <ProtectedRoutes exact path="/dashboard" component={ Dashboard } secret={true} />
             <ProtectedRoutes exact path="/dashboard/booking" component={ DashboardAccommodation } secret={true} />

@@ -1,5 +1,5 @@
 import React from 'react';
-import Modal from '../../components/stories/Modal'
+import { withRouter } from "react-router-dom";
 import Navbar from "../../components/navBar/navbar";
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
@@ -8,14 +8,12 @@ import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
-import _div from 'lodash/divide';
-import _floor from 'lodash/floor';
+import { Link } from 'react-router-dom';
+import _toNumber from 'lodash/toNumber';
 import dateFnsFormat from 'date-fns/format';
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 import MyCard from './card'
-
-import bg from '../../assets/img/bg2house.jpeg'
 
 const styles = theme => ({
   root: {
@@ -23,7 +21,6 @@ const styles = theme => ({
   },
   card: {
     margin: `${theme.spacing(0)}px auto`,
-    maxWidth: 600
   },
   buttons: {
     width: '90%',
@@ -38,71 +35,53 @@ class Attraction extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      text: "", openModal: false, title: "", imgUrl: "",
-      page: 0, rowsPerPage: 6,
+      page: 1,
     };
-    this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.handleOpenModal = this.handleOpenModal.bind(this);
-    this.handleNext = this.handleNext.bind(this);
-    this.handlePrevious = this.handlePrevious.bind(this);
+    this.handlePageNext = this.handlePageNext.bind(this);
+    this.handlePagePrevious = this.handlePagePrevious.bind(this);
   }
 
-  handleOpenModal = ({ text, title, imgUrl }) => {
-    this.setState({ text, openModal: true, title, imgUrl });
-  };
-
-  handleCloseModal = () => {
-    this.setState({ openModal: false });
-  };
-
-  handleNext = () => {
-    const { page } = this.state;
-    this.setState({ page: page + 1 })
-  };
-
-  handlePrevious = () => {
-    const { page } = this.state;
-    this.setState({ page: page - 1 })
-  };
-
   componentDidMount() {
+    const url = window.location.pathname;
+    const page = _toNumber(url.substring(url.lastIndexOf('stories/p/') + 10));
+    const pageNumber = _toNumber(page) < 1 ? 1 : page;
     const { onMount } = this.props;
-    onMount();
+    onMount(pageNumber);
+    this.setState({ page: pageNumber });
+  }
+
+  handlePagePrevious() {
+    const { onMount } = this.props;
+    const { page } = this.state;
+    this.props.history.push(`/stories/p/${page - 1}`);
+    onMount(page - 1);
+    this.setState({ page: page - 1 });
+  }
+
+  handlePageNext() {
+    const { onMount } = this.props;
+    const { page } = this.state;
+    this.props.history.push(`/stories/p/${page + 1}`);
+    onMount(page + 1);
+    this.setState({ page: page + 1 });
   }
 
 
   render() {
-    const { classes, data } = this.props;
-    const { page, rowsPerPage } = this.state;
-    const maxPage = _floor(_div(data.length - 1, rowsPerPage));
-
-    const divStyle = {
-      padding: 0,
-      marginTop: 0,
-      width: "100%",
-      minHeight: "100vh",
-      height: "auto",
-      margin: 0,
-      backgroundImage: `url(${bg})`,
-      maxWidth: "100%",
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-      backgroundRepeat: 'no-repeat',
-      position: 'relative',
-
-    };
+    const { classes, pageStories } = this.props;
+    const { page, } = this.state;
 
     return (
-      <div style={divStyle}>
+      <div>
         <Navbar />
         <h3 style={{ fontSize: '2em', fontFamily: "Montserrat, sans-serif", paddingLeft: "5vw" }}>Listen to our Stories!</h3>
         <div style={{ padding: '10px' }}>
           <Grid justify="center" container spacing={3}>
             {
-              data.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(item => (
+              pageStories.map(item => (
                 <Grid item xs={12} md={6}>
                   <Card className={classes.card} key={item.title}>
-                    <CardActionArea onClick={() => this.handleOpenModal({ ...item })}>
+                    <CardActionArea component={Link} to={`/story/s/${item.link}`}>
                       <MyCard src={item.imgUrl} date={dateFnsFormat(item.createdAt, 'YYYY/MM/DD HH:mm')} title={item.title} summary={item.summary} />
                     </CardActionArea>
 
@@ -112,13 +91,30 @@ class Attraction extends React.Component {
             }
           </Grid>
         </div>
-        <Modal {...this.state} onCloseModal={this.handleCloseModal} />
         <Grid container justify="center" spacing={10} className={classes.buttons}>
-          <Button size="small" color="primary" onClick={this.handlePrevious} disabled={page === 0} >
-            <KeyboardArrowLeft /> Previous Page
+          <Button
+              size="small"
+              variant="contained"
+              color="default"
+              onClick={this.handlePagePrevious}
+              disabled={page <= 1}
+              style={{
+                margin: 10
+              }}
+          >
+            <KeyboardArrowLeft /> Previous
             </Button>
-          <Button size="small" color="primary" onClick={this.handleNext} disabled={page === maxPage}>
-            Next Page <KeyboardArrowRight />
+          <Button
+              size="small"
+              variant="contained"
+              color="default"
+              onClick={this.handlePageNext}
+              disabled={pageStories.length < 6}
+              style={{
+                margin: 10
+              }}
+          >
+            Next <KeyboardArrowRight />
           </Button>
         </Grid>
         <SuccessToast />
@@ -128,4 +124,4 @@ class Attraction extends React.Component {
   }
 }
 
-export default withStyles(styles)(Attraction);
+export default withStyles(styles)(withRouter(Attraction));

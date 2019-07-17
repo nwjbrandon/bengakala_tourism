@@ -42,7 +42,7 @@ app.get('/home/info', home.info);
 app.get('/booking/info', booking.info);
 app.post('/booking/info', booking.post);
 app.get('/explore/info', explore.info);
-app.get('/stories/info', stories.info);
+app.get('/stories/info/:page', stories.info);
 app.get('/contact/info', contact.info);
 app.put('/contact/info',
   contactValidators,
