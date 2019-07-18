@@ -16,6 +16,7 @@ import TablePagination from '@material-ui/core/TablePagination';
 import Modal from "../../components/dashboard/Modal";
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
+import API from '../../api'
 
 const styles = theme => ({
   root: {
@@ -68,6 +69,13 @@ class Dashboard extends Component {
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
   }
+  updateTransactionState = () => {
+    API.post('/updateTransaction', {
+      data: {
+        uuid: this.state.uuid
+      }
+    })
+  }
 
   confirmedCheckIn(event) {
     const { checkIn } = this.props;
@@ -81,7 +89,7 @@ class Dashboard extends Component {
   }
 
   handleChangePage(event, newPage) {
-    this.setState({ page: newPage});
+    this.setState({ page: newPage });
   }
 
   handleChangeRowsPerPage(event) {
@@ -89,23 +97,23 @@ class Dashboard extends Component {
   }
 
   handleOpenModal = ({
-                       firstName,
-                       lastName,
-                       email,
-                       country,
-                       dateFrom,
-                       dateTo,
-                       breakfast,
-                       lunch,
-                       dinner,
-                       males,
-                       females,
-                       cars,
-                       van,
-                       motorbikes,
-                       checkedIn,
-                       cash,
-                       uuid,
+    firstName,
+    lastName,
+    email,
+    country,
+    dateFrom,
+    dateTo,
+    breakfast,
+    lunch,
+    dinner,
+    males,
+    females,
+    cars,
+    van,
+    motorbikes,
+    checkedIn,
+    cash,
+    uuid,
   }) => {
     this.setState({
       firstName,
@@ -165,66 +173,69 @@ class Dashboard extends Component {
             Number of Customers
           </Typography>
           <Chart
-              chartType="Calendar"
-              data={heatMapData}
-              width="100%"
-              height="400px"
+            chartType="Calendar"
+            data={heatMapData}
+            width="100%"
+            height="400px"
           />
           <Typography variant='h4'>
             Account Statements
           </Typography>
           <Paper className={classes.tableWrapper}>
-              <Table className={classes.table}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell align="right">First Name</TableCell>
-                    <TableCell align="right">Last Name</TableCell>
-                    <TableCell align="right">Email</TableCell>
-                    <TableCell align="right">Expand</TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => (
-                      <TableRow key={row.uuid}>
-                        <TableCell align="right">{row.firstName}</TableCell>
-                        <TableCell align="right">{row.lastName}</TableCell>
-                        <TableCell align="right">{row.email}</TableCell>
-                        <TableCell align="right">
-                          <Button
-                              size="small"
-                              value={row}
-                              variant="contained"
-                              color={row.checkedIn ? "primary" : "secondary"}
-                              onClick={() => this.handleOpenModal({...row})}
-                          >
-                            Expand
+            <Table className={classes.table}>
+              <TableHead>
+                <TableRow>
+                  <TableCell align="right">First Name</TableCell>
+                  <TableCell align="right">Last Name</TableCell>
+                  <TableCell align="right">Email</TableCell>
+                  <TableCell align="right">Expand</TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {transactions.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map(row => (
+                  <TableRow key={row.uuid}>
+                    <TableCell align="right">{row.firstName}</TableCell>
+                    <TableCell align="right">{row.lastName}</TableCell>
+                    <TableCell align="right">{row.email}</TableCell>
+                    <TableCell align="right">
+                      <Button
+                        size="small"
+                        value={row}
+                        variant="contained"
+                        color={row.checkedIn ? "primary" : "secondary"}
+                        onClick={() => this.handleOpenModal({ ...row })}
+                      >
+                        Expand
                           </Button>
-                        </TableCell>
-                      </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              </TableBody>
+            </Table>
             <TablePagination
-                rowsPerPageOptions={[5, 10, 25]}
-                component="div"
-                count={transactions.length}
-                rowsPerPage={rowsPerPage}
-                page={page}
-                backIconButtonProps={{
-                  'aria-label': 'Previous Page',
-                }}
-                nextIconButtonProps={{
-                  'aria-label': 'Next Page',
-                }}
-                onChangePage={this.handleChangePage}
-                onChangeRowsPerPage={this.handleChangeRowsPerPage}
+              rowsPerPageOptions={[5, 10, 25]}
+              component="div"
+              count={transactions.length}
+              rowsPerPage={rowsPerPage}
+              page={page}
+              backIconButtonProps={{
+                'aria-label': 'Previous Page',
+              }}
+              nextIconButtonProps={{
+                'aria-label': 'Next Page',
+              }}
+              onChangePage={this.handleChangePage}
+              onChangeRowsPerPage={this.handleChangeRowsPerPage}
             />
-            </Paper>
-          </main>
+          </Paper>
+        </main>
         <Modal {...this.state}
-               onCloseModal={this.handleCloseModal}
-               confirmedCheckIn={this.confirmedCheckIn}
-               deleteCheckIn={this.deleteCheckIn}
+          onCloseModal={this.handleCloseModal}
+          confirmedCheckIn={this.confirmedCheckIn}
+          deleteCheckIn={this.deleteCheckIn}
+          updateTransactionState={
+            this.updateTransactionState
+          }
         />
         <SuccessToast />
         <ErrorToast />

@@ -8,6 +8,7 @@ import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 import TextField from "@material-ui/core/TextField";
 import _debounce from 'lodash/debounce';
+import SearchIcon from '@material-ui/icons/Search';
 
 const styles = theme => ({
   root: {
@@ -92,6 +93,9 @@ class Faq extends React.Component {
                   }}
                   value={value}
                   onChange={this.handleChange}
+                  InputProps={{
+                    endAdornment: <SearchIcon />
+                  }}
                 />
               </Grid>
             </Grid>

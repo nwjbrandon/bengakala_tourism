@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Card from '@material-ui/core/Card';
@@ -7,7 +7,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import Hidden from '@material-ui/core/Hidden';
-
+import Buttons from './Buttons';
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -78,7 +78,7 @@ class Content extends Component {
       textSizeAdjust: '100%',
     };
 
-    const separator ={
+    const separator = {
       backgroundColor: '#f8304b',
       display: 'block',
       width: '85px',
@@ -97,63 +97,55 @@ class Content extends Component {
     };
 
     const { stories, mission, classes } = this.props;
-    return(
+    return (
       <div className={classes.root}>
         <div className={classes.paper}>
-          <h2 style={titleHeader}>{ mission.title }</h2>
+          <h2 style={titleHeader}>{mission.title}</h2>
           <div style={separator} />
           <div>
             {
               mission.text ?
-                  mission.text.split("\n").map((i,key) => (
-                <div style={myTextstyle} key={key}>{i}</div>
-                  )): <div />
+                mission.text.split("\n").map((i, key) => (
+                  <div style={myTextstyle} key={key}>{i}</div>
+                )) : <div />
             }
           </div>
         </div>
         <div className={classes.bottomPaper}>
           <Grid justify="center" container>
             <Grid item xs={12} md={6}>
-              <Grid justify="center" container>
-                <Typography variant="h6">
-                  Listen to our stories!
-                </Typography>
-              </Grid>
+
               <Grid justify="center" container>
                 <Button
-                    variant="contained"
-                    size="medium"
-                    color="primary"
-                    component={Link}
-                    to="/stories"
-                    style={{
-                      marginBottom: 50,
-                      backgroundColor: 'teal',
-                    }}
+                  variant="contained"
+                  size="medium"
+                  color="primary"
+                  component={Link}
+                  to="/stories"
+                  style={{
+                    marginBottom: 50,
+                    backgroundColor: 'teal',
+                  }}
                 >
-                  Listen
+                  Listen to our stories!
                 </Button>
               </Grid>
             </Grid>
             <Grid item xs={12} md={6}>
-              <Grid justify="center" container>
-                <Typography variant="h6">
-                  Explore our village!
-                </Typography>
-              </Grid>
+
               <Grid justify="center" container>
                 <Button
-                    variant="contained"
-                    size="medium"
-                    color="primary"
-                    component={Link}
-                    to="/explore"
-                    style={{
-                      marginBottom: 50,
-                      backgroundColor: 'teal',
-                    }}
+                  variant="contained"
+                  size="medium"
+                  color="primary"
+                  component={Link}
+                  to="/explore"
+                  style={{
+                    marginBottom: 50,
+                    backgroundColor: 'teal',
+                  }}
                 >
-                  Explore
+                  Explore our village!
                 </Button>
               </Grid>
             </Grid>
@@ -163,123 +155,123 @@ class Content extends Component {
         <div>
           {
             stories.map((text, index) => (
-                <div key={index}>
-                  <Grid justify="center" container>
-                    <Grid item xs={12}>
-                      <Card style={{
-                        backgroundImage: `url(${text.imgUrl})`,
-                        margin: 'none auto',
-                        backgroundSize: 'cover',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        justifyContent: 'center',
-                        backgroundPosition: 'center',
-                        backgroundRepeat: 'no-repeat',
-                        position: 'relative',
-                        maxWidth: '100%',
-                        boxSizing: 'inherit',
-                        minHeight: '400px'
-                      }}
+              <div key={index}>
+                <Grid justify="center" container>
+                  <Grid item xs={12}>
+                    <Card style={{
+                      backgroundImage: `url(${text.imgUrl})`,
+                      margin: 'none auto',
+                      backgroundSize: 'cover',
+                      display: 'flex',
+                      flexDirection: 'column',
+                      justifyContent: 'center',
+                      backgroundPosition: 'center',
+                      backgroundRepeat: 'no-repeat',
+                      position: 'relative',
+                      maxWidth: '100%',
+                      boxSizing: 'inherit',
+                      minHeight: '400px'
+                    }}
 
-                      >
-                        <Hidden smDown>
-                          {
-                            index % 2 === 0 ?
-                                <Grid
-                                    justify="flex-start" container>
-                                  <Grid item xs={4}  style={{
-                                    backgroundColor: 'black',
-                                    opacity: 0.6,
-                                    minHeight: '400px'
+                    >
+                      <Hidden smDown>
+                        {
+                          index % 2 === 0 ?
+                            <Grid
+                              justify="flex-start" container>
+                              <Grid item xs={4} style={{
+                                backgroundColor: 'black',
+                                opacity: 0.6,
+                                minHeight: '400px'
+                              }}>
+                                <CardContent>
+                                  <Typography variant="h5" style={{
+                                    color: "white",
+                                    fontWeight: "bold"
                                   }}>
-                                    <CardContent>
-                                      <Typography variant="h5" style={{
-                                        color: "white",
-                                        fontWeight: "bold"
-                                      }}>
-                                        {text.title}
-                                      </Typography>
-                                      <Typography variant="body1" style={{
-                                        color: "white"
-                                      }}>
-                                        {text.text.split("\n").map((i,key) => (
-                                            <div style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</div>
-                                        ))}
-                                      </Typography>
-                                    </CardContent>
-                                  </Grid>
-                                </Grid> :
-                                <Grid
-                                    justify="flex-end" container>
-                                  <Grid item xs={4}  style={{
-                                    backgroundColor: 'black',
-                                    opacity: 0.6,
-                                    minHeight: '400px'
+                                    {text.title}
+                                  </Typography>
+                                  <Typography variant="body1" style={{
+                                    color: "white"
                                   }}>
-                                    <CardContent>
-                                      <Typography variant="h5" style={{
-                                        color: "white",
-                                        fontWeight: "bold"
-                                      }}>
-                                        {text.title}
-                                      </Typography>
-                                      <Typography variant="body1" style={{
-                                        color: "white"
-                                      }}>
-                                        {text.text.split("\n").map((i,key) => (
-                                            <div style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</div>
-                                        ))}
-                                      </Typography>
-                                    </CardContent>
-                                  </Grid>
-                                </Grid>
-                          }
-                        </Hidden>
-                      </Card>
+                                    {text.text.split("\n").map((i, key) => (
+                                      <div style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</div>
+                                    ))}
+                                  </Typography>
+                                </CardContent>
+                              </Grid>
+                            </Grid> :
+                            <Grid
+                              justify="flex-end" container>
+                              <Grid item xs={4} style={{
+                                backgroundColor: 'black',
+                                opacity: 0.6,
+                                minHeight: '400px'
+                              }}>
+                                <CardContent>
+                                  <Typography variant="h5" style={{
+                                    color: "white",
+                                    fontWeight: "bold"
+                                  }}>
+                                    {text.title}
+                                  </Typography>
+                                  <Typography variant="body1" style={{
+                                    color: "white"
+                                  }}>
+                                    {text.text.split("\n").map((i, key) => (
+                                      <div style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</div>
+                                    ))}
+                                  </Typography>
+                                </CardContent>
+                              </Grid>
+                            </Grid>
+                        }
+                      </Hidden>
+                    </Card>
+                  </Grid>
+                </Grid>
+                <Hidden mdUp>
+                  <Grid
+                    justify="center" container>
+                    <Grid item xs={12} style={{
+                      backgroundColor: 'black',
+                      opacity: 0.6,
+                      minHeight: '400px'
+                    }}>
+                      <CardContent>
+                        <Typography variant="h5" style={{
+                          color: "white",
+                          fontWeight: "bold"
+                        }}>
+                          {text.title}
+                        </Typography>
+                        <Typography variant="body1" style={{
+                          color: "white"
+                        }}>
+                          {text.text.split("\n").map((i, key) => (
+                            <div style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</div>
+                          ))}
+                        </Typography>
+                      </CardContent>
                     </Grid>
                   </Grid>
-                  <Hidden mdUp>
-                    <Grid
-                        justify="center" container>
-                      <Grid item xs={12}  style={{
-                        backgroundColor: 'black',
-                        opacity: 0.6,
-                        minHeight: '400px'
-                      }}>
-                        <CardContent>
-                          <Typography variant="h5" style={{
-                            color: "white",
-                            fontWeight: "bold"
-                          }}>
-                            {text.title}
-                          </Typography>
-                          <Typography variant="body1" style={{
-                            color: "white"
-                          }}>
-                            {text.text.split("\n").map((i,key) => (
-                                <div style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</div>
-                            ))}
-                          </Typography>
-                        </CardContent>
-                      </Grid>
-                    </Grid>
-                  </Hidden>
-                </div>
+                </Hidden>
+              </div>
             ))
           }
         </div>
         <div className={classes.bottomPaper}>
           <Grid justify="center" container>
             <Button
-                variant="contained"
-                size="medium"
-                color="primary"
-                component={Link}
-                to="/booking"
-                style={{
-                  marginBottom: 50,
-                  backgroundColor: 'teal',
-                }}
+              variant="contained"
+              size="medium"
+              color="primary"
+              component={Link}
+              to="/booking"
+              style={{
+                marginBottom: 50,
+                backgroundColor: 'teal',
+              }}
             >
               Book Now!
             </Button>

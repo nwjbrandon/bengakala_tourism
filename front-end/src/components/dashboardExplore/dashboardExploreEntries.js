@@ -38,6 +38,18 @@ class DashboardFAQEntries extends Component {
         this.watchTitle = this.watchTitle.bind(this);
         this.watchText = this.watchText.bind(this);
         this.editEntry = this.editEntry.bind(this);
+        this.watchThumbnail = this.watchThumbnail.bind(this);
+    }
+
+    watchThumbnail(event) {
+        const value = event.target.value;
+        const uuid = event.target.id;
+        const { watch } = this.props;
+        watch({
+            value,
+            uuid,
+            field: 'subheading',
+        })
     }
 
     watchImgUrl(event) {
@@ -115,6 +127,17 @@ class DashboardFAQEntries extends Component {
                                         multiline={true}
                                         variant="outlined"
                                         fullWidth
+                                        value={data[item].subheading}
+                                        placeholder="Eg. 9SKA6PmcLuQ"
+                                        label="Thumbnail URL Links"
+                                        className={classes.button}
+                                        onChange={this.watchThumbnail}
+                                        id={item}
+                                    />
+                                    <TextField
+                                        multiline={true}
+                                        variant="outlined"
+                                        fullWidth
                                         value={data[item].imgUrl}
                                         placeholder="Eg. 9SKA6PmcLuQ"
                                         label="Video URL Links ID"
@@ -138,6 +161,9 @@ class DashboardFAQEntries extends Component {
                                 <div>
                                     <Typography>
                                         { data[item].title }
+                                    </Typography>
+                                    <Typography>
+                                        { data[item].subheading }
                                     </Typography>
                                     <Typography>
                                         { data[item].imgUrl }

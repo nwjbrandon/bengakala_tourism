@@ -11,7 +11,6 @@ import {
 } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import dateFnsFormat from "date-fns/format";
-import { Link } from 'react-router-dom';
 
 const styles = () => ({
   root: {

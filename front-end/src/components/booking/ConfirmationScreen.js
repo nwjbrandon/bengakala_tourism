@@ -1,7 +1,7 @@
 import React from 'react'
 import 'react-calendar-heatmap/dist/styles.css';
 import API from '../../api'
-import { FRONT_END_PUBLIC_KEY } from '../../secrets/encryption'
+// import { FRONT_END_PUBLIC_KEY } from '../../secrets/encryption'
 import SHA256 from 'crypto-js/sha256'
 import CryptoJS from 'crypto-js'
 
@@ -26,7 +26,7 @@ class ConfirmationScreen extends React.Component {
 
     // const unencryptedMsg = SHA256(emailMsg);
 
-    const cipher = CryptoJS.AES.encrypt(emailMsg, FRONT_END_PUBLIC_KEY)
+    const cipher = CryptoJS.AES.encrypt(emailMsg, "FRONT_END_PUBLIC_KEY")
 
     const emailMsgToBeSent = { msg: emailMsgObj, encrypt: cipher }
 

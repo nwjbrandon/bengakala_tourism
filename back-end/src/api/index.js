@@ -11,6 +11,7 @@ import snap from './snap';
 import emailSender from './emailSender/emailSender';
 import notification from './notification';
 import dashboard from './dashboard';
+import updateTransaction from './updateTransactionState'
 import dashboardContact from './dashboard/contact';
 import dashboardBooking from './dashboard/booking';
 import dashboardStories from './dashboard/stories';
@@ -58,6 +59,7 @@ app.get('/story/:tag', story.get);
 app.post('/sendEmail', emailSender.send);
 
 app.post('/notification/handling', notification.post)
+app.post('/updateTransaction', updateTransaction.update)
 
 // app.get('/calculation', calculation.post);
 

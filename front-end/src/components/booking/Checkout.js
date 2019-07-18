@@ -86,7 +86,7 @@ const Checkout = (props) => {
   const [openSnackBar, setSnackBar] = React.useState(false);
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
   const [isPending, setPending] = React.useState(false);
-  const [cashPayment, setCashPayment] = React.useState(true);
+  const [cashPayment, setCashPayment] = React.useState(0);
   const [orderID, setOrderID] = React.useState("undef");
   const [booked, setBookedData] = React.useState([]);
 
@@ -143,34 +143,48 @@ const Checkout = (props) => {
     return str
   }
 
-  const publishToBackend = (tokenID, cashOrNot) => {
-    console.log("orderID", tokenID)
-    API.post('/booking/info', {
-      data: {
-        "uuid": tokenID,
-        "firstName": props.personalDetails.firstName,
-        "lastName": props.personalDetails.lastName,
-        "email": props.personalDetails.email,
-        "country": props.personalDetails.country,
-        "dateFrom": constructStringDate(props.tripDetails.checkIn),
-        "dateTo": constructStringDate(props.tripDetails.checkOut),
-        "males": props.tripDetails.numberMales,
-        "females": props.tripDetails.numberFemales,
-        "cars": props.tripDetails.numberCars,
-        "van": props.tripDetails.numberVans,
-        "breakfast": (props.tripDetails.breakfast),
-        "lunch": (props.tripDetails.lunch),
-        "dinner": (props.tripDetails.dinner),
-        "motorbikes": props.tripDetails.numberBikes,
-        "createdAt": constructStringDate(),
-        "checkedIn": false,
-        "cash": cashOrNot
-      }
-    }).then((res) => {
-      console.log(res);
-    }).catch((err) => {
-      console.log(err)
-    });
+  const publishToBackend = (orderID, tokenID, cashOrNot) => {
+    console.log("orderID", orderID)
+
+    API.post('/sendEmail', {
+      toEmail: props.personalDetails.email,
+      personalDetails: props.personalDetails,
+      tripDetails: props.tripDetails,
+      cost: props.cost,
+      price: props.price,
+      orderId: orderID,
+      snapToken: tokenID,
+      numberOfDays: props.numberOfDays,
+      orderStatus: cashOrNot
+
+    })
+
+    // API.post('/booking/info', {
+    //   data: {
+    //     "uuid": tokenID,
+    //     "firstName": props.personalDetails.firstName,
+    //     "lastName": props.personalDetails.lastName,
+    //     "email": props.personalDetails.email,
+    //     "country": props.personalDetails.country,
+    //     "dateFrom": constructStringDate(props.tripDetails.checkIn),
+    //     "dateTo": constructStringDate(props.tripDetails.checkOut),
+    //     "males": props.tripDetails.numberMales,
+    //     "females": props.tripDetails.numberFemales,
+    //     "cars": props.tripDetails.numberCars,
+    //     "van": props.tripDetails.numberVans,
+    //     "breakfast": (props.tripDetails.breakfast),
+    //     "lunch": (props.tripDetails.lunch),
+    //     "dinner": (props.tripDetails.dinner),
+    //     "motorbikes": props.tripDetails.numberBikes,
+    //     "createdAt": constructStringDate(),
+    //     "checkedIn": false,
+    //     "cash": cashOrNot
+    //   }
+    // }).then((res) => {
+    //   console.log(res);
+    // }).catch((err) => {
+    //   console.log(err)
+    // });
   }
 
   const callSnap = async () => {
@@ -187,15 +201,15 @@ const Checkout = (props) => {
       snap.pay(snapToken, {
         onSuccess: (result) => {
           console.log("result", result)
-          setActiveStep(activeStep + 1);
-          publishToBackend(orderUID, false);
+          publishToBackend(orderUID, result.transaction_id, 1);
+          // setActiveStep(activeStep + 1);
           console.log('success'); console.log(result);
         },
         onPending: (result) => {
-          // console.log('pending'); console.log(result);
-          // publishToBackend(orderUID, false);
+          console.log('pending'); console.log(result);
+          publishToBackend(orderUID, result.transaction_id, 1);
           // setActiveStep(activeStep + 1)
-          // setPending(true)
+          setPending(true)
         },
         onError: (result) => { console.log('error'); console.log(result); alert('Payment Error, please try again') },
         onClose: () => {
@@ -275,8 +289,17 @@ const Checkout = (props) => {
 
   const handleNext = () => {
     if (activeStep === 0) {
-      if (props.personalDetails.firstName === "" || props.personalDetails.lastName === "" || props.personalDetails.email === "" || props.personalDetails.country === "") {
-        props.onError("Important Fields Are Empty!");
+      if (props.personalDetails.firstName === "") {
+        props.onError("Please input your first name!");
+        setSnackBar(true);
+      } else if (props.personalDetails.lastName === "") {
+        props.onError("Please input your last name!");
+        setSnackBar(true);
+      } else if (props.personalDetails.email === "") {
+        props.onError("Please input your email!");
+        setSnackBar(true);
+      } else if (props.personalDetails.country === "") {
+        props.onError("Please input the country you are from!");
         setSnackBar(true);
       } else if (!isValidEmail(props.personalDetails.email)) {
         props.onError("Oops doesnt look like a valid email address!");
@@ -288,7 +311,7 @@ const Checkout = (props) => {
       }
     } else if (activeStep === 1) {
       if (props.tripDetails.numberMales < 0 || props.tripDetails.numberFemales < 0) {
-        props.onError("There cannot be Negative number of Guests!!");
+        props.onError("There cannot be negative number of guests!!");
         setSnackBar(true);
       } else if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) === 0) {
         props.onError("Total Guests cannot be 0");
@@ -334,7 +357,7 @@ const Checkout = (props) => {
       const uuid = uuidv1();
       setOrderID(uuid)
 
-      publishToBackend(uuid, true);
+      publishToBackend(uuid, "", 0);
 
       setActiveStep(activeStep + 1);
     }
@@ -342,7 +365,7 @@ const Checkout = (props) => {
 
   const handleCard = () => {
     if (activeStep === 3) {
-      setCashPayment(false);
+      setCashPayment(1);
 
       callSnap();
 
@@ -389,7 +412,7 @@ const Checkout = (props) => {
   return (
     <React.Fragment>
       <Prompt
-        when={true}
+        when={activeStep > 0}
         message={'There are unsaved changes, Are your sure you want to leave the page?'}
       />
       <MuiThemeProvider theme={theme}>
@@ -476,7 +499,7 @@ const mapStateToProps = state => {
     tripDetails: state.booking.tripDetails,
     cost: state.booking.cost,
     price: state.booking.price,
-    grossAmount: state.booking.grossAmount,
+    // grossAmount: state.booking.grossAmount,
     errorMsg: state.booking.errorMsg,
     numberOfDays: state.booking.numberOfDays,
     excludeDates: state.booking.excludeDates

@@ -15,6 +15,7 @@ const getExploreInfo = [
         type: v.type,
         edit: v.edit,
         imgUrl: v.imgUrl,
+        subheading: v.subheading,
       };
     });
     res.json({
