@@ -6,7 +6,7 @@ export default (props) => {
       <iframe
         style={{
           width: "100%",
-          height: '50vh',
+          height: '75vh',
         }}
         title={props.youtubeId}
         src={'https://www.youtube.com/embed/' + props.youtubeId}

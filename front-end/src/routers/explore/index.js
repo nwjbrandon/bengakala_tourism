@@ -100,7 +100,7 @@ class TutorialPage extends React.Component {
         <Navbar />
           <div className={classes.paper}>
               <Grid justify="center" container spacing={3} style={{ paddingBottom: 20 }}>
-                  <Grid item xs={12} md={6}>
+                  <Grid item xs={8} sm={6} md={4}>
                       <TextField
                           placeholder="Search..."
                           margin="normal"
@@ -120,21 +120,31 @@ class TutorialPage extends React.Component {
               <Grid container justify="center">
                   <Grid item xs={12} sm={10} md={8}>
                       <div>
-                          <Grid container justify="center">
-                              <Typography variant="h4" style={{ paddingBottom: 20 }}>
-                                  { title }
-                              </Typography>
-                          </Grid>
-                          { videoID ? <Youtube youtubeId={videoID} /> :
+                          { videoID ?
+                              <Grid container justify="center">
+                                  <Grid item xs={12} md={10}>
+                                      <Youtube youtubeId={videoID} />
+                                  </Grid>
+                              </Grid>
+                              :
                               <Grid container justify="center">
                                   <Typography variant="h4" style={{ paddingBottom: 20 }}>
                                       Cannot Load Video
                                   </Typography>
                               </Grid>
                           }
-                          <Grid container justify="flex-end">
-                              <Typography variant="body2" style={{ paddingBottom: 50 }}>
-                                  { dateFnsFormat(createdAt, 'YYYY/MM/DD HH:mm') }
+                          <Grid container justify="center">
+                              <Grid item xs={12} md={10}>
+                                  <Grid container justify="flex-end">
+                                      <Typography variant="body2" style={{ paddingBottom: 50 }}>
+                                          { dateFnsFormat(createdAt, 'YYYY/MM/DD HH:mm') }
+                                      </Typography>
+                                  </Grid>
+                              </Grid>
+                          </Grid>
+                          <Grid container justify="center">
+                              <Typography variant="h4" style={{ paddingBottom: 20 }}>
+                                  { title }
                               </Typography>
                           </Grid>
                           <Grid container justify="center" style={{ paddingBottom: 30 }}>
@@ -174,7 +184,7 @@ class TutorialPage extends React.Component {
                           <Element name="test7" className="element" id="containerElement" style={{
                               position: 'relative',
                               width: '100%',
-                              height: '50vh',
+                              height: '70vh',
                               overflowY: 'scroll',
                               marginBottom: '100px',
                           }}>
