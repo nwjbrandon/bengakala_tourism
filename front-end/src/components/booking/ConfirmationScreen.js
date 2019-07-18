@@ -1,8 +1,6 @@
 import React from 'react'
 import 'react-calendar-heatmap/dist/styles.css';
 import API from '../../api'
-// import { FRONT_END_PUBLIC_KEY } from '../../secrets/encryption'
-import SHA256 from 'crypto-js/sha256'
 import CryptoJS from 'crypto-js'
 
 class ConfirmationScreen extends React.Component {

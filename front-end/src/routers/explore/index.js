@@ -173,21 +173,21 @@ class TutorialPage extends React.Component {
                           </Grid>
                           <Element name="test7" className="element" id="containerElement" style={{
                               position: 'relative',
-                              minHeight: '100px',
-                              maxHeight: '450px',
+                              width: '100%',
+                              height: '50vh',
                               overflowY: 'scroll',
                               marginBottom: '100px',
                           }}>
                           {
                               value.length <= 1 ?
                                   data.map((datum, index) => (
-                                      <Card style={{ paddingTop: 5, paddingBottom: 5 }}>
+                                      <Card style={{ paddingTop: 5, paddingBottom: 5, minHeight: 50 }}>
                                           <CardActionArea onClick={() => this.setState({ ...datum, playing: index })}>
                                               <Grid container key={index}>
                                                   <Grid item xs={12} md={10}>
                                                       <Grid container>
                                                           <Grid item xs={1} md={1}>
-                                                              <Grid container justify="center" style={{ paddingTop: 20, }}>
+                                                              <Grid container justify="center" style={{ paddingTop: 10, }}>
                                                                   {index === playing ? <PlayArrowIcon /> : <div />}
                                                               </Grid>
                                                           </Grid>
