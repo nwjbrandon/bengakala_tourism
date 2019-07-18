@@ -42,7 +42,6 @@ const app = express();
 app.get('/testing', (req, res) => res.json({ data: 'v1.0' }));
 app.get('/home/info', home.info);
 app.get('/booking/info', booking.info);
-app.post('/booking/info', booking.post);
 app.get('/explore/info', explore.info);
 app.get('/stories/info/:page', stories.info);
 app.get('/contact/info', contact.info);
@@ -58,10 +57,8 @@ app.post('/snap/info',
 app.get('/story/:tag', story.get);
 app.post('/sendEmail', emailSender.send);
 
-app.post('/notification/handling', notification.post)
-app.post('/updateTransaction', updateTransaction.update)
-
-// app.get('/calculation', calculation.post);
+app.post('/notification/handling', notification.post);
+app.post('/updateTransaction', updateTransaction.update);
 
 // endpoints must be protected
 app.post('/admin/login',
