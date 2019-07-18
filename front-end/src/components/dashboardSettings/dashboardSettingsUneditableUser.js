@@ -83,15 +83,20 @@ class DashboardSettingsUneditableUser extends Component {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography className={classes.heading}>{ data[item].username } - { data[item].jobTitle }</Typography>
+                            <Typography className={classes.heading}>{ data[item].username }</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
-                            <Typography>
-                                { data[item].email }
-                            </Typography>
-                            <Typography>
-                                { data[item].phone }
-                            </Typography>
+                            <div>
+                                <Typography>
+                                    Email: { data[item].email }
+                                </Typography>
+                                <Typography>
+                                    Contact: { data[item].phone }
+                                </Typography>
+                                <Typography>
+                                    Contact: { data[item].jobTitle }
+                                </Typography>
+                            </div>
                         </ExpansionPanelDetails>
                     </ExpansionPanel>
                 ))}

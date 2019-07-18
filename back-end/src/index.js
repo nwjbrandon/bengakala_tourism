@@ -4,12 +4,10 @@ import cors from 'cors';
 import bodyParser from 'body-parser';
 import redis from 'redis';
 import connectRedis from 'connect-redis';
-import swaggerUi from 'swagger-ui-express';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import api from './api';
 import config from './config';
-import swaggerSpec from './configuration/swagger';
 
 const app = express();
 
@@ -40,7 +38,6 @@ app.use(cors({ credentials: true, origin: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 app.use('/api', api);
 
 const startExpress = (portNumber) => {

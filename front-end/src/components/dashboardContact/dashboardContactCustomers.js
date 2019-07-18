@@ -61,10 +61,10 @@ class DashboardContactDetails extends Component {
                                     Email: { data[item].title }
                                 </Typography>
                                 <Typography>
-                                    First Name: { data[item].heading }
+                                    Name: { data[item].heading }
                                 </Typography>
                                 <Typography>
-                                    Last Name: { data[item].subheading }
+                                    Contact: { data[item].subheading }
                                 </Typography>
                                 <Typography>
                                     Message: { data[item].subparagraph }

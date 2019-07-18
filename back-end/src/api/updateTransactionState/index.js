@@ -1,16 +1,10 @@
-import sendEmail from '../../emailSender/emailSender'
-import { FRONT_END_PRIVATE_KEY } from '../../secret/encryption'
-import SHA256 from 'crypto-js/sha256'
-import CryptoJS from 'crypto-js'
-
-import _ from 'lodash';
-import { wrapAsync } from "../../middleware/errorHandling";
 import db from '../../storage/db';
 import { TABLE_EXCLUDED_DATES, TABLE_INFORMATION, TABLE_TRANSACTIONS } from '../../storage/tableName';
 import { eachDay } from 'date-fns';
 import calculations from '../../middleware/calculations'
 
 import { serverKey, clientKey } from '../../secret/midtransSecret';
+import sendEmail from '../../emailSender/emailSender'
 
 const midtransClient = require('midtrans-client');
 
