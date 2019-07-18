@@ -121,7 +121,7 @@ class Content extends Component {
                   size="medium"
                   color="primary"
                   component={Link}
-                  to="/stories"
+                  to="/stories/p/1"
                   style={{
                     marginBottom: 50,
                     backgroundColor: 'teal',
