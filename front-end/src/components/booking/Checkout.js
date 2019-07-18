@@ -132,6 +132,8 @@ const Checkout = (props) => {
     }
   }, []);
 
+
+
   const isValidEmail = (email) => {
     return email.includes("@") && email.includes('.') && email.split('@').length > 1 && email.split('@')[1] !== "";
   };
@@ -151,13 +153,20 @@ const Checkout = (props) => {
       personalDetails: props.personalDetails,
       tripDetails: props.tripDetails,
       cost: props.cost,
-      price: props.price,
+      prices: props.price,
       orderId: orderID,
-      snapToken: tokenID,
+      transactionID: tokenID,
       numberOfDays: props.numberOfDays,
       orderStatus: cashOrNot
 
-    })
+    }).then(res => {
+      if (res.data === 'pending') {
+        setPending(true);
+      }
+
+      setActiveStep(activeStep + 1);
+
+    });
 
     // API.post('/booking/info', {
     //   data: {
@@ -357,9 +366,8 @@ const Checkout = (props) => {
       const uuid = uuidv1();
       setOrderID(uuid)
 
-      publishToBackend(uuid, "", 0);
+      publishToBackend("", uuid, 0);
 
-      setActiveStep(activeStep + 1);
     }
   }
 
@@ -369,7 +377,6 @@ const Checkout = (props) => {
 
       callSnap();
 
-      // setActiveStep(activeStep + 1);
     }
   }
 

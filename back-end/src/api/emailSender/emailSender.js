@@ -30,7 +30,7 @@ const apiClient = new midtransClient.Snap({
 const writeToDB = async (Data, paymentStat) => {
 
     const paymentData = {
-        "uuid": Data.snapToken,
+        "uuid": Data.transactionID,
         "firstName": Data.personalDetails.firstName,
         "lastName": Data.personalDetails.lastName,
         "email": Data.personalDetails.email,
@@ -62,71 +62,85 @@ const send = [
         const Data = req.body;
         console.log(Data)
 
-        const snapToken = Data.snapToken;
+        const transactionID = Data.transactionID;
         const orderId = Data.orderId;
         const orderStat = Data.orderStatus
         console.log(orderStat)
-        console.log(db.uuidExist(TABLE_TRANSACTIONS, snapToken))
+        console.log(db.uuidExist(TABLE_TRANSACTIONS, transactionID))
 
-        // if (!db.uuidExist(TABLE_TRANSACTIONS, snapToken)) {
+        const UUIDexists = await db.uuidExist(TABLE_TRANSACTIONS, transactionID);
+
+        if (!UUIDexists) {
 
 
-        if (orderStat === 0) {
-            await writeToDB(Data, 0)
-        } else if (orderStat === 1) {
-            try {
-                const response = await apiClient.transaction.status(snapToken);
+            if (orderStat === 0) {
+                await writeToDB(Data, 0);
+                await sendEmail({
+                    toEmail: Data.personalDetails.email,
+                    tripDetails: { ...Data.personalDetails, ...Data.tripDetails },
+                    cost: Data.cost,
+                    prices: Data.prices,
+                    numberOfDays: Data.numberOfDays,
+                    transactionID: Data.transactionID,
+                    orderStatus: Data.orderStatus,
+                    checkIn: constructStringDate(Data.tripDetails.checkIn),
+                    checkOut: constructStringDate(Data.tripDetails.checkOut),
+                    Now: constructStringDate(),
+                });
 
-                console.log("RESPONSE", response)
+                res.json({
+                    data: 'success',
+                });
+            } else if (orderStat === 1) {
+                try {
+                    const response = await apiClient.transaction.status(transactionID);
 
-                if (response.fraud_status === 'accept') {
-                    await sendEmail(Data);
-                    await writeToDB(Data, 2)
-                } else {
-                    await writeToDB(Data, 1)
+                    console.log("RESPONSE", response)
+
+                    if (response.fraud_status === 'accept') {
+                        await sendEmail({
+                            toEmail: Data.personalDetails.email,
+                            tripDetails: { ...Data.personalDetails, ...Data.tripDetails },
+                            cost: Data.cost,
+                            prices: Data.prices,
+                            numberOfDays: Data.numberOfDays,
+                            transactionID: Data.transactionID,
+                            orderStatus: Data.orderStatus,
+                            checkIn: constructStringDate(Data.tripDetails.checkIn),
+                            checkOut: constructStringDate(Data.tripDetails.checkOut),
+                            Now: constructStringDate(),
+                        });
+                        await writeToDB(Data, 2)
+                        res.json({
+                            data: 'success',
+                        });
+                    } else {
+                        res.json({
+                            data: 'pending',
+                        });
+                        await writeToDB(Data, 1)
+                    }
+
+
+                } catch (err) {
+                    console.log(err)
                 }
 
 
-            } catch (err) {
-                console.log(err)
+            } else {
+
+                res.json({
+                    data: 'success',
+                });
+
             }
 
 
-        } else {
-            //
         }
 
 
-        // }
 
 
-
-
-
-        //     toEmail: Data.personalDetails.email,
-        //   personalDetails: props.personalDetails,
-        //   tripDetails: props.tripDetails,
-        //   cost: props.cost,
-        //   price: props.price,
-        //   orderId: orderID,
-        //   snapToken: tokenID,
-        //   numberOfDays: props.numberOfDays,
-        //   orderStatus: cashOrNot
-
-
-
-        // const emailData = req.body;
-        // const msg = emailData.msg;
-        // const encrypt = emailData.encrypt;
-
-        // var bytes  = CryptoJS.AES.decrypt(encrypt.toString(), FRONT_END_PRIVATE_KEY);
-        // var plaintext = bytes.toString(CryptoJS.enc.Utf8);
-
-
-        // await sendEmail(emailData);
-        res.json({
-            data: 'success',
-        });
     }
 ];
 export default {
