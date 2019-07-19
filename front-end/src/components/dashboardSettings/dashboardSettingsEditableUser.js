@@ -42,7 +42,9 @@ class DashboardSettingsEditableUser extends Component {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography className={classes.heading}>{ data[item].username }</Typography>
+                        <Typography className={classes.heading}>{ data[item].username ? data[item].username.split("\n").map((i,key) => (
+                            <div key={key}>{i}</div>)) : <div /> }
+                        </Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                             <div>
@@ -53,7 +55,7 @@ class DashboardSettingsEditableUser extends Component {
                                     Contact: { data[item].phone }
                                 </Typography>
                                 <Typography>
-                                    Contact: { data[item].jobTitle }
+                                    Job Title: { data[item].jobTitle }
                                 </Typography>
                             </div>
                         </ExpansionPanelDetails>

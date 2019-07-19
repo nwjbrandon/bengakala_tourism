@@ -68,7 +68,7 @@ class Faq extends React.Component {
 
   render() {
     const { classes, data } = this.props;
-    const { value, filteredData, searching } = this.state;
+    const { value, filteredData, searching, question } = this.state;
     return (
       <div>
         <Navbar />
@@ -128,7 +128,9 @@ class Faq extends React.Component {
                                   >
                                     Q:&nbsp;
                                         </Typography>
-                                  {datum.question}
+                                        { datum.question ? datum.question.split("\n").map((i,key) => (
+                                          <Typography variant="body1" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>)) : <div />
+                                        }
                                 </Typography>
                                 <Typography style={{ paddingTop: 10 }}>
                                   <Typography
@@ -138,7 +140,9 @@ class Faq extends React.Component {
                                   >
                                     A:&nbsp;
                                         </Typography>
-                                  {datum.answer}
+                                        { datum.answer ? datum.answer.split("\n").map((i,key) => (
+                                          <Typography variant="body1" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>)) : <div />
+                                        }
                                 </Typography>
                               </Typography>
                             ))

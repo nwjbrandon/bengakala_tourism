@@ -252,6 +252,7 @@ class DashboardFAQ extends Component {
                         <TextField
                             variant="outlined"
                             fullWidth
+                            multiline
                             value={newUsername}
                             placeholder="Eg. 123@example.com"
                             label="Email"
@@ -281,6 +282,7 @@ class DashboardFAQ extends Component {
                         <TextField
                             variant="outlined"
                             fullWidth
+                            multiline
                             value={newJobTitle}
                             placeholder="Eg. Officer"
                             label="Job Title"
@@ -290,6 +292,7 @@ class DashboardFAQ extends Component {
                         <TextField
                             variant="outlined"
                             fullWidth
+                            multiline
                             value={newPhone}
                             placeholder="Eg. +62 1234 5678"
                             label="Phone"
