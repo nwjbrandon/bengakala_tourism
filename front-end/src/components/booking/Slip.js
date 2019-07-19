@@ -44,9 +44,9 @@ const App = (props) => {
 
   return (
     <div className='flex-center container medium-border-surround'>
-      <Typography className={classes.label} variant="h4">
+      <h1 style={{ color: "white" }}>
         Here's your Order
-        </Typography>
+        </h1>
       <div>
         <Paper>
           <Typography className={classes.label} variant="h6">
@@ -57,9 +57,6 @@ const App = (props) => {
           </Typography>
         </Paper>
         <div>
-          <Typography className={classes.label} variant="h5">
-            Price Breakdown
-            </Typography>
           {windowWidth > 600
             ? <MasterTable tripDetails={props.tripDetails} costData={props.cost} calcData={props.price} />
             : <MasterTableMobile tripDetails={props.tripDetails} costData={props.cost} calcData={props.price} />

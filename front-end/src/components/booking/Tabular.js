@@ -64,16 +64,16 @@ const MasterTable = (props) => {
       <Table className={classes.table}>
         <TableHead>
           <TableRow>
-            <TableCell style={{ fontSize: "20px", color: 'olive' }}>Number of days of stay: </TableCell>
-            <TableCell style={{ fontSize: "20px", color: 'olive' }}>{numOfDays}</TableCell>
-            <TableCell style={{ fontSize: "20px", color: 'olive' }}></TableCell>
-            <TableCell style={{ fontSize: "20px", color: 'olive' }}></TableCell>
+            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Number of days of stay: </TableCell>
+            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>{numOfDays}</TableCell>
+            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
           </TableRow>
           <TableRow>
-            <TableCell style={{ fontSize: "20px", color: 'green' }}>Type</TableCell>
-            <TableCell style={{ fontSize: "20px", color: 'green' }}>No. of people</TableCell>
-            <TableCell style={{ fontSize: "20px", color: 'green' }}>Unit Price per day(IDR)</TableCell>
-            <TableCell style={{ fontSize: "20px", color: 'green' }}>Price (IDR)</TableCell>
+            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Type</TableCell>
+            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>No. of people</TableCell>
+            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Unit Price per day(IDR)</TableCell>
+            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Price (IDR)</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>

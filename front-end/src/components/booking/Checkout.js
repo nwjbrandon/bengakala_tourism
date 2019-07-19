@@ -32,7 +32,7 @@ const snap = window.snap;
 
 const useStyles = makeStyles(theme => ({
   label: {
-    color: blue
+    color: "white"
   },
   layout: {
     width: 'auto',
@@ -70,14 +70,14 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const steps = ['Personal Details', 'Trip Details', 'Transportation Preferences', 'Confirm your Trip'];
+const steps = ['Trip Details', 'Personal Details', 'Transportation Preferences', 'Confirm your Trip'];
 
 
 const Checkout = (props) => {
 
   const toRender = [
-    <PersonalDetailsForm />,
     <TripDetailsForm />,
+    <PersonalDetailsForm />,
     <TransportDetails />,
     <Slip />
   ];
@@ -297,7 +297,7 @@ const Checkout = (props) => {
   }
 
   const handleNext = () => {
-    if (activeStep === 0) {
+    if (activeStep === 1) {
       if (props.personalDetails.firstName === "") {
         props.onError("Please input your first name!");
         setSnackBar(true);
@@ -318,7 +318,7 @@ const Checkout = (props) => {
         setSnackBar(false);
         setActiveStep(activeStep + 1);
       }
-    } else if (activeStep === 1) {
+    } else if (activeStep === 0) {
       if (props.tripDetails.numberMales < 0 || props.tripDetails.numberFemales < 0) {
         props.onError("There cannot be negative number of guests!!");
         setSnackBar(true);
@@ -428,7 +428,7 @@ const Checkout = (props) => {
           <Paper className={classes.paper}>
 
             <Typography className={classes.label} component="h1" variant="h4" align="center">
-              Checkout
+              Come Stay With Us
             </Typography>
 
             {windowWidth < 600 ? MStepper : normalStepper}

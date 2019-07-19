@@ -62,12 +62,12 @@ const MasterTable = (props) => {
     return (
         <React.Fragment>
             <Paper className={classes.root}>
-                <Typography>Unit Prices</Typography>
+                <Typography style={{ paddingTop:10, minHeight: 50, backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }} >Unit Prices</Typography>
                 <Table className={classes.table}>
                     <TableBody>
                         <TableRow>
-                            <TableCell style={{ color: 'black' }}>Accommodation</TableCell>
-                            <TableCell style={{ color: 'black' }}></TableCell>
+                            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Accommodation</TableCell>
+                            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}></TableCell>
                         </TableRow>
 
                         <TableRow>
@@ -81,8 +81,8 @@ const MasterTable = (props) => {
                         </TableRow>
 
                         <TableRow>
-                            <TableCell style={{ color: 'black' }}>Meals</TableCell>
-                            <TableCell style={{ color: 'black' }}></TableCell>
+                            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Meals</TableCell>
+                            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}></TableCell>
                         </TableRow>
 
                         <TableRow style={{ color: 'black' }}>
@@ -105,16 +105,16 @@ const MasterTable = (props) => {
                 <Table className={classes.table}>
                     <TableHead>
                         <TableRow>
-                            <TableCell style={{ fontSize: "20px", color: 'olive' }}>Number of days of stay: </TableCell>
-                            <TableCell style={{ fontSize: "20px", color: 'olive' }}>{numOfDays}</TableCell>
+                            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Number of days of stay: </TableCell>
+                            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>{numOfDays}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell style={{ fontSize: "20px", color: 'olive' }}>Number of people: </TableCell>
-                            <TableCell style={{ fontSize: "20px", color: 'olive' }}>{groupSize}</TableCell>
+                            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Number of people: </TableCell>
+                            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>{groupSize}</TableCell>
                         </TableRow>
                         <TableRow>
-                            <TableCell style={{ fontSize: "20px", color: 'green' }}>Type</TableCell>
-                            <TableCell style={{ fontSize: "20px", color: 'green' }}>Price (IDR)</TableCell>
+                            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Type</TableCell>
+                            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Price (IDR)</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
