@@ -67,7 +67,8 @@ class DashboardContactDetails extends Component {
                                     Contact: { data[item].subheading }
                                 </Typography>
                                 <Typography>
-                                    Message: { data[item].subparagraph }
+                                Message: { data[item].subparagraph ? data[item].subparagraph.split("\n").map((i,key) => (
+                                    <Typography variant="body1" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>)) : <div /> }
                                 </Typography>
                             </Grid>
                         </ExpansionPanelDetails>

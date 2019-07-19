@@ -138,7 +138,9 @@ class DashboardFAQEntries extends Component {
                                 </Grid>
                                 :
                                 <Typography>
-                                    { data[item].text }
+                                    { data[item].text ? data[item].text.split("\n").map((i,key) => (
+                                      <div key={key}>{i}</div>)) : <div />
+                                    }
                                 </Typography>
                             }
                         </ExpansionPanelDetails>
