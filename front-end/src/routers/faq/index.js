@@ -126,9 +126,11 @@ class Faq extends React.Component {
                                     variant="h6"
                                     color="textPrimary"
                                   >
-                                    Q:&nbsp;
+                                    Question:&nbsp;
                                         </Typography>
-                                  {datum.question}
+                                        { datum.question ? datum.question.split("\n").map((i,key) => (
+                                          <Typography variant="body1" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>)) : <div />
+                                        }
                                 </Typography>
                                 <Typography style={{ paddingTop: 10 }}>
                                   <Typography
@@ -136,9 +138,11 @@ class Faq extends React.Component {
                                     variant="h6"
                                     color="textPrimary"
                                   >
-                                    A:&nbsp;
+                                    Answer:&nbsp;
                                         </Typography>
-                                  {datum.answer}
+                                        { datum.answer ? datum.answer.split("\n").map((i,key) => (
+                                          <Typography variant="body1" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>)) : <div />
+                                        }
                                 </Typography>
                               </Typography>
                             ))

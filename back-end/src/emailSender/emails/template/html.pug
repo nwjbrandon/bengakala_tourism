@@ -5,6 +5,8 @@
     <link rel="stylesheet" href="/css/app.css", data-inline>
 </head>
 
+
+
 <body>
     <div class="invoice-box"  class="boxborder">
         <table cellpadding="0" cellspacing="0">
@@ -16,7 +18,7 @@
                                 <img src="https://www.varadaborneotour.com/wp-content/uploads/2019/01/WONDERFUL-INDOENSIA-ORANGUTAN.png" style="width:100%; max-width:300px;">
                             </td>
                             
-                            <td>Invoice #:#{orderId}<br>#{new Date()}</td>
+                            <td>Invoice #:#{transactionID}<br>#{Now}</td>
                         </tr>
                     </table>
                 </td>
@@ -26,7 +28,7 @@
                 <td colspan="2">
                     <table>
                         <tr>
-                            <td>Name: #{personalDetails.firstName} #{personalDetails.lastName}<br>Email: #{personalDetails.email} <br>Total Guests Count: #{tripDetails.numberMales + tripDetails.numberFemales} <br>Check In: #{tripDetails.checkIn}<br>Check Out: #{tripDetails.checkOut}</td>
+                            <td>Name: #{tripDetails.firstName} #{tripDetails.lastName}<br>Email: #{tripDetails.email} <br>Total Guests Count: #{tripDetails.numberMales + tripDetails.numberFemales} <br>Check In: #{checkIn}<br>Check Out: #{checkOut}</td>
                             
                             <td></td>
                         </tr>
@@ -70,9 +72,9 @@
             </tr>
             
             <tr class="details">
-                <td>#{cashPayment ? "Cash" :"Credit Card"}</td>
+                <td>#{!orderStatus ? "Cash" :"Credit Card"}</td>
                 
-                <td>IDR #{price.subTotal}</td>
+                <td>IDR #{prices.subTotal}</td>
             </tr>
             
             <tr class="heading">
@@ -89,7 +91,7 @@
             <tr class="subitem">
                 <td>#{numberOfDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
                 
-                <td>IDR #{price.accommodation}</td>
+                <td>IDR #{prices.accommodation}</td>
             </tr>
 
 
@@ -100,18 +102,18 @@
             <tr class="subitem">
                 <td>Breakfast for #{numberOfDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
                 
-                <td>IDR #{price.breakfast}</td>
+                <td>IDR #{prices.breakfast}</td>
             </tr>
             <tr class="subitem">
                 <td>Lunch for #{numberOfDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
                 
-                <td>IDR #{price.lunch}</td>
+                <td>IDR #{prices.lunch}</td>
             </tr>
 
             <tr class="subitem">
                 <td>Dinner for #{numberOfDays} Days for #{tripDetails.numberMales + tripDetails.numberFemales} people </td>
                 
-                <td>IDR #{price.dinner}</td>
+                <td>IDR #{prices.dinner}</td>
             </tr>
             
             <tr class="item last">
@@ -121,9 +123,9 @@
             </tr>
             
             <tr class="total">
-                <td>#{cashPayment ? "Total Due Upon Arrival:" : "Total Amount Paid:"}</td>
+                <td>#{!orderStatus ? "Total Due Upon Arrival:" : "Total Amount Paid:"}</td>
                 
-                <td>IDR #{price.subTotal}</td>
+                <td>IDR #{prices.subTotal}</td>
             </tr>
 
             <tr class="heading">

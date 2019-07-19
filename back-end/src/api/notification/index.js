@@ -30,23 +30,33 @@ const notificationPost = [
 
     console.log(`Transaction notification received. Order ID: ${orderId}. Transaction status: ${transactionStatus}. Fraud status: ${fraudStatus}`);
 
+    const UUIDexists = await db.uuidExist(TABLE_TRANSACTIONS, transactionId);
 
-    if (transactionStatus === 'capture') {
-      if (fraudStatus === 'challenge') {
-        // TODO set transaction status on databaase to 'challenge'
+    const Data = await fetchData(TABLE_TRANSACTIONS, { uuid: transactionId })
+
+    console.log(Data)
+
+    if (UUIDexists) {
+
+      if (transactionStatus === 'capture') {
+        if (fraudStatus === 'challenge') {
+          // TODO set transaction status on databaase to 'challenge'
+          updateDB(orderId, 1);
+        } else if (fraudStatus === 'accept') {
+          updateDB(orderId, 2);
+          // TODO set transaction status on databaase to 'success' and send email here
+        }
+      } else if (transactionStatus === 'cancel'
+        || transactionStatus === 'deny'
+        || transactionStatus === 'expire') {
+        // do nothing
+      } else if (transactionStatus === 'pending') {
         updateDB(orderId, 1);
-      } else if (fraudStatus === 'accept') {
-        updateDB(orderId, 2);
-        // TODO set transaction status on databaase to 'success' and send email here
+        // TODO set transaction status on your databaase to 'pending' / waiting payment
       }
-    } else if (transactionStatus === 'cancel'
-      || transactionStatus === 'deny'
-      || transactionStatus === 'expire') {
-      // do nothing
-    } else if (transactionStatus === 'pending') {
-      updateDB(orderId, 1);
-      // TODO set transaction status on your databaase to 'pending' / waiting payment
+
     }
+
   })
 
 ];

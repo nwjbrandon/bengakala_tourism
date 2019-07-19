@@ -107,7 +107,9 @@ class DashboardFAQEntries extends Component {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography className={classes.heading}>{ data[item].title }</Typography>
+                            <Typography className={classes.heading}>{ data[item].title ? data[item].title.split("\n").map((i,key) => (
+                                <Typography variant="body1" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>)) : <div /> }
+                            </Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                             {data[item].edit ?
@@ -160,16 +162,19 @@ class DashboardFAQEntries extends Component {
                                 :
                                 <div>
                                     <Typography>
-                                        { data[item].title }
+                                        { data[item].subheading ? data[item].subheading.split("\n").map((i,key) => (
+                                          <div key={key}>{i}</div>)) : <div />
+                                        }
                                     </Typography>
                                     <Typography>
-                                        { data[item].subheading }
+                                        { data[item].imgUrl ? data[item].imgUrl.split("\n").map((i,key) => (
+                                          <div key={key}>{i}</div>)) : <div />
+                                        }
                                     </Typography>
                                     <Typography>
-                                        { data[item].imgUrl }
-                                    </Typography>
-                                    <Typography>
-                                        { data[item].text }
+                                        { data[item].text ? data[item].text.split("\n").map((i,key) => (
+                                          <div key={key}>{i}</div>)) : <div />
+                                        }
                                     </Typography>
                                 </div>
                             }
