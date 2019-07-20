@@ -2,6 +2,9 @@ import midtransClient from 'midtrans-client';
 import { serverKey, clientKey } from '../../secret/midtransSecret';
 import { wrapAsync } from '../../middleware/errorHandling';
 import db from '../../storage/db';
+import { refractorOrder, constructStringDate } from '../../utils/helperMethods'
+
+import calculations from '../../middleware/calculations'
 
 // getTransactionStatus();
 const updateDB = async (orderID, paymentStat) => {
@@ -43,8 +46,37 @@ const notificationPost = [
           // TODO set transaction status on databaase to 'challenge'
           updateDB(transactionId, 1);
         } else if (fraudStatus === 'accept') {
+          const services = await db.fetchData(TABLE_INFORMATION, { type: 'cost' });
+          const Order = await db.fetchData(TABLE_TRANSACTIONS, { uuid: transactionID });
+          const myOrder = Order[0];
+          const CalculationData = new Object();
+
+          CalculationData.tripDetails = { ...refractorOrder(myOrder) }
+
+          CalculationData.cost = new Object();
+
+          services.forEach((item) => {
+            const price = parseInt(item.pricesString, 10);
+            CalculationData.cost[item.title.toLowerCase()] = price;
+          })
+
+          const { prices, numberOfDays } = calculations(CalculationData);
+          const EmailData = {
+            tripDetails: CalculationData.tripDetails,
+            cost: CalculationData.cost,
+            prices: prices,
+            numberOfDays: numberOfDays,
+            orderStatus: myOrder.cash,
+            transactionID: myOrder.uuid,
+            toEmail: myOrder.email,
+            checkIn: constructStringDate(CalculationData.tripDetails.checkIn),
+            checkOut: constructStringDate(CalculationData.tripDetails.checkOut),
+            Now: constructStringDate(),
+          }
+
+          await sendEmail(EmailData);
+
           updateDB(transactionId, 2);
-          // TODO set transaction status on databaase to 'success' and send email here
         }
       } else if (transactionStatus === 'cancel'
         || transactionStatus === 'deny'

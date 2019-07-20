@@ -5,6 +5,7 @@ import calculations from '../../middleware/calculations'
 
 import { serverKey, clientKey } from '../../secret/midtransSecret';
 import sendEmail from '../../utils/emailSender/emailSender'
+import { refractorOrder, constructStringDate } from '../../utils/helperMethods'
 
 const midtransClient = require('midtrans-client');
 
@@ -20,40 +21,40 @@ const updateDB = async (orderID, paymentStat) => {
 
 }
 
-const constructStringDate = (date) => {
-    const DateObj = date ? new Date(date) : new Date();
-    const str = `${DateObj.getFullYear()}-${DateObj.getMonth() + 1}-${DateObj.getDate()}`
-    console.log(str)
-    return str
-}
+// const constructStringDate = (date) => {
+//     const DateObj = date ? new Date(date) : new Date();
+//     const str = `${DateObj.getFullYear()}-${DateObj.getMonth() + 1}-${DateObj.getDate()}`
+//     console.log(str)
+//     return str
+// }
 
 
-const refractorOrder = (myOrder) => {
+// const refractorOrder = (myOrder) => {
 
-    const refractoredOrder = {
+//     const refractoredOrder = {
 
-        firstName: myOrder.firstName,
-        lastName: myOrder.lastName,
-        email: myOrder.email,
-        country: myOrder.country,
+//         firstName: myOrder.firstName,
+//         lastName: myOrder.lastName,
+//         email: myOrder.email,
+//         country: myOrder.country,
 
 
-        checkIn: myOrder.dateFrom,
-        checkOut: myOrder.dateTo,
-        breakfast: myOrder.breakfast,
-        lunch: myOrder.lunch,
-        dinner: myOrder.dinner,
-        numberMales: parseInt(myOrder.males, 10),
-        numberFemales: parseInt(myOrder.females, 10),
-        numberVans: parseInt(myOrder.van, 10),
-        numberCars: parseInt(myOrder.cars, 10),
-        numberBikes: parseInt(myOrder.motorbikes, 10),
+//         checkIn: myOrder.dateFrom,
+//         checkOut: myOrder.dateTo,
+//         breakfast: myOrder.breakfast,
+//         lunch: myOrder.lunch,
+//         dinner: myOrder.dinner,
+//         numberMales: parseInt(myOrder.males, 10),
+//         numberFemales: parseInt(myOrder.females, 10),
+//         numberVans: parseInt(myOrder.van, 10),
+//         numberCars: parseInt(myOrder.cars, 10),
+//         numberBikes: parseInt(myOrder.motorbikes, 10),
 
-        transactionID: myOrder.uuid
-    }
+//         transactionID: myOrder.uuid
+//     }
 
-    return refractoredOrder
-}
+//     return refractoredOrder
+// }
 
 const updateState = [
     async (req, res) => {
