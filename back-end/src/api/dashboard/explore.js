@@ -4,6 +4,7 @@ import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
 import { wrapAsync } from '../../middleware/errorHandling';
 
+// fetch data for the dashboard explore page
 const getExploreInfo = [
   wrapAsync(async (req, res) => {
     const attractions = await db.fetchData(TABLE_INFORMATION, { type: 'video' });
@@ -25,6 +26,7 @@ const getExploreInfo = [
   }),
 ];
 
+// update data on the dashboard explore page
 const postExploreInfo = [
   wrapAsync(async (req, res) => {
     const receivedData = req.body.data;

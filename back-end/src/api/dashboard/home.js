@@ -4,8 +4,10 @@ import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
 import { wrapAsync } from '../../middleware/errorHandling';
 
+// fetch data for the dashboard home page
 const getContactInfo = [
   wrapAsync(async (req, res) => {
+    // fetch data that are displayed on the attractions part of the home page
     const homes = await db.fetchData(TABLE_INFORMATION, { type: 'home' });
     const stories = _.orderBy(_.mapValues(_.groupBy(homes, 'uuid'), (value) => {
       const v = _.head(value);
@@ -18,6 +20,8 @@ const getContactInfo = [
         createdAt: v.createdAt,
       };
     }), ['createdAt'], ['desc']);
+
+    // fetch data that are displayed on the top part of the home page
     const missions = await db.fetchData(TABLE_INFORMATION, { type: 'mission' });
     const objective = _.mapValues(_.groupBy(missions, 'uuid'), (value) => {
       const v = _.head(value);
@@ -38,6 +42,7 @@ const getContactInfo = [
   }),
 ];
 
+// update data for the dashboard home page
 const postHomeInfo = [
   wrapAsync(async (req, res) => {
     const { stories: receivedData, objective } = req.body.data;

@@ -4,6 +4,7 @@ import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
 import { wrapAsync } from '../../middleware/errorHandling';
 
+// fetch data for the faq page
 const getContactInfo = [
   wrapAsync(async (req, res) => {
     const faqs = await db.fetchData(TABLE_INFORMATION, { type: 'faq' });
@@ -24,6 +25,7 @@ const getContactInfo = [
   }),
 ];
 
+// update data for the faq page
 const postFaqInfo = [
   wrapAsync(async (req, res) => {
     const receivedData = req.body.data;

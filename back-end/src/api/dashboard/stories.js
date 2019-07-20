@@ -4,6 +4,7 @@ import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
 import { wrapAsync } from '../../middleware/errorHandling';
 
+// fetch data on the dashboard stories page
 const getStoriesInfo = [
   wrapAsync(async (req, res) => {
     const stories = await db.fetchData(TABLE_INFORMATION, { type: 'media' });
@@ -25,6 +26,7 @@ const getStoriesInfo = [
   }),
 ];
 
+// update data on the dashboard stories page
 const postStoriesInfo = [
   wrapAsync(async (req, res) => {
     const receivedData = _.mapValues(req.body.data, (datum) => {
