@@ -45,7 +45,7 @@ const notificationPost = [
           await updateDB(transactionId, 1);
         } else if (fraudStatus === 'accept') {
           const services = await db.fetchData(TABLE_INFORMATION, { type: 'cost' });
-          const Order = await db.fetchData(TABLE_TRANSACTIONS, { uuid: transactionID });
+          const Order = await db.fetchData(TABLE_TRANSACTIONS, { uuid: transactionId });
           const myOrder = Order[0];
           const CalculationData = new Object();
 
