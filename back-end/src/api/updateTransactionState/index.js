@@ -1,15 +1,10 @@
 import db from '../../storage/db';
 import { TABLE_INFORMATION, TABLE_TRANSACTIONS } from '../../storage/tableName';
 import calculations from '../../middleware/calculations';
-<<<<<<< HEAD
 
 import { serverKey, clientKey } from '../../secret/midtransSecret';
 import sendEmail from '../../utils/emailSender/emailSender'
 import { refractorOrder, constructStringDate } from '../../utils/helperMethods'
-=======
-import { clientKey, serverKey } from '../../secret/midtransSecret';
-import sendEmail from '../../utils/emailSender/emailSender';
->>>>>>> ba54c113ee8a8e212bbfc8905c78649be97857ec
 
 const midtransClient = require('midtrans-client');
 
