@@ -8,7 +8,7 @@ import { wrapAsync } from '../../middleware/errorHandling';
 const getExploreInfo = [
   wrapAsync(async (req, res) => {
     const attractions = await db.fetchData(TABLE_INFORMATION, { type: 'video' });
-    const data = _.orderBy(_.mapValues(_.groupBy(attractions, 'uuid'), (value) => {
+    const data = _.mapValues(_.groupBy(attractions, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         title: v.title,
@@ -17,9 +17,8 @@ const getExploreInfo = [
         edit: v.edit,
         imgUrl: v.imgUrl,
         subheading: v.subheading,
-        createdAt: v.createdAt,
       };
-    }), ['createdAt'], ['desc']);
+    });
     return res.json({
       data,
     });

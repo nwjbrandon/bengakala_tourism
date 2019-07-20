@@ -9,7 +9,7 @@ const getContactInfo = [
   wrapAsync(async (req, res) => {
     // fetch data that are displayed on the attractions part of the home page
     const homes = await db.fetchData(TABLE_INFORMATION, { type: 'home' });
-    const stories = _.orderBy(_.mapValues(_.groupBy(homes, 'uuid'), (value) => {
+    const stories = _.mapValues(_.groupBy(homes, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         title: v.title,
@@ -17,9 +17,8 @@ const getContactInfo = [
         type: v.type,
         edit: v.edit,
         imgUrl: v.imgUrl,
-        createdAt: v.createdAt,
       };
-    }), ['createdAt'], ['desc']);
+    });
 
     // fetch data that are displayed on the top part of the home page
     const missions = await db.fetchData(TABLE_INFORMATION, { type: 'mission' });

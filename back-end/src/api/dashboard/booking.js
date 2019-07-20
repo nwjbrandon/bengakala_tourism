@@ -23,16 +23,15 @@ const getBookingInfo = [
 
     // fetch the list of pictures of the houses
     const bookingData = await db.fetchData(TABLE_INFORMATION, { type: 'booking' });
-    const booking = _.orderBy(_.mapValues(_.groupBy(bookingData, 'uuid'), (value) => {
+    const booking = _.mapValues(_.groupBy(bookingData, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         title: v.title,
         imgUrl: v.imgUrl,
         type: v.type,
         edit: v.edit,
-        createdAt: v.createdAt,
       };
-    }), ['createdAt'], ['desc']);
+    });
 
     // fetch the list of excluded dates
     const excludedDatesData = await db.fetchData(TABLE_EXCLUDED_DATES);

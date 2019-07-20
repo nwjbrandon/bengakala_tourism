@@ -8,7 +8,7 @@ import { wrapAsync } from '../../middleware/errorHandling';
 const getContactInfo = [
   wrapAsync(async (req, res) => {
     const faqs = await db.fetchData(TABLE_INFORMATION, { type: 'faq' });
-    const data = _.orderBy(_.mapValues(_.groupBy(faqs, 'uuid'), (value) => {
+    const data = _.mapValues(_.groupBy(faqs, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         heading: v.heading,
@@ -16,9 +16,8 @@ const getContactInfo = [
         text: v.text,
         type: v.type,
         edit: v.edit,
-        createdAt: v.createdAt,
       };
-    }), ['createdAt'], ['desc']);
+    });
     return res.json({
       data,
     });

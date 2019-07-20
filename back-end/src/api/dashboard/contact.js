@@ -21,7 +21,7 @@ const getContactInfo = [
 
     // fetch the customer queries
     const customers = await db.fetchData(TABLE_INFORMATION, { type: 'customer' });
-    const customer = _.orderBy(_.mapValues(_.groupBy(customers, 'uuid'), (value) => {
+    const customer = _.mapValues(_.groupBy(customers, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         heading: v.heading,
@@ -33,7 +33,7 @@ const getContactInfo = [
         edit: v.edit,
         date: v.createdAt,
       };
-    }), ['date'], ['desc']);
+    });
     return res.json({
       data: {
         contact,

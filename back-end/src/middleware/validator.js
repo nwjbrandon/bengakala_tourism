@@ -34,7 +34,7 @@ export const midtransValidators = [
   check('gross_amount').exists().not().isEmpty()
     .isNumeric()
     .withMessage('Gross Amount is Required')
-    .custom(value => {
+    .custom((value) => {
       if (Big(value).gte(0.01)) {
         return true;
       }
@@ -85,8 +85,8 @@ export const dashboardBookingValidators = [
         }
       });
       _.map(booking, (item) => {
-        if ( item.imgUrl === '' || item.title === '') {
-            throw Error('Field cannot be empty');
+        if (item.imgUrl === '' || item.title === '') {
+          throw Error('Field cannot be empty');
         }
         if (item.edit === 1) {
           throw Error('You need to update your changes.');

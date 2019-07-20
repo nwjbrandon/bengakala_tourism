@@ -9,7 +9,7 @@ const getContactInfo = [
   wrapAsync(async (req, res) => {
     // fetch data of root administrators
     const editableAdmin = await db.fetchData(TABLE_ADMINISTRATOR, { edit: true });
-    const editable = _.orderBy(_.mapValues(_.groupBy(editableAdmin, 'uuid'), (value) => {
+    const editable = _.mapValues(_.groupBy(editableAdmin, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         username: v.username,
@@ -17,13 +17,12 @@ const getContactInfo = [
         phone: v.phone,
         jobTitle: v.jobTitle,
         edit: v.edit,
-        createdAt: v.createdAt,
       };
-    }), ['createdAt'], ['desc']);
+    });
 
     // fetch data of non-root administrators
     const uneditableAdmin = await db.fetchData(TABLE_ADMINISTRATOR, { edit: false });
-    const uneditable = _.orderBy(_.mapValues(_.groupBy(uneditableAdmin, 'uuid'), (value) => {
+    const uneditable = _.mapValues(_.groupBy(uneditableAdmin, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         username: v.username,
@@ -31,9 +30,8 @@ const getContactInfo = [
         phone: v.phone,
         jobTitle: v.jobTitle,
         edit: v.edit,
-        createdAt: v.createdAt,
       };
-    }), ['createdAt'], ['desc']);
+    });
     return res.json({
       data: {
         uneditable,
