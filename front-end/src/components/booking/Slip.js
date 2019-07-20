@@ -5,7 +5,6 @@ import { connect } from 'react-redux'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles';
 import { Paper } from '@material-ui/core';
-import API from '../../api'
 import calculator from './calculation'
 
 import * as actionTypes from '../../actions/booking';
@@ -16,7 +15,7 @@ const useStyles = makeStyles(() => {
 const App = (props) => {
 
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
-  const [calculationComplete, setCalculationComplete] = React.useState(false);
+  const [setCalculationComplete] = React.useState(false);
 
   React.useEffect(() => {
     window.addEventListener("resize", () => setWindowWidth(window.innerWidth));

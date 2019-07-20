@@ -16,7 +16,6 @@ import TablePagination from '@material-ui/core/TablePagination';
 import Modal from "../../components/dashboard/Modal";
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
-import API from '../../api'
 
 const styles = theme => ({
   root: {

@@ -58,7 +58,6 @@ app.get('/story/:tag', story.get);
 app.post('/sendEmail', emailSender.send);
 
 app.post('/notification/handling', notification.post);
-app.post('/updateTransaction', updateTransaction.update);
 
 // endpoints must be protected
 app.post('/admin/login',
@@ -72,6 +71,7 @@ app.get('/admin/logout', checkAuthentication, admin.logout);
 app.get('/admin/dashboard', checkAuthentication, dashboard.get);
 app.post('/admin/dashboard', checkAuthentication, dashboard.post);
 app.delete('/admin/dashboard', checkAuthentication, dashboard.del);
+app.post('/updateTransaction', checkAuthentication, updateTransaction.update);
 
 app.get('/admin/dashboard/contact', checkAuthentication, dashboardContact.get);
 app.post('/admin/dashboard/contact',

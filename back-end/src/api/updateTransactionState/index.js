@@ -1,7 +1,6 @@
 import db from '../../storage/db';
 import { TABLE_INFORMATION, TABLE_TRANSACTIONS } from '../../storage/tableName';
 import calculations from '../../middleware/calculations';
-
 import { clientKey, serverKey } from '../../secret/midtransSecret';
 import sendEmail from '../../utils/emailSender/emailSender';
 
@@ -19,9 +18,7 @@ const updateDB = async (orderID, paymentStat) => {
 
 const constructStringDate = (date) => {
   const DateObj = date ? new Date(date) : new Date();
-  const str = `${DateObj.getFullYear()}-${DateObj.getMonth() + 1}-${DateObj.getDate()}`;
-  console.log(str);
-  return str;
+  return `${DateObj.getFullYear()}-${DateObj.getMonth() + 1}-${DateObj.getDate()}`;
 };
 
 
@@ -50,7 +47,6 @@ const refractorOrder = myOrder => ({
 const updateState = [
   async (req, res) => {
     const transactionID = req.body.data.uuid;
-    console.log('Transaction!!!', transactionID);
 
     const UUIDexists = await db.uuidExist(TABLE_TRANSACTIONS, transactionID);
 
@@ -60,11 +56,9 @@ const updateState = [
 
         if (response.fraud_status === 'accept') {
           const services = await db.fetchData(TABLE_INFORMATION, { type: 'cost' });
-          console.log('SERVICES', services);
 
           const Order = await db.fetchData(TABLE_TRANSACTIONS, { uuid: transactionID });
           const myOrder = Order[0];
-          console.log('myOrder', myOrder);
 
           const CalculationData = new Object();
 
@@ -77,9 +71,7 @@ const updateState = [
             CalculationData.cost[item.title.toLowerCase()] = price;
           });
 
-          console.log('CalculationData.cost', CalculationData.cost);
           const { prices, numberOfDays } = calculations(CalculationData);
-          console.log({ prices, numberOfDays });
           const EmailData = {
             tripDetails: CalculationData.tripDetails,
             cost: CalculationData.cost,
