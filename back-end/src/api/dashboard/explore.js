@@ -2,12 +2,12 @@ import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
-import {wrapAsync} from "../../middleware/errorHandling";
+import { wrapAsync } from '../../middleware/errorHandling';
 
 const getExploreInfo = [
   wrapAsync(async (req, res) => {
     const attractions = await db.fetchData(TABLE_INFORMATION, { type: 'video' });
-    const data = _.mapValues(_.groupBy(attractions, 'uuid'), (value) => {
+    const data = _.orderBy(_.mapValues(_.groupBy(attractions, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         title: v.title,
@@ -16,9 +16,10 @@ const getExploreInfo = [
         edit: v.edit,
         imgUrl: v.imgUrl,
         subheading: v.subheading,
+        createdAt: v.createdAt,
       };
-    });
-    res.json({
+    }), ['createdAt'], ['desc']);
+    return res.json({
       data,
     });
   }),
@@ -38,7 +39,7 @@ const postExploreInfo = [
       saveList,
       deleteList,
     });
-    res.json({
+    return res.json({
       data: 'success'
     });
   }),

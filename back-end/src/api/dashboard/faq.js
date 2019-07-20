@@ -2,12 +2,12 @@ import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
-import {wrapAsync} from "../../middleware/errorHandling";
+import { wrapAsync } from '../../middleware/errorHandling';
 
 const getContactInfo = [
   wrapAsync(async (req, res) => {
     const faqs = await db.fetchData(TABLE_INFORMATION, { type: 'faq' });
-    const data = _.mapValues(_.groupBy(faqs, 'uuid'), (value) => {
+    const data = _.orderBy(_.mapValues(_.groupBy(faqs, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         heading: v.heading,
@@ -15,9 +15,10 @@ const getContactInfo = [
         text: v.text,
         type: v.type,
         edit: v.edit,
+        createdAt: v.createdAt,
       };
-    });
-    res.json({
+    }), ['createdAt'], ['desc']);
+    return res.json({
       data,
     });
   }),
@@ -37,7 +38,7 @@ const postFaqInfo = [
       saveList,
       deleteList,
     });
-    res.json({
+    return res.json({
       data: 'success'
     });
   }),

@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import { eachDay } from 'date-fns';
 import db from '../../storage/db';
-import { TABLE_INFORMATION, TABLE_TRANSACTIONS } from '../../storage/tableName';
+import { TABLE_TRANSACTIONS } from '../../storage/tableName';
 import { wrapAsync } from '../../middleware/errorHandling';
 
 const dashboardGet = [

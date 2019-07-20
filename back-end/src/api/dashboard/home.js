@@ -2,12 +2,12 @@ import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
-import {wrapAsync} from "../../middleware/errorHandling";
+import { wrapAsync } from '../../middleware/errorHandling';
 
 const getContactInfo = [
   wrapAsync(async (req, res) => {
     const homes = await db.fetchData(TABLE_INFORMATION, { type: 'home' });
-    const stories = _.mapValues(_.groupBy(homes, 'uuid'), (value) => {
+    const stories = _.orderBy(_.mapValues(_.groupBy(homes, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         title: v.title,
@@ -15,8 +15,9 @@ const getContactInfo = [
         type: v.type,
         edit: v.edit,
         imgUrl: v.imgUrl,
+        createdAt: v.createdAt,
       };
-    });
+    }), ['createdAt'], ['desc']);
     const missions = await db.fetchData(TABLE_INFORMATION, { type: 'mission' });
     const objective = _.mapValues(_.groupBy(missions, 'uuid'), (value) => {
       const v = _.head(value);
@@ -28,7 +29,7 @@ const getContactInfo = [
         imgUrl: v.imgUrl,
       };
     });
-    res.json({
+    return res.json({
       data: {
         stories,
         objective
@@ -56,7 +57,7 @@ const postHomeInfo = [
       saveList,
       deleteList,
     });
-    res.json({
+    return res.json({
       data: 'success'
     });
   }),

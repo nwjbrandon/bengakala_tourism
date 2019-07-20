@@ -2,12 +2,12 @@ import _ from 'lodash';
 import bcrypt from 'bcryptjs';
 import db from '../../storage/db';
 import { TABLE_ADMINISTRATOR } from '../../storage/tableName';
-import {wrapAsync} from "../../middleware/errorHandling";
+import { wrapAsync } from '../../middleware/errorHandling';
 
 const getContactInfo = [
   wrapAsync(async (req, res) => {
     const editableAdmin = await db.fetchData(TABLE_ADMINISTRATOR, { edit: true });
-    const editable = _.mapValues(_.groupBy(editableAdmin, 'uuid'), (value) => {
+    const editable = _.orderBy(_.mapValues(_.groupBy(editableAdmin, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         username: v.username,
@@ -15,10 +15,11 @@ const getContactInfo = [
         phone: v.phone,
         jobTitle: v.jobTitle,
         edit: v.edit,
+        createdAt: v.createdAt,
       };
-    });
+    }), ['createdAt'], ['desc']);
     const uneditableAdmin = await db.fetchData(TABLE_ADMINISTRATOR, { edit: false });
-    const uneditable = _.mapValues(_.groupBy(uneditableAdmin, 'uuid'), (value) => {
+    const uneditable = _.orderBy(_.mapValues(_.groupBy(uneditableAdmin, 'uuid'), (value) => {
       const v = _.head(value);
       return {
         username: v.username,
@@ -26,8 +27,9 @@ const getContactInfo = [
         phone: v.phone,
         jobTitle: v.jobTitle,
         edit: v.edit,
+        createdAt: v.createdAt,
       };
-    });
+    }), ['createdAt'], ['desc']);
     return res.json({
       data: {
         uneditable,
@@ -39,7 +41,7 @@ const getContactInfo = [
 
 const putContactInfo = [
   wrapAsync(async (req, res) => {
-    const { confirmedPassword, ...newUser} = req.body;
+    const { confirmedPassword, ...newUser } = req.body;
     const { password } = newUser;
     const salt = bcrypt.genSaltSync(10);
     newUser.password = bcrypt.hashSync(password, salt);
