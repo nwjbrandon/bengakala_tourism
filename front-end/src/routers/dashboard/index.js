@@ -68,20 +68,13 @@ class Dashboard extends Component {
     this.handleChangeRowsPerPage = this.handleChangeRowsPerPage.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.handleOpenModal = this.handleOpenModal.bind(this);
+    this.updateTransactionState = this.updateTransactionState.bind(this);
   }
-  updateTransactionState = () => {
-    API.post('/updateTransaction', {
-      data: {
-        uuid: this.state.uuid
-      }
-    }).then((res) => {
-      if (res.data == "success") {
-        // "Successfully updated state, please refresh to see changes"
-        // this.props.updateTransactionStateSuccess();
-      } else {
-        // this.props.updateTransactionStateFailure();
-      }
-    });
+
+  updateTransactionState() {
+    const { uuid } = this.state;
+    const { verify } = this.props;
+    verify({ uuid });
   }
 
   confirmedCheckIn(event) {

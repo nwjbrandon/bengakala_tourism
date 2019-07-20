@@ -73,6 +73,26 @@ export const dashboardOnMountReducer = handleActions({
             error: action.payload,
         };
     },
-
+    "DASHBOARD_VERIFY_ERROR": (state, action) => {
+        return {
+            ...state,
+            fetching: false,
+            error: action.payload,
+        };
+    },
+    "DASHBOARD_VERIFY_REQUEST": (state) => {
+        return {
+            ...state,
+            fetching: true,
+            error: false,
+        };
+    },
+    "DASHBOARD_VERIFY_SUCCESS": (state) => {
+        return {
+            ...state,
+            fetching: false,
+            error: false,
+        };
+    },
 }, initialState);
 
