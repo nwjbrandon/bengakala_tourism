@@ -25,7 +25,6 @@ import TransportDetails from './TransportDetails'
 import IconButton from '@material-ui/core/IconButton';
 import API from '../../api';
 import uuidv1 from 'uuid/v1';
-import ImageCarousell from './ImageCarousell/ImageCarousell'
 
 // import callSnap from './snapPayment'
 const snap = window.snap;
@@ -99,19 +98,19 @@ const Checkout = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await API.get('/booking/info');
-      console.log(result.data)
+      console.log(result.data);
 
       const cost = result.data.cost;
       const excludeDates = result.data.excludedDates;
       const costObj = {};
       cost.map((item) => {
         const keyval = Object.keys(item)[0].toString().toLowerCase();
-        costObj[keyval] = item[Object.keys(item)[0].toString()]
-      })
+        costObj[keyval] = item[Object.keys(item)[0].toString()];
+      });
       props.updateCost(costObj);
 
       props.updateDates(excludeDates);
-      setBookedData([...result.data.booked])
+      setBookedData([...result.data.booked]);
 
 
       console.log(excludeDates)
@@ -124,7 +123,7 @@ const Checkout = (props) => {
     const onUnload = (e) => {
       e.preventDefault();
       e.returnValue = '';
-    }
+    };
     window.addEventListener('beforeunload', onUnload);
 
     return () => {
@@ -140,13 +139,13 @@ const Checkout = (props) => {
 
   const constructStringDate = (date) => {
     const DateObj = date ? new Date(date) : new Date();
-    const str = `${DateObj.getFullYear()}-${DateObj.getMonth() + 1}-${DateObj.getDate()}`
-    console.log(str)
+    const str = `${DateObj.getFullYear()}-${DateObj.getMonth() + 1}-${DateObj.getDate()}`;
+    console.log(str);
     return str
-  }
+  };
 
   const publishToBackend = (orderID, tokenID, cashOrNot) => {
-    console.log("orderID", orderID)
+    console.log("orderID", orderID);
 
     API.post('/sendEmail', {
       toEmail: props.personalDetails.email,
@@ -194,22 +193,22 @@ const Checkout = (props) => {
     // }).catch((err) => {
     //   console.log(err)
     // });
-  }
+  };
 
   const callSnap = async () => {
     snap.show();
-    console.log('handling token request like a boss')
+    console.log('handling token request like a boss');
     const res = await getToken();
-    const snapToken = res.data.snapToken
-    const orderUID = res.data.order_id
-    setOrderID(orderUID)
-    console.log("IDS", { snapToken, orderUID })
+    const snapToken = res.data.snapToken;
+    const orderUID = res.data.order_id;
+    setOrderID(orderUID);
+    console.log("IDS", { snapToken, orderUID });
 
     if (snapToken) {
-      console.log('calling snap pay')
+      console.log('calling snap pay');
       snap.pay(snapToken, {
         onSuccess: (result) => {
-          console.log("result", result)
+          console.log("result", result);
           publishToBackend(orderUID, result.transaction_id, 1);
           // setActiveStep(activeStep + 1);
           console.log('success'); console.log(result);
@@ -232,12 +231,12 @@ const Checkout = (props) => {
       snap.hide();
       // console.log(error)
     }
-  }
+  };
 
 
   const getToken = async () => {
-    const { personalDetails, price } = props
-    console.log('getting token from backend')
+    const { personalDetails, price } = props;
+    console.log('getting token from backend');
     const res = await API.post('/snap/info', {
 
       'first_name': personalDetails.firstName,
@@ -247,7 +246,7 @@ const Checkout = (props) => {
 
     });
 
-    console.log("Response", res)
+    console.log("Response", res);
     if (res) {
       setOrderID(res.order_id);
       return res;
@@ -255,27 +254,27 @@ const Checkout = (props) => {
       return null;
     }
 
-  }
+  };
   const excludedDatesEngulfed = () => {
     const checkIn = new Date(props.tripDetails.checkIn);
     const checkOut = new Date(props.tripDetails.checkOut);
     const result = props.excludeDates.find((item) => {
-      const currDate = new Date(item)
+      const currDate = new Date(item);
       return (currDate >= checkIn && currDate <= checkOut);
-    })
+    });
 
     return result;
-  }
+  };
   const fullyBookedDateChosen = () => {
     const checkIn = new Date(props.tripDetails.checkIn);
     const checkOut = new Date(props.tripDetails.checkOut);
-    console.log(checkIn)
-    console.log(checkOut)
+    console.log(checkIn);
+    console.log(checkOut);
     let maxFullDays = 0;
     let maxFullDate = null;
-    console.log("Booked", booked)
+    console.log("Booked", booked);
     const fallswithin = booked.filter((item) => {
-      const itemDate = new Date(item.date)
+      const itemDate = new Date(item.date);
 
       return (itemDate >= checkIn && itemDate <= checkOut);
     });
@@ -283,7 +282,7 @@ const Checkout = (props) => {
     console.log("falls within", fallswithin);
 
     fallswithin.forEach((item) => {
-      const itemDate = new Date(item.date)
+      const itemDate = new Date(item.date);
       if (maxFullDays < item.counts) {
         maxFullDays = item.counts;
         maxFullDate = itemDate;
@@ -294,7 +293,7 @@ const Checkout = (props) => {
 
     return { maxFullDate, maxFullDays }
 
-  }
+  };
 
   const handleNext = () => {
     if (activeStep === 1) {
@@ -333,7 +332,7 @@ const Checkout = (props) => {
         setSnackBar(true);
       } else {
         const { maxFullDate, maxFullDays } = fullyBookedDateChosen();
-        console.log("TESTING DATE QUOTA", maxFullDate, maxFullDays)
+        console.log("TESTING DATE QUOTA", maxFullDate, maxFullDays);
         if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) > (30 - maxFullDays)) {
           props.onError(`Sorry we do not have enough slots on ${constructStringDate(maxFullDate)} please reselect your check in and check out Dates`);
           setSnackBar(true);
@@ -364,12 +363,12 @@ const Checkout = (props) => {
     if (activeStep === 3) {
 
       const uuid = uuidv1();
-      setOrderID(uuid)
+      setOrderID(uuid);
 
       publishToBackend("", uuid, 0);
 
     }
-  }
+  };
 
   const handleCard = () => {
     if (activeStep === 3) {
@@ -378,7 +377,7 @@ const Checkout = (props) => {
       callSnap();
 
     }
-  }
+  };
 
   const handleBack = () => {
     setActiveStep(activeStep - 1);
@@ -496,7 +495,7 @@ const Checkout = (props) => {
       </MuiThemeProvider>
     </React.Fragment>
   );
-}
+};
 
 
 
@@ -519,6 +518,6 @@ const mapDispatchToProps = dispatch => {
     updateCost: (val) => dispatch({ type: actionTypes.LOAD_COST, payload: val }),
     updateDates: (val) => dispatch({ type: actionTypes.LOAD_DATES, payload: val })
   }
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Checkout);

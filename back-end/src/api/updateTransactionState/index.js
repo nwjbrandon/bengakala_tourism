@@ -1,10 +1,15 @@
 import db from '../../storage/db';
 import { TABLE_INFORMATION, TABLE_TRANSACTIONS } from '../../storage/tableName';
 import calculations from '../../middleware/calculations';
+<<<<<<< HEAD
 
 import { serverKey, clientKey } from '../../secret/midtransSecret';
 import sendEmail from '../../utils/emailSender/emailSender'
 import { refractorOrder, constructStringDate } from '../../utils/helperMethods'
+=======
+import { clientKey, serverKey } from '../../secret/midtransSecret';
+import sendEmail from '../../utils/emailSender/emailSender';
+>>>>>>> ba54c113ee8a8e212bbfc8905c78649be97857ec
 
 const midtransClient = require('midtrans-client');
 
@@ -22,7 +27,6 @@ const updateDB = async (orderID, paymentStat) => {
 const updateState = [
     async (req, res) => {
         const transactionID = req.body.data.uuid;
-        console.log('Transaction!!!', transactionID);
 
         const UUIDexists = await db.uuidExist(TABLE_TRANSACTIONS, transactionID);
 
@@ -32,11 +36,9 @@ const updateState = [
 
                 if (response.fraud_status === 'accept') {
                     const services = await db.fetchData(TABLE_INFORMATION, { type: 'cost' });
-                    console.log('SERVICES', services);
 
                     const Order = await db.fetchData(TABLE_TRANSACTIONS, { uuid: transactionID });
                     const myOrder = Order[0];
-                    console.log('myOrder', myOrder);
 
                     const CalculationData = new Object();
 
@@ -49,9 +51,7 @@ const updateState = [
                         CalculationData.cost[item.title.toLowerCase()] = price;
                     });
 
-                    console.log('CalculationData.cost', CalculationData.cost);
                     const { prices, numberOfDays } = calculations(CalculationData);
-                    console.log({ prices, numberOfDays });
                     const EmailData = {
                         tripDetails: CalculationData.tripDetails,
                         cost: CalculationData.cost,
@@ -69,7 +69,7 @@ const updateState = [
                     await updateDB(transactionID, 2);
                 }
             } catch (err) {
-                console.log(err);
+
             }
 
             res.json({
