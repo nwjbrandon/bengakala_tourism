@@ -2,9 +2,10 @@ import midtransClient from 'midtrans-client';
 import { serverKey, clientKey } from '../../secret/midtransSecret';
 import { wrapAsync } from '../../middleware/errorHandling';
 import db from '../../storage/db';
-import { refractorOrder, constructStringDate } from '../../utils/helperMethods'
+import { refractorOrder, constructStringDate } from '../../utils/helperMethods';
+import sendEmail from '../../utils/emailSender/emailSender';
 
-import calculations from '../../middleware/calculations'
+import calculations from '../../middleware/calculations';
 import { TABLE_TRANSACTIONS, TABLE_INFORMATION } from '../../storage/tableName';
 
 // getTransactionStatus();
@@ -45,28 +46,28 @@ const notificationPost = [
           const myOrder = Order[0];
           const CalculationData = new Object();
 
-          CalculationData.tripDetails = { ...refractorOrder(myOrder) }
+          CalculationData.tripDetails = { ...refractorOrder(myOrder) };
 
           CalculationData.cost = new Object();
 
           services.forEach((item) => {
             const price = parseInt(item.pricesString, 10);
             CalculationData.cost[item.title.toLowerCase()] = price;
-          })
+          });
 
           const { prices, numberOfDays } = calculations(CalculationData);
           const EmailData = {
             tripDetails: CalculationData.tripDetails,
             cost: CalculationData.cost,
-            prices: prices,
-            numberOfDays: numberOfDays,
+            prices,
+            numberOfDays,
             orderStatus: myOrder.cash,
             transactionID: myOrder.uuid,
             toEmail: myOrder.email,
             checkIn: constructStringDate(CalculationData.tripDetails.checkIn),
             checkOut: constructStringDate(CalculationData.tripDetails.checkOut),
             Now: constructStringDate(),
-          }
+          };
 
           await sendEmail(EmailData);
 
