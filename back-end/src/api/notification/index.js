@@ -5,7 +5,7 @@ import db from '../../storage/db';
 import { refractorOrder, constructStringDate } from '../../utils/helperMethods'
 
 import calculations from '../../middleware/calculations'
-import { TABLE_TRANSACTIONS } from '../../storage/tableName';
+import { TABLE_TRANSACTIONS, TABLE_INFORMATION } from '../../storage/tableName';
 
 // getTransactionStatus();
 const updateDB = async (orderID, paymentStat) => {
