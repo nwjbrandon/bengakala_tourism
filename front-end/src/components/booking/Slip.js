@@ -15,7 +15,7 @@ const useStyles = makeStyles(() => {
 const App = (props) => {
 
   const [windowWidth, setWindowWidth] = React.useState(window.innerWidth);
-  const [setCalculationComplete] = React.useState(false);
+  const [calculationComplete, setCalculationComplete] = React.useState(false);
 
   React.useEffect(() => {
     window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
