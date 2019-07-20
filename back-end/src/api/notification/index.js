@@ -5,13 +5,12 @@ import db from '../../storage/db';
 import { refractorOrder, constructStringDate } from '../../utils/helperMethods'
 
 import calculations from '../../middleware/calculations'
+import { TABLE_TRANSACTIONS } from '../../storage/tableName';
 
 // getTransactionStatus();
 const updateDB = async (orderID, paymentStat) => {
-
   await db.updateData(TABLE_TRANSACTIONS, { cash: paymentStat }, { uuid: orderID });
-
-}
+};
 
 
 const notificationPost = [
@@ -29,22 +28,21 @@ const notificationPost = [
     const orderId = statusResponse.order_id;
     const transactionStatus = statusResponse.transaction_status;
     const fraudStatus = statusResponse.fraud_status;
-    const transactionId = statusResponse.transaction_id
+    const transactionId = statusResponse.transaction_id;
 
     console.log(`Transaction notification received. Order ID: ${orderId}. Transaction status: ${transactionStatus}. Fraud status: ${fraudStatus}`);
 
     const UUIDexists = await db.uuidExist(TABLE_TRANSACTIONS, transactionId);
 
-    const Data = await db.fetchData(TABLE_TRANSACTIONS, { uuid: transactionId })
+    const Data = await db.fetchData(TABLE_TRANSACTIONS, { uuid: transactionId });
 
-    console.log(Data)
+    console.log(Data);
 
     if (UUIDexists) {
-
       if (transactionStatus === 'capture') {
         if (fraudStatus === 'challenge') {
-          // TODO set transaction status on databaase to 'challenge'
-          updateDB(transactionId, 1);
+          // TODO set transaction status on database to 'challenge'
+          await updateDB(transactionId, 1);
         } else if (fraudStatus === 'accept') {
           const services = await db.fetchData(TABLE_INFORMATION, { type: 'cost' });
           const Order = await db.fetchData(TABLE_TRANSACTIONS, { uuid: transactionID });
@@ -76,21 +74,19 @@ const notificationPost = [
 
           await sendEmail(EmailData);
 
-          updateDB(transactionId, 2);
+          await updateDB(transactionId, 2);
         }
       } else if (transactionStatus === 'cancel'
         || transactionStatus === 'deny'
         || transactionStatus === 'expire') {
         // do nothing
       } else if (transactionStatus === 'pending') {
-        updateDB(transactionId, 1);
-        // TODO set transaction status on your databaase to 'pending' / waiting payment
+        await updateDB(transactionId, 1);
+        // TODO set transaction status on your database to 'pending' / waiting payment
       }
-
     }
-
+    return res.json({ data: 'success' });
   })
-
 ];
 export default {
   post: notificationPost

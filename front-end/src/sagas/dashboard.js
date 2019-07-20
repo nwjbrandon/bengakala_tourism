@@ -13,6 +13,9 @@ import {
     DASHBOARD_DELETE_CHECKIN_REQUEST_NAME,
     DASHBOARD_DELETE_CHECKIN_SUCCESS,
     DASHBOARD_DELETE_CHECKIN_ERROR,
+    DASHBOARD_VERIFY_ERROR,
+    DASHBOARD_VERIFY_REQUEST_NAME,
+    DASHBOARD_VERIFY_SUCCESS,
 } from "../actions/dashboard";
 import {ADMIN_LOGOUT_REQUEST} from "../actions/admin";
 import {TOAST_ERROR_SHOW, TOAST_SUCCESS_SHOW} from "../actions/toast";
@@ -104,10 +107,38 @@ function* workerSagaDeleteCheckIn(payload) {
     }
 }
 
+function verify(payload) {
+    return API.post('/updateTransaction', { data: payload });
+}
+
+function* workerSagaVerify(payload) {
+    try {
+        yield call(verify, payload.payload);
+        yield put(DASHBOARD_VERIFY_SUCCESS());
+        yield put(TOAST_SUCCESS_SHOW('Refresh the page to see the changes'));
+        yield put(DASHBOARD_ONMOUNT_REQUEST());
+    } catch (error) {
+        yield put(DASHBOARD_VERIFY_ERROR(error));
+        const res = error.response;
+        if (res) {
+            if (res.status === 401) {
+                yield put(ADMIN_LOGOUT_REQUEST());
+            } else if (res.status === 422) {
+                yield put(TOAST_ERROR_SHOW(res.data.error.message));
+            } else {
+                yield put(TOAST_ERROR_SHOW('Oops something went wrong'));
+            }
+        }
+        if (error.message === "Network Error") {
+            yield put(TOAST_ERROR_SHOW('Server Error'));
+        }
+    }
+}
+
 
 export default [
     takeLatest(DASHBOARD_ONMOUNT_REQUEST_NAME, workerSagaOnMount),
     takeLatest(DASHBOARD_CHECKIN_REQUEST_NAME, workerSagaCheckIn),
     takeLatest(DASHBOARD_DELETE_CHECKIN_REQUEST_NAME, workerSagaDeleteCheckIn),
-
+    takeLatest(DASHBOARD_VERIFY_REQUEST_NAME, workerSagaVerify),
 ]
