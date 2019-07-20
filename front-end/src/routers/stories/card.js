@@ -29,7 +29,7 @@ const ImageItem = (props) => {
             }}
             >
                 <h3 style={{ fontFamily: "Montserrat, sans-serif", color: "white", marginTop: 0, }}>{props.date}</h3>
-                <h3 style={{ fontFamily: "Montserrat, sans-serif", fontSize: "3em", marginTop: 0, color: "white" }}>{props.title}</h3>
+                <h3 style={{ fontFamily: "Montserrat, sans-serif", fontSize: 30, marginTop: 0, color: "white" }}>{props.title}</h3>
             </div>
         </div >
     );
