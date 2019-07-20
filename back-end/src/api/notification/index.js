@@ -41,9 +41,9 @@ const notificationPost = [
       if (transactionStatus === 'capture') {
         if (fraudStatus === 'challenge') {
           // TODO set transaction status on databaase to 'challenge'
-          updateDB(orderId, 1);
+          updateDB(transactionId, 1);
         } else if (fraudStatus === 'accept') {
-          updateDB(orderId, 2);
+          updateDB(transactionId, 2);
           // TODO set transaction status on databaase to 'success' and send email here
         }
       } else if (transactionStatus === 'cancel'
@@ -51,7 +51,7 @@ const notificationPost = [
         || transactionStatus === 'expire') {
         // do nothing
       } else if (transactionStatus === 'pending') {
-        updateDB(orderId, 1);
+        updateDB(transactionId, 1);
         // TODO set transaction status on your databaase to 'pending' / waiting payment
       }
 

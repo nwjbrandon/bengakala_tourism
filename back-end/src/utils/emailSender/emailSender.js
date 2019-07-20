@@ -1,6 +1,6 @@
 import path from 'path';
 import Email from 'email-templates';
-import { USEREMAIL, USERPASS } from '../secret/emailSecret'
+import { USEREMAIL, USERPASS } from '../../secret/emailSecret'
 
 export default async function main(emailContent) {
     const email = await new Email({

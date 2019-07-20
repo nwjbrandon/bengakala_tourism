@@ -15,7 +15,7 @@ function mapStateToProps(state) {
     };
 }
 
-function matchDispatchToProps(dispatch){
+function matchDispatchToProps(dispatch) {
     return {
         onMount: () => dispatch(DASHBOARD_BOOKING_ONMOUNT_REQUEST()),
         resetEntries: () => dispatch(DASHBOARD_BOOKING_RESET()),

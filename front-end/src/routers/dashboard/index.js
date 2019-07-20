@@ -74,7 +74,14 @@ class Dashboard extends Component {
       data: {
         uuid: this.state.uuid
       }
-    })
+    }).then((res) => {
+      if (res.data == "success") {
+        // "Successfully updated state, please refresh to see changes"
+        // this.props.updateTransactionStateSuccess();
+      } else {
+        // this.props.updateTransactionStateFailure();
+      }
+    });
   }
 
   confirmedCheckIn(event) {

@@ -1,4 +1,4 @@
-import sendEmail from '../../emailSender/emailSender'
+import sendEmail from '../../utils/emailSender/emailSender'
 import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_TRANSACTIONS } from '../../storage/tableName';

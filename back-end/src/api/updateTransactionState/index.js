@@ -4,7 +4,7 @@ import { eachDay } from 'date-fns';
 import calculations from '../../middleware/calculations'
 
 import { serverKey, clientKey } from '../../secret/midtransSecret';
-import sendEmail from '../../emailSender/emailSender'
+import sendEmail from '../../utils/emailSender/emailSender'
 
 const midtransClient = require('midtrans-client');
 
@@ -58,83 +58,69 @@ const refractorOrder = (myOrder) => {
 const updateState = [
     async (req, res) => {
 
-        const orderID = req.body.data.uuid;
-        console.log("ORDER!!!", orderID);
+        const transactionID = req.body.data.uuid;
+        console.log("Transaction!!!", transactionID);
 
+        const UUIDexists = await db.uuidExist(TABLE_TRANSACTIONS, transactionID);
 
-        // cost: {
-        //     accommodation: 100000,
-        //     van: 50000,
-        //     car: 50000,
-        //     bike: 50000,
-        //     breakfast: 20000,
-        //     lunch: 20000,
-        //     dinner: 20000
-        //   },
+        if (UUIDexists) {
+            try {
+                const response = await apiClient.transaction.status(transactionID);
 
-        // API.post('/sendEmail', {
-        //     toEmail: props.personalDetails.email,
-        //     personalDetails: props.personalDetails,
-        //     tripDetails: props.tripDetails,
-        //     cost: props.cost,
-        //     price: props.price,
-        //     orderId: orderID,
-        //     transactionID: tokenID,
-        //     numberOfDays: props.numberOfDays,
-        //     orderStatus: cashOrNot
+                if (response.fraud_status === 'accept') {
 
-        //   })
+                    const services = await db.fetchData(TABLE_INFORMATION, { type: 'cost' });
+                    console.log("SERVICES", services);
 
-        try {
-            const response = await apiClient.transaction.status(orderID);
+                    const Order = await db.fetchData(TABLE_TRANSACTIONS, { uuid: transactionID });
+                    const myOrder = Order[0];
+                    console.log("myOrder", myOrder);
 
-            if (response.fraud_status === 'accept') {
+                    const CalculationData = new Object();
 
-                const services = await db.fetchData(TABLE_INFORMATION, { type: 'cost' });
-                console.log("SERVICES", services);
+                    CalculationData.tripDetails = { ...refractorOrder(myOrder) }
 
-                const Order = await db.fetchData(TABLE_TRANSACTIONS, { uuid: orderID });
-                const myOrder = Order[0];
-                console.log("myOrder", myOrder);
+                    CalculationData.cost = new Object();
 
-                const CalculationData = new Object();
+                    services.forEach((item) => {
+                        const price = parseInt(item.pricesString, 10);
+                        CalculationData.cost[item.title.toLowerCase()] = price;
+                    })
 
-                CalculationData.tripDetails = { ...refractorOrder(myOrder) }
+                    console.log("CalculationData.cost", CalculationData.cost)
+                    const { prices, numberOfDays } = calculations(CalculationData);
+                    console.log({ prices, numberOfDays })
+                    const EmailData = {
+                        tripDetails: CalculationData.tripDetails,
+                        cost: CalculationData.cost,
+                        prices: prices,
+                        numberOfDays: numberOfDays,
+                        orderStatus: myOrder.cash,
+                        transactionID: myOrder.uuid,
+                        toEmail: myOrder.email,
+                        checkIn: constructStringDate(CalculationData.tripDetails.checkIn),
+                        checkOut: constructStringDate(CalculationData.tripDetails.checkOut),
+                        Now: constructStringDate(),
+                    }
 
-                CalculationData.cost = new Object();
-
-                services.forEach((item) => {
-                    const price = parseInt(item.pricesString, 10);
-                    CalculationData.cost[item.title.toLowerCase()] = price;
-                })
-
-                console.log("CalculationData.cost", CalculationData.cost)
-                const { prices, numberOfDays } = calculations(CalculationData);
-                console.log({ prices, numberOfDays })
-                const EmailData = {
-                    tripDetails: CalculationData.tripDetails,
-                    cost: CalculationData.cost,
-                    prices: prices,
-                    numberOfDays: numberOfDays,
-                    orderStatus: myOrder.cash,
-                    transactionID: myOrder.uuid,
-                    toEmail: myOrder.email,
-                    checkIn: constructStringDate(CalculationData.tripDetails.checkIn),
-                    checkOut: constructStringDate(CalculationData.tripDetails.checkOut),
-                    Now: constructStringDate(),
+                    await sendEmail(EmailData);
+                    await updateDB(transactionID, 2)
                 }
 
-                await sendEmail(EmailData);
-                await updateDB(orderID, 2)
+            } catch (err) {
+                console.log(err)
             }
 
-        } catch (err) {
-            console.log(err)
+            res.json({
+                data: 'success',
+            });
+        } else {
+            res.json({
+                data: 'not found',
+            });
         }
 
-        res.json({
-            data: 'success',
-        });
+
     }
 ];
 export default {

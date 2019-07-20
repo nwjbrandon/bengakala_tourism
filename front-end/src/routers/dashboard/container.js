@@ -10,12 +10,13 @@ function mapStateToProps(state) {
     };
 }
 
-function matchDispatchToProps(dispatch){
+
+
+function matchDispatchToProps(dispatch) {
     return {
         onMount: () => dispatch(DASHBOARD_ONMOUNT_REQUEST()),
         checkIn: (payload) => dispatch(DASHBOARD_CHECKIN_REQUEST(payload)),
         delCheckIn: (payload) => dispatch(DASHBOARD_DELETE_CHECKIN_REQUEST(payload)),
-
     }
 }
 
