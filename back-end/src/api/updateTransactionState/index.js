@@ -1,10 +1,9 @@
 import db from '../../storage/db';
 import { TABLE_INFORMATION, TABLE_TRANSACTIONS } from '../../storage/tableName';
 import calculations from '../../middleware/calculations';
-
-import { serverKey, clientKey } from '../../secret/midtransSecret';
-import sendEmail from '../../utils/emailSender/emailSender'
-import { refractorOrder, constructStringDate } from '../../utils/helperMethods'
+import { clientKey, serverKey } from '../../secret/midtransSecret';
+import sendEmail from '../../utils/emailSender/emailSender';
+import { constructStringDate, refractorOrder } from '../../utils/helperMethods';
 
 const midtransClient = require('midtrans-client');
 
@@ -42,8 +41,7 @@ const updateState = [
                     CalculationData.cost = new Object();
 
                     services.forEach((item) => {
-                        const price = parseInt(item.pricesString, 10);
-                        CalculationData.cost[item.title.toLowerCase()] = price;
+                        CalculationData.cost[item.title.toLowerCase()] = parseInt(item.pricesString, 10);
                     });
 
                     const { prices, numberOfDays } = calculations(CalculationData);
@@ -64,7 +62,7 @@ const updateState = [
                     await updateDB(transactionID, 2);
                 }
             } catch (err) {
-
+                console.log(err);
             }
 
             res.json({
