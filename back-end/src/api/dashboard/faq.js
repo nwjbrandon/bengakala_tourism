@@ -2,8 +2,9 @@ import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
-import {wrapAsync} from "../../middleware/errorHandling";
+import { wrapAsync } from '../../middleware/errorHandling';
 
+// fetch data for the faq page
 const getContactInfo = [
   wrapAsync(async (req, res) => {
     const faqs = await db.fetchData(TABLE_INFORMATION, { type: 'faq' });
@@ -17,12 +18,13 @@ const getContactInfo = [
         edit: v.edit,
       };
     });
-    res.json({
+    return res.json({
       data,
     });
   }),
 ];
 
+// update data for the faq page
 const postFaqInfo = [
   wrapAsync(async (req, res) => {
     const receivedData = req.body.data;
@@ -37,7 +39,7 @@ const postFaqInfo = [
       saveList,
       deleteList,
     });
-    res.json({
+    return res.json({
       data: 'success'
     });
   }),

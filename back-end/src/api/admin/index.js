@@ -1,4 +1,4 @@
-import { wrapAsync } from "../../middleware/errorHandling";
+import { wrapAsync } from '../../middleware/errorHandling';
 
 // logs the user in
 const loginAdmin = [
@@ -14,9 +14,8 @@ const getLogout = [
     req.session.destroy((err) => {
       if (err) {
         return res.status(400).json({ error: 'logout error' });
-      } else {
-        return res.json({ data: 'success' });
       }
+      return res.json({ data: 'success' });
     });
   })
 ];

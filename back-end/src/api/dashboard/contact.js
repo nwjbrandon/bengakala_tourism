@@ -2,10 +2,12 @@ import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
-import {wrapAsync} from "../../middleware/errorHandling";
+import { wrapAsync } from '../../middleware/errorHandling';
 
+// fetch information for the dashboard contact page
 const getContactInfo = [
   wrapAsync(async (req, res) => {
+    // fetch the contact details
     const contacts = await db.fetchData(TABLE_INFORMATION, { type: 'contact' });
     const contact = _.mapValues(_.groupBy(contacts, 'uuid'), (value) => {
       const v = _.head(value);
@@ -16,6 +18,8 @@ const getContactInfo = [
         edit: v.edit,
       };
     });
+
+    // fetch the customer queries
     const customers = await db.fetchData(TABLE_INFORMATION, { type: 'customer' });
     const customer = _.mapValues(_.groupBy(customers, 'uuid'), (value) => {
       const v = _.head(value);
@@ -30,7 +34,7 @@ const getContactInfo = [
         date: v.createdAt,
       };
     });
-    res.json({
+    return res.json({
       data: {
         contact,
         customer,
@@ -39,6 +43,7 @@ const getContactInfo = [
   }),
 ];
 
+// update the contact details
 const postContactInfo = [
   wrapAsync(async (req, res) => {
     const receivedData = req.body.data;
@@ -53,17 +58,18 @@ const postContactInfo = [
       saveList,
       deleteList,
     });
-    res.json({
+    return res.json({
       data: 'success'
     });
   }),
 ];
 
+// delete the customer queries
 const deleteContactInfo = [
   wrapAsync(async (req, res) => {
     const uuid = req.body.data;
     await db.deleteData(TABLE_INFORMATION, { uuid });
-    res.json({
+    return res.json({
       data: 'success',
     });
   }),

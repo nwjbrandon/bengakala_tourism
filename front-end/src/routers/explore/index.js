@@ -22,8 +22,6 @@ import { Element } from 'react-scroll';
 const styles = () => ({
     root: {
         flexGrow: 1,
-        backgroundColor: "#bdbdbd",
-        minHeight: "100vh"
     },
     paper: {
         paddingLeft: 10,

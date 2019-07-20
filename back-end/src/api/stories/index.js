@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
-import { wrapAsync } from "../../middleware/errorHandling";
+import { wrapAsync } from '../../middleware/errorHandling';
 
 // obtain information for the stories page
 const storiesInfo = [

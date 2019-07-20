@@ -9,6 +9,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import format from 'date-fns/format';
+import dateFnsFormat from "date-fns/format";
 
 const styles = theme => ({
     root: {
@@ -53,7 +54,7 @@ class DashboardContactDetails extends Component {
                             aria-controls="panel1a-content"
                             id="panel1a-header"
                         >
-                            <Typography className={classes.heading}>Subject: { data[item].paragraph } - { format(data[item].date, 'MM/DD/YYYY')} </Typography>
+                            <Typography className={classes.heading}>Subject: { data[item].paragraph } - { dateFnsFormat(data[item].date, 'YYYY/MM/DD HH:mm') }</Typography>
                         </ExpansionPanelSummary>
                         <ExpansionPanelDetails>
                             <Grid>

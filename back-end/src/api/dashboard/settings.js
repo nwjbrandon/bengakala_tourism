@@ -2,10 +2,12 @@ import _ from 'lodash';
 import bcrypt from 'bcryptjs';
 import db from '../../storage/db';
 import { TABLE_ADMINISTRATOR } from '../../storage/tableName';
-import {wrapAsync} from "../../middleware/errorHandling";
+import { wrapAsync } from '../../middleware/errorHandling';
 
+// get the data for the dashboard setting page
 const getContactInfo = [
   wrapAsync(async (req, res) => {
+    // fetch data of root administrators
     const editableAdmin = await db.fetchData(TABLE_ADMINISTRATOR, { edit: true });
     const editable = _.mapValues(_.groupBy(editableAdmin, 'uuid'), (value) => {
       const v = _.head(value);
@@ -17,6 +19,8 @@ const getContactInfo = [
         edit: v.edit,
       };
     });
+
+    // fetch data of non-root administrators
     const uneditableAdmin = await db.fetchData(TABLE_ADMINISTRATOR, { edit: false });
     const uneditable = _.mapValues(_.groupBy(uneditableAdmin, 'uuid'), (value) => {
       const v = _.head(value);
@@ -37,9 +41,10 @@ const getContactInfo = [
   }),
 ];
 
+// create new user
 const putContactInfo = [
   wrapAsync(async (req, res) => {
-    const { confirmedPassword, ...newUser} = req.body;
+    const { confirmedPassword, ...newUser } = req.body;
     const { password } = newUser;
     const salt = bcrypt.genSaltSync(10);
     newUser.password = bcrypt.hashSync(password, salt);
@@ -51,6 +56,7 @@ const putContactInfo = [
   }),
 ];
 
+// delete user
 const deleteContactInfo = [
   wrapAsync(async (req, res) => {
     const uuid = req.body.data;
@@ -61,6 +67,7 @@ const deleteContactInfo = [
   }),
 ];
 
+// update password
 const postContactInfo = [
   wrapAsync(async (req, res) => {
     const { email, newPassword } = req.body;

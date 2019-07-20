@@ -2,8 +2,9 @@ import _ from 'lodash';
 import db from '../../storage/db';
 import { TABLE_INFORMATION } from '../../storage/tableName';
 import { processedDataToChangeInDB } from '../../utils/processedData';
-import {wrapAsync} from "../../middleware/errorHandling";
+import { wrapAsync } from '../../middleware/errorHandling';
 
+// fetch data for the dashboard explore page
 const getExploreInfo = [
   wrapAsync(async (req, res) => {
     const attractions = await db.fetchData(TABLE_INFORMATION, { type: 'video' });
@@ -18,12 +19,13 @@ const getExploreInfo = [
         subheading: v.subheading,
       };
     });
-    res.json({
+    return res.json({
       data,
     });
   }),
 ];
 
+// update data on the dashboard explore page
 const postExploreInfo = [
   wrapAsync(async (req, res) => {
     const receivedData = req.body.data;
@@ -38,7 +40,7 @@ const postExploreInfo = [
       saveList,
       deleteList,
     });
-    res.json({
+    return res.json({
       data: 'success'
     });
   }),
