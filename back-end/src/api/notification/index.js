@@ -30,11 +30,9 @@ const notificationPost = [
     const fraudStatus = statusResponse.fraud_status;
     const transactionId = statusResponse.transaction_id;
 
-    console.log(`Transaction notification received. Order ID: ${orderId}. Transaction status: ${transactionStatus}. Fraud status: ${fraudStatus}`);
 
     const UUIDexists = await db.uuidExist(TABLE_TRANSACTIONS, transactionId);
 
-    console.log(Data);
 
     if (UUIDexists) {
       if (transactionStatus === 'capture') {
