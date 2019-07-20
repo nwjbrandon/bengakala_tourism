@@ -34,8 +34,6 @@ const notificationPost = [
 
     const UUIDexists = await db.uuidExist(TABLE_TRANSACTIONS, transactionId);
 
-    const Data = await db.fetchData(TABLE_TRANSACTIONS, { uuid: transactionId });
-
     console.log(Data);
 
     if (UUIDexists) {
