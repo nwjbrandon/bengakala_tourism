@@ -1,8 +1,8 @@
 import _ from 'lodash';
-import { wrapAsync } from "../../middleware/errorHandling";
+import { eachDay } from 'date-fns';
+import { wrapAsync } from '../../middleware/errorHandling';
 import db from '../../storage/db';
 import { TABLE_EXCLUDED_DATES, TABLE_INFORMATION, TABLE_TRANSACTIONS } from '../../storage/tableName';
-import { eachDay } from 'date-fns';
 
 // obtained information for the booking page
 const bookingInfo = [
@@ -13,14 +13,12 @@ const bookingInfo = [
 
     // obtain the excluded dates for booking calendar
     const excludedDatesData = await db.fetchData(TABLE_EXCLUDED_DATES);
-    const excludedDates = _.map(excludedDatesData, (data) => data.date);
+    const excludedDates = _.map(excludedDatesData, data => data.date);
 
     // obtain the number of people at the village on that day
     const transactions = await db.fetchData(TABLE_TRANSACTIONS);
     const listOfDates = _.flatten(_.map(transactions, t => eachDay(t.dateFrom, t.dateTo)));
-    const booked = _.map(_.countBy(listOfDates), (counts, date) => {
-      return { date, counts };
-    });
+    const booked = _.map(_.countBy(listOfDates), (counts, date) => ({ date, counts }));
 
     // obtain the images of accommodation
     const bookingImagesData = await db.fetchData(TABLE_INFORMATION, { type: 'booking' });

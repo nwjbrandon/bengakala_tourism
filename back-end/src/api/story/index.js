@@ -1,6 +1,6 @@
-import { wrapAsync } from "../../middleware/errorHandling";
-import { TABLE_INFORMATION } from "../../storage/tableName";
 import _ from 'lodash';
+import { wrapAsync } from '../../middleware/errorHandling';
+import { TABLE_INFORMATION } from '../../storage/tableName';
 import db from '../../storage/db';
 
 // obtain information for the story page
