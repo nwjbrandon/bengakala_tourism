@@ -1,7 +1,7 @@
 import midtransClient from 'midtrans-client';
 import { serverKey, clientKey } from '../../secret/midtransSecret';
 import { wrapAsync } from '../../middleware/errorHandling';
-
+import db from '../../storage/db';
 
 // getTransactionStatus();
 const updateDB = async (orderID, paymentStat) => {
@@ -32,7 +32,7 @@ const notificationPost = [
 
     const UUIDexists = await db.uuidExist(TABLE_TRANSACTIONS, transactionId);
 
-    const Data = await fetchData(TABLE_TRANSACTIONS, { uuid: transactionId })
+    const Data = await db.fetchData(TABLE_TRANSACTIONS, { uuid: transactionId })
 
     console.log(Data)
 
