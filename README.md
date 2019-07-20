@@ -32,8 +32,8 @@ The repository contains the directories front-end, back-end, database, helper, a
     - helper <br />
     Scripts to generate uuid and hashes of text
 - To setup the repository, do the following in sequential order
-    1) Go to back-end and follow the instructions with the # behind the heading
-    2) Go to the database directory and follow the instructions with the # behind the heading
+    1) Go to the database directory and follow the instructions with the # behind the heading
+    2) Go to back-end and follow the instructions with the # behind the heading
     3) Go to the front-end and follow the instructions with the # behind the heading
 - To deploy the code
     1) Go to the devops and follow the instructions with the # behind the heading

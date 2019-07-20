@@ -18,6 +18,11 @@ npm run up
 mysql -u bengkala -p bengkala < <file_name>.sql
 ```
 
+### To create SQL dump
+```
+mysqldump -u bengkala -p bengkala > <file_name>.sql
+```
+
 ### Usage
 - To create a new migration script
 ```

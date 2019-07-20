@@ -8,6 +8,8 @@ import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import api from './api';
 import config from './config';
+import { cookieSecret } from './secret/cookieSecret';
+import { redisSecret } from './secret/redisSecret';
 
 const app = express();
 
@@ -19,8 +21,8 @@ redisClient.on('error', (err) => {
   console.log('Redis error:', err);
 });
 app.use(session({
-  secret: '$2a$10$YOtOxoncjCeh54HUJLNVKOlGz5uhlk9Z8ucdZBScw0nx3TPQgNeXa',
-  name: 'Bengkala Tourism',
+  secret: redisSecret,
+  name: 'bengkala_tourism',
   resave: false,
   saveUninitialized: true,
   store: new RedisStore({
@@ -31,7 +33,7 @@ app.use(session({
   }),
 }));
 
-app.use(cookieParser('$2a$10$Lfmg/wBnPWHzbQGJkFm9ZOvnhR79H368P01ElLIgmFVhuf.agF4qu'));
+app.use(cookieParser(cookieSecret));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cors({ credentials: true, origin: true }));
