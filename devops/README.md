@@ -32,9 +32,10 @@ sudo npm install -g pm2 serve
 ```
 - Setup CertBot Let's Encrypt for SSL Certificate
 ```
-sudo apt install epel-release
+sudo apt install nginx
 sudo apt install certbot
-certbot certonly --standalone -d bengkala.social # prompt you to input your email address to remind you to renew
+sudo apt-get install python-certbot-nginx
+certbot certonly --nginx -d bengkala.social # prompt you to input your email address to remind you to renew
 ```
 - Setup nginx by copying the configuration from nginx.config into following default file
 ```
