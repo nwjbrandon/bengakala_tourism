@@ -80,6 +80,7 @@ const Checkout = (props) => {
     <TransportDetails />,
     <Slip />
   ];
+
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
   const [openSnackBar, setSnackBar] = React.useState(false);
@@ -98,8 +99,6 @@ const Checkout = (props) => {
   useEffect(() => {
     const fetchData = async () => {
       const result = await API.get('/booking/info');
-      console.log(result.data);
-
       const cost = result.data.cost;
       const excludeDates = result.data.excludedDates;
       const costObj = {};
@@ -112,8 +111,6 @@ const Checkout = (props) => {
       props.updateDates(excludeDates);
       setBookedData([...result.data.booked]);
 
-
-      console.log(excludeDates)
     };
 
     fetchData();
@@ -131,22 +128,9 @@ const Checkout = (props) => {
     }
   }, []);
 
-
-
-  const isValidEmail = (email) => {
-    return email.includes("@") && email.includes('.') && email.split('@').length > 1 && email.split('@')[1] !== "";
-  };
-
-  const constructStringDate = (date) => {
-    const DateObj = date ? new Date(date) : new Date();
-    const str = `${DateObj.getFullYear()}-${DateObj.getMonth() + 1}-${DateObj.getDate()}`;
-    console.log(str);
-    return str
-  };
-
+  //Publishes data to database and sends email if necessary
   const publishToBackend = (orderID, tokenID, cashOrNot) => {
-    console.log("orderID", orderID);
-
+   
     API.post('/sendEmail', {
       toEmail: props.personalDetails.email,
       personalDetails: props.personalDetails,
@@ -167,76 +151,39 @@ const Checkout = (props) => {
 
     });
 
-    // API.post('/booking/info', {
-    //   data: {
-    //     "uuid": tokenID,
-    //     "firstName": props.personalDetails.firstName,
-    //     "lastName": props.personalDetails.lastName,
-    //     "email": props.personalDetails.email,
-    //     "country": props.personalDetails.country,
-    //     "dateFrom": constructStringDate(props.tripDetails.checkIn),
-    //     "dateTo": constructStringDate(props.tripDetails.checkOut),
-    //     "males": props.tripDetails.numberMales,
-    //     "females": props.tripDetails.numberFemales,
-    //     "cars": props.tripDetails.numberCars,
-    //     "van": props.tripDetails.numberVans,
-    //     "breakfast": (props.tripDetails.breakfast),
-    //     "lunch": (props.tripDetails.lunch),
-    //     "dinner": (props.tripDetails.dinner),
-    //     "motorbikes": props.tripDetails.numberBikes,
-    //     "createdAt": constructStringDate(),
-    //     "checkedIn": false,
-    //     "cash": cashOrNot
-    //   }
-    // }).then((res) => {
-    //   console.log(res);
-    // }).catch((err) => {
-    //   console.log(err)
-    // });
   };
 
+  //Calls snap payment backend
   const callSnap = async () => {
     snap.show();
-    console.log('handling token request like a boss');
     const res = await getToken();
     const snapToken = res.data.snapToken;
     const orderUID = res.data.order_id;
     setOrderID(orderUID);
-    console.log("IDS", { snapToken, orderUID });
 
     if (snapToken) {
-      console.log('calling snap pay');
       snap.pay(snapToken, {
         onSuccess: (result) => {
-          console.log("result", result);
           publishToBackend(orderUID, result.transaction_id, 1);
-          // setActiveStep(activeStep + 1);
-          console.log('success'); console.log(result);
         },
         onPending: (result) => {
-          console.log('pending'); console.log(result);
           publishToBackend(orderUID, result.transaction_id, 1);
-          // setActiveStep(activeStep + 1)
           setPending(true)
         },
-        onError: (result) => { console.log('error'); console.log(result); alert('Payment Error, please try again') },
+        onError: (result) => { alert('Payment Error, please try again') },
         onClose: () => {
-
-          console.log('customer closed the popup without finishing the payment');
           alert('Please press the place order button to retry credit card payment');
         },
       })
 
     } else {
       snap.hide();
-      // console.log(error)
     }
   };
 
-
+  //Gets Token from backEnd
   const getToken = async () => {
     const { personalDetails, price } = props;
-    console.log('getting token from backend');
     const res = await API.post('/snap/info', {
 
       'first_name': personalDetails.firstName,
@@ -246,7 +193,6 @@ const Checkout = (props) => {
 
     });
 
-    console.log("Response", res);
     if (res) {
       setOrderID(res.order_id);
       return res;
@@ -255,6 +201,8 @@ const Checkout = (props) => {
     }
 
   };
+
+  //Ensures Check in and checkout date window does not include excluded Dates
   const excludedDatesEngulfed = () => {
     const checkIn = new Date(props.tripDetails.checkIn);
     const checkOut = new Date(props.tripDetails.checkOut);
@@ -265,120 +213,140 @@ const Checkout = (props) => {
 
     return result;
   };
+
+  //Get Maximum Occupancy for the check in and check put dates chosen
   const fullyBookedDateChosen = () => {
     const checkIn = new Date(props.tripDetails.checkIn);
     const checkOut = new Date(props.tripDetails.checkOut);
-    console.log(checkIn);
-    console.log(checkOut);
     let maxFullDays = 0;
     let maxFullDate = null;
-    console.log("Booked", booked);
     const fallswithin = booked.filter((item) => {
       const itemDate = new Date(item.date);
 
       return (itemDate >= checkIn && itemDate <= checkOut);
     });
 
-    console.log("falls within", fallswithin);
-
     fallswithin.forEach((item) => {
       const itemDate = new Date(item.date);
       if (maxFullDays < item.counts) {
         maxFullDays = item.counts;
         maxFullDate = itemDate;
-
       }
-
     });
 
     return { maxFullDate, maxFullDays }
 
   };
 
+  //Checks if email looks Valid
+  const isValidEmail = (email) => {
+    return email.includes("@") && email.includes('.') && email.split('@').length > 1 && email.split('@')[1] !== "";
+  };
+
+  //Constructs Readble String from Date object
+  const constructStringDate = (date) => {
+    const DateObj = date ? new Date(date) : new Date();
+    const str = `${DateObj.getFullYear()}-${DateObj.getMonth() + 1}-${DateObj.getDate()}`;
+    return str
+  };
+
+  //Validates Personal Information
+  const handlePersonalInfo = () => {
+    if (props.personalDetails.firstName === "") {
+      props.onError("Please input your first name!");
+      setSnackBar(true);
+    } else if (props.personalDetails.lastName === "") {
+      props.onError("Please input your last name!");
+      setSnackBar(true);
+    } else if (props.personalDetails.email === "") {
+      props.onError("Please input your email!");
+      setSnackBar(true);
+    } else if (props.personalDetails.country === "") {
+      props.onError("Please input the country you are from!");
+      setSnackBar(true);
+    } else if (!isValidEmail(props.personalDetails.email)) {
+      props.onError("Oops doesnt look like a valid email address!");
+      setSnackBar(true);
+    } else {
+      props.onError("");
+      setSnackBar(false);
+      setActiveStep(activeStep + 1);
+    }
+  }
+
+  //Validates Trip Information
+  const handleTripInfo = () => {
+
+    if (props.tripDetails.numberMales < 0 || props.tripDetails.numberFemales < 0) {
+      props.onError("There cannot be negative number of guests!!");
+      setSnackBar(true);
+    } else if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) === 0) {
+      props.onError("Total Guests cannot be 0");
+      setSnackBar(true);
+    } else if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) > 30) {
+      props.onError("Sorry we are unable to accommodate more than 30 people.");
+      setSnackBar(true);
+    } else if (excludedDatesEngulfed()) {
+      props.onError("Sorry, we are not able to accommodate you on some dates that you have Chosen. Please reselect check in and check out dates.");
+      setSnackBar(true);
+    } else {
+      const { maxFullDate, maxFullDays } = fullyBookedDateChosen();
+      if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) > (30 - maxFullDays)) {
+        props.onError(`Sorry we do not have enough slots on ${constructStringDate(maxFullDate)} please reselect your check in and check out Dates`);
+        setSnackBar(true);
+      } else {
+        props.onError("");
+        setSnackBar(false);
+        setActiveStep(activeStep + 1);
+      }
+    }
+
+  }
+
+  //Validates Transport Information
+  const handleTransportInfo = () => {
+    if (props.tripDetails.numberVans < 0 || props.tripDetails.numberCars < 0 || props.tripDetails.numberBikes < 0) {
+      props.onError("There cannot be Negative number of Vehicles!!");
+      setSnackBar(true);
+    } else {
+      props.onError("");
+      setSnackBar(false);
+      setActiveStep(activeStep + 1);
+    }
+  }
+
+  //Input Validator
+  // Handles Next Button
   const handleNext = () => {
     if (activeStep === 1) {
-      if (props.personalDetails.firstName === "") {
-        props.onError("Please input your first name!");
-        setSnackBar(true);
-      } else if (props.personalDetails.lastName === "") {
-        props.onError("Please input your last name!");
-        setSnackBar(true);
-      } else if (props.personalDetails.email === "") {
-        props.onError("Please input your email!");
-        setSnackBar(true);
-      } else if (props.personalDetails.country === "") {
-        props.onError("Please input the country you are from!");
-        setSnackBar(true);
-      } else if (!isValidEmail(props.personalDetails.email)) {
-        props.onError("Oops doesnt look like a valid email address!");
-        setSnackBar(true);
-      } else {
-        props.onError("");
-        setSnackBar(false);
-        setActiveStep(activeStep + 1);
-      }
+      handlePersonalInfo();
     } else if (activeStep === 0) {
-      if (props.tripDetails.numberMales < 0 || props.tripDetails.numberFemales < 0) {
-        props.onError("There cannot be negative number of guests!!");
-        setSnackBar(true);
-      } else if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) === 0) {
-        props.onError("Total Guests cannot be 0");
-        setSnackBar(true);
-      } else if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) > 30) {
-        props.onError("Sorry we are unable to accommodate more than 30 people.");
-        setSnackBar(true);
-      } else if (excludedDatesEngulfed()) {
-        props.onError("Sorry, we are not able to accommodate you on some dates that you have Chosen. Please reselect check in and check out dates.");
-        setSnackBar(true);
-      } else {
-        const { maxFullDate, maxFullDays } = fullyBookedDateChosen();
-        console.log("TESTING DATE QUOTA", maxFullDate, maxFullDays);
-        if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) > (30 - maxFullDays)) {
-          props.onError(`Sorry we do not have enough slots on ${constructStringDate(maxFullDate)} please reselect your check in and check out Dates`);
-          setSnackBar(true);
-        } else {
-          props.onError("");
-          setSnackBar(false);
-          setActiveStep(activeStep + 1);
-        }
-
-
-      }
+      handleTripInfo();
     } else if (activeStep === 2) {
-
-      if (props.tripDetails.numberVans < 0 || props.tripDetails.numberCars < 0 || props.tripDetails.numberBikes < 0) {
-        props.onError("There cannot be Negative number of Vehicles!!");
-        setSnackBar(true);
-      } else {
-        props.onError("");
-        setSnackBar(false);
-        setActiveStep(activeStep + 1);
-      }
+      handleTransportInfo();
     } else {
       setActiveStep(activeStep + 1);
     }
   };
 
+  //Handles Cash Payment
   const handleCash = () => {
     if (activeStep === 3) {
-
       const uuid = uuidv1();
       setOrderID(uuid);
-
       publishToBackend("", uuid, 0);
-
     }
   };
 
+  //Handles Online Payment
   const handleCard = () => {
     if (activeStep === 3) {
       setCashPayment(1);
-
       callSnap();
-
     }
   };
 
+  //Handles Back Button
   const handleBack = () => {
     setActiveStep(activeStep - 1);
   };
@@ -441,6 +409,7 @@ const Checkout = (props) => {
                     <PendingScreen email={props.personalDetails.email} />
                   ) : (
                       <ConfirmationScreen
+                      email={props.personalDetails.email}
                         cashPayment={cashPayment}
                         numberOfDays={props.numberOfDays}
                         orderId={orderID}
@@ -505,7 +474,6 @@ const mapStateToProps = state => {
     tripDetails: state.booking.tripDetails,
     cost: state.booking.cost,
     price: state.booking.price,
-    // grossAmount: state.booking.grossAmount,
     errorMsg: state.booking.errorMsg,
     numberOfDays: state.booking.numberOfDays,
     excludeDates: state.booking.excludeDates

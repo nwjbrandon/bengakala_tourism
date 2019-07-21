@@ -17,7 +17,7 @@ const updateDB = async (orderID, paymentStat) => {
     await db.updateData(TABLE_TRANSACTIONS, { cash: paymentStat }, { uuid: orderID });
 };
 
-
+//Manual Updating of Database with transaction state changes after updating midtrans dashboard
 const updateState = [
     async (req, res) => {
         const transactionID = req.body.data.uuid;

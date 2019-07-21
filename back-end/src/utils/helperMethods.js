@@ -1,9 +1,12 @@
+//Constructs Date into a Readable String Format
 export const constructStringDate = (date) => {
     const DateObj = date ? new Date(date) : new Date();
     const str = `${DateObj.getFullYear()}-${DateObj.getMonth() + 1}-${DateObj.getDate()}`
     return str
 }
 
+
+//Refractor Order to the format that the Email sender requires
 export const refractorOrder = (myOrder) => {
 
     const refractoredOrder = {

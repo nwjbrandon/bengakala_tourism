@@ -13,6 +13,8 @@ const updateDB = async (orderID, paymentStat) => {
 };
 
 
+//Post request handler function to challenge transaction change in midtrans
+//Database updated if valid change in transaction State
 const notificationPost = [
   wrapAsync(async (req, res) => {
     // Create Core API / Snap instance (both have shared `transactions` methods)
