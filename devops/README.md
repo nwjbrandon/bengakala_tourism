@@ -35,7 +35,7 @@ sudo npm install -g pm2 serve
 sudo apt install nginx
 sudo apt install certbot
 sudo apt-get install python-certbot-nginx
-certbot certonly --standalone -d bengkala.social # prompt you to input your email address to remind you to renew
+certbot certonly --nginx -d bengkala.social # prompt you to input your email address to remind you to renew
 ```
 - Setup nginx by copying the configuration from nginx.config into following default file
 ```
