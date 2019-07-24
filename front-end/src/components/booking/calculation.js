@@ -9,7 +9,7 @@ const dateDiffIndays = (date1, date2) => {
 };
 
 
-const calculationsPost = (data) => {
+const CalculationsPost = (data) => {
     const tripData = data.tripDetails;
     const costData = data.cost;
 
@@ -58,4 +58,4 @@ const calculationsPost = (data) => {
 
     return { price: packageCost, numberOfDays: Number(numOfDays) }
 }
-export default calculationsPost
+export default CalculationsPost
