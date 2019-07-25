@@ -28,7 +28,7 @@ const styles = theme => ({
     backgroundRepeat: 'no-repeat',
   },
   paper: {
-    padding: theme.spacing(6),
+    padding: theme.spacing(2),
   },
   progress: {
     margin: theme.spacing(2),
@@ -137,12 +137,12 @@ class Faq extends React.Component {
                         onChange={this.handleTabChange}
                         indicatorColor="secondary"
                         textColor="secondary"
-                        centered
-                        >
+                        variant="fullWidth"
+                      >
                         {Object.keys(data).map((FAQ_TYPE, index) => (
                           <Tab
                             key={index}
-                            label={FAQ_TYPE.split(' ')[0]}
+                            label={FAQ_TYPE}
                           />
                         ))}
                       </Tabs>
@@ -158,7 +158,7 @@ class Faq extends React.Component {
                         {Object.keys(data).map((FAQ_TYPE, index) => (
                           <Tab
                             key={index}
-                            label={FAQ_TYPE.split(' ')[0]}
+                            label={FAQ_TYPE}
                           />
                         ))}
                       </Tabs>  
@@ -168,7 +168,7 @@ class Faq extends React.Component {
                     index === val ?
                       <div key={index} style={{ paddingTop: 20 }}>
                         <Grid container justify="center">
-                          <Grid item xs={6}>
+                          <Grid item xs={12} md={8}>
                             <Typography>
                               {
                                 data[FAQ_TYPE].map(datum => (
