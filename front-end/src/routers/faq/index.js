@@ -9,6 +9,9 @@ import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 import TextField from "@material-ui/core/TextField";
 import _debounce from 'lodash/debounce';
 import SearchIcon from '@material-ui/icons/Search';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import { Tab, Tabs } from '@material-ui/core';
+import Divider from '@material-ui/core/Divider'
 
 const styles = theme => ({
   root: {
@@ -27,22 +30,38 @@ const styles = theme => ({
   paper: {
     padding: theme.spacing(6),
   },
+  progress: {
+    margin: theme.spacing(2),
+  },
 });
+
 
 class Faq extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      val: 0,
       value: '',
       filteredData: [],
       searching: false,
+      windowWidth: null,
     };
   }
 
   componentDidMount() {
+    this.handleResize()
+    window.addEventListener('resize', this.handleResize)
     const { onMount } = this.props;
     onMount();
   }
+
+  componentWillMount() {
+    window.removeEventListener('resize', this.handleResize)
+  }
+
+  handleResize = () => this.setState({
+    windowWidth: window.innerWidth
+  })
 
   setDisplayedContacts = _debounce(value => {
     const { searchData, } = this.props;
@@ -66,10 +85,16 @@ class Faq extends React.Component {
     this.setDisplayedContacts(input);
   };
 
+  handleTabChange = (e, newVal) => {
+    this.setState({ val: newVal })
+  }
+
+
   render() {
     const { classes, data } = this.props;
-    const { value, filteredData, searching } = this.state;
+    const { value, filteredData, searching, val, windowWidth } = this.state;
     return (
+
       <div>
         <Navbar />
         <div className={classes.root}>
@@ -103,61 +128,94 @@ class Faq extends React.Component {
           <Paper className={classes.paper}>
             {
               value.length <= 1 ?
-                Object.keys(data).map((FAQ_TYPE, index) => (
-                  <div key={index} style={{ paddingTop: 20 }}>
-                    <Grid justify="center" container>
-                      <Grid item xs={12} md={8}>
-                        <Typography
-                          component="span"
-                          variant="h5"
-                          color="textPrimary"
+                <React.Fragment>
+                  <Paper>
+                    {windowWidth > 600
+                      ?
+                      <Tabs
+                        value={val}
+                        onChange={this.handleTabChange}
+                        indicatorColor="secondary"
+                        textColor="secondary"
+                        centered
                         >
-                          {FAQ_TYPE}
-                        </Typography>
-                      </Grid>
-                      <Grid item xs={12} md={8}>
-                        <Typography>
-                          {
-                            data[FAQ_TYPE].map(datum => (
-                              <Typography style={{ paddingTop: 20 }}>
-                                <Typography style={{ paddingTop: 10 }}>
-                                  <Typography
-                                    component="span"
-                                    variant="h6"
-                                    color="textPrimary"
-                                  >
-                                    Question:&nbsp;
-                                        </Typography>
-                                        { datum.question ? datum.question.split("\n").map((i,key) => (
+                        {Object.keys(data).map((FAQ_TYPE, index) => (
+                          <Tab
+                            key={index}
+                            label={FAQ_TYPE.split(' ')[0]}
+                          />
+                        ))}
+                      </Tabs>
+                      :
+                      <Tabs
+                        value={val}
+                        onChange={this.handleTabChange}
+                        indicatorColor="secondary"
+                        textColor="secondary"
+                        variant="scrollable"
+                        scrollButtons="auto"
+                        >
+                        {Object.keys(data).map((FAQ_TYPE, index) => (
+                          <Tab
+                            key={index}
+                            label={FAQ_TYPE.split(' ')[0]}
+                          />
+                        ))}
+                      </Tabs>  
+                    }
+                  </Paper>
+                  {Object.keys(data).map((FAQ_TYPE, index) => (
+                    index === val ?
+                      <div key={index} style={{ paddingTop: 20 }}>
+                        <Grid container justify="center">
+                          <Grid item xs={6}>
+                            <Typography>
+                              {
+                                data[FAQ_TYPE].map(datum => (
+                                  <React.Fragment>
+                                    <Typography style={{ paddingTop: 20 }}>
+                                      <Typography style={{ paddingTop: 10 }}>
+                                        <Typography
+                                          component="span"
+                                          variant="h6"
+                                          color="textPrimary"
+                                        >
+                                          Question:&nbsp;
+                                              </Typography>
+                                        {datum.question ? datum.question.split("\n").map((i, key) => (
                                           <Typography variant="body1" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>)) : <div />
                                         }
-                                </Typography>
-                                <Typography style={{ paddingTop: 10 }}>
-                                  <Typography
-                                    component="span"
-                                    variant="h6"
-                                    color="textPrimary"
-                                  >
-                                    Answer:&nbsp;
-                                        </Typography>
-                                        { datum.answer ? datum.answer.split("\n").map((i,key) => (
+                                      </Typography>
+                                      <Typography style={{ paddingTop: 10 }}>
+                                        <Typography
+                                          component="span"
+                                          variant="h6"
+                                          color="textPrimary"
+                                        >
+                                          Answer:&nbsp;
+                                              </Typography>
+                                        {datum.answer ? datum.answer.split("\n").map((i, key) => (
                                           <Typography variant="body1" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>)) : <div />
                                         }
-                                </Typography>
-                              </Typography>
-                            ))
-                          }
-                        </Typography>
-                      </Grid>
-                    </Grid>
-                  </div>
-                ))
+                                      </Typography>
+                                    </Typography>
+                                    <Divider />
+                                  </React.Fragment>
+                                ))
+                              }
+                            </Typography>
+                          </Grid>
+                        </Grid>
+                      </div>
+                      : <Typography> </Typography>
+                  ))}
+                </React.Fragment>
                 :
                 filteredData.length === 0 ?
                   <div>
                     <Grid justify="center" container>
                       {
-                        searching ? "Please Wait" : "No Results Found"
+                        searching ? <CircularProgress className={classes.progress} color="secondary" /> : <Typography>No Results Found</Typography>
                       }
                     </Grid>
                   </div>

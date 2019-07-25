@@ -409,7 +409,10 @@ const Checkout = (props) => {
     <React.Fragment>
       <Prompt
         when={activeStep > 0}
-        message={'There are unsaved changes, Are your sure you want to leave the page?'}
+        message={location =>
+          location.pathname.startsWith("/booking")
+          ? "Please use the 'Back' and 'Next' buttons to navigate within the booking page"
+          : 'There are unsaved changes, Are you sure you want to leave the page?'}
       />
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
