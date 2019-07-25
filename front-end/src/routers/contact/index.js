@@ -21,7 +21,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import countryTelephoneCode, { countries } from "country-telephone-code";
-
+import _sortBy from 'lodash/sortBy';
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -95,7 +95,13 @@ class Contact extends React.Component {
     const { classes, data, } = this.props;
     const { scale, countryCode } = this.state;
     const coordinates = [-8.113850,115.175360];
-    const phoneCodes = countries.map(country => `+${countryTelephoneCode(country)}`);
+    const phoneCodes = _sortBy(countries.map(country => {
+     return {
+       code: `+${countryTelephoneCode(country)}`,
+       text: `${country} +${countryTelephoneCode(country)}`,
+       country
+     }
+    }), ['country']);
     return (
       <div className={classes.root}>
         <Navbar />
@@ -182,7 +188,7 @@ class Contact extends React.Component {
               <Grid container style={{ paddingTop: 30 }}>
                 <Grid item xs={12}>
                   <Paper className={classes.paper}>
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12}>
                       <TextField
                           required
                           label="Name"
@@ -195,7 +201,7 @@ class Contact extends React.Component {
                       />
                     </Grid>
 
-                    <Grid item xs={12} sm={6}>
+                    <Grid item xs={12}>
                       <TextField
                           required
                           label="Phone number"
@@ -210,16 +216,15 @@ class Contact extends React.Component {
                                 <InputAdornment position="start">
                                   <FormControl>
                                     <Select
-                                        style={{ maxWidth: 80 }}
                                         value={countryCode}
                                         onChange={(event) => this.setState({ countryCode: event.target.value })}
                                     >
                                       <MenuItem value="+62">
-                                        <em>+62</em>
+                                        <em>ID +62</em>
                                       </MenuItem>
                                       {
-                                        phoneCodes.map(code => (
-                                            <MenuItem value={code}>{code}</MenuItem>
+                                        phoneCodes.map(phone => (
+                                            <MenuItem value={phone.code}>{phone.text}</MenuItem>
                                         ))
                                       }
                                     </Select>
