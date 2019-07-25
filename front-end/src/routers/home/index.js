@@ -6,10 +6,16 @@ import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 
 class App extends Component {
 
-  isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
 
 
   render() {
+    const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+    const isFirefox = typeof InstallTrigger !== 'undefined';
+
+    if (!isChrome && !isFirefox) {
+      window.confirm('Some Features of this website only work on Chrome or Firefox web browsers. Please Consider switching for a better experience.');
+    }
+
     return (
       <div>
         <Background />
