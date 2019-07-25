@@ -16,6 +16,11 @@ import SuccessToast from '../../components/snackBar/successSnackBar.container';
 import ErrorToast from '../../components/snackBar/errorSnackBar.container';
 import Map from 'pigeon-maps'
 import Marker from 'pigeon-marker'
+import InputAdornment from '@material-ui/core/InputAdornment';
+import MenuItem from '@material-ui/core/MenuItem';
+import FormControl from '@material-ui/core/FormControl';
+import Select from '@material-ui/core/Select';
+import countryTelephoneCode, { countries } from "country-telephone-code";
 
 const styles = theme => ({
   root: {
@@ -45,6 +50,7 @@ class Contact extends React.Component {
       contact:'',
       subject:'',
       message:'',
+      countryCode: '+62',
       mailSent: false,
       email: '',
       scale: 12.5,
@@ -75,19 +81,21 @@ class Contact extends React.Component {
       name,
       subject,
       message,
+      countryCode,
       email,
     } = this.state;
     const id = uuid();
     const { contactSubmit } = this.props;
     contactSubmit({
-      uuid: id, contact, name, subject, message, email
+      uuid: id, contact, name, subject, message, email, countryCode
     });
   }
 
   render() {
     const { classes, data, } = this.props;
-    const { scale } = this.state;
+    const { scale, countryCode } = this.state;
     const coordinates = [-8.113850,115.175360];
+    const phoneCodes = countries.map(country => `+${countryTelephoneCode(country)}`);
     return (
       <div className={classes.root}>
         <Navbar />
@@ -197,6 +205,27 @@ class Contact extends React.Component {
                           variant="outlined"
                           value={this.state.contact}
                           onChange={e => this.setState({contact: e.target.value})}
+                          InputProps={{
+                            startAdornment:
+                                <InputAdornment position="start">
+                                  <FormControl>
+                                    <Select
+                                        style={{ maxWidth: 80 }}
+                                        value={countryCode}
+                                        onChange={(event) => this.setState({ countryCode: event.target.value })}
+                                    >
+                                      <MenuItem value="+62">
+                                        <em>+62</em>
+                                      </MenuItem>
+                                      {
+                                        phoneCodes.map(code => (
+                                            <MenuItem value={code}>{code}</MenuItem>
+                                        ))
+                                      }
+                                    </Select>
+                                  </FormControl>
+                                </InputAdornment>,
+                          }}
                       />
                     </Grid>
 

@@ -51,6 +51,8 @@ export const contactValidators = [
     .withMessage('Name is Required'),
   check('contact').exists().not().isEmpty()
     .withMessage('Contact is Required'),
+  check('countryCode').exists().not().isEmpty()
+    .withMessage('Country Code is Required'),
   check('subject').exists().not().isEmpty()
     .withMessage('Subject is Required'),
   check('message').exists().not().isEmpty()

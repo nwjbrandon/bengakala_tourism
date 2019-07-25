@@ -28,11 +28,12 @@ const contactPut = [
       subject,
       message,
       email,
+      countryCode,
     } = req.body;
     const data = _.assign({
       uuid,
       heading: name,
-      subheading: contact,
+      subheading: `${countryCode}-${contact}`,
       title: email,
       paragraph: subject,
       subparagraph: message,
