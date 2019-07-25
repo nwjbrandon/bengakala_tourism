@@ -74,12 +74,6 @@ const steps = ['Trip Details', 'Personal Details', 'Transportation Preferences',
 
 const Checkout = (props) => {
 
-  const toRender = [
-    <TripDetailsForm />,
-    <PersonalDetailsForm />,
-    <TransportDetails />,
-    <Slip />
-  ];
 
   const classes = useStyles();
   const [activeStep, setActiveStep] = React.useState(0);
@@ -89,6 +83,16 @@ const Checkout = (props) => {
   const [cashPayment, setCashPayment] = React.useState(0);
   const [orderID, setOrderID] = React.useState("undef");
   const [booked, setBookedData] = React.useState([]);
+
+  const [transportNeeded, setTransportNeeded] = React.useState(false);
+
+
+  const toRender = [
+    <TripDetailsForm />,
+    <PersonalDetailsForm />,
+    <TransportDetails setNeeded={setTransportNeeded} transportNeeded={transportNeeded} />,
+    <Slip />
+  ];
 
   useEffect(() => {
     window.addEventListener("resize", () => setWindowWidth(window.innerWidth));
@@ -130,7 +134,7 @@ const Checkout = (props) => {
 
   //Publishes data to database and sends email if necessary
   const publishToBackend = (orderID, tokenID, cashOrNot) => {
-   
+
     API.post('/sendEmail', {
       toEmail: props.personalDetails.email,
       personalDetails: props.personalDetails,
@@ -152,6 +156,7 @@ const Checkout = (props) => {
     });
 
   };
+
 
   //Calls snap payment backend
   const callSnap = async () => {
@@ -238,6 +243,20 @@ const Checkout = (props) => {
 
   };
 
+  //Disallows stays more than _ month long
+  const isTooLong = () => {
+    const checkIn = new Date(props.tripDetails.checkIn);
+    const checkOut = new Date(props.tripDetails.checkOut);
+    const diffTime = Math.abs(checkOut.getTime() - checkIn.getTime());
+    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+    if (diffDays > 30) {
+      return true
+    } else {
+      return false
+    }
+
+  }
+
   //Checks if email looks Valid
   const isValidEmail = (email) => {
     return email.includes("@") && email.includes('.') && email.split('@').length > 1 && email.split('@')[1] !== "";
@@ -282,6 +301,9 @@ const Checkout = (props) => {
       setSnackBar(true);
     } else if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) === 0) {
       props.onError("Total Guests cannot be 0");
+      setSnackBar(true);
+    } else if (isTooLong()) {
+      props.onError("Sorry your trip is too long! For trips longer than 1 month contact us directly");
       setSnackBar(true);
     } else if ((props.tripDetails.numberMales + props.tripDetails.numberFemales) > 30) {
       props.onError("Sorry we are unable to accommodate more than 30 people.");
@@ -409,7 +431,7 @@ const Checkout = (props) => {
                     <PendingScreen email={props.personalDetails.email} />
                   ) : (
                       <ConfirmationScreen
-                      email={props.personalDetails.email}
+                        email={props.personalDetails.email}
                         cashPayment={cashPayment}
                         numberOfDays={props.numberOfDays}
                         orderId={orderID}

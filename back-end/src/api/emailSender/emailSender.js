@@ -44,6 +44,10 @@ const writeToDB = async (Data, paymentStat) => {
   await db.saveData(TABLE_TRANSACTIONS, confirmedData);
 };
 
+
+//Handles post request upon payment completion
+//Updates Database with user and trip details
+//Sends email if successful payment
 const send = [
   async (req, res) => {
     const Data = req.body;

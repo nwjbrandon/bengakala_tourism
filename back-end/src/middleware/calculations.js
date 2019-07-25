@@ -1,5 +1,6 @@
 import Big from 'big.js';
 
+//Calculates difference in days
 const dateDiffIndays = (date1, date2) => {
     const dt1 = new Date(date1);
     const dt2 = new Date(date2);
@@ -8,7 +9,7 @@ const dateDiffIndays = (date1, date2) => {
             dt1.getDate())) / (1000 * 60 * 60 * 24));
 };
 
-
+//Calculates Costs 
 const calculationsPost = (data) => {
 
     const tripDetails = data.tripDetails;

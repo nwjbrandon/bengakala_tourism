@@ -5,13 +5,17 @@ import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 
 class App extends Component {
+
+  isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
+
+
   render() {
-    return(
+    return (
       <div>
-          <Background />
-          <Content />
-          <SuccessToast />
-          <ErrorToast />
+        <Background />
+        <Content />
+        <SuccessToast />
+        <ErrorToast />
       </div>
     );
   }

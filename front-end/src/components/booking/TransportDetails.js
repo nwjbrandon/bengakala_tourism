@@ -29,8 +29,6 @@ const useStyles = makeStyles(theme => ({
 const TransportDetailsForm = (props) => {
     const classes = useStyles();
 
-    const [needTransport, setNeedTransport] = useState(false);
-
     return (
         <React.Fragment>
             <Typography className={classes.label} variant="h6" gutterBottom>
@@ -51,7 +49,12 @@ const TransportDetailsForm = (props) => {
                         <Grid container spacing={0}>
                             <FormControlLabel
                                 control={
-                                    <Checkbox checked={needTransport} onChange={() => setNeedTransport(!needTransport)} value="checkedA" />
+                                    <Checkbox checked={props.transportNeeded} onChange={() => {
+                                        props.onBikeChange(0);
+                                        props.onCarChange(0);
+                                        props.onVanChange(0);
+                                        props.setNeeded(!props.transportNeeded)
+                                    }} value="checkedA" />
                                 }
                                 label="Do You need Transport from the Airport?"
                             />
@@ -59,7 +62,7 @@ const TransportDetailsForm = (props) => {
                     </Paper>
                 </Grid>
 
-                {needTransport ?
+                {props.transportNeeded ?
 
                     <TransportSelect
                         numberCars={props.tripDetails.numberCars}

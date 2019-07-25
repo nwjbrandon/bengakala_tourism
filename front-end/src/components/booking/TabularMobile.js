@@ -62,7 +62,7 @@ const MasterTable = (props) => {
     return (
         <React.Fragment>
             <Paper className={classes.root}>
-                <Typography style={{ paddingTop:10, minHeight: 50, backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }} >Unit Prices</Typography>
+                <Typography style={{ paddingTop: 10, minHeight: 50, backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }} >Unit Prices</Typography>
                 <Table className={classes.table}>
                     <TableBody>
                         <TableRow>
@@ -101,6 +101,35 @@ const MasterTable = (props) => {
                 </Table>
 
             </Paper>
+
+            <Paper className={classes.root}>
+                <Typography style={{ paddingTop: 10, minHeight: 50, backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }} >Transportation Booked:</Typography>
+                <Table className={classes.table}>
+                    <TableBody>
+                        <TableRow>
+                            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Total Vehicles:</TableCell>
+                            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>{tripDetails.numberBikes + tripDetails.numberCars + tripDetails.numberVans}</TableCell>
+                        </TableRow>
+
+                        <TableRow>
+                            <TableCell style={{ color: 'black' }} align="center">Cars</TableCell>
+                            <TableCell style={{ color: 'black' }}>{tripDetails.numberCars}</TableCell>
+                        </TableRow>
+
+                        <TableRow style={{ color: 'black' }}>
+                            <TableCell style={{ color: 'black' }} align="center">Vans</TableCell>
+                            <TableCell style={{ color: 'black' }}>{tripDetails.numberVans}</TableCell>
+                        </TableRow>
+                        <TableRow style={{ color: 'black' }}>
+                            <TableCell style={{ color: 'black' }} align="center">Motorbikes</TableCell>
+                            <TableCell style={{ color: 'black' }}>{tripDetails.numberBikes}</TableCell>
+                        </TableRow>
+                    </TableBody>
+                </Table>
+
+            </Paper>
+
+
             <Paper className={classes.root}>
                 <Table className={classes.table}>
                     <TableHead>
