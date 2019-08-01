@@ -7,6 +7,8 @@ import bg from '../../assets/img/bgHouse.jpg'
 import { connect } from 'react-redux'
 
 import ImageCarousell from '../../components/booking/ImageCarousell/ImageCarousell'
+import SEO from "../../components/seo";
+import {seoTags} from "../../assets/data/seo";
 // import kiwi from '/assets/img/kiwi.svg'
 
 class Accomodation extends React.Component {
@@ -37,8 +39,11 @@ class Accomodation extends React.Component {
 
     return (
       <div >
-
-
+        <SEO
+            title={ seoTags.booking.title }
+            description={ seoTags.booking.description }
+            keywords={ seoTags.booking.keywords }
+        />
         <div style={divStyle}>
           <Navbar />
           <AccomodationsForm />

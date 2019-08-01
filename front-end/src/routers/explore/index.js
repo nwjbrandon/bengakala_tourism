@@ -19,6 +19,8 @@ import TextField from "@material-ui/core/TextField";
 import SearchIcon from '@material-ui/icons/Search';
 import _debounce from "lodash/debounce";
 import { Element } from 'react-scroll';
+import SEO from "../../components/seo";
+import {seoTags} from "../../assets/data/seo";
 const styles = () => ({
     root: {
         flexGrow: 1,
@@ -100,6 +102,11 @@ class TutorialPage extends React.Component {
         const { title, text, videoID, thumbnailUrl, createdAt, playing, value, filteredData, searching } = this.state;
         return (
             <div className={classes.root}>
+                <SEO
+                    title={ seoTags.explore.title }
+                    description={ seoTags.explore.description }
+                    keywords={ seoTags.explore.keywords }
+                />
                 <Navbar />
                 <div className={classes.paper}>
                     <Grid justify="center" container spacing={3} style={{ paddingBottom: 20 }}>

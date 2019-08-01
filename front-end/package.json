@@ -36,6 +36,7 @@
     "react-calendar-heatmap": "^1.8.0",
     "react-dom": "^16.8.6",
     "react-google-charts": "^3.0.13",
+    "react-helmet": "^5.2.1",
     "react-idle-timer": "^4.2.7",
     "react-items-carousel": "^2.3.6",
     "react-notifications-component": "^1.1.1",

@@ -12,6 +12,9 @@ import SearchIcon from '@material-ui/icons/Search';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Tab, Tabs } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider'
+import {Helmet} from "react-helmet";
+import SEO from "../../components/seo";
+import {seoTags} from "../../assets/data/seo";
 
 const styles = theme => ({
   root: {
@@ -96,6 +99,11 @@ class Faq extends React.Component {
     return (
 
       <div>
+        <SEO
+            title={ seoTags.faq.title }
+            description={ seoTags.faq.description }
+            keywords={ seoTags.faq.keywords }
+        />
         <Navbar />
         <div className={classes.root}>
           <div className={classes.searchBar}>

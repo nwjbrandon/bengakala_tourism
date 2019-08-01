@@ -22,6 +22,8 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import countryTelephoneCode, { countries } from "country-telephone-code";
 import _sortBy from 'lodash/sortBy';
+import SEO from "../../components/seo";
+import {seoTags} from "../../assets/data/seo";
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -104,6 +106,11 @@ class Contact extends React.Component {
     }), ['country']);
     return (
       <div className={classes.root}>
+        <SEO
+            title={ seoTags.contact.title }
+            description={ seoTags.contact.description }
+            keywords={ seoTags.contact.keywords }
+        />
         <Navbar />
         <div style={{ paddingTop: 100, paddingBottom: 100, paddingLeft: 10, paddingRight: 10 }}>
           <Grid justify="center" container>

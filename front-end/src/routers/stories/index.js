@@ -14,6 +14,9 @@ import dateFnsFormat from 'date-fns/format';
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 import MyCard from './card'
+import {Helmet} from "react-helmet";
+import SEO from "../../components/seo";
+import {seoTags} from "../../assets/data/seo";
 
 const styles = theme => ({
   root: {
@@ -73,6 +76,11 @@ class Attraction extends React.Component {
 
     return (
       <div>
+        <SEO
+            title={ seoTags.stories.title }
+            description={ seoTags.stories.description }
+            keywords={ seoTags.stories.keywords }
+        />
         <Navbar />
         <h3 style={{ fontSize: '2em', fontFamily: "Montserrat, sans-serif", paddingLeft: "5vw" }}>Listen to our Stories!</h3>
         <div style={{ padding: '10px' }}>

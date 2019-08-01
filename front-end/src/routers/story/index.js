@@ -11,6 +11,9 @@ import {
 } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import dateFnsFormat from "date-fns/format";
+import {Helmet} from "react-helmet";
+import SEO from "../../components/seo";
+import {seoTags} from "../../assets/data/seo";
 
 const styles = () => ({
   root: {
@@ -54,6 +57,11 @@ class Story extends React.Component {
     const { classes, latestStories, story } = this.props;
     return (
       <div className={classes.root}>
+        <SEO
+            title={ seoTags.story.title }
+            description={ seoTags.story.description }
+            keywords={ seoTags.story.keywords }
+        />
         <Navbar />
         <div className={classes.paper}>
           <Grid container justify="center" spacing={3}>
