@@ -22,9 +22,22 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import countryTelephoneCode, { countries } from "country-telephone-code";
 import _sortBy from 'lodash/sortBy';
+import bg from '../../assets/img/bgimg3.jpg'
 const styles = theme => ({
   root: {
     flexGrow: 1,
+    paddingBottom: 50,
+    marginTop: 0,
+    width: "100%",
+    minHeight: "100vh",
+    height: "auto",
+    margin: 0,
+    backgroundImage: `url(${bg})`,
+    maxWidth: "100%",
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    position: 'relative',
   },
   paper: {
     padding: theme.spacing(2),
@@ -47,9 +60,9 @@ class Contact extends React.Component {
     super(props);
     this.state = {
       name: '',
-      contact:'',
-      subject:'',
-      message:'',
+      contact: '',
+      subject: '',
+      message: '',
       countryCode: '+62',
       mailSent: false,
       email: '',
@@ -94,20 +107,20 @@ class Contact extends React.Component {
   render() {
     const { classes, data, } = this.props;
     const { scale, countryCode } = this.state;
-    const coordinates = [-8.113850,115.175360];
+    const coordinates = [-8.113850, 115.175360];
     const phoneCodes = _sortBy(countries.map(country => {
-     return {
-       code: `+${countryTelephoneCode(country)}`,
-       text: `${country} +${countryTelephoneCode(country)}`,
-       country
-     }
+      return {
+        code: `+${countryTelephoneCode(country)}`,
+        text: `${country} +${countryTelephoneCode(country)}`,
+        country
+      }
     }), ['country']);
     return (
       <div className={classes.root}>
         <Navbar />
         <div style={{ paddingTop: 100, paddingBottom: 100, paddingLeft: 10, paddingRight: 10 }}>
           <Grid justify="center" container>
-            <Grid item xs={12} md={6}  style={{ paddingTop: 20 }}>
+            <Grid item xs={12} md={6} style={{ paddingTop: 20 }}>
               <Grid justify="center" container>
                 <Typography variant="h4">
                   <LocationIcon />&nbsp;Address
@@ -115,9 +128,9 @@ class Contact extends React.Component {
               </Grid>
               <Grid justify="center" container style={{ paddingTop: 20 }}>
                 <Typography variant="h6">
-                  { data['Address'] ?
-                      data['Address'].split("\n").map((i,key) => (
-                      <div key={key}>{i}</div> )) : <div />
+                  {data['Address'] ?
+                    data['Address'].split("\n").map((i, key) => (
+                      <div key={key}>{i}</div>)) : <div />
                   }
                 </Typography>
               </Grid>
@@ -128,9 +141,9 @@ class Contact extends React.Component {
               </Grid>
               <Grid justify="center" container style={{ paddingTop: 20 }}>
                 <Typography variant="h6">
-                  { data['Phone'] ?
-                      data['Phone'].split("\n").map((i,key) => (
-                          <div key={key}>{i}</div> )) : <div />
+                  {data['Phone'] ?
+                    data['Phone'].split("\n").map((i, key) => (
+                      <div key={key}>{i}</div>)) : <div />
                   }
                 </Typography>
               </Grid>
@@ -141,9 +154,9 @@ class Contact extends React.Component {
               </Grid>
               <Grid justify="center" container style={{ paddingTop: 20 }}>
                 <Typography variant="h6">
-                  { data['Hours'] ?
-                      data['Hours'].split("\n").map((i,key) => (
-                          <div key={key}>{i}</div> )) : <div />
+                  {data['Hours'] ?
+                    data['Hours'].split("\n").map((i, key) => (
+                      <div key={key}>{i}</div>)) : <div />
                   }
                 </Typography>
               </Grid>
@@ -158,18 +171,18 @@ class Contact extends React.Component {
                 </Map>
               </Grid>
               <Grid justify="center" container style={{ paddingTop: 10 }}>
-                <Button variant="outlined" color="primary" onClick={this.zoomIn}>+ Zoom in</Button>
+                <Button variant="outlined" color="white" onClick={this.zoomIn}>+ Zoom in</Button>
                 &nbsp;
-                <Button variant="outlined" color="primary" onClick={this.zoomOut}>- Zoom out</Button>
+                <Button variant="outlined" color="white" onClick={this.zoomOut}>- Zoom out</Button>
               </Grid>
               <Grid justify="center" container style={{ paddingTop: 10 }}>
                 <Typography variant="body1">
-                  Latitude: { coordinates[0] }
+                  Latitude: {coordinates[0]}
                 </Typography>
               </Grid>
               <Grid justify="center" container style={{ paddingTop: 10 }}>
                 <Typography variant="body1">
-                  Longitude: { coordinates[1] }
+                  Longitude: {coordinates[1]}
                 </Typography>
               </Grid>
             </Grid>
@@ -190,59 +203,59 @@ class Contact extends React.Component {
                   <Paper className={classes.paper}>
                     <Grid item xs={12}>
                       <TextField
-                          required
-                          label="Name"
-                          fullWidth
-                          autoComplete="name"
-                          margin="normal"
-                          variant="outlined"
-                          value={this.state.name}
-                          onChange={e => this.setState({name: e.target.value})}
+                        required
+                        label="Name"
+                        fullWidth
+                        autoComplete="name"
+                        margin="normal"
+                        variant="outlined"
+                        value={this.state.name}
+                        onChange={e => this.setState({ name: e.target.value })}
                       />
                     </Grid>
 
                     <Grid item xs={12}>
                       <TextField
-                          required
-                          label="Phone number"
-                          fullWidth
-                          autoComplete="Phone"
-                          margin="normal"
-                          variant="outlined"
-                          value={this.state.contact}
-                          onChange={e => this.setState({contact: e.target.value})}
-                          InputProps={{
-                            startAdornment:
-                                <InputAdornment position="start">
-                                  <FormControl>
-                                    <Select
-                                        value={countryCode}
-                                        onChange={(event) => this.setState({ countryCode: event.target.value })}
-                                    >
-                                      <MenuItem value="+62">
-                                        <em>ID +62</em>
-                                      </MenuItem>
-                                      {
-                                        phoneCodes.map(phone => (
-                                            <MenuItem value={phone.code}>{phone.text}</MenuItem>
-                                        ))
-                                      }
-                                    </Select>
-                                  </FormControl>
-                                </InputAdornment>,
-                          }}
+                        required
+                        label="Phone number"
+                        fullWidth
+                        autoComplete="Phone"
+                        margin="normal"
+                        variant="outlined"
+                        value={this.state.contact}
+                        onChange={e => this.setState({ contact: e.target.value })}
+                        InputProps={{
+                          startAdornment:
+                            <InputAdornment position="start">
+                              <FormControl>
+                                <Select
+                                  value={countryCode}
+                                  onChange={(event) => this.setState({ countryCode: event.target.value })}
+                                >
+                                  <MenuItem value="+62">
+                                    <em>ID +62</em>
+                                  </MenuItem>
+                                  {
+                                    phoneCodes.map(phone => (
+                                      <MenuItem value={phone.code}>{phone.text}</MenuItem>
+                                    ))
+                                  }
+                                </Select>
+                              </FormControl>
+                            </InputAdornment>,
+                        }}
                       />
                     </Grid>
 
                     <TextField
-                        required
-                        label="Email"
-                        fullWidth
-                        autoComplete="email"
-                        margin="normal"
-                        variant="outlined"
-                        value={this.state.email}
-                        onChange={e => this.setState({email: e.target.value})}
+                      required
+                      label="Email"
+                      fullWidth
+                      autoComplete="email"
+                      margin="normal"
+                      variant="outlined"
+                      value={this.state.email}
+                      onChange={e => this.setState({ email: e.target.value })}
                     />
 
                     <Typography variant="h6" style={{ paddingTop: 30 }}>
@@ -250,32 +263,32 @@ class Contact extends React.Component {
                     </Typography>
 
                     <TextField
-                        required
-                        label="Subject"
-                        fullWidth
-                        margin="normal"
-                        variant="outlined"
-                        value={this.state.subject}
-                        onChange={e => this.setState({subject: e.target.value})}
+                      required
+                      label="Subject"
+                      fullWidth
+                      margin="normal"
+                      variant="outlined"
+                      value={this.state.subject}
+                      onChange={e => this.setState({ subject: e.target.value })}
                     />
 
                     <TextField
-                        required
-                        label="Message"
-                        fullWidth
-                        margin="normal"
-                        variant="outlined"
-                        multiline
-                        rows="7"
-                        value={this.state.message}
-                        onChange={e => this.setState({message: e.target.value})}
+                      required
+                      label="Message"
+                      fullWidth
+                      margin="normal"
+                      variant="outlined"
+                      multiline
+                      rows="7"
+                      value={this.state.message}
+                      onChange={e => this.setState({ message: e.target.value })}
                     />
 
                     <Grid container justify="center" style={{ paddingTop: 20 }}>
                       <Button
-                          variant="contained"
-                          className={classes.button}
-                          onClick={this.submit}
+                        variant="contained"
+                        className={classes.button}
+                        onClick={this.submit}
                       >
                         Submit
                       </Button>

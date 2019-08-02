@@ -3,7 +3,7 @@ import Background from '../../components/home/background.container'
 import Content from '../../components/home/content.container'
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
-
+import ImageCarousell from '../../components/home/ImageCarousell/ImageCarousell'
 class App extends Component {
 
 
@@ -20,6 +20,7 @@ class App extends Component {
       <div>
         <Background />
         <Content />
+        <ImageCarousell />
         <SuccessToast />
         <ErrorToast />
       </div>

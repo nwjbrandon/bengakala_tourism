@@ -14,6 +14,7 @@ import dateFnsFormat from 'date-fns/format';
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 import MyCard from './card'
+import bg from '../../assets/img/bgHouse.jpg'
 
 const styles = theme => ({
   root: {
@@ -71,8 +72,25 @@ class Attraction extends React.Component {
     const { classes, pageStories } = this.props;
     const { page, } = this.state;
 
+    const divStyle = {
+      padding: 0,
+      marginTop: 0,
+      width: "100%",
+      minHeight: "100vh",
+      height: "auto",
+      margin: 0,
+      backgroundImage: `url(${bg})`,
+      maxWidth: "100%",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      position: 'relative',
+
+    };
+
+
     return (
-      <div>
+      <div style={divStyle}>
         <Navbar />
         <h3 style={{ fontSize: '2em', fontFamily: "Montserrat, sans-serif", paddingLeft: "5vw" }}>Listen to our Stories!</h3>
         <div style={{ padding: '10px' }}>
@@ -93,26 +111,26 @@ class Attraction extends React.Component {
         </div>
         <Grid container justify="center" spacing={10} className={classes.buttons}>
           <Button
-              size="small"
-              variant="contained"
-              color="default"
-              onClick={this.handlePagePrevious}
-              disabled={page <= 1}
-              style={{
-                margin: 10
-              }}
+            size="small"
+            variant="contained"
+            color="default"
+            onClick={this.handlePagePrevious}
+            disabled={page <= 1}
+            style={{
+              margin: 10
+            }}
           >
             <KeyboardArrowLeft /> Previous
             </Button>
           <Button
-              size="small"
-              variant="contained"
-              color="default"
-              onClick={this.handlePageNext}
-              disabled={pageStories.length < 6}
-              style={{
-                margin: 10
-              }}
+            size="small"
+            variant="contained"
+            color="default"
+            onClick={this.handlePageNext}
+            disabled={pageStories.length < 6}
+            style={{
+              margin: 10
+            }}
           >
             Next <KeyboardArrowRight />
           </Button>

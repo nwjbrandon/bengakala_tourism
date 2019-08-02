@@ -20,7 +20,7 @@ class Accomodation extends React.Component {
   render() {
 
     const divStyle = {
-      padding: 0,
+      paddingBottom: 50,
       marginTop: 0,
       width: "100%",
       minHeight: "100vh",

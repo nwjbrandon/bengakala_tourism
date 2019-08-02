@@ -12,6 +12,7 @@ import SearchIcon from '@material-ui/icons/Search';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Tab, Tabs } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider'
+import bg from '../../assets/img/bgHouse.jpg'
 
 const styles = theme => ({
   root: {
@@ -154,14 +155,14 @@ class Faq extends React.Component {
                         textColor="secondary"
                         variant="scrollable"
                         scrollButtons="auto"
-                        >
+                      >
                         {Object.keys(data).map((FAQ_TYPE, index) => (
                           <Tab
                             key={index}
                             label={FAQ_TYPE}
                           />
                         ))}
-                      </Tabs>  
+                      </Tabs>
                     }
                   </Paper>
                   {Object.keys(data).map((FAQ_TYPE, index) => (
