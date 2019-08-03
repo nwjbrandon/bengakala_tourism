@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-const httpUrl = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
-    ? 'http://localhost:3001/api': 'https://bengkala.social/api';
+const httpUrl = 'https://bengkala.social/api';
 axios.defaults.withCredentials = true;
 const getRequest = (url, data) => {
   return new Promise((resolve, reject) => {
@@ -57,4 +56,3 @@ export default {
   put: putRequest,
   post: postRequest
 }
-

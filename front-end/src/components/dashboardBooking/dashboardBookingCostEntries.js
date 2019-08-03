@@ -32,6 +32,13 @@ const styles = theme => ({
     }
 });
 
+const formatter = new Intl.NumberFormat('en-IDR', {
+  style: 'currency',
+  currency: 'IDR',
+  currencyDisplay: "symbol",
+  minimumFractionDigits: 0,
+})
+
 function NumberFormatCustom(props) {
     const { inputRef, onChange, ...other } = props;
     return (
@@ -47,10 +54,14 @@ function NumberFormatCustom(props) {
                 });
             }}
             thousandSeparator
-            prefix="Rp "
+            prefix="IDR "
         />
     );
 }
+
+// function toCurrency() {
+//   return
+// }
 
 NumberFormatCustom.propTypes = {
     inputRef: PropTypes.func.isRequired,
@@ -122,7 +133,7 @@ class DashboardContactDetails extends Component {
                                 </Grid>
                                 :
                                 <Typography>
-                                    Cost: { data[item].pricesString }
+                                    Cost: { formatter.format( data[item].pricesString ) }
                                 </Typography>
                             }
                         </ExpansionPanelDetails>

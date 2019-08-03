@@ -17,6 +17,13 @@ const apiClient = new midtransClient.Snap({
   clientKey
 });
 
+const formatter = new Intl.NumberFormat('en-IDR', {
+  style: 'currency',
+  currency: 'IDR',
+  currencyDisplay: "symbol",
+  minimumFractionDigits: 0,
+})
+
 const writeToDB = async (Data, paymentStat) => {
   const paymentData = {
     uuid: Data.transactionID,
