@@ -59,6 +59,11 @@ const MasterTable = (props) => {
   const mealRow = createMealRow()
   const homeRow = [createRow('HomeStay', groupSize, costData.accommodation, calcData.accommodation)]
 
+  const formatter = new Intl.NumberFormat({
+    style: 'decimal',
+    minimumFractionDigits: 0,
+  })
+
   return (
     <Paper className={classes.root}>
       <Table className={classes.table}>
@@ -92,7 +97,7 @@ const MasterTable = (props) => {
           <TableRow>
             <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Type</TableCell>
             <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>No. of people</TableCell>
-            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Unit Price per day(IDR)</TableCell>
+            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Unit Price per day (IDR)</TableCell>
             <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Price (IDR)</TableCell>
           </TableRow>
         </TableHead>
@@ -101,15 +106,15 @@ const MasterTable = (props) => {
             <TableRow key={index}>
               <TableCell style={{ color: 'black' }}>{row.desc}</TableCell>
               <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
-              <TableCell style={{ color: 'black' }}>{row.unit}</TableCell>
-              <TableCell style={{ color: 'black' }}>{row.price}</TableCell>
+              <TableCell style={{ color: 'black' }}>{formatter.format(row.unit)}</TableCell>
+              <TableCell style={{ color: 'black' }}>{formatter.format(row.price)}</TableCell>
             </TableRow>
           ))}
           <TableRow>
             <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell style={{ color: 'blue' }}>Accommodation total</TableCell>
-            <TableCell style={{ color: 'blue' }}>{homeRow[0].price}</TableCell>
+            <TableCell style={{ color: 'blue' }}>{formatter.format(homeRow[0].price)}</TableCell>
           </TableRow>
           <TableRow style={{ backgroundColor: '' }}>
             <TableCell style={{ color: 'black' }}>Meals</TableCell>
@@ -121,21 +126,21 @@ const MasterTable = (props) => {
             <TableRow key={index} style={{ color: 'black' }}>
               <TableCell style={{ color: 'black' }} align="center">{row.desc}</TableCell>
               <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
-              <TableCell style={{ color: 'black' }}>{row.unit}</TableCell>
-              <TableCell style={{ color: 'black' }}>{row.price}</TableCell>
+              <TableCell style={{ color: 'black' }}>{formatter.format(row.unit)}</TableCell>
+              <TableCell style={{ color: 'black' }}>{formatter.format(row.price)}</TableCell>
             </TableRow>
           ))}
           <TableRow>
             <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell style={{ color: 'blue' }}>Meals total</TableCell>
-            <TableCell style={{ color: 'blue' }}>{calcData.mealPlan}</TableCell>
+            <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.mealPlan)}</TableCell>
           </TableRow>
           <TableRow>
             <TableCell></TableCell>
             <TableCell></TableCell>
             <TableCell style={{ color: 'blue' }}>Total</TableCell>
-            <TableCell style={{ color: 'blue' }}>{calcData.subTotal}</TableCell>
+            <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.subTotal)}</TableCell>
           </TableRow>
         </TableBody>
       </Table>
