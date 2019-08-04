@@ -95,7 +95,7 @@ const Modal = ({
               </Button>
                     {
                         cash === 1 ?
-                            <Button onClick={updateTransactionState} color="primary">
+                            <Button onClick={updateTransactionState} disabled={true} color="primary">
                                 Update Transaction State
                             </Button>
                             : ""

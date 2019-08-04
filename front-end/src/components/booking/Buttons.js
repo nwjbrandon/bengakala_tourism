@@ -33,6 +33,7 @@ const Buttons = (props) => {
       <Button
         variant="contained"
         color="primary"
+        disabled={true}
         onClick={props.handleCard}
         className={classes.button}
       >Pay by Credit Card</Button>
