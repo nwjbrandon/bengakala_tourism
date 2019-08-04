@@ -186,7 +186,7 @@ class TutorialPage extends React.Component {
                                     <Grid item xs={12} sm={10}>
                                         {
                                             text ? text.split("\n").map((i, key) => (
-                                                <Typography variant="h6" style={{ fontFamily: "Montserrat, sans-serif", color: "white", marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>
+                                                <Typography variant="h6" style={{ fontFamily: "Montserrat, sans-serif", color: "white", marginTop: '10px', marginBottom: '10px', paddingLeft: 10 }} key={key}>{i}</Typography>
                                             )) : <div />
                                         }
                                     </Grid>

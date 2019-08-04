@@ -108,7 +108,7 @@ class Attraction extends React.Component {
                 <Grid item xs={12} md={6}>
                   <Card className={classes.card} key={item.title}>
                     <CardActionArea component={Link} to={`/story/s/${item.link}`}>
-                      <MyCard src={item.imgUrl} date={dateFnsFormat(item.createdAt, 'YYYY/MM/DD HH:mm')} title={item.title} summary={item.summary} />
+                      <MyCard src={item.imgUrl} date={dateFnsFormat(item.createdAt, 'YYYY/MM/DD')} title={item.title} summary={item.summary} />
                     </CardActionArea>
 
                   </Card>

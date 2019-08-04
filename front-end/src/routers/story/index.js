@@ -39,6 +39,9 @@ const styles = () => ({
   card: {
     width: "100%",
   },
+  justifyText: {
+    allignText: "justify-center"
+  }
 });
 
 const theme = createMuiTheme({
@@ -107,7 +110,10 @@ class Story extends React.Component {
                   story ?
                     <div style={{
                       background: "#21212190",
-                      borderRadius: "10px"
+                      borderRadius: "10px",
+                      paddingLeft: 20,
+                      paddingRight: 20,
+                      paddingTop: 10
                     }}>
                       <Grid container justify="center">
                         <Typography color="secondary" variant="h4" style={{ paddingBottom: 20 }}>
@@ -129,8 +135,8 @@ class Story extends React.Component {
                         minHeight: '400px'
                       }} />
                       <Grid container justify="flex-end">
-                        <Typography color="secondary" variant="body2" style={{ paddingBottom: 50 }}>
-                          {dateFnsFormat(story.createdAt, 'YYYY/MM/DD HH:mm')}
+                        <Typography color="secondary" variant="body2" style={{ paddingBottom: 10 }}>
+                          {dateFnsFormat(story.createdAt, 'YYYY/MM/DD')}
                         </Typography>
                       </Grid>
                       <Grid container justify="center" style={{ paddingBottom: 30 }}>
@@ -184,7 +190,7 @@ class Story extends React.Component {
                                 <Typography gutterBottom variant="h5" component="h2">
                                   {stories.title}
                                 </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
+                                <Typography className={classes.justifyText} variant="body2" color="textSecondary" component="p">
                                   {stories.summary}
                                 </Typography>
                               </CardContent>
