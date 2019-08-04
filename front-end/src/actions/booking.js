@@ -19,4 +19,7 @@ export const PAYMENT_CALC = "PAYMENT_CALC";
 export const NUMBER_OF_DAYS = "NUMBER_OF_DAYS";
 export const LOAD_COST = "LOAD_COST";
 export const LOAD_DATES = "LOAD_DATES";
+export const AIRPORTCARS = "AIRPORTCARS";
+export const PICKUPDETAILS = "PICKUPDETAILS";
+
 // export const ORDER_ID = "ORDER_ID"

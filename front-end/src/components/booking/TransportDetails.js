@@ -8,6 +8,7 @@ import * as actionTypes from '../../actions/booking';
 import TransportSelect from './TransportSelect'
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
+import PickupDetails from './PickupDetails'
 
 import { connect } from 'react-redux'
 
@@ -58,7 +59,7 @@ const TransportDetailsForm = (props) => {
                                         props.setNeeded(!props.transportNeeded)
                                     }} value="checkedA" />
                                 }
-                                label="Do You need Transport from the Airport?"
+                                label="Do You need Transport while in the village?"
                             />
                         </Grid>
                     </Paper>
@@ -67,12 +68,45 @@ const TransportDetailsForm = (props) => {
                 {props.transportNeeded ?
 
                     <TransportSelect
+                        airport={false}
                         numberCars={props.tripDetails.numberCars}
                         numberVans={props.tripDetails.numberVans}
                         numberBikes={props.tripDetails.numberBikes}
                         carChanged={(e) => props.onCarChange(e.target.value)}
                         vanChanged={(e) => props.onVanChange(e.target.value)}
                         bikeChanged={(e) => props.onBikeChange(e.target.value)} />
+                    : null
+
+                }
+                <Grid item xs={12}>
+                    <Paper className={classes.root}>
+                        <Grid container spacing={0}>
+                            <FormControlLabel
+                                control={
+                                    <Checkbox checked={props.airportTransportNeeded} onChange={() => {
+                                        props.onAirportCarChange(0);
+                                        props.setAirportNeeded(!props.airportTransportNeeded)
+                                    }} value="checkedA" />
+                                }
+                                label="Do You need Transport from the Airport?"
+                            />
+                        </Grid>
+                    </Paper>
+                </Grid>
+
+                {props.airportTransportNeeded ?
+
+                    <TransportSelect
+                        airport={true}
+                        numberAirportCars={props.tripDetails.numberAirportCars}
+                        airportCarChanged={(e) => props.onAirportCarChange(e.target.value)} />
+
+                    : null
+
+                }
+
+                {props.airportTransportNeeded ?
+                    <PickupDetails onChangeHandler={(e) => props.onPickUpChange(e.target.value)} data={props.tripDetails.pickUpDetails} />
                     : null
 
                 }
@@ -94,8 +128,10 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
     return {
         onCarChange: (val) => dispatch({ type: actionTypes.CARS, payload: parseInt(val, 10) }),
+        onAirportCarChange: (val) => dispatch({ type: actionTypes.AIRPORTCARS, payload: parseInt(val, 10) }),
         onVanChange: (val) => dispatch({ type: actionTypes.VANS, payload: parseInt(val, 10) }),
         onBikeChange: (val) => dispatch({ type: actionTypes.BIKES, payload: parseInt(val, 10) }),
+        onPickUpChange: (val) => dispatch({ type: actionTypes.PICKUPDETAILS, payload: val })
     }
 }
 

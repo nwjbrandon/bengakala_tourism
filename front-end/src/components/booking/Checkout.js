@@ -86,12 +86,13 @@ const Checkout = (props) => {
   const [booked, setBookedData] = React.useState([]);
 
   const [transportNeeded, setTransportNeeded] = React.useState(false);
+  const [airportTransportNeeded, setAirportTransportNeeded] = React.useState(false);
 
 
   const toRender = [
     <TripDetailsForm />,
     <PersonalDetailsForm />,
-    <TransportDetails setNeeded={setTransportNeeded} transportNeeded={transportNeeded} />,
+    <TransportDetails setNeeded={setTransportNeeded} transportNeeded={transportNeeded} setAirportNeeded={setAirportTransportNeeded} airportTransportNeeded={airportTransportNeeded} />,
     <Slip />
   ];
 

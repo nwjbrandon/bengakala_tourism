@@ -36,7 +36,9 @@ const writeToDB = async (Data, paymentStat) => {
     motorbikes: Data.tripDetails.numberBikes,
     createdAt: constructStringDate(),
     checkedIn: false,
-    cash: paymentStat
+    cash: paymentStat,
+    carsAirport: Data.tripDetails.numberAirportCars,
+    airportLocation:Data.tripDetails.pickUpDetails
   };
   const confirmedData = _.assign({
     ...paymentData,

@@ -23,14 +23,26 @@ const TransportSelect = (props) => {
         <Grid item xs={12}>
             <Paper className={classes.root}>
                 <Typography >
-                    Select Your Vehicles
-            </Typography>
+                    {props.airport ? 'Select the number of cars needed for Airport pickup ' : 'Select Your Vehicles for village touring'}
+                </Typography>
 
-                <Grid container spacing={3}>
-                    <NumberSelector changed={props.carChanged} value={props.numberCars} division={4} label="Cars" occupancy={4} />
-                    <NumberSelector changed={props.vanChanged} value={props.numberVans} division={4} label="Vans" occupancy={6} />
-                    <NumberSelector changed={props.bikeChanged} value={props.numberBikes} division={4} label="MotorBikes" occupancy={2} />
-                </Grid>
+                {props.airport ?
+
+                    <Grid container spacing={3}>
+                        <NumberSelector changed={props.airportCarChanged} value={props.numberAirportCars} division={12} label="Cars" occupancy={4} />
+                    </Grid>
+
+                    :
+
+                    <Grid container spacing={3}>
+                        <NumberSelector changed={props.carChanged} value={props.numberCars} division={4} label="Cars" occupancy={4} />
+                        <NumberSelector changed={props.vanChanged} value={props.numberVans} division={4} label="Vans" occupancy={6} />
+                        <NumberSelector changed={props.bikeChanged} value={props.numberBikes} division={4} label="MotorBikes" occupancy={2} />
+                    </Grid>
+
+                }
+
+
             </Paper>
         </Grid>
     );
