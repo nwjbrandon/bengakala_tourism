@@ -147,7 +147,7 @@ class Story extends React.Component {
                           }
                         </Grid>
                       </Grid>
-                      <Grid container justify="center">
+                      <Grid container justify="center" style={{ textAlign: 'justify'}}>
                         <Grid item xs={12} sm={10}>
                           {
                             story.text ? story.text.split("\n").map((i, key) => (
@@ -189,7 +189,7 @@ class Story extends React.Component {
                                 <Typography gutterBottom variant="h5" component="h2">
                                   {stories.title}
                                 </Typography>
-                                <Typography className={classes.justifyText} variant="body2" color="textSecondary" component="p">
+                                <Typography className={classes.justifyText} variant="body2" color="textSecondary" component="p" style={{ textAlign: 'justify' }}>
                                   {stories.summary}
                                 </Typography>
                               </CardContent>

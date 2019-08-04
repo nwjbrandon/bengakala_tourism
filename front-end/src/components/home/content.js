@@ -102,7 +102,7 @@ class Content extends Component {
         <div className={classes.paper}>
           <h2 style={titleHeader}>{mission.title}</h2>
           <div style={separator} />
-          <div>
+          <div style={{ textAlign: 'justify' }}>
             {
               mission.text ?
                 mission.text.split("\n").map((i, key) => (

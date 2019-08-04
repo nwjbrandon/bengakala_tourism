@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
   },
   btn: {
     textTransform: 'none',
-    fontFamily: "Montserrat, sans-serif"
+    fontFamily: "Montserrat, sans-serif",
+    color: 'white',
   }
 }));
 
@@ -73,38 +74,24 @@ export default function ButtonAppBar() {
   }
   const classes = useStyles();
 
-
-  const theme = createMuiTheme({
-    palette: {
-      secondary: {
-        main: "#fafafa",
-      },
-      primary: {
-        main: green[500]
-      }
-    },
-  });
-
-
   return (
     <div className={classes.root}>
 
-      <ThemeProvider theme={theme}>
 
-        <AppBar position="static" style={{ backgroundColor: '#11111199' }}>
+        <AppBar style={{ backgroundColor: '#11111199' }}>
           <Toolbar>
             <Typography variant="h6" className={classes.title}>
-              <Button className={classes.btn} color="secondary" component={Link} to="/" >Bengkala</Button>
+              <Button className={classes.btn} component={Link} to="/" >Bengkala</Button>
             </Typography>
             <Hidden xsDown>
               {sections.map(section => {
                 return (
-                  <Button className={classes.btn} key={section.title} color="secondary" component={Link} to={section.url}>{section.title}</Button>
+                  <Button className={classes.btn} key={section.title} component={Link} to={section.url}>{section.title}</Button>
                 )
               })}
             </Hidden>
             <Hidden smUp>
-              <IconButton edge="start" className={classes.menuButton} color="secondary" aria-label="Menu" onClick={handleClick}>
+              <IconButton edge="start" className={classes.menuButton} aria-label="Menu" onClick={handleClick}>
                 <MenuIcon />
               </IconButton>
               <Menu
@@ -125,7 +112,7 @@ export default function ButtonAppBar() {
             </Hidden>
           </Toolbar>
         </AppBar>
-      </ThemeProvider>
+      <div style={{ paddingBottom: 100 }} />
     </div>
   );
 }
