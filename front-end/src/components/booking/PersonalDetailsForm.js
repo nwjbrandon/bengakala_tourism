@@ -8,7 +8,8 @@ import { connect } from 'react-redux'
 
 const useStyles = makeStyles(theme => ({
   label: {
-    color: "white"
+    color: "white",
+    fontFamily: "Montserrat, sans-serif",
   }
 }));
 

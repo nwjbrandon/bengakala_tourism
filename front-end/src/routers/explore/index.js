@@ -19,9 +19,24 @@ import TextField from "@material-ui/core/TextField";
 import SearchIcon from '@material-ui/icons/Search';
 import _debounce from "lodash/debounce";
 import { Element } from 'react-scroll';
+import SEO from "../../components/seo";
+import { seoTags } from "../../assets/data/seo";
+import bg from '../../assets/img/bgimg4.jpg'
 const styles = () => ({
     root: {
         flexGrow: 1,
+        paddingBottom: 50,
+        marginTop: 0,
+        width: "100%",
+        minHeight: "100vh",
+        height: "auto",
+        margin: 0,
+        backgroundImage: `url(${bg})`,
+        maxWidth: "100%",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+        backgroundRepeat: 'no-repeat',
+        position: 'relative',
     },
     paper: {
         paddingLeft: 10,
@@ -100,12 +115,22 @@ class TutorialPage extends React.Component {
         const { title, text, videoID, thumbnailUrl, createdAt, playing, value, filteredData, searching } = this.state;
         return (
             <div className={classes.root}>
+                <SEO
+                    title={seoTags.explore.title}
+                    description={seoTags.explore.description}
+                    keywords={seoTags.explore.keywords}
+                />
                 <Navbar />
                 <div className={classes.paper}>
                     <Grid justify="center" container spacing={3} style={{ paddingBottom: 20 }}>
                         <Grid item xs={8} sm={6} md={4}>
                             <TextField
-                                placeholder="Explore Our Vaillage!"
+                                style={{
+                                    background: "white",
+                                    borderColor: "white",
+                                    borderRadius: "10px"
+                                }}
+                                placeholder="Explore Our Village!"
                                 margin="normal"
                                 fullWidth
                                 variant="outlined"
@@ -146,28 +171,22 @@ class TutorialPage extends React.Component {
 
                                     :
                                     <Grid container justify="center">
-                                        <Typography variant="h4" style={{ paddingBottom: 20 }}>
+                                        <Typography variant="h4" style={{ paddingBottom: 0 }}>
                                             Cannot Load Video
                                   </Typography>
                                     </Grid>
                                 }
-                                <Grid container justify="center">
-                                    <Grid item xs={12} md={10} container justify="flex-end">
-                                        <Typography variant="body2" style={{ paddingBottom: 0 }}>
-                                            {dateFnsFormat(createdAt, 'YYYY/MM/DD HH:mm')}
-                                        </Typography>
-                                    </Grid>
-                                </Grid>
-                                <div style={{ borderBottom: "1px solid grey", textAlign: "center" }}>
-                                    <h1 variant="h4" style={{ paddingBottom: 10 }}>
+
+                                <div style={{ background: "#21212150", paddingTop: 20, borderBottom: "1px solid grey", textAlign: "center" }}>
+                                    <h1 variant="h4" style={{ fontFamily: "Montserrat, sans-serif", color: "white", paddingBottom: 10 }}>
                                         {title}
                                     </h1>
                                 </div>
-                                <Grid container justify="center" style={{ paddingBottom: 30 }}>
+                                <Grid container justify="center" style={{ background: "#21212150", paddingBottom: 30 }}>
                                     <Grid item xs={12} sm={10}>
                                         {
                                             text ? text.split("\n").map((i, key) => (
-                                                <Typography variant="h6" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>
+                                                <Typography variant="h6" style={{ fontFamily: "Montserrat, sans-serif", color: "white", marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>
                                             )) : <div />
                                         }
                                     </Grid>

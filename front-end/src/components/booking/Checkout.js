@@ -31,7 +31,8 @@ const snap = window.snap;
 
 const useStyles = makeStyles(theme => ({
   label: {
-    color: "white"
+    color: "white",
+    fontFamily: "Montserrat, sans-serif",
   },
   layout: {
     width: 'auto',
@@ -411,8 +412,8 @@ const Checkout = (props) => {
         when={activeStep > 0}
         message={location =>
           location.pathname.startsWith("/booking")
-          ? "Please use the 'Back' and 'Next' buttons to navigate within the booking page"
-          : 'There are unsaved changes, Are you sure you want to leave the page?'}
+            ? "Please use the 'Back' and 'Next' buttons to navigate within the booking page"
+            : 'There are unsaved changes, Are you sure you want to leave the page?'}
       />
       <MuiThemeProvider theme={theme}>
         <CssBaseline />
@@ -473,6 +474,7 @@ const Checkout = (props) => {
                       />
                     </Snackbar>
                     <Buttons
+                      style={{ fontFamily: "Montserrat, sans-serif", }}
                       activeStep={activeStep}
                       handleBack={handleBack}
                       handleCash={handleCash}

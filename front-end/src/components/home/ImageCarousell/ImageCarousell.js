@@ -3,14 +3,14 @@ import React from 'react';
 import ItemsCarousel from 'react-items-carousel';
 
 import API from '../../../api';
-import Chevron from './chevrons';
-import ImageItem from './ImageItem'
+import "react-image-gallery/styles/css/image-gallery.css";
+import ImageGallery from 'react-image-gallery';
 
 const ImageCarousell = (props) => {
 
     const [attractions, setAttractions] = React.useState([]);
 
-    const children = attractions.map(i => <ImageItem {...i} />)
+
 
     const changeActiveItem = (activeItemIndex) => setActiveItemIndex(activeItemIndex);
 
@@ -27,10 +27,17 @@ const ImageCarousell = (props) => {
     React.useEffect(() => {
         const fetchData = async () => {
             const result = await API.get('/home/info');
-            console.log(result.data)
+            console.log(result.data.stories)
 
+            const children = result.data.stories.map((i, index) => {
+                return {
+                    original: i.imgUrl,
+                    thumbnail: i.imgUrl
+                }
 
-            setAttractions([...result.data.stories]);
+            })
+
+            setAttractions(children);
 
         };
 
@@ -39,44 +46,18 @@ const ImageCarousell = (props) => {
 
 
 
+
+
     const numofCards = windowWidth > 1100 ? 3 : (windowWidth > 800 ? 2 : (windowWidth > 600 ? 1 : 1));
 
 
 
     return (
-        <div style={{ margin: 10, paddingLeft: "2%", paddingRight: "2%", paddingBottom: "2%" }}>
-            <h3 style={{ fontSize: '2em' }}>Our Attractions</h3>
+        <div style={{ textAlign: "center", margin: 10, paddingLeft: "2%", paddingRight: "2%", paddingBottom: "2%" }}>
+            <h3 style={{ fontFamily: "Montserrat, sans-serif", fontSize: '2em' }}>See our attractions!</h3>
 
-            {children.length !== 0 ?
-                <ItemsCarousel
-                    // Placeholder configurations
-                    enablePlaceholder
-                    numberOfPlaceholderItems={5}
-                    minimumPlaceholderTime={1000}
-                    placeholderItem={<div style={{ height: 300, background: '#900' }}>Placeholder</div>}
-
-                    numberOfCards={numofCards}
-                    gutter={12}
-                    showSlither={true}
-                    firstAndLastGutter={true}
-                    freeScrolling={false}
-
-                    requestToChangeActive={changeActiveItem}
-                    activeItemIndex={activeItemIndex}
-                    activePosition={'center'}
-
-                    chevronWidth={24}
-                    rightChevron={[
-                        (<Chevron direction="left" />),
-
-                    ]}
-                    leftChevron={[(<Chevron direction="right" />)]}
-                    outsideChevron={false}
-                >
-                    {children}
-                </ItemsCarousel>
-
-
+            {attractions.length !== 0 ?
+                <ImageGallery showNav={true} showPlayButton={true} autoPlay={true} lazyLoad={true} items={attractions} />
                 :
 
                 <div>No data to display</div>

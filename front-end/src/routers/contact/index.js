@@ -23,6 +23,11 @@ import Select from '@material-ui/core/Select';
 import countryTelephoneCode, { countries } from "country-telephone-code";
 import _sortBy from 'lodash/sortBy';
 import bg from '../../assets/img/bgimg3.jpg'
+
+import { ThemeProvider } from '@material-ui/styles';
+import { white, green, orange } from '@material-ui/core/colors';
+
+import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -40,7 +45,8 @@ const styles = theme => ({
     position: 'relative',
   },
   paper: {
-    padding: theme.spacing(2),
+    padding: 10,
+    paddingTop: 0,
     margin: 'auto',
     display: 'flex',
     flexWrap: 'wrap',
@@ -50,8 +56,37 @@ const styles = theme => ({
       width: 450,
     },
   },
+  paperCont: {
+    paddingRight: 0,
+    background: "#21212150",
+    margin: 0,
+    maxWidth: "100vw",
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      padding: theme.spacing(3),
+    },
+  },
+  paperTwo: {
+    paddingRight: 0,
+    background: "#21212150",
+    width: "100%",
+    margin: 0,
+    [theme.breakpoints.up(600 + theme.spacing(3) * 2)]: {
+      padding: theme.spacing(3),
+    },
+  },
   button: {
     margin: theme.spacing(1),
+  },
+});
+
+const theme = createMuiTheme({
+  palette: {
+    secondary: {
+      main: "#fafafa",
+    },
+    primary: {
+      main: green[500]
+    }
   },
 });
 
@@ -118,189 +153,206 @@ class Contact extends React.Component {
     return (
       <div className={classes.root}>
         <Navbar />
-        <div style={{ paddingTop: 100, paddingBottom: 100, paddingLeft: 10, paddingRight: 10 }}>
-          <Grid justify="center" container>
-            <Grid item xs={12} md={6} style={{ paddingTop: 20 }}>
-              <Grid justify="center" container>
-                <Typography variant="h4">
-                  <LocationIcon />&nbsp;Address
-                </Typography>
-              </Grid>
-              <Grid justify="center" container style={{ paddingTop: 20 }}>
-                <Typography variant="h6">
-                  {data['Address'] ?
-                    data['Address'].split("\n").map((i, key) => (
-                      <div key={key}>{i}</div>)) : <div />
-                  }
-                </Typography>
-              </Grid>
-              <Grid justify="center" container style={{ paddingTop: 30 }}>
-                <Typography variant="h4">
-                  <PhoneIcon />&nbsp;Contact
-                </Typography>
-              </Grid>
-              <Grid justify="center" container style={{ paddingTop: 20 }}>
-                <Typography variant="h6">
-                  {data['Phone'] ?
-                    data['Phone'].split("\n").map((i, key) => (
-                      <div key={key}>{i}</div>)) : <div />
-                  }
-                </Typography>
-              </Grid>
-              <Grid justify="center" container style={{ paddingTop: 30 }}>
-                <Typography variant="h4">
-                  <OperatingHoursIcon />&nbsp;Operating Hours
-                </Typography>
-              </Grid>
-              <Grid justify="center" container style={{ paddingTop: 20 }}>
-                <Typography variant="h6">
-                  {data['Hours'] ?
-                    data['Hours'].split("\n").map((i, key) => (
-                      <div key={key}>{i}</div>)) : <div />
-                  }
-                </Typography>
-              </Grid>
-              <Grid justify="center" container style={{ paddingTop: 30 }}>
-                <Typography variant="h4">
-                  <DirectionsIcon />&nbsp;Directions
-                </Typography>
-              </Grid>
-              <Grid justify="center" container style={{ paddingTop: 30 }}>
-                <Map center={coordinates} zoom={scale} width={400} height={300}>
-                  <Marker anchor={coordinates} payload={1} />
-                </Map>
-              </Grid>
-              <Grid justify="center" container style={{ paddingTop: 10 }}>
-                <Button variant="outlined" color="white" onClick={this.zoomIn}>+ Zoom in</Button>
-                &nbsp;
-                <Button variant="outlined" color="white" onClick={this.zoomOut}>- Zoom out</Button>
-              </Grid>
-              <Grid justify="center" container style={{ paddingTop: 10 }}>
-                <Typography variant="body1">
-                  Latitude: {coordinates[0]}
-                </Typography>
-              </Grid>
-              <Grid justify="center" container style={{ paddingTop: 10 }}>
-                <Typography variant="body1">
-                  Longitude: {coordinates[1]}
-                </Typography>
-              </Grid>
-            </Grid>
+        <ThemeProvider theme={theme}>
 
-            <Grid item xs={12} md={6} style={{ paddingTop: 20 }}>
-              <Grid justify="center" container>
-                <Typography variant="h3">
-                  Contact us.
+          <div style={{ maxWidth: "100vw", paddingTop: 50, paddingBottom: 100}}>
+            <Grid justify="center" container>
+              <div className={classes.paperCont}>
+                <Grid item xs={12} md={12} style={{ paddingTop: 20 }}>
+                  <Grid justify="center" container>
+                    <Typography style={{ fontFamily: "Montserrat, sans-serif", }} color="secondary" variant="h4">
+                      <LocationIcon color="secondary" />&nbsp;Address
                 </Typography>
-              </Grid>
-              <Grid justify="center" container style={{ paddingTop: 30 }}>
-                <Typography variant="h6">
-                  Visiting or have something to share with us?
-                </Typography>
-              </Grid>
-              <Grid container style={{ paddingTop: 30 }}>
-                <Grid item xs={12}>
-                  <Paper className={classes.paper}>
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        label="Name"
-                        fullWidth
-                        autoComplete="name"
-                        margin="normal"
-                        variant="outlined"
-                        value={this.state.name}
-                        onChange={e => this.setState({ name: e.target.value })}
-                      />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                      <TextField
-                        required
-                        label="Phone number"
-                        fullWidth
-                        autoComplete="Phone"
-                        margin="normal"
-                        variant="outlined"
-                        value={this.state.contact}
-                        onChange={e => this.setState({ contact: e.target.value })}
-                        InputProps={{
-                          startAdornment:
-                            <InputAdornment position="start">
-                              <FormControl>
-                                <Select
-                                  value={countryCode}
-                                  onChange={(event) => this.setState({ countryCode: event.target.value })}
-                                >
-                                  <MenuItem value="+62">
-                                    <em>ID +62</em>
-                                  </MenuItem>
-                                  {
-                                    phoneCodes.map(phone => (
-                                      <MenuItem value={phone.code}>{phone.text}</MenuItem>
-                                    ))
-                                  }
-                                </Select>
-                              </FormControl>
-                            </InputAdornment>,
-                        }}
-                      />
-                    </Grid>
-
-                    <TextField
-                      required
-                      label="Email"
-                      fullWidth
-                      autoComplete="email"
-                      margin="normal"
-                      variant="outlined"
-                      value={this.state.email}
-                      onChange={e => this.setState({ email: e.target.value })}
-                    />
-
-                    <Typography variant="h6" style={{ paddingTop: 30 }}>
-                      Your message:
+                  </Grid>
+                  <Grid justify="center" container style={{ paddingTop: 20 }}>
+                    <Typography style={{ fontFamily: "Montserrat, sans-serif", }} color="secondary" variant="h6">
+                      {data['Address'] ?
+                        data['Address'].split("\n").map((i, key) => (
+                          <div key={key}>{i}</div>)) : <div />
+                      }
                     </Typography>
-
-                    <TextField
-                      required
-                      label="Subject"
-                      fullWidth
-                      margin="normal"
-                      variant="outlined"
-                      value={this.state.subject}
-                      onChange={e => this.setState({ subject: e.target.value })}
-                    />
-
-                    <TextField
-                      required
-                      label="Message"
-                      fullWidth
-                      margin="normal"
-                      variant="outlined"
-                      multiline
-                      rows="7"
-                      value={this.state.message}
-                      onChange={e => this.setState({ message: e.target.value })}
-                    />
-
-                    <Grid container justify="center" style={{ paddingTop: 20 }}>
-                      <Button
-                        variant="contained"
-                        className={classes.button}
-                        onClick={this.submit}
-                      >
-                        Submit
-                      </Button>
-                    </Grid>
-                  </Paper>
+                  </Grid>
+                  <Grid justify="center" container style={{ paddingTop: 30 }}>
+                    <Typography color="secondary" variant="h4">
+                      <PhoneIcon color="secondary" />&nbsp;Contact
+                </Typography>
+                  </Grid>
+                  <Grid justify="center" container style={{ paddingTop: 20 }}>
+                    <Typography style={{ fontFamily: "Montserrat, sans-serif", }} color="secondary" variant="h6">
+                      {data['Phone'] ?
+                        data['Phone'].split("\n").map((i, key) => (
+                          <div key={key}>{i}</div>)) : <div />
+                      }
+                    </Typography>
+                  </Grid>
+                  <Grid justify="center" container style={{ paddingTop: 30 }}>
+                    <Typography style={{ fontFamily: "Montserrat, sans-serif", }} color="secondary" variant="h4">
+                      <OperatingHoursIcon color="secondary" />&nbsp;Operating Hours
+                </Typography>
+                  </Grid>
+                  <Grid justify="center" container style={{ paddingTop: 20 }}>
+                    <Typography style={{ fontFamily: "Montserrat, sans-serif", }} variant="h6">
+                      {data['Hours'] ?
+                        data['Hours'].split("\n").map((i, key) => (
+                          <div key={key}>{i}</div>)) : <div />
+                      }
+                    </Typography>
+                  </Grid>
+                  <Grid justify="center" container style={{ paddingTop: 30 }}>
+                    <Typography style={{ fontFamily: "Montserrat, sans-serif", }} color="secondary" variant="h4">
+                      <DirectionsIcon color="secondary" />&nbsp;Directions
+                </Typography>
+                  </Grid>
+                  <Grid justify="center" container style={{ maxWidth: "100vw" ,paddingTop: 30 }}>
+                    <Map center={coordinates} zoom={scale} width={500} height={300}>
+                      <Marker anchor={coordinates} payload={1} />
+                    </Map>
+                  </Grid>
+                  <Grid justify="center" container style={{ paddingTop: 10 }}>
+                    <Button variant="outlined" style={{ color: "white" }} color="secondary" onClick={this.zoomIn}>+ Zoom in</Button>
+                    &nbsp;
+                <Button variant="outlined" color="secondary" onClick={this.zoomOut}>- Zoom out</Button>
+                  </Grid>
+                  <Grid justify="center" container style={{ paddingTop: 10 }}>
+                    <Typography style={{ fontFamily: "Montserrat, sans-serif", }} color="secondary" variant="body1">
+                      Latitude: {coordinates[0]}
+                    </Typography>
+                  </Grid>
+                  <Grid justify="center" container style={{ paddingTop: 10 }}>
+                    <Typography style={{ fontFamily: "Montserrat, sans-serif", }} color="secondary" variant="body1">
+                      Longitude: {coordinates[1]}
+                    </Typography>
+                  </Grid>
                 </Grid>
-              </Grid>
+              </div>
+
+              <div className={classes.paperCont}>
+                <Grid justify="center" item xs={12} md={12} style={{ paddingTop: 30, margin: 0 }}>
+
+                  <Grid justify="center" container>
+                    <Typography style={{ fontFamily: "Montserrat, sans-serif", }} color="secondary" variant="h3">
+                      Contact us.
+                  </Typography>
+                  </Grid>
+                  <Grid justify="center" container style={{ paddingTop: 30 }}>
+                    <Typography style={{ fontFamily: "Montserrat, sans-serif", }} color="secondary" variant="h6">
+                      Visiting or have something to share with us?
+                  </Typography>
+                  </Grid>
+                  <Grid container style={{ paddingTop: 30 }}>
+                    <Grid item xs={12}>
+                      <Paper className={classes.paper}>
+                        <Grid item xs={12}>
+                          <TextField
+                            required
+                            label="Name"
+                            fullWidth
+                            autoComplete="name"
+                            margin="normal"
+                            variant="outlined"
+                            value={this.state.name}
+                            onChange={e => this.setState({ name: e.target.value })}
+                          />
+                        </Grid>
+
+                        <Grid item xs={12}>
+                          <TextField
+                            required
+                            label="Phone number"
+                            fullWidth
+                            autoComplete="Phone"
+                            margin="normal"
+                            variant="outlined"
+                            value={this.state.contact}
+                            onChange={e => this.setState({ contact: e.target.value })}
+                            InputProps={{
+                              startAdornment:
+                                <InputAdornment position="start">
+                                  <FormControl>
+                                    <Select
+                                      value={countryCode}
+                                      onChange={(event) => this.setState({ countryCode: event.target.value })}
+                                    >
+                                      <MenuItem value="+62">
+                                        <em>ID +62</em>
+                                      </MenuItem>
+                                      {
+                                        phoneCodes.map(phone => (
+                                          <MenuItem value={phone.code}>{phone.text}</MenuItem>
+                                        ))
+                                      }
+                                    </Select>
+                                  </FormControl>
+                                </InputAdornment>,
+                            }}
+                          />
+                        </Grid>
+
+                        <TextField
+                          required
+                          label="Email"
+                          fullWidth
+                          autoComplete="email"
+                          margin="normal"
+                          variant="outlined"
+                          value={this.state.email}
+                          onChange={e => this.setState({ email: e.target.value })}
+                        />
+
+                      </Paper>
+
+                      <Grid justify="center" container style={{ paddingTop: 30 }}>
+                        <Typography style={{ fontFamily: "Montserrat, sans-serif", }} color="secondary" variant="h6" style={{ paddingTop: 0, paddingBottom: 20 }}>
+                          Your message:
+                    </Typography>
+                      </Grid>
+
+
+
+                      <Paper className={classes.paper}>
+
+                        <TextField
+                          required
+                          label="Subject"
+                          fullWidth
+                          margin="normal"
+                          variant="outlined"
+                          value={this.state.subject}
+                          onChange={e => this.setState({ subject: e.target.value })}
+                        />
+
+                        <TextField
+                          required
+                          label="Message"
+                          fullWidth
+                          margin="normal"
+                          variant="outlined"
+                          multiline
+                          rows="7"
+                          value={this.state.message}
+                          onChange={e => this.setState({ message: e.target.value })}
+                        />
+
+                        <Grid container justify="center" style={{ paddingTop: 20 }}>
+                          <Button
+                            variant="contained"
+                            className={classes.button}
+                            onClick={this.submit}
+                          >
+                            Submit
+                        </Button>
+                        </Grid>
+                      </Paper>
+                    </Grid>
+                  </Grid>
+
+                </Grid>
+              </div>
             </Grid>
-          </Grid>
-        </div>
-        <SuccessToast />
-        <ErrorToast />
+          </div>
+          <SuccessToast />
+          <ErrorToast />
+        </ThemeProvider>
       </div>
     )
   }
