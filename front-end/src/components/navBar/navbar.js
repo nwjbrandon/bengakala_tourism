@@ -13,7 +13,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import { ThemeProvider } from '@material-ui/styles';
 
 
-import { white, green, orange } from '@material-ui/core/colors';
+import { green, } from '@material-ui/core/colors';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -72,12 +72,6 @@ export default function ButtonAppBar() {
     setAnchorEl(null);
   }
   const classes = useStyles();
-
-  const navlinks = sections.map(section => {
-    return (
-      <Button className={classes.btn} key={section.title} color="secondary" component={Link} to={section.url}>{section.title}</Button>
-    )
-  });
 
 
   const theme = createMuiTheme({

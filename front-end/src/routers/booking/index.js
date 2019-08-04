@@ -9,13 +9,12 @@ import { connect } from 'react-redux'
 import ImageCarousell from '../../components/booking/ImageCarousell/ImageCarousell'
 import SEO from "../../components/seo";
 import { seoTags } from "../../assets/data/seo";
-// import kiwi from '/assets/img/kiwi.svg'
 
 
 import { ThemeProvider } from '@material-ui/styles';
-import { white, green, orange } from '@material-ui/core/colors';
+import { green } from '@material-ui/core/colors';
 
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 
 
 const theme = createMuiTheme({

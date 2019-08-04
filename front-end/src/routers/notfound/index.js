@@ -2,7 +2,6 @@ import React from 'react'
 import Navbar from "../../components/navBar/navbar";
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import {Helmet} from "react-helmet";
 import SEO from "../../components/seo";
 import {seoTags} from "../../assets/data/seo";
 class Notfound extends React.Component {

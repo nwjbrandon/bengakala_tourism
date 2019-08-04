@@ -15,7 +15,6 @@ import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 import MyCard from './card'
 import bg from '../../assets/img/bgimg3.jpg'
-import { Helmet } from "react-helmet";
 import SEO from "../../components/seo";
 import { seoTags } from "../../assets/data/seo";
 
@@ -108,7 +107,7 @@ class Attraction extends React.Component {
                 <Grid item xs={12} md={6}>
                   <Card className={classes.card} key={item.title}>
                     <CardActionArea component={Link} to={`/story/s/${item.link}`}>
-                      <MyCard src={item.imgUrl} date={dateFnsFormat(item.createdAt, 'YYYY/MM/DD HH:mm')} title={item.title} summary={item.summary} />
+                      <MyCard src={item.imgUrl} date={dateFnsFormat(item.createdAt, 'YYYY/MM/DD')} title={item.title} summary={item.summary} />
                     </CardActionArea>
 
                   </Card>

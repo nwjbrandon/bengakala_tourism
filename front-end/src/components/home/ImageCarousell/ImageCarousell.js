@@ -1,7 +1,5 @@
 import React from 'react';
 
-import ItemsCarousel from 'react-items-carousel';
-
 import API from '../../../api';
 import "react-image-gallery/styles/css/image-gallery.css";
 import ImageGallery from 'react-image-gallery';

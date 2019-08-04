@@ -7,7 +7,6 @@ import {
     CardActionArea,
 } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import dateFnsFormat from "date-fns/format";
 import Navbar from "../../components/navBar/navbar";
 import 'react-animated-slider/build/horizontal.css';
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
@@ -112,7 +111,7 @@ class TutorialPage extends React.Component {
     render() {
 
         const { data, classes } = this.props;
-        const { title, text, videoID, thumbnailUrl, createdAt, playing, value, filteredData, searching } = this.state;
+        const { title, text, videoID, thumbnailUrl, playing, value, filteredData, searching } = this.state;
         return (
             <div className={classes.root}>
                 <SEO
