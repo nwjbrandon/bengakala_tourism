@@ -9,6 +9,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Button from '@material-ui/core/Button';
 import Grid from '@material-ui/core/Grid';
 import TextField from "@material-ui/core/TextField";
+import NumberFormat from "react-number-format";
 
 const styles = theme => ({
     root: {
@@ -30,6 +31,31 @@ const styles = theme => ({
         alignSelf: 'flex-end'
     }
 });
+
+function NumberFormatCustom(props) {
+    const { inputRef, onChange, ...other } = props;
+    return (
+        <NumberFormat
+            {...other}
+            getInputRef={inputRef}
+            onValueChange={values => {
+                onChange({
+                    target: {
+                        value: values.value,
+                        id: other.id,
+                    },
+                });
+            }}
+            thousandSeparator
+            prefix="Rp "
+        />
+    );
+}
+
+NumberFormatCustom.propTypes = {
+    inputRef: PropTypes.func.isRequired,
+    onChange: PropTypes.func.isRequired,
+};
 
 class DashboardContactDetails extends Component {
     constructor(props) {
@@ -89,6 +115,9 @@ class DashboardContactDetails extends Component {
                                         className={classes.button}
                                         onChange={this.watchPricesString}
                                         id={item}
+                                        InputProps={{
+                                            inputComponent: NumberFormatCustom,
+                                        }}
                                     />
                                 </Grid>
                                 :
