@@ -52,14 +52,13 @@ const Buttons = (props) => {
           Pay by Cash
         </Button>
       }
-      {
         <Button
           variant="contained"
           color="primary"
           onClick={props.handleCard}
           className={classes.button}
+          disabled={true}
         >Pay by Credit Card</Button>
-      }
     </div>)
     :
     (<div className={classes.buttons}>
