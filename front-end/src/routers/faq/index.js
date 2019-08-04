@@ -12,23 +12,52 @@ import SearchIcon from '@material-ui/icons/Search';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import { Tab, Tabs } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider'
-import {Helmet} from "react-helmet";
+import bg from '../../assets/img/bgimg4.jpg'
+import { Helmet } from "react-helmet";
 import SEO from "../../components/seo";
-import {seoTags} from "../../assets/data/seo";
+import { seoTags } from "../../assets/data/seo";
+
+
+
+import { ThemeProvider } from '@material-ui/styles';
+import { white, green, orange } from '@material-ui/core/colors';
+
+import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+
+
+const theme = createMuiTheme({
+  palette: {
+    secondary: {
+      main: "#fafafa",
+    },
+    primary: {
+      main: green[500]
+    }
+  },
+});
+
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-  },
-  searchBar: {
-    padding: theme.spacing(2),
-    backgroundColor: '#ffe2a4',
+    backgroundImage: `url(${bg})`,
     backgroundSize: 'cover',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundPosition: 'center',
+    backgroundPosition: 'fixed',
     backgroundRepeat: 'no-repeat',
+  },
+  searchBar: {
+    padding: 0,
+
+  },
+  searchBarItems: {
+    height: "100%",
+    width: "100%",
+    maxWidth: "90vw",
+    padding: theme.spacing(2),
+    margin: 0,
   },
   paper: {
     padding: theme.spacing(2),
@@ -36,6 +65,11 @@ const styles = theme => ({
   progress: {
     margin: theme.spacing(2),
   },
+  textField: {
+    background: "#DFDFDF",
+    borderRadius: "10px"
+  }
+
 });
 
 
@@ -98,40 +132,43 @@ class Faq extends React.Component {
     const { value, filteredData, searching, val, windowWidth } = this.state;
     return (
 
-      <div>
+      <div className={classes.root}>
         <SEO
-            title={ seoTags.faq.title }
-            description={ seoTags.faq.description }
-            keywords={ seoTags.faq.keywords }
+          title={seoTags.faq.title}
+          description={seoTags.faq.description}
+          keywords={seoTags.faq.keywords}
         />
         <Navbar />
-        <div className={classes.root}>
+        <div >
           <div className={classes.searchBar}>
-            <Grid justify="center" container spacing={3}>
-              <Grid item xs={12} md={6}>
-                <Typography variant="h4" style={{ paddingTop: 80 }}>
-                  Hello, how can we help?
+            <div className={classes.searchBarItems}>
+              <Grid justify="center" container spacing={3}>
+                <Grid item xs={12} md={6}>
+                  <Typography style={{ fontFamily: "Montserrat, sans-serif" }} variant="h4" style={{ paddingTop: 80 }}>
+                    Hello, how can we help?
                 </Typography>
+                </Grid>
               </Grid>
-            </Grid>
-            <Grid justify="center" container spacing={3} style={{ paddingBottom: 80 }}>
-              <Grid item xs={12} md={6}>
-                <TextField
-                  placeholder="Search..."
-                  margin="normal"
-                  fullWidth
-                  variant="outlined"
-                  InputLabelProps={{
-                    shrink: true,
-                  }}
-                  value={value}
-                  onChange={this.handleChange}
-                  InputProps={{
-                    endAdornment: <SearchIcon />
-                  }}
-                />
+              <Grid justify="center" container spacing={3} style={{ paddingBottom: 80 }}>
+                <Grid item xs={12} md={6}>
+                  <TextField
+                   className = {classes.textField}
+                    placeholder="Search..."
+                    margin="normal"
+                    fullWidth
+                    variant="outlined"
+                    InputLabelProps={{
+                      shrink: true,
+                    }}
+                    value={value}
+                    onChange={this.handleChange}
+                    InputProps={{
+                      endAdornment: <SearchIcon />
+                    }}
+                  />
+                </Grid>
               </Grid>
-            </Grid>
+            </div>
           </div>
           <Paper className={classes.paper}>
             {
@@ -162,14 +199,14 @@ class Faq extends React.Component {
                         textColor="secondary"
                         variant="scrollable"
                         scrollButtons="auto"
-                        >
+                      >
                         {Object.keys(data).map((FAQ_TYPE, index) => (
                           <Tab
                             key={index}
                             label={FAQ_TYPE}
                           />
                         ))}
-                      </Tabs>  
+                      </Tabs>
                     }
                   </Paper>
                   {Object.keys(data).map((FAQ_TYPE, index) => (
@@ -181,29 +218,32 @@ class Faq extends React.Component {
                               {
                                 data[FAQ_TYPE].map(datum => (
                                   <React.Fragment>
-                                    <Typography style={{ paddingTop: 20 }}>
-                                      <Typography style={{ paddingTop: 10 }}>
+
+                                    <Typography style={{ fontFamily: "Montserrat, sans-serif", paddingTop: 20 }}>
+                                      <Typography style={{ fontFamily: "Montserrat, sans-serif", paddingTop: 10 }}>
                                         <Typography
                                           component="span"
                                           variant="h6"
                                           color="textPrimary"
+                                          style={{ fontFamily: "Montserrat, sans-serif", }}
                                         >
                                           Question:&nbsp;
                                               </Typography>
                                         {datum.question ? datum.question.split("\n").map((i, key) => (
-                                          <Typography variant="body1" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>)) : <div />
+                                          <Typography variant="body1" style={{ fontFamily: "Montserrat, sans-serif", marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>)) : <div />
                                         }
                                       </Typography>
-                                      <Typography style={{ paddingTop: 10 }}>
+                                      <Typography style={{ fontFamily: "Montserrat, sans-serif", paddingTop: 10 }}>
                                         <Typography
                                           component="span"
                                           variant="h6"
                                           color="textPrimary"
+                                          style={{ fontFamily: "Montserrat, sans-serif", }}
                                         >
                                           Answer:&nbsp;
                                               </Typography>
                                         {datum.answer ? datum.answer.split("\n").map((i, key) => (
-                                          <Typography variant="body1" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>)) : <div />
+                                          <Typography variant="body1" style={{ fontFamily: "Montserrat, sans-serif", marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>)) : <div />
                                         }
                                       </Typography>
                                     </Typography>

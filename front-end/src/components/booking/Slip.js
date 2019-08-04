@@ -43,7 +43,7 @@ const App = (props) => {
 
   return (
     <div className='flex-center container medium-border-surround'>
-      <h1 style={{ color: "white" }}>
+      <h1 style={{ fontFamily: "Montserrat, sans-serif",color: "white" }}>
         Here's your Order
         </h1>
       <div>

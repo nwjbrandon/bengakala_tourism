@@ -7,10 +7,12 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import Hidden from '@material-ui/core/Hidden';
+
 const styles = theme => ({
   root: {
     flexGrow: 1,
     overflow: 'hidden',
+    minHeight: "50%"
   },
   paper: {
     padding: theme.spacing(2),
@@ -21,6 +23,7 @@ const styles = theme => ({
     padding: theme.spacing(2),
     margin: 'auto',
     maxWidth: 800,
+    minHeight: "50%"
   },
   segment: {
     margin: '0',
@@ -75,6 +78,7 @@ class Content extends Component {
       marginTop: '0',
       position: 'relative',
       textSizeAdjust: '100%',
+      fontFamily: "Montserrat, sans-serif",
     };
 
     const separator = {
@@ -93,6 +97,7 @@ class Content extends Component {
       color: 'rgb(44,54,67)',
       fontSize: '16px',
       lineHeight: '26px',
+      fontFamily: "Montserrat, sans-serif",
     };
 
     const { stories, mission, classes } = this.props;
@@ -124,6 +129,7 @@ class Content extends Component {
                   style={{
                     marginBottom: 50,
                     backgroundColor: 'teal',
+                    fontFamily: "Montserrat, sans-serif",
                   }}
                 >
                   Listen to our stories!
@@ -142,6 +148,7 @@ class Content extends Component {
                   style={{
                     marginBottom: 50,
                     backgroundColor: 'teal',
+                    fontFamily: "Montserrat, sans-serif",
                   }}
                 >
                   Explore our village!
@@ -152,7 +159,7 @@ class Content extends Component {
           </Grid>
         </div>
         <div>
-          {
+          {/*
             stories.map((text, index) => (
               <div key={index}>
                 <Grid justify="center" container>
@@ -256,26 +263,13 @@ class Content extends Component {
                   </Grid>
                 </Hidden>
               </div>
-            ))
+            ))*/
           }
+
+
         </div>
-        <div className={classes.bottomPaper}>
-          <Grid justify="center" container>
-            <Button
-              variant="contained"
-              size="medium"
-              color="primary"
-              component={Link}
-              to="/booking"
-              style={{
-                marginBottom: 50,
-                backgroundColor: 'teal',
-              }}
-            >
-              Book Now!
-            </Button>
-          </Grid>
-        </div>
+
+
       </div>
     );
   }

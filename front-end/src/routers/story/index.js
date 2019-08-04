@@ -11,10 +11,17 @@ import {
 } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import dateFnsFormat from "date-fns/format";
-import {Helmet} from "react-helmet";
+import { Helmet } from "react-helmet";
 import SEO from "../../components/seo";
-import {seoTags} from "../../assets/data/seo";
+import { seoTags } from "../../assets/data/seo";
 
+
+import { ThemeProvider } from '@material-ui/styles';
+import { white, green, orange } from '@material-ui/core/colors';
+
+import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+
+import bg from '../../assets/img/bgimg3.jpg'
 const styles = () => ({
   root: {
     flexGrow: 1,
@@ -31,6 +38,17 @@ const styles = () => ({
   },
   card: {
     width: "100%",
+  },
+});
+
+const theme = createMuiTheme({
+  palette: {
+    secondary: {
+      main: "#fafafa",
+    },
+    primary: {
+      main: green[500]
+    }
   },
 });
 
@@ -53,25 +71,47 @@ class Story extends React.Component {
     onMount(tag);
   }
 
+
+
   render() {
+    const divStyle = {
+      padding: 0,
+      marginTop: 0,
+      width: "100%",
+      minHeight: "100vh",
+      height: "auto",
+      margin: 0,
+      backgroundImage: `url(${bg})`,
+      maxWidth: "100%",
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+      backgroundRepeat: 'no-repeat',
+      position: 'relative',
+
+    };
     const { classes, latestStories, story } = this.props;
     return (
-      <div className={classes.root}>
-        <SEO
-            title={ seoTags.story.title }
-            description={ seoTags.story.description }
-            keywords={ seoTags.story.keywords }
-        />
-        <Navbar />
-        <div className={classes.paper}>
-          <Grid container justify="center" spacing={3}>
-            <Grid item xs={12} md={8}>
-              {
-                story ?
-                    <div>
+      <div className={classes.root} style={divStyle}>
+        <ThemeProvider theme={theme}>
+          <SEO
+            title={seoTags.story.title}
+            description={seoTags.story.description}
+            keywords={seoTags.story.keywords}
+          />
+          <Navbar />
+          <div className={classes.paper}>
+            <Grid container justify="center" spacing={3}>
+
+              <Grid item xs={12} md={8}>
+                {
+                  story ?
+                    <div style={{
+                      background: "#21212190",
+                      borderRadius: "10px"
+                    }}>
                       <Grid container justify="center">
-                        <Typography variant="h4" style={{ paddingBottom: 20 }}>
-                          { story.title }
+                        <Typography color="secondary" variant="h4" style={{ paddingBottom: 20 }}>
+                          {story.title}
                         </Typography>
                       </Grid>
                       <Card style={{
@@ -89,15 +129,15 @@ class Story extends React.Component {
                         minHeight: '400px'
                       }} />
                       <Grid container justify="flex-end">
-                        <Typography variant="body2" style={{ paddingBottom: 50 }}>
-                          { dateFnsFormat(story.createdAt, 'YYYY/MM/DD HH:mm') }
+                        <Typography color="secondary" variant="body2" style={{ paddingBottom: 50 }}>
+                          {dateFnsFormat(story.createdAt, 'YYYY/MM/DD HH:mm')}
                         </Typography>
                       </Grid>
                       <Grid container justify="center" style={{ paddingBottom: 30 }}>
                         <Grid item xs={12} sm={10}>
                           {
-                            story.summary ? story.summary.split("\n").map((i,key) => (
-                                <Typography variant="h6" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>
+                            story.summary ? story.summary.split("\n").map((i, key) => (
+                              <Typography color="secondary" variant="h6" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>
                             )) : <div />
                           }
                         </Grid>
@@ -105,8 +145,8 @@ class Story extends React.Component {
                       <Grid container justify="center">
                         <Grid item xs={12} sm={10}>
                           {
-                            story.text ? story.text.split("\n").map((i,key) => (
-                                <Typography variant="body1" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>
+                            story.text ? story.text.split("\n").map((i, key) => (
+                              <Typography color="secondary" variant="body1" style={{ marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>
                             )) : <div />
                           }
                         </Grid>
@@ -114,38 +154,38 @@ class Story extends React.Component {
                     </div> :
                     <div>
                       <Grid container justify="center">
-                        <Typography variant="h5" style={{ paddingBottom: 20 }}>
+                        <Typography color="secondary" variant="h5" style={{ paddingBottom: 20 }}>
                           The story you are looking for cannot be found.
                         </Typography>
                       </Grid>
                     </div>
 
-              }
-            </Grid>
-            <Grid item xs={12} md={4}>
-              <Grid container justify="center">
-                <Typography variant="h6" style={{ paddingBottom: 20 }}>
-                  Latest Stories
-                </Typography>
+                }
               </Grid>
-              {
-                latestStories.map(stories => (
+              <Grid item xs={12} md={4}>
+                <Grid container justify="center">
+                  <Typography color="secondary" variant="h6" style={{ paddingBottom: 20 }}>
+                    Latest Stories
+                </Typography>
+                </Grid>
+                {
+                  latestStories.map(stories => (
                     <Grid container justify="center" spacing={2}>
                       <Grid item xs={12} sm={8} md={10}>
                         <Grid container justify="center">
                           <Card className={classes.card}>
                             <CardActionArea onClick={() => this.handlePageChange(stories.link)}>
                               <CardMedia
-                                  className={classes.media}
-                                  image={stories.imgUrl}
-                                  title={stories.title}
+                                className={classes.media}
+                                image={stories.imgUrl}
+                                title={stories.title}
                               />
                               <CardContent>
                                 <Typography gutterBottom variant="h5" component="h2">
-                                  { stories.title }
+                                  {stories.title}
                                 </Typography>
                                 <Typography variant="body2" color="textSecondary" component="p">
-                                  { stories.summary }
+                                  {stories.summary}
                                 </Typography>
                               </CardContent>
                             </CardActionArea>
@@ -153,11 +193,12 @@ class Story extends React.Component {
                         </Grid>
                       </Grid>
                     </Grid>
-                ))
-              }
+                  ))
+                }
+              </Grid>
             </Grid>
-          </Grid>
-        </div>
+          </div>
+        </ThemeProvider>
       </div>
     )
   }
