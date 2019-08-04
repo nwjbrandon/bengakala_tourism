@@ -81,16 +81,16 @@ const MasterTable = (props) => {
             <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Total Vehicles:</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell style={{ color: 'black' }}>{tripDetails.numberCars}</TableCell>
-            <TableCell style={{ color: 'black' }}>{tripDetails.numberVans}</TableCell>
-            <TableCell style={{ color: 'black' }}>{tripDetails.numberBikes}</TableCell>
-            <TableCell style={{ color: 'black' }}>{tripDetails.numberBikes + tripDetails.numberCars + tripDetails.numberVans}</TableCell>
+            <TableCell style={{ color: 'black' }}>{formatter.format(tripDetails.numberCars)}</TableCell>
+            <TableCell style={{ color: 'black' }}>{formatter.format(tripDetails.numberVans)}</TableCell>
+            <TableCell style={{ color: 'black' }}>{formatter.format(tripDetails.numberBikes)}</TableCell>
+            <TableCell style={{ color: 'black' }}>{formatter.format(tripDetails.numberBikes + tripDetails.numberCars + tripDetails.numberVans)}</TableCell>
           </TableRow>
         </TableHead>
         <TableHead>
           <TableRow>
             <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Number of days of stay: </TableCell>
-            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>{numOfDays}</TableCell>
+            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>{formatter.format(numOfDays)}</TableCell>
             <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
             <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
           </TableRow>
@@ -105,7 +105,7 @@ const MasterTable = (props) => {
           {homeRow.map((row, index) => (
             <TableRow key={index}>
               <TableCell style={{ color: 'black' }}>{row.desc}</TableCell>
-              <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
+              <TableCell style={{ color: 'black' }}>{formatter.format(row.qty)}</TableCell>
               <TableCell style={{ color: 'black' }}>{formatter.format(row.unit)}</TableCell>
               <TableCell style={{ color: 'black' }}>{formatter.format(row.price)}</TableCell>
             </TableRow>
@@ -125,7 +125,7 @@ const MasterTable = (props) => {
           {mealRow.map((row, index) => (
             <TableRow key={index} style={{ color: 'black' }}>
               <TableCell style={{ color: 'black' }} align="center">{row.desc}</TableCell>
-              <TableCell style={{ color: 'black' }}>{row.qty}</TableCell>
+              <TableCell style={{ color: 'black' }}>{formatter.format(row.qty)}</TableCell>
               <TableCell style={{ color: 'black' }}>{formatter.format(row.unit)}</TableCell>
               <TableCell style={{ color: 'black' }}>{formatter.format(row.price)}</TableCell>
             </TableRow>
