@@ -32,7 +32,7 @@ const styles = theme => ({
     }
 });
 
-const formatter = new Intl.NumberFormat('en-IDR', {
+const formatter = new Intl.NumberFormat('IDR', {
   style: 'currency',
   currency: 'IDR',
   currencyDisplay: "symbol",
