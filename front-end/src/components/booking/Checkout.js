@@ -26,6 +26,7 @@ import IconButton from '@material-ui/core/IconButton';
 import API from '../../api';
 import uuidv1 from 'uuid/v1';
 
+
 // import callSnap from './snapPayment'
 const snap = window.snap;
 
@@ -84,9 +85,11 @@ const Checkout = (props) => {
   const [cashPayment, setCashPayment] = React.useState(0);
   const [orderID, setOrderID] = React.useState("undef");
   const [booked, setBookedData] = React.useState([]);
+  const [isLoadingCash, setLoadingCash] = React.useState(false);
+  //const [isLoadingCard, setLoadingCard] = React.useState(false);
+
 
   const [transportNeeded, setTransportNeeded] = React.useState(false);
-
 
   const toRender = [
     <TripDetailsForm />,
@@ -153,7 +156,8 @@ const Checkout = (props) => {
       }
 
       setActiveStep(activeStep + 1);
-
+      setLoadingCash(false);
+      //setLoadingCard(false);
     });
 
   };
@@ -355,6 +359,7 @@ const Checkout = (props) => {
   //Handles Cash Payment
   const handleCash = () => {
     if (activeStep === 3) {
+      setLoadingCash(true);
       const uuid = uuidv1();
       setOrderID(uuid);
       publishToBackend("", uuid, 0);
@@ -364,8 +369,10 @@ const Checkout = (props) => {
   //Handles Online Payment
   const handleCard = () => {
     if (activeStep === 3) {
+      //setLoadingCard(true);
       setCashPayment(1);
       callSnap();
+      //setLoadingCard(false);
     }
   };
 
@@ -480,6 +487,8 @@ const Checkout = (props) => {
                       handleCash={handleCash}
                       handleCard={handleCard}
                       handleNext={handleNext}
+                      transactionStateCash = {isLoadingCash}
+                      //transactionStateCard = {isLoadingCard}
                       stepsLength={steps.length} />
 
                   </React.Fragment>

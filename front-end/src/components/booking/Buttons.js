@@ -1,6 +1,7 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress'
 
 
 const useStyles = makeStyles(theme => ({
@@ -24,19 +25,41 @@ const Buttons = (props) => {
           Back
         </Button>
       )}
-      <Button
-        variant="contained"
-        color="primary"
-        onClick={props.handleCash}
-        className={classes.button}
-      >Pay by Cash</Button>
-      <Button
-        variant="contained"
-        color="primary"
-        disabled={true}
-        onClick={props.handleCard}
-        className={classes.button}
-      >Pay by Credit Card</Button>
+      {props.transactionStateCash ?
+        //render spinner
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={props.handleCash}
+          className={classes.button}
+          disabled={true}
+        >
+          <CircularProgress
+            size={20}
+            color='primary'
+            thickness={5}
+            variant='indeterminate'
+          />
+        </Button>
+        :
+        //render words
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={props.handleCash}
+          className={classes.button}
+        >
+          Pay by Cash
+        </Button>
+      }
+      {
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={props.handleCard}
+          className={classes.button}
+        >Pay by Credit Card</Button>
+      }
     </div>)
     :
     (<div className={classes.buttons}>
