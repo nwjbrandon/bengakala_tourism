@@ -11,7 +11,7 @@ import snap from './snap';
 import emailSender from './emailSender/emailSender';
 import notification from './notification';
 import dashboard from './dashboard';
-import updateTransaction from './updateTransactionState'
+import updateTransaction from './updateTransactionState';
 import dashboardContact from './dashboard/contact';
 import dashboardBooking from './dashboard/booking';
 import dashboardStories from './dashboard/stories';
@@ -36,6 +36,7 @@ import {
   errorHandling,
 } from '../middleware/validator';
 import { errorHandler } from '../middleware/errorHandling';
+
 const app = express();
 
 // endpoints not necessarily to protect

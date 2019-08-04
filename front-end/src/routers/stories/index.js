@@ -15,7 +15,6 @@ import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 import MyCard from './card'
 import bg from '../../assets/img/bgimg3.jpg'
-import { Helmet } from "react-helmet";
 import SEO from "../../components/seo";
 import { seoTags } from "../../assets/data/seo";
 

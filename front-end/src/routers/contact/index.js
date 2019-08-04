@@ -25,9 +25,9 @@ import _sortBy from 'lodash/sortBy';
 import bg from '../../assets/img/bgimg3.jpg'
 
 import { ThemeProvider } from '@material-ui/styles';
-import { white, green, orange } from '@material-ui/core/colors';
+import { green } from '@material-ui/core/colors';
 
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -302,7 +302,7 @@ class Contact extends React.Component {
                       </Paper>
 
                       <Grid justify="center" container style={{ paddingTop: 30 }}>
-                        <Typography style={{ fontFamily: "Montserrat, sans-serif", }} color="secondary" variant="h6" style={{ paddingTop: 0, paddingBottom: 20 }}>
+                        <Typography color="secondary" variant="h6" style={{ paddingTop: 0, paddingBottom: 20, fontFamily: "Montserrat, sans-serif", }}>
                           Your message:
                     </Typography>
                       </Grid>

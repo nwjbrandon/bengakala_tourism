@@ -11,15 +11,14 @@ import {
 } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import dateFnsFormat from "date-fns/format";
-import { Helmet } from "react-helmet";
 import SEO from "../../components/seo";
 import { seoTags } from "../../assets/data/seo";
 
 
 import { ThemeProvider } from '@material-ui/styles';
-import { white, green, orange } from '@material-ui/core/colors';
+import { green, } from '@material-ui/core/colors';
 
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, } from '@material-ui/core/styles';
 
 import bg from '../../assets/img/bgimg3.jpg'
 const styles = () => ({

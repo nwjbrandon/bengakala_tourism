@@ -13,28 +13,8 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import { Tab, Tabs } from '@material-ui/core';
 import Divider from '@material-ui/core/Divider'
 import bg from '../../assets/img/bgimg4.jpg'
-import { Helmet } from "react-helmet";
 import SEO from "../../components/seo";
 import { seoTags } from "../../assets/data/seo";
-
-
-
-import { ThemeProvider } from '@material-ui/styles';
-import { white, green, orange } from '@material-ui/core/colors';
-
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
-
-
-const theme = createMuiTheme({
-  palette: {
-    secondary: {
-      main: "#fafafa",
-    },
-    primary: {
-      main: green[500]
-    }
-  },
-});
 
 
 const styles = theme => ({
@@ -144,7 +124,7 @@ class Faq extends React.Component {
             <div className={classes.searchBarItems}>
               <Grid justify="center" container spacing={3}>
                 <Grid item xs={12} md={6}>
-                  <Typography style={{ fontFamily: "Montserrat, sans-serif" }} variant="h4" style={{ paddingTop: 80 }}>
+                  <Typography style={{ fontFamily: "Montserrat, sans-serif", paddingTop: 80  }} variant="h4">
                     Hello, how can we help?
                 </Typography>
                 </Grid>
