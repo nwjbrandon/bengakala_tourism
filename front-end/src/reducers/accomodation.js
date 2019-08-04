@@ -24,6 +24,8 @@ const initialState = {
     numberVans: 0,
     numberCars: 0,
     numberBikes: 0,
+    numberAirportCars: 0,
+    pickUpDetails: ""
   },
   excludeDates: [],
   cost: {
@@ -33,7 +35,8 @@ const initialState = {
     bike: 50000,
     breakfast: 20000,
     lunch: 20000,
-    dinner: 20000
+    dinner: 20000,
+    "airport car": 100000
   },
   price: {
     accommodation: 0,
@@ -244,6 +247,28 @@ const reducer = (state = initialState, action) => {
     return {
       ...state,
       excludeDates: [...action.payload]
+    }
+  } else if (action.type === actionTypes.AIRPORTCARS) {
+
+    const tempcpyTrip = { ...state.tripDetails };
+    tempcpyTrip.numberAirportCars = action.payload;
+    return {
+      ...state,
+      personalDetails: { ...state.personalDetails },
+      tripDetails: { ...tempcpyTrip },
+      excludeDates: [...state.excludeDates],
+      cost: { ...state.cost }
+    }
+  } else if (action.type === actionTypes.PICKUPDETAILS) {
+
+    const tempcpyTrip = { ...state.tripDetails };
+    tempcpyTrip.pickUpDetails = action.payload;
+    return {
+      ...state,
+      personalDetails: { ...state.personalDetails },
+      tripDetails: { ...tempcpyTrip },
+      excludeDates: [...state.excludeDates],
+      cost: { ...state.cost }
     }
   }
   return state;
