@@ -5,12 +5,40 @@
       xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 <!-- created with Free Online Sitemap Generator www.xml-sitemaps.com -->
-
-
-<url>
-  <loc>https://bengkala.social/</loc>
-  <lastmod>2019-08-02T16:17:28+00:00</lastmod>
-</url>
-
-
+  <url>
+    <loc>https://bengkala.social/</loc>
+    <lastmod>2019-08-02T16:17:28+00:00</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bengkala.social/booking</loc>
+    <lastmod>2019-08-02T16:17:28+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bengkala.social/explore</loc>
+    <lastmod>2019-08-02T16:17:28+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://bengkala.social/stories</loc>
+    <lastmod>2019-08-02T16:17:28+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://bengkala.social/contact</loc>
+    <lastmod>2019-08-02T16:17:28+00:00</lastmod>
+    <changefreq>yearly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://bengkala.social/faq</loc>
+    <lastmod>2019-08-02T16:17:28+00:00</lastmod>
+    <changefreq>monthly</changefreq>YEARLY
+    <priority>0.6</priority>
+  </url>
 </urlset>
