@@ -332,7 +332,7 @@ const Checkout = (props) => {
 
   //Validates Transport Information
   const handleTransportInfo = () => {
-    if (props.tripDetails.numberVans < 0 || props.tripDetails.numberCars < 0 || props.tripDetails.numberBikes < 0) {
+    if (props.tripDetails.numberVans < 0 || props.tripDetails.numberCars < 0 || props.tripDetails.numberBikes < 0 || props.tripDetails.numberAirportCars < 0) {
       props.onError("There cannot be Negative number of Vehicles!!");
       setSnackBar(true);
     } else {
