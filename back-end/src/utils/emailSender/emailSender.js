@@ -3,7 +3,7 @@ import Email from 'email-templates';
 import { USEREMAIL, USERPASS } from '../../secret/emailSecret'
 
 
-//Sends Email to customer
+//Sends Email to customer`
 export default async function main(emailContent) {
     const email = await new Email({
         juice: true,

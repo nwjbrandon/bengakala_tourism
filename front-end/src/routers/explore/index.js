@@ -7,7 +7,6 @@ import {
     CardActionArea,
 } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
-import dateFnsFormat from "date-fns/format";
 import Navbar from "../../components/navBar/navbar";
 import 'react-animated-slider/build/horizontal.css';
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
@@ -112,7 +111,7 @@ class TutorialPage extends React.Component {
     render() {
 
         const { data, classes } = this.props;
-        const { title, text, videoID, thumbnailUrl, createdAt, playing, value, filteredData, searching } = this.state;
+        const { title, text, videoID, thumbnailUrl, playing, value, filteredData, searching } = this.state;
         return (
             <div className={classes.root}>
                 <SEO
@@ -182,11 +181,11 @@ class TutorialPage extends React.Component {
                                         {title}
                                     </h1>
                                 </div>
-                                <Grid container justify="center" style={{ background: "#21212150", paddingBottom: 30 }}>
+                                <Grid container justify="center" style={{ background: "#21212150", paddingBottom: 30, textAlign: 'justify' }}>
                                     <Grid item xs={12} sm={10}>
                                         {
                                             text ? text.split("\n").map((i, key) => (
-                                                <Typography variant="h6" style={{ fontFamily: "Montserrat, sans-serif", color: "white", marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>
+                                                <Typography variant="h6" style={{ fontFamily: "Montserrat, sans-serif", color: "white", marginTop: '10px', marginBottom: '10px', paddingLeft: 10 }} key={key}>{i}</Typography>
                                             )) : <div />
                                         }
                                     </Grid>

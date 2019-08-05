@@ -1,12 +1,8 @@
 import React, { Component } from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
-import Hidden from '@material-ui/core/Hidden';
 
 const styles = theme => ({
   root: {
@@ -100,13 +96,13 @@ class Content extends Component {
       fontFamily: "Montserrat, sans-serif",
     };
 
-    const { stories, mission, classes } = this.props;
+    const { mission, classes } = this.props;
     return (
       <div className={classes.root}>
         <div className={classes.paper}>
           <h2 style={titleHeader}>{mission.title}</h2>
           <div style={separator} />
-          <div>
+          <div style={{ textAlign: 'justify' }}>
             {
               mission.text ?
                 mission.text.split("\n").map((i, key) => (

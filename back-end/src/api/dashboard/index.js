@@ -28,6 +28,8 @@ const dashboardGet = [
         checkedIn: v.checkedIn,
         cash: v.cash,
         createdAt: v.createdAt,
+        carsAirport: v.carsAirport,
+        airportLocation: v.airportLocation,
       };
     });
     const transaction = _.orderBy(transactionData, ['createdAt'], ['desc']);

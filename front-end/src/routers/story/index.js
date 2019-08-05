@@ -11,15 +11,14 @@ import {
 } from "@material-ui/core";
 import Typography from "@material-ui/core/Typography";
 import dateFnsFormat from "date-fns/format";
-import { Helmet } from "react-helmet";
 import SEO from "../../components/seo";
 import { seoTags } from "../../assets/data/seo";
 
 
 import { ThemeProvider } from '@material-ui/styles';
-import { white, green, orange } from '@material-ui/core/colors';
+import { green, } from '@material-ui/core/colors';
 
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme, } from '@material-ui/core/styles';
 
 import bg from '../../assets/img/bgimg3.jpg'
 const styles = () => ({
@@ -39,6 +38,9 @@ const styles = () => ({
   card: {
     width: "100%",
   },
+  justifyText: {
+    allignText: "justify-center"
+  }
 });
 
 const theme = createMuiTheme({
@@ -107,7 +109,10 @@ class Story extends React.Component {
                   story ?
                     <div style={{
                       background: "#21212190",
-                      borderRadius: "10px"
+                      borderRadius: "10px",
+                      paddingLeft: 20,
+                      paddingRight: 20,
+                      paddingTop: 10
                     }}>
                       <Grid container justify="center">
                         <Typography color="secondary" variant="h4" style={{ paddingBottom: 20 }}>
@@ -129,8 +134,8 @@ class Story extends React.Component {
                         minHeight: '400px'
                       }} />
                       <Grid container justify="flex-end">
-                        <Typography color="secondary" variant="body2" style={{ paddingBottom: 50 }}>
-                          {dateFnsFormat(story.createdAt, 'YYYY/MM/DD HH:mm')}
+                        <Typography color="secondary" variant="body2" style={{ paddingBottom: 10 }}>
+                          {dateFnsFormat(story.createdAt, 'YYYY/MM/DD')}
                         </Typography>
                       </Grid>
                       <Grid container justify="center" style={{ paddingBottom: 30 }}>
@@ -142,7 +147,7 @@ class Story extends React.Component {
                           }
                         </Grid>
                       </Grid>
-                      <Grid container justify="center">
+                      <Grid container justify="center" style={{ textAlign: 'justify'}}>
                         <Grid item xs={12} sm={10}>
                           {
                             story.text ? story.text.split("\n").map((i, key) => (
@@ -184,7 +189,7 @@ class Story extends React.Component {
                                 <Typography gutterBottom variant="h5" component="h2">
                                   {stories.title}
                                 </Typography>
-                                <Typography variant="body2" color="textSecondary" component="p">
+                                <Typography className={classes.justifyText} variant="body2" color="textSecondary" component="p" style={{ textAlign: 'justify' }}>
                                   {stories.summary}
                                 </Typography>
                               </CardContent>

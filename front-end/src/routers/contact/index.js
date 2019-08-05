@@ -25,9 +25,9 @@ import _sortBy from 'lodash/sortBy';
 import bg from '../../assets/img/bgimg3.jpg'
 
 import { ThemeProvider } from '@material-ui/styles';
-import { white, green, orange } from '@material-ui/core/colors';
+import { green } from '@material-ui/core/colors';
 
-import { createMuiTheme, makeStyles } from '@material-ui/core/styles';
+import { createMuiTheme } from '@material-ui/core/styles';
 const styles = theme => ({
   root: {
     flexGrow: 1,
@@ -155,7 +155,7 @@ class Contact extends React.Component {
         <Navbar />
         <ThemeProvider theme={theme}>
 
-          <div style={{ maxWidth: "100vw", paddingTop: 50, paddingBottom: 100}}>
+          <div style={{ maxWidth: "100vw", paddingTop: 50, paddingBottom: 100 }}>
             <Grid justify="center" container>
               <div className={classes.paperCont}>
                 <Grid item xs={12} md={12} style={{ paddingTop: 20 }}>
@@ -203,7 +203,7 @@ class Contact extends React.Component {
                       <DirectionsIcon color="secondary" />&nbsp;Directions
                 </Typography>
                   </Grid>
-                  <Grid justify="center" container style={{ maxWidth: "100vw" ,paddingTop: 30 }}>
+                  <Grid justify="center" container style={{ maxWidth: "100vw", paddingTop: 30 }}>
                     <Map center={coordinates} zoom={scale} width={500} height={300}>
                       <Marker anchor={coordinates} payload={1} />
                     </Map>
@@ -234,7 +234,7 @@ class Contact extends React.Component {
                       Contact us.
                   </Typography>
                   </Grid>
-                  <Grid justify="center" container style={{ paddingTop: 30 }}>
+                  <Grid justify="center" container style={{ paddingTop: 30, paddingLeft: 10, paddingRight: 10 }}>
                     <Typography style={{ fontFamily: "Montserrat, sans-serif", }} color="secondary" variant="h6">
                       Visiting or have something to share with us?
                   </Typography>
@@ -302,7 +302,7 @@ class Contact extends React.Component {
                       </Paper>
 
                       <Grid justify="center" container style={{ paddingTop: 30 }}>
-                        <Typography style={{ fontFamily: "Montserrat, sans-serif", }} color="secondary" variant="h6" style={{ paddingTop: 0, paddingBottom: 20 }}>
+                        <Typography color="secondary" variant="h6" style={{ paddingTop: 0, paddingBottom: 20, fontFamily: "Montserrat, sans-serif", }}>
                           Your message:
                     </Typography>
                       </Grid>
