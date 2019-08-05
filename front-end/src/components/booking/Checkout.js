@@ -85,7 +85,7 @@ const Checkout = (props) => {
   const [orderID, setOrderID] = React.useState("undef");
   const [booked, setBookedData] = React.useState([]);
   const [isLoadingCash, setLoadingCash] = React.useState(false);
-  //const [isLoadingCard, setLoadingCard] = React.useState(false);
+  const [isLoadingCard, setLoadingCard] = React.useState(false);
 
 
   const [transportNeeded, setTransportNeeded] = React.useState(false);
@@ -175,19 +175,21 @@ const Checkout = (props) => {
         onSuccess: (result) => {
           publishToBackend(orderUID, result.transaction_id, 1);
         },
-        onPending: (result) => {
+        on8Pending: (result) => {
           publishToBackend(orderUID, result.transaction_id, 1);
           setPending(true)
         },
-        onError: (result) => { alert('Payment Error, please try again') },
+        onError: (result) => {
+          alert('Payment Error, please try again')
+        },
         onClose: () => {
           alert('Please press the place order button to retry credit card payment');
         },
       })
-
     } else {
       snap.hide();
     }
+    setLoadingCard(false);
   };
 
   //Gets Token from backEnd
@@ -368,7 +370,7 @@ const Checkout = (props) => {
   //Handles Online Payment
   const handleCard = () => {
     if (activeStep === 3) {
-      //setLoadingCard(true);
+      setLoadingCard(true);
       setCashPayment(1);
       callSnap();
       //setLoadingCard(false);
@@ -486,7 +488,7 @@ const Checkout = (props) => {
                       handleCard={handleCard}
                       handleNext={handleNext}
                       transactionStateCash = {isLoadingCash}
-                      //transactionStateCard = {isLoadingCard}
+                      transactionStateCard = {isLoadingCard}
                       stepsLength={steps.length} />
 
                   </React.Fragment>
