@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper'
 import Table from '@material-ui/core/Table';
@@ -66,18 +66,28 @@ const MasterTable = (props) => {
     <Paper className={classes.root}>
       <Table className={classes.table}>
         <TableHead>
-          <TableRow>
-            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Airport Transfer</TableCell>
-            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
-            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
-            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
-          </TableRow>
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-              <TableCell style={{color: 'black'}}>Airport Cars</TableCell>
-              <TableCell style={{color: 'black'}}>{tripDetails.numberAirportCars}</TableCell>
-            </TableRow>
+          {tripDetails.numberAirportCars > 0 ?
+            <React.Fragment>
+              <TableRow>
+                <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Airport Transfer</TableCell>
+                <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+                <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+                <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+                <TableCell style={{ color: 'black', fontSize: '15px' }}>Airport Cars</TableCell>
+                <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberAirportCars}</TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+                <TableCell style={{ color: 'black', fontSize: '15px' }}>Pick-up Information</TableCell>
+                <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.pickUpDetails}</TableCell>
+              </TableRow>
+            </React.Fragment>
+            : null}
           <TableRow>
             <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Transportation within village</TableCell>
             <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
@@ -91,10 +101,10 @@ const MasterTable = (props) => {
             <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Total Vehicles:</TableCell>
           </TableRow>
           <TableRow>
-            <TableCell style={{ color: 'black' }}>{tripDetails.numberCars}</TableCell>
-            <TableCell style={{ color: 'black' }}>{tripDetails.numberVans}</TableCell>
-            <TableCell style={{ color: 'black' }}>{tripDetails.numberBikes}</TableCell>
-            <TableCell style={{ color: 'black' }}>{tripDetails.numberBikes + tripDetails.numberCars + tripDetails.numberVans}</TableCell>
+            <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberCars}</TableCell>
+            <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberVans}</TableCell>
+            <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberBikes}</TableCell>
+            <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberBikes + tripDetails.numberCars + tripDetails.numberVans}</TableCell>
           </TableRow>
         </TableHead>
         <TableHead>
@@ -151,19 +161,21 @@ const MasterTable = (props) => {
             <TableCell style={{ color: 'black' }}></TableCell>
             <TableCell style={{ color: 'black' }}></TableCell>
             <TableCell style={{ color: 'black' }}></TableCell>
-          </TableRow> 
+          </TableRow>
+          {tripDetails.numberAirportCars > 0 ?
             <TableRow>
               <TableCell></TableCell>
               <TableCell></TableCell>
               <TableCell style={{ color: 'blue' }}>Airport Car Total</TableCell>
               <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.airportCarCost)}</TableCell>
             </TableRow>
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell style={{ color: 'blue' }}>Total</TableCell>
-            <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.subTotal)}</TableCell>
-          </TableRow>
+            : null }
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+              <TableCell style={{ color: 'blue' }}>Total</TableCell>
+              <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.subTotal)}</TableCell>
+            </TableRow>
         </TableBody>
       </Table>
     </Paper>
