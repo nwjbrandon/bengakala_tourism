@@ -116,7 +116,7 @@ const MasterTable = (props) => {
                         </TableRow>
                         <TableRow style={{ color: 'black' }}>
                             <TableCell style={{ color: 'black' }} align="center">Airport Car cost</TableCell>
-                            <TableCell style={{ color: 'black' }}>{costData.aiportCarCost}</TableCell>
+                            <TableCell style={{ color: 'black' }}>{costData['airport car']}</TableCell>
                         </TableRow>
                     </TableBody>
                 </Table>
@@ -222,6 +222,14 @@ const MasterTable = (props) => {
                         <TableRow>
                             <TableCell style={{ color: 'blue' }}>Meals total</TableCell>
                             <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.mealPlan)}</TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell style={{ color: 'black' }}>Transport to Airport</TableCell>
+                            <TableCell style={{ color: 'black' }}></TableCell>
+                        </TableRow>
+                        <TableRow>
+                            <TableCell style={{ color: 'blue' }}>Airport Car Total</TableCell>
+                            <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.airportCarCost)}</TableCell>
                         </TableRow>
                         <TableRow>
                             <TableCell ></TableCell>
