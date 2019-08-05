@@ -73,7 +73,41 @@ const MasterTable = (props) => {
             <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Cars</TableCell>
             <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Vans</TableCell>
             <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Motorbikes</TableCell>
+            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Total Vehicles:</TableCell><TableRow><TableRow>
+            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Vehicles Booked </TableCell>
+            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Cars</TableCell>
+            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Vans</TableCell>
+            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Motorbikes</TableCell>
             <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Total Vehicles:</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell style={{ color: 'black' }}>{tripDetails.numberCars}</TableCell>
+            <TableCell style={{ color: 'black' }}>{tripDetails.numberVans}</TableCell>
+            <TableCell style={{ color: 'black' }}>{tripDetails.numberBikes}</TableCell>
+            <TableCell style={{ color: 'black' }}>{tripDetails.numberBikes + tripDetails.numberCars + tripDetails.numberVans}</TableCell>
+          </TableRow>
+            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Vehicles Booked </TableCell>
+            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Cars</TableCell>
+            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Vans</TableCell>
+            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Motorbikes</TableCell>
+            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Total Vehicles:</TableCell>
+          </TableRow>
+          <TableRow>
+            <TableCell style={{ color: 'black' }}>{tripDetails.numberCars}</TableCell>
+            <TableCell style={{ color: 'black' }}>{tripDetails.numberVans}</TableCell>
+            <TableCell style={{ color: 'black' }}>{tripDetails.numberBikes}</TableCell>
+            <TableCell style={{ color: 'black' }}>{tripDetails.numberBikes + tripDetails.numberCars + tripDetails.numberVans}</TableCell>
+          </TableRow>
           </TableRow>
           <TableRow>
             <TableCell style={{ color: 'black' }}>{tripDetails.numberCars}</TableCell>
