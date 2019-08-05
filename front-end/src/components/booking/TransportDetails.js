@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
@@ -18,10 +18,12 @@ const useStyles = makeStyles(theme => ({
         marginBottom: "20"
     },
     label: {
-        color: "white"
+        color: "white",
+        fontFamily: "Montserrat, sans-serif",
     },
     transportLabel: {
-        color: "black"
+        color: "black",
+        fontFamily: "Montserrat, sans-serif",
     }
 }));
 
@@ -39,7 +41,7 @@ const TransportDetailsForm = (props) => {
                 <Grid item xs={12}>
                     <Paper className={classes.root}>
                         <Typography className={classes.transportLabel} variant="h6" gutterBottom>
-                            Please be informed that transportation is being outsourced to other companies and hence is subjected to the price fluctations uncontrolled by us. Payment for transportation will be done when you arrive to bengkala
+                            Please be informed the availability is subject to demand and the payment will be done during your check-in
                         </Typography>
                     </Paper>
                 </Grid>

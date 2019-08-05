@@ -18,6 +18,7 @@ class Background extends Component {
       position: 'relative',
       maxWidth: '100%',
       boxSizing: 'inherit',
+      minHeight: "50%"
     };
     const captionWrap = {
       maxWidth: '500px',
@@ -27,23 +28,28 @@ class Background extends Component {
       flexDirection: 'column',
       justifyContent: 'center',
       textAlign: 'center',
+      fontFamily: "Montserrat, sans-serif",
     };
     const bgCaption = {
       color: '#fff',
       fontSize: '60px',
       margin: '0',
+      fontFamily: "Montserrat, sans-serif",
     };
     const topCaption = {
       color: '#fff',
       fontSize: '20px',
       letterSpacing: '-.02rem',
-      lineHeight: '1'
+      lineHeight: '1',
+      fontFamily: "Montserrat, sans-serif",
+
     };
     const banner = {
       color: '#fff',
       fontSize: '40px',
       letterSpacing: '-.02rem',
-      lineHeight: '1'
+      lineHeight: '1',
+      fontFamily: "Montserrat, sans-serif",
     };
     return (
 
@@ -56,15 +62,15 @@ class Background extends Component {
           <h2 style={bgCaption}>Bengkala</h2>
           <p style={banner}>Explore Kolok and much more!</p>
           <Button
-              variant="contained"
-              size="medium"
-              color="primary"
-              component={Link}
-              to="/booking"
-              style={{
-                marginBottom: 50,
-                backgroundColor: 'teal',
-              }}
+            variant="contained"
+            size="medium"
+            color="primary"
+            component={Link}
+            to="/booking"
+            style={{
+              marginBottom: 50,
+              backgroundColor: 'teal',
+            }}
           >
             Book Now!</Button>
         </div>

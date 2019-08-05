@@ -14,7 +14,8 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(3, 2),
   },
   label: {
-    color: "white"
+    color: "white",
+    fontFamily: "Montserrat, sans-serif",
   }
 }));
 

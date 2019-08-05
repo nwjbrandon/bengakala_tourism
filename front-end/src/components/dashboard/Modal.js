@@ -33,6 +33,8 @@ const Modal = ({
     cash,
     updateTransactionState,
     openModal = false,
+    carsAirport,
+    airportLocation,
 }) => (
         <Dialog
             open={openModal}
@@ -73,6 +75,28 @@ const Modal = ({
                         Cars: {cars} Vans: {van} Motorbikes: {motorbikes}
                     </Typography>
                     <Typography variant="body1" color="textSecondary" component="p">
+                        {
+                        carsAirport === '0' ?
+                            <div>
+                                <Typography variant="body1" color="textSecondary" component="p">
+                                    Number of Vehicles for Airport Pickup: NIL
+                                </Typography>
+                                <Typography variant="body1" color="textSecondary" component="p">
+                                    Location for Airport Pickup: NIL
+                                </Typography>
+                            </div>
+                            :
+                            <div>
+                                <Typography variant="body1" color="textSecondary" component="p">
+                                    Number of Vehicles for Airport Pickup: { carsAirport }
+                                </Typography>
+                                <Typography variant="body1" color="textSecondary" component="p">
+                                    Location for Airport Pickup: { airportLocation }
+                                </Typography>
+                            </div>
+                        }
+                    </Typography>
+                    <Typography variant="body1" color="textSecondary" component="p">
                         Payment Mode: {cash === 0 ? "Pay by Cash" : "Paid through Midtrans"}
                     </Typography>
                     <Typography variant="body1" color="textSecondary" component="p">
@@ -95,7 +119,7 @@ const Modal = ({
               </Button>
                     {
                         cash === 1 ?
-                            <Button onClick={updateTransactionState} color="primary">
+                            <Button onClick={updateTransactionState} disabled={true} color="primary">
                                 Update Transaction State
                             </Button>
                             : ""

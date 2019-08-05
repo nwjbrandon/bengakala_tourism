@@ -4,7 +4,10 @@ import Background from '../../components/home/background.container'
 import Content from '../../components/home/content.container'
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
+import ImageCarousell from '../../components/home/ImageCarousell/ImageCarousell'
 import { seoTags } from '../../assets/data/seo';
+
+
 class App extends Component {
 
   render() {
@@ -18,12 +21,13 @@ class App extends Component {
     return (
       <div>
         <SEO
-          title={ seoTags.home.title }
-          description={ seoTags.home.description }
-          keywords={ seoTags.home.keywords }
+          title={seoTags.home.title}
+          description={seoTags.home.description}
+          keywords={seoTags.home.keywords}
         />
         <Background />
         <Content />
+        <ImageCarousell />
         <SuccessToast />
         <ErrorToast />
       </div>

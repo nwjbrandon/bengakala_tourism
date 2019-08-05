@@ -52,29 +52,13 @@ const Buttons = (props) => {
           Pay by Cash
         </Button>
       }
-      {/*props.transactionStateCard ?
         <Button
           variant="contained"
           color="primary"
           onClick={props.handleCard}
           className={classes.button}
           disabled={true}
-        >
-          <CircularProgress
-            size={20}
-            color='primary'
-            thickness={5}
-            variant='indeterminate'
-          />
-        </Button>
-        : */
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={props.handleCard}
-          className={classes.button}
         >Pay by Credit Card</Button>
-      }
     </div>)
     :
     (<div className={classes.buttons}>
