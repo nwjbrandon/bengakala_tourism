@@ -181,7 +181,7 @@ class TutorialPage extends React.Component {
                                         {title}
                                     </h1>
                                 </div>
-                                <Grid container justify="center" style={{ background: "#21212150", paddingBottom: 30 }}>
+                                <Grid container justify="center" style={{ background: "#21212150", paddingBottom: 30, textAlign: 'justify' }}>
                                     <Grid item xs={12} sm={10}>
                                         {
                                             text ? text.split("\n").map((i, key) => (

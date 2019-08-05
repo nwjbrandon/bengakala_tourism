@@ -17,6 +17,45 @@ const apiClient = new midtransClient.Snap({
   clientKey
 });
 
+// const formatter = new Intl.NumberFormat('en-IDR', {
+//   style: 'currency',
+//   currency: 'IDR',
+//   currencyDisplay: "symbol",
+//   minimumFractionDigits: 0,
+// })
+
+const formatter = new Intl.NumberFormat({
+  style: 'decimal',
+  minimumFractionDigits: 0,
+})
+
+const formatAll = (emailData) => {
+  // const formattedData = Object.keys(emailData).reduce((result, key) => {
+  //   result[key] = formatter.format(emailData[result])
+  //   return result;
+  // }, {});
+  // console.log(formattedData)
+  // return formattedData;
+
+
+  const objectMap = (object, mapFn) => {
+    return Object.keys(object).reduce((result, key) => {
+      result[key] = mapFn(object[key])
+      return result
+    }, {})
+  }
+
+  const newObject = objectMap(emailData, function (value) {
+    return formatter.format(value);
+  })
+
+  console.log(emailData)
+  console.log(newObject)
+
+  return newObject;
+
+}
+
 const writeToDB = async (Data, paymentStat) => {
   const paymentData = {
     uuid: Data.transactionID,
@@ -65,8 +104,8 @@ const send = [
         await sendEmail({
           toEmail: Data.personalDetails.email,
           tripDetails: { ...Data.personalDetails, ...Data.tripDetails },
-          cost: Data.cost,
-          prices: Data.prices,
+          cost: formatAll(Data.cost),
+          prices: formatAll(Data.prices),
           numberOfDays: Data.numberOfDays,
           transactionID: Data.transactionID,
           orderStatus: Data.orderStatus,
@@ -86,8 +125,8 @@ const send = [
             await sendEmail({
               toEmail: Data.personalDetails.email,
               tripDetails: { ...Data.personalDetails, ...Data.tripDetails },
-              cost: Data.cost,
-              prices: Data.prices,
+              cost: formatAll(Data.cost),
+              prices: formatAll(Data.prices),
               numberOfDays: Data.numberOfDays,
               transactionID: Data.transactionID,
               orderStatus: Data.orderStatus,

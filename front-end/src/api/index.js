@@ -57,4 +57,3 @@ export default {
   put: putRequest,
   post: postRequest
 }
-

@@ -192,7 +192,7 @@ class Faq extends React.Component {
                   {Object.keys(data).map((FAQ_TYPE, index) => (
                     index === val ?
                       <div key={index} style={{ paddingTop: 20 }}>
-                        <Grid container justify="center">
+                        <Grid container justify="center" style={{ textAlign: 'justify' }}>
                           <Grid item xs={12} md={8}>
                             <Typography>
                               {
@@ -252,7 +252,7 @@ class Faq extends React.Component {
                     {
                       filteredData.map((datum, index) => (
                         <div key={index} style={{ paddingTop: 20 }}>
-                          <Grid justify="center" container>
+                          <Grid justify="center" container style={{ textAlign: 'justify' }}>
                             <Grid item xs={12} md={8}>
                               <Typography>
                                 <Typography style={{ paddingTop: 20 }}>
