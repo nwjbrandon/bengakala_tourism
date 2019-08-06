@@ -10,6 +10,7 @@ const dateDiffIndays = (date1, date2) => {
 
 
 const CalculationsPost = (data) => {
+    console.log(data)
     const tripData = data.tripDetails;
     const costData = data.cost;
 
@@ -17,12 +18,25 @@ const CalculationsPost = (data) => {
     const femaleSize = new Big(tripData.numberFemales);
     const groupSize = maleSize.add(femaleSize);
 
+    /* Airport transfer calculation */
+    let numAirportCars = 0;
+    let airportCarPrice = 0;
+    let airportCarCost = 0;
+
+    if (tripData.numberAirportCars > 0) {
+        numAirportCars = new Big(tripData.numberAirportCars)
+        airportCarPrice = new Big(costData['airport car'])
+        airportCarCost = numAirportCars.mul(airportCarPrice)
+        console.log(airportCarCost)
+    }
+
     const numOfDays = new Big(dateDiffIndays(tripData.checkIn, tripData.checkOut));
 
     const itemCost = (val) => {
         const bigVal = new Big(val);
         return bigVal.mul(groupSize).mul(numOfDays);
     };
+
     const accommodation = itemCost(costData.accommodation);
 
     let breakfast = new Big(0);
@@ -45,7 +59,7 @@ const CalculationsPost = (data) => {
 
     const mealPlan = breakfast.add(lunch).add(dinner);
 
-    const subTotal = mealPlan.add(accommodation);
+    const subTotal = mealPlan.add(accommodation).add(airportCarCost);
 
     const packageCost = {
         accommodation: Number(accommodation),
@@ -53,6 +67,7 @@ const CalculationsPost = (data) => {
         lunch: Number(lunch),
         dinner: Number(dinner),
         mealPlan: Number(mealPlan),
+        airportCarCost: Number(airportCarCost),
         subTotal: Number(subTotal),
     };
 

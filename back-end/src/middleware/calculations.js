@@ -1,6 +1,5 @@
 import Big from 'big.js';
 
-//Calculates difference in days
 const dateDiffIndays = (date1, date2) => {
     const dt1 = new Date(date1);
     const dt2 = new Date(date2);
@@ -9,26 +8,35 @@ const dateDiffIndays = (date1, date2) => {
             dt1.getDate())) / (1000 * 60 * 60 * 24));
 };
 
-//Calculates Costs 
-const calculationsPost = (data) => {
 
-    const tripDetails = data.tripDetails;
-
+const CalculationsPost = (data) => {
+    console.log(data)
+    const tripData = data.tripDetails;
     const costData = data.cost;
-    console.log("TRIPDETAILS")
-    console.log(tripDetails)
-    console.log(costData)
 
-    const maleSize = new Big(tripDetails.numberMales);
-    const femaleSize = new Big(tripDetails.numberFemales);
+    const maleSize = new Big(tripData.numberMales);
+    const femaleSize = new Big(tripData.numberFemales);
     const groupSize = maleSize.add(femaleSize);
 
-    const numOfDays = new Big(dateDiffIndays(tripDetails.checkIn, tripDetails.checkOut));
+    /* Airport transfer calculation */
+    let numAirportCars = 0;
+    let airportCarPrice = 0;
+    let airportCarCost = 0;
+
+    if (tripData.numberAirportCars > 0) {
+        numAirportCars = new Big(tripData.numberAirportCars)
+        airportCarPrice = new Big(costData['airport car'])
+        airportCarCost = numAirportCars.mul(airportCarPrice)
+        console.log(airportCarCost)
+    }
+
+    const numOfDays = new Big(dateDiffIndays(tripData.checkIn, tripData.checkOut));
 
     const itemCost = (val) => {
         const bigVal = new Big(val);
         return bigVal.mul(groupSize).mul(numOfDays);
     };
+
     const accommodation = itemCost(costData.accommodation);
 
     let breakfast = new Big(0);
@@ -36,13 +44,13 @@ const calculationsPost = (data) => {
     let dinner = new Big(0);
 
     const calcMeal = () => {
-        if (tripDetails.breakfast) {
+        if (tripData.breakfast) {
             breakfast = itemCost(costData.breakfast);
         }
-        if (tripDetails.lunch) {
+        if (tripData.lunch) {
             lunch = itemCost(costData.lunch);
         }
-        if (tripDetails.dinner) {
+        if (tripData.dinner) {
             dinner = itemCost(costData.dinner);
         }
     }
@@ -51,7 +59,7 @@ const calculationsPost = (data) => {
 
     const mealPlan = breakfast.add(lunch).add(dinner);
 
-    const subTotal = mealPlan.add(accommodation);
+    const subTotal = mealPlan.add(accommodation).add(airportCarCost);
 
     const packageCost = {
         accommodation: Number(accommodation),
@@ -59,9 +67,11 @@ const calculationsPost = (data) => {
         lunch: Number(lunch),
         dinner: Number(dinner),
         mealPlan: Number(mealPlan),
+        airportCarCost: Number(airportCarCost),
         subTotal: Number(subTotal),
     };
 
-    return { prices: { ...packageCost }, numberOfDays: Number(numOfDays) }
+    return { price: packageCost, numberOfDays: Number(numOfDays) }
 }
-export default calculationsPost
+export default CalculationsPost
+
