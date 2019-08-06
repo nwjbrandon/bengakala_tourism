@@ -83,7 +83,7 @@ const TransportDetailsForm = (props) => {
                         <Grid container spacing={0}>
                             <FormControlLabel
                                 control={
-                                    <Checkbox checked={props.airportTransportNeeded} onChange={() => {
+                                    <Checkbox disabled checked={props.airportTransportNeeded} onChange={() => {
                                         props.onAirportCarChange(0);
                                         props.setAirportNeeded(!props.airportTransportNeeded)
                                     }} value="checkedA" />
