@@ -46,7 +46,7 @@ class Accomodation extends React.Component {
       minHeight: "100vh",
       height: "auto",
       margin: 0,
-      backgroundImage: `url(${bg})`,
+      backgroundImage: `url('https://i.postimg.cc/fb2fpXRQ/IMG-0294.jpg')`,
       maxWidth: "100%",
       backgroundSize: 'cover',
       backgroundPosition: 'center',

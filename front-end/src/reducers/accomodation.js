@@ -36,7 +36,8 @@ const initialState = {
     breakfast: 20000,
     lunch: 20000,
     dinner: 20000,
-    "airport car": 100000
+    "airport car": 100000,
+    entrance: 100000,
   },
   price: {
     accommodation: 0,

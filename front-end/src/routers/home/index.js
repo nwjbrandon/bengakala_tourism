@@ -10,6 +10,8 @@ import { seoTags } from '../../assets/data/seo';
 
 class App extends Component {
 
+
+
   render() {
     const isChrome = !!window.chrome && (!!window.chrome.webstore || !!window.chrome.runtime);
     const isFirefox = typeof InstallTrigger !== 'undefined';

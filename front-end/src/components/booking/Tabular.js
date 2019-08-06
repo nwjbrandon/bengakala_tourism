@@ -156,26 +156,29 @@ const MasterTable = (props) => {
             <TableCell style={{ color: 'blue' }}>Meals total</TableCell>
             <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.mealPlan)}</TableCell>
           </TableRow>
-          <TableRow style={{ backgroundColor: '' }}>
-            <TableCell style={{ color: 'black' }}>Transport to Airport</TableCell>
-            <TableCell style={{ color: 'black' }}></TableCell>
-            <TableCell style={{ color: 'black' }}></TableCell>
-            <TableCell style={{ color: 'black' }}></TableCell>
-          </TableRow>
+
           {tripDetails.numberAirportCars > 0 ?
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-              <TableCell style={{ color: 'blue' }}>Airport Car Total</TableCell>
-              <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.airportCarCost)}</TableCell>
-            </TableRow>
-            : null }
-            <TableRow>
-              <TableCell></TableCell>
-              <TableCell></TableCell>
-              <TableCell style={{ color: 'blue' }}>Total</TableCell>
-              <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.subTotal)}</TableCell>
-            </TableRow>
+            <React.Fragment>
+              <TableRow style={{ backgroundColor: '' }}>
+                <TableCell style={{ color: 'black' }}>Transport to Airport</TableCell>
+                <TableCell style={{ color: 'black' }}></TableCell>
+                <TableCell style={{ color: 'black' }}></TableCell>
+                <TableCell style={{ color: 'black' }}></TableCell>
+              </TableRow>
+              <TableRow>
+                <TableCell></TableCell>
+                <TableCell></TableCell>
+                <TableCell style={{ color: 'blue' }}>Airport Car Total</TableCell>
+                <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.airportCarCost)}</TableCell>
+              </TableRow>
+            </React.Fragment>
+            : null}
+          <TableRow>
+            <TableCell></TableCell>
+            <TableCell></TableCell>
+            <TableCell style={{ color: 'blue' }}>Total</TableCell>
+            <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.subTotal)}</TableCell>
+          </TableRow>
         </TableBody>
       </Table>
     </Paper>

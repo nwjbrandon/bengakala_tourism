@@ -115,6 +115,7 @@ const Checkout = (props) => {
         costObj[keyval] = item[Object.keys(item)[0].toString()];
       });
       props.updateCost(costObj);
+      console.log("COST BRO", costObj);
 
       props.updateDates(excludeDates);
       setBookedData([...result.data.booked]);
