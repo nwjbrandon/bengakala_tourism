@@ -86,7 +86,7 @@ const Checkout = (props) => {
   const [orderID, setOrderID] = React.useState("undef");
   const [booked, setBookedData] = React.useState([]);
   const [isLoadingCash, setLoadingCash] = React.useState(false);
-  //const [isLoadingCard, setLoadingCard] = React.useState(false);
+  const [isLoadingCard, setLoadingCard] = React.useState(false);
 
   const [transportNeeded, setTransportNeeded] = React.useState(false);
   const [airportTransportNeeded, setAirportTransportNeeded] = React.useState(false);
@@ -157,7 +157,7 @@ const Checkout = (props) => {
 
       setActiveStep(activeStep + 1);
       setLoadingCash(false);
-      //setLoadingCard(false);
+      setLoadingCard(false);
     });
 
   };
@@ -369,10 +369,9 @@ const Checkout = (props) => {
   //Handles Online Payment
   const handleCard = () => {
     if (activeStep === 3) {
-      //setLoadingCard(true);
+      setLoadingCard(true);
       setCashPayment(1);
       callSnap();
-      //setLoadingCard(false);
     }
   };
 
@@ -487,8 +486,8 @@ const Checkout = (props) => {
                       handleCash={handleCash}
                       handleCard={handleCard}
                       handleNext={handleNext}
-                      transactionStateCash = {isLoadingCash}
-                      //transactionStateCard = {isLoadingCard}
+                      transactionStateCash={isLoadingCash}
+                      transactionStateCard={isLoadingCard}
                       stepsLength={steps.length} />
 
                   </React.Fragment>

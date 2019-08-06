@@ -34,6 +34,7 @@
     "react-animated-slider": "^1.1.4",
     "react-calendar": "^2.19.0",
     "react-calendar-heatmap": "^1.8.0",
+    "react-device-detect": "^1.7.5",
     "react-dom": "^16.8.6",
     "react-google-charts": "^3.0.13",
     "react-helmet": "^5.2.1",
