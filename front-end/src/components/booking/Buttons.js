@@ -52,13 +52,36 @@ const Buttons = (props) => {
           Pay by Cash
         </Button>
       }
+
+      {props.transactionStateCard ?
+        //render spinner
         <Button
           variant="contained"
           color="primary"
           onClick={props.handleCard}
           className={classes.button}
           disabled={true}
+        >
+          <CircularProgress
+            size={20}
+            color='primary'
+            thickness={5}
+            variant='indeterminate'
+          />
+        </Button>
+        :
+        //render words
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={props.handleCard}
+          className={classes.button}
+          disabled={false}
         >Pay by Credit Card</Button>
+      }
+
+
+
     </div>)
     :
     (<div className={classes.buttons}>
