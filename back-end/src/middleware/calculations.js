@@ -30,6 +30,8 @@ const CalculationsPost = (data) => {
         console.log(airportCarCost)
     }
 
+    const entranceFee = new Big(costData.entrance)
+
     const numOfDays = new Big(dateDiffIndays(tripData.checkIn, tripData.checkOut));
 
     const itemCost = (val) => {
@@ -59,7 +61,8 @@ const CalculationsPost = (data) => {
 
     const mealPlan = breakfast.add(lunch).add(dinner);
 
-    const subTotal = mealPlan.add(accommodation).add(airportCarCost);
+    const subTotal = mealPlan.add(accommodation).add(airportCarCost).add(entranceFee);
+
 
     const packageCost = {
         accommodation: Number(accommodation),
@@ -69,6 +72,7 @@ const CalculationsPost = (data) => {
         mealPlan: Number(mealPlan),
         airportCarCost: Number(airportCarCost),
         subTotal: Number(subTotal),
+        entrance: Number(entranceFee)
     };
 
     return { price: packageCost, numberOfDays: Number(numOfDays) }

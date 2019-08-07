@@ -6,6 +6,8 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
+import TouchRipple from '@material-ui/core/ButtonBase/TouchRipple';
+import Typography from '@material-ui/core/Typography'
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -63,125 +65,155 @@ const MasterTable = (props) => {
   })
 
   return (
-    <Paper className={classes.root}>
-      <Table className={classes.table}>
-        <TableHead>
-          {tripDetails.numberAirportCars > 0 ?
-            <React.Fragment>
-              <TableRow>
-                <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Airport Transfer</TableCell>
-                <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
-                <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
-                <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-                <TableCell style={{ color: 'black', fontSize: '15px' }}>Airport Cars</TableCell>
-                <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberAirportCars}</TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-                <TableCell style={{ color: 'black', fontSize: '15px' }}>Pick-up Information</TableCell>
-                <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.pickUpDetails}</TableCell>
-              </TableRow>
-            </React.Fragment>
-            : null}
-          <TableRow>
-            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Transportation within village</TableCell>
-            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
-            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
-            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Cars</TableCell>
-            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Vans</TableCell>
-            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Motorbikes</TableCell>
-            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Total Vehicles:</TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberCars}</TableCell>
-            <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberVans}</TableCell>
-            <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberBikes}</TableCell>
-            <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberBikes + tripDetails.numberCars + tripDetails.numberVans}</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableHead>
-          <TableRow>
-            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Number of days of stay: </TableCell>
-            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>{formatter.format(numOfDays)}</TableCell>
-            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
-            <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
-          </TableRow>
-          <TableRow>
-            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Type</TableCell>
-            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>No. of people</TableCell>
-            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Unit Price per day (IDR)</TableCell>
-            <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Price (IDR)</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {homeRow.map((row, index) => (
-            <TableRow key={index}>
-              <TableCell style={{ color: 'black' }}>{row.desc}</TableCell>
-              <TableCell style={{ color: 'black' }}>{formatter.format(row.qty)}</TableCell>
-              <TableCell style={{ color: 'black' }}>{formatter.format(row.unit)}</TableCell>
-              <TableCell style={{ color: 'black' }}>{formatter.format(row.price)}</TableCell>
+    <React.Fragment>
+      {tripDetails.numberAirportCars > 0 ?
+        <div style={{ marginTop: '20px' }}>
+          <Paper>
+            <Typography variant='h6'>Airport Cars requested: {tripDetails.numberAirportCars}</Typography>
+            <Typography variant='h6'>Pick-up Information: {tripDetails.pickUpDetails}</Typography>
+          </Paper>
+        </div>
+        : null
+      }
+      <Paper className={classes.root}>
+        <Table className={classes.table}>
+          <TableHead>
+            {/* {tripDetails.numberAirportCars > 0 ?
+              <React.Fragment>
+                <TableRow>
+                  <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Airport Transfer</TableCell>
+                  <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+                  <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+                  <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  <TableCell style={{ color: 'black', fontSize: '15px' }}>Airport Cars</TableCell>
+                  <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberAirportCars}</TableCell>
+                </TableRow>
+                {/* <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  <TableCell style={{ color: 'black', fontSize: '15px' }}>Pick-up Information</TableCell>
+                  <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.pickUpDetails}</TableCell>
+                </TableRow> */}
+            {/* </React.Fragment> */}
+            {/* : null} */}
+            <TableRow>
+              <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Transportation within village</TableCell>
+              <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+              <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+              <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
             </TableRow>
-          ))}
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell style={{ color: 'blue' }}>Accommodation total</TableCell>
-            <TableCell style={{ color: 'blue' }}>{formatter.format(homeRow[0].price)}</TableCell>
-          </TableRow>
-          <TableRow style={{ backgroundColor: '' }}>
-            <TableCell style={{ color: 'black' }}>Meals</TableCell>
-            <TableCell style={{ color: 'black' }}></TableCell>
-            <TableCell style={{ color: 'black' }}></TableCell>
-            <TableCell style={{ color: 'black' }}></TableCell>
-          </TableRow>
-          {mealRow.map((row, index) => (
-            <TableRow key={index} style={{ color: 'black' }}>
-              <TableCell style={{ color: 'black' }} align="center">{row.desc}</TableCell>
-              <TableCell style={{ color: 'black' }}>{formatter.format(row.qty)}</TableCell>
-              <TableCell style={{ color: 'black' }}>{formatter.format(row.unit)}</TableCell>
-              <TableCell style={{ color: 'black' }}>{formatter.format(row.price)}</TableCell>
+            <TableRow>
+              <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Cars</TableCell>
+              <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Vans</TableCell>
+              <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Motorbikes</TableCell>
+              <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Total Vehicles:</TableCell>
             </TableRow>
-          ))}
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell style={{ color: 'blue' }}>Meals total</TableCell>
-            <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.mealPlan)}</TableCell>
-          </TableRow>
+            <TableRow>
+              <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberCars}</TableCell>
+              <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberVans}</TableCell>
+              <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberBikes}</TableCell>
+              <TableCell style={{ color: 'black', fontSize: '15px' }}>{tripDetails.numberBikes + tripDetails.numberCars + tripDetails.numberVans}</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableHead>
+            <TableRow>
+              <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>Number of days of stay: </TableCell>
+              <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}>{formatter.format(numOfDays)}</TableCell>
+              <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+              <TableCell style={{ backgroundColor: "#212121", fontSize: "15px", color: '#ffc107' }}></TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Type</TableCell>
+              <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>No. of people</TableCell>
+              <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Unit Price per day (IDR)</TableCell>
+              <TableCell style={{ backgroundColor: "#616161", fontSize: "15px", color: 'white' }}>Price (IDR)</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {homeRow.map((row, index) => (
+              <TableRow key={index}>
+                <TableCell style={{ color: 'black' }}>{row.desc}</TableCell>
+                <TableCell style={{ color: 'black' }}>{formatter.format(row.qty)}</TableCell>
+                <TableCell style={{ color: 'black' }}>{formatter.format(row.unit)}</TableCell>
+                <TableCell style={{ color: 'black' }}>{formatter.format(row.price)}</TableCell>
+              </TableRow>
+            ))}
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+              <TableCell style={{ color: 'blue' }}>Accommodation total</TableCell>
+              <TableCell style={{ color: 'blue' }}>{formatter.format(homeRow[0].price)}</TableCell>
+            </TableRow>
+            <TableRow style={{ backgroundColor: '' }}>
+              <TableCell style={{ color: 'black' }}>Meals</TableCell>
+              <TableCell style={{ color: 'black' }}></TableCell>
+              <TableCell style={{ color: 'black' }}></TableCell>
+              <TableCell style={{ color: 'black' }}></TableCell>
+            </TableRow>
+            {mealRow.map((row, index) => (
+              <TableRow key={index} style={{ color: 'black' }}>
+                <TableCell style={{ color: 'black' }} align="center">{row.desc}</TableCell>
+                <TableCell style={{ color: 'black' }}>{formatter.format(row.qty)}</TableCell>
+                <TableCell style={{ color: 'black' }}>{formatter.format(row.unit)}</TableCell>
+                <TableCell style={{ color: 'black' }}>{formatter.format(row.price)}</TableCell>
+              </TableRow>
+            ))}
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+              <TableCell style={{ color: 'blue' }}>Meals total</TableCell>
+              <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.mealPlan)}</TableCell>
+            </TableRow>
 
-          {tripDetails.numberAirportCars > 0 ?
-            <React.Fragment>
-              <TableRow style={{ backgroundColor: '' }}>
-                <TableCell style={{ color: 'black' }}>Transport to Airport</TableCell>
-                <TableCell style={{ color: 'black' }}></TableCell>
-                <TableCell style={{ color: 'black' }}></TableCell>
-                <TableCell style={{ color: 'black' }}></TableCell>
-              </TableRow>
-              <TableRow>
-                <TableCell></TableCell>
-                <TableCell></TableCell>
-                <TableCell style={{ color: 'blue' }}>Airport Car Total</TableCell>
-                <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.airportCarCost)}</TableCell>
-              </TableRow>
-            </React.Fragment>
-            : null}
-          <TableRow>
-            <TableCell></TableCell>
-            <TableCell></TableCell>
-            <TableCell style={{ color: 'blue' }}>Total</TableCell>
-            <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.subTotal)}</TableCell>
-          </TableRow>
-        </TableBody>
-      </Table>
-    </Paper>
+            <TableRow style={{ backgroundColor: '' }}>
+              <TableCell style={{ color: 'black' }}>Miscellaneous Fees</TableCell>
+              <TableCell style={{ color: 'black' }}></TableCell>
+              <TableCell style={{ color: 'black' }}></TableCell>
+              <TableCell style={{ color: 'black' }}></TableCell>
+            </TableRow>
+            <TableRow style={{ color: 'black' }}>
+              <TableCell style={{ color: 'black' }} align="center">Entrance Fee</TableCell>
+              <TableCell style={{ color: 'black' }}></TableCell>
+              <TableCell style={{ color: 'black' }}></TableCell>
+              <TableCell style={{ color: 'black' }}>{formatter.format(costData.entrance)}</TableCell>
+            </TableRow>
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+              <TableCell style={{ color: 'blue' }}>Miscellaneous total</TableCell>
+              <TableCell style={{ color: 'blue' }}>{formatter.format(costData.entrance)}</TableCell>
+            </TableRow>
+
+            {tripDetails.numberAirportCars > 0 ?
+              <React.Fragment>
+                <TableRow style={{ backgroundColor: '' }}>
+                  <TableCell style={{ color: 'black' }}>Transport to Airport</TableCell>
+                  <TableCell style={{ color: 'black' }}></TableCell>
+                  <TableCell style={{ color: 'black' }}></TableCell>
+                  <TableCell style={{ color: 'black' }}></TableCell>
+                </TableRow>
+                <TableRow>
+                  <TableCell></TableCell>
+                  <TableCell></TableCell>
+                  <TableCell style={{ color: 'blue' }}>Airport Car Total</TableCell>
+                  <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.airportCarCost)}</TableCell>
+                </TableRow>
+              </React.Fragment>
+              : null}
+            <TableRow>
+              <TableCell></TableCell>
+              <TableCell></TableCell>
+              <TableCell style={{ color: 'blue' }}>Total</TableCell>
+              <TableCell style={{ color: 'blue' }}>{formatter.format(calcData.subTotal)}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </Paper>
+    </React.Fragment>
   )
 }
 
