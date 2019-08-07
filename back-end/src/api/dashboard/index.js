@@ -33,7 +33,13 @@ const dashboardGet = [
       };
     });
     const transaction = _.orderBy(transactionData, ['createdAt'], ['desc']);
-    const listOfDates = _.flatten(_.map(transactions, t => eachDay(t.dateFrom, t.dateTo)));
+    const listOfDates = _.flatten(_.map(transactions, (t) => {
+      const totalDates = [];
+      const totalCounts = _.toNumber(t.males) + _.toNumber(t.females);
+      const dates = eachDay(t.dateFrom, t.dateTo);
+      _.times(totalCounts, () => totalDates.push(dates));
+      return _.flatten(totalDates);
+    }));
     const calendarHeatMap = _.countBy(listOfDates);
     return res.json({
       data: {
