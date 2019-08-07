@@ -21,6 +21,7 @@ import { Element } from 'react-scroll';
 import SEO from "../../components/seo";
 import { seoTags } from "../../assets/data/seo";
 import bg from '../../assets/img/bgimg4.jpg'
+const bg2 = 'https://i.postimg.cc/C57wSBSC/IMG-0140.jpg'
 const styles = () => ({
     root: {
         flexGrow: 1,
@@ -30,7 +31,7 @@ const styles = () => ({
         minHeight: "100vh",
         height: "auto",
         margin: 0,
-        backgroundImage: `url(${bg})`,
+        backgroundImage: `url(${bg2})`,
         maxWidth: "100%",
         backgroundSize: 'cover',
         backgroundPosition: 'center',

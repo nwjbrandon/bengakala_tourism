@@ -15,22 +15,28 @@ import Divider from '@material-ui/core/Divider'
 import bg from '../../assets/img/bgimg4.jpg'
 import SEO from "../../components/seo";
 import { seoTags } from "../../assets/data/seo";
+const bg2 = 'https://i.postimg.cc/HxYnb2J1/IMG-8495-1.jpg'
 
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundImage: `url(${bg})`,
-    backgroundSize: 'cover',
+    // backgroundImage: `url(${bg2})`,
+    // backgroundSize: 'cover',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundPosition: 'fixed',
-    backgroundRepeat: 'no-repeat',
+    // padding: 0,
+    // backgroundPosition: 'fixed',
+    // backgroundRepeat: 'space'
   },
   searchBar: {
     padding: 0,
-
+    backgroundImage: `url(${bg2})`,
+     backgroundSize: '100% auto',
+    backgroundPosition: 'fixed',
+     backgroundRepeat: 'no-repeat',
+    //  marginTop: '0'
   },
   searchBarItems: {
     height: "100%",
@@ -118,8 +124,8 @@ class Faq extends React.Component {
           description={seoTags.faq.description}
           keywords={seoTags.faq.keywords}
         />
-        <Navbar />
-        <div >
+        <Navbar style={{marginBottom: 0}}/>
+        <div>
           <div className={classes.searchBar}>
             <div className={classes.searchBarItems}>
               <Grid justify="center" container spacing={3}>
