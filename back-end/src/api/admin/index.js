@@ -1,9 +1,17 @@
 import { wrapAsync } from '../../middleware/errorHandling';
+import db from '../../storage/db';
+import { TABLE_ADMINISTRATOR } from '../../storage/tableName';
 
 // logs the user in
 const loginAdmin = [
   wrapAsync(async (req, res) => {
     req.session.key = req.body.email;
+    const { email } = req.body;
+    const today = new Date();
+    const loginActivityDate = `${today.getFullYear()}-${today.getMonth() + 1}-${today.getDay()}`;
+    const loginActivityTime = `${today.getHours()}:${today.getMinutes()}:${today.getSeconds()}`;
+    const loginActivity = `${loginActivityDate}T${loginActivityTime}`;
+    await db.updateData(TABLE_ADMINISTRATOR, { loginActivity }, { email });
     return res.json({ data: 'success' });
   }),
 ];
