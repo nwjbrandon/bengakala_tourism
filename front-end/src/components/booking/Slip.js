@@ -43,7 +43,7 @@ const App = (props) => {
 
   return (
     <div className='flex-center container medium-border-surround'>
-      <h1 style={{ fontFamily: "Montserrat, sans-serif",color: "white" }}>
+      <h1 style={{ fontFamily: "Montserrat, sans-serif", color: "white" }}>
         Here's your Order
         </h1>
       <div>
@@ -61,6 +61,29 @@ const App = (props) => {
             : <MasterTableMobile tripDetails={props.tripDetails} costData={props.cost} calcData={props.price} />
           }
         </div>
+        <Paper style={{ marginTop: 10, padding: 10 }}>
+          <Typography align="left" style={{ fontSize: "10px", fontStyle: "bold" }} variant="h3">
+            Disclaimer:
+          </Typography>
+          <Typography align="left" style={{ fontSize: "10px" }} variant="h6">
+            1. For cancellations and failure to show-up, no refunds will be entertained.
+          </Typography>
+          <Typography align="left" style={{ fontSize: "10px" }} variant="h6">
+            2.	For wrong input of information/special requests, please contact us via the website with your transaction number.
+          </Typography>
+          <Typography align="left" style={{ fontSize: "10px" }} variant="h6">
+            3.	Please note that all Special Requests are subject to availability and additional charges may apply.
+          </Typography>
+          <Typography align="left" style={{ fontSize: "10px" }} variant="h6">
+            4.	Your card issuer may charge you a foreign transaction fee.
+          </Typography>
+          <Typography align="left" style={{ fontSize: "10px" }} variant="h6">
+            5.	Bengkala is a typical village, hotel standard facilities and standardised amenities should not be expected. Homes may differ as all guests will be staying in the villagers’ houses.
+          </Typography>
+        </Paper>
+
+
+
       </div>
     </div>
   );
