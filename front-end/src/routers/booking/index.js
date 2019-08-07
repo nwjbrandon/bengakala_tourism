@@ -16,6 +16,8 @@ import { green } from '@material-ui/core/colors';
 
 import { createMuiTheme } from '@material-ui/core/styles';
 
+const bg2 = ' https://i.postimg.cc/mDh2wtrD/IMG-0847.jpg'
+
 
 const theme = createMuiTheme({
   palette: {
@@ -46,7 +48,7 @@ class Accomodation extends React.Component {
       minHeight: "100vh",
       height: "auto",
       margin: 0,
-      backgroundImage: `url('https://i.postimg.cc/fb2fpXRQ/IMG-0294.jpg')`,
+      backgroundImage: `url(${bg2})`,
       maxWidth: "100%",
       backgroundSize: 'cover',
       backgroundPosition: 'center',
