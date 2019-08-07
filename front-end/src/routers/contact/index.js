@@ -191,7 +191,7 @@ class Contact extends React.Component {
                 </Typography>
                   </Grid>
                   <Grid justify="center" container style={{ paddingTop: 20 }}>
-                    <Typography style={{ fontFamily: "Montserrat, sans-serif", }} variant="h6">
+                    <Typography style={{ fontFamily: "Montserrat, sans-serif", }}  color="secondary" variant="h6">
                       {data['Hours'] ?
                         data['Hours'].split("\n").map((i, key) => (
                           <div key={key}>{i}</div>)) : <div />
