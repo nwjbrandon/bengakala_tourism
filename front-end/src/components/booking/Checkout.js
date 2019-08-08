@@ -236,12 +236,13 @@ const Checkout = (props) => {
 
     const checkOut = new Date(props.tripDetails.checkOut);
 
-    checkOut.setTime(checkIn.getTime());
+    checkOut.setHours(0,0,0);
+    checkIn.setHours(0,0,0);
 
     const fallswithin = booked.filter((item) => {
       const itemDate = new Date(item.date);
 
-      itemDate.setTime(checkIn.getTime());
+      itemDate.setHours(0,0,0);
 
       return (itemDate >= checkIn && itemDate <= checkOut);
     });
