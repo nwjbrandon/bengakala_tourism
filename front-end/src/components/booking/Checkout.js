@@ -178,19 +178,21 @@ const Checkout = (props) => {
         onSuccess: (result) => {
           publishToBackend(orderUID, result.transaction_id, 1);
         },
-        onPending: (result) => {
+        on8Pending: (result) => {
           publishToBackend(orderUID, result.transaction_id, 1);
           setPending(true)
         },
-        onError: (result) => { alert('Payment Error, please try again') },
+        onError: (result) => {
+          alert('Payment Error, please try again')
+        },
         onClose: () => {
           alert('Please press the place order button to retry credit card payment');
         },
       })
-
     } else {
       snap.hide();
     }
+    setLoadingCard(false);
   };
 
   //Gets Token from backEnd

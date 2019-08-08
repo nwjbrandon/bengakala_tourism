@@ -21,13 +21,14 @@ const bg2 = 'https://i.postimg.cc/y8sM1r2K/IMG-8495.jpg'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundImage: `url(${bg2})`,
-    backgroundSize: 'cover',
+    background: "#FFC107",
+    // backgroundImage: `url(${bg2})`,
+    // backgroundSize: 'cover',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    backgroundPosition: 'fixed',
-    backgroundRepeat: 'no-repeat',
+    // backgroundPosition: 'fixed',
+    // backgroundRepeat: 'no-repeat',
   },
   searchBar: {
     padding: 0,
