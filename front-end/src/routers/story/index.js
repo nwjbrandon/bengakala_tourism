@@ -147,7 +147,7 @@ class Story extends React.Component {
                           }
                         </Grid>
                       </Grid>
-                      <Grid container justify="center" style={{ textAlign: 'justify'}}>
+                      <Grid container justify="center" style={{ textAlign: 'justify' }}>
                         <Grid item xs={12} sm={10}>
                           {
                             story.text ? story.text.split("\n").map((i, key) => (
@@ -174,8 +174,8 @@ class Story extends React.Component {
                 </Typography>
                 </Grid>
                 {
-                  latestStories.map(stories => (
-                    <Grid container justify="center" spacing={2}>
+                  latestStories.map((stories, index) => (
+                    <Grid key={index} container justify="center" spacing={2}>
                       <Grid item xs={12} sm={8} md={10}>
                         <Grid container justify="center">
                           <Card className={classes.card}>

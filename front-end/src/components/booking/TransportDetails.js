@@ -78,7 +78,7 @@ const TransportDetailsForm = (props) => {
                     : null
 
                 }
-                <Grid item xs={12}>
+                {/*<Grid item xs={12}>
                     <Paper className={classes.root}>
                         <Grid container spacing={0}>
                             <FormControlLabel
@@ -92,22 +92,22 @@ const TransportDetailsForm = (props) => {
                             />
                         </Grid>
                     </Paper>
-                </Grid>
+                            </Grid>*/}
 
-                {props.airportTransportNeeded ?
+                {/*props.airportTransportNeeded ?
 
                     <TransportSelect
                         airport={true}
                         numberAirportCars={props.tripDetails.numberAirportCars}
                         airportCarChanged={(e) => props.onAirportCarChange(e.target.value)} />
 
-                    : null
+                    : null*/
 
                 }
 
-                {props.airportTransportNeeded ?
+                {/*props.airportTransportNeeded ?
                     <PickupDetails onChangeHandler={(e) => props.onPickUpChange(e.target.value)} data={props.tripDetails.pickUpDetails} />
-                    : null
+                    : null*/
 
                 }
 

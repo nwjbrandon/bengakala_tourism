@@ -10,7 +10,7 @@ const ImageCarousell = (props) => {
 
     const [bookingImages, setBookingImages] = React.useState([]);
 
-    const children = bookingImages.map(i => <ImageItem {...i} />)
+    const children = bookingImages.map((i , index )=> <ImageItem key = {index} {...i} />)
 
     const changeActiveItem = (activeItemIndex) => setActiveItemIndex(activeItemIndex);
 
@@ -66,6 +66,7 @@ const ImageCarousell = (props) => {
                     requestToChangeActive={changeActiveItem}
                     activeItemIndex={activeItemIndex}
                     activePosition={'center'}
+                    width= "auto"
 
                     chevronWidth={24}
                     rightChevron={[

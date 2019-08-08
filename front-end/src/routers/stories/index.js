@@ -103,8 +103,8 @@ class Attraction extends React.Component {
         <div style={{ padding: '10px' }}>
           <Grid justify="center" container spacing={3}>
             {
-              pageStories.map(item => (
-                <Grid item xs={12} md={6}>
+              pageStories.map((item, index) => (
+                <Grid key={index} item xs={12} md={6}>
                   <Card className={classes.card} key={item.title}>
                     <CardActionArea component={Link} to={`/story/s/${item.link}`}>
                       <MyCard src={item.imgUrl} date={dateFnsFormat(item.createdAt, 'YYYY/MM/DD')} title={item.title} summary={item.summary} />
