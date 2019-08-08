@@ -69,15 +69,15 @@ const Buttons = (props) => {
             variant='indeterminate'
           />
         </Button>
-        :
+        : null
         //render words
-        <Button
+        /*<Button
           variant="contained"
           color="primary"
           onClick={props.handleCard}
           className={classes.button}
           disabled={false}
-        >Pay by Credit Card</Button>
+        >Pay by Credit Card</Button>*/
       }
 
 
