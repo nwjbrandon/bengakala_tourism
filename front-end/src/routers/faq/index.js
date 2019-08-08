@@ -22,7 +22,7 @@ const styles = theme => ({
   root: {
     flexGrow: 1,
     backgroundImage: `url(${bg2})`,
-    backgroundSize: 'contain',
+    backgroundSize: 'cover',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
