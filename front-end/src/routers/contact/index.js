@@ -27,7 +27,7 @@ import _sortBy from 'lodash/sortBy';
 import { ThemeProvider } from '@material-ui/styles';
 import { green } from '@material-ui/core/colors';
 import { createMuiTheme } from '@material-ui/core/styles';
-const bg = 'https://i.postimg.cc/MTcWxrN5/IMG-1033.jpg';
+const bg = 'https://i.postimg.cc/SxFBN0yT/IMG-0357.jpg';
 const styles = theme => ({
   root: {
     flexGrow: 'initial',
@@ -37,7 +37,7 @@ const styles = theme => ({
     backgroundImage: `url(${bg})`,
     // maxWidth: "100%",
     backgroundSize: 'cover',
-    // // backgroundPosition: 'center',
+    backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
     // position: 'relative',
   },
@@ -153,7 +153,7 @@ class Contact extends React.Component {
         <ThemeProvider theme={theme}>
 
           <div style={{ maxWidth: "100vw", paddingTop: 50, paddingBottom: 100  }}>
-            <Grid justify="left" container>
+            <Grid justify="center" container>
               <div className={classes.paperCont}>
                 <Grid item xs={12} md={12} style={{ paddingTop: 20 }}>
                   <Grid justify="center" container>

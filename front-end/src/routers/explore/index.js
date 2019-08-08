@@ -21,7 +21,7 @@ import { Element } from 'react-scroll';
 import SEO from "../../components/seo";
 import { seoTags } from "../../assets/data/seo";
 import bg from '../../assets/img/bgimg4.jpg'
-const bg2 = 'https://i.postimg.cc/C57wSBSC/IMG-0140.jpg'
+const bg2 = 'https://i.postimg.cc/qvDk6Ts0/IMG-8551.jpg'
 const styles = () => ({
     root: {
         flexGrow: 1,
@@ -45,7 +45,7 @@ const styles = () => ({
     },
     media: {
         height: 0,
-        paddingTop: '56.25%', // 16:9
+        paddingTop: '56.26%' // 16:9
     },
     card: {
         width: "100%",
@@ -160,8 +160,8 @@ class TutorialPage extends React.Component {
 
                                         backgroundColor: "#21212180",
                                         padding: "0px",
-                                        height: "100%",
-                                        width: "100%",
+                                        height: "50%",
+                                        width: "80%",
 
                                     }}>
                                         <Youtube videoHeight={this.state.videoHeight} youtubeId={videoID} />
