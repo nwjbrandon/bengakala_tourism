@@ -196,9 +196,8 @@ class Faq extends React.Component {
                           <Grid item xs={12} md={8}>
                             <Typography>
                               {
-                                data[FAQ_TYPE].map(datum => (
-                                  <React.Fragment>
-
+                                data[FAQ_TYPE].map((datum, index) => (
+                                  <div key={index}>
                                     <Typography style={{ fontFamily: "Montserrat, sans-serif", paddingTop: 20 }}>
                                       <Typography style={{ fontFamily: "Montserrat, sans-serif", paddingTop: 10 }}>
                                         <Typography
@@ -228,14 +227,14 @@ class Faq extends React.Component {
                                       </Typography>
                                     </Typography>
                                     <Divider />
-                                  </React.Fragment>
+                                  </div>
                                 ))
                               }
                             </Typography>
                           </Grid>
                         </Grid>
                       </div>
-                      : <Typography> </Typography>
+                      : <Typography key = {index}> </Typography>
                   ))}
                 </React.Fragment>
                 :
