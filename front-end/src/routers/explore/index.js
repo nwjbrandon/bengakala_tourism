@@ -155,19 +155,19 @@ class TutorialPage extends React.Component {
                             item xs={12} sm={12} md={9}>
                             <div>
                                 {videoID ?
+                                    <Grid container justify="center">
 
-                                    <div style={{
+                                        <div style={{
 
-                                        backgroundColor: "#21212180",
-                                        padding: "0px",
-                                        height: "50%",
-                                        width: "80%",
+                                            backgroundColor: "#21212180",
+                                            padding: "0px",
+                                            height: "50%",
+                                            width: "80%",
 
-                                    }}>
-                                        <Youtube videoHeight={this.state.videoHeight} youtubeId={videoID} />
-                                    </div>
-
-
+                                        }}>
+                                            <Youtube videoHeight={this.state.videoHeight} youtubeId={videoID} />
+                                        </div>
+                                    </Grid>
 
                                     :
                                     <Grid container justify="center">
