@@ -92,59 +92,63 @@ class Attraction extends React.Component {
 
 
     return (
-      <div style={divStyle}>
+      <React.Fragment>
         <SEO
-          title={seoTags.stories.title}
-          description={seoTags.stories.description}
-          keywords={seoTags.stories.keywords}
+            title={seoTags.stories.title}
+            description={seoTags.stories.description}
+            keywords={seoTags.stories.keywords}
         />
         <Navbar />
-        <h3 style={{ fontSize: '2em', fontFamily: "Montserrat, sans-serif", paddingLeft: "5vw", color: "white" }}>Listen to our Stories!</h3>
-        <div style={{ padding: '10px' }}>
-          <Grid justify="center" container spacing={3}>
-            {
-              pageStories.map((item, index) => (
-                <Grid key={index} item xs={12} md={6}>
-                  <Card className={classes.card} key={item.title}>
-                    <CardActionArea component={Link} to={`/story/s/${item.link}`}>
-                      <MyCard src={item.imgUrl} date={dateFnsFormat(item.createdAt, 'YYYY/MM/DD')} title={item.title} summary={item.summary} />
-                    </CardActionArea>
+        <div style={divStyle}>
+          <div style={{ paddingTop: '100px' }}/>
+          <h3 style={{ fontSize: '2em', fontFamily: "Montserrat, sans-serif", paddingLeft: "5vw", color: "white" }}>Listen to our Stories!</h3>
+          <div style={{ padding: '10px' }}>
+            <Grid justify="center" container spacing={3}>
+              {
+                pageStories.map((item, index) => (
+                    <Grid key={index} item xs={12} md={6}>
+                      <Card className={classes.card} key={item.title}>
+                        <CardActionArea component={Link} to={`/story/s/${item.link}`}>
+                          <MyCard src={item.imgUrl} date={dateFnsFormat(item.createdAt, 'YYYY/MM/DD')} title={item.title} summary={item.summary} />
+                        </CardActionArea>
 
-                  </Card>
-                </Grid>
-              ))
-            }
-          </Grid>
-        </div>
-        <Grid container justify="center" spacing={10} className={classes.buttons}>
-          <Button
-            size="small"
-            variant="contained"
-            color="default"
-            onClick={this.handlePagePrevious}
-            disabled={page <= 1}
-            style={{
-              margin: 10
-            }}
-          >
-            <KeyboardArrowLeft /> Previous
+                      </Card>
+                    </Grid>
+                ))
+              }
+            </Grid>
+          </div>
+          <Grid container justify="center" spacing={10} className={classes.buttons}>
+            <Button
+                size="small"
+                variant="contained"
+                color="default"
+                onClick={this.handlePagePrevious}
+                disabled={page <= 1}
+                style={{
+                  margin: 10
+                }}
+            >
+              <KeyboardArrowLeft /> Previous
             </Button>
-          <Button
-            size="small"
-            variant="contained"
-            color="default"
-            onClick={this.handlePageNext}
-            disabled={pageStories.length < 6}
-            style={{
-              margin: 10
-            }}
-          >
-            Next <KeyboardArrowRight />
-          </Button>
-        </Grid>
-        <SuccessToast />
-        <ErrorToast />
-      </div>
+            <Button
+                size="small"
+                variant="contained"
+                color="default"
+                onClick={this.handlePageNext}
+                disabled={pageStories.length < 6}
+                style={{
+                  margin: 10
+                }}
+            >
+              Next <KeyboardArrowRight />
+            </Button>
+          </Grid>
+          <SuccessToast />
+          <ErrorToast />
+        </div>
+      </React.Fragment>
+
     )
   }
 }

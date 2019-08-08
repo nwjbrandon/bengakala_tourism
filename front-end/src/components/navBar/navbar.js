@@ -112,7 +112,7 @@ export default function ButtonAppBar() {
             </Hidden>
           </Toolbar>
         </AppBar>
-      <div style={{ paddingBottom: 100 }} />
+      <div/>
     </div>
   );
 }

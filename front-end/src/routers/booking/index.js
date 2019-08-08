@@ -43,6 +43,7 @@ class Accomodation extends React.Component {
 
     const divStyle = {
       paddingBottom: 50,
+      paddingTop: '50px',
       marginTop: 0,
       width: "100%",
       minHeight: "100vh",
@@ -58,26 +59,20 @@ class Accomodation extends React.Component {
     };
 
     return (
-      <div >
-        <ThemeProvider theme={theme}>
-          <SEO
+      <React.Fragment>
+        <SEO
             title={seoTags.booking.title}
             description={seoTags.booking.description}
             keywords={seoTags.booking.keywords}
-          />
+        />
+        <Navbar />
+        <ThemeProvider theme={theme}>
           <div style={divStyle}>
-            <Navbar />
             <AccomodationsForm />
           </div>
-
           <ImageCarousell />
-
-
         </ThemeProvider>
-
-
-      </div>
-
+      </React.Fragment>
     )
   }
 }

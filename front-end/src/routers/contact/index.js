@@ -36,6 +36,7 @@ const styles = theme => ({
     margin: 0,
     backgroundImage: `url(${bg})`,
     // maxWidth: "100%",
+    paddingTop: '50px',
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',

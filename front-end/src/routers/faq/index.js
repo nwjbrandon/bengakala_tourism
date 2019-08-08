@@ -21,22 +21,21 @@ const bg2 = 'https://i.postimg.cc/y8sM1r2K/IMG-8495.jpg'
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    background: "#FFC107",
-    // backgroundImage: `url(${bg2})`,
-    // backgroundSize: 'cover',
+  },
+  searchBar: {
+    paddingTop: '200px',
+    backgroundImage: `url(${bg2})`,
+    margin: 'none auto',
+    backgroundSize: 'cover',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
-    // backgroundPosition: 'fixed',
-    // backgroundRepeat: 'no-repeat',
-  },
-  searchBar: {
-    padding: 0,
-    // backgroundImage: `url(${bg2})`,
-    //  backgroundSize: '100% auto',
-    // backgroundPosition: 'fixed',
-    //  backgroundRepeat: 'no-repeat',
-     marginTop: '0'
+    backgroundPosition: 'center',
+    backgroundRepeat: 'no-repeat',
+    position: 'relative',
+    maxWidth: '100%',
+    boxSizing: 'inherit',
+    minHeight: "50%"
   },
   searchBarItems: {
     height: "100%",
@@ -124,13 +123,13 @@ class Faq extends React.Component {
           description={seoTags.faq.description}
           keywords={seoTags.faq.keywords}
         />
-        <Navbar style={{marginBottom: 0}}/>
+        <Navbar />
         <div>
           <div className={classes.searchBar}>
             <div className={classes.searchBarItems}>
               <Grid justify="center" container spacing={3}>
                 <Grid item xs={12} md={6}>
-                  <Typography style={{ fontFamily: "Montserrat, sans-serif", paddingTop: 80, color: '#FFFFFF'  }} variant="h4">
+                  <Typography style={{ fontFamily: "Montserrat, sans-serif", color: '#FFFFFF'  }} variant="h4">
                     Hello, how can we help?
                 </Typography>
                 </Grid>

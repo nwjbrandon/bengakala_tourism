@@ -29,6 +29,7 @@ class Background extends Component {
       justifyContent: 'center',
       textAlign: 'center',
       fontFamily: "Montserrat, sans-serif",
+      marginTop: '200px',
     };
     const bgCaption = {
       color: '#fff',

@@ -25,6 +25,7 @@ const bg2 = 'https://i.postimg.cc/qvDk6Ts0/IMG-8551.jpg'
 const styles = () => ({
     root: {
         flexGrow: 1,
+        paddingTop: '100px',
         paddingBottom: 50,
         marginTop: 0,
         width: "100%",
@@ -150,7 +151,6 @@ class TutorialPage extends React.Component {
                             padding: 0,
                             width: "100%",
                             margin: 0,
-
                         }}
                             item xs={12} sm={12} md={9}>
                             <div>
@@ -158,17 +158,14 @@ class TutorialPage extends React.Component {
                                     <Grid container justify="center">
 
                                         <div style={{
-
                                             backgroundColor: "#21212180",
                                             padding: "0px",
                                             height: "50%",
                                             width: "80%",
-
                                         }}>
                                             <Youtube videoHeight={this.state.videoHeight} youtubeId={videoID} />
                                         </div>
                                     </Grid>
-
                                     :
                                     <Grid container justify="center">
                                         <Typography variant="h4" style={{ paddingBottom: 0 }}>
