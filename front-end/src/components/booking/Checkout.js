@@ -118,6 +118,7 @@ const Checkout = (props) => {
       console.log("COST BRO", costObj);
 
       props.updateDates(excludeDates);
+      console.log(result.data.booked)
       setBookedData([...result.data.booked]);
 
     };
@@ -225,17 +226,28 @@ const Checkout = (props) => {
     return result;
   };
 
+  const fallsWithinWindow = () => {
+
+  }
+
   //Get Maximum Occupancy for the check in and check put dates chosen
   const fullyBookedDateChosen = () => {
     const checkIn = new Date(props.tripDetails.checkIn);
+
     const checkOut = new Date(props.tripDetails.checkOut);
-    let maxFullDays = 0;
-    let maxFullDate = null;
+
+    checkOut.setTime(checkIn.getTime());
+
     const fallswithin = booked.filter((item) => {
       const itemDate = new Date(item.date);
 
+      itemDate.setTime(checkIn.getTime());
+
       return (itemDate >= checkIn && itemDate <= checkOut);
     });
+
+    let maxFullDays = 0;
+    let maxFullDate = null;
 
     fallswithin.forEach((item) => {
       const itemDate = new Date(item.date);
