@@ -20,7 +20,7 @@ import { green, } from '@material-ui/core/colors';
 
 import { createMuiTheme, } from '@material-ui/core/styles';
 
-import bg from '../../assets/img/bgimg3.jpg'
+const bg = 'https://i.postimg.cc/52FFLRFF/IMG-9842.jpg'
 const styles = () => ({
   root: {
     flexGrow: 1,
