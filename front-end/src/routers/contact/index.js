@@ -22,27 +22,24 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import countryTelephoneCode, { countries } from "country-telephone-code";
 import _sortBy from 'lodash/sortBy';
-import bg from '../../assets/img/bgimg3.jpg'
+//import bg from '../../assets/img/bgimg3.jpg'
 
 import { ThemeProvider } from '@material-ui/styles';
 import { green } from '@material-ui/core/colors';
-
 import { createMuiTheme } from '@material-ui/core/styles';
+const bg = 'https://i.postimg.cc/SxFBN0yT/IMG-0357.jpg';
 const styles = theme => ({
   root: {
-    flexGrow: 1,
-    paddingBottom: 50,
+    flexGrow: 'initial',
+    paddingBottom: 0,
     marginTop: 0,
-    width: "100%",
-    minHeight: "100vh",
-    height: "auto",
     margin: 0,
-    backgroundImage: `url(https://i.postimg.cc/fb2fpXRQ/IMG-0294.jpg)`,
-    maxWidth: "100%",
+    backgroundImage: `url(${bg})`,
+    // maxWidth: "100%",
     backgroundSize: 'cover',
     backgroundPosition: 'center',
     backgroundRepeat: 'no-repeat',
-    position: 'relative',
+    // position: 'relative',
   },
   paper: {
     padding: 10,
@@ -155,7 +152,7 @@ class Contact extends React.Component {
         <Navbar />
         <ThemeProvider theme={theme}>
 
-          <div style={{ maxWidth: "100vw", paddingTop: 50, paddingBottom: 100 }}>
+          <div style={{ maxWidth: "100vw", paddingTop: 50, paddingBottom: 100  }}>
             <Grid justify="center" container>
               <div className={classes.paperCont}>
                 <Grid item xs={12} md={12} style={{ paddingTop: 20 }}>

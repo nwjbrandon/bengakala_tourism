@@ -15,13 +15,14 @@ import Divider from '@material-ui/core/Divider'
 import bg from '../../assets/img/bgimg4.jpg'
 import SEO from "../../components/seo";
 import { seoTags } from "../../assets/data/seo";
+const bg2 = 'https://i.postimg.cc/y8sM1r2K/IMG-8495.jpg'
 
 
 const styles = theme => ({
   root: {
     flexGrow: 1,
-    backgroundImage: `url(${bg})`,
-    backgroundSize: 'cover',
+    backgroundImage: `url(${bg2})`,
+    backgroundSize: 'contain',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
@@ -30,7 +31,11 @@ const styles = theme => ({
   },
   searchBar: {
     padding: 0,
-
+    // backgroundImage: `url(${bg2})`,
+    //  backgroundSize: '100% auto',
+    // backgroundPosition: 'fixed',
+    //  backgroundRepeat: 'no-repeat',
+     marginTop: '0'
   },
   searchBarItems: {
     height: "100%",
@@ -118,13 +123,13 @@ class Faq extends React.Component {
           description={seoTags.faq.description}
           keywords={seoTags.faq.keywords}
         />
-        <Navbar />
-        <div >
+        <Navbar style={{marginBottom: 0}}/>
+        <div>
           <div className={classes.searchBar}>
             <div className={classes.searchBarItems}>
               <Grid justify="center" container spacing={3}>
                 <Grid item xs={12} md={6}>
-                  <Typography style={{ fontFamily: "Montserrat, sans-serif", paddingTop: 80  }} variant="h4">
+                  <Typography style={{ fontFamily: "Montserrat, sans-serif", paddingTop: 80, color: '#FFFFFF'  }} variant="h4">
                     Hello, how can we help?
                 </Typography>
                 </Grid>

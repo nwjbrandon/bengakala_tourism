@@ -17,7 +17,7 @@ export default (props) => {
     <iframe
       style={{
 
-        position: "relative",
+        position: "center",
         width: "100%",
         height: `${videoHeight}vw`
       }}

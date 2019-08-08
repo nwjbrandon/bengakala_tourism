@@ -14,9 +14,9 @@ import dateFnsFormat from 'date-fns/format';
 import SuccessToast from "../../components/snackBar/successSnackBar.container";
 import ErrorToast from "../../components/snackBar/errorSnackBar.container";
 import MyCard from './card'
-import bg from '../../assets/img/bgimg3.jpg'
 import SEO from "../../components/seo";
 import { seoTags } from "../../assets/data/seo";
+const bg = 'https://i.postimg.cc/52FFLRFF/IMG-9842.jpg'
 
 const styles = theme => ({
   root: {
