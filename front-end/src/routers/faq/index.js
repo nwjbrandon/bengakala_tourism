@@ -217,12 +217,12 @@ class Faq extends React.Component {
                                           component="span"
                                           variant="h6"
                                           color="textPrimary"
-                                          style={{ fontFamily: "Montserrat, sans-serif", }}
+                                          style={{ fontFamily: "Montserrat, sans-serif"}}
                                         >
                                           Answer:&nbsp;
                                               </Typography>
                                         {datum.answer ? datum.answer.split("\n").map((i, key) => (
-                                          <Typography variant="body1" style={{ fontFamily: "Montserrat, sans-serif", marginTop: '10px', marginBottom: '10px' }} key={key}>{i}</Typography>)) : <div />
+                                          <Typography variant="body1" style={{ fontFamily: "Montserrat, sans-serif", marginTop: '10px', marginBottom: '10px', wordWrap: "break-word"}} key={key}>{i}</Typography>)) : <div />
                                         }
                                       </Typography>
                                     </Typography>
