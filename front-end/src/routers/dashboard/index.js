@@ -207,7 +207,7 @@ class Dashboard extends Component {
                         size="small"
                         value={row}
                         variant="contained"
-                        color={row.checkedIn ? "primary" : "secondary"}
+                        color={row.cash === 1 ? "secondary" : "primary"}
                         onClick={() => this.handleOpenModal({ ...row })}
                       >
                         Expand
