@@ -17,7 +17,13 @@ const bookingInfo = [
 
     // obtain the number of people at the village on that day
     const transactions = await db.fetchData(TABLE_TRANSACTIONS);
-    const listOfDates = _.flatten(_.map(transactions, t => eachDay(t.dateFrom, t.dateTo)));
+    const listOfDates = _.flatten(_.map(transactions, (t) => {
+      const totalDates = [];
+      const totalCounts = _.toNumber(t.males) + _.toNumber(t.females);
+      const dates = eachDay(t.dateFrom, t.dateTo);
+      _.times(totalCounts, () => totalDates.push(dates));
+      return _.flatten(totalDates);
+    }));
     const booked = _.map(_.countBy(listOfDates), (counts, date) => ({ date, counts }));
 
     // obtain the images of accommodation
