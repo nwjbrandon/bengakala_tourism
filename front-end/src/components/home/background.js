@@ -60,7 +60,7 @@ class Background extends Component {
             <h1 style={topCaption}>Bali, Indonesia</h1>
           </div>
           <h2 style={bgCaption}>Bengkala</h2>
-          <p style={banner}>Explore Kolok and much more!</p>
+          <p style={banner}>Experience living in a village like no other!</p>
           <Button
             variant="contained"
             size="medium"
